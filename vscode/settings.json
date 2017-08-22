@@ -1,0 +1,41 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "editor.fontFamily": "consolas",
+    "editor.fontSize": 15,
+    "explorer.openEditors.visible": 6,
+    "workbench.editor.showTabs": false,
+    "workbench.sideBar.location": "right",
+    "search.exclude":
+    {
+        "**/wwwroot": true,
+        "**/typings": true,
+        "**/out": true,
+        "**/zenite.Web": true
+    },
+    "workbench.editor.enablePreview": true,
+    "terminal.external.windowsExec": "C:\\Program Files\\ConEmu\\ConEmu64.exe",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "workbench.iconTheme": "vscode-icon-theme",
+    "editor.wordWrap": "off",
+    "explorer.autoReveal": true,
+    "csharp.suppressDotnetRestoreNotification": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "git.autorefresh": false,
+    "git.autofetch": false,
+    "omnisharp.projectLoadTimeout": 120,
+    "files.exclude":
+    {
+        "**/node_modules": true,
+        "**/bin": true,
+        "**/obj": true
+    },
+    "gitlens.blame.line.enabled": false,
+    "editor.minimap.enabled": false,
+    "git.enableSmartCommit": true,
+    "telemetry.enableTelemetry": false,
+    "gitlens.stashExplorer.enabled": false,
+    "workbench.colorTheme": "Default Light+",
+    "extensions.autoUpdate": false,
+    "extensions.ignoreRecommendations": true,
+    "terminal.integrated.rightClickCopyPaste": true
+}

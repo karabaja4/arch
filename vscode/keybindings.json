@@ -1,0 +1,20 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    { "key": "ctrl+1", "command": "workbench.action.navigateBack" },
+    { "key": "ctrl+2", "command": "workbench.action.navigateForward" },
+
+    { "key": "ctrl+w",         "command": "editor.action.addCommentLine",
+                                  "when": "editorTextFocus" },
+
+    { "key": "ctrl+q",         "command": "editor.action.removeCommentLine",
+                                  "when": "editorTextFocus" },
+
+    {
+        "key": "ctrl+alt+g",
+        "command": "-typescriptHero.showCmdGui"
+    },
+    {
+        "key": "ctrl+f5",
+        "command": "workbench.action.reloadWindow"
+    }
+]
