@@ -1,0 +1,36 @@
+alias ls='LC_COLLATE=C ls -A -o -h --color=always --group-directories-first'
+
+alias chx='chmod +x'
+alias permof='stat --printf "%n - %a\n"'
+alias sizeof='du -sh'
+alias grep='grep --color'
+alias df='df -h -T --total'
+alias c='clear'
+alias x='exit'
+
+alias sr='screen -r'
+alias sn='screen -S'
+
+function gitpush()
+{
+    if [ -n "$1" ]; then
+        git add .
+        git commit -a -m "$1"
+        git push origin master
+    else
+        echo "Please include a commit message."
+    fi
+}
+
+mkmine()
+{
+    if [ -n "$1" ]; then
+        sudo chown -R ${USER}:${USER} $1
+    else
+        echo "No file defined."
+    fi
+}
+
+alias regdom='nano /etc/conf.d/wireless-regdom'
+alias ifedit='nano /etc/udev/rules.d/10-network.rules'
+alias speedtest='wget http://newsletter.t-com.hr/adslbrzina/random-100mb.zip'

@@ -1,0 +1,17 @@
+use_xft yes
+xftfont Consolas:size=18
+draw_shades no
+alignment top_left
+gap_x 50
+gap_y 50
+update_interval 1
+double_buffer yes
+
+TEXT
+$nodename $sysname $kernel
+
+Uptime: ${uptime}
+CPU:    ${cpu}%
+RAM:    ${mem} / ${memmax}
+Disk:   ${fs_used /} / ${fs_size /}
+IP:     ${addr eth0}
