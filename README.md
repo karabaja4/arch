@@ -1,2 +1,2 @@
 # arch
-Arch Linxu configuration files.
+Arch Linux configuration files.
