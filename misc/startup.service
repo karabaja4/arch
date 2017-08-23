@@ -1,0 +1,9 @@
+[Unit]
+Description=startup
+
+[Service]
+Type=oneshot
+ExecStart=/root/scripts/startup.sh
+
+[Install]
+WantedBy=multi-user.target
