@@ -13,8 +13,6 @@
         "**/zenite.Web": true
     },
     "workbench.editor.enablePreview": true,
-    "terminal.external.windowsExec": "C:\\Program Files\\ConEmu\\ConEmu64.exe",
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     "workbench.iconTheme": "vscode-icon-theme",
     "editor.wordWrap": "off",
     "explorer.autoReveal": true,

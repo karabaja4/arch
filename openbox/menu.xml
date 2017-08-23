@@ -39,6 +39,12 @@
 			</action>
 		</item>
 
+		<item label="virtualbox">
+			<action name="Execute">
+				<execute>virtualbox</execute>
+			</action>
+		</item>
+
 		<separator/>
 
 		<item label="exit">

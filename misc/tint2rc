@@ -29,7 +29,7 @@ border_color = #ffffff 0
 #---------------------------------------------
 panel_monitor = all
 panel_position = bottom center
-panel_size = 0 23
+panel_size = 0 25
 panel_margin = 0 0
 panel_padding = 0 0
 font_shadow = 0
@@ -54,7 +54,7 @@ task_text = 1
 task_maximum_size = 200 0
 task_centered = 1
 task_padding = 6 6
-task_font = noto sans bold 8
+task_font = noto sans 8
 
 task_font_color = #ffffff 100
 task_active_font_color = #ffffff 100
@@ -95,3 +95,5 @@ launcher_padding = 5 5 5
 launcher_background_id = 1
 launcher_icon_size = 23
 launcher_item_app = /usr/share/applications/xfce4-terminal.desktop
+launcher_item_app = /usr/share/applications/chromium.desktop
+launcher_item_app = /usr/share/applications/visual-studio-code.desktop

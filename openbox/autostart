@@ -1,7 +1,6 @@
 xsettingsd &
 xfce4-clipman &
-hsetroot -solid '#808080'
-conky -c /home/dev/.config/conky/conkyrc1 &
-#compton -b --config /home/dev/linux/config/compton.conf
+xsetroot -solid '#808080'
+conky -c /home/igor/arch/misc/conkyrc1 &
 tint2 &
-#pnmixer &
+pnmixer &
