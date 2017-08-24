@@ -1,17 +1,23 @@
-use_xft yes
-xftfont Consolas:size=18
-draw_shades no
-alignment top_left
-gap_x 50
-gap_y 50
-update_interval 1
-double_buffer yes
+conky.config = {
+	use_xft = true,
+	font = 'Consolas:size=18',
+	draw_shades = false,
+	alignment = 'top_left',
+	gap_x = 50,
+	gap_y = 50,
+	update_interval = 1,
+	double_buffer = true,
+	own_window = true,
+	own_window_type = 'desktop',
+	own_window_transparent = true,
 
-TEXT
+};
+
+conky.text = [[
 $nodename $sysname $kernel
 
 Uptime: ${uptime}
 CPU:    ${cpu}%
 RAM:    ${mem} / ${memmax}
 Disk:   ${fs_used /} / ${fs_size /}
-IP:     ${addr enp2s0}
+IP:     ${addr wlp0s20u2u1}]];
