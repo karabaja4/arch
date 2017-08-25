@@ -21,7 +21,7 @@
 			</action>
 		</item>
 
-		<item label="file manager">
+		<item label="qtfm">
 			<action name="Execute">
 				<execute>qtfm</execute>
 			</action>
