@@ -39,6 +39,12 @@
 			</action>
 		</item>
 
+		<item label="qbittorrent">
+			<action name="Execute">
+				<execute>qbittorrent</execute>
+			</action>
+		</item>
+
 		<item label="virtualbox">
 			<action name="Execute">
 				<execute>virtualbox</execute>
