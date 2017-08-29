@@ -20,4 +20,4 @@ Uptime: ${uptime}
 CPU:    ${cpu}%
 RAM:    ${mem} / ${memmax}
 Disk:   ${fs_used /} / ${fs_size /}
-IP:     ${addr wlp0s20u2u1}]];
+IP:     ${addr enp2s0}]];
