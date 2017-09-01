@@ -21,9 +21,9 @@
 			</action>
 		</item>
 
-		<item label="qtfm">
+		<item label="thunar">
 			<action name="Execute">
-				<execute>qtfm</execute>
+				<execute>thunar</execute>
 			</action>
 		</item>
 
