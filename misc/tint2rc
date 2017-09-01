@@ -90,7 +90,7 @@ mouse_scroll_down = none
 #---------------------------------------------
 # LAUNCHER
 #---------------------------------------------
-launcher_icon_theme = Ultra-Flat
+launcher_icon_theme = Breeze
 launcher_padding = 5 5 5
 launcher_background_id = 1
 launcher_icon_size = 23
@@ -98,3 +98,4 @@ launcher_item_app = /usr/share/applications/xfce4-terminal.desktop
 launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/mousepad.desktop
+launcher_item_app = /usr/share/applications/thunar.desktop
