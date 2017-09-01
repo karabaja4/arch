@@ -16,8 +16,9 @@ conky.config = {
 conky.text = [[
 $nodename $sysname $kernel
 
-Uptime: ${uptime}
-CPU:    ${cpu}%
-RAM:    ${mem} / ${memmax}
-Disk:   ${fs_used /} / ${fs_size /}
-IP:     ${addr enp2s0}]];
+Uptime:  ${uptime}
+CPU:     ${cpu}%
+RAM:     ${mem} / ${memmax}
+Disk:    ${fs_used /} / ${fs_size /}
+Network: ${downspeed enp2s0} | ${upspeed enp2s0}
+]];
