@@ -11,8 +11,8 @@ sleep 15
 #echo none > /sys/class/leds/ath9k_htc-phy*/trigger
 
 # entropy
-haveged -w 1024
-sleep 1
+#haveged -w 1024
+#sleep 1
 
 # MAC
 macchanger -r $wireless
