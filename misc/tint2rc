@@ -98,4 +98,4 @@ launcher_item_app = /usr/share/applications/xfce4-terminal.desktop
 launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/mousepad.desktop
-launcher_item_app = /usr/share/applications/thunar.desktop
+launcher_item_app = /usr/share/applications/Thunar.desktop
