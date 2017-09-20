@@ -6,3 +6,4 @@ conky -c /home/igor/arch/misc/conkyrc1 &
 tint2 &
 pnmixer &
 compton -b --config /home/igor/arch/misc/compton.conf
+xautolock -time 60 -locker "systemctl suspend" -detectsleep &
