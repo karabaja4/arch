@@ -51,6 +51,12 @@
 			</action>
 		</item>
 
+		<item label="vncviewer">
+			<action name="Execute">
+				<execute>vncviewer</execute>
+			</action>
+		</item>
+
 		<separator/>
 
 		<item label="exit">

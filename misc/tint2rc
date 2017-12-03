@@ -99,3 +99,7 @@ launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/mousepad.desktop
 launcher_item_app = /usr/share/applications/Thunar.desktop
+launcher_item_app = /usr/share/applications/sqlops.desktop
+launcher_item_app = /usr/share/applications/filezilla.desktop
+launcher_item_app = /usr/share/applications/virtualbox.desktop
+launcher_item_app = /usr/share/applications/robo3t.desktop
