@@ -5,5 +5,6 @@ feh --bg-scale /home/igor/wall/gray_white_spots_abstraction_faded_65625_3840x216
 conky -c /home/igor/arch/misc/conkyrc1 &
 tint2 &
 pnmixer &
-compton -b --config /home/igor/arch/misc/compton.conf
+#compton -b --config /home/igor/arch/misc/compton.conf
 xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+#node coinbase.js | osd_cat -c white -A center -p bottom -o 6 -i 760 -d 0 -l 1 &
