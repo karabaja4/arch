@@ -7,4 +7,8 @@ tint2 &
 pnmixer &
 #compton -b --config /home/igor/arch/misc/compton.conf
 xautolock -time 60 -locker "systemctl suspend" -detectsleep &
-#node coinbase.js | osd_cat -c white -A center -p bottom -o 6 -i 760 -d 0 -l 1 &
+sleep 4
+/home/igor/arch/scripts/fixres.sh
+sudo killall dhcpcd || sudo dhcpcd enp2s0
+sleep 5
+flameshot &

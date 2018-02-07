@@ -35,7 +35,7 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = top
-panel_items = LTSC
+panel_items = LTESC
 strut_policy = follow_size
 
 #---------------------------------------------
@@ -70,12 +70,13 @@ systray_padding = 5 2 3
 systray_background_id = 0
 systray_sort = left2right
 systray_icon_size = 0
+systray_monitor = 3
 
 #---------------------------------------------
 # CLOCK
 #---------------------------------------------
 time1_format = %H:%M
-time1_font = noto sans bold 8
+time1_font = Segoe UI Bold 8
 clock_font_color = #ffffff 100
 clock_padding = 3 0
 clock_background_id = 0
@@ -99,7 +100,17 @@ launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/mousepad.desktop
 launcher_item_app = /usr/share/applications/Thunar.desktop
-launcher_item_app = /usr/share/applications/sqlops.desktop
 launcher_item_app = /usr/share/applications/filezilla.desktop
 launcher_item_app = /usr/share/applications/virtualbox.desktop
 launcher_item_app = /usr/share/applications/robo3t.desktop
+launcher_item_app = /usr/share/applications/pgAdmin4.desktop
+launcher_item_app = /usr/share/applications/qbittorrent.desktop
+
+#-------------------------------------
+# Executor 1
+execp = new
+execp_command = node /home/igor/coinbase/coinbase.js
+execp_interval = 10
+execp_font = Segoe UI Bold 8
+execp_font_color = #ffffff 100
+execp_padding = 100 0
