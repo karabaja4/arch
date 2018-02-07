@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "editor.fontFamily": "consolas",
+    "editor.fontFamily": "Consolas",
     "editor.fontSize": 14,
     "explorer.openEditors.visible": 0,
     "workbench.editor.showTabs": true,
@@ -10,10 +10,10 @@
         "**/wwwroot": true,
         "**/typings": true,
         "**/out": true,
-        "**/zenite.Web": true
+        "**/zenite.Web": true,
+        "**/cdn": true
     },
     "workbench.editor.enablePreview": true,
-    "workbench.iconTheme": "vscode-icon-theme",
     "editor.wordWrap": "off",
     "explorer.autoReveal": true,
     "csharp.suppressDotnetRestoreNotification": true,
@@ -33,7 +33,10 @@
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": true,
     "terminal.integrated.rightClickCopyPaste": true,
-    "window.zoomLevel": 2,
+    "workbench.iconTheme": "vscode-icon-theme",
+    "typescript.useCodeSnippetsOnMethodSuggest": true,
+    "editor.dragAndDrop": false,
+    "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
         "gitDecoration.modifiedResourceForeground": "#FF8C00"
     },
