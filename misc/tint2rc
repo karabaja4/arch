@@ -114,3 +114,5 @@ execp_interval = 10
 execp_font = Segoe UI Bold 8
 execp_font_color = #ffffff 100
 execp_padding = 100 0
+execp_tooltip =
+execp_lclick_command = chromium https://www.coinbase.com/dashboard
