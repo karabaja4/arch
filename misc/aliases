@@ -42,3 +42,4 @@ alias speedtest='wget http://debian.carnet.hr/debian-cd/9.3.0/amd64/iso-cd/debia
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias ed='leafpad'
 alias ws='rdesktop -u igor -g 1680x1050 -z -x m -P -k hr -r sound:off 20.0.0.108'
+alias thinkpad='rdesktop -u Administrator -g 1024x768 -z -x m -P -k hr -r sound:off 192.168.0.1'
