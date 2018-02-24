@@ -105,6 +105,7 @@ launcher_item_app = /usr/share/applications/virtualbox.desktop
 launcher_item_app = /usr/share/applications/robo3t.desktop
 launcher_item_app = /usr/share/applications/pgAdmin4.desktop
 launcher_item_app = /usr/share/applications/qbittorrent.desktop
+launcher_item_app = /usr/share/applications/slack.desktop
 
 #-------------------------------------
 # Executor 1

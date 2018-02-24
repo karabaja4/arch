@@ -35,10 +35,10 @@ mkmine()
 
 alias regdom='nano /etc/conf.d/wireless-regdom'
 alias ifedit='nano /etc/udev/rules.d/10-network.rules'
-alias speedtest='wget http://newsletter.t-com.hr/adslbrzina/random-100mb.zip'
+alias speedtest='wget http://debian.carnet.hr/debian-cd/9.3.0/amd64/iso-cd/debian-9.3.0-amd64-netinst.iso'
 
 #alias rsnc='sudo pacman -Rsnc'
 #alias pacman='sudo pacman'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
-alias ed='mousepad'
+alias ed='leafpad'
 alias ws='rdesktop -u igor -g 1680x1050 -z -x m -P -k hr -r sound:off 20.0.0.108'
