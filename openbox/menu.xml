@@ -8,52 +8,10 @@
 				<execute>xfce4-terminal</execute>
 			</action>
 		</item>
-
+		
 		<item label="chromium">
 			<action name="Execute">
 				<execute>chromium</execute>
-			</action>
-		</item>
-
-		<item label="code">
-			<action name="Execute">
-				<execute>code</execute>
-			</action>
-		</item>
-
-		<item label="thunar">
-			<action name="Execute">
-				<execute>thunar</execute>
-			</action>
-		</item>
-
-		<item label="mousepad">
-			<action name="Execute">
-				<execute>mousepad</execute>
-			</action>
-		</item>
-
-		<item label="filezilla">
-			<action name="Execute">
-				<execute>filezilla</execute>
-			</action>
-		</item>
-
-		<item label="qbittorrent">
-			<action name="Execute">
-				<execute>qbittorrent</execute>
-			</action>
-		</item>
-
-		<item label="virtualbox">
-			<action name="Execute">
-				<execute>virtualbox</execute>
-			</action>
-		</item>
-
-		<item label="vncviewer">
-			<action name="Execute">
-				<execute>vncviewer</execute>
 			</action>
 		</item>
 
