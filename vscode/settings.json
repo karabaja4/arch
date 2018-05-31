@@ -25,14 +25,12 @@
         "**/bin": true,
         "**/obj": true
     },
-    "gitlens.blame.line.enabled": false,
     "editor.minimap.enabled": false,
     "git.enableSmartCommit": true,
     "telemetry.enableTelemetry": false,
     "workbench.colorTheme": "Default Light+",
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": true,
-    "terminal.integrated.rightClickCopyPaste": true,
     "workbench.iconTheme": "vscode-icon-theme",
     "typescript.useCodeSnippetsOnMethodSuggest": true,
     "editor.dragAndDrop": false,
@@ -48,7 +46,33 @@
         "suppressGitVersionWarning": false,
         "suppressLineUncommittedWarning": false,
         "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
         "suppressUpdateNotice": true,
         "suppressWelcomeNotice": true
-    }
+    },
+    "gitlens.currentLine.enabled": false,
+    "problems.decorations.enabled": false,
+    "msbuildProjectTools": {
+        "logging": {
+            "level": "Information",
+            "seq": {},
+            "file": "",
+            "trace": false
+        },
+        "language": {
+            "disableFeature": {},
+            "useClassicProvider": false,
+            "disable": {
+                "hover": false
+            }
+        },
+        "nuget": {
+            "newestVersionsFirst": true,
+            "includePreRelease": true,
+            "disablePrefetch": false
+        },
+        "schemaVersion": 1
+    },
+    "gitlens.historyExplorer.enabled": true
 }

@@ -7,14 +7,5 @@
                                   "when": "editorTextFocus" },
 
     { "key": "ctrl+q",         "command": "editor.action.removeCommentLine",
-                                  "when": "editorTextFocus" },
-
-    {
-        "key": "ctrl+alt+g",
-        "command": "-typescriptHero.showCmdGui"
-    },
-    {
-        "key": "ctrl+f5",
-        "command": "workbench.action.reloadWindow"
-    }
+                                  "when": "editorTextFocus" }
 ]
