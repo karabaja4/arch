@@ -17,7 +17,7 @@
 (gtk_accel_path "<Actions>/terminal-window/new-tab" "<Primary>t")
 ; (gtk_accel_path "<Actions>/terminal-window/view-menu" "")
 ; (gtk_accel_path "<Actions>/terminal-window/show-toolbar" "")
-; (gtk_accel_path "<Actions>/terminal-window/paste" "<Primary><Shift>v")
+(gtk_accel_path "<Actions>/terminal-window/paste" "<Primary>v")
 ; (gtk_accel_path "<Actions>/terminal-window/copy" "<Primary><Shift>c")
 ; (gtk_accel_path "<Actions>/terminal-window/edit-menu" "")
 ; (gtk_accel_path "<Actions>/terminal-window/fullscreen" "F11")
