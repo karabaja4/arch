@@ -1,3 +1,3 @@
-wpa_supplicant -B -i ra0 -c /etc/wpa_supplicant/batak.conf
+wpa_supplicant -B -i wlp0s20u1u1 -c /etc/wpa_supplicant/batak.conf
 sleep 1
-dhcpcd ra0
+dhcpcd wlp0s20u1u1

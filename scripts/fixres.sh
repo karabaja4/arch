@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # left
-xrandr --output HDMI-1 --mode 1920x1200 --primary
+xrandr --output HDMI-1-1 --mode 1920x1200 --primary
 
 # right
-xrandr --addmode DP-1 1920x1200
-xrandr --output DP-1 --mode 1920x1200 --right-of HDMI-1
+xrandr --addmode DP-1-1 1920x1200
+xrandr --output DP-1-1 --mode 1920x1200 --right-of HDMI-1-1
 
 # laptop
-xrandr --output eDP-1 --mode 1920x1080 --left-of HDMI-1
+xrandr --output eDP-1-1 --mode 1920x1080 --left-of HDMI-1-1
 
 feh --bg-scale /home/igor/wall/gray_white_spots_abstraction_faded_65625_3840x2160.jpg

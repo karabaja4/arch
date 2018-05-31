@@ -1,14 +1,15 @@
 xsettingsd &
 xfce4-clipman &
 #xsetroot -solid '#808080'
+/home/igor/arch/scripts/fixres.sh
 feh --bg-scale /home/igor/wall/gray_white_spots_abstraction_faded_65625_3840x2160.jpg
 conky -c /home/igor/arch/misc/conkyrc1 &
 tint2 &
 pnmixer &
-#compton -b --config /home/igor/arch/misc/compton.conf
 xautolock -time 60 -locker "systemctl suspend" -detectsleep &
-sleep 4
-/home/igor/arch/scripts/fixres.sh
-sudo killall dhcpcd || sudo dhcpcd enp2s0
-sleep 5
+sudo killall dhcpcd
+sudo dhcpcd enp2s0
+#sleep 5
+#compton -b --config /home/igor/arch/misc/compton.conf
 flameshot &
+node /home/igor/coinbase/coinbase.js | osd_cat -c white -A center -p bottom -o 6 -i 760 -d 0 -l 1 &

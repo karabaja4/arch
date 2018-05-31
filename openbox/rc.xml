@@ -53,7 +53,7 @@
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>Segoe UI</name>
-      <size>8</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
@@ -62,7 +62,7 @@
     </font>
     <font place="InactiveWindow">
       <name>Segoe UI</name>
-      <size>8</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
@@ -71,7 +71,7 @@
     </font>
     <font place="MenuHeader">
       <name>Segoe UI</name>
-      <size>8</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -80,7 +80,7 @@
     </font>
     <font place="MenuItem">
       <name>Consolas</name>
-      <size>11</size>
+      <size>14</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -89,7 +89,7 @@
     </font>
     <font place="ActiveOnScreenDisplay">
       <name>Segoe UI</name>
-      <size>8</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
@@ -98,7 +98,7 @@
     </font>
     <font place="InactiveOnScreenDisplay">
       <name>Segoe UI</name>
-      <size>8</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
@@ -403,6 +403,9 @@
         <action name="SendToDesktop">
           <to>next</to>
         </action>
+      </mousebind>
+      <mousebind button="A-Left" action="Drag">
+        <action name="Move"/>
       </mousebind>
     </context>
     <context name="Titlebar">
