@@ -112,6 +112,7 @@ launcher_item_app = /usr/share/applications/robo3t.desktop
 launcher_item_app = /usr/share/applications/pgAdmin4.desktop
 launcher_item_app = /usr/share/applications/mysql-workbench.desktop
 launcher_item_app = /usr/share/applications/sqlbrowser.desktop
+launcher_item_app = /usr/share/applications/steam.desktop
 
 #-------------------------------------
 # Executor 1
