@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Consolas:size=21',
+	font = 'Consolas:bold:size=23',
 	draw_shades = false,
 	alignment = 'top_left',
 	gap_x = 50,
@@ -10,11 +10,12 @@ conky.config = {
 	own_window = true,
 	own_window_type = 'desktop',
 	own_window_transparent = true,
+	color0 = '#ffffff'
 
 };
 
 conky.text = [[
-$nodename $sysname $kernel
+${color0}$nodename $sysname $kernel
 
 Uptime:   ${uptime}
 CPU:      ${cpu}%
