@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Consolas:size=23',
+	font = 'Consolas:size=21',
 	draw_shades = false,
 	alignment = 'top_left',
 	gap_x = 50,

@@ -6,19 +6,19 @@ menu.title.text.justify: center
 
 !! Menu items
 menu.items.bg: flat solid
-menu.items.bg.color: #000000
+menu.items.bg.color: #212121
 menu.items.text.color: #ffffff
 menu.items.justify: left
 menu.items.disabled.text.color: #ffffff
 menu.items.active.bg: flat solid
 menu.items.active.bg.color: #ffffff
-menu.items.active.text.color: #000000
+menu.items.active.text.color: #212121
 
 !! Window title
 window.active.title.bg: flat
-window.active.title.bg.color: #000000
+window.active.title.bg.color: #212121
 window.inactive.title.bg: flat
-window.inactive.title.bg.color: #000000
+window.inactive.title.bg.color: #212121
 
 !! Window labels
 window.label.text.justify: center

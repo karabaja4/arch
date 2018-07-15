@@ -9,20 +9,20 @@
 # ID 1
 rounded = 0
 border_width = 0
-background_color = #000000 100
-border_color = #000000 0
+background_color = #212121 100
+border_color = #212121 0
 
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #000000 100
-border_color = #000000 0
+background_color = #212121 100
+border_color = #212121 0
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #ffffff 20
-border_color = #ffffff 0
+background_color = #424242 100
+border_color = #424242 0
 
 #---------------------------------------------
 # PANEL
@@ -75,10 +75,10 @@ systray_monitor = 3
 #---------------------------------------------
 # CLOCK
 #---------------------------------------------
-time1_format = %H:%M
+time1_format = %d.%m.%Y. %H:%M:%S
 time1_font = Segoe UI Bold 8
 clock_font_color = #ffffff 100
-clock_padding = 3 0
+clock_padding = 5 0
 clock_background_id = 0
 
 #---------------------------------------------
