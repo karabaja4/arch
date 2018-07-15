@@ -12,4 +12,4 @@ sudo dhcpcd enp2s0
 #sleep 5
 #compton -b --config /home/igor/arch/misc/compton.conf
 flameshot &
-node /home/igor/arch/coinbase/coinbase.js | osd_cat -c white -A center -p bottom -o 6 -i 760 -d 0 -l 1 &
+#node /home/igor/arch/coinbase/coinbase.js | osd_cat -c white -A center -p bottom -o 6 -i 760 -d 0 -l 1 &

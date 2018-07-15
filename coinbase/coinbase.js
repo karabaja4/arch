@@ -14,7 +14,7 @@ const get = () =>
 };
 
 get();
-setInterval(() => {
-    get();
-}, 30000);
+//setInterval(() => {
+//    get();
+//}, 30000);
 
