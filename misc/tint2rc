@@ -124,3 +124,4 @@ execp_font_color = #ffffff 100
 execp_padding = 100 0
 execp_tooltip =
 execp_lclick_command = chromium https://www.coinbase.com/dashboard
+execp_markup = 1

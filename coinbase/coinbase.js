@@ -8,7 +8,7 @@ const get = () =>
     {
         if (account != null)
         {
-            console.log(account.native_balance.amount + ' ' + account.native_balance.currency);
+            console.log('<span foreground="aqua">' + account.native_balance.amount + ' ' + account.native_balance.currency + '</span>');
         }
     });
 };
