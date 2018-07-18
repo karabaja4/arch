@@ -342,6 +342,9 @@
         <monitor>1</monitor>
       </action>
 	  </keybind>
+    <keybind key="A-M">
+      <action name="ToggleMaximize"/>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>1</dragThreshold>
@@ -356,6 +359,9 @@
     <!-- Set this to TRUE to move the mouse pointer across the desktop when
        switching due to hitting the edge of the screen -->
     <context name="Frame">
+      <mousebind button="Middle" action="Drag">
+        <action name="Move"/>
+      </mousebind>
       <mousebind button="A-Left" action="Press">
         <action name="Focus"/>
         <action name="Raise"/>
