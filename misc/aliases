@@ -50,3 +50,5 @@ function secure_chromium {
     port=4711
     chromium --proxy-server="socks://localhost:$port"
 }
+
+alias mountnas='sudo mount -t cifs //192.168.0.10/storage nas/ -o username=root,password=password,vers=1.0'

@@ -7,8 +7,8 @@ conky -c /home/igor/arch/misc/conkyrc1 &
 tint2 &
 pnmixer &
 xautolock -time 60 -locker "systemctl suspend" -detectsleep &
-sudo killall dhcpcd
-sudo dhcpcd enp2s0
+#sudo killall dhcpcd
+#sudo dhcpcd enp2s0
 #sleep 5
 #compton -b --config /home/igor/arch/misc/compton.conf
 flameshot &

@@ -11,7 +11,7 @@ conky.config = {
 	own_window_type = 'desktop',
 	own_window_transparent = true,
 	color0 = '#ffffff',
-	xinerama_head = 2
+	xinerama_head = 1
 
 };
 
@@ -22,7 +22,7 @@ Uptime:   ${uptime}
 CPU:      ${cpu}%
 RAM:      ${mem} / ${memmax}
 Disk:     ${fs_used /} / ${fs_size /}
-Download: ${downspeed wlp3s0}
-Upload:   ${upspeed wlp3s0}
-IP:       ${addr wlp3s0}
+Download: ${downspeed enp2s0}
+Upload:   ${upspeed enp2s0}
+IP:       ${addr enp2s0}
 ]];
