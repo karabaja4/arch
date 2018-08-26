@@ -1,15 +1,16 @@
 xsettingsd &
 xfce4-clipman &
-#xsetroot -solid '#808080'
-/home/igor/arch/scripts/fixres.sh
+xdpyinfo | grep VNC > /dev/null && xsetroot -solid '#808080'
+xdpyinfo | grep VNC > /dev/null || /home/igor/arch/scripts/fixres.sh
 #feh --bg-scale /home/igor/wall/gray_white_spots_abstraction_faded_65625_3840x2160.jpg
 conky -c /home/igor/arch/misc/conkyrc1 &
 tint2 &
-pnmixer &
-xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+xdpyinfo | grep VNC > /dev/null || pnmixer &
+xdpyinfo | grep VNC > /dev/null || xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+xdpyinfo | grep VNC > /dev/null || flameshot &
 #sudo killall dhcpcd
 #sudo dhcpcd enp2s0
 #sleep 5
 #compton -b --config /home/igor/arch/misc/compton.conf
-flameshot &
 #node /home/igor/arch/coinbase/coinbase.js | osd_cat -c white -A center -p bottom -o 6 -i 760 -d 0 -l 1 &
+xdpyinfo | grep VNC > /dev/null || vncserver &

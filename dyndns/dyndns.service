@@ -1,0 +1,12 @@
+[Unit]
+Description=dyndns
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/home/igor/arch/dyndns/dns.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
