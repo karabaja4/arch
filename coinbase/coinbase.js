@@ -13,7 +13,7 @@ const coinbaseGet = (callback) => {
 		try {
 			callback(null, !err && account != null ? (account.native_balance.amount + " " + account.native_balance.currency) : "ERROR");
 		} catch (e) {
-			callback(null, "ERROR");
+			callback(null, "-");
 		}
     });
 };
@@ -26,7 +26,7 @@ const pbzGet = (callback) => {
 			const currency = data.jsonResponse.result.homePageCommandList[0].data.tableData[0].bankAccounts[0].accountCurrencyCode;
 			callback(null, balance + " " + currency);
 		} catch (e) {
-			callback(null, "ERROR");
+			callback(null, "-");
 		}
 	});
 }

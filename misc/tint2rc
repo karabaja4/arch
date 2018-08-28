@@ -118,7 +118,7 @@ launcher_item_app = /usr/share/applications/steam.desktop
 # Executor 1
 execp = new
 execp_command = node /home/igor/arch/coinbase/coinbase.js
-execp_interval = 60
+execp_interval = 120
 execp_font = Segoe UI Bold 8
 execp_font_color = #ffffff 100
 execp_padding = 100 0
