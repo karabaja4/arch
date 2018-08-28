@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
-        "coinbase": "latest"
+        "coinbase": "latest",
+        "async": "2.6.1"
     }
 }
