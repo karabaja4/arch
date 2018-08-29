@@ -1,3 +1,7 @@
+xdpyinfo | grep VNC > /dev/null
+declare vnc=$?
+[ $vnc -ne 0 ] && echo ajme
+
 xsettingsd &
 xfce4-clipman &
 xdpyinfo | grep VNC > /dev/null && xsetroot -solid '#808080'
