@@ -1,20 +1,18 @@
 xdpyinfo | grep VNC > /dev/null
-declare vnc=$?
-[ $vnc -ne 0 ] && echo ajme
+declare vnc=$? # 0 ako je vnc
+
+[ $vnc -eq 0 ] && echo "$(date): Started VNC" >> $HOME/my.log
+[ $vnc -eq 0 ] || echo "$(date): Started Openbox" >> $HOME/my.log
 
 xsettingsd &
 xfce4-clipman &
-xdpyinfo | grep VNC > /dev/null && xsetroot -solid '#808080'
-xdpyinfo | grep VNC > /dev/null || /home/igor/arch/scripts/fixres.sh
-#feh --bg-scale /home/igor/wall/gray_white_spots_abstraction_faded_65625_3840x2160.jpg
+
+[ $vnc -eq 0 ] && xsetroot -solid '#808080'
+[ $vnc -eq 0 ] || /home/igor/arch/scripts/fixres.sh # calls feh
+
 conky -c /home/igor/arch/misc/conkyrc1 &
 tint2 &
-xdpyinfo | grep VNC > /dev/null || pnmixer &
-xdpyinfo | grep VNC > /dev/null || xautolock -time 60 -locker "systemctl suspend" -detectsleep &
-xdpyinfo | grep VNC > /dev/null || flameshot &
-#sudo killall dhcpcd
-#sudo dhcpcd enp2s0
-#sleep 5
-#compton -b --config /home/igor/arch/misc/compton.conf
-#node /home/igor/arch/coinbase/coinbase.js | osd_cat -c white -A center -p bottom -o 6 -i 760 -d 0 -l 1 &
-xdpyinfo | grep VNC > /dev/null || vncserver &
+
+[ $vnc -eq 0 ] || pnmixer &
+#[ $vnc -eq 0 ] || xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+[ $vnc -eq 0 ] || vncserver &
