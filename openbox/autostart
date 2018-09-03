@@ -7,7 +7,7 @@ declare vnc=$? # 0 ako je vnc
 xsettingsd &
 xfce4-clipman &
 
-[ $vnc -eq 0 ] && xsetroot -solid '#808080'
+[ $vnc -eq 0 ] && xsetroot -solid '#008080'
 [ $vnc -eq 0 ] || /home/igor/arch/scripts/fixres.sh # calls feh
 
 conky -c /home/igor/arch/misc/conkyrc1 &
