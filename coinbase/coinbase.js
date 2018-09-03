@@ -4,7 +4,7 @@ const client   = new coinbase.Client({'apiKey': secret.apiKey, 'apiSecret': secr
 const { exec } = require('child_process');
 const async = require('async');
 
-let pbz = true;
+let pbz = false;
 
 const print = (text1, text2) => {
 	console.log(`<span foreground="aqua">${text1 || "-"}</span><span foreground="white">  |  </span><span foreground="lime">${text2 || "-"}</span>`);

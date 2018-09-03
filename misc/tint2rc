@@ -100,11 +100,10 @@ launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/firefox.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/leafpad.desktop
-launcher_item_app = /usr/share/applications/Thunar.desktop
+launcher_item_app = /usr/share/applications/qtfm.desktop
 launcher_item_app = /usr/share/applications/filezilla.desktop
 launcher_item_app = /usr/share/applications/virtualbox.desktop
 launcher_item_app = /usr/share/applications/qbittorrent.desktop
-launcher_item_app = /usr/share/applications/slack.desktop
 launcher_item_app = /usr/share/applications/arc.desktop
 launcher_item_app = /usr/share/applications/org.kde.krita.desktop
 launcher_item_app = /usr/share/applications/inkscape.desktop
@@ -112,6 +111,7 @@ launcher_item_app = /usr/share/applications/robo3t.desktop
 launcher_item_app = /usr/share/applications/pgAdmin4.desktop
 launcher_item_app = /usr/share/applications/mysql-workbench.desktop
 launcher_item_app = /usr/share/applications/sqlbrowser.desktop
+launcher_item_app = /usr/share/applications/sqlops.desktop
 launcher_item_app = /usr/share/applications/steam.desktop
 
 #-------------------------------------
