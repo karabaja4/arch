@@ -16,7 +16,8 @@ conky.config = {
 };
 
 conky.text = [[
-${color0}$nodename $sysname $kernel
+${color0}home.aerium.hr ($nodename)
+$sysname $kernel
 
 Uptime:   ${uptime}
 CPU:      ${cpu}%
