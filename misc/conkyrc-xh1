@@ -11,8 +11,7 @@ conky.config = {
 	own_window_type = 'desktop',
 	own_window_transparent = true,
 	color0 = '#ffffff',
-	xinerama_head = 0
-
+	xinerama_head = 1
 };
 
 conky.text = [[
