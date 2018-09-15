@@ -45,4 +45,12 @@ alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias ed='geany'
 alias ws='rdesktop -u igor -g 1680x1050 -z -x m -P -k hr -r sound:off 20.0.0.108'
 alias thinkpad='rdesktop -u Igor -g 1024x768 -z -x m -P -k hr -r sound:off 192.168.0.1'
-alias mountnas='sudo mount -t cifs //192.168.0.10/storage nas/ -o username=root,password=password,vers=1.0'
+alias mountnas="sudo mount -t cifs //192.168.0.10/storage nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"
+
+# exports
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export NO_AT_BRIDGE=1
+
+# dotnet
+export DOTNET_ROOT=$PATH:$HOME/dotnet
+export PATH=$PATH:$HOME/dotnet
