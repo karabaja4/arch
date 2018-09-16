@@ -74,5 +74,18 @@
         },
         "schemaVersion": 1
     },
-    "gitlens.historyExplorer.enabled": true
+    "gitlens.historyExplorer.enabled": true,
+    "breadcrumbs.enabled": false,
+    "mssql.connections": [
+        {
+            "server": "localhost",
+            "database": "zenite",
+            "authenticationType": "SqlLogin",
+            "user": "sa",
+            "password": "",
+            "emptyPasswordInput": false,
+            "savePassword": true,
+            "profileName": "zenite"
+        }
+    ]
 }
