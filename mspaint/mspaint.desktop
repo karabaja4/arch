@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=mspaint
+Comment=mspaint
+Type=Application
+Categories=Development;
+Exec=wine /home/igor/arch/mspaint/mspaint.exe
+Terminal=false
+StartupNotify=true
+Icon=mspaint2
