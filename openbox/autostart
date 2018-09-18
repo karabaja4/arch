@@ -6,7 +6,6 @@ declare vnc=$? # 0 ako je vnc
 
 xsettingsd -c /home/igor/arch/misc/xsettingsd &
 xfce4-clipman &
-[ $vnc -eq 0 ] || flameshot &
 
 [ $vnc -eq 0 ] && xsetroot -solid '#008080'
 [ $vnc -eq 0 ] || /home/igor/arch/scripts/fixres.sh # calls feh
@@ -16,5 +15,6 @@ conky -c /home/igor/arch/misc/conkyrc-xh0 -d
 tint2 -c /home/igor/arch/misc/tint2rc &
 
 [ $vnc -eq 0 ] || pnmixer &
+[ $vnc -eq 0 ] || (sleep 5 && flameshot) &
 #[ $vnc -eq 0 ] || xautolock -time 60 -locker "systemctl suspend" -detectsleep &
 [ $vnc -eq 0 ] || vncserver &
