@@ -22,6 +22,7 @@ Uptime:   ${uptime}
 CPU:      ${cpu}%
 RAM:      ${mem} / ${memmax}
 Disk:     ${fs_used /} / ${fs_size /}
+SD:       ${fs_used /home/igor/sd} / ${fs_size /home/igor/sd}
 Download: ${downspeed enp2s0}
 Upload:   ${upspeed enp2s0}
 IP:       ${addr enp2s0}
