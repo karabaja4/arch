@@ -4,6 +4,7 @@ declare vnc=$? # 0 ako je vnc
 [ $vnc -eq 0 ] && echo "$(date): Started VNC" >> $HOME/.my.log
 [ $vnc -eq 0 ] || echo "$(date): Started Openbox" >> $HOME/.my.log
 
+[ $vnc -eq 0 ] || xcompmgr -a &
 xsettingsd -c /home/igor/arch/misc/xsettingsd &
 xfce4-clipman &
 
