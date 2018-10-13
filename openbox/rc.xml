@@ -316,33 +316,12 @@
         <direction>down</direction>
       </action>
     </keybind>
-    <!-- Keybindings for running applications -->
-    <keybind key="W-e">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Konqueror</name>
-        </startupnotify>
-        <command>kfmclient openProfile filemanagement</command>
-      </action>
-    </keybind>
-    <!-- Launch scrot when Print is pressed -->
-    <keybind key="Print">
-      <action name="Execute">
-        <command>scrot</command>
-      </action>
-    </keybind>
-    <keybind key="W-w">
-      <action name="Execute">
-        <command>xfce4-appfinder</command>
-      </action>
-    </keybind>
     <keybind key="W-1">
       <action name="MoveResizeTo">
         <monitor>1</monitor>
       </action>
 	  </keybind>
-    <keybind key="A-M">
+    <keybind key="A-X">
       <action name="ToggleMaximize"/>
     </keybind>
   </keyboard>
@@ -813,6 +792,9 @@
         <x>center</x>
         <y>center</y>
       </position>
+    </application>
+    <application name="*">
+      <decor>no</decor>
     </application>
   </applications>
 </openbox_config>
