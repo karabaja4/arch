@@ -49,6 +49,7 @@ alias thinkpad='rdesktop -u Igor -g 1024x768 -z -x m -P -k hr -r sound:off 192.1
 alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"
 alias mountcz="sudo mount -t cifs //192.168.132.10/code _cz/ -o username=www-data,password=password,uid=$(id -u),gid=$(id -g)"
 alias mountdisk="sudo mount /dev/sdb1 _disk/"
+alias vboxadd="VBoxManage registervm"
 
 # exports
 export QT_QPA_PLATFORMTHEME="qt5ct"
