@@ -50,6 +50,7 @@ alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root
 alias mountcz="sudo mount -t cifs //192.168.132.10/code _cz/ -o username=www-data,password=password,uid=$(id -u),gid=$(id -g)"
 alias mountdisk="sudo mount /dev/sdb1 _disk/"
 alias vboxadd="VBoxManage registervm"
+alias zxvf="tar zxvf"
 
 # exports
 export QT_QPA_PLATFORMTHEME="qt5ct"
