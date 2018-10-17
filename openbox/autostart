@@ -12,7 +12,7 @@ xfce4-clipman &
 [ $vnc -eq 0 ] || /home/igor/arch/scripts/fixres.sh # calls feh
 
 conky -c /home/igor/arch/misc/conkyrc-xh0 -d
-[ $vnc -eq 0 ] || cp /home/igor/arch/misc/conkyrc-xh0 /tmp/conkyrc-xh1 && sed -i -e 's/xinerama_head = 0/xinerama_head = 1/g' /tmp/conkyrc-xh1
+[ $vnc -eq 0 ] || sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
 [ $vnc -eq 0 ] || conky -c /tmp/conkyrc-xh1 -d
 tint2 -c /home/igor/arch/misc/tint2rc &
 
