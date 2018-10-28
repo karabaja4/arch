@@ -55,23 +55,12 @@
     "problems.decorations.enabled": false,
     "gitlens.historyExplorer.enabled": true,
     "breadcrumbs.enabled": false,
-    "mssql.connections": [
-        {
-            "server": "localhost",
-            "database": "zenite",
-            "authenticationType": "SqlLogin",
-            "user": "sa",
-            "password": "",
-            "emptyPasswordInput": false,
-            "savePassword": true,
-            "profileName": "zenite"
-        }
-    ],
-    "msbuildProjectTools.nuget.includePreRelease": true,
     "msbuildProjectTools.nuget.newestVersionsFirst": true,
     "explorer.confirmDelete": false,
     "dotnet-test-explorer.testProjectPath": "src/zenite.Tests",
     "razor.languageServer.trace": "Off",
     "omnisharp.loggingLevel": "critical",
-    "msbuildProjectTools.logging.level": "Error"
+    "msbuildProjectTools.logging.level": "Error",
+    "omnisharp.disableMSBuildDiagnosticWarning": true,
+    "omnisharp.path": "latest"
 }
