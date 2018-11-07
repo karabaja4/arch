@@ -54,7 +54,7 @@ task_text = 1
 task_maximum_size = 200 0
 task_centered = 1
 task_padding = 6 6
-task_font = Segoe UI Bold 8
+task_font = Roboto Regular 9
 
 task_font_color = #ffffff 100
 task_active_font_color = #ffffff 100
@@ -76,7 +76,7 @@ systray_monitor = 3
 # CLOCK
 #---------------------------------------------
 time1_format = %d.%m.%Y. %H:%M:%S
-time1_font = Segoe UI Bold 8
+time1_font = Roboto Regular 9
 clock_font_color = #ffffff 100
 clock_padding = 5 0
 clock_background_id = 0
@@ -86,8 +86,8 @@ clock_background_id = 0
 #---------------------------------------------
 mouse_middle = none
 mouse_right = close
-mouse_scroll_up = none
-mouse_scroll_down = none
+mouse_scroll_up = maximize_restore
+mouse_scroll_down = maximize_restore
 #---------------------------------------------
 # LAUNCHER
 #---------------------------------------------
@@ -122,7 +122,7 @@ launcher_item_app = /usr/share/applications/virtualbox.desktop
 execp = new
 execp_command = node /home/igor/arch/coinbase/coinbase.js
 execp_interval = 120
-execp_font = Segoe UI Bold 8
+execp_font = Roboto Regular 9
 execp_font_color = #ffffff 100
 execp_padding = 100 0
 execp_tooltip =

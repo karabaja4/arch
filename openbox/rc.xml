@@ -120,6 +120,9 @@
   <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
 
   <context name="Frame">
+    <mousebind button="Middle" action="DoubleClick">
+      <action name="ToggleMaximize"/>
+    </mousebind>
     <mousebind button="Middle" action="Drag">
       <action name="Move"/>
     </mousebind>
@@ -203,11 +206,6 @@
   </context>
 
   <context name="Root">
-    <mousebind button="Middle" action="Press">
-      <action name="ShowMenu">
-        <menu>client-list-combined-menu</menu>
-      </action>
-    </mousebind> 
     <mousebind button="Right" action="Press">
       <action name="ShowMenu">
         <menu>root-menu</menu>
