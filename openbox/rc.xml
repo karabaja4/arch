@@ -125,6 +125,8 @@
     </mousebind>
     <mousebind button="Middle" action="Drag">
       <action name="Move"/>
+      <action name="Focus"/>
+      <action name="Raise"/>
     </mousebind>
   </context>
 
