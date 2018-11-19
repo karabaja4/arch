@@ -58,9 +58,11 @@
     "msbuildProjectTools.nuget.newestVersionsFirst": true,
     "explorer.confirmDelete": false,
     "dotnet-test-explorer.testProjectPath": "src/zenite.Tests",
-    "razor.languageServer.trace": "Off",
     "omnisharp.loggingLevel": "critical",
     "msbuildProjectTools.logging.level": "Error",
     "omnisharp.disableMSBuildDiagnosticWarning": true,
-    "omnisharp.path": "latest"
+    "razor.disabled": true,
+    "window.titleBarStyle": "custom",
+    "window.restoreWindows": "none",
+    "workbench.settings.editor": "json"
 }

@@ -37,7 +37,7 @@ mkmine()
 
 alias regdom='nano /etc/conf.d/wireless-regdom'
 alias ifedit='nano /etc/udev/rules.d/10-network.rules'
-alias speedtest='wget http://debian.carnet.hr/debian-cd/9.5.0/amd64/iso-cd/debian-9.5.0-amd64-netinst.iso'
+alias speedtest='wget http://debian.carnet.hr/debian-cd/9.6.0/amd64/iso-cd/debian-9.6.0-amd64-netinst.iso'
 
 alias rsnc='sudo pacman -Rsnc'
 #alias pacman='sudo pacman'

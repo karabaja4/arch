@@ -12,24 +12,24 @@ conky.config = {
 	own_window_transparent = true,
 	color0 = '#ffffff',
 	xinerama_head = 0,
-	color1 = '#64DD17',
-	color2 = '#FFD600',
-	color3 = '#D50000'
+	color1 = '#00FF00',
+	color2 = '#FFFF00',
+	color3 = '#FF0000'
 };
 
 conky.text = [[
 ${color0}home.aerium.hr ($nodename)
 $sysname $kernel
 
-Uptime:   ${uptime}
-CPU:      ${cpu}%
-RAM:      ${mem} ${if_match ${memperc} >= 66}${color3}/${color}${else}${if_match ${memperc} >= 33}${color2}/${color}${else}${color1}/${color}${endif}${endif} ${memmax}
-HDD:      ${fs_used /} ${if_match ${fs_used_perc /} >= 66}${color3}/${color}${else}${if_match ${fs_used_perc /} >= 33}${color2}/${color}${else}${color1}/${color}${endif}${endif} ${fs_size /}
-SD:       ${fs_used /home/igor/_sd} ${if_match ${fs_used_perc /home/igor/_sd} >= 66}${color3}/${color}${else}${if_match ${fs_used_perc /home/igor/_sd} >= 33}${color2}/${color}${else}${color1}/${color}${endif}${endif} ${fs_size /home/igor/_sd}
-${if_up enp2s0}IP        ${addr enp2s0}
-Download: ${downspeed enp2s0}
-Upload:   ${upspeed enp2s0}
-${endif}${if_up wlp3s0}IP (wl):  ${addr wlp3s0}
-Download: ${downspeed wlp3s0}
-Upload:   ${upspeed wlp3s0}${endif}
+● Uptime:   ${uptime}
+${if_match ${cpu} >= 66}${color3}●${color}${else}${if_match ${cpu} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} CPU:      ${cpu}%
+${if_match ${memperc} >= 66}${color3}●${color}${else}${if_match ${memperc} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} RAM:      ${mem} / ${memmax}
+${if_match ${fs_used_perc /} >= 66}${color3}●${color}${else}${if_match ${fs_used_perc /} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} HDD:      ${fs_used /} / ${fs_size /}
+${if_match ${fs_used_perc /home/igor/_sd} >= 66}${color3}●${color}${else}${if_match ${fs_used_perc /home/igor/_sd} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} SD:       ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}
+${if_up enp2s0}● IP:       ${addr enp2s0}
+${if_match ${downspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Download: ${downspeed enp2s0}
+${if_match ${upspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Upload:   ${upspeed enp2s0}
+${endif}${if_up wlp3s0}● IP (wl):  ${addr wlp3s0}
+● Download: ${downspeed wlp3s0}
+● Upload:   ${upspeed wlp3s0}${endif}
 ]];
