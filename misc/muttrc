@@ -1,0 +1,3 @@
+set smtp_pass="my-password-goes-here"
+set smtp_url = "smtps://my-email-goes-here@gmail.com@smtp.gmail.com:465/"
+set copy=no
