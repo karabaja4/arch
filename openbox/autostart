@@ -1,24 +1,52 @@
 xdpyinfo | grep VNC > /dev/null
-declare vnc=$? # 0 ako je vnc
+declare isvnc=$? # 0 ako je vnc
 
-[ $vnc -eq 0 ] && echo "$(date): Started VNC" >> $HOME/.my.log
-[ $vnc -eq 0 ] || echo "$(date): Started Openbox" >> $HOME/.my.log
+vnc () {
+    # log
+    echo "$(date): Started VNC" >> $HOME/.my.log
 
-[ $vnc -eq 0 ] || xcompmgr -a &
-xsettingsd -c /home/igor/arch/misc/xsettingsd &
-xfce4-clipman &
+    # daemons
+    xsettingsd -c /home/igor/arch/misc/xsettingsd &
 
-[ $vnc -eq 0 ] && xsetroot -solid '#008080'
-[ $vnc -eq 0 ] || /home/igor/arch/scripts/fixres.sh # calls feh
+    # bacgkround
+    xsetroot -solid '#008080'
 
-conky -c /home/igor/arch/misc/conkyrc-xh0 -d
-[ $vnc -eq 0 ] || sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
-[ $vnc -eq 0 ] || sed 's/xinerama_head = 0/xinerama_head = 2/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh2
-[ $vnc -eq 0 ] || conky -c /tmp/conkyrc-xh1 -d
-[ $vnc -eq 0 ] || conky -c /tmp/conkyrc-xh2 -d
-tint2 -c /home/igor/arch/misc/tint2rc &
+    # interface
+    conky -c /home/igor/arch/misc/conkyrc-xh0 -d
+    tint2 -c /home/igor/arch/misc/tint2rc &
+}
 
-[ $vnc -eq 0 ] || pnmixer &
-[ $vnc -eq 0 ] || (sleep 5 && flameshot) &
-#[ $vnc -eq 0 ] || xautolock -time 60 -locker "systemctl suspend" -detectsleep &
-[ $vnc -eq 0 ] || vncserver &
+desktop () {
+    # log
+    echo "$(date): Started Openbox" >> $HOME/.my.log
+
+    # daemons
+    xsettingsd -c /home/igor/arch/misc/xsettingsd &
+    xcompmgr -a &
+
+    # resolution and background
+    /home/igor/arch/scripts/fixres.sh
+    feh --bg-scale /home/igor/arch/wall/default.jpg
+
+    # conky
+    sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
+    sed 's/xinerama_head = 0/xinerama_head = 2/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh2
+    conky -c /home/igor/arch/misc/conkyrc-xh0 -d
+    conky -c /tmp/conkyrc-xh1 -d
+    conky -c /tmp/conkyrc-xh2 -d
+
+    # tray
+    tint2 -c /home/igor/arch/misc/tint2rc &
+    pnmixer &
+    xfce4-clipman &
+    (sleep 5 && flameshot) &
+
+    # autolock
+    #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+
+    # vnc
+    vncserver &
+}
+
+[ $isvnc -eq 0 ] || desktop
+[ $isvnc -eq 0 ] && vnc
