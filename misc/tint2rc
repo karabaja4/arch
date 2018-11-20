@@ -120,7 +120,7 @@ launcher_item_app = /usr/share/applications/vmplayer.desktop
 #-------------------------------------
 # Executor 1
 execp = new
-execp_command = node /home/igor/arch/coinbase/coinbase.js
+execp_command = node /home/igor/arch/gdax/gdax.js
 execp_interval = 120
 execp_font = Roboto Bold 8
 execp_font_color = #ffffff 100

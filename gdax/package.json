@@ -1,0 +1,10 @@
+{
+    "name": "gdax",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "gdax": "latest",
+        "request": "latest",
+        "async": "latest"
+    }
+}

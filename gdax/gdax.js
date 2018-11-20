@@ -1,0 +1,54 @@
+const Gdax = require('gdax');
+const request = require('request');
+const async = require('async');
+const secret = require('./secret.json')
+
+const apiURI = 'https://api.pro.coinbase.com';
+const publicClient = new Gdax.PublicClient();
+
+const eurId = "cb130c23-1daa-475d-a679-2a5900d28b24";
+const btcId = "a3593b1c-08b7-4f53-8ab8-d3ab666ad037";
+
+const authedClient = new Gdax.AuthenticatedClient(
+    secret.gdaxKey,
+    secret.gdaxSecret,
+    secret.gdaxPassphrase,
+    apiURI
+);
+
+const hnb = (callback) => {
+    request('http://api.hnb.hr/tecajn/v1?valuta=EUR', { json: true }, (err, res, body) => {
+        callback(err, body && parseFloat(body[0]["Kupovni za devize"].replace(",", ".")));
+    });
+};
+
+const price = (callback) => {
+    publicClient.getProductTicker('BTC-EUR', (err, response, data) => {
+        callback(err, data && parseFloat(data.price));
+    });
+}
+
+const account = (id, callback) => {
+    authedClient.getAccount(id, (err, response, data) => {
+        callback(err, data && parseFloat(data.balance));
+    });
+}
+
+const eur = (callback) => account(eurId, callback);
+const btc = (callback) => account(btcId, callback);
+
+const print = (text1, text2) => {
+    const first = `<span foreground="aqua">${text1 || "-"}</span>`;
+    const second = `<span foreground="lime">${text2 || "-"}</span>`;
+    const middle = `<span foreground="white">  |  </span>`;
+    console.log(first + middle + second);
+}
+
+async.parallel([hnb, price, btc, eur], (err, results) => {
+    const btcAmount = results[0] * results[1] * results[2];
+    const eurAmount = results[3];
+    const format = (amount, currency) => {
+        return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
+    }
+    print(format(btcAmount, "HRK (BTC)"), format(eurAmount, "EUR"));
+});
