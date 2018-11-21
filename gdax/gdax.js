@@ -39,8 +39,7 @@ const hnb = (callback) => {
             callback(err, value);
         });
     }
-    else
-    {
+    else {
         callback(null, hnbValue);
     }
 };
