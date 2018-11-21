@@ -1,7 +1,8 @@
 const Gdax = require('gdax');
 const request = require('request');
 const async = require('async');
-const secret = require('./secret.json')
+const secret = require('./secret.json');
+const fs = require('fs');
 
 const apiURI = 'https://api.pro.coinbase.com';
 const publicClient = new Gdax.PublicClient();
@@ -42,15 +43,21 @@ const print = (text1, text2, text3) => {
     const first = `<span foreground="#90EE90">${text1 || "-"}</span>`;
     const second = `<span foreground="#FFB6C1">${text2 || "-"}</span>`;
     const third = `<span foreground="#87CEFA">${text3 || "-"}</span>`;
-    console.log(first + separator + second + separator + third);
+    const content = first + separator + second + separator + third;
+    console.log(content);
+    fs.writeFile("/tmp/gdax", content); 
 }
 
-async.parallel([hnb, price, btc, eur], (err, results) => {
-    const btcAmount = results[0] * results[1] * results[2];
-    const eurAmount = results[3];
-    const btcPrice = results[1];
-    const format = (amount, currency) => {
-        return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
-    }
-    print(format(eurAmount, "EUR"), format(btcPrice, "EUR"), format(btcAmount, "BTC (HRK)"));
-});
+var exec = () => {
+    async.parallel([hnb, price, btc, eur], (err, results) => {
+        const btcAmount = results[0] * results[1] * results[2];
+        const eurAmount = results[3];
+        const btcPrice = results[1];
+        const format = (amount, currency) => {
+            return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
+        }
+        print(format(eurAmount, "EUR"), format(btcPrice, "EUR"), format(btcAmount, "BTC (HRK)"));
+    });
+}
+
+setInterval(exec, 10000);
