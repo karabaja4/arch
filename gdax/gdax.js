@@ -37,18 +37,20 @@ const account = (id, callback) => {
 const eur = (callback) => account(eurId, callback);
 const btc = (callback) => account(btcId, callback);
 
-const print = (text1, text2) => {
-    const first = `<span foreground="aqua">${text1 || "-"}</span>`;
-    const second = `<span foreground="lime">${text2 || "-"}</span>`;
-    const middle = `<span foreground="white">  |  </span>`;
-    console.log(first + middle + second);
+const print = (text1, text2, text3) => {
+    const separator = `<span foreground="#FFFFFF">  |  </span>`;
+    const first = `<span foreground="#90EE90">${text1 || "-"}</span>`;
+    const second = `<span foreground="#FFB6C1">${text2 || "-"}</span>`;
+    const third = `<span foreground="#87CEFA">${text3 || "-"}</span>`;
+    console.log(first + separator + second + separator + third);
 }
 
 async.parallel([hnb, price, btc, eur], (err, results) => {
     const btcAmount = results[0] * results[1] * results[2];
     const eurAmount = results[3];
+    const btcPrice = results[1];
     const format = (amount, currency) => {
         return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
     }
-    print(format(btcAmount, "HRK (BTC)"), format(eurAmount, "EUR"));
+    print(format(eurAmount, "EUR"), format(btcPrice, "EUR"), format(btcAmount, "BTC (HRK)"));
 });
