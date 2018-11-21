@@ -10,6 +10,15 @@ const publicClient = new Gdax.PublicClient();
 const eurId = "cb130c23-1daa-475d-a679-2a5900d28b24";
 const btcId = "a3593b1c-08b7-4f53-8ab8-d3ab666ad037";
 
+// cached date
+let hnbDate = null;
+let hnbValue = null;
+Date.prototype.addHours = function(h) {
+    var date = new Date(this.getTime());
+    date.setHours(date.getHours() + h);
+    return date;
+}
+
 const authedClient = new Gdax.AuthenticatedClient(
     secret.gdaxKey,
     secret.gdaxSecret,
@@ -18,9 +27,22 @@ const authedClient = new Gdax.AuthenticatedClient(
 );
 
 const hnb = (callback) => {
-    request('http://api.hnb.hr/tecajn/v1?valuta=EUR', { json: true }, (err, res, body) => {
-        callback(err, body && parseFloat(body[0]["Kupovni za devize"].replace(",", ".")));
-    });
+    const now = new Date();
+    const shouldFetch = !hnbDate || !hnbValue || (now > hnbDate.addHours(6));
+    if (shouldFetch) {
+        request('http://api.hnb.hr/tecajn/v1?valuta=EUR', { json: true }, (err, res, body) => {
+            const value = body && parseFloat(body[0]["Kupovni za devize"].replace(",", "."));
+            if (!err && value) {
+                hnbDate = new Date();
+                hnbValue = value;
+            }
+            callback(err, value);
+        });
+    }
+    else
+    {
+        callback(null, hnbValue);
+    }
 };
 
 const price = (callback) => {
