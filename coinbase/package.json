@@ -1,9 +1,0 @@
-{
-    "name": "coinbase",
-    "version": "1.0.0",
-    "private": true,
-    "dependencies": {
-        "coinbase": "latest",
-        "async": "2.6.1"
-    }
-}
