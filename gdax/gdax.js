@@ -45,7 +45,7 @@ const print = (text1, text2, text3) => {
     const third = `<span foreground="#87CEFA">${text3 || "-"}</span>`;
     const content = first + separator + second + separator + third;
     console.log(content);
-    fs.writeFile("/tmp/gdax", content); 
+    fs.writeFile("/tmp/gdax", content, (err) => {});
 }
 
 var exec = () => {
