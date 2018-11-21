@@ -1,11 +1,11 @@
-const Gdax = require('gdax');
+const gdax = require('gdax');
 const request = require('request');
 const async = require('async');
 const secret = require('./secret.json');
 const fs = require('fs');
 
-const apiURI = 'https://api.pro.coinbase.com';
-const publicClient = new Gdax.PublicClient();
+const api = 'https://api.pro.coinbase.com';
+const public = new gdax.PublicClient();
 
 const eurId = "cb130c23-1daa-475d-a679-2a5900d28b24";
 const btcId = "a3593b1c-08b7-4f53-8ab8-d3ab666ad037";
@@ -13,17 +13,17 @@ const btcId = "a3593b1c-08b7-4f53-8ab8-d3ab666ad037";
 // cached date
 let hnbDate = null;
 let hnbValue = null;
-Date.prototype.addHours = function(h) {
+Date.prototype.addHours = function(hours) {
     var date = new Date(this.getTime());
-    date.setHours(date.getHours() + h);
+    date.setHours(date.getHours() + hours);
     return date;
 }
 
-const authedClient = new Gdax.AuthenticatedClient(
+const auth = new gdax.AuthenticatedClient(
     secret.gdaxKey,
     secret.gdaxSecret,
     secret.gdaxPassphrase,
-    apiURI
+    api
 );
 
 const hnb = (callback) => {
@@ -45,13 +45,13 @@ const hnb = (callback) => {
 };
 
 const price = (callback) => {
-    publicClient.getProductTicker('BTC-EUR', (err, response, data) => {
+    public.getProductTicker('BTC-EUR', (err, response, data) => {
         callback(err, data && parseFloat(data.price));
     });
 }
 
 const account = (id, callback) => {
-    authedClient.getAccount(id, (err, response, data) => {
+    auth.getAccount(id, (err, response, data) => {
         callback(err, data && parseFloat(data.balance));
     });
 }
