@@ -36,6 +36,7 @@ const hnb = (callback) => {
                 hnbDate = new Date();
                 hnbValue = value;
             }
+            console.log("Updated HNB exchange rate to " + value)
             callback(err, value);
         });
     }
@@ -59,25 +60,35 @@ const account = (id, callback) => {
 const eur = (callback) => account(eurId, callback);
 const btc = (callback) => account(btcId, callback);
 
-const print = (text1, text2, text3) => {
-    const separator = `<span foreground="#FFFFFF">  |  </span>`;
-    const first = `<span foreground="#90EE90">${text1 || "-"}</span>`;
-    const second = `<span foreground="#FFB6C1">${text2 || "-"}</span>`;
-    const third = `<span foreground="#87CEFA">${text3 || "-"}</span>`;
-    const content = first + separator + second + separator + third;
+const print = (texts) => {
+    let content = "";
+    for (let i = 0; i < texts.length; i++) {
+        const text = texts[i].text;
+        const color = texts[i].color;
+        content += `<span foreground="${color}">${text || "-"}</span>`;
+        if (i < (texts.length - 1)) {
+            content += `<span foreground="#FFFFFF">  |  </span>`;
+        }
+    }
     console.log(content);
     fs.writeFile("/tmp/gdax", content, (err) => {});
 }
 
 var exec = () => {
     async.parallel([hnb, price, btc, eur], (err, results) => {
-        const btcAmount = results[0] * results[1] * results[2];
+        const btcAmountHrk = results[0] * results[1] * results[2];
+        const btcAmountEur = results[1] * results[2];
         const eurAmount = results[3];
         const btcPrice = results[1];
         const format = (amount, currency) => {
             return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
         }
-        print(format(eurAmount, "EUR"), format(btcPrice, "EUR"), format(btcAmount, "BTC (HRK)"));
+        const texts = [
+            { text: format(eurAmount, "EUR"), color: "#87CEFA" },
+            { text: format(btcPrice, "EUR"), color: "#FFB6C1" },
+            { text: format(btcAmountEur, "BTC (EUR)"), color: "#90EE90" }
+        ];
+        print(texts);
     });
 }
 
