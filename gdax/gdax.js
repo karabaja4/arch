@@ -76,6 +76,9 @@ const print = (texts) => {
 
 var exec = () => {
     async.parallel([hnb, price, btc, eur], (err, results) => {
+        if (err) {
+            console.log(err);
+        }
         const btcAmountHrk = results[0] * results[1] * results[2];
         const btcAmountEur = results[1] * results[2];
         const eurAmount = results[3];
