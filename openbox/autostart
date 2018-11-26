@@ -22,8 +22,8 @@ desktop () {
 
     # daemons
     xsettingsd -c /home/igor/arch/misc/xsettingsd &
-    #xcompmgr -a &
-    compton -b
+    xcompmgr -a &
+    #compton -b
 
     # resolution and background
     /home/igor/arch/scripts/fixres.sh
