@@ -29,11 +29,11 @@ desktop () {
     feh --bg-scale /home/igor/arch/wall/default.jpg
 
     # conky
-    sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
-    sed 's/xinerama_head = 0/xinerama_head = 2/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh2
+    #sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
+    #sed 's/xinerama_head = 0/xinerama_head = 2/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh2
     conky -c /home/igor/arch/misc/conkyrc-xh0 -d
-    conky -c /tmp/conkyrc-xh1 -d
-    conky -c /tmp/conkyrc-xh2 -d
+    #conky -c /tmp/conkyrc-xh1 -d
+    #conky -c /tmp/conkyrc-xh2 -d
 
     # tray
     tint2 -c /home/igor/arch/misc/tint2rc &
@@ -45,8 +45,8 @@ desktop () {
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
 
     # vnc
-    vncserver &
+    #vncserver &
 }
 
 [ $isvnc -eq 0 ] || desktop
-[ $isvnc -eq 0 ] && vnc
+#[ $isvnc -eq 0 ] && vnc

@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Consolas:size=23',
+	font = 'Consolas:size=15',
 	draw_shades = false,
 	alignment = 'top_left',
 	gap_x = 50,
@@ -18,18 +18,15 @@ conky.config = {
 };
 
 conky.text = [[
-${color0}home.aerium.hr ($nodename)
+${color0}hp.aerium.hr ($nodename)
 $sysname $kernel
 
 ● Uptime:   ${uptime}
 ${if_match ${cpu} >= 66}${color3}●${color}${else}${if_match ${cpu} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} CPU:      ${cpu}%
 ${if_match ${memperc} >= 66}${color3}●${color}${else}${if_match ${memperc} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} RAM:      ${mem} / ${memmax}
 ${if_match ${fs_used_perc /} >= 66}${color3}●${color}${else}${if_match ${fs_used_perc /} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} HDD:      ${fs_used /} / ${fs_size /}
-${if_match ${fs_used_perc /home/igor/_sd} >= 66}${color3}●${color}${else}${if_match ${fs_used_perc /home/igor/_sd} >= 33}${color2}●${color}${else}${color1}●${color}${endif}${endif} SD:       ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}
-${if_up enp2s0}● IP:       ${addr enp2s0}
-${if_match ${downspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Download: ${downspeed enp2s0}
-${if_match ${upspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Upload:   ${upspeed enp2s0}
-${endif}${if_up wlp3s0}● IP (wl):  ${addr wlp3s0}
-● Download: ${downspeed wlp3s0}
-● Upload:   ${upspeed wlp3s0}${endif}
+${if_up wlo1}● IP:       ${addr wlo1}
+${if_match ${downspeedf wlo1} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Download: ${downspeed wlo1}
+${if_match ${upspeedf wlo1} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Upload:   ${upspeed wlo1}
+${endif}
 ]];
