@@ -91,7 +91,7 @@ mouse_scroll_down = maximize_restore
 #---------------------------------------------
 # LAUNCHER
 #---------------------------------------------
-launcher_icon_theme = Papirus
+launcher_icon_theme = Breeze
 launcher_padding = 7 5 6
 launcher_background_id = 1
 launcher_icon_size = 23
