@@ -13,6 +13,7 @@ window.active.label.text.color: #ffffff
 !! misc
 border.width: 1
 window.client.padding.width: 0
+menu.border.width: 0
 
 !! borders
 window.active.border.color: #9E9E9E
