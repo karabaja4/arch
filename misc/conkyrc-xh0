@@ -28,5 +28,5 @@ ${if_match ${fs_used_perc /} >= 66}${color3}●${color}${else}${if_match ${fs_us
 ${if_up wlo1}● IP:       ${addr wlo1}
 ${if_match ${downspeedf wlo1} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Download: ${downspeed wlo1}
 ${if_match ${upspeedf wlo1} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Upload:   ${upspeed wlo1}
-${endif}${if_match ${battery_percent} >= 66}${color1}●${color}${else}${if_match ${battery_percent} >= 33}${color2}●${color}${else}${color3}●${color}${endif}${endif} Battery:  ${battery_percent}% (${battery_time})
+${endif}
 ]];
