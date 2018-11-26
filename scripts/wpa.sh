@@ -1,3 +1,21 @@
-wpa_supplicant -B -i wlp0s20u1u1 -c /etc/wpa_supplicant/batak.conf
+#!/bin/bash
+
+killall wpa_supplicant
+killall dhcpcd
 sleep 1
-dhcpcd wlp0s20u1u1
+
+declare iface="iface"
+declare ssid="ssid"
+declare psk="psk"
+
+declare file="/tmp/wifi.conf"
+declare conf="network={
+    ssid=\"$ssid\"
+    psk=\"$psk\"
+}"
+
+echo -e "$conf" > $file
+
+wpa_supplicant -B -i $iface -c $file
+sleep 1
+dhcpcd $iface
