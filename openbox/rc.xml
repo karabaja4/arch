@@ -30,19 +30,19 @@
   <keepBorder>yes</keepBorder>
   <animateIconify>no</animateIconify>
   <font place="ActiveWindow">
-    <name>Segoe UI</name>
+    <name>Roboto</name>
     <size>11</size>
     <weight>Bold</weight>
     <slant>Normal</slant>
   </font>
   <font place="InactiveWindow">
-    <name>Segoe UI</name>
+    <name>Roboto</name>
     <size>11</size>
     <weight>Bold</weight>
     <slant>Normal</slant>
   </font>
   <font place="MenuHeader">
-    <name>Segoe UI</name>
+    <name>Roboto</name>
     <size>11</size>
     <weight>Normal</weight>
     <slant>Normal</slant>
@@ -54,13 +54,13 @@
     <slant>Normal</slant>
   </font>
   <font place="ActiveOnScreenDisplay">
-    <name>Segoe UI</name>
+    <name>Roboto</name>
     <size>11</size>
     <weight>Bold</weight>
     <slant>Normal</slant>
   </font>
   <font place="InactiveOnScreenDisplay">
-    <name>Segoe UI</name>
+    <name>Roboto</name>
     <size>11</size>
     <weight>Bold</weight>
     <slant>Normal</slant>
@@ -120,63 +120,12 @@
   <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
 
   <context name="Frame">
-    <mousebind button="Middle" action="DoubleClick">
-      <action name="ToggleMaximize"/>
-    </mousebind>
     <mousebind button="Middle" action="Drag">
       <action name="Move"/>
       <action name="Focus"/>
       <action name="Raise"/>
     </mousebind>
-  </context>
-
-  <context name="Top Right Bottom Left TLCorner TRCorner BRCorner BLCorner">
-    <mousebind button="Left" action="Press">
-      <action name="Focus"/>
-      <action name="Raise"/>
-      <action name="Unshade"/>
-    </mousebind>
-  </context>
-
-  <context name="Top">
-    <mousebind button="Left" action="Drag">
-      <action name="Resize">
-        <edge>top</edge>
-      </action>
-    </mousebind>
-  </context>
-
-  <context name="Left">
-    <mousebind button="Left" action="Drag">
-      <action name="Resize">
-        <edge>left</edge>
-      </action>
-    </mousebind>
-  </context>
-
-  <context name="Right">
-    <mousebind button="Left" action="Drag">
-      <action name="Resize">
-        <edge>right</edge>
-      </action>
-    </mousebind>
-  </context>
-
-  <context name="Bottom">
-    <mousebind button="Left" action="Drag">
-      <action name="Resize">
-        <edge>bottom</edge>
-      </action>
-    </mousebind>
-  </context>
-
-  <context name="TRCorner BRCorner TLCorner BLCorner">
-    <mousebind button="Left" action="Press">
-      <action name="Focus"/>
-      <action name="Raise"/>
-      <action name="Unshade"/>
-    </mousebind>
-    <mousebind button="Left" action="Drag">
+    <mousebind button="A-Left" action="Drag">
       <action name="Resize"/>
     </mousebind>
   </context>
