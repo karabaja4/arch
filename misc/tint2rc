@@ -122,7 +122,7 @@ launcher_item_app = /usr/share/applications/vmplayer.desktop
 # Executor 1
 execp = new
 execp_command = cat /tmp/gdax
-execp_interval = 10
+execp_interval = 1
 execp_font = Roboto Bold 8
 execp_font_color = #ffffff 100
 execp_padding = 30 0
