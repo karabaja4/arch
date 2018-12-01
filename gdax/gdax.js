@@ -92,7 +92,8 @@ var exec = () => {
             { text: format(btcAmountEur, "BTC (EUR)"), color: "#90EE90" }
         ];
         print(texts);
+        setTimeout(() => exec(), 2000);
     });
 }
 
-setInterval(exec, 10000);
+exec();
