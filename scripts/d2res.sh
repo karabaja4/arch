@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare monitor="HDMI-1-1"
-declare width=1200
+declare width=1280
 declare height=800
 declare refresh=60
 
