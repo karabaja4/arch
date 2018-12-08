@@ -97,7 +97,7 @@ const getColor = (percent) => {
     } else if (percent >= 33) {
         return "#F0E68C";
     } else {
-        return "#F0E68C";
+        return "#FFB6C1";
     }
 }
 
