@@ -3,6 +3,7 @@ const request = require('request');
 const async = require('async');
 const secret = require('./secret.json');
 const fs = require('fs');
+const execute = require('child_process').exec;
 
 const api = 'https://api.pro.coinbase.com';
 const public = new gdax.PublicClient();
@@ -57,6 +58,22 @@ const account = (id, callback) => {
     });
 }
 
+const battery = (callback) => {
+    execute('acpi', (error, stdout, stderr) => {
+        if (error) {
+            callback(error);
+        } else {
+            const split = stdout.trim().split(",");
+            const percent = parseInt(split[1].trim().replace("%", ""));
+            const time = split[2].trim().split(" ")[0];
+            callback(null, {
+                percent: percent,
+                time: time
+            });
+        }
+    });
+}
+
 const eur = (callback) => account(eurId, callback);
 const btc = (callback) => account(btcId, callback);
 
@@ -74,23 +91,51 @@ const print = (texts) => {
     fs.writeFile("/tmp/gdax", content, (err) => {});
 }
 
-var exec = () => {
-    async.parallel([hnb, price, btc, eur], (err, results) => {
+const getColor = (percent) => {
+    if (percent >= 66) {
+        return "#90EE90";
+    } else if (percent >= 33) {
+        return "#F0E68C";
+    } else {
+        return "#F0E68C";
+    }
+}
+
+const exec = () => {
+    async.parallel([hnb, price, btc, eur, battery], (err, results) => {
         if (err) {
             console.log(err);
         }
-        const btcAmountHrk = results[0] * results[1] * results[2];
-        const btcAmountEur = results[1] * results[2];
-        const eurAmount = results[3];
+        //const kunaEurValue = results[0];
         const btcPrice = results[1];
+        const btcAmount = results[2];
+        const eurAmount = results[3];
+        const batteryData = results[4];
+
+        //const btcAmountHrk = kunaEurValue * btcPrice * btcAmount;
+        //const btcAmountEur = btcPrice * btcAmount;
+        
         const format = (amount, currency) => {
             return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
         }
-        const texts = [
-            { text: format(eurAmount, "EUR"), color: "#87CEFA" },
-            { text: format(btcPrice, "EUR"), color: "#FFB6C1" },
-            { text: format(btcAmountEur, "BTC (EUR)"), color: "#90EE90" }
-        ];
+        const texts = [];
+
+        texts.push({ text: format(btcPrice, "(P)"), color: "#87CEFA" });
+
+        if (eurAmount > 0) {
+            texts.push({ text: format(eurAmount, "(F)"), color: "#90EE90" });
+        }
+        if (btcAmount > 0) {
+            texts.push({ text: format(btcAmount, "BTC"), color: "#FFB6C1" });
+        }
+
+        if (batteryData) {
+            texts.push({
+                text: batteryData.percent + "%" + " (" + batteryData.time + ")",
+                color: getColor(batteryData.percent)
+            });
+        }
+
         print(texts);
         setTimeout(() => exec(), 2000);
     });
