@@ -65,7 +65,7 @@ const battery = (callback) => {
         } else {
             const split = stdout.trim().split(",");
             const percent = parseInt(split[1].trim().replace("%", ""));
-            const time = split[2].trim().split(" ")[0];
+            const time = split[2] ? split[2].trim().split(" ")[0] : null;
             callback(null, {
                 percent: percent,
                 time: time
@@ -131,7 +131,7 @@ const exec = () => {
 
         if (batteryData) {
             texts.push({
-                text: batteryData.percent + "%" + " (" + batteryData.time + ")",
+                text: batteryData.percent + "%" + (batteryData.time ? (" (" + batteryData.time + ")") : ""),
                 color: getColor(batteryData.percent)
             });
         }
