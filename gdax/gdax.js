@@ -130,8 +130,9 @@ const exec = () => {
         }
 
         if (batteryData) {
+            const time = (batteryData.time ? (" (" + batteryData.time + ")") : "");
             texts.push({
-                text: batteryData.percent + "%" + (batteryData.time ? (" (" + batteryData.time + ")") : ""),
+                text: batteryData.percent + "%" + time,
                 color: getColor(batteryData.percent)
             });
         }
