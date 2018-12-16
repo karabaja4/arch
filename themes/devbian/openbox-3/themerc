@@ -12,9 +12,3 @@ window.active.label.text.color: #ffffff
 
 !! misc
 border.width: 0
-!!window.client.padding.width: 0
-!!menu.border.width: 0
-
-!! borders
-!! window.active.border.color: #9E9E9E
-!! window.inactive.border.color: #9E9E9E
