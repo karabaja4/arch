@@ -11,4 +11,21 @@ menu.items.active.text.color: #212121
 window.active.label.text.color: #ffffff
 
 !! misc
-border.width: 0
+padding.width: 0
+padding.height: 0
+border.width: 1
+window.client.padding.width: 0
+window.client.padding.height: 0
+window.handle.width: 0
+menu.border.width: 0
+
+!! borders
+window.active.border.color: #212121
+window.inactive.border.color: #212121
+
+window.active.title.bg: flat solid
+window.active.title.bg.color: #FAFAFA
+window.inactive.title.bg: flat solid
+window.inactive.title.bg.color: #FAFAFA
+window.active.title.separator.color: #FAFAFA
+window.inactive.title.separator.color: #FAFAFA
