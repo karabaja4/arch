@@ -25,7 +25,7 @@
 <theme>
   <name>devbian</name>
   <titleLayout></titleLayout>
-  <keepBorder>no</keepBorder>
+  <keepBorder>yes</keepBorder>
   <animateIconify>no</animateIconify>
   <font place="ActiveWindow">
     <name>Consolas</name>
@@ -174,9 +174,6 @@
   </application>
   <application name="*">
     <decor>no</decor>
-  </application>
-  <application name="xfce4-terminal">
-    <decor>yes</decor>
   </application>
 </applications>
 
