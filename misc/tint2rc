@@ -117,6 +117,7 @@ launcher_item_app = /usr/share/applications/sqlops.desktop
 launcher_item_app = /usr/share/applications/arc.desktop
 launcher_item_app = /usr/share/applications/filezilla.desktop
 launcher_item_app = /usr/share/applications/vmplayer.desktop
+launcher_item_app = /usr/share/applications/virtualbox.desktop
 
 #-------------------------------------
 # Executor 1
