@@ -46,7 +46,7 @@ const hnb = (callback) => {
 };
 
 const price = (callback) => {
-    public.getProductTicker('BTC-EUR', (err, response, data) => {
+    public.getProductTicker('BTC-USD', (err, response, data) => {
         callback(err, data && parseFloat(data.price));
     });
 }
@@ -75,21 +75,24 @@ const print = (texts) => {
 }
 
 var exec = () => {
-    async.parallel([hnb, price, btc, eur], (err, results) => {
+    //const tasks = [hnb, price, btc, eur];
+    const tasks = [price];
+    async.parallel(tasks, (err, results) => {
         if (err) {
             console.log(err);
         }
-        const btcAmountHrk = results[0] * results[1] * results[2];
-        const btcAmountEur = results[1] * results[2];
-        const eurAmount = results[3];
-        const btcPrice = results[1];
+        //const btcAmountHrk = results[0] * results[1] * results[2];
+        //const btcAmountEur = results[1] * results[2];
+        //const eurAmount = results[3];
+        //const btcPrice = results[1];
+        const btcPrice = results[0];
         const format = (amount, currency) => {
             return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
         }
         const texts = [
-            { text: format(eurAmount, "EUR"), color: "#87CEFA" },
-            { text: format(btcPrice, "EUR"), color: "#FFB6C1" },
-            { text: format(btcAmountEur, "BTC (EUR)"), color: "#90EE90" }
+            //{ text: format(eurAmount, "EUR"), color: "#FFB6C1" },
+            { text: "BTC: " + format(btcPrice, "USD"), color: "#90EE90" },
+            //{ text: format(btcAmountEur, "BTC (EUR)"), color: "#87CEFA" }
         ];
         print(texts);
         setTimeout(() => exec(), 2000);
