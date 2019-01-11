@@ -26,7 +26,8 @@ desktop () {
 
     # resolution and background
     /home/igor/arch/scripts/fixres.sh
-    feh --bg-scale /home/igor/arch/wall/default.jpg
+    feh --bg-scale /home/igor/arch/wall/default3.jpg
+    #xsetroot -solid '#008080'
 
     # conky
     sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
