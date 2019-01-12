@@ -12,9 +12,9 @@ conky.config = {
 	own_window_transparent = true,
 	color0 = '#FFFFFF',
 	xinerama_head = 0,
-	color1 = '#00FF00',
-	color2 = '#FFFF00',
-	color3 = '#FF0000'
+	color1 = '#76FF03',
+	color2 = '#EEFF41',
+	color3 = '#FF5252'
 };
 
 conky.text = [[
