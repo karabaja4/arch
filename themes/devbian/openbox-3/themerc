@@ -16,5 +16,5 @@ window.client.padding.width: 0
 menu.border.width: 0
 
 !! borders
-window.active.border.color: #546E7A
-window.inactive.border.color: #546E7A
+window.active.border.color: #757575
+window.inactive.border.color: #757575

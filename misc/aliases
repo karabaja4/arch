@@ -62,3 +62,4 @@ export NO_AT_BRIDGE=1
 # dotnet
 export DOTNET_ROOT=$PATH:$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
+export VMWARE_USE_SHIPPED_LIBS='yes'
