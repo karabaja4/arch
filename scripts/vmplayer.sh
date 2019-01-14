@@ -12,4 +12,4 @@ sudo systemctl start vmware-hostd.service
 
 sleep 1
 
-vmplayer
+vmware
