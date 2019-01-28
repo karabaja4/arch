@@ -26,7 +26,7 @@ desktop () {
 
     # resolution and background
     /home/igor/arch/scripts/fixres.sh
-    feh --bg-scale /home/igor/arch/wall/default4.jpg
+    feh --bg-scale /home/igor/arch/wall/default.jpg
     #xsetroot -solid '#757575'
 
     # conky
