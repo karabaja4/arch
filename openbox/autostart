@@ -9,7 +9,7 @@ vnc () {
     xsettingsd -c /home/igor/arch/misc/xsettingsd &
 
     # bacgkround
-    xsetroot -solid '#757575'
+    xsetroot -solid '#038387'
 
     # interface
     conky -c /home/igor/arch/misc/conkyrc-xh0 -d
@@ -27,7 +27,7 @@ desktop () {
     # resolution and background
     /home/igor/arch/scripts/fixres.sh
     feh --bg-scale /home/igor/arch/wall/default.jpg
-    #xsetroot -solid '#757575'
+    #xsetroot -solid '#038387'
 
     # conky
     sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
