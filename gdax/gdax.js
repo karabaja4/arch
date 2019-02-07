@@ -91,7 +91,7 @@ var exec = () => {
         }
         const texts = [
             //{ text: format(eurAmount, "EUR"), color: "#FFB6C1" },
-            { text: "BTC: " + format(btcPrice, "USD"), color: "#80D8FF" },
+            { text: "BTC: " + format(btcPrice, "USD"), color: "#90CAF9" },
             //{ text: format(btcAmountEur, "BTC (EUR)"), color: "#87CEFA" }
         ];
         print(texts);

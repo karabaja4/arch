@@ -13,19 +13,6 @@ alias sn='screen -S'
 
 alias startx='nvidia-xrun'
 
-function gitpush()
-{
-    if [ -n "$1" ]; then
-	git config user.email "karabaja4@gmail.com"
-	git config user.name "karabaja4"
-        git add .
-        git commit -a -m "$1"
-        git push origin master
-    else
-        echo "Please include a commit message."
-    fi
-}
-
 mkmine()
 {
     if [ -n "$1" ]; then
@@ -42,7 +29,7 @@ alias speedtest='wget http://debian.carnet.hr/debian-cd/9.6.0/amd64/iso-cd/debia
 alias rsnc='sudo pacman -Rsnc'
 #alias pacman='sudo pacman'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
-alias ed='mousepad'
+alias ed='geany'
 alias ws='rdesktop -u Administrator -g 1680x1050 -z -x m -P -k hr -r sound:off 192.168.0.19'
 alias headless='VBoxHeadless -s ws2012r2'
 alias thinkpad='rdesktop -u Igor -g 1024x768 -z -x m -P -k hr -r sound:off 192.168.0.1'
@@ -62,4 +49,6 @@ export NO_AT_BRIDGE=1
 # dotnet
 export DOTNET_ROOT=$PATH:$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
+
+# vmware
 export VMWARE_USE_SHIPPED_LIBS='yes'
