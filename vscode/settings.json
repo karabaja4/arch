@@ -53,7 +53,6 @@
     },
     "gitlens.currentLine.enabled": false,
     "problems.decorations.enabled": false,
-    "gitlens.historyExplorer.enabled": true,
     "breadcrumbs.enabled": false,
     "msbuildProjectTools.nuget.newestVersionsFirst": true,
     "explorer.confirmDelete": false,
