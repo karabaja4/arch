@@ -63,5 +63,6 @@
     "razor.disabled": true,
     "window.titleBarStyle": "custom",
     "window.restoreWindows": "none",
-    "workbench.settings.editor": "json"
+    "workbench.settings.editor": "json",
+    "razor.trace": "Off"
 }
