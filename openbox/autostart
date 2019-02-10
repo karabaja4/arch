@@ -12,8 +12,9 @@ vnc () {
     xsetroot -solid '#038387'
 
     # interface
-    conky -c /home/igor/arch/misc/conkyrc-xh0 -d
-    tint2 -c /home/igor/arch/misc/tint2rc &
+    conky -m 0 -c /home/igor/arch/misc/conkyrc-xh0 -d
+    tint2 -c /home/igor/arch/misc/tint2rc-top &
+    tint2 -c /home/igor/arch/misc/tint2rc-bottom &
 }
 
 desktop () {
@@ -30,14 +31,13 @@ desktop () {
     #xsetroot -solid '#038387'
 
     # conky
-    sed 's/xinerama_head = 0/xinerama_head = 1/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh1
-    sed 's/xinerama_head = 0/xinerama_head = 2/g' /home/igor/arch/misc/conkyrc-xh0 > /tmp/conkyrc-xh2
-    conky -c /home/igor/arch/misc/conkyrc-xh0 -d
-    conky -c /tmp/conkyrc-xh1 -d
-    conky -c /tmp/conkyrc-xh2 -d
+    conky -m 0 -c /home/igor/arch/misc/conkyrc-xh0 -d
+    conky -m 1 -c /home/igor/arch/misc/conkyrc-xh0 -d
+    conky -m 2 -c /home/igor/arch/misc/conkyrc-xh0 -d
 
     # tray
-    tint2 -c /home/igor/arch/misc/tint2rc &
+    tint2 -c /home/igor/arch/misc/tint2rc-top &
+    tint2 -c /home/igor/arch/misc/tint2rc-bottom &
     pnmixer &
     xfce4-clipman &
     (sleep 5 && flameshot) &
