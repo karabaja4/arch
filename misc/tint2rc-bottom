@@ -1,0 +1,90 @@
+#---------------------------------------------
+# TINT2 CONFIG FILE
+#---------------------------------------------
+
+#---------------------------------------------
+# BACKGROUND AND BORDER
+#---------------------------------------------
+
+# ID 1
+rounded = 0
+border_width = 0
+background_color = #212121 100
+border_color = #212121 0
+
+# ID 2
+rounded = 0
+border_width = 0
+background_color = #212121 100
+border_color = #212121 0
+
+# ID 3
+rounded = 0
+border_width = 0
+background_color = #424242 100
+border_color = #424242 0
+
+#---------------------------------------------
+# PANEL
+#---------------------------------------------
+panel_monitor = all
+panel_position = bottom center
+panel_size = 0 25
+panel_margin = 0 0
+panel_padding = 0 0
+font_shadow = 0
+panel_background_id = 1
+panel_layer = top
+panel_items = T
+strut_policy = follow_size
+
+#---------------------------------------------
+# TASKBAR
+#---------------------------------------------
+taskbar_mode = single_desktop
+taskbar_padding = 0 0 1
+taskbar_background_id = 0
+
+#---------------------------------------------
+# TASK
+#---------------------------------------------
+task_icon = 1
+task_text = 1
+
+task_maximum_size = 250 0
+task_centered = 1
+task_padding = 6 6
+task_font = Roboto Bold 8
+
+task_font_color = #ffffff 100
+task_active_font_color = #ffffff 100
+
+task_background_id = 2
+task_active_background_id = 3
+
+#---------------------------------------------
+# SYSTRAYBAR
+#---------------------------------------------
+systray = 1
+systray_padding = 5 2 3
+systray_background_id = 0
+systray_sort = left2right
+systray_icon_size = 0
+systray_monitor = 3
+
+#---------------------------------------------
+# CLOCK
+#---------------------------------------------
+time1_format = %d.%m.%Y. %H:%M:%S
+time1_font = Roboto Bold 8
+clock_font_color = #ffffff 100
+clock_padding = 5 0
+clock_background_id = 0
+
+#---------------------------------------------
+# MOUSE ACTION ON TASK
+#---------------------------------------------
+mouse_middle = none
+mouse_right = close
+mouse_scroll_up = maximize_restore
+mouse_scroll_down = maximize_restore
