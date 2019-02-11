@@ -9,13 +9,13 @@ conky.config = {
 };
 
 conky.text = [[
-⏺  home.aerium.hr ($nodename)     ⏺  \
-$sysname $kernel     ⏺  \
+⏺  $sysname $kernel     ⏺  \
 Uptime: ${uptime}     ⏺  \
 CPU: ${cpu}%     ⏺  \
 RAM: ${mem} / ${memmax}     ⏺  \
 HDD: ${fs_used /} / ${fs_size /}     ⏺  \
 SD: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}     ⏺  \
+${exec cat /tmp/gdax}
 ${if_up enp2s0}Download: ${downspeed enp2s0}     ⏺  \
 Upload: ${upspeed enp2s0}\
 ${endif}
