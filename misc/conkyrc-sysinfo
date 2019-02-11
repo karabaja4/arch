@@ -20,10 +20,5 @@ conky.config = {
 conky.text = [[
 ${color0}home.aerium.hr ($nodename)
 $sysname $kernel
-
-● Uptime:   ${uptime}
-${if_up enp2s0}● IP:       ${addr enp2s0}
-${if_match ${downspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Download: ${downspeed enp2s0}
-${if_match ${upspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Upload:   ${upspeed enp2s0}
-${endif}
+Uptime: ${uptime}
 ]];

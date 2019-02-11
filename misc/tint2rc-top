@@ -35,7 +35,7 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = top
-panel_items = LFES
+panel_items = LFE
 strut_policy = follow_size
 
 #---------------------------------------------
