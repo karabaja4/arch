@@ -1,22 +1,23 @@
 conky.config = {
 	out_to_x = false,
 	update_interval = 1,
-	color0 = '#FFFFFF',
-	color1 = '#00FF00',
-	color2 = '#FFFF00',
-	color3 = '#FF0000',
 	overwrite_file = '/tmp/tint2text'
 };
 
 conky.text = [[
-⏺  $sysname $kernel     ⏺  \
-Uptime: ${uptime}     ⏺  \
-CPU: ${cpu}%     ⏺  \
-RAM: ${mem} / ${memmax}     ⏺  \
-HDD: ${fs_used /} / ${fs_size /}     ⏺  \
-SD: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}     ⏺  \
-${exec cat /tmp/gdax}
-${if_up enp2s0}Download: ${downspeed enp2s0}     ⏺  \
-Upload: ${upspeed enp2s0}\
-${endif}
+<span foreground="\#90CAF9">⏺</span>  $sysname $kernel     \
+<span foreground="\#90CAF9">⏺</span>  Uptime: ${uptime}     \
+${if_match ${cpu} >= 80}<span foreground="\#FF9E80">⏺</span>${else}\
+${if_match ${cpu} >= 30}<span foreground="\#FFF59D">⏺</span>${else}\
+<span foreground="\#90EE90">⏺</span>${endif}${endif}  CPU: ${cpu}%     \
+${if_match ${memperc} >= 80}<span foreground="\#FF9E80">⏺</span>${else}\
+${if_match ${memperc} >= 30}<span foreground="\#FFF59D">⏺</span>${else}\
+<span foreground="\#90EE90">⏺</span>${endif}${endif}  RAM: ${mem} / ${memmax}     \
+${if_match ${fs_used_perc /} >= 80}<span foreground="\#FF9E80">⏺</span>${else}\
+${if_match ${fs_used_perc /} >= 30}<span foreground="\#FFF59D">⏺</span>${else}\
+<span foreground="\#90EE90">⏺</span>${endif}${endif}  HDD: ${fs_used /} / ${fs_size /}     \
+${if_match ${fs_used_perc /home/igor/_sd} >= 80}<span foreground="\#FF9E80">⏺</span>${else}\
+${if_match ${fs_used_perc /home/igor/_sd} >= 30}<span foreground="\#FFF59D">⏺</span>${else}\
+<span foreground="\#90EE90">⏺</span>${endif}${endif}  SD: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}     \
+<span foreground="\#90CAF9">⏺</span>  ${exec cat /tmp/gdax}\
 ]];
