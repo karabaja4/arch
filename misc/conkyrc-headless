@@ -1,0 +1,23 @@
+conky.config = {
+	out_to_x = false,
+	update_interval = 1,
+	color0 = '#FFFFFF',
+	color1 = '#00FF00',
+	color2 = '#FFFF00',
+	color3 = '#FF0000',
+	overwrite_file = '/tmp/tint2text'
+};
+
+conky.text = [[
+${color0}home.aerium.hr ($nodename)   ::   \
+$sysname $kernel   ::   \
+Uptime: ${uptime}   ::   \
+CPU: ${cpu}%   ::   \
+RAM: ${mem} / ${memmax}   ::   \
+HDD: ${fs_used /} / ${fs_size /}   ::   \
+SD: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}   ::   \
+${if_up enp2s0}IP: ${addr enp2s0}   ::   \
+Download: ${downspeed enp2s0}   ::   \
+Upload: ${upspeed enp2s0}\
+${endif}
+]];
