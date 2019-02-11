@@ -19,5 +19,6 @@ ${if_match ${fs_used_perc /} >= 30}<span foreground="\#FFF59D">⏺</span>${else}
 ${if_match ${fs_used_perc /home/igor/_sd} >= 80}<span foreground="\#FF9E80">⏺</span>${else}\
 ${if_match ${fs_used_perc /home/igor/_sd} >= 30}<span foreground="\#FFF59D">⏺</span>${else}\
 <span foreground="\#90EE90">⏺</span>${endif}${endif}  SD: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}     \
-<span foreground="\#90CAF9">⏺</span>  ${exec cat /tmp/gdax}\
+<span foreground="\#90CAF9">⏺</span>  ${exec cat /tmp/gdax}     \
+<span foreground="\#90CAF9">⏺</span>  Time: ${time %d.%m.%Y. %H:%M:%S}\
 ]];

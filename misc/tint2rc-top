@@ -35,7 +35,7 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = top
-panel_items = LFESC
+panel_items = LFES
 strut_policy = follow_size
 
 #---------------------------------------------
@@ -127,7 +127,7 @@ execp_command = cat /tmp/tint2text
 execp_interval = 1
 execp_font = Roboto Bold 8
 execp_font_color = #ffffff 100
-execp_padding = 20 0
+execp_padding = 10 0
 execp_tooltip =
 #execp_lclick_command = chromium https://pro.coinbase.com
 execp_markup = 1
