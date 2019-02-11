@@ -5,7 +5,9 @@ conky.config = {
 	color1 = '#00FF00',
 	color2 = '#FFFF00',
 	color3 = '#FF0000',
-	overwrite_file = '/tmp/tint2text'
+	overwrite_file = '/tmp/tint2text',
+	use_spacer = 'left',
+	pad_percents = 2
 };
 
 conky.text = [[
