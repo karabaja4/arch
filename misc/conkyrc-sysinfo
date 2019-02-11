@@ -1,0 +1,29 @@
+conky.config = {
+	use_xft = true,
+	font = 'Consolas:size=23',
+	draw_shades = false,
+	alignment = 'top_left',
+	gap_x = 50,
+	gap_y = 75,
+	update_interval = 1,
+	double_buffer = true,
+	own_window = true,
+	own_window_type = 'desktop',
+	own_window_transparent = true,
+	color0 = '#FFFFFF',
+	xinerama_head = 0,
+	color1 = '#00FF00',
+	color2 = '#FFFF00',
+	color3 = '#FF0000'
+};
+
+conky.text = [[
+${color0}home.aerium.hr ($nodename)
+$sysname $kernel
+
+● Uptime:   ${uptime}
+${if_up enp2s0}● IP:       ${addr enp2s0}
+${if_match ${downspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Download: ${downspeed enp2s0}
+${if_match ${upspeedf enp2s0} >= 5}${color1}●${color}${else}${color0}●${color}${endif} Upload:   ${upspeed enp2s0}
+${endif}
+]];

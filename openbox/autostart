@@ -13,7 +13,7 @@ vnc () {
 
     # interface
     conky -c /home/igor/arch/misc/conkyrc-headless -d
-    #conky -m 0 -c /home/igor/arch/misc/conkyrc-xh0 -d
+    conky -c /home/igor/arch/misc/conkyrc-sysinfo -d
     tint2 -c /home/igor/arch/misc/tint2rc-top &
     tint2 -c /home/igor/arch/misc/tint2rc-bottom &
 }
@@ -33,9 +33,9 @@ desktop () {
 
     # conky
     conky -c /home/igor/arch/misc/conkyrc-headless -d
-    #conky -m 0 -c /home/igor/arch/misc/conkyrc-xh0 -d
-    #conky -m 1 -c /home/igor/arch/misc/conkyrc-xh0 -d
-    #conky -m 2 -c /home/igor/arch/misc/conkyrc-xh0 -d
+    conky -m 0 -c /home/igor/arch/misc/conkyrc-sysinfo -d
+    conky -m 1 -c /home/igor/arch/misc/conkyrc-sysinfo -d
+    conky -m 2 -c /home/igor/arch/misc/conkyrc-sysinfo -d
 
     # tray
     tint2 -c /home/igor/arch/misc/tint2rc-top &

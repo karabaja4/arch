@@ -5,8 +5,6 @@ conky.config = {
 };
 
 conky.text = [[
-<span foreground="\#90CAF9">⏺</span>  $sysname $kernel     \
-<span foreground="\#90CAF9">⏺</span>  Uptime: ${uptime}     \
 ${if_match ${cpu} >= 80}<span foreground="\#FF9E80">⏺</span>${else}\
 ${if_match ${cpu} >= 30}<span foreground="\#FFF59D">⏺</span>${else}\
 <span foreground="\#90EE90">⏺</span>${endif}${endif}  CPU: ${cpu}%     \
