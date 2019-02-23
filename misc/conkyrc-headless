@@ -10,5 +10,7 @@ conky.text = [[
 <span foreground="${if_match ${fs_used_perc /} >= 80}\#FF0000${else}${if_match ${fs_used_perc /} >= 30}\#FFFF00${else}\#00FF00${endif}${endif}">HDD:</span> ${fs_used /} / ${fs_size /}       \
 <span foreground="${if_match ${fs_used_perc /home/igor/_sd} >= 80}\#FF0000${else}${if_match ${fs_used_perc /home/igor/_sd} >= 30}\#FFFF00${else}\#00FF00${endif}${endif}">SDC:</span> ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}       \
 <span foreground="\#00FFFF">BTC:</span> ${exec cat /tmp/gdax}       \
+<span foreground="\#00FFFF">UPT:</span> ${uptime}       \
+<span foreground="\#00FFFF">SYS:</span> ${sysname} ${kernel}       \
 <span foreground="\#00FFFF">CLK:</span> ${time %d.%m.%Y. %H:%M:%S}\
 ]];
