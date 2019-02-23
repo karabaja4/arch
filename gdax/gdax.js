@@ -64,8 +64,8 @@ const print = (texts) => {
     let content = "";
     for (let i = 0; i < texts.length; i++) {
         const text = texts[i].text;
-        const color = texts[i].color;
-        content += `<span foreground="${color}">${text || "-"}</span>`;
+        //const color = texts[i].color;
+        content += `${text || "-"}`;
         if (i < (texts.length - 1)) {
             content += `<span foreground="#FFFFFF">  |  </span>`;
         }
