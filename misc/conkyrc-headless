@@ -5,11 +5,11 @@ conky.config = {
 };
 
 conky.text = [[
-<span foreground="${if_match ${cpu} >= 80}\#FF0000${else}${if_match ${cpu} >= 30}\#FFFF00${else}\#00FF00${endif}${endif}">CPU:</span> ${cpu}%       \
-<span foreground="${if_match ${memperc} >= 80}\#FF0000${else}${if_match ${memperc} >= 30}\#FFFF00${else}\#00FF00${endif}${endif}">RAM:</span> ${mem} / ${memmax}       \
-<span foreground="${if_match ${fs_used_perc /} >= 80}\#FF0000${else}${if_match ${fs_used_perc /} >= 30}\#FFFF00${else}\#00FF00${endif}${endif}">HDD:</span> ${fs_used /} / ${fs_size /}       \
-<span foreground="${if_match ${fs_used_perc /home/igor/_sd} >= 80}\#FF0000${else}${if_match ${fs_used_perc /home/igor/_sd} >= 30}\#FFFF00${else}\#00FF00${endif}${endif}">SDC:</span> ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}       \
-<span foreground="\#00FFFF">BTC:</span> ${exec cat /tmp/gdax}       \
-<span foreground="\#00FFFF">UPT:</span> ${uptime} (${sysname} ${kernel})      \
-<span foreground="\#00FFFF">CLK:</span> ${time %d.%m.%Y. %H:%M:%S}\
+<span foreground="${if_match ${cpu} >= 80}\#FF8A65${else}${if_match ${cpu} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">■</span> CPU: ${cpu}%        \
+<span foreground="${if_match ${memperc} >= 80}\#FF8A65${else}${if_match ${memperc} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">■</span> RAM: ${mem} / ${memmax}        \
+<span foreground="${if_match ${fs_used_perc /} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">■</span> HDD: ${fs_used /} / ${fs_size /}        \
+<span foreground="${if_match ${fs_used_perc /home/igor/_sd} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /home/igor/_sd} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">■</span> SDC: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}        \
+<span foreground="\#BBDEFB" rise="1000">■</span> BTC: ${exec cat /tmp/gdax}        \
+<span foreground="\#BBDEFB" rise="1000">■</span> UPT: ${uptime} (${sysname} ${kernel})        \
+<span foreground="\#BBDEFB" rise="1000">■</span> CLK: ${time %d.%m.%Y. %H:%M:%S}\
 ]];

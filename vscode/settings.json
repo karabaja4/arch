@@ -64,5 +64,6 @@
     "window.titleBarStyle": "custom",
     "window.restoreWindows": "none",
     "workbench.settings.editor": "json",
-    "razor.trace": "Off"
+    "razor.trace": "Off",
+    "debug.console.fontFamily": "Consolas"
 }
