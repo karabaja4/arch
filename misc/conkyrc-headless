@@ -5,12 +5,13 @@ conky.config = {
 };
 
 conky.text = [[
-<span foreground="${if_match ${downspeedf enp2s0} >= 5}\#00E676${else}\#BBDEFB${endif}" rise="1000">&\#9632;</span> DL: ${downspeedf enp2s0} KB        \
-<span foreground="${if_match ${upspeedf enp2s0} >= 5}\#00E676${else}\#BBDEFB${endif}" rise="1000">&\#9632;</span> UP: ${upspeedf enp2s0} KB        \
+<span foreground="${if_match ${downspeedf enp2s0} >= 5}\#00E676${else}\#BBDEFB${endif}" rise="1000">&\#9632;</span> DWL: ${downspeedf enp2s0} KB        \
+<span foreground="${if_match ${upspeedf enp2s0} >= 5}\#00E676${else}\#BBDEFB${endif}" rise="1000">&\#9632;</span> UPL: ${upspeedf enp2s0} KB        \
 <span foreground="${if_match ${cpu} >= 80}\#FF8A65${else}${if_match ${cpu} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> CPU: ${cpu}%        \
 <span foreground="${if_match ${memperc} >= 80}\#FF8A65${else}${if_match ${memperc} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> RAM: ${mem} / ${memmax}        \
 <span foreground="${if_match ${fs_used_perc /} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> HDD: ${fs_used /} / ${fs_size /}        \
-<span foreground="${if_match ${fs_used_perc /home/igor/_sd} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /home/igor/_sd} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> SDC: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}        \
+<span foreground="${if_match ${fs_used_perc /home/igor/_sd} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /home/igor/_sd} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> MMC: ${fs_used /home/igor/_sd} / ${fs_size /home/igor/_sd}        \
+<span foreground="${if_match ${fs_used_perc /home/igor/_ssd} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /home/igor/_ssd} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> SSD: ${fs_used /home/igor/_ssd} / ${fs_size /home/igor/_ssd}        \
 <span foreground="\#BBDEFB" rise="1000">&\#9632;</span> BTC: ${exec cat /tmp/gdax}        \
 <span foreground="\#BBDEFB" rise="1000">&\#9632;</span> UPT: ${uptime}        \
 <span foreground="\#BBDEFB" rise="1000">&\#9632;</span> SYS: ${sysname} ${kernel}        \
