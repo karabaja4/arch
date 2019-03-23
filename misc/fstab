@@ -1,8 +1,9 @@
-# 
+#
 # /etc/fstab: static file system information
 #
-# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+# <file system> <dir>   <type>  <options>       <dump>  <pass>
 # /dev/sdb1
-UUID=56855f92-7483-4db9-afaf-5eb05a0dcc82	/         	ext4      	rw,relatime,data=ordered	0 1
-UUID=b9dcecab-2004-476f-8ea9-c3f5628f7cd1 none swap defaults 0 0
-/dev/mmcblk0p1       /home/igor/_sd               ext4            rw,relatime,data=ordered        0 2
+/dev/sdb1       /               ext4            rw,relatime,data=ordered 0 1
+/dev/sdb2                                       none swap defaults 0 0
+/dev/mmcblk0p1  /home/igor/_mmc ntfs-3g         defaults 0 0
+/dev/sda4       /home/igor/_win ntfs-3g         defaults 0 0
