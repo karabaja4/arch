@@ -101,6 +101,11 @@
       <monitor>1</monitor>
     </action>
   </keybind>
+  <keybind key="W-T">
+    <action name="Execute">
+      <command>xfce4-terminal</command>
+    </action>
+  </keybind>
 </keyboard>
 
 <mouse>
