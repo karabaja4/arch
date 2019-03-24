@@ -24,7 +24,7 @@ mkmine()
 
 alias regdom='nano /etc/conf.d/wireless-regdom'
 alias ifedit='nano /etc/udev/rules.d/10-network.rules'
-alias speedtest='wget http://debian.carnet.hr/debian-cd/9.8.0/amd64/iso-cd/debian-9.8.0-amd64-netinst.iso'
+alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso'
 
 alias rsnc='sudo pacman -Rsnc'
 #alias pacman='sudo pacman'
@@ -45,6 +45,8 @@ alias jcat='journalctl --no-pager -u'
 alias dhcpcd='sudo dhcpcd -4'
 alias start='sudo systemctl start'
 alias stop='sudo systemctl stop'
+alias enable='sudo systemctl enable'
+alias disable='sudo systemctl disable'
 
 # exports
 export QT_QPA_PLATFORMTHEME="qt5ct"
