@@ -9,11 +9,11 @@ conky.text = [[
 <span foreground="${if_match ${upspeedf enp2s0} >= 5}\#00E676${else}\#FFFFFF${endif}" rise="1000">&\#9632;</span> UPL: ${upspeedf enp2s0} KB        \
 <span foreground="${if_match ${cpu} >= 80}\#FF8A65${else}${if_match ${cpu} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> CPU: ${cpu}%        \
 <span foreground="${if_match ${memperc} >= 80}\#FF8A65${else}${if_match ${memperc} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> RAM: ${mem} / ${memmax}        \
-<span foreground="${if_match ${fs_used_perc /} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> HDD: ${fs_used /} / ${fs_size /}        \
+<span foreground="${if_match ${fs_used_perc /} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> SSD: ${fs_used /} / ${fs_size /}        \
 <span foreground="${if_match ${fs_used_perc /home/igor/_mmc} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /home/igor/_mmc} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> MMC: ${fs_used /home/igor/_mmc} / ${fs_size /home/igor/_mmc}        \
-<span foreground="${if_match ${fs_used_perc /home/igor/_win} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /home/igor/_win} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> WIN: ${fs_used /home/igor/_win} / ${fs_size /home/igor/_win}        \
+<span foreground="${if_match ${fs_used_perc /home/igor/_disk} >= 80}\#FF8A65${else}${if_match ${fs_used_perc /home/igor/_disk} >= 30}\#FFF59D${else}\#00E676${endif}${endif}" rise="1000">&\#9632;</span> EDD: ${fs_used /home/igor/_disk} / ${fs_size /home/igor/_disk}        \
 <span foreground="\#FFFFFF" rise="1000">&\#9632;</span> BTC: ${exec cat /tmp/gdax}        \
 <span foreground="\#FFFFFF" rise="1000">&\#9632;</span> UPT: ${uptime}        \
-<span foreground="\#FFFFFF" rise="1000">&\#9632;</span> SYS: ${sysname} ${kernel}        \
+<span foreground="\#FFFFFF" rise="1000">&\#9632;</span> KRN: ${sysname} ${kernel}        \
 <span foreground="\#FFFFFF" rise="1000">&\#9632;</span> CLK: ${time %d.%m.%Y. %H:%M:%S}\
 ]];
