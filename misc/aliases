@@ -42,6 +42,10 @@ alias zxvf="tar zxvf"
 alias jtail='journalctl -f -n 1000 -u'
 alias jcat='journalctl --no-pager -u'
 
+alias dhcpcd='dhcpcd -4'
+alias start='sudo systemctl start'
+alias stop='sudo systemctl stop'
+
 # exports
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export NO_AT_BRIDGE=1
@@ -51,4 +55,4 @@ export DOTNET_ROOT=$PATH:$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
 
 # vmware
-export VMWARE_USE_SHIPPED_LIBS='yes'
+#export VMWARE_USE_SHIPPED_LIBS='yes'
