@@ -42,7 +42,7 @@ alias zxvf="tar zxvf"
 alias jtail='journalctl -f -n 1000 -u'
 alias jcat='journalctl --no-pager -u'
 
-alias dhcpcd='dhcpcd -4'
+alias dhcpcd='sudo dhcpcd -4'
 alias start='sudo systemctl start'
 alias stop='sudo systemctl stop'
 
