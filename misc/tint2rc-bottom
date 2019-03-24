@@ -9,20 +9,20 @@
 # ID 1
 rounded = 0
 border_width = 0
-background_color = #2c2c2c 100
-border_color = #2c2c2c 0
+background_color = #2C2C2C 100
+border_color = #2C2C2C 0
 
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #2c2c2c 100
-border_color = #2c2c2c 0
+background_color = #2C2C2C 100
+border_color = #2C2C2C 0
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #424242 100
-border_color = #424242 0
+background_color = #4A4A4A 100
+border_color = #4A4A4A 0
 
 #---------------------------------------------
 # PANEL
