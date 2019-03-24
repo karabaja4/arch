@@ -22,6 +22,9 @@ desktop () {
     # log
     echo "$(date): Started Openbox" >> $HOME/.my.log
 
+    # cpu
+    sudo sh -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+
     # daemons
     xsettingsd -c /home/igor/arch/misc/xsettingsd &
     xcompmgr -a &
