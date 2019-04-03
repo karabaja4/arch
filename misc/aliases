@@ -39,8 +39,15 @@ alias mountmmc="sudo mount /dev/mmcblk0p1 /home/igor/_mmc/"
 alias vboxadd="VBoxManage registervm"
 alias zxvf="tar zxvf"
 
-alias jtail='tail -n 1000 /var/log/busybox/$1.log'
-alias jcat='cat /var/log/busybox/$1.log'
+jtail()
+{
+    tail -n 1000 /var/log/busybox/$1.log
+}
+
+jcat()
+{
+    cat /var/log/busybox/$1.log
+}
 
 alias dhcpcd='sudo dhcpcd -4'
 alias start='rc start'
