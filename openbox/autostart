@@ -3,7 +3,8 @@ declare isvnc=$? # 0 ako je vnc
 
 vnc () {
     # log
-    echo "$(date): Started VNC" >> $HOME/.my.log
+    mkdir -p $HOME/.local/logs
+    echo "$(date): Started VNC" >> $HOME/.local/logs/openbox.log
 
     # daemons
     xsettingsd -c /home/igor/arch/misc/xsettingsd &
@@ -20,7 +21,8 @@ vnc () {
 
 desktop () {
     # log
-    echo "$(date): Started Openbox" >> $HOME/.my.log
+    mkdir -p $HOME/.local/logs
+    echo "$(date): Started Openbox" >> $HOME/.local/logs/openbox.log
 
     # cpu
     sudo sh -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'

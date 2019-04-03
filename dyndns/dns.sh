@@ -21,7 +21,7 @@ do
             if [ $? = 0 ]
             then
                 echo "DigitalOcean request successful. New IP: $ip"
-                echo "$(date): Updated DNS: $ip" >> $HOME/.my.log
+                echo "$(date): Updated DNS: $ip"
                 oldip=$ip
             else
                 echo "DigitalOcean request failed."
