@@ -24,30 +24,26 @@ mkmine()
 
 alias regdom='nano /etc/conf.d/wireless-regdom'
 alias ifedit='nano /etc/udev/rules.d/10-network.rules'
-alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso'
+alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
 
 alias rsnc='sudo pacman -Rsnc'
-#alias pacman='sudo pacman'
+alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias ed='geany -i'
 alias red='sudo geany -i'
 alias ws='rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20'
 alias headless='VBoxHeadless -s ws2012r2v2'
-alias thinkpad='rdesktop -u Igor -g 1024x768 -z -x m -P -k hr -r sound:off 192.168.0.1'
 alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"
-alias mountcz="sudo mount -t cifs //192.168.132.10/code _cz/ -o username=www-data,password=password,uid=$(id -u),gid=$(id -g)"
 alias mountdisk="sudo mount /dev/sdc1 _disk/"
 alias vboxadd="VBoxManage registervm"
 alias zxvf="tar zxvf"
 
-alias jtail='journalctl -f -n 1000 -u'
-alias jcat='journalctl --no-pager -u'
+alias jtail='tail -n 1000 /var/log/busybox/$1.log'
+alias jcat='cat /var/log/busybox/$1.log'
 
 alias dhcpcd='sudo dhcpcd -4'
-alias start='sudo systemctl start'
-alias stop='sudo systemctl stop'
-alias enable='sudo systemctl enable'
-alias disable='sudo systemctl disable'
+alias start='rc start'
+alias stop='rc stop'
 
 # exports
 export QT_QPA_PLATFORMTHEME="qt5ct"
@@ -57,5 +53,3 @@ export NO_AT_BRIDGE=1
 export DOTNET_ROOT=$PATH:$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
 
-# vmware
-#export VMWARE_USE_SHIPPED_LIBS='yes'
