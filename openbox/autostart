@@ -24,6 +24,12 @@ desktop () {
 
     # cpu
     sudo sh -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+    
+    # mouse sens
+    xinput set-prop 11 326 0.5
+    
+    # alsa
+    alsactl restore
 
     # daemons
     xsettingsd -c /home/igor/arch/misc/xsettingsd &
@@ -50,9 +56,6 @@ desktop () {
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
-
-    # vnc
-    vncserver &
 }
 
 [ $isvnc -eq 0 ] || desktop
