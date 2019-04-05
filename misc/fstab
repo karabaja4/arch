@@ -1,9 +1,9 @@
-#
+# 
 # /etc/fstab: static file system information
 #
-# <file system> <dir>   <type>  <options>       <dump>  <pass>
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
 # /dev/sdb1
-/dev/sdb1       /               ext4            rw,relatime,data=ordered 0 1
-/dev/sdb2                                       none swap defaults 0 0
-/dev/mmcblk0p1  /home/igor/_mmc ntfs-3g         defaults 0 0
-/dev/sda4       /home/igor/_win ntfs-3g         defaults 0 0
+/dev/sdb1	/         	ext4      	rw,relatime,data=ordered 0 1
+/dev/sdb2					none swap defaults 0 0
+#/dev/mmcblk0p1  /home/igor/_mmc ntfs-3g		defaults 0 0
+#/dev/sda4  	/home/igor/_win ntfs-3g         defaults 0 0
