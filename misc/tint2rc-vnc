@@ -9,20 +9,20 @@
 # ID 1
 rounded = 0
 border_width = 0
-background_color = #212121 100
-border_color = #212121 0
+background_color = #2C2C2C 100
+border_color = #2C2C2C 0
 
 # ID 2
 rounded = 0
 border_width = 0
-background_color = #212121 100
-border_color = #212121 0
+background_color = #2C2C2C 100
+border_color = #2C2C2C 0
 
 # ID 3
 rounded = 0
 border_width = 0
-background_color = #424242 100
-border_color = #424242 0
+background_color = #4A4A4A 100
+border_color = #4A4A4A 0
 
 #---------------------------------------------
 # PANEL
@@ -35,7 +35,7 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = top
-panel_items = LTESC
+panel_items = LTSC
 strut_policy = follow_size
 
 #---------------------------------------------
@@ -97,37 +97,8 @@ launcher_background_id = 1
 launcher_icon_size = 23
 launcher_item_app = /usr/share/applications/xfce4-terminal.desktop
 launcher_item_app = /usr/share/applications/chromium.desktop
-launcher_item_app = /usr/share/applications/firefox.desktop
-launcher_item_app = /usr/share/applications/qtfm.desktop
+launcher_item_app = /usr/share/applications/pcmanfm.desktop
 launcher_item_app = /usr/share/applications/geany.desktop
-launcher_item_app = /usr/share/applications/qbittorrent.desktop
-#launcher_item_app = /usr/share/applications/galculator.desktop
-launcher_item_app = /usr/share/applications/steam.desktop
-#launcher_item_app = /usr/share/applications/org.kde.krita.desktop
-launcher_item_app = /usr/share/applications/jspaint.desktop
-launcher_item_app = /usr/share/applications/inkscape.desktop
-#launcher_item_app = /home/igor/arch/mspaint/mspaint.desktop
-#launcher_item_app = /usr/share/applications/libreoffice-startcenter.desktop
-launcher_item_app = /usr/share/applications/abiword.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
-launcher_item_app = /usr/share/applications/robo3t.desktop
-launcher_item_app = /usr/share/applications/pgAdmin4.desktop
-#launcher_item_app = /usr/share/applications/mysql-workbench.desktop
 launcher_item_app = /usr/share/applications/sqlbrowser.desktop
-launcher_item_app = /usr/share/applications/sqlops.desktop
-launcher_item_app = /usr/share/applications/arc.desktop
-launcher_item_app = /usr/share/applications/filezilla.desktop
-launcher_item_app = /usr/share/applications/vmplayer.desktop
-launcher_item_app = /usr/share/applications/virtualbox.desktop
-
-#-------------------------------------
-# Executor 1
-execp = new
-execp_command = cat /tmp/gdax
-execp_interval = 1
-execp_font = Roboto Bold 8
-execp_font_color = #ffffff 100
-execp_padding = 30 0
-execp_tooltip =
-execp_lclick_command = chromium https://pro.coinbase.com
-execp_markup = 1
+launcher_item_app = /usr/share/applications/advanced-rest-client.desktop
