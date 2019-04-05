@@ -110,4 +110,3 @@ launcher_item_app = /usr/share/applications/sqlbrowser.desktop
 launcher_item_app = /usr/share/applications/advanced-rest-client.desktop
 launcher_item_app = /usr/share/applications/filezilla.desktop
 launcher_item_app = /usr/share/applications/virtualbox.desktop
-launcher_item_app = /usr/share/applications/synergy.desktop
