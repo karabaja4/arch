@@ -49,6 +49,8 @@ jcat()
     cat /var/log/busybox/$1.log
 }
 
+alias vboxload="sudo modprobe vboxdrv && sudo modprobe vboxnetadp && sudo modprobe vboxnetflt"
+
 alias dhcpcd='sudo dhcpcd -4'
 alias start='rc start'
 alias stop='rc stop'
