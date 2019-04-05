@@ -9,18 +9,16 @@ log()
 
 vnc () {
 
-    # log
-    echo "Started VNC" | log VNC
+    echo "Started VNC"
 
     # daemons
     xsettingsd -c $HOME/arch/misc/xsettingsd &
 
     # bacgkround
-    xsetroot -solid '#038387'
+    xsetroot -solid '#008080'
 
     # interface
-    conky -c $HOME/arch/misc/conkyrc-headless -d
-    # conky -c $HOME/arch/misc/conkyrc-sysinfo -d
+    conky -d -c $HOME/arch/misc/conkyrc-headless
     tint2 -c $HOME/arch/misc/tint2rc-top &
     tint2 -c $HOME/arch/misc/tint2rc-bottom &
 
@@ -28,17 +26,16 @@ vnc () {
 
 desktop () {
 
-    # log
-    echo "Started Openbox" | log openbox
+    echo "Started Openbox"
 
     # cpu
     sudo sh -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
     
     # mouse sens
-    xinput set-prop 11 326 0.5 |& log xinput
+    xinput set-prop 11 326 0.5
     
     # alsa
-    alsactl restore -f $HOME/.config/asound.state |& log alsa
+    alsactl restore -f $HOME/.config/asound.state
 
     # daemons
     xsettingsd -c $HOME/arch/misc/xsettingsd &
@@ -47,24 +44,23 @@ desktop () {
     # resolution and background
     $HOME/arch/scripts/fixres.sh
     feh --bg-scale $HOME/arch/wall/default2.png
-    #xsetroot -solid '#008080'
 
     # conky
-    conky -c $HOME/arch/misc/conkyrc-headless |& log conky &
+    #conky -d -c $HOME/arch/misc/conkyrc-headless
 
-    conky -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 0 |& log conky &
-    conky -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 1 |& log conky &
-    conky -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 2 |& log conky &
+    conky -d -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 0
+    conky -d -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 1
+    conky -d -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 2
 
     # tray
-    tint2 -c $HOME/arch/misc/tint2rc-top    |& log tint2 &
-    tint2 -c $HOME/arch/misc/tint2rc-bottom |& log tint2 &
+    tint2 -c $HOME/arch/misc/tint2rc-top &
+    tint2 -c $HOME/arch/misc/tint2rc-bottom &
 
     # other
-    pnmixer                 |& log pnmixer &
-    xfce4-clipman           |& log xfce4-clipman &
-    (sleep 5 && flameshot)  |& log flameshot &
-    (sleep 5 && synergy)    |& log synergy &
+    pnmixer &
+    xfce4-clipman &
+    (sleep 5 && flameshot) &
+    (sleep 5 && synergy) &
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
