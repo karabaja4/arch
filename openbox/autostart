@@ -1,63 +1,74 @@
 xdpyinfo | grep VNC > /dev/null
 declare isvnc=$? # 0 ako je vnc
 
-vnc () {
-    # log
+log()
+{
     mkdir -p $HOME/.local/logs
-    echo "$(date): Started VNC" >> $HOME/.local/logs/openbox.log
+    ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> $HOME/.local/logs/openbox.log
+}
+
+vnc () {
+
+    # log
+    echo "Started VNC" | log VNC
 
     # daemons
-    xsettingsd -c /home/igor/arch/misc/xsettingsd &
+    xsettingsd -c $HOME/arch/misc/xsettingsd &
 
     # bacgkround
     xsetroot -solid '#038387'
 
     # interface
-    conky -c /home/igor/arch/misc/conkyrc-headless -d
-    # conky -c /home/igor/arch/misc/conkyrc-sysinfo -d
-    tint2 -c /home/igor/arch/misc/tint2rc-top &
-    tint2 -c /home/igor/arch/misc/tint2rc-bottom &
+    conky -c $HOME/arch/misc/conkyrc-headless -d
+    # conky -c $HOME/arch/misc/conkyrc-sysinfo -d
+    tint2 -c $HOME/arch/misc/tint2rc-top &
+    tint2 -c $HOME/arch/misc/tint2rc-bottom &
+
 }
 
 desktop () {
+
     # log
-    mkdir -p $HOME/.local/logs
-    echo "$(date): Started Openbox" >> $HOME/.local/logs/openbox.log
+    echo "Started Openbox" | log openbox
 
     # cpu
     sudo sh -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
     
     # mouse sens
-    xinput set-prop 11 326 0.5
+    xinput set-prop 11 326 0.5 |& log xinput
     
     # alsa
-    alsactl restore
+    alsactl restore -f $HOME/.config/asound.state |& log alsa
 
     # daemons
-    xsettingsd -c /home/igor/arch/misc/xsettingsd &
+    xsettingsd -c $HOME/arch/misc/xsettingsd &
     xcompmgr -a &
 
     # resolution and background
-    /home/igor/arch/scripts/fixres.sh
-    feh --bg-scale /home/igor/arch/wall/default2.png
+    $HOME/arch/scripts/fixres.sh
+    feh --bg-scale $HOME/arch/wall/default2.png
     #xsetroot -solid '#008080'
 
     # conky
-    conky -c /home/igor/arch/misc/conkyrc-headless -d
-    # conky -m 0 -c /home/igor/arch/misc/conkyrc-sysinfo -d
-    # conky -m 1 -c /home/igor/arch/misc/conkyrc-sysinfo -d
-    # conky -m 2 -c /home/igor/arch/misc/conkyrc-sysinfo -d
+    conky -c $HOME/arch/misc/conkyrc-headless |& log conky &
+
+    conky -m 0 -c arch/misc/conky-kernel --xinerama-head 0 |& log conky &
+    conky -m 0 -c arch/misc/conky-kernel --xinerama-head 1 |& log conky &
+    conky -m 0 -c arch/misc/conky-kernel --xinerama-head 2 |& log conky &
 
     # tray
-    tint2 -c /home/igor/arch/misc/tint2rc-top &
-    tint2 -c /home/igor/arch/misc/tint2rc-bottom &
-    pnmixer &
-    xfce4-clipman &
-    (sleep 5 && flameshot) &
-    (sleep 5 && synergy) &
+    tint2 -c $HOME/arch/misc/tint2rc-top    |& log tint2 &
+    tint2 -c $HOME/arch/misc/tint2rc-bottom |& log tint2 &
+
+    # other
+    pnmixer                 |& log pnmixer &
+    xfce4-clipman           |& log xfce4-clipman &
+    (sleep 5 && flameshot)  |& log flameshot &
+    (sleep 5 && synergy)    |& log synergy &
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+    
 }
 
 [ $isvnc -eq 0 ] || desktop
