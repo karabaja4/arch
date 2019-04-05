@@ -20,6 +20,9 @@ vnc () {
     # interface
     tint2 -c $HOME/arch/misc/tint2rc-vnc &
 
+    # other
+    xfce4-clipman &
+
 }
 
 desktop () {
