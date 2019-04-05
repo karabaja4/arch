@@ -52,9 +52,9 @@ desktop () {
     # conky
     conky -c $HOME/arch/misc/conkyrc-headless |& log conky &
 
-    conky -m 0 -c arch/misc/conky-kernel --xinerama-head 0 |& log conky &
-    conky -m 0 -c arch/misc/conky-kernel --xinerama-head 1 |& log conky &
-    conky -m 0 -c arch/misc/conky-kernel --xinerama-head 2 |& log conky &
+    conky -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 0 |& log conky &
+    conky -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 1 |& log conky &
+    conky -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 2 |& log conky &
 
     # tray
     tint2 -c $HOME/arch/misc/tint2rc-top    |& log tint2 &
