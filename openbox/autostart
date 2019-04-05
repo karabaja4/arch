@@ -45,7 +45,7 @@ desktop () {
     $HOME/arch/scripts/fixres.sh
     feh --bg-scale $HOME/arch/wall/default2.png
 
-    # conky
+    # conky (headless se vec vrti u vnc)
     #conky -d -c $HOME/arch/misc/conkyrc-headless
 
     conky -d -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 0
