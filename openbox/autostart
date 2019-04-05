@@ -18,9 +18,7 @@ vnc () {
     xsetroot -solid '#008080'
 
     # interface
-    conky -d -c $HOME/arch/misc/conkyrc-headless
-    tint2 -c $HOME/arch/misc/tint2rc-top &
-    tint2 -c $HOME/arch/misc/tint2rc-bottom &
+    tint2 -c $HOME/arch/misc/tint2rc-vnc &
 
 }
 
@@ -45,12 +43,11 @@ desktop () {
     $HOME/arch/scripts/fixres.sh
     feh --bg-scale $HOME/arch/wall/default2.png
 
-    # conky (headless se vec vrti u vnc)
-    #conky -d -c $HOME/arch/misc/conkyrc-headless
-
-    conky -d -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 0
-    conky -d -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 1
-    conky -d -m 0 -c arch/misc/conkyrc-kernel --xinerama-head 2
+    # conky
+    conky -d -c $HOME/arch/misc/conkyrc-headless
+    conky -d -m 0 -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 0
+    conky -d -m 0 -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 1
+    conky -d -m 0 -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 2
 
     # tray
     tint2 -c $HOME/arch/misc/tint2rc-top &
