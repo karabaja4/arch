@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Arial:size=12',
+	font = 'Roboto:size=14',
 	draw_shades = false,
 	alignment = 'bottom_right',
 	gap_x = 15,
