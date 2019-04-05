@@ -25,11 +25,11 @@ MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=TRUE
 MiscNewTabAdjacent=FALSE
-ScrollingUnlimited=TRUE
-TitleMode=TERMINAL_TITLE_REPLACE
 ScrollingOnOutput=FALSE
-ScrollingBar=TERMINAL_SCROLLBAR_NONE
 ColorForeground=#212121212121
 ColorBackground=#fafafafafafa
+ScrollingUnlimited=TRUE
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+TitleMode=TERMINAL_TITLE_REPLACE
 ColorBoldIsBright=FALSE
 
