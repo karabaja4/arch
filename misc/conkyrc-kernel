@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Roboto:size=14',
+	font = 'Noto Sans:size=12',
 	draw_shades = false,
 	alignment = 'bottom_right',
 	gap_x = 15,
@@ -10,7 +10,7 @@ conky.config = {
 	own_window = true,
 	own_window_type = 'desktop',
 	own_window_transparent = true,
-	color0 = '#BDBDBD'
+	color0 = '#f2f2f2'
 };
 
 conky.text = [[
