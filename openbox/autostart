@@ -44,7 +44,7 @@ desktop () {
 
     # resolution and background
     $HOME/arch/scripts/fixres.sh
-    feh --bg-scale $HOME/arch/wall/default2.png
+    feh --bg-scale $HOME/arch/wall/default.jpg
 
     # conky
     conky -d -c $HOME/arch/misc/conkyrc-headless
