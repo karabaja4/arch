@@ -10,7 +10,7 @@ conky.config = {
 	own_window = true,
 	own_window_type = 'desktop',
 	own_window_transparent = true,
-	color0 = '#ffffff'
+	color0 = '#BDBDBD'
 };
 
 conky.text = [[
