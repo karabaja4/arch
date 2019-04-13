@@ -180,6 +180,12 @@
   <application name="*">
     <decor>no</decor>
   </application>
+  <application name="gsimplecal">
+    <position force="yes">
+      <x>1705</x>
+      <y>0</y>
+    </position>
+  </application>
 </applications>
 
 </openbox_config>

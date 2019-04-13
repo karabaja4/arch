@@ -118,6 +118,7 @@ execp_command = cat /tmp/tint2text
 execp_interval = 1
 execp_font = Roboto Bold 8
 execp_font_color = #ffffff 100
+execp_lclick_command = gsimplecal
 execp_padding = 10 0
 execp_tooltip =
 execp_markup = 1
