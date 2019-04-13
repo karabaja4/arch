@@ -63,3 +63,5 @@ export NO_AT_BRIDGE=1
 export DOTNET_ROOT=$PATH:$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
 
+source /usr/share/git/completion/git-prompt.sh
+PS1='[\W$(__git_ps1 " (%s)")]\$ '
