@@ -64,4 +64,5 @@ export DOTNET_ROOT=$PATH:$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
 
 source /usr/share/git/completion/git-prompt.sh
-PS1='[\W$(__git_ps1 " (%s)")]\$ '
+PS1='\w $(__git_ps1 "(%s) ")\[\033[1;32m\]>\[\033[0m\] '
+
