@@ -3,6 +3,7 @@
 red="#FF6E40"
 yellow="#EEFF41"
 green="#69F0AE"
+gray="#757575"
 
 trendfile="/tmp/btctrend"
 pricefile="/tmp/btcprice"
@@ -15,32 +16,39 @@ rm $conkyfile
 while true
 do
 	price=$(curl -s https://api.coinbase.com/v2/prices/BTC-USD/spot | jq -r '.data .amount' | xargs printf '%0.2f')
-	oldprice="0.00"
-	delta="0.00"
 
-	if [ -f $pricefile ]; then
-		oldprice="$(cat $pricefile)"
-		delta=$(echo "$price - $oldprice" | bc | xargs printf '%0.2f')
-	fi
+	if [ 1 -eq "$(echo "${price} > 0" | bc)" ]; then
+		oldprice="0.00"
+		delta="0.00"
 
-	echo "New price is $price"
-	echo "Old price is $oldprice"
+		if [ -f $pricefile ]; then
+			oldprice="$(cat $pricefile)"
+			delta=$(echo "$price - $oldprice" | bc | xargs printf '%0.2f')
+		fi
 
-	if [ 1 -eq "$(echo "${price} > ${oldprice}" | bc)" ]; then
-		echo "Trend is up ($delta)"
-		echo -n $green > $trendfile
-		echo -n $price > $pricefile
-		echo -n "$price USD (+$delta)" > $conkyfile
-	elif [ 1 -eq "$(echo "${price} < ${oldprice}" | bc)" ]; then
-		echo "Trend is down ($delta)"
-		echo -n $red > $trendfile
-		echo -n $price > $pricefile
-		echo -n "$price USD ($delta)" > $conkyfile
+		echo "New price is $price"
+		echo "Old price is $oldprice"
+
+		if [ 1 -eq "$(echo "${price} > ${oldprice}" | bc)" ]; then
+			echo "Trend is up ($delta)"
+			echo -n $green > $trendfile
+			echo -n $price > $pricefile
+			echo -n "$price USD (+$delta)" > $conkyfile
+		elif [ 1 -eq "$(echo "${price} < ${oldprice}" | bc)" ]; then
+			echo "Trend is down ($delta)"
+			echo -n $red > $trendfile
+			echo -n $price > $pricefile
+			echo -n "$price USD ($delta)" > $conkyfile
+		else
+			echo "Trend is neutral ($delta)"
+			echo -n $yellow > $trendfile
+			echo -n $price > $pricefile
+			echo -n "$price USD ($delta)" > $conkyfile
+		fi
 	else
-		echo "Trend is neutral ($delta)"
-		echo -n $yellow > $trendfile
-		echo -n $price > $pricefile
-		echo -n "$price USD ($delta)" > $conkyfile
+		echo "Price not available"
+		echo -n $gray > $trendfile
+		echo -n "N/A" > $conkyfile
 	fi
     
 	sleep 30
