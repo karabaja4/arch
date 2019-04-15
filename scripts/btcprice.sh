@@ -9,15 +9,16 @@ trendfile="/tmp/btctrend"
 pricefile="/tmp/btcprice"
 conkyfile="/tmp/btcconky"
 
-rm $trendfile
-rm $pricefile
-rm $conkyfile
+rm -f $trendfile
+rm -f $pricefile
+rm -f $conkyfile
 
 while true
 do
-	price=$(curl -s https://api.coinbase.com/v2/prices/BTC-USD/spot | jq -r '.data .amount' | xargs printf '%0.2f')
+	result=$(curl -s https://api.coinbase.com/v2/prices/BTC-USD/spot)
+	if [ $? == 0 ]; then
 
-	if [ 1 -eq "$(echo "${price} > 0" | bc)" ]; then
+		price=$(echo $result | jq -r '.data .amount' | xargs printf '%0.2f')
 		oldprice="0.00"
 		delta="0.00"
 
@@ -45,11 +46,12 @@ do
 			echo -n $price > $pricefile
 			echo -n "$price USD ($delta)" > $conkyfile
 		fi
+
 	else
 		echo "Price not available"
 		echo -n $gray > $trendfile
 		echo -n "N/A" > $conkyfile
 	fi
     
-	sleep 30
+	sleep 5
 done
