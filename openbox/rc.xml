@@ -125,7 +125,7 @@
       <action name="Focus"/>
       <action name="Raise"/>
     </mousebind>
-    <mousebind button="A-Left" action="Drag">
+    <mousebind button="W-Left" action="Drag">
       <action name="Resize"/>
     </mousebind>
   </context>
