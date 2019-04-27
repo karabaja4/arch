@@ -34,17 +34,17 @@ do
 			echo "Trend is up ($delta)"
 			echo -n $green > $trendfile
 			echo -n $price > $pricefile
-			echo -n "$price USD (+$delta)" > $conkyfile
+			echo -n "$price USD | +$delta" > $conkyfile
 		elif [ 1 -eq "$(echo "${price} < ${oldprice}" | bc)" ]; then
 			echo "Trend is down ($delta)"
 			echo -n $red > $trendfile
 			echo -n $price > $pricefile
-			echo -n "$price USD ($delta)" > $conkyfile
+			echo -n "$price USD | $delta" > $conkyfile
 		else
 			echo "Trend is neutral ($delta)"
 			echo -n $yellow > $trendfile
 			echo -n $price > $pricefile
-			echo -n "$price USD ($delta)" > $conkyfile
+			echo -n "$price USD | $delta" > $conkyfile
 		fi
 
 	else
