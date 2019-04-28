@@ -19,6 +19,7 @@ do
 	if [ $? == 0 ]; then
 
 		price=$(echo $result | jq -r '.data .amount' | xargs printf '%0.2f')
+		
 		oldprice="0.00"
 		delta="0.00"
 
@@ -27,25 +28,21 @@ do
 			delta=$(echo "$price - $oldprice" | bc | xargs printf '%0.2f')
 		fi
 
-		echo "New price is $price"
-		echo "Old price is $oldprice"
-
-		if [ 1 -eq "$(echo "${price} > ${oldprice}" | bc)" ]; then
-			echo "Trend is up ($delta)"
+		if [ 1 -eq "$(echo "${price} > ${oldprice}" | bc)" ] && [ "$delta" != "0.00" ]; then
 			echo -n $green > $trendfile
-			echo -n $price > $pricefile
-			echo -n "$price USD | +$delta" > $conkyfile
 		elif [ 1 -eq "$(echo "${price} < ${oldprice}" | bc)" ]; then
-			echo "Trend is down ($delta)"
 			echo -n $red > $trendfile
-			echo -n $price > $pricefile
-			echo -n "$price USD | $delta" > $conkyfile
 		else
-			echo "Trend is neutral ($delta)"
 			echo -n $yellow > $trendfile
-			echo -n $price > $pricefile
-			echo -n "$price USD | $delta" > $conkyfile
 		fi
+
+		# add + to positive deltas
+		if [ "$delta" != "0.00" ] && [ "${delta:0:1}" != "-" ]; then
+			delta="+$delta"
+		fi
+
+		echo -n $price > $pricefile
+		echo -n "$price USD | $delta" > $conkyfile
 
 	else
 		echo "Price not available"
