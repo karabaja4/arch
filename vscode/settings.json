@@ -23,7 +23,9 @@
     {
         "**/node_modules": true,
         "**/bin": true,
-        "**/obj": true
+        "**/obj": true,
+        "*.o": true,
+        "moc_*": true
     },
     "editor.minimap.enabled": false,
     "git.enableSmartCommit": true,
