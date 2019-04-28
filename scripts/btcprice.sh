@@ -16,14 +16,15 @@ rm -f $conkyfile
 while true
 do
 	result=$(curl -s https://api.coinbase.com/v2/prices/BTC-USD/spot)
-	if [[ $? == 0 ]]; then
+	if [[ $? == 0 ]]
+	then
 
 		price=$(echo $result | jq -r '.data .amount' | xargs printf '%0.2f')
-
 		oldprice="0.00"
 		delta="0.00"
 
-		if [[ -f $pricefile ]]; then
+		if [[ -f $pricefile ]]
+		then
 			oldprice="$(cat $pricefile)"
 			delta=$(echo "$price - $oldprice" | bc | xargs printf '%0.2f')
 		fi
@@ -37,7 +38,8 @@ do
 		fi
 
 		# add + to positive deltas
-		if [[ "$delta" != "0.00" ]] && [[ "${delta:0:1}" != "-" ]]; then
+		if [[ "$delta" != "0.00" ]] && [[ "${delta:0:1}" != "-" ]]
+		then
 			delta="+$delta"
 		fi
 
