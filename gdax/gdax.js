@@ -94,7 +94,7 @@ const exec = () => {
             lastBtcPriceDiff = priceDiff;
     
             const format = (amount, currency, showPlus) => {
-                return (amount || (amount === 0)) ? ((showPlus ? (amount > 0 ? "+" : "") : "") + amount.toFixed(2) + " " + currency) : null;
+                return (amount || (amount === 0)) ? ((showPlus && (amount > 0) ? "+" : "") + amount.toFixed(2) + " " + currency) : null;
             }
     
             trend = priceDiff === 0 ? "#EEFF41" : (priceDiff > 0 ? "#69F0AE" : "#FF6E40");
