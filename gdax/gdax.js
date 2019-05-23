@@ -103,7 +103,7 @@ const exec = () => {
         fs.writeFile("/tmp/btctrend", trend, () => {});
         fs.writeFile("/tmp/btcconky", conky, () => {});
 
-        setTimeout(() => exec(), 2000);
+        setTimeout(() => exec(), 5000);
     });
 }
 
