@@ -34,8 +34,8 @@ const hnb = (currency, callback) => {
             if (!err && value) {
                 hnbDate = new Date();
                 hnbValue = value;
+                console.log("Updated HNB exchange rate to " + value);
             }
-            console.log("Updated HNB exchange rate to " + value)
             callback(err, value);
         });
     }
@@ -71,38 +71,42 @@ const exec = () => {
     ];
 
     async.parallel(tasks, (err, results) => {
+
+        let trend = "#757575"; // gray
+        let conky = "-";
+
+        if (!err) {
+            const eurToHrkValue = results[0];
+            const btcPriceInEur = results[1];
+            const btcPriceInUsd = results[2];
+            const btcAmount = results[3];
+            //const eurAmount = results[4];
+    
+            const btcAmountHrk = eurToHrkValue * btcPriceInEur * btcAmount;
+            //const btcAmountEur = btcPriceInEur * btcAmount;
+            //const btcAmountUsd = btcPriceInUsd * btcAmount;
+    
+            const gainsDiff = btcAmountHrk - initialCost;
+            let priceDiff = lastBtcPriceUsd !== null ? (btcPriceInUsd - lastBtcPriceUsd) : 0;
+    
+            lastBtcPriceUsd = btcPriceInUsd;
+            priceDiff = priceDiff || lastBtcPriceDiff || 0;
+            lastBtcPriceDiff = priceDiff;
+    
+            const format = (amount, currency, showPlus) => {
+                return (amount || (amount === 0)) ? ((showPlus ? (amount > 0 ? "+" : "") : "") + amount.toFixed(2) + " " + currency) : null;
+            }
+    
+            trend = priceDiff === 0 ? "#EEFF41" : (priceDiff > 0 ? "#69F0AE" : "#FF6E40");
+            conky = format(btcPriceInUsd, "USD") + " | " + format(priceDiff, "USD", true) + " | " + format(gainsDiff, "HRK", true);
+        }
+
+        console.log(trend + ": " + conky);
         if (err) {
             console.log(err);
         }
-
-        const eurToHrkValue = results[0];
-        const btcPriceInEur = results[1];
-        const btcPriceInUsd = results[2];
-        const btcAmount = results[3];
-        //const eurAmount = results[4];
-
-        const btcAmountHrk = eurToHrkValue * btcPriceInEur * btcAmount;
-        //const btcAmountEur = btcPriceInEur * btcAmount;
-        //const btcAmountUsd = btcPriceInUsd * btcAmount;
-
-        const gainsDiff = btcAmountHrk - initialCost;
-        let priceDiff = lastBtcPriceUsd !== null ? (btcPriceInUsd - lastBtcPriceUsd) : 0;
-
-        lastBtcPriceUsd = btcPriceInUsd;
-        priceDiff = priceDiff || lastBtcPriceDiff || 0;
-        lastBtcPriceDiff = priceDiff;
-
-        const format = (amount, currency, showPlus) => {
-            return (amount || (amount === 0)) ? ((showPlus ? (amount > 0 ? "+" : "") : "") + amount.toFixed(2) + " " + currency) : null;
-        }
-
-        var trend = priceDiff === 0 ? "#EEFF41" : (priceDiff > 0 ? "#69F0AE" : "#FF6E40");
-        var conky = format(btcPriceInUsd, "USD") + " | " + format(priceDiff, "USD", true) + " | " + format(gainsDiff, "HRK", true);
-
-        console.log(trend + ": " + conky);
         fs.writeFile("/tmp/btctrend", trend, () => {});
         fs.writeFile("/tmp/btcconky", conky, () => {});
-
         setTimeout(() => exec(), 2000);
     });
 }
