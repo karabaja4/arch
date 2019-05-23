@@ -6,6 +6,12 @@ const fs = require('fs');
 
 const api = 'https://api.pro.coinbase.com';
 const public = new gdax.PublicClient();
+const auth = new gdax.AuthenticatedClient(
+    secret.gdaxKey,
+    secret.gdaxSecret,
+    secret.gdaxPassphrase,
+    api
+);
 
 const eurId = "cb130c23-1daa-475d-a679-2a5900d28b24";
 const btcId = "a3593b1c-08b7-4f53-8ab8-d3ab666ad037";
@@ -19,18 +25,11 @@ Date.prototype.addHours = function(hours) {
     return date;
 }
 
-const auth = new gdax.AuthenticatedClient(
-    secret.gdaxKey,
-    secret.gdaxSecret,
-    secret.gdaxPassphrase,
-    api
-);
-
-const hnb = (callback) => {
+const hnb = (currency, callback) => {
     const now = new Date();
     const shouldFetch = !hnbDate || !hnbValue || (now > hnbDate.addHours(6));
     if (shouldFetch) {
-        request('http://api.hnb.hr/tecajn/v1?valuta=EUR', { json: true }, (err, res, body) => {
+        request("http://api.hnb.hr/tecajn/v1?valuta=" + currency, { json: true }, (err, res, body) => {
             const value = body && parseFloat(body[0]["Kupovni za devize"].replace(",", "."));
             if (!err && value) {
                 hnbDate = new Date();
@@ -45,8 +44,8 @@ const hnb = (callback) => {
     }
 };
 
-const price = (callback) => {
-    public.getProductTicker('BTC-USD', (err, response, data) => {
+const price = (pair, callback) => {
+    public.getProductTicker(pair, (err, response, data) => {
         callback(err, data && parseFloat(data.price));
     });
 }
@@ -57,44 +56,53 @@ const account = (id, callback) => {
     });
 }
 
-const eur = (callback) => account(eurId, callback);
-const btc = (callback) => account(btcId, callback);
+let lastBtcPriceUsd = null;
+let lastBtcPriceDiff = null;
 
-const print = (texts) => {
-    let content = "";
-    for (let i = 0; i < texts.length; i++) {
-        const text = texts[i].text;
-        //const color = texts[i].color;
-        content += `${text || "-"}`;
-        if (i < (texts.length - 1)) {
-            content += `<span foreground="#FFFFFF">  |  </span>`;
-        }
-    }
-    console.log(content);
-    fs.writeFile("/tmp/gdax", content, (err) => {});
-}
+const initialCost = 15473.03;
 
-var exec = () => {
-    //const tasks = [hnb, price, btc, eur];
-    const tasks = [price];
+const exec = () => {
+    const tasks = [
+        (callback) => hnb("EUR", callback),
+        (callback) => price("BTC-EUR", callback),
+        (callback) => price("BTC-USD", callback),
+        (callback) => account(btcId, callback),
+        (callback) => account(eurId, callback)
+    ];
+
     async.parallel(tasks, (err, results) => {
         if (err) {
             console.log(err);
         }
-        //const btcAmountHrk = results[0] * results[1] * results[2];
-        //const btcAmountEur = results[1] * results[2];
-        //const eurAmount = results[3];
-        //const btcPrice = results[1];
-        const btcPrice = results[0];
-        const format = (amount, currency) => {
-            return (amount || (amount === 0)) ? (amount.toFixed(2) + " " + currency) : null;
+
+        const eurToHrkValue = results[0];
+        const btcPriceInEur = results[1];
+        const btcPriceInUsd = results[2];
+        const btcAmount = results[3];
+        //const eurAmount = results[4];
+
+        const btcAmountHrk = eurToHrkValue * btcPriceInEur * btcAmount;
+        //const btcAmountEur = btcPriceInEur * btcAmount;
+        //const btcAmountUsd = btcPriceInUsd * btcAmount;
+
+        const gainsDiff = btcAmountHrk - initialCost;
+        let priceDiff = lastBtcPriceUsd !== null ? (btcPriceInUsd - lastBtcPriceUsd) : 0;
+
+        lastBtcPriceUsd = btcPriceInUsd;
+        priceDiff = priceDiff || lastBtcPriceDiff || 0;
+        lastBtcPriceDiff = priceDiff;
+
+        const format = (amount, currency, showPlus) => {
+            return (amount || (amount === 0)) ? ((showPlus ? (amount > 0 ? "+" : "") : "") + amount.toFixed(2) + " " + currency) : null;
         }
-        const texts = [
-            //{ text: format(eurAmount, "EUR"), color: "#FFB6C1" },
-            { text: format(btcPrice, "USD"), color: "#FFFFFF" },
-            //{ text: format(btcAmountEur, "BTC (EUR)"), color: "#87CEFA" }
-        ];
-        print(texts);
+
+        var trend = priceDiff === 0 ? "#EEFF41" : (priceDiff > 0 ? "#69F0AE" : "#FF6E40");
+        var conky = format(btcPriceInUsd, "USD") + " | " + format(priceDiff, "USD", true) + " | " + format(gainsDiff, "HRK", true);
+
+        console.log(trend + ": " + conky);
+        fs.writeFile("/tmp/btctrend", trend, () => {});
+        fs.writeFile("/tmp/btcconky", conky, () => {});
+
         setTimeout(() => exec(), 2000);
     });
 }
