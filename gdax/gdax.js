@@ -94,11 +94,11 @@ const exec = () => {
             lastBtcPriceDiff = priceDiff;
     
             const format = (amount, currency, showPlus) => {
-                return (amount || (amount === 0)) ? ((showPlus && (amount > 0) ? "+" : "") + amount.toFixed(2) + " " + currency) : null;
+                return (amount || (amount === 0)) ? ((showPlus && (amount > 0) ? "+" : "") + amount.toFixed(2) + currency) : null;
             }
     
             trend = priceDiff === 0 ? "#EEFF41" : (priceDiff > 0 ? "#69F0AE" : "#FF6E40");
-            conky = format(btcPriceInUsd, "USD") + " | " + format(priceDiff, "USD", true) + " | " + format(gainsDiff, "HRK", true);
+            conky = format(btcPriceInUsd, " USD") + " | " + format(priceDiff, "", true) + " | " + format(gainsDiff, " HRK", true);
         }
 
         console.log(trend + ": " + conky);
