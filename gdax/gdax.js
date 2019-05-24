@@ -80,13 +80,14 @@ const exec = () => {
             const btcPriceInEur = results[1];
             const btcPriceInUsd = results[2];
             const btcAmount = results[3];
-            //const eurAmount = results[4];
+            const eurAmount = results[4];
     
             const btcAmountHrk = eurToHrkValue * btcPriceInEur * btcAmount;
+            const eurAmountHrk = eurToHrkValue * eurAmount;
             //const btcAmountEur = btcPriceInEur * btcAmount;
             //const btcAmountUsd = btcPriceInUsd * btcAmount;
     
-            const gainsDiff = btcAmountHrk - initialCost;
+            const gainsDiff = ((btcAmountHrk > 1) ? btcAmountHrk : eurAmountHrk) - initialCost;
             let priceDiff = lastBtcPriceUsd !== null ? (btcPriceInUsd - lastBtcPriceUsd) : 0;
     
             lastBtcPriceUsd = btcPriceInUsd;
