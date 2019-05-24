@@ -88,6 +88,7 @@ const exec = () => {
             //const btcAmountUsd = btcPriceInUsd * btcAmount;
     
             const gainsDiff = ((btcAmountHrk > 1) ? btcAmountHrk : eurAmountHrk) - initialCost;
+            const gainsCurrency = (btcAmountHrk > 1) ? " HRK (B)" : " HRK (F)";
             let priceDiff = lastBtcPriceUsd !== null ? (btcPriceInUsd - lastBtcPriceUsd) : 0;
     
             lastBtcPriceUsd = btcPriceInUsd;
@@ -99,7 +100,7 @@ const exec = () => {
             }
     
             trend = priceDiff === 0 ? "#EEFF41" : (priceDiff > 0 ? "#69F0AE" : "#FF6E40");
-            conky = format(btcPriceInUsd, " USD") + " | " + format(priceDiff, "", true) + " | " + format(gainsDiff, " HRK", true);
+            conky = format(btcPriceInUsd, " USD") + " | " + format(priceDiff, "", true) + " | " + format(gainsDiff, gainsCurrency, true);
         }
 
         console.log(trend + ": " + conky);
