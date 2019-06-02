@@ -29,8 +29,8 @@ alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debia
 alias rsnc='sudo pacman -Rsnc'
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
-alias ed='geany -i'
-alias red='sudo geany -i'
+alias ed='geany -i -m -n -p -s -t'
+alias red='sudo geany -i -m -n -p -s -t'
 alias ws='rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20'
 alias headless='VBoxHeadless -s ws2012r2v2'
 alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"

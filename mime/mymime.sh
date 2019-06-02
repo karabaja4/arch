@@ -1,3 +1,17 @@
 #!/bin/bash
 
-echo $0 $1 $2 > /home/igor/ajme
+path="$1"
+extension="${path##*.}"
+
+case "$extension" in
+    pdf)
+        mupdf "$path";;
+    jpg|svg|png)
+        gpicview "$path";;
+    avi|mkv|flac|mp3|wav)
+        vlc "$path";;
+    txt|c|js|conf|md|sh)
+        geany -i -m -n -p -s -t "$path";;
+    *)
+        zenity --info --text="No extension was defined for $extension" --no-wrap;;
+esac
