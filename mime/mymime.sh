@@ -13,12 +13,12 @@ case "$extension" in
     txt|c|js|conf|md|sh|json|map|yml)
         geany -i -m -n -p -s -t "$path";;
     *)
-        mime=$(file -b --mime-type $path)
+        mime=$(xdg-mime query filetype $path)
         case "$mime" in
             text/plain)
                 geany -i -m -n -p -s -t "$path";;
             *)
-                zenity --info --text="Missing definition for $extension as $mime" --no-wrap;;
+                zenity --info --text="Missing definition for extension $extension as $mime" --no-wrap;;
         esac
         ;;
 esac
