@@ -48,6 +48,7 @@ application/msword=mymime.desktop;
 application/msword-template=mymime.desktop;
 application/mxf=mymime.desktop;
 application/nappdf=mymime.desktop;
+application/octet-stream=mymime.desktop;
 application/oda=mymime.desktop;
 application/ogg=mymime.desktop;
 application/owl+xml=mymime.desktop;
