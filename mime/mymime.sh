@@ -10,7 +10,7 @@ case "$extension" in
         gpicview "$path";;
     avi|mkv|flac|mp3|wav)
         vlc "$path";;
-    txt|c|js|conf|md|sh|json|map)
+    txt|c|js|conf|md|sh|json|map|yml)
         geany -i -m -n -p -s -t "$path";;
     *)
         mime=$(file -b --mime-type $path)
