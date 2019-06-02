@@ -9,18 +9,6 @@
 			</action>
 		</item>
 		
-		<item label="chromium">
-			<action name="Execute">
-				<execute>chromium</execute>
-			</action>
-		</item>
-
-		<item label="qtfm">
-			<action name="Execute">
-				<execute>qtfm</execute>
-			</action>
-		</item>
-
 		<separator/>
 
 		<item label="exit">
