@@ -18,7 +18,7 @@ case "$extension" in
             text/plain)
                 geany -i -m -n -p -s -t "$path";;
             *)
-                zenity --info --text="Missing definition for extension $extension as $mime" --no-wrap;;
+                zenity --info --text="Missing definition for $extension as $mime" --no-wrap;;
         esac
         ;;
 esac
