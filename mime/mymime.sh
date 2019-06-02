@@ -5,8 +5,8 @@ extension="${path##*.}"
 
 case "$extension" in
     pdf)
-        mupdf "$path";;
-    jpg|svg|png)
+        mupdf -r 96 "$path";;
+    jpg|jpeg|svg|png|bmp)
         gpicview "$path";;
     avi|mkv|flac|mp3|wav)
         vlc "$path";;
