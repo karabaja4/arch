@@ -1765,3 +1765,7 @@ video/x-msvideo=mymime.desktop;
 video/x-sgi-movie=mymime.desktop;
 x-conference/x-cooltalk=mymime.desktop;
 x-epoc/x-sisx-app=mymime.desktop;
+
+application/x-compressed-tar=mymime.desktop
+application/x-shellscript=mymime.desktop
+application/x-executable=mymime.desktop
