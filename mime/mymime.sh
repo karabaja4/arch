@@ -12,8 +12,10 @@ case "$extension" in
         vlc "$path";;
     txt|c|js|conf|md|sh|json|map|yml)
         geany -i -m -n -p -s -t "$path";;
+    torrent)
+        qbittorrent "$path";;
     *)
-        mime=$(xdg-mime query filetype $path)
+        mime=$(xdg-mime query filetype "$path")
         case "$mime" in
             text/plain)
                 geany -i -m -n -p -s -t "$path";;
