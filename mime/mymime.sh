@@ -10,7 +10,7 @@ case "$extension" in
         gpicview "$path";;
     avi|mkv|flac|mp3|wav)
         vlc "$path";;
-    txt|c|js|conf|md|sh|json|map|yml)
+    txt|c|js|conf|md|sh|json|map|yml|xml)
         geany -i -m -n -p -s -t "$path";;
     torrent)
         qbittorrent "$path";;
