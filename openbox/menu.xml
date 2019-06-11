@@ -11,10 +11,6 @@
 		
 		<separator/>
 
-		<item label="exit">
-			<action name="Exit"/>
-		</item>
-
 		<item label="reboot">
 			<action name="Execute">
 				<execute>sudo reboot</execute>

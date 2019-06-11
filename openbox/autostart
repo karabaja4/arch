@@ -1,14 +1,19 @@
 xdpyinfo | grep VNC > /dev/null
 declare isvnc=$? # 0 ako je vnc
 
-log()
+all ()
+{
+    sudo touch /var/run/utmp
+}
+
+log ()
 {
     mkdir -p $HOME/.local/logs
     ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> $HOME/.local/logs/openbox.log
 }
 
-vnc () {
-
+vnc ()
+{
     echo "Started VNC"
 
     # daemons
@@ -22,11 +27,10 @@ vnc () {
 
     # other
     xfce4-clipman &
-
 }
 
-desktop () {
-
+desktop ()
+{
     echo "Started Openbox"
 
     # cpu
@@ -64,8 +68,8 @@ desktop () {
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
-    
 }
 
+all
 [ $isvnc -eq 0 ] || desktop
 [ $isvnc -eq 0 ] && vnc
