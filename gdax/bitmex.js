@@ -39,7 +39,6 @@ const exec = () =>
                     price: price
                 };
                 prices.push(elem);
-                //console.log("added price " + JSON.stringify(elem));
             }
 
             const previous = prices.slice(-(minutes + 1))[0]; // 10 od kraja, ili ako ih nema 10, prvi
@@ -59,11 +58,10 @@ const exec = () =>
 
             const percentage = ((price - previous.price) / previous.price) * 100;
             const increase = (percentage > 0 ? "+" : "") + percentage.toFixed(2);
-            
-            conky = `${price} USD | ${increase}% in last ${minutes} minutes`;
+            const text = `${price} USD | ${increase}% in last ${minutes} minutes`;
 
             fs.writeFile("/tmp/btctrend", color, () => {});
-            fs.writeFile("/tmp/btcconky", conky, () => {});
+            fs.writeFile("/tmp/btcconky", text, () => {});
             setTimeout(() => exec(), 2000);
         }
     });
