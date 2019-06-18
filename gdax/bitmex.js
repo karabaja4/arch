@@ -6,7 +6,14 @@ const bitmex = (callback) =>
     const url = "https://www.bitmex.com/api/v1/trade?symbol=XBT&count=1&reverse=true";
     request(url, { json: true }, (err, res, body) =>
     {
-        callback(err, body[0]["price"]);
+        if (!body || !body[0])
+        {
+            callback(new Error("no body"), null);
+        }
+        else
+        {
+            callback(err, body[0]["price"]);
+        }
     });
 }
 
