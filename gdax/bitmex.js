@@ -8,7 +8,7 @@ const bitmex = (callback) =>
     {
         if (!body || !body[0])
         {
-            callback(new Error("no body"), null);
+            callback(new Error(`no body (response ${res.statusCode}: ${body})`), null);
         }
         else
         {
