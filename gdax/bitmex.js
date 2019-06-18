@@ -41,8 +41,9 @@ const exec = () =>
                 prices.push(elem);
             }
 
-            const previous = prices.slice(-(minutes + 1))[0]; // 10 od kraja, ili ako ih nema 10, prvi
-
+            prices = prices.slice(-(minutes + 1)); // 11 od kraja, tj. prije 10 minuta
+            
+            const previous = prices[0];
             if (price > previous.price)
             {
                 color = green;
