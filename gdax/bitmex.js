@@ -77,7 +77,7 @@ const exec = () =>
             fs.writeFile("/tmp/btcconky", text, () => {});
         }
 
-        setTimeout(() => exec(), 30000);
+        setTimeout(() => exec(), 5000);
     });
 }
 
