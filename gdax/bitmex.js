@@ -46,6 +46,7 @@ const exec = () =>
                     price: price
                 };
                 prices.push(elem);
+                console.log(`pushed ${JSON.stringify(elem)}`);
             }
 
             prices = prices.slice(-(minutes + 1)); // 11 od kraja, tj. prije 10 minuta
