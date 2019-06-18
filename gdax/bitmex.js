@@ -8,7 +8,7 @@ const bitmex = (callback) =>
     {
         if (!body || !body[0])
         {
-            callback(new Error(`no body (response ${res.statusCode}: ${body})`), null);
+            callback(new Error(`error: ${JSON.stringify(body)})`), null);
         }
         else
         {
@@ -73,7 +73,7 @@ const exec = () =>
             fs.writeFile("/tmp/btcconky", text, () => {});
         }
 
-        setTimeout(() => exec(), 10000);
+        setTimeout(() => exec(), 30000);
     });
 }
 
