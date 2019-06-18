@@ -63,7 +63,7 @@ const exec = () =>
 
             fs.writeFile("/tmp/btctrend", color, () => {});
             fs.writeFile("/tmp/btcconky", text, () => {});
-            setTimeout(() => exec(), 2000);
+            setTimeout(() => exec(), 10000);
         }
     });
 }
