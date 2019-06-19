@@ -24,6 +24,7 @@ const bitmex = (callback) =>
 const yellow = "#EEFF41";
 const green = "#69F0AE";
 const red = "#FF6E40";
+const gray = "#757575";
 const minutes = 10;
 
 let prices = [];
@@ -32,11 +33,10 @@ const exec = () =>
 {
     bitmex((err, price) =>
     {
-        if (err)
-        {
-            console.log(err);
-        }
-        else
+        let color = gray;
+        let text = "-";
+
+        if (!err)
         {
             const now = (new Date()).getTime();
             const last = prices.slice(-1).pop();
@@ -71,12 +71,15 @@ const exec = () =>
 
             const percentage = ((price - previous.price) / previous.price) * 100;
             const increase = (percentage > 0 ? "+" : "") + percentage.toFixed(2);
-            const text = `${price} USD | ${increase}% in last ${minutes} minutes`;
-
-            fs.writeFile("/tmp/btctrend", color, () => {});
-            fs.writeFile("/tmp/btcconky", text, () => {});
+            text = `${price} USD | ${increase}% in last ${minutes} minutes`;
+        }
+        else
+        {
+            console.log(err);
         }
 
+        fs.writeFile("/tmp/btctrend", color, () => {});
+        fs.writeFile("/tmp/btcconky", text, () => {});
         setTimeout(() => exec(), 5000);
     });
 }
