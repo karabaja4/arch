@@ -71,7 +71,7 @@ const exec = () =>
 
             const percentage = ((price - previous.price) / previous.price) * 100;
             const increase = (percentage > 0 ? "+" : "") + percentage.toFixed(2);
-            text = `${price} USD | ${increase}% in last ${minutes} minutes`;
+            text = `${price} USD | ${increase}% (${minutes} min)`;
         }
         else
         {
