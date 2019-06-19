@@ -25,7 +25,7 @@ const yellow = "#EEFF41";
 const green = "#69F0AE";
 const red = "#FF6E40";
 const gray = "#757575";
-const minutes = 10;
+const minutes = 15;
 
 let prices = [];
 
