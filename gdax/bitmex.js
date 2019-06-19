@@ -6,9 +6,9 @@ const bitmex = (callback) =>
     const url = "https://www.bitmex.com/api/v1/trade?symbol=XBT&count=1&reverse=true";
     request(url, { json: true }, (err, res, body) =>
     {
-        console.log("Limit: " + res.headers["x-ratelimit-limit"]);
-        console.log("Remaining: " + res.headers["x-ratelimit-remaining"]);
-        console.log("Reset: " + res.headers["x-ratelimit-reset"]);
+        // console.log("Limit: " + res.headers["x-ratelimit-limit"]);
+        // console.log("Remaining: " + res.headers["x-ratelimit-remaining"]);
+        // console.log("Reset: " + res.headers["x-ratelimit-reset"]);
 
         if (!body || !body[0])
         {
