@@ -1,196 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<openbox_config xmlns="http://openbox.org/3.4/rc" xmlns:xi="http://www.w3.org/2001/XInclude">
+<openbox_config xmlns="http://openbox.org/3.4/rc" 
+  xmlns:xi="http://www.w3.org/2001/XInclude">
 
-<resistance>
-  <strength>10</strength>
-  <screen_edge_strength>20</screen_edge_strength>
-</resistance>
+  <resistance>
+    <strength>10</strength>
+    <screen_edge_strength>20</screen_edge_strength>
+  </resistance>
 
-<focus>
-  <focusNew>yes</focusNew>
-  <followMouse>no</followMouse>
-  <focusLast>yes</focusLast>
-  <underMouse>no</underMouse>
-  <focusDelay>200</focusDelay>
-  <raiseOnFocus>no</raiseOnFocus>
-</focus>
+  <focus>
+    <focusNew>yes</focusNew>
+    <followMouse>no</followMouse>
+    <focusLast>yes</focusLast>
+    <underMouse>no</underMouse>
+    <focusDelay>200</focusDelay>
+    <raiseOnFocus>no</raiseOnFocus>
+  </focus>
 
-<placement>
-  <policy>Smart</policy>
-  <center>yes</center>
-  <monitor>Mouse</monitor>
-  <primaryMonitor>1</primaryMonitor>
-</placement>
+  <placement>
+    <policy>Smart</policy>
+    <center>yes</center>
+    <monitor>Mouse</monitor>
+    <primaryMonitor>1</primaryMonitor>
+  </placement>
 
-<theme>
-  <name>devbian</name>
-  <titleLayout></titleLayout>
-  <keepBorder>yes</keepBorder>
-  <animateIconify>no</animateIconify>
-  <font place="ActiveWindow">
-    <name>Consolas</name>
-    <size>1</size>
-    <weight>Normal</weight>
-    <slant>Normal</slant>
-  </font>
-  <font place="InactiveWindow">
-    <name>Consolas</name>
-    <size>1</size>
-    <weight>Normal</weight>
-    <slant>Normal</slant>
-  </font>
-  <font place="MenuItem">
-    <name>Consolas</name>
-    <size>14</size>
-    <weight>Normal</weight>
-    <slant>Normal</slant>
-  </font>
-  <font place="ActiveOnScreenDisplay">
-    <name>Roboto</name>
-    <size>11</size>
-    <weight>Bold</weight>
-    <slant>Normal</slant>
-  </font>
-  <font place="InactiveOnScreenDisplay">
-    <name>Roboto</name>
-    <size>11</size>
-    <weight>Bold</weight>
-    <slant>Normal</slant>
-  </font>
-</theme>
+  <theme>
+    <name>devbian</name>
+    <titleLayout></titleLayout>
+    <keepBorder>yes</keepBorder>
+    <animateIconify>no</animateIconify>
+    <font place="ActiveOnScreenDisplay">
+      <name>Roboto</name>
+      <size>11</size>
+      <weight>Bold</weight>
+      <slant>Normal</slant>
+    </font>
+    <font place="InactiveOnScreenDisplay">
+      <name>Roboto</name>
+      <size>11</size>
+      <weight>Bold</weight>
+      <slant>Normal</slant>
+    </font>
+  </theme>
 
-<desktops>
-  <number>1</number>
-  <firstdesk>1</firstdesk>
-  <names></names>
-  <popupTime>875</popupTime>
-</desktops>
+  <desktops>
+    <number>1</number>
+    <firstdesk>1</firstdesk>
+    <names></names>
+    <popupTime>875</popupTime>
+  </desktops>
 
-<resize>
-  <drawContents>yes</drawContents>
-  <popupShow>Nonpixel</popupShow>
-  <popupPosition>Center</popupPosition>
-  <popupFixedPosition>
-    <x>10</x>
-    <y>10</y>
-  </popupFixedPosition>
-</resize>
+  <resize>
+    <drawContents>yes</drawContents>
+    <popupShow>Nonpixel</popupShow>
+    <popupPosition>Center</popupPosition>
+    <popupFixedPosition>
+      <x>10</x>
+      <y>10</y>
+    </popupFixedPosition>
+  </resize>
 
-<margins>
-  <top>0</top>
-  <bottom>0</bottom>
-  <left>0</left>
-  <right>0</right>
-</margins>
+  <margins>
+    <top>0</top>
+    <bottom>0</bottom>
+    <left>0</left>
+    <right>0</right>
+  </margins>
 
-<keyboard>
-  <keybind key="A-F4">
-    <action name="Close"/>
-  </keybind>
-  <keybind key="A-Tab">
-    <action name="NextWindow">
-      <finalactions>
+  <keyboard>
+    <keybind key="A-F4">
+      <action name="Close"/>
+    </keybind>
+    <keybind key="A-Tab">
+      <action name="NextWindow">
+        <finalactions>
+          <action name="Focus"/>
+          <action name="Raise"/>
+          <action name="Unshade"/>
+        </finalactions>
+      </action>
+    </keybind>
+    <keybind key="W-1">
+      <action name="MoveResizeTo">
+        <monitor>1</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-T">
+      <action name="Execute">
+        <command>xfce4-terminal</command>
+      </action>
+    </keybind>
+    <keybind key="W-L">
+      <action name="Execute">
+        <command>slock</command>
+      </action>
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <dragThreshold>1</dragThreshold>
+    <doubleClickTime>500</doubleClickTime>
+    <screenEdgeWarpTime>400</screenEdgeWarpTime>
+    <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
+
+    <context name="Frame">
+      <mousebind button="Middle" action="Drag">
+        <action name="Move"/>
         <action name="Focus"/>
         <action name="Raise"/>
-        <action name="Unshade"/>
-      </finalactions>
-    </action>
-  </keybind>
-  <keybind key="W-1">
-    <action name="MoveResizeTo">
-      <monitor>1</monitor>
-    </action>
-  </keybind>
-  <keybind key="W-T">
-    <action name="Execute">
-      <command>xfce4-terminal</command>
-    </action>
-  </keybind>
-  <keybind key="W-L">
-    <action name="Execute">
-      <command>slock</command>
-    </action>
-  </keybind>
-</keyboard>
+      </mousebind>
+      <mousebind button="W-Left" action="Drag">
+        <action name="Resize"/>
+      </mousebind>
+    </context>
 
-<mouse>
-  <dragThreshold>1</dragThreshold>
-  <doubleClickTime>500</doubleClickTime>
-  <screenEdgeWarpTime>400</screenEdgeWarpTime>
-  <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
+    <context name="Client">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Middle" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+    </context>
 
-  <context name="Frame">
-    <mousebind button="Middle" action="Drag">
-      <action name="Move"/>
-      <action name="Focus"/>
-      <action name="Raise"/>
-    </mousebind>
-    <mousebind button="W-Left" action="Drag">
-      <action name="Resize"/>
-    </mousebind>
-  </context>
+    <context name="Desktop">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+    </context>
 
-  <context name="Client">
-    <mousebind button="Left" action="Press">
-      <action name="Focus"/>
-      <action name="Raise"/>
-    </mousebind>
-    <mousebind button="Middle" action="Press">
-      <action name="Focus"/>
-      <action name="Raise"/>
-    </mousebind>
-    <mousebind button="Right" action="Press">
-      <action name="Focus"/>
-      <action name="Raise"/>
-    </mousebind>
-  </context>
+  </mouse>
 
-  <context name="Desktop">
-    <mousebind button="Left" action="Press">
-      <action name="Focus"/>
-      <action name="Raise"/>
-    </mousebind>
-    <mousebind button="Right" action="Press">
-      <action name="Focus"/>
-      <action name="Raise"/>
-    </mousebind>
-  </context>
-
-  <context name="Root">
-    <mousebind button="Right" action="Press">
-      <action name="ShowMenu">
-        <menu>root-menu</menu>
-      </action>
-    </mousebind>
-  </context>
-</mouse>
-
-<menu>
-  <file>menu.xml</file>
-  <hideDelay>200</hideDelay>
-  <middle>no</middle>
-  <submenuShowDelay>100</submenuShowDelay>
-  <submenuHideDelay>400</submenuHideDelay>
-  <showIcons>yes</showIcons>
-  <manageDesktops>yes</manageDesktops>
-</menu>
-
-<applications>
-  <application type="normal">
-    <position>
-      <x>center</x>
-      <y>center</y>
-    </position>
-  </application>
-  <application name="*">
-    <decor>no</decor>
-  </application>
-  <application name="gsimplecal">
-    <position force="yes">
-      <x>1733</x>
-      <y>0</y>
-    </position>
-  </application>
-</applications>
+  <applications>
+    <application type="normal">
+      <position>
+        <x>center</x>
+        <y>center</y>
+      </position>
+    </application>
+    <application name="*">
+      <decor>no</decor>
+    </application>
+    <application name="gsimplecal">
+      <position force="yes">
+        <x>1733</x>
+        <y>0</y>
+      </position>
+    </application>
+  </applications>
 
 </openbox_config>
