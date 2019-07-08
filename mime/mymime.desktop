@@ -1,3 +1,4 @@
 [Desktop Entry]
 Name=MyMime
+Type=Application
 Exec=/home/igor/arch/mime/mymime.sh
