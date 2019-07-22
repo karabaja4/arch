@@ -4,6 +4,7 @@ declare isvnc=$? # 0 ako je vnc
 all ()
 {
     sudo touch /var/run/utmp
+    sudo rm -rf /tmp/*
 }
 
 log ()
