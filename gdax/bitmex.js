@@ -1,87 +1,50 @@
-const request = require('request');
 const fs = require('fs');
+const WebSocket = require("ws");
 
-const bitmex = (callback) =>
-{
-    const url = "https://www.bitmex.com/api/v1/trade?symbol=XBT&count=1&reverse=true";
-    request(url, { json: true }, (err, res, body) =>
-    {
-        // console.log("Limit: " + res.headers["x-ratelimit-limit"]);
-        // console.log("Remaining: " + res.headers["x-ratelimit-remaining"]);
-        // console.log("Reset: " + res.headers["x-ratelimit-reset"]);
-
-        if (!body || !body[0])
-        {
-            callback(new Error(`error: ${JSON.stringify(body)})`), null);
-        }
-        else
-        {
-            callback(err, body[0]["price"]);
-        }
-    });
-}
-
-const yellow = "#EEFF41";
+//const yellow = "#EEFF41";
 const green = "#69F0AE";
 const red = "#FF6E40";
-const gray = "#757575";
-const minutes = 15;
+//const gray = "#757575";
 
-let prices = [];
-
-const exec = () =>
+const connect = () =>
 {
-    bitmex((err, price) =>
+    const ws = new WebSocket("wss://www.bitmex.com/realtime");
+    ws.on("open", () =>
     {
-        let color = gray;
-        let text = "-";
-
-        if (!err)
-        {
-            const now = (new Date()).getTime();
-            const last = prices.slice(-1).pop();
-            const minute = 60 * 1000; // 1 minute in ms
-            
-            if (!last || ((last.time + minute) < now))
-            {
-                const elem =
-                {
-                    time: now,
-                    price: price
-                };
-                prices.push(elem);
-                console.log(`pushed ${JSON.stringify(elem)}`);
-            }
-
-            prices = prices.slice(-(minutes + 1)); // 11 od kraja, tj. prije 10 minuta
-            
-            const previous = prices[0];
-            if (price > previous.price)
-            {
-                color = green;
-            }
-            else if (price < previous.price)
-            {
-                color = red;
-            }
-            else
-            {
-                color = yellow;
-            }
-
-            const percentage = ((price - previous.price) / previous.price) * 100;
-            const increase = (percentage > 0 ? "+" : "") + percentage.toFixed(2);
-            text = `${price} USD | ${increase}% (${minutes} min)`;
-        }
-        else
-        {
-            console.log(err);
-        }
-
-        fs.writeFile("/tmp/btctrend", color, () => {});
-        fs.writeFile("/tmp/btcconky", text, () => {});
-        setTimeout(() => exec(), 5000);
+        const instrument = JSON.stringify({ op: "subscribe", args: "instrument:XBTUSD" });
+        ws.send(instrument);
     });
-}
+    
+    ws.on("message", (data) =>
+    {
+        const parsed = JSON.parse(data);
+        if (parsed.table == "instrument" && parsed.action == "update")
+        {
+            const info = parsed.data[0];
+            if (info && info.lastPrice)
+            {
+                const direction = info.lastTickDirection == "ZeroPlusTick" || info.lastTickDirection == "PlusTick" ? 1 : -1;
+                const color = direction == 1 ? green : red;
+                const price = parseInt(info.lastPrice);
+                const text = `${price} USD`;
+                console.log(text);
+                fs.writeFile("/tmp/btctrend", color, () => {});
+                fs.writeFile("/tmp/btcconky", text, () => {});
+            }
+        }
+    });
+    
+    // Close always gets called after error. This will call connect twice on an error.
+    // ws.on('error', () =>
+    // {
+    //     console.log('socket error');
+    // });
 
-exec();
+    ws.on("close", () =>
+    {
+        console.log("closed, reconnecting...");
+        setTimeout(connect, 1000);
+    });
+};
+
+connect();
