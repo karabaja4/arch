@@ -5,13 +5,13 @@ conky.config = {
 };
 
 conky.text = [[
-<span foreground="${if_match ${downspeedf enp2s0} >= 5}\#69F0AE${else}\#757575${endif}" rise="1000">&\#9632;</span> DWL: ${downspeedf enp2s0} KB        \
-<span foreground="${if_match ${upspeedf enp2s0} >= 5}\#69F0AE${else}\#757575${endif}" rise="1000">&\#9632;</span> UPL: ${upspeedf enp2s0} KB        \
-<span foreground="${if_match ${cpu} >= 80}\#FF6E40${else}${if_match ${cpu} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}" rise="1000">&\#9632;</span> CPU: ${cpu}% (${freq} MHz)        \
-<span foreground="${if_match ${memperc} >= 80}\#FF6E40${else}${if_match ${memperc} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}" rise="1000">&\#9632;</span> RAM: ${mem} / ${memmax}        \
-<span foreground="${if_match ${fs_used_perc /} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}" rise="1000">&\#9632;</span> SSD: ${fs_used /} / ${fs_size /}        \
-<span foreground="${if_mounted /home/igor/_mmc}${if_match ${fs_used_perc /home/igor/_mmc} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /home/igor/_mmc} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}${else}\#757575${endif}" rise="1000">&\#9632;</span> MMC: ${if_mounted /home/igor/_mmc}${fs_used /home/igor/_mmc} / ${fs_size /home/igor/_mmc}${else}not mounted${endif}        \
-<span foreground="${if_mounted /home/igor/_disk}${if_match ${fs_used_perc /home/igor/_disk} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /home/igor/_disk} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}${else}\#757575${endif}" rise="1000">&\#9632;</span> EDD: ${if_mounted /home/igor/_disk}${fs_used /home/igor/_disk} / ${fs_size /home/igor/_disk}${else}not mounted${endif}        \
-<span foreground="${exec cat /tmp/btctrend}" rise="1000">&\#9632;</span> BTC: ${exec cat /tmp/btcconky}        \
-<span foreground="\#757575" rise="1000">&\#9632;</span> CLK: ${time %A, %d.%m.%Y. %H:%M:%S}\
+<span foreground="${if_match ${downspeedf enp2s0} >= 5}\#69F0AE${else}\#757575${endif}" rise="1000">&\#9632;</span>  DWL: ${downspeedf enp2s0} KB        \
+<span foreground="${if_match ${upspeedf enp2s0} >= 5}\#69F0AE${else}\#757575${endif}" rise="1000">&\#9632;</span>  UPL: ${upspeedf enp2s0} KB        \
+<span foreground="${if_match ${cpu} >= 80}\#FF6E40${else}${if_match ${cpu} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}" rise="1000">&\#9632;</span>  CPU: ${cpu}% (${freq} MHz)        \
+<span foreground="${if_match ${memperc} >= 80}\#FF6E40${else}${if_match ${memperc} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}" rise="1000">&\#9632;</span>  RAM: ${mem} / ${memmax}        \
+<span foreground="${if_match ${fs_used_perc /} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}" rise="1000">&\#9632;</span>  SSD: ${fs_used /} / ${fs_size /}        \
+<span foreground="${if_mounted /home/igor/_mmc}${if_match ${fs_used_perc /home/igor/_mmc} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /home/igor/_mmc} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}${else}\#757575${endif}" rise="1000">&\#9632;</span>  MMC: ${if_mounted /home/igor/_mmc}${fs_used /home/igor/_mmc} / ${fs_size /home/igor/_mmc}${else}not mounted${endif}        \
+<span foreground="${if_mounted /home/igor/_disk}${if_match ${fs_used_perc /home/igor/_disk} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /home/igor/_disk} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}${else}\#757575${endif}" rise="1000">&\#9632;</span>  EDD: ${if_mounted /home/igor/_disk}${fs_used /home/igor/_disk} / ${fs_size /home/igor/_disk}${else}not mounted${endif}        \
+<span foreground="${exec cat /tmp/btctrend}" rise="1000">&\#9632;</span>  BTC: ${exec cat /tmp/btcconky}        \
+<span foreground="\#757575" rise="1000">&\#9632;</span>  CLK: ${time %A, %d.%m.%Y. %H:%M:%S}\
 ]];
