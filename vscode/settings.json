@@ -58,7 +58,6 @@
     "breadcrumbs.enabled": false,
     "msbuildProjectTools.nuget.newestVersionsFirst": true,
     "explorer.confirmDelete": false,
-    "dotnet-test-explorer.testProjectPath": "src/zenite.Tests",
     "omnisharp.loggingLevel": "critical",
     "msbuildProjectTools.logging.level": "Error",
     "omnisharp.disableMSBuildDiagnosticWarning": true,
@@ -67,5 +66,6 @@
     "window.restoreWindows": "none",
     "workbench.settings.editor": "json",
     "razor.trace": "Off",
-    "debug.console.fontFamily": "Consolas"
+    "debug.console.fontFamily": "Consolas",
+    "terminal.external.linuxExec": "gnome-terminal"
 }
