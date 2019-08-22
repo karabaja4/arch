@@ -7,7 +7,7 @@ conky.config = {
 conky.text = [[
 <span font_family="Flaticon" size="8000" rise="100" foreground="${if_match ${downspeedf enp2s0} >= 5}\#69F0AE${else}\#757575${endif}"></span>  DWL: ${downspeedf enp2s0} KB         \
 <span font_family="Flaticon" size="8000" rise="100" foreground="${if_match ${upspeedf enp2s0} >= 5}\#69F0AE${else}\#757575${endif}"></span>  UPL: ${upspeedf enp2s0} KB         \
-<span font_family="Flaticon" size="5000" rise="1000" foreground="${if_match ${cpu} >= 80}\#FF6E40${else}${if_match ${cpu} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}"></span>  CPU: ${cpu}% (${freq} MHz)         \
+<span font_family="Flaticon" size="5000" rise="1200" foreground="${if_match ${cpu} >= 80}\#FF6E40${else}${if_match ${cpu} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}"></span>  CPU: ${cpu}% (${freq} MHz)         \
 <span font_family="Flaticon" size="8000" rise="100" foreground="${if_match ${memperc} >= 80}\#FF6E40${else}${if_match ${memperc} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}"></span>  RAM: ${mem} / ${memmax}         \
 <span font_family="Flaticon" size="8000" rise="100" foreground="${if_match ${fs_used_perc /} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}"></span>  SSD: ${fs_used /} / ${fs_size /}         \
 <span font_family="Flaticon" size="8000" rise="100" foreground="${if_mounted /home/igor/_mmc}${if_match ${fs_used_perc /home/igor/_mmc} >= 80}\#FF6E40${else}${if_match ${fs_used_perc /home/igor/_mmc} >= 30}\#EEFF41${else}\#69F0AE${endif}${endif}${else}\#757575${endif}"></span>  MMC: ${if_mounted /home/igor/_mmc}${fs_used /home/igor/_mmc} / ${fs_size /home/igor/_mmc}${else}not mounted${endif}         \
