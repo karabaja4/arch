@@ -1,1 +1,1 @@
-rm -rf /tmp/{*,.*}
+rm -rf /tmp/{*,.*} > /dev/null
