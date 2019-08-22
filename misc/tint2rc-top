@@ -100,10 +100,10 @@ launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/firefox.desktop
 launcher_item_app = /usr/share/applications/qtfm.desktop
 launcher_item_app = /usr/share/applications/org.qbittorrent.qBittorrent.desktop
-launcher_item_app = /usr/share/applications/telegramdesktop.desktop
-launcher_item_app = /usr/share/applications/discord.desktop
+#launcher_item_app = /usr/share/applications/telegramdesktop.desktop
+#launcher_item_app = /usr/share/applications/discord.desktop
 launcher_item_app = /usr/share/applications/geany.desktop
-launcher_item_app = /usr/share/applications/jspaint.desktop
+#launcher_item_app = /usr/share/applications/jspaint.desktop
 launcher_item_app = /usr/share/applications/inkscape.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/robo3t.desktop
@@ -116,7 +116,7 @@ launcher_item_app = /usr/share/applications/virtualbox.desktop
 #-------------------------------------
 # Executor 1
 execp = new
-execp_command = cat /tmp/tint2text
+execp_command = cat /tmp/tint2text | sed "s/GiB/ GB/g"
 execp_interval = 1
 execp_font = Roboto Bold 8
 execp_font_color = #ffffff 100

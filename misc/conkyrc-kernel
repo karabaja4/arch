@@ -10,10 +10,12 @@ conky.config = {
 	own_window = true,
 	own_window_type = 'desktop',
 	own_window_transparent = true,
-	color0 = '#f2f2f2'
+	color0 = '#f2f2f2',
+	color1 = '#1794d1'
 };
 
 conky.text = [[
+$alignr $color1 ${font openlogos:size=32}B${font}
 $color0 $alignr home.aerium.hr ($nodename)
 $alignr $sysname $kernel
 $alignr Uptime: $uptime

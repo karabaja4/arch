@@ -1,12 +1,6 @@
 xdpyinfo | grep VNC > /dev/null
 declare isvnc=$? # 0 ako je vnc
 
-all ()
-{
-    sudo touch /var/run/utmp
-    sudo rm -rf /tmp/*
-}
-
 log ()
 {
     mkdir -p $HOME/.local/logs
@@ -71,6 +65,5 @@ desktop ()
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
 }
 
-all
 [ $isvnc -eq 0 ] || desktop
 [ $isvnc -eq 0 ] && vnc

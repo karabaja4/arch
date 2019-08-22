@@ -10,7 +10,6 @@
         "**/wwwroot": true,
         "**/typings": true,
         "**/out": true,
-        "**/zenite.Web": true,
         "**/cdn": true
     },
     "workbench.editor.enablePreview": true,
@@ -67,5 +66,6 @@
     "workbench.settings.editor": "json",
     "razor.trace": "Off",
     "debug.console.fontFamily": "Consolas",
-    "terminal.external.linuxExec": "gnome-terminal"
+    "terminal.external.linuxExec": "gnome-terminal",
+    "terminal.explorerKind": "external"
 }
