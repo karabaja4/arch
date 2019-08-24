@@ -22,6 +22,7 @@ vnc ()
 
     # other
     xfce4-clipman &
+    yad --notification --command="gsimplecal" --image="calendar" --text="Calendar" &
 }
 
 desktop ()
@@ -60,6 +61,7 @@ desktop ()
     xfce4-clipman &
     (sleep 5 && flameshot) &
     (sleep 5 && synergy) &
+    (sleep 6 && yad --notification --command="gsimplecal" --image="calendar" --text="Calendar") &
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
