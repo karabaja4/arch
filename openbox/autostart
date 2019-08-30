@@ -28,9 +28,6 @@ vnc ()
 desktop ()
 {
     echo "Started Openbox"
-
-    # cpu
-    sudo sh -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
     
     # mouse sens
     xinput set-prop 11 326 0.5
