@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Geany
+Exec=/home/igor/arch/misc/geany.sh
+Icon=geany
+Type=Application

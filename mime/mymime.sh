@@ -14,6 +14,8 @@ case "$extension" in
         geany -i -m -n -p -s -t "$path";;
     torrent)
         qbittorrent "$path";;
+    html|htm)
+        chromium "$path";;
     *)
         mime=$(xdg-mime query filetype "$path")
         case "$mime" in
