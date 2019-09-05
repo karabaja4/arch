@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-mkdir -p /tmp/geany
+mkdir -p "$HOME/.geany"
 declare filename
 declare temp
 
