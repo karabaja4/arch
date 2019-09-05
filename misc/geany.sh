@@ -8,7 +8,7 @@ declare temp
 if [ $# -eq 0 ]
 then
     temp=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
-    filename="/tmp/geany/$temp.js"
+    filename="$HOME/.geany/$temp.js"
 else
     filename="$1"
 fi
