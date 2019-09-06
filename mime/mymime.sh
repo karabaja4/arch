@@ -1,7 +1,21 @@
 #!/bin/bash
+set -euo pipefail
 
-path="$1"
-extension="${path##*.}"
+declare extension=""
+declare path="$1"
+declare filename=$(basename "$path")
+
+echo "Opening: $path"
+echo "Base file name: $filename"
+
+if [[ ${filename:0:1} == "." ]]; then
+    echo "Dotfile detected, not using extensions"
+elif [[ $filename != *"."* ]]; then
+    echo "Filename does not contain a dot, not using extensions"
+else
+    extension="${filename##*.}"
+    echo "Found extension: $extension"
+fi
 
 case "$extension" in
     pdf)
@@ -17,6 +31,7 @@ case "$extension" in
     html|htm)
         chromium "$path";;
     *)
+        echo "Using xdg-mime to query filetype for file $path"
         mime=$(xdg-mime query filetype "$path")
         case "$mime" in
             text/plain)
