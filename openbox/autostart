@@ -37,7 +37,7 @@ desktop ()
 
     # daemons
     xsettingsd -c $HOME/arch/misc/xsettingsd &
-    xcompmgr -a &
+    #xcompmgr -a &
 
     # resolution and background
     $HOME/arch/scripts/fixres.sh
