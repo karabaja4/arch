@@ -204,8 +204,8 @@ state.PCH {
 	control.17 {
 		iface PCM
 		name 'Playback Channel Map'
-		value.0 3
-		value.1 4
+		value.0 0
+		value.1 0
 		comment {
 			access read
 			type INTEGER

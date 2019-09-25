@@ -33,7 +33,8 @@ desktop ()
     xinput set-prop 11 326 0.5
     
     # alsa
-    alsactl restore -f $HOME/arch/alsa/asound.state.speakers
+    # alsactl -f $HOME/arch/alsa/asound.state store
+    alsactl -f $HOME/arch/alsa/asound.state restore
 
     # daemons
     xsettingsd -c $HOME/arch/misc/xsettingsd &
