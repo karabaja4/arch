@@ -46,9 +46,12 @@ desktop ()
 
     # conky
     conky -d -c $HOME/arch/misc/conkyrc-headless
-    conky -d -m 0 -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 0
-    conky -d -m 0 -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 1
-    conky -d -m 0 -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 2
+    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 0
+    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 1
+    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 2
+
+    # conky todo
+    # conky -d -c $HOME/arch/misc/conkyrc-todo --xinerama-head 1
 
     # tray
     tint2 -c $HOME/arch/misc/tint2rc-top &

@@ -1,0 +1,19 @@
+conky.config = {
+	use_xft = true,
+	font = 'Roboto:size=24',
+	draw_shades = false,
+	alignment = 'top_left',
+	gap_x = 50,
+	gap_y = 75,
+	update_interval = 1,
+	double_buffer = true,
+	own_window = true,
+	own_window_type = 'desktop',
+	own_window_transparent = true,
+	color0 = '#f2f2f2',
+	color1 = '#1794d1'
+};
+
+conky.text = [[
+${exec cat /home/igor/todo}
+]];
