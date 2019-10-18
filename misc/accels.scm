@@ -1,4 +1,4 @@
-; xfce4-terminal GtkAccelMap rc-file         -*- scheme -*-
+; gnome-terminal GtkAccelMap rc-file         -*- scheme -*-
 ; this file is an automated accelerator map dump
 ;
 (gtk_accel_path "<Actions>/terminal-window/goto-tab-2" "<Alt>2")
