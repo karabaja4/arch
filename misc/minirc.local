@@ -2,3 +2,4 @@ touch /var/run/utmp
 mkdir -p /tmp/pids
 mkdir -p /run/samba
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+swapon /dev/sdb2

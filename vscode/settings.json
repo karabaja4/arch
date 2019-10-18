@@ -68,5 +68,6 @@
     "razor.trace": "Off",
     "debug.console.fontFamily": "Consolas",
     "terminal.external.linuxExec": "gnome-terminal",
-    "terminal.explorerKind": "external"
+    "terminal.explorerKind": "external",
+    "update.mode": "none"
 }
