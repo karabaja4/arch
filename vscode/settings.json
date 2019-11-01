@@ -69,5 +69,11 @@
     "debug.console.fontFamily": "Consolas",
     "terminal.external.linuxExec": "gnome-terminal",
     "terminal.explorerKind": "external",
-    "update.mode": "none"
+    "update.mode": "none",
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/lib_bower/*/**": true
+    }
 }
