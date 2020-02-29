@@ -55,13 +55,15 @@ alias dhcpcd='sudo dhcpcd -4'
 alias start='rc start'
 alias stop='rc stop'
 
+alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
+
 # exports
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export NO_AT_BRIDGE=1
 
 # dotnet
-export DOTNET_ROOT=$PATH:$HOME/dotnet-sdk
-export PATH=$PATH:$HOME/dotnet-sdk
+export DOTNET_ROOT=$PATH:/opt/dotnet
+export PATH=$PATH:/opt/dotnet
 export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
 
 source /usr/share/git/completion/git-prompt.sh

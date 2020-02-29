@@ -2,6 +2,7 @@
 {
     "editor.fontFamily": "Consolas",
     "editor.fontSize": 14,
+    "editor.letterSpacing": -0.2,
     "explorer.openEditors.visible": 0,
     "workbench.editor.showTabs": true,
     "workbench.sideBar.location": "right",
@@ -22,7 +23,6 @@
     {
         "**/node_modules": true,
         "**/bower_components": true,
-        "**/bin": true,
         "**/obj": true,
         "*.o": true,
         "moc_*": true
@@ -75,5 +75,6 @@
         "**/.git/subtree-cache/**": true,
         "**/node_modules/*/**": true,
         "**/lib_bower/*/**": true
-    }
+    },
+    "javascript.updateImportsOnFileMove.enabled": "never"
 }

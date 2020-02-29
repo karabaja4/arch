@@ -1,3 +1,5 @@
+echo "Cleaning up..."
+
 rm -rf /tmp/{*,.*} > /dev/null
 rm -f /home/igor/.vnc/*.pid
 rm -f /home/igor/.vnc/*.log
