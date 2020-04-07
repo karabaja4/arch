@@ -67,9 +67,10 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export NO_AT_BRIDGE=1
 
 # dotnet
-export DOTNET_ROOT=$PATH:/opt/dotnet
-export PATH=$PATH:/opt/dotnet
-export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
+#export DOTNET_ROOT=$PATH:/opt/dotnet
+#export PATH=$PATH:/opt/dotnet
+#export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
 
 source /usr/share/git/completion/git-prompt.sh
 
