@@ -49,6 +49,11 @@ jcat()
     cat /var/log/busybox/$1.log
 }
 
+scem()
+{
+    xinput -set-prop 14 339 $1
+}
+
 alias vboxload="sudo modprobe vboxdrv && sudo modprobe vboxnetadp && sudo modprobe vboxnetflt"
 
 alias dhcpcd='sudo dhcpcd -4'

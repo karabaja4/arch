@@ -23,6 +23,7 @@
     {
         "**/node_modules": true,
         "**/bower_components": true,
+        "**/bin": true,
         "**/obj": true,
         "*.o": true,
         "moc_*": true
@@ -76,5 +77,6 @@
         "**/node_modules/*/**": true,
         "**/lib_bower/*/**": true
     },
-    "javascript.updateImportsOnFileMove.enabled": "never"
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "explorer.compactFolders": false
 }
