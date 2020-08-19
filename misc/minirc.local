@@ -3,3 +3,7 @@ mkdir -p /tmp/pids
 mkdir -p /run/samba
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 swapon /dev/sdb2
+ln -s /proc/self/fd /dev/fd
+ln -s /proc/self/fd/0 /dev/stdin
+ln -s /proc/self/fd/1 /dev/stdout
+ln -s /proc/self/fd/2 /dev/stderr

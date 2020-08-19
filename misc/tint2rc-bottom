@@ -73,40 +73,9 @@ systray_icon_size = 16
 systray_monitor = 3
 
 #---------------------------------------------
-# CLOCK
-#---------------------------------------------
-time1_format = %d.%m.%Y. %H:%M:%S
-time1_font = Roboto Bold 8
-clock_font_color = #ffffff 100
-clock_padding = 5 0
-clock_background_id = 0
-
-#---------------------------------------------
 # MOUSE ACTION ON TASK
 #---------------------------------------------
 mouse_middle = none
 mouse_right = close
 mouse_scroll_up = maximize_restore
 mouse_scroll_down = maximize_restore
-#---------------------------------------------
-# LAUNCHER
-#---------------------------------------------
-launcher_icon_theme = Breeze
-launcher_padding = 7 5 6
-launcher_background_id = 1
-launcher_icon_size = 23
-launcher_item_app = /usr/share/applications/xfce4-terminal.desktop
-launcher_item_app = /usr/share/applications/chromium.desktop
-launcher_item_app = /usr/share/applications/firefox.desktop
-launcher_item_app = /usr/share/applications/qtfm.desktop
-launcher_item_app = /usr/share/applications/org.qbittorrent.qBittorrent.desktop
-launcher_item_app = /usr/share/applications/geany.desktop
-launcher_item_app = /usr/share/applications/jspaint.desktop
-launcher_item_app = /usr/share/applications/inkscape.desktop
-launcher_item_app = /usr/share/applications/visual-studio-code.desktop
-launcher_item_app = /usr/share/applications/robo3t.desktop
-launcher_item_app = /usr/share/applications/pgAdmin4.desktop
-launcher_item_app = /usr/share/applications/sqlbrowser.desktop
-launcher_item_app = /usr/share/applications/advanced-rest-client.desktop
-launcher_item_app = /usr/share/applications/filezilla.desktop
-launcher_item_app = /usr/share/applications/virtualbox.desktop
