@@ -78,5 +78,6 @@
         "**/lib_bower/*/**": true
     },
     "javascript.updateImportsOnFileMove.enabled": "never",
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "diffEditor.ignoreTrimWhitespace": false
 }
