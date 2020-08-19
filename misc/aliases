@@ -71,6 +71,7 @@ export NO_AT_BRIDGE=1
 #export PATH=$PATH:/opt/dotnet
 #export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
 source /usr/share/git/completion/git-prompt.sh
 
