@@ -3,69 +3,66 @@ declare isvnc=$? # 0 ako je vnc
 
 log ()
 {
-    mkdir -p $HOME/.local/logs
-    ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> $HOME/.local/logs/openbox.log
+  mkdir -p $HOME/.local/logs
+  ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> $HOME/.local/logs/openbox.log
 }
 
 vnc ()
 {
-    echo "Started VNC"
+  echo "Started VNC"
 
-    # daemons
-    xsettingsd -c $HOME/arch/misc/xsettingsd &
+  # daemons
+  xsettingsd -c $HOME/arch/misc/xsettingsd &
 
-    # bacgkround
-    xsetroot -solid '#008080'
+  # bacgkround
+  xsetroot -solid '#008080'
 
-    # interface
-    tint2 -c $HOME/arch/misc/tint2rc-vnc &
+  # interface
+  tint2 -c $HOME/arch/misc/tint2rc-vnc &
 
-    # other
-    xfce4-clipman &
-    yad --notification --command="gsimplecal" --image="calendar" --text="Calendar" &
+  # other
+  xfce4-clipman &
+  yad --notification --command="gsimplecal" --image="calendar" --text="Calendar" &
 }
 
 desktop ()
 {
-    echo "Started Openbox"
-    
-    # mouse sens
-    xinput set-prop 11 326 0.5
-    
-    # alsa
-    # alsactl -f $HOME/arch/alsa/asound.state store
-    alsactl -f $HOME/arch/alsa/asound.state restore
+  echo "Started Openbox"
+  
+  # mouse sens
+  xinput set-prop 11 326 0.5
+  
+  # alsa
+  # alsactl -f $HOME/arch/alsa/asound.state store
+  alsactl -f $HOME/arch/alsa/asound.state restore
 
-    # daemons
-    xsettingsd -c $HOME/arch/misc/xsettingsd &
-    xcompmgr -a &
+  # daemons
+  xsettingsd -c $HOME/arch/misc/xsettingsd &
+  xcompmgr -a &
 
-    # resolution and background
-    $HOME/arch/scripts/fixres.sh
-    feh --bg-scale $HOME/arch/wall/default.jpg
+  # resolution and background
+  $HOME/arch/scripts/fixres.sh
+  feh --bg-scale $HOME/arch/wall/default.jpg
 
-    # conky
-    conky -d -c $HOME/arch/misc/conkyrc-headless
-    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 0
-    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 1
-    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 2
+  # conky
+  conky -d -c $HOME/arch/misc/conkyrc-headless
+  conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 0
+  conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 1
+  conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 2
 
-    # conky todo
-    # conky -d -c $HOME/arch/misc/conkyrc-todo --xinerama-head 1
+  # tray
+  tint2 -c $HOME/arch/misc/tint2rc-top &
+  tint2 -c $HOME/arch/misc/tint2rc-bottom &
 
-    # tray
-    tint2 -c $HOME/arch/misc/tint2rc-top &
-    tint2 -c $HOME/arch/misc/tint2rc-bottom &
+  # other
+  pnmixer &
+  xfce4-clipman &
+  (sleep 5 && flameshot) &
+  (sleep 5 && synergy) &
+  (sleep 6 && yad --notification --command="gsimplecal" --image="calendar" --text="Calendar") &
 
-    # other
-    pnmixer &
-    xfce4-clipman &
-    (sleep 5 && flameshot) &
-    (sleep 5 && synergy) &
-    (sleep 6 && yad --notification --command="gsimplecal" --image="calendar" --text="Calendar") &
-
-    # autolock
-    #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+  # autolock
+  #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
 }
 
 [ $isvnc -eq 0 ] || desktop
