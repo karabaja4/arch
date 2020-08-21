@@ -7,7 +7,7 @@
 			"using (var entities = _entities.Create())",
 			"{",
 			"\t$1",
-			"\tawait entities.SaveChangesAsync();",
+			"\tentities.SaveChanges();",
 			"}"
 		],
 		"description": "Add database context"

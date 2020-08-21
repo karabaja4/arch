@@ -31,9 +31,13 @@ const connect = () => {
     }
   });
 
+  ws.on('error', () => {
+    console.log('socket error');
+  });
+
   ws.on('close', () => {
     console.log('closed, reconnecting...');
-    setTimeout(connect, 1000);
+    setTimeout(connect, 5000);
   });
 };
 
