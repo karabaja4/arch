@@ -27,7 +27,7 @@ case "$extension" in
     *)
         mime=$(file --brief --mime-type "$path")
         case "$mime" in
-            text/plain)
+            text/plain|inode/x-empty)
                 geany -i -m -n -p -s -t "$path";;
             inode/directory)
                 qtfm "$path";;
