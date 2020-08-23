@@ -1,11 +1,11 @@
 xdpyinfo | grep VNC > /dev/null
 declare isvnc=$? # 0 ako je vnc
 
-log ()
-{
-    mkdir -p $HOME/.local/logs
-    ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> $HOME/.local/logs/openbox.log
-}
+# log ()
+# {
+#     mkdir -p $HOME/.local/logs
+#     ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> $HOME/.local/logs/openbox.log
+# }
 
 vnc ()
 {
@@ -57,9 +57,12 @@ desktop ()
     # other
     pnmixer &
     xfce4-clipman &
-    (sleep 5 && flameshot) &
-    (sleep 5 && synergy) &
-    (sleep 6 && yad --notification --command="gsimplecal" --image="calendar" --text="Calendar") &
+    sleep 5
+    flameshot &
+    sleep 1
+    synergy &
+    sleep 1
+    yad --notification --command="gsimplecal" --image="calendar" --text="Calendar" &
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
