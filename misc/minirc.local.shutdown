@@ -1,5 +1,5 @@
 echo "Cleaning up..."
 
-rm -rf /tmp/{*,.*} > /dev/null
+rm -rf /tmp/{*,.*} > /dev/null 2>&1
 rm -f /home/igor/.vnc/*.pid
 rm -f /home/igor/.vnc/*.log
