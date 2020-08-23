@@ -54,10 +54,11 @@ launcher_item_app = /usr/share/applications/discord.desktop
 launcher_item_app = /home/igor/arch/misc/geany.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/robo3t.desktop
-#launcher_item_app = /usr/share/applications/pgAdmin4.desktop
+launcher_item_app = /usr/share/applications/pgAdmin4.desktop
 launcher_item_app = /usr/share/applications/sqlbrowser.desktop
 launcher_item_app = /usr/share/applications/filezilla.desktop
 launcher_item_app = /usr/share/applications/virtualbox.desktop
+launcher_item_app = /usr/share/applications/postman.desktop
 
 #-------------------------------------
 # Executor 1

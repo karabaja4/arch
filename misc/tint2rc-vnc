@@ -100,5 +100,3 @@ launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/qtfm.desktop
 launcher_item_app = /usr/share/applications/geany.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
-launcher_item_app = /usr/share/applications/sqlbrowser.desktop
-launcher_item_app = /usr/share/applications/advanced-rest-client.desktop
