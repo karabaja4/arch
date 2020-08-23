@@ -1,8 +1,17 @@
 touch /var/run/utmp
+
 mkdir -p /tmp/pids
 mkdir -p /run/samba
+
+mkdir -p /tmp/minirc
+mkdir -p /var/log/minirc
+
+chmod 777 /tmp/minirc
+chmod 777 /var/log/minirc
+
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-swapon /dev/sdb2
+swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
+
 ln -s /proc/self/fd /dev/fd
 ln -s /proc/self/fd/0 /dev/stdin
 ln -s /proc/self/fd/1 /dev/stdout
