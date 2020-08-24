@@ -3,11 +3,9 @@ touch /var/run/utmp
 mkdir -p /tmp/pids
 mkdir -p /run/samba
 
-mkdir -p /tmp/minirc
-mkdir -p /var/log/minirc
-
-chmod 777 /tmp/minirc
-chmod 777 /var/log/minirc
+mkdir -p -m 777 /tmp/minirc
+mkdir -p -m 777 /var/log/minirc
+mkdir -p -m 777 /tmp/qtfm
 
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
