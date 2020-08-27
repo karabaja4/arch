@@ -24,6 +24,8 @@ case "$extension" in
         qbittorrent "$path";;
     html|htm)
         chromium "$path";;
+    gz)
+        xarchiver "$path";;
     *)
         mime=$(file --brief --mime-type "$path")
         case "$mime" in
