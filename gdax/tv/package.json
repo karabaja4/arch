@@ -4,6 +4,7 @@
     "private": true,
     "dependencies": {
         "websocket": "latest",
-        "randomstring": "latest"
+        "randomstring": "latest",
+        "ws": "latest"
     }
 }
