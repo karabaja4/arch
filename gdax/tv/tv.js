@@ -98,7 +98,7 @@ const connect = () => {
     }
   });
 
-  ws.on('error', () => {
+  ws.on('error', (e) => {
     console.log(`socket error: ${e}`);
   });
 
