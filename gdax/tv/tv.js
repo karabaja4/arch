@@ -1,6 +1,7 @@
 
 const WebSocket = require('ws');
 const rs = require('randomstring');
+const fs = require('fs');
 
 const sym = [
   'BITMEX:XBTUSD',
@@ -21,6 +22,15 @@ const sym = [
   'NYSE:CRM'
 ];
 
+const conky = async (name, price, change, percent) => {
+  const green = '#69F0AE';
+  const red = '#FF6E40';
+  if (name === 'FOREXCOM:NSXUSD') {
+    await fs.promises.writeFile('/tmp/btctrend', `${change > 0 ? green : red}`);
+    await fs.promises.writeFile('/tmp/btcconky', `NSX: ${price} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+  }
+}
+
 const isDataObject = (o) => {
   return o.p && 
          Array.isArray(o.p) &&
@@ -31,9 +41,10 @@ const isDataObject = (o) => {
          o.p[1]['v']['lp'];
 }
 
-const process = (message) => {
+const process = async (message) => {
   const parts = message.split('~m~');
-  parts.forEach(p => {
+  for(let i = 0; i < parts.length; i++) {
+    const p = parts[i];
     const match = p.match(/{.+}/g);
     if (match) {
       try {
@@ -44,13 +55,14 @@ const process = (message) => {
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
           console.log(`${name} -> PRICE: ${price}${change ? `, CHANGE: ${change}` : ''}${percent ? `, PERCENT: ${percent}%` : ''}`);
+          await conky(name, price, change, percent);
         }
       } catch(e) {
         console.log(`error parsing json: ${match[0]}`);
         console.log(e);
       }
     }
-  });
+  }
 }
 
 const connect = () => {
@@ -59,11 +71,16 @@ const connect = () => {
     origin: 'https://www.tradingview.com'
   });
 
+  const timer = setTimeout(() => { // timeout
+    ws.terminate();
+  }, 20000);
+
   ws.on('open', () => {
     console.log('open');
   });
   
   ws.on('message', (message) => {
+    timer.refresh();
     if (message.includes('session_id')) {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
@@ -82,7 +99,7 @@ const connect = () => {
   });
 
   ws.on('error', () => {
-    console.log('socket error');
+    console.log(`socket error: ${e}`);
   });
 
   ws.on('close', () => {
