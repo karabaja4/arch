@@ -34,7 +34,7 @@ desktop ()
     
     # alsa
     # alsactl -f $HOME/arch/alsa/asound.state store
-    alsactl -f $HOME/arch/alsa/asound.state restore
+    #alsactl -f $HOME/arch/alsa/asound.state restore
 
     # daemons
     xsettingsd -c $HOME/arch/misc/xsettingsd &
