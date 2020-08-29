@@ -18,7 +18,7 @@ vnc ()
     xsetroot -solid '#008080'
 
     # interface
-    tint2 -c $HOME/arch/misc/tint2rc-vnc &
+    tint2 -c $HOME/arch/tint2/tint2rc-vnc &
 
     # other
     xfce4-clipman &
@@ -45,14 +45,14 @@ desktop ()
     feh --bg-scale $HOME/arch/wall/default.jpg
 
     # conky
-    conky -d -c $HOME/arch/misc/conkyrc-headless
-    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 0
-    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 1
-    conky -d -c $HOME/arch/misc/conkyrc-kernel --xinerama-head 2
+    conky -d -c $HOME/arch/conky/conkyrc-headless
+    conky -d -c $HOME/arch/conky/conkyrc-kernel --xinerama-head 0
+    conky -d -c $HOME/arch/conky/conkyrc-kernel --xinerama-head 1
+    conky -d -c $HOME/arch/conky/conkyrc-kernel --xinerama-head 2
 
     # tray
-    tint2 -c $HOME/arch/misc/tint2rc-top &
-    tint2 -c $HOME/arch/misc/tint2rc-bottom &
+    tint2 -c $HOME/arch/tint2/tint2rc-top &
+    tint2 -c $HOME/arch/tint2/tint2rc-bottom &
 
     # other
     pnmixer &
