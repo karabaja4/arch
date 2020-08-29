@@ -31,9 +31,8 @@ on_boot() {
     ln -s /proc/self/fd/1 /dev/stdout
     ln -s /proc/self/fd/2 /dev/stderr
 
-    echo "mounting..."
+    echo "mounting fstab..."
     mount -a
-    mount -o remount,rw /
 
     echo "starting daemons..."
     for dmn in $ENABLED
