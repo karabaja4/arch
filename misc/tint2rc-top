@@ -41,7 +41,7 @@ strut_policy = follow_size
 #---------------------------------------------
 # LAUNCHER
 #---------------------------------------------
-launcher_icon_theme = Breeze
+launcher_icon_theme = Papirus
 launcher_padding = 7 5 6
 launcher_background_id = 1
 launcher_icon_size = 16
@@ -59,6 +59,7 @@ launcher_item_app = /usr/share/applications/sqlbrowser.desktop
 launcher_item_app = /usr/share/applications/filezilla.desktop
 launcher_item_app = /usr/share/applications/virtualbox.desktop
 launcher_item_app = /usr/share/applications/postman.desktop
+launcher_item_app = /usr/share/applications/slack.desktop
 
 #-------------------------------------
 # Executor 1
