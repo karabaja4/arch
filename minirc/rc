@@ -65,11 +65,14 @@ on_shutdown() {
 }
 
 daemon_restart() {
+
     daemon_stop "$1"
     daemon_start "$1"
+
 }
 
 usage() {
+
     echo "Usage: rc [--help] <action> [daemon]"
     echo
     echo "Actions:"
@@ -77,6 +80,7 @@ usage() {
     echo "   rc start [daemon]    starts daemon"
     echo "   rc stop [daemon]     stops daemon"
     echo "   rc restart [daemon]  restarts daemon"
+    
 }
 
 case "$1" in
