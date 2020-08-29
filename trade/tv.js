@@ -26,8 +26,8 @@ const conky = async (name, price, change, percent) => {
   const green = '#69F0AE';
   const red = '#FF6E40';
   if (name === 'FOREXCOM:NSXUSD') {
-    await fs.promises.writeFile('/tmp/btctrend', `${change > 0 ? green : red}`);
-    await fs.promises.writeFile('/tmp/btcconky', `NSX: ${price} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+    await fs.promises.writeFile('/tmp/assettrend', `${change > 0 ? green : red}`);
+    await fs.promises.writeFile('/tmp/assetvalue', `NSX: ${price} USD (${percent > 0 ? `+${percent}` : percent}%)`);
   }
 }
 
