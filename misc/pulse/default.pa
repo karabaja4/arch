@@ -58,16 +58,16 @@ load-module module-jackdbus-detect channels=2
 .endif
 
 ### Automatically load driver modules for Bluetooth hardware
-#.ifexists module-bluetooth-policy.so
-#load-module module-bluetooth-policy
-#.endif
+.ifexists module-bluetooth-policy.so
+load-module module-bluetooth-policy
+.endif
 
-#.ifexists module-bluetooth-discover.so
-#load-module module-bluetooth-discover
-#.endif
+.ifexists module-bluetooth-discover.so
+load-module module-bluetooth-discover
+.endif
 
 ### Load several protocols
-load-module module-dbus-protocol
+#load-module module-dbus-protocol
 .ifexists module-esound-protocol-unix.so
 load-module module-esound-protocol-unix
 .endif
@@ -113,7 +113,7 @@ load-module module-always-sink
 load-module module-intended-roles
 
 ### Automatically suspend sinks/sources that become idle for too long
-#load-module module-suspend-on-idle
+load-module module-suspend-on-idle
 
 ### If autoexit on idle is enabled we want to make sure we only quit
 ### when no local session needs us anymore.
