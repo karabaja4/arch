@@ -1,0 +1,111 @@
+#!/bin/bash
+
+. /etc/minirc.conf
+
+on_boot() {
+
+    echo "mounting API filesystem..."
+    mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
+    mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
+    mountpoint -q /run     || mount -t tmpfs run /run -o mode=0755,nosuid,nodev
+    mountpoint -q /dev     || mount -t devtmpfs dev /dev -o mode=0755,nosuid
+    mkdir -p /dev/pts /dev/shm
+    mountpoint -q /dev/pts || mount -t devpts devpts /dev/pts -o mode=0620,gid=5,nosuid,noexec
+    mountpoint -q /dev/shm || mount -t tmpfs shm /dev/shm -o mode=1777,nosuid,nodev
+
+    echo "setting up loopback device..."
+    /usr/sbin/ip link set up dev lo
+
+    echo "initializing udev..."
+    /usr/lib/systemd/systemd-udevd --daemon
+    /usr/bin/udevadm trigger --action=add --type=subsystems
+    /usr/bin/udevadm trigger --action=add --type=devices
+
+    echo "setting hostname..."
+    echo "$(cat /etc/hostname)" >| /proc/sys/kernel/hostname
+
+    echo "mounting..."
+    mount -a
+    mount -o remount,rw /
+
+    echo "starting daemons..."
+    for dmn in $ENABLED
+    do
+        daemon_start "$dmn"
+    done
+    
+    if [ -x /etc/minirc.local ]
+    then
+        echo "loading /etc/minirc.local..."
+        /etc/minirc.local
+    fi
+
+}
+
+on_shutdown() {
+
+    echo "stopping daemons..."
+    for dmn in $DAEMONS
+    do
+        daemon_poll "$dmn" && daemon_stop "$dmn"
+    done
+
+    if [ -x /etc/minirc.local.shutdown ]
+    then
+        echo "loading /etc/minirc.local.shutdown..."
+        /etc/minirc.local.shutdown
+    fi
+
+    echo "shutting down udev..."
+    killall systemd-udevd
+
+    echo "unmounting API filesystem..."
+    umount -r /run
+
+}
+
+daemon_restart() {
+    daemon_stop "$1"
+    daemon_start "$1"
+}
+
+usage() {
+    echo "Usage: rc [--help] <action> [daemon]"
+    echo
+    echo "Actions:"
+    echo "   rc list              shows status of all daemons"
+    echo "   rc start [daemon]    starts daemon"
+    echo "   rc stop [daemon]     stops daemon"
+    echo "   rc restart [daemon]  restarts daemon"
+}
+
+case "$1" in
+init)
+    on_boot;;
+shutdown)
+    on_shutdown;;
+start|stop|restart)
+    if [ "$#" -ne 2 ]
+    then
+        usage
+        exit 1
+    fi
+    if [ "$EUID" -ne 0 ]
+    then
+        echo "not root"
+        exit 1
+    fi
+    daemon_"$1" "$2";;
+list)
+    for dmn in $DAEMONS
+    do
+        if daemon_poll "$dmn"
+        then
+            echo "[X] $dmn"
+        else
+            echo "[ ] $dmn"
+        fi
+    done;;
+*)
+    usage;;
+esac

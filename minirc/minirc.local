@@ -1,6 +1,5 @@
 touch /var/run/utmp
 
-mkdir -p /tmp/pids
 mkdir -p /run/samba
 
 mkdir -p -m 777 /tmp/minirc
