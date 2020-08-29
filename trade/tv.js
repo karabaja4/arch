@@ -22,12 +22,27 @@ const sym = [
   'NYSE:CRM'
 ];
 
-const conky = async (name, price, change, percent) => {
-  const green = '#69F0AE';
-  const red = '#FF6E40';
-  if (name === 'FOREXCOM:NSXUSD') {
-    await fs.promises.writeFile('/tmp/assettrend', `${change > 0 ? green : red}`);
-    await fs.promises.writeFile('/tmp/assetvalue', `NSX: ${price} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+const cache = {};
+
+const conky = async (name, data) => {
+
+  if (name === 'BITMEX:XBTUSD') {
+
+    if (!cache[name]) cache[name] = {};
+    cache[name]['price'] = data.price || cache[name]['price'];
+    cache[name]['change'] = data.change || cache[name]['change'];
+    cache[name]['percent'] = data.percent || cache[name]['percent'];
+
+    const price = cache[name]['price'];
+    const change = cache[name]['change'];
+    const percent = cache[name]['percent'];
+  
+    const green = '#69F0AE';
+    const red = '#FF6E40';
+
+    await fs.promises.writeFile('/tmp/asset_trend', `${change > 0 ? green : red}`);
+    await fs.promises.writeFile('/tmp/asset_value', `${name.split(':')[1]}: ${parseInt(price)} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+
   }
 }
 
@@ -55,7 +70,7 @@ const process = async (message) => {
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
           console.log(`${name} -> PRICE: ${price}${change ? `, CHANGE: ${change}` : ''}${percent ? `, PERCENT: ${percent}%` : ''}`);
-          await conky(name, price, change, percent);
+          await conky(name, { price: price, change: change, percent: percent });
         }
       } catch(e) {
         console.log(`error parsing json: ${match[0]}`);
