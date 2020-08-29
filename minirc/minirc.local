@@ -1,5 +1,4 @@
 touch /var/run/utmp
-
 mkdir -p /run/samba
 
 mkdir -p -m 777 /tmp/minirc
@@ -8,8 +7,3 @@ mkdir -p -m 777 /tmp/qtfm
 
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
-
-ln -s /proc/self/fd /dev/fd
-ln -s /proc/self/fd/0 /dev/stdin
-ln -s /proc/self/fd/1 /dev/stdout
-ln -s /proc/self/fd/2 /dev/stderr

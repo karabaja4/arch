@@ -24,6 +24,13 @@ on_boot() {
     echo "setting hostname..."
     echo "$(cat /etc/hostname)" >| /proc/sys/kernel/hostname
 
+    echo "creating symlinks..."
+    ln -s /proc/kcore /dev/core
+    ln -s /proc/self/fd /dev/fd
+    ln -s /proc/self/fd/0 /dev/stdin
+    ln -s /proc/self/fd/1 /dev/stdout
+    ln -s /proc/self/fd/2 /dev/stderr
+
     echo "mounting..."
     mount -a
     mount -o remount,rw /
