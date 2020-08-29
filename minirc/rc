@@ -73,6 +73,7 @@ on_shutdown() {
 daemon_restart() {
 
     daemon_stop "$1"
+    sleep 1
     daemon_start "$1"
 
 }

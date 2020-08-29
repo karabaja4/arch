@@ -1,0 +1,9 @@
+{
+  "name": "tv",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "randomstring": "^1.1.5",
+    "ws": "^7.3.1"
+  }
+}
