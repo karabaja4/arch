@@ -36,6 +36,7 @@ alias headless='VBoxHeadless -s ws2012r2v2'
 alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"
 alias mountdisk="sudo mount /dev/sdc1 /home/igor/_disk/"
 alias mountmmc="sudo mount /dev/mmcblk0p1 /home/igor/_mmc/"
+alias mountazure="sudo mount -t cifs //igorsaric.file.core.windows.net/storage1 /home/igor/_azure -o vers=3.0,credentials=/etc/smbcredentials/igorsaric.cred,dir_mode=0777,file_mode=0777,serverino"
 alias vboxadd="VBoxManage registervm"
 alias zxvf="tar zxvf"
 
