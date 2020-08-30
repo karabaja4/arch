@@ -55,4 +55,7 @@ thumb)
     declare dest="$(dirname $2)/thumb_$(basename $2)"
     convert -resize 13% "$2" "$dest"
     ;;
+unzip)
+    unzip "$2" -d "$(dirname $2)"
+    ;;
 esac
