@@ -4,6 +4,10 @@
 declare -r action_path="/tmp/qtfm/action"
 declare -r files_path="/tmp/qtfm/files"
 
+spin() {
+    zenity --progress --pulsate --no-cancel --auto-close --text="$1"
+}
+
 case "$1" in
 cut)
     echo -n "mv" > "$action_path"
@@ -32,7 +36,7 @@ paste)
                 dest="${dest}_${suffix}"
             fi
             declare cmd=($action)
-            "${cmd[@]}" "$line" "$dest" | zenity --progress --pulsate --no-cancel --auto-close --text="$action $line to $dest"
+            "${cmd[@]}" "$line" "$dest" | spin "$action $line to $dest"
         fi
     done < "$files_path"
     ;;
@@ -41,17 +45,17 @@ rm)
 copypath)
     echo -n "$2" | xclip -i -selection clipboard;;
 extract)
-    tar xvf "$2";;                            # $1=extract, $2=%f
+    tar xvf "$2" | spin "extracting $2";;
 term)
-    xfce4-terminal --working-directory="$2";; # $1=term,    $2=%D
+    xfce4-terminal --working-directory="$2";;
 feh)
-    feh --bg-scale "$2";;                     # $1=feh,     $2=%F
+    feh --bg-scale "$2";;
 thumb)
-    convert -resize 13% "$2" "thumb_$2";;     # $1=thumb,   $2=%f
+    convert -resize 13% "$2" "thumb_$2";;
 unzip)
-    unzip "$2";;                              # $1=unzip,   $2=%f
+    unzip "$2" | spin "extracting $2";;
 unrar)
-    unrar x "$2";;                            # $1=unrar,   $2=%f
+    unrar x "$2" | spin "extracting $2";;
 gzip)
-    tar cvzf "$2.tar.gz" "${@:3}";;           # $1=gzip,    $2=%n,    $3=%f
+    tar cvzf "$2.tar.gz" "${@:3}" | spin "creating archive $2.tar.gz";;
 esac
