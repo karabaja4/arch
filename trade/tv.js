@@ -22,28 +22,13 @@ const sym = [
   'NYSE:CRM'
 ];
 
-const cache = {};
+const store = {};
 
-const conky = async (name, data) => {
-
-  if (name === 'BITMEX:XBTUSD') {
-
-    if (!cache[name]) cache[name] = {};
-    cache[name]['price'] = data.price || cache[name]['price'];
-    cache[name]['change'] = data.change || cache[name]['change'];
-    cache[name]['percent'] = data.percent || cache[name]['percent'];
-
-    const price = cache[name]['price'];
-    const change = cache[name]['change'];
-    const percent = cache[name]['percent'];
-  
-    const green = '#69F0AE';
-    const red = '#FF6E40';
-
-    await fs.promises.writeFile('/tmp/asset_trend', `${change > 0 ? green : red}`);
-    await fs.promises.writeFile('/tmp/asset_value', `${name.split(':')[1]}: ${parseInt(price)} USD (${percent > 0 ? `+${percent}` : percent}%)`);
-
-  }
+const save = (name, data) => {
+  if (!store[name]) store[name] = {};
+  if (data.price !== undefined) store[name]['price'] = data.price;
+  if (data.change !== undefined) store[name]['change'] = data.change;
+  if (data.percent !== undefined) store[name]['percent'] = data.percent;
 }
 
 const isDataObject = (o) => {
@@ -70,7 +55,7 @@ const process = async (message) => {
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
           console.log(`${name} -> PRICE: ${price}${change ? `, CHANGE: ${change}` : ''}${percent ? `, PERCENT: ${percent}%` : ''}`);
-          await conky(name, { price: price, change: change, percent: percent });
+          save(name, { price: price, change: change, percent: percent });
         }
       } catch(e) {
         console.log(`error parsing json: ${match[0]}`);
@@ -125,3 +110,16 @@ const connect = () => {
 };
 
 connect();
+
+// conky stuff, remove later
+setInterval(async () => {
+  const name = 'BITMEX:XBTUSD';
+  const values = store[name];
+  if (values) {
+    const price = store[name]['price'];
+    const change = store[name]['change'];
+    const percent = store[name]['percent'];
+    await fs.promises.writeFile('/tmp/asset_trend', `${change > 0 ? '#69F0AE' : '#FF6E40'}`);
+    await fs.promises.writeFile('/tmp/asset_value', `${name.split(':')[1]}: ${parseInt(price)} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+  }
+}, 1000);
