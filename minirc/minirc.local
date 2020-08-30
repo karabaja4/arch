@@ -1,3 +1,4 @@
+echo 0 > /proc/sys/kernel/printk
 touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p -m 777 /tmp/qtfm
