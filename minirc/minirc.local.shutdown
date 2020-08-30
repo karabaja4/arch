@@ -1,4 +1,3 @@
-echo "cleaning up..."
-
+umount /home/igor/_azure
 rm -f /home/igor/.vnc/*.pid
 rm -f /home/igor/.vnc/*.log
