@@ -42,7 +42,7 @@ desktop ()
 
     # resolution and background
     $HOME/arch/scripts/fixres.sh
-    feh --bg-scale $HOME/arch/wall/default4.jpg
+    feh --bg-scale $HOME/arch/wall/default3.png
 
     # conky
     echo "#757575" > /tmp/asset_trend
