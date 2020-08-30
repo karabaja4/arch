@@ -1,5 +1,9 @@
 #!/bin/bash
 
+daemon_start() { echo "$1 not configured"; return 1; }
+daemon_stop()  { echo "$1 not configured"; return 1; }
+daemon_poll()  { echo "$1 not configured"; return 1; }
+
 . /etc/minirc.conf
 
 on_boot() {
