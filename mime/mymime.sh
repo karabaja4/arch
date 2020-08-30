@@ -11,7 +11,7 @@ then
     extension="${filename##*.}"
 fi
 
-case "$extension" in
+case "${extension,,}" in
     pdf)
         mupdf -r 96 "$path";;
     jpg|jpeg|svg|png|bmp|gif|tga)
@@ -24,7 +24,7 @@ case "$extension" in
         qbittorrent "$path";;
     html|htm)
         chromium "$path";;
-    gz)
+    gz|zip|rar)
         xarchiver "$path";;
     *)
         mime=$(file --brief --mime-type "$path")
