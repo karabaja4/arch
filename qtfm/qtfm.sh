@@ -18,7 +18,7 @@ paste)
     then
         exit 1
     fi
-    declare -r action=$(cat "$action_path")
+    declare -r action="$(cat "$action_path")"
     while IFS= read -r line
     do
         if [ ! -e "$line" ] # check if source exists
