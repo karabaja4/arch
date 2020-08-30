@@ -41,17 +41,17 @@ rm)
 copypath)
     echo -n "$2" | xclip -i -selection clipboard;;
 extract)
-    tar xvf "$2";;                            # $1=extract $2=%f
+    tar xvf "$2";;                            # $1=extract, $2=%f
 term)
-    xfce4-terminal --working-directory="$2";; # $1=term    $2=%D
+    xfce4-terminal --working-directory="$2";; # $1=term,    $2=%D
 feh)
-    feh --bg-scale "$2";;                     # $1=feh     $2=%F
+    feh --bg-scale "$2";;                     # $1=feh,     $2=%F
 thumb)
-    convert -resize 13% "$2" "thumb_$2";;     # $1=thumb   $2=%f
+    convert -resize 13% "$2" "thumb_$2";;     # $1=thumb,   $2=%f
 unzip)
-    unzip "$2";;                              # $1=unzip   $2=%f
+    unzip "$2";;                              # $1=unzip,   $2=%f
 unrar)
-    unrar x "$2";;                            # $1=unrar   $2=%f
+    unrar x "$2";;                            # $1=unrar,   $2=%f
 gzip)
-    tar cvzf "$2.tar.gz" "${@:3}";;           # $1=gzip    $2=%n    $3=%f
+    tar cvzf "$2.tar.gz" "${@:3}";;           # $1=gzip,    $2=%n,    $3=%f
 esac
