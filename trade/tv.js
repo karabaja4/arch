@@ -119,9 +119,15 @@ setInterval(async () => {
     if (values) {
       const price = store[name]['price'];
       const change = store[name]['change'];
-      const percent = store[name]['percent'];
+      //const percent = store[name]['percent'];
+
+      const namePrint = name.split(':')[1];
+      const pricePrint = price.toFixed(2);
+      //const percentPrint = `${percent > 0 ? '+' : ''}${percent.toFixed(2)}%`;
+      const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
+
       await fs.promises.writeFile('/tmp/asset_trend', `${change > 0 ? '#69F0AE' : '#FF6E40'}`);
-      await fs.promises.writeFile('/tmp/asset_value', `${name.split(':')[1]}: ${parseInt(price)} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+      await fs.promises.writeFile('/tmp/asset_value', `${namePrint}: ${pricePrint} USD | ${changePrint}`);
     }
   } catch (e) {
     console.log(`conky error: ${e}`);
