@@ -25,10 +25,10 @@ paste)
         then
             zenity --error --no-wrap --text="$line does not exist"
         else
-            declare dest="$2/$(basename $line)"
+            declare dest="$2/$(basename "$line")"
             if [ -e "$dest" ] # check if dest exists
             then
-                declare suffix="$(ls ${dest}* | wc -l)"
+                declare suffix="$(ls "$dest"* | wc -l)"
                 dest="${dest}_${suffix}"
             fi
             declare cmd=($action)
