@@ -58,4 +58,7 @@ thumb)
 unzip)
     unzip "$2" -d "$(dirname $2)"
     ;;
+unrar)
+    unrar x "$2" "$(dirname $2)"
+    ;;
 esac
