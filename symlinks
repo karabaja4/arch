@@ -1,6 +1,0 @@
-.xsettingsd -> /home/dev/linux/config/xsettingsd
-.fonts.conf -> /home/dev/linux/config/fonts.conf
-.bash_aliases -> /home/dev/linux/bash/aliases
-autostart -> /home/dev/linux/openbox/autostart
-menu.xml -> /home/dev/linux/openbox/menu.xml
-rc.xml -> /home/dev/linux/openbox/rc.xml
