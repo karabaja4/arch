@@ -58,4 +58,8 @@ unrar)
     unrar x "$2" | spin "extracting $2";;
 gzip)
     tar cvzf "$2.tar.gz" "${@:3}" | spin "creating archive $2.tar.gz";;
+copyurl)
+    declare -r path="$(realpath --relative-to="/home/igor/_azure" "$2")"
+    cat "/home/igor/arch/qtfm/sas.key" | sed "s|<filepath>|$path|g" | xclip -i -selection clipboard
+    ;;
 esac
