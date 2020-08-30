@@ -113,13 +113,17 @@ connect();
 
 // conky stuff, remove later
 setInterval(async () => {
-  const name = 'BITMEX:XBTUSD';
-  const values = store[name];
-  if (values) {
-    const price = store[name]['price'];
-    const change = store[name]['change'];
-    const percent = store[name]['percent'];
-    await fs.promises.writeFile('/tmp/asset_trend', `${change > 0 ? '#69F0AE' : '#FF6E40'}`);
-    await fs.promises.writeFile('/tmp/asset_value', `${name.split(':')[1]}: ${parseInt(price)} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+  try {
+    const name = 'BITMEX:XBTUSD';
+    const values = store[name];
+    if (values) {
+      const price = store[name]['price'];
+      const change = store[name]['change'];
+      const percent = store[name]['percent'];
+      await fs.promises.writeFile('/tmp/asset_trend', `${change > 0 ? '#69F0AE' : '#FF6E40'}`);
+      await fs.promises.writeFile('/tmp/asset_value', `${name.split(':')[1]}: ${parseInt(price)} USD (${percent > 0 ? `+${percent}` : percent}%)`);
+    }
+  } catch (e) {
+    console.log(`conky error: ${e}`);
   }
 }, 1000);
