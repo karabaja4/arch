@@ -29,18 +29,14 @@ paste)
         then
             zenity --error --no-wrap --text="$line does not exist"
         else
-            declare bn="$(basename $line)"
-            declare code=0
-            if [ -e "$2/$bn" ]
+            declare dest="$2/$(basename $line)"
+            if [ -e "$dest" ]
             then
-                zenity --question --no-wrap --text="$bn exists, replace/merge?"
-                code=$?
+                declare suffix="$(ls ${dest}* | wc -l)"
+                dest="${dest}_${suffix}"
             fi
-            if [ "$code" -eq 0 ]
-            then
-                declare cmd=($action)
-                "${cmd[@]}" "$line" "$2" | zenity --progress --pulsate --no-cancel --auto-close --text="$action $line to $2"
-            fi
+            declare cmd=($action)
+            "${cmd[@]}" "$line" "$dest" | zenity --progress --pulsate --no-cancel --auto-close --text="$action $line to $dest"
         fi
     done < "$files_path"
     ;;
