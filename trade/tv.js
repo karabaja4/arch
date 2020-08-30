@@ -121,7 +121,7 @@ setInterval(async () => {
       const change = store[name]['change'];
       //const percent = store[name]['percent'];
 
-      const namePrint = name.split(':')[1];
+      const namePrint = name.split(':')[1].replace('USD', '');
       const pricePrint = `${price.toFixed(2)} USD`;
       //const percentPrint = `${percent > 0 ? '+' : ''}${percent.toFixed(2)}%`;
       const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
