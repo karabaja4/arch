@@ -114,7 +114,7 @@ connect();
 // conky stuff, remove later
 setInterval(async () => {
   try {
-    const name = 'BITMEX:XBTUSD';
+    const name = 'FOREXCOM:NSXUSD';
     const values = store[name];
     if (values) {
       const price = store[name]['price'];
