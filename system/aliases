@@ -13,8 +13,7 @@ alias sn='screen -S'
 
 alias startx='nvidia-xrun'
 
-mkmine()
-{
+mkmine() {
     if [ -n "$1" ]; then
         sudo chown -R ${USER}:${USER} $1
     else
@@ -30,7 +29,6 @@ alias rsnc='sudo pacman -Rsnc'
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias ed='/home/igor/arch/geany/geany.sh'
-alias red='/home/igor/arch/geany/geany.sh'
 alias ws='rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20'
 alias headless='VBoxHeadless -s ws2012r2v2'
 alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"
@@ -40,19 +38,12 @@ alias mountazure="sudo mount -t cifs //igorsaric.file.core.windows.net/storage1 
 alias vboxadd="VBoxManage registervm"
 alias zxvf="tar zxvf"
 
-jtail()
-{
-    tail -n 1000 /var/log/busybox/$1.log
+jtail() {
+    tail -f /var/log/minirc/$1.log
 }
 
-jcat()
-{
-    cat /var/log/busybox/$1.log
-}
-
-scem()
-{
-    xinput -set-prop 14 339 $1
+jcat() {
+    tail -n 10000 /var/log/minirc/$1.log
 }
 
 alias vboxload="sudo modprobe vboxdrv && sudo modprobe vboxnetadp && sudo modprobe vboxnetflt"
