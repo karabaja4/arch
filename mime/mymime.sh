@@ -2,39 +2,39 @@
 set -euo pipefail
 
 declare extension=""
-declare path="$1"
-declare filename=$(basename "$path")
+declare path="${1}"
+declare filename="$(basename "${path}")"
 
 # if not a dotfile and contains a dot, get the extension
-if [[ ${filename:0:1} != "." ]] && [[ $filename == *"."* ]]
+if [[ ${filename:0:1} != "." ]] && [[ ${filename} == *"."* ]]
 then
     extension="${filename##*.}"
 fi
 
 case "${extension,,}" in
     pdf)
-        mupdf -r 96 "$path";;
+        mupdf -r 96 "${path}";;
     jpg|jpeg|svg|png|bmp|gif|tga)
-        gpicview "$path";;
+        gpicview "${path}";;
     avi|mkv|flac|mp3|wav|mp4)
-        vlc "$path";;
+        vlc "${path}";;
     txt|c|js|conf|md|sh|json|map|yml|xml|py|log|cs)
-        geany -i -m -n -p -s -t "$path";;
+        geany -i -m -n -p -s -t "${path}";;
     torrent)
-        qbittorrent "$path";;
+        qbittorrent "${path}";;
     html|htm)
-        chromium "$path";;
+        chromium "${path}";;
     gz|zip|rar)
-        xarchiver "$path";;
+        xarchiver "${path}";;
     *)
-        mime=$(file --brief --mime-type "$path")
-        case "$mime" in
+        mime=$(file --brief --mime-type "${path}")
+        case "${mime}" in
             text/plain|inode/x-empty)
-                geany -i -m -n -p -s -t "$path";;
+                geany -i -m -n -p -s -t "${path}";;
             inode/directory)
-                qtfm "$path";;
+                qtfm "${path}";;
             *)
-                zenity --info --text="Missing definition for $extension as $mime" --no-wrap;;
+                zenity --info --text="Missing definition for ${extension} as ${mime}" --no-wrap;;
         esac
         ;;
 esac
