@@ -60,6 +60,8 @@ gzip)
     tar cvzf "$2.tar.gz" "${@:3}" | spin "creating archive $2.tar.gz";;
 copyurl)
     declare -r path="$(realpath --relative-to="/home/igor/_azure" "$2")"
-    cat "/home/igor/arch/qtfm/sas.key" | sed "s|<filepath>|$path|g" | xclip -i -selection clipboard
+    declare -r url="https://igorsaric.file.core.windows.net/storage1/$path"
+    declare -r full="${url}$(cat "/home/igor/arch/qtfm/sas.token")"
+    echo "$full" | xclip -i -selection clipboard
     ;;
 esac

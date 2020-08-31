@@ -1,5 +1,5 @@
 node_modules
 .vscode
 secret.json
-sas.key
+sas.token
 package-lock.json
