@@ -2,8 +2,8 @@
 set -euo pipefail
 
 mkdir -p "${HOME}/.geany"
-declare filename
-declare temp
+declare filename=""
+declare temp=""
 
 if [ $# -eq 0 ]
 then
