@@ -1,8 +1,8 @@
 #!/bin/bash
 
-daemon_start() { echo "$1 not configured"; return 1; }
-daemon_stop()  { echo "$1 not configured"; return 1; }
-daemon_poll()  { echo "$1 not configured"; return 1; }
+daemon_start() { echo "${1} not configured"; return 1; }
+daemon_stop()  { echo "${1} not configured"; return 1; }
+daemon_poll()  { echo "${1} not configured"; return 1; }
 
 . /etc/minirc.conf
 
@@ -39,9 +39,9 @@ on_boot() {
     mount -a
 
     echo "starting daemons..."
-    for dmn in $ENABLED
+    for dmn in ${ENABLED}
     do
-        daemon_start "$dmn"
+        daemon_start "${dmn}"
     done
     
     if [ -x /etc/minirc.local ]
@@ -55,9 +55,9 @@ on_boot() {
 on_shutdown() {
 
     echo "stopping daemons..."
-    for dmn in $DAEMONS
+    for dmn in ${DAEMONS}
     do
-        daemon_poll "$dmn" && daemon_stop "$dmn"
+        daemon_poll "${dmn}" && daemon_stop "${dmn}"
     done
 
     echo "clearing /tmp..."
@@ -79,9 +79,9 @@ on_shutdown() {
 
 daemon_restart() {
 
-    daemon_stop "$1"
+    daemon_stop "${1}"
     sleep 1
-    daemon_start "$1"
+    daemon_start "${1}"
 
 }
 
@@ -97,7 +97,7 @@ usage() {
     
 }
 
-case "$1" in
+case "${1}" in
 init)
     on_boot;;
 shutdown)
@@ -108,20 +108,20 @@ start|stop|restart)
         usage
         exit 1
     fi
-    if [ "$EUID" -ne 0 ]
+    if [ "${EUID}" -ne 0 ]
     then
         echo "not root"
         exit 1
     fi
-    daemon_"$1" "$2";;
+    daemon_"${1}" "${2}";;
 list)
-    for dmn in $DAEMONS
+    for dmn in ${DAEMONS}
     do
-        if daemon_poll "$dmn"
+        if daemon_poll "${dmn}"
         then
-            echo "[X] $dmn"
+            echo "[X] ${dmn}"
         else
-            echo "[ ] $dmn"
+            echo "[ ] ${dmn}"
         fi
     done;;
 *)
