@@ -3,8 +3,8 @@ declare isvnc=$? # 0 ako je vnc
 
 # log ()
 # {
-#     mkdir -p $HOME/.local/logs
-#     ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> $HOME/.local/logs/openbox.log
+#     mkdir -p ${HOME}/.local/logs
+#     ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> ${HOME}/.local/logs/openbox.log
 # }
 
 vnc ()
@@ -12,13 +12,13 @@ vnc ()
     echo "Started VNC"
 
     # daemons
-    xsettingsd -c $HOME/arch/xfce4-terminal/xsettingsd &
+    xsettingsd -c ${HOME}/arch/xfce4-terminal/xsettingsd &
 
     # bacgkround
     xsetroot -solid '#008080'
 
     # interface
-    tint2 -c $HOME/arch/tint2/tint2rc-vnc &
+    tint2 -c ${HOME}/arch/tint2/tint2rc-vnc &
 
     # other
     xfce4-clipman &
@@ -33,28 +33,28 @@ desktop ()
     xinput set-prop 11 326 0.5
     
     # alsa
-    # alsactl -f $HOME/arch/alsa/asound.state store
-    #alsactl -f $HOME/arch/alsa/asound.state restore
+    # alsactl -f ${HOME}/arch/alsa/asound.state store
+    #alsactl -f ${HOME}/arch/alsa/asound.state restore
 
     # daemons
-    xsettingsd -c $HOME/arch/xfce4-terminal/xsettingsd &
+    xsettingsd -c ${HOME}/arch/xfce4-terminal/xsettingsd &
     xcompmgr -a &
 
     # resolution and background
-    $HOME/arch/scripts/fixres.sh
-    feh --bg-scale $HOME/arch/wall/default.jpg
+    ${HOME}/arch/scripts/fixres.sh
+    feh --bg-scale ${HOME}/arch/wall/default.jpg
 
     # conky
     echo "#757575" > /tmp/asset_trend
     echo "TRV: not connected" > /tmp/asset_value
-    conky -d -c $HOME/arch/conky/conkyrc-headless
-    conky -d -c $HOME/arch/conky/conkyrc-kernel --xinerama-head 0
-    conky -d -c $HOME/arch/conky/conkyrc-kernel --xinerama-head 1
-    conky -d -c $HOME/arch/conky/conkyrc-kernel --xinerama-head 2
+    conky -d -c ${HOME}/arch/conky/conkyrc-headless
+    conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 0
+    conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 1
+    conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 2
 
     # tray
-    tint2 -c $HOME/arch/tint2/tint2rc-top &
-    tint2 -c $HOME/arch/tint2/tint2rc-bottom &
+    tint2 -c ${HOME}/arch/tint2/tint2rc-top &
+    tint2 -c ${HOME}/arch/tint2/tint2rc-bottom &
 
     # other
     pnmixer &
@@ -70,5 +70,5 @@ desktop ()
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
 }
 
-[ $isvnc -eq 0 ] || desktop
-[ $isvnc -eq 0 ] && vnc
+[ ${isvnc} -eq 0 ] || desktop
+[ ${isvnc} -eq 0 ] && vnc
