@@ -3,6 +3,7 @@
 
 declare -r action_path="/tmp/qtfm/action"
 declare -r files_path="/tmp/qtfm/files"
+declare -r base_dir="$(dirname "$(readlink -f "$0")")"
 
 spin() {
     zenity --progress --pulsate --no-cancel --auto-close --text="$1"
@@ -59,9 +60,15 @@ unrar)
 gzip)
     tar cvzf "$2.tar.gz" "${@:3}" | spin "creating archive $2.tar.gz";;
 copyurl)
-    declare -r path="$(realpath --relative-to="/home/igor/_azure" "$2")"
-    declare -r url="https://igorsaric.file.core.windows.net/storage1/$path"
-    declare -r full="${url}$(cat "/home/igor/arch/qtfm/sas.token")"
-    echo "$full" | xclip -i -selection clipboard
+    declare -r dir="$(cat "$base_dir/store.json" | jq -r ".dir")"
+    if [[ "$2" != "$dir"* ]]
+    then
+        zenity --error --no-wrap --text="Not a remote file."
+        exit 1
+    fi
+    declare -r url="$(cat "$base_dir/store.json" | jq -r ".url")"
+    declare -r sas="$(cat "$base_dir/store.json" | jq -r ".sas")"
+    declare -r path="$(realpath --relative-to="$dir" "$2")"
+    echo "${url}${path}${sas}" | xclip -i -selection clipboard
     ;;
 esac

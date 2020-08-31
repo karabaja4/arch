@@ -2,15 +2,15 @@
 
 declare ip=""
 declare oldip=""
-declare basedir="$(dirname $(readlink -f $0))"
-declare token="$(cat $basedir/secret.json | jq -r ".token")"
+declare basedir="$(dirname "$(readlink -f "$0")")"
+declare token="$(cat "$basedir/secret.json" | jq -r ".token")"
 declare url="https://api.digitalocean.com/v2/domains/aerium.hr/records/53478297"
 
 echo "Running in $basedir"
 
 while true
 do
-    ip=$(curl -s -f https://api.ipify.org)
+    ip="$(curl -s -f "https://api.ipify.org")"
     if [ $? != 0 ]
     then
         echo "IP request failed."
@@ -22,7 +22,7 @@ do
             then
                 echo "DigitalOcean request successful. New IP: $ip"
                 echo "$(date): Updated DNS: $ip"
-                oldip=$ip
+                oldip="$ip"
             else
                 echo "DigitalOcean request failed."
             fi
