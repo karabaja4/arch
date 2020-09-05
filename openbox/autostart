@@ -60,7 +60,7 @@ desktop ()
     pnmixer &
     xfce4-clipman &
     sleep 5
-    ksnip &
+    flameshot &
     sleep 1
     #synergy &
     #sleep 1
