@@ -60,10 +60,10 @@ desktop ()
     pnmixer &
     xfce4-clipman &
     sleep 5
-    flameshot &
+    ksnip &
     sleep 1
-    synergy &
-    sleep 1
+    #synergy &
+    #sleep 1
     ${HOME}/arch/bins/minitraycal &
 
     # autolock
