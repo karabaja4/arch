@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=Featherpad
-Exec=/home/igor/arch/geany/geany.sh
+Exec=/home/igor/arch/text/text.sh
 Icon=featherpad
 Type=Application

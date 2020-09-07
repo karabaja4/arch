@@ -14,7 +14,6 @@ else
 fi
 
 echo "Opening ${filename}"
-#geany -i -m -n -p -s -t "${filename}"
 touch "${filename}"
 featherpad "${filename}"
 if [ ! -s "${filename}" ]
