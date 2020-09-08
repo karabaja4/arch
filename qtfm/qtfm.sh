@@ -49,6 +49,8 @@ extract)
     tar xvf "${2}" | spin "extracting ${2}";;
 term)
     xfce4-terminal --working-directory="${2}";;
+vscode)
+    code --folder-uri "${2}";;
 feh)
     feh --bg-scale "${2}";;
 thumb)
