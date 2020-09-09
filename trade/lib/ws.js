@@ -25,7 +25,7 @@ const process = async (message) => {
           const price = parsed.p[1]['v']['lp'];
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
-          //console.log(`${name} -> PRICE: ${price}${change ? `, CHANGE: ${change}` : ''}${percent ? `, PERCENT: ${percent}%` : ''}`);
+          console.log(`${name} -> PRICE: ${price}${change ? `, CHANGE: ${change}` : ''}${percent ? `, PERCENT: ${percent}%` : ''}`);
           if (params.onReceived != null) {
             params.onReceived(name, { price: price, change: change, percent: percent });
           }

@@ -11,7 +11,7 @@ ws.init(symbols, (name, data) => {
   if (data.change !== undefined) store[name]['change'] = data.change;
   if (data.percent !== undefined) store[name]['percent'] = data.percent;
 
-  plasma.print();
+  //plasma.print();
 
 });
 
