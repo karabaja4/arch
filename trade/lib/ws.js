@@ -58,7 +58,7 @@ const connect = () => {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
         `~m~52~m~{"m":"quote_create_session","p":["${sid}"]}`,
-        `~m~305~m~{"m":"quote_add_symbols","p":["${sid}","${params.symbols.join('","')}",{"flags":["force_permission"]}]}`
+        `~m~304~m~{"m":"quote_add_symbols","p":["${sid}","${params.symbols.join('","')}",{"flags":["force_permission"]}]}`
       ];
       messages.forEach(m => ws.send(m));
     } else {

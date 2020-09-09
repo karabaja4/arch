@@ -6,8 +6,13 @@
     "FOREXCOM:NSXUSD",
     "TVC:SPX",
     "CURRENCYCOM:GOLD",
+    "FX:EURUSD",
+    "FX:AUDUSD",
+    "NASDAQ:DOCU",
     "NASDAQ:TSLA",
     "NASDAQ:NVDA",
-    "NASDAQ:AAPL"
+    "NASDAQ:AAPL",
+    "NASDAQ:ZM",
+    "NASDAQ:AMZN"
   ]
 }
