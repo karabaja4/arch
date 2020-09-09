@@ -8,10 +8,13 @@
     "CURRENCYCOM:GOLD",
     "FX:EURUSD",
     "FX:AUDUSD",
+    "TVC:VIX",
+    "TVC:UKOIL",
     "NASDAQ:DOCU",
     "NASDAQ:TSLA",
     "NASDAQ:NVDA",
     "NASDAQ:AAPL",
+    "NYSE:CRM",
     "NASDAQ:ZM",
     "NASDAQ:AMZN"
   ]
