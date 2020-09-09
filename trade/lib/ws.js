@@ -49,7 +49,7 @@ const connect = () => {
   }, 20000);
 
   ws.on('open', () => {
-    console.log('open');
+    //console.log('open');
   });
 
   ws.on('message', (message) => {
@@ -64,7 +64,7 @@ const connect = () => {
     } else {
       if (message.match(/^~m~\d+~m~~h~\d+$/g)) { // ping
         ws.send(message);
-        console.log('pong');
+        //console.log('pong');
       } else {
         process(message);
       }

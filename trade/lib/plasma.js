@@ -5,7 +5,13 @@ const util = require('util');
 
 const symbols = [
   "BITMEX:XBTUSD",
-  "TVC:USOIL"
+  "TVC:USOIL",
+  "TVC:DXY",
+  "FOREXCOM:NSXUSD",
+  "TVC:SPX",
+  "CURRENCYCOM:GOLD",
+  "FX:EURUSD",
+  "NASDAQ:TSLA"
 ];
 
 const render = util.promisify(figlet.text);
