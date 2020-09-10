@@ -21,7 +21,6 @@ let lock = false;
 const print = async () => {
   if (!lock) {
     lock = true;
-    //process.stdout.write('\033[H\033[J');
     
     const keys = [];
     for(const name in store) {
@@ -44,10 +43,12 @@ const print = async () => {
       draw.push(chalk[value.change > 0 ? 'green' : 'red'](text));
       
     }
-    console.clear();
+    
+    process.stdout.write('\033[H');
     for(let i = 0; i < draw.length; i++) {
       console.log(draw[i]);
     }
+
     lock = false;
   }
 
