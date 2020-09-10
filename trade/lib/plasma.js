@@ -17,7 +17,6 @@ const symbols = [
 const render = util.promisify(figlet.text);
 
 const print = async () => {
-  process.stdout.write('\x1B[2J\x1B[3J\x1B[H\x1Bc');
   const keys = [];
   for(const name in store) {
     if (symbols.includes(name)) {
