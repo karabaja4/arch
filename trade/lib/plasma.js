@@ -29,7 +29,7 @@ const print = async () => {
       }
     }
     keys.sort();
-    const draw = ['\n', '\n','\n','\n','\n','\n'];
+    const draw = [];
     for(let i = 0; i < keys.length; i++) {
       const key = keys[i];
       const value = store[key];
