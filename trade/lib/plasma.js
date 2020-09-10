@@ -22,7 +22,7 @@ const print = async () => {
   if (!lock) {
     lock = true;
     //process.stdout.write('\033[H\033[J');
-    console.clear();
+    
     const keys = [];
     for(const name in store) {
       if (symbols.includes(name)) {
@@ -30,6 +30,7 @@ const print = async () => {
       }
     }
     keys.sort();
+    const draw = [];
     for(let i = 0; i < keys.length; i++) {
       const key = keys[i];
       const value = store[key];
@@ -40,9 +41,14 @@ const print = async () => {
       let text = await render(`${name} ${price} | ${change}`, { font: '3x5', width: 1000 });
       text = text.replace(/#/g, '█');
       //process.stdout.write(`${chalk[value.change > 0 ? 'green' : 'red'](text)}\n`);
-      console.log(chalk[value.change > 0 ? 'green' : 'red'](text));
-      lock = false;
+      draw.push(chalk[value.change > 0 ? 'green' : 'red'](text));
+      
     }
+    console.clear();
+    for(let i = 0; i < draw.length; i++) {
+      console.log(draw[i]);
+    }
+    lock = false;
   }
 
 }
