@@ -29,7 +29,7 @@ const print = async () => {
       }
     }
     keys.sort();
-    const draw = [];
+    const draw = ['\n', '\n','\n','\n','\n','\n'];
     for(let i = 0; i < keys.length; i++) {
       const key = keys[i];
       const value = store[key];
@@ -43,7 +43,7 @@ const print = async () => {
       draw.push(chalk[value.change > 0 ? 'green' : 'red'](text));
       
     }
-    
+
     process.stdout.write('\033[H');
     for(let i = 0; i < draw.length; i++) {
       console.log(draw[i]);
