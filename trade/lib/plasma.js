@@ -39,7 +39,7 @@ const print = async () => {
     const value = store[key];
     const name = `${key.split(':')[1]}:`.padEnd(12);
     const price = `${value.price.toFixed(2)} USD`.padEnd(12);
-    const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`;
+    const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`.padEnd(4);
 
     let text = await render(`${name} ${price} | ${change}`, { font: '3x5', width: 1000 });
     text = text.replace(/#/g, '█');
