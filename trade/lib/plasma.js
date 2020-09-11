@@ -33,6 +33,7 @@ const print = async () => {
     }
     keys.sort();
     const rows = [];
+    rows.push('\n\n');
     for(let i = 0; i < keys.length; i++) {
       const key = keys[i];
       const value = store[key];
@@ -40,7 +41,7 @@ const print = async () => {
       const price = `${value.price.toFixed(2)} USD`.padEnd(12);
       const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`;
   
-      let text = await render(`  ${name} ${price}  |  ${change}    `, { font: '3x5', width: 1000 });
+      let text = await render(`  ${name} ${price} | ${change}    `, { font: '3x5', width: 1000 });
       text = text.replace(/#/g, '█');
       const color = value.change > 0 ? 'green' : 'red';
       rows.push(chalk[color](text));
