@@ -16,45 +16,53 @@ const symbols = [
 
 const render = util.promisify(figlet.text);
 
-let lock = false;
-
-process.stdout.write('\033[J');
-process.stdout.write('\033[?25l');
 process.on('exit', () => {
-  process.stdout.write('\033[?25h');
+  process.stdout.write('\033[?25h'); // show cursor
 });
 
+let lock = false;
+
 const print = async () => {
-
-  const keys = [];
-  for(const name in store) {
-    if (symbols.includes(name)) {
-      keys.push(name);
-    }
-  }
-  keys.sort();
-  const draw = [];
-  for(let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-    const value = store[key];
-    const name = `${key.split(':')[1]}:`.padEnd(12);
-    const price = `${value.price.toFixed(2)} USD`.padEnd(12);
-    const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`.padEnd(4);
-
-    let text = await render(`${name} ${price} | ${change}`, { font: '3x5', width: 1000 });
-    text = text.replace(/#/g, '█');
-    //process.stdout.write(`${chalk[value.change > 0 ? 'green' : 'red'](text)}\n`);
-    draw.push(chalk[value.change > 0 ? 'green' : 'red'](text));
-  }
   if (!lock) {
-    lock = true
-    process.stdout.write('\033[H');
-    for(let i = 0; i < draw.length; i++) {
-      console.log(draw[i]);
+    lock = true;
+    const keys = [];
+    for(const name in store) {
+      if (symbols.includes(name)) {
+        keys.push(name);
+      }
     }
+    keys.sort();
+    const rows = [];
+    for(let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const value = store[key];
+      const name = `${key.split(':')[1]}:`.padEnd(12);
+      const price = `${value.price.toFixed(2)} USD`.padEnd(12);
+      const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`;
+  
+      let text = await render(`${name} ${price} | ${change}    `, { font: '3x5', width: 1000 });
+      text = text.replace(/#/g, '█');
+      const color = value.change > 0 ? 'green' : 'red';
+      rows.push(chalk[color](text));
+    }
+    output(rows);
     lock = false;
   }
+}
 
+
+let cleared = false;
+
+const output = (rows) => {
+  if (!cleared) {
+    process.stdout.write('\033[?25l'); // hide cursor
+    console.clear();
+    cleared = true;
+  }
+  process.stdout.write('\033[H'); // move to top left
+  for (let i = 0; i < rows.length; i++) {
+    console.log(rows[i]);
+  }
 }
 
 
