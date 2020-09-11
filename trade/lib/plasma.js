@@ -18,6 +18,12 @@ const render = util.promisify(figlet.text);
 
 let lock = false;
 
+console.clear();
+console.log('\e[?25l');
+process.on('exit', () => {
+  console.log('\e[?25h');
+});
+
 const print = async () => {
   if (!lock) {
     lock = true;
