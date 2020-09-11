@@ -44,7 +44,6 @@ const print = async () => {
       let text = await render(`  ${name} ${price} | ${change}    `, { font: '3x5', width: 1000 });
       text = text.replace(/#/g, '█');
       const color = value.change > 0 ? 'green' : 'red';
-      rows.push('\n');
       rows.push(chalk[color](text));
     }
     output(rows);
