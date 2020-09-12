@@ -2,7 +2,6 @@ const str = require('./store');
 const store = str.store;
 const config = str.config;
 const figlet = require('figlet');
-const chalk = require('chalk');
 const util = require('util');
 
 const symbols = [
@@ -16,11 +15,24 @@ const symbols = [
   "NASDAQ:TSLA"
 ];
 
+const escapes = {
+  cyan: '\033[36m',
+  white: '\033[37m',
+  green: '\033[32m',
+  red: '\033[31m',
+  reset: '\033[0m',
+  cursor: {
+    show: '\033[?25h',
+    hide: '\033[?25l',
+    moveTopLeft: '\033[H'
+  }
+};
+
 const render = util.promisify(figlet.text);
 const block = '█';
 
 process.on('exit', () => {
-  process.stdout.write('\033[?25h'); // show cursor
+  process.stdout.write(escapes.cursor.show); // show cursor
 });
 
 let lock = false;
@@ -49,20 +61,13 @@ const print = async () => {
         text = text.replace(/#/g, block);
         // colorize
         const lines = text.split('\n');
-        const colors = {
-          default: '\033[36m',
-          price: '\033[37m',
-          change: value.change > 0 ? '\033[32m' : '\033[31m',
-          reset: '\033[0m'
-        }
+        const color = value.change > 0 ? escapes.green : escapes.red;
         for (let j = 0; j < lines.length; j++) {
           let line = lines[j];
           if (line.includes(block)) {
-            line = `${line.substring(0, 8)}${colors.default}${line.substring(8, line.length)}`;
-            line = `${line.substring(0, 65)}${colors.reset}${colors.price}${line.substring(65, line.length)}`;
-            line = `${line.substring(0, 131)}${colors.reset}${colors.default}${line.substring(131, line.length)}`;
-            line = `${line.substring(0, 151)}${colors.reset}${colors.change}${line.substring(151, line.length)}`;
-            line += colors.reset;
+            line = `${line.substring(0, 8)}${escapes.white}${line.substring(8, line.length)}`;
+            line = `${line.substring(0, 133)}${escapes.reset}${color}${line.substring(133, line.length)}`;
+            line += escapes.reset;
           }
           rows.push(line);
         }
@@ -75,11 +80,11 @@ const print = async () => {
 
 const output = (rows) => {
   if (!config.cleared) {
-    process.stdout.write('\033[?25l'); // hide cursor
+    process.stdout.write(escapes.cursor.hide); // hide cursor
     console.clear();
     config.cleared = true;
   }
-  process.stdout.write('\033[H'); // move to top left
+  process.stdout.write(escapes.cursor.moveTopLeft); // move to top left
   console.log(rows.join('\n'));
 }
 
