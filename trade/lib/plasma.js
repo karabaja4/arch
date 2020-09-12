@@ -50,7 +50,7 @@ const print = async () => {
         // colorize
         const lines = text.split('\n');
         const colors = {
-          asset: '\033[36m',
+          default: '\033[36m',
           price: '\033[37m',
           change: value.change > 0 ? '\033[32m' : '\033[31m',
           reset: '\033[0m'
@@ -58,9 +58,10 @@ const print = async () => {
         for (let j = 0; j < lines.length; j++) {
           let line = lines[j];
           if (line.includes(block)) {
-            line = `${line.substring(0, 8)}${colors.asset}${line.substring(8, line.length)}`;
+            line = `${line.substring(0, 8)}${colors.default}${line.substring(8, line.length)}`;
             line = `${line.substring(0, 65)}${colors.reset}${colors.price}${line.substring(65, line.length)}`;
-            line = `${line.substring(0, 142)}${colors.reset}${colors.change}${line.substring(142, line.length)}`;
+            line = `${line.substring(0, 131)}${colors.reset}${colors.default}${line.substring(131, line.length)}`;
+            line = `${line.substring(0, 151)}${colors.reset}${colors.change}${line.substring(151, line.length)}`;
             line += colors.reset;
           }
           rows.push(line);
