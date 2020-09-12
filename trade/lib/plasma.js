@@ -17,7 +17,7 @@ const symbols = [
 
 const escapes = {
   cyan: '\033[36m',
-  white: '\033[37m',
+  white: '\033[97m',
   green: '\033[32m',
   red: '\033[31m',
   reset: '\033[0m',
