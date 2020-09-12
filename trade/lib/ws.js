@@ -1,6 +1,8 @@
 const WebSocket = require('ws');
 const rs = require('randomstring');
 const params = {};
+const str = require('./store');
+const config = str.config;
 
 const isDataObject = (o) => {
   return o.p &&
@@ -75,8 +77,12 @@ const connect = () => {
     console.log(`socket error: ${e}`);
   });
 
-  ws.on('close', (e) => {
-    console.log('closed, reconnecting...');
+  ws.on('close', () => {
+    if (config.cleared) {
+      console.clear();
+    }
+    config.cleared = false;
+    console.log(`closed, reconnecting...`);
     setTimeout(connect, 5000);
   });
 

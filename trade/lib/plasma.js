@@ -1,4 +1,6 @@
-const store = require('./store').store;
+const str = require('./store');
+const store = str.store;
+const config = str.config;
 const figlet = require('figlet');
 const chalk = require('chalk');
 const util = require('util');
@@ -51,14 +53,11 @@ const print = async () => {
   }
 }
 
-
-let cleared = false;
-
 const output = (rows) => {
-  if (!cleared) {
+  if (!config.cleared) {
     process.stdout.write('\033[?25l'); // hide cursor
     console.clear();
-    cleared = true;
+    config.cleared = true;
   }
   process.stdout.write('\033[H'); // move to top left
   for (let i = 0; i < rows.length; i++) {
