@@ -18,8 +18,8 @@ const symbols = [
 const escapes = {
   cyan: '\033[36m',
   white: '\033[97m',
-  green: '\033[32m',
-  red: '\033[31m',
+  green: '\033[92m',
+  red: '\033[91m',
   reset: '\033[0m',
   cursor: {
     show: '\033[?25h',
