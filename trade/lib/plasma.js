@@ -25,14 +25,20 @@ const escapes = {
   }
 };
 
-process.on('exit', () => {
+process.on('SIGINT', () => {
+  console.log('exited');
   process.stdout.write(escapes.cursor.show); // show cursor
+  process.exit();
 });
 
 const render = util.promisify(figlet.text);
 const block = '█';
 
 let lock = false;
+
+const insert = (text, ins, index) => {
+  return `${text.substring(0, index)}${ins}${text.substring(index, text.length)}`;
+};
 
 const print = async (data) => {
   if (!lock) {
@@ -60,9 +66,9 @@ const print = async (data) => {
         for (let j = 0; j < lines.length; j++) {
           let line = lines[j];
           if (line.includes(block)) {
-            line = `${line.substring(0, 8)}${escapes.white}${line.substring(8, line.length)}`;
-            line = `${line.substring(0, 122)}${escapes.reset}${escapes.gray}${line.substring(122, line.length)}`;
-            line = `${line.substring(0, 142)}${escapes.reset}${color}${line.substring(142, line.length)}`;
+            line = insert(line, `${escapes.white}`, 8);
+            line = insert(line, `${escapes.reset}${escapes.gray}`, 122);
+            line = insert(line, `${escapes.reset}${color}`, 142);
             line += escapes.reset;
           }
           rows.push(line);

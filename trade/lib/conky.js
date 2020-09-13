@@ -25,7 +25,6 @@ const write = (key, data) => {
     fs.writeFile(trendFile, `${change > 0 ? green : red}`, () => {});
     fs.writeFile(valueFile, `${namePrint}: ${pricePrint} | ${changePrint}`, () => {});
   }
-
 }
 
 module.exports = {
