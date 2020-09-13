@@ -14,6 +14,7 @@ const symbols = [
 
 const escapes = {
   white: '\033[97m',
+  gray: '\033[90m',
   green: '\033[32m',
   red: '\033[31m',
   reset: '\033[0m',
@@ -60,7 +61,8 @@ const print = async (data) => {
           let line = lines[j];
           if (line.includes(block)) {
             line = `${line.substring(0, 8)}${escapes.white}${line.substring(8, line.length)}`;
-            line = `${line.substring(0, 133)}${escapes.reset}${color}${line.substring(133, line.length)}`;
+            line = `${line.substring(0, 122)}${escapes.reset}${escapes.gray}${line.substring(122, line.length)}`;
+            line = `${line.substring(0, 142)}${escapes.reset}${color}${line.substring(142, line.length)}`;
             line += escapes.reset;
           }
           rows.push(line);
