@@ -5,7 +5,7 @@ const events = {};
 
 const isEvent = (name) => {
   return events[name] && typeof(events[name]) === 'function';
-}
+};
 
 const isDataObject = (o) => {
   return o.p &&
@@ -15,7 +15,7 @@ const isDataObject = (o) => {
     o.p[1]['s'] &&
     o.p[1]['v'] &&
     o.p[1]['v']['lp'];
-}
+};
 
 const process = async (message) => {
   const parts = message.split('~m~');
@@ -31,7 +31,7 @@ const process = async (message) => {
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
           if (isEvent('receive')) {
-            events.receive(name, { price: price, change: change, percent: percent });
+            events.receive(name, {price: price, change: change, percent: percent});
           }
         }
       } catch (e) {
@@ -41,12 +41,11 @@ const process = async (message) => {
       }
     }
   }
-}
+};
 
 const connect = (symbols) => {
-
   const ws = new WebSocket('wss://data.tradingview.com/socket.io/websocket', {
-    origin: 'https://www.tradingview.com'
+    origin: 'https://www.tradingview.com',
   });
 
   const timer = setTimeout(() => { // timeout
@@ -54,7 +53,7 @@ const connect = (symbols) => {
   }, 20000);
 
   ws.on('open', () => {
-    //console.log('open');
+    // console.log('open');
   });
 
   ws.on('message', (message) => {
@@ -63,13 +62,13 @@ const connect = (symbols) => {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
         `~m~52~m~{"m":"quote_create_session","p":["${sid}"]}`,
-        `~m~313~m~{"m":"quote_add_symbols","p":["${sid}","${symbols.join('","')}",{"flags":["force_permission"]}]}`
+        `~m~313~m~{"m":"quote_add_symbols","p":["${sid}","${symbols.join('","')}",{"flags":["force_permission"]}]}`,
       ];
-      messages.forEach(m => ws.send(m));
+      messages.forEach((m) => ws.send(m));
     } else {
       if (message.match(/^~m~\d+~m~~h~\d+$/g)) { // ping
         ws.send(message);
-        //console.log('pong');
+        // console.log('pong');
       } else {
         process(message);
       }
@@ -88,18 +87,17 @@ const connect = (symbols) => {
     }
     setTimeout(() => connect(symbols), 5000);
   });
-
 };
 
 const init = (symbols) => {
   connect(symbols);
-}
+};
 
 const on = (name, callback) => {
   events[name] = callback;
-}
+};
 
 module.exports = {
   init,
-  on
+  on,
 };

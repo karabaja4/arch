@@ -6,8 +6,8 @@ const args = require('minimist')(process.argv.slice(2));
 
 const mode = {
   plasma: !!args['plasma'],
-  conky: !!args['conky']
-}
+  conky: !!args['conky'],
+};
 
 if (!mode.conky && !mode.plasma) {
   console.log('requires --conky or --plasma');
@@ -31,7 +31,6 @@ ws.on('close', (c) => {
 });
 
 ws.on('receive', (name, feed) => {
-
   // group feed to data object
   if (!data[name]) data[name] = {};
   if (feed.price !== undefined) data[name]['price'] = feed.price;
@@ -54,7 +53,6 @@ ws.on('receive', (name, feed) => {
   if (mode.conky) {
     conky.write(name, data);
   }
-
 });
 
 ws.init(symbols);

@@ -9,7 +9,7 @@ const symbols = [
   'TVC:GOLD',
   'FX:EURUSD',
   'NASDAQ:TSLA',
-  'BITMEX:XBTUSD'
+  'BITMEX:XBTUSD',
 ];
 
 const escapes = {
@@ -21,8 +21,8 @@ const escapes = {
   cursor: {
     show: '\033[?25h',
     hide: '\033[?25l',
-    moveTopLeft: '\033[H'
-  }
+    moveTopLeft: '\033[H',
+  },
 };
 
 process.on('SIGINT', () => {
@@ -58,7 +58,7 @@ const print = async (data) => {
         const name = `${key.split(':')[1]}:`.padEnd(12);
         const price = `${value.price.toFixed(2)} USD`.padEnd(12);
         const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`;
-        let text = await render(`  ${name} ${price}  |  ${change}  `, { font: '3x5', width: 1000 });
+        let text = await render(`  ${name} ${price}  |  ${change}  `, {font: '3x5', width: 1000});
         text = text.replace(/#/g, block);
         // colorize
         const lines = text.split('\n');
@@ -78,7 +78,7 @@ const print = async (data) => {
     }
     lock = false;
   }
-}
+};
 
 let cleared = false;
 
@@ -86,7 +86,7 @@ const output = (rows) => {
   switchToDrawMode();
   process.stdout.write(escapes.cursor.moveTopLeft); // move to top left
   console.log(rows.join('\n'));
-}
+};
 
 const switchToDrawMode = () => {
   if (!cleared) {
@@ -94,7 +94,7 @@ const switchToDrawMode = () => {
     process.stdout.write(escapes.cursor.hide);
     console.clear();
   }
-}
+};
 
 const switchToLogMode = () => {
   if (cleared) {
@@ -102,9 +102,9 @@ const switchToLogMode = () => {
     process.stdout.write(escapes.cursor.show);
     console.clear();
   }
-}
+};
 
 module.exports = {
   print,
-  switchToLogMode
+  switchToLogMode,
 };
