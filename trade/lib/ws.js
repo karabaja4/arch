@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const rs = require('randomstring');
-const params = {};
-//const config = require('./store').config;
+
+const events = {};
 
 const isDataObject = (o) => {
   return o.p &&
@@ -26,19 +26,20 @@ const process = async (message) => {
           const price = parsed.p[1]['v']['lp'];
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
-          if (params.onReceived != null) {
-            params.onReceived(name, { price: price, change: change, percent: percent });
+          if (events.receive) {
+            events.receive(name, { price: price, change: change, percent: percent });
           }
         }
       } catch (e) {
-        // console.log(`error parsing json: ${match[0]}`);
-        // console.log(e);
+        if (events.error) {
+          events.error(e);
+        }
       }
     }
   }
 }
 
-const connect = () => {
+const connect = (symbols) => {
 
   const ws = new WebSocket('wss://data.tradingview.com/socket.io/websocket', {
     origin: 'https://www.tradingview.com'
@@ -58,7 +59,7 @@ const connect = () => {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
         `~m~52~m~{"m":"quote_create_session","p":["${sid}"]}`,
-        `~m~313~m~{"m":"quote_add_symbols","p":["${sid}","${params.symbols.join('","')}",{"flags":["force_permission"]}]}`
+        `~m~313~m~{"m":"quote_add_symbols","p":["${sid}","${symbols.join('","')}",{"flags":["force_permission"]}]}`
       ];
       messages.forEach(m => ws.send(m));
     } else {
@@ -72,26 +73,29 @@ const connect = () => {
   });
 
   ws.on('error', (e) => {
-    //console.log(`socket error: ${e}`);
+    if (events.error) {
+      events.error(e);
+    }
   });
 
-  ws.on('close', () => {
-    // if (config.cleared) {
-    //   console.clear();
-    // }
-    // config.cleared = false;
-    // console.log(`closed, reconnecting...`);
-    setTimeout(connect, 5000);
+  ws.on('close', (code) => {
+    if (events.close) {
+      events.close(code);
+    }
+    setTimeout(() => connect(symbols), 5000);
   });
 
 };
 
-const init = (symbols, onReceived) => {
-  params.onReceived = onReceived;
-  params.symbols = symbols;
-  connect();
+const init = (symbols) => {
+  connect(symbols);
+}
+
+const on = (name, callback) => {
+  events[name] = callback;
 }
 
 module.exports = {
-  init
+  init,
+  on
 };

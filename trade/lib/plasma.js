@@ -24,14 +24,13 @@ const escapes = {
   }
 };
 
-const render = util.promisify(figlet.text);
-const block = '█';
-
 process.on('exit', () => {
   process.stdout.write(escapes.cursor.show); // show cursor
 });
 
-let cleared = false;
+const render = util.promisify(figlet.text);
+const block = '█';
+
 let lock = false;
 
 const print = async (data) => {
@@ -73,6 +72,8 @@ const print = async (data) => {
   }
 }
 
+let cleared = false;
+
 const output = (rows) => {
   if (!cleared) {
     process.stdout.write(escapes.cursor.hide); // hide cursor
@@ -83,6 +84,14 @@ const output = (rows) => {
   console.log(rows.join('\n'));
 }
 
+const switchToLogMode = () => {
+  if (cleared) {
+    console.clear();
+    cleared = false;
+  }
+}
+
 module.exports = {
-  print
+  print,
+  switchToLogMode
 };
