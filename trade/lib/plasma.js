@@ -55,7 +55,7 @@ const print = async () => {
         const name = `${key.split(':')[1]}:`.padEnd(12);
         const price = `${value.price.toFixed(2)} USD`.padEnd(12);
         const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`;
-        let text = await render(`  ${name} ${price}  |  ${change}  `, { font: '3x5', width: process.stdout.columns || 10000 });
+        let text = await render(`  ${name} ${price}  |  ${change}  `, { font: '3x5', width: 1000 });
         text = text.replace(/#/g, block);
         // colorize
         const lines = text.split('\n');
