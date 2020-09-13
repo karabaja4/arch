@@ -3,6 +3,10 @@ const rs = require('randomstring');
 
 const events = {};
 
+const isEvent = (name) => {
+  return events[name] && typeof(events[name]) == "function";
+}
+
 const isDataObject = (o) => {
   return o.p &&
     Array.isArray(o.p) &&
@@ -26,12 +30,12 @@ const process = async (message) => {
           const price = parsed.p[1]['v']['lp'];
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
-          if (events.receive) {
+          if (isEvent('receive')) {
             events.receive(name, { price: price, change: change, percent: percent });
           }
         }
       } catch (e) {
-        if (events.error) {
+        if (isEvent('error')) {
           events.error(e);
         }
       }
@@ -73,13 +77,13 @@ const connect = (symbols) => {
   });
 
   ws.on('error', (e) => {
-    if (events.error) {
+    if (isEvent('error')) {
       events.error(e);
     }
   });
 
   ws.on('close', (code) => {
-    if (events.close) {
+    if (isEvent('close')) {
       events.close(code);
     }
     setTimeout(() => connect(symbols), 5000);

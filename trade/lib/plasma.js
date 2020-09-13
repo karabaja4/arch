@@ -75,19 +75,24 @@ const print = async (data) => {
 let cleared = false;
 
 const output = (rows) => {
-  if (!cleared) {
-    process.stdout.write(escapes.cursor.hide); // hide cursor
-    console.clear();
-    cleared = true;
-  }
+  switchToDrawMode();
   process.stdout.write(escapes.cursor.moveTopLeft); // move to top left
   console.log(rows.join('\n'));
 }
 
+const switchToDrawMode = () => {
+  if (!cleared) {
+    cleared = true;
+    process.stdout.write(escapes.cursor.hide);
+    console.clear();
+  }
+}
+
 const switchToLogMode = () => {
   if (cleared) {
-    console.clear();
     cleared = false;
+    process.stdout.write(escapes.cursor.show);
+    console.clear();
   }
 }
 
