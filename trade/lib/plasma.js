@@ -69,7 +69,6 @@ const print = async () => {
           }
           rows.push(line);
         }
-        rows.push('\n');
       }
       output(rows);
     }
