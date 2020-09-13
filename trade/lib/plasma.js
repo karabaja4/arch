@@ -5,6 +5,7 @@ const figlet = require('figlet');
 const util = require('util');
 
 const symbols = [
+  "BITMEX:XBTUSD",
   "TVC:USOIL",
   "TVC:DXY",
   "FOREXCOM:NSXUSD",
