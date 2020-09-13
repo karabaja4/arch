@@ -5,21 +5,19 @@ const figlet = require('figlet');
 const util = require('util');
 
 const symbols = [
-  "BITMEX:XBTUSD",
   "TVC:USOIL",
   "TVC:DXY",
   "FOREXCOM:NSXUSD",
   "TVC:SPX",
-  "CURRENCYCOM:GOLD",
+  "TVC:GOLD",
   "FX:EURUSD",
   "NASDAQ:TSLA"
 ];
 
 const escapes = {
-  cyan: '\033[36m',
   white: '\033[97m',
-  green: '\033[92m',
-  red: '\033[91m',
+  green: '\033[32m',
+  red: '\033[31m',
   reset: '\033[0m',
   cursor: {
     show: '\033[?25h',
@@ -71,6 +69,7 @@ const print = async () => {
           }
           rows.push(line);
         }
+        rows.push('\n');
       }
       output(rows);
     }

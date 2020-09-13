@@ -4,18 +4,19 @@
     "TVC:USOIL",
     "TVC:DXY",
     "FOREXCOM:NSXUSD",
+    "TVC:GOLD",
+    "TVC:SILVER",
     "TVC:SPX",
-    "CURRENCYCOM:GOLD",
     "FX:EURUSD",
     "FX:AUDUSD",
     "TVC:VIX",
-    "TVC:UKOIL",
-    "NASDAQ:DOCU",
-    "NASDAQ:TSLA",
-    "NASDAQ:NVDA",
     "NASDAQ:AAPL",
-    "NYSE:CRM",
-    "NASDAQ:ZM",
-    "NASDAQ:AMZN"
+    "NASDAQ:TSLA",
+    "NASDAQ:AMZN",
+    "NASDAQ:MSFT",
+    "NASDAQ:FB",
+    "NASDAQ:NVDA",
+    "NASDAQ:AMD",
+    "NASDAQ:INTC"
   ]
 }

@@ -1,8 +1,7 @@
 const WebSocket = require('ws');
 const rs = require('randomstring');
 const params = {};
-const str = require('./store');
-const config = str.config;
+const config = require('./store').config;
 
 const isDataObject = (o) => {
   return o.p &&
@@ -27,7 +26,6 @@ const process = async (message) => {
           const price = parsed.p[1]['v']['lp'];
           const change = parsed.p[1]['v']['ch'];
           const percent = parsed.p[1]['v']['chp'];
-          //console.log(`${name} -> PRICE: ${price}${change ? `, CHANGE: ${change}` : ''}${percent ? `, PERCENT: ${percent}%` : ''}`);
           if (params.onReceived != null) {
             params.onReceived(name, { price: price, change: change, percent: percent });
           }
@@ -60,7 +58,7 @@ const connect = () => {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
         `~m~52~m~{"m":"quote_create_session","p":["${sid}"]}`,
-        `~m~304~m~{"m":"quote_add_symbols","p":["${sid}","${params.symbols.join('","')}",{"flags":["force_permission"]}]}`
+        `~m~313~m~{"m":"quote_add_symbols","p":["${sid}","${params.symbols.join('","')}",{"flags":["force_permission"]}]}`
       ];
       messages.forEach(m => ws.send(m));
     } else {
