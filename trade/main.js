@@ -9,6 +9,11 @@ const mode = {
   conky: !!args['conky']
 }
 
+if (!mode.conky && !mode.plasma) {
+  console.log('requires --conky or --plasma');
+  process.exit(1);
+}
+
 const data = {};
 
 ws.on('error', (e) => {
