@@ -9,8 +9,8 @@ const mode = {
   conky: !!args['conky'],
 };
 
-if (!mode.conky && !mode.plasma) {
-  console.log('requires --conky or --plasma');
+if ((!mode.conky && !mode.plasma) || (mode.conky && mode.plasma)) {
+  console.log('requires one: --conky or --plasma');
   process.exit(1);
 }
 
