@@ -62,7 +62,7 @@ const print = async (data) => {
         text = text.replace(/#/g, block);
         // colorize
         const lines = text.split('\n');
-        const color = value.change > 0 ? escapes.green : escapes.red;
+        const color = value.change >= 0 ? escapes.green : escapes.red;
         for (let j = 0; j < lines.length; j++) {
           let line = lines[j];
           if (line.includes(block)) {
