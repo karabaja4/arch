@@ -1,18 +1,15 @@
-const str = require('./store');
-const store = str.store;
-const config = str.config;
 const figlet = require('figlet');
 const util = require('util');
 
 const symbols = [
-  "BITMEX:XBTUSD",
-  "TVC:USOIL",
-  "TVC:DXY",
   "FOREXCOM:NSXUSD",
+  "TVC:DXY",
+  "TVC:USOIL",
   "TVC:SPX",
   "TVC:GOLD",
   "FX:EURUSD",
-  "NASDAQ:TSLA"
+  "NASDAQ:TSLA",
+  "BITMEX:XBTUSD"
 ];
 
 const escapes = {
@@ -34,25 +31,24 @@ process.on('exit', () => {
   process.stdout.write(escapes.cursor.show); // show cursor
 });
 
+let cleared = false;
 let lock = false;
 
-const print = async () => {
+const print = async (data) => {
   if (!lock) {
     lock = true;
     const keys = [];
-    for (const name in store) {
-      if (symbols.includes(name)) {
-        keys.push(name);
+    for (let i = 0; i < symbols.length; i++) {
+      const symbol = symbols[i];
+      if (data[symbol]) {
+        keys.push(symbol);
       }
     }
     if (keys.length == symbols.length) { // got all
-      keys.sort();
-      const rows = [];
-      rows.push('\n');
-      rows.push('\n');
+      const rows = ['\n', '\n'];
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        const value = store[key];
+        const value = data[key];
         const name = `${key.split(':')[1]}:`.padEnd(12);
         const price = `${value.price.toFixed(2)} USD`.padEnd(12);
         const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`;
@@ -78,10 +74,10 @@ const print = async () => {
 }
 
 const output = (rows) => {
-  if (!config.cleared) {
+  if (!cleared) {
     process.stdout.write(escapes.cursor.hide); // hide cursor
     console.clear();
-    config.cleared = true;
+    cleared = true;
   }
   process.stdout.write(escapes.cursor.moveTopLeft); // move to top left
   console.log(rows.join('\n'));

@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const rs = require('randomstring');
 const params = {};
-const config = require('./store').config;
+//const config = require('./store').config;
 
 const isDataObject = (o) => {
   return o.p &&
@@ -31,8 +31,8 @@ const process = async (message) => {
           }
         }
       } catch (e) {
-        console.log(`error parsing json: ${match[0]}`);
-        console.log(e);
+        // console.log(`error parsing json: ${match[0]}`);
+        // console.log(e);
       }
     }
   }
@@ -72,15 +72,15 @@ const connect = () => {
   });
 
   ws.on('error', (e) => {
-    console.log(`socket error: ${e}`);
+    //console.log(`socket error: ${e}`);
   });
 
   ws.on('close', () => {
-    if (config.cleared) {
-      console.clear();
-    }
-    config.cleared = false;
-    console.log(`closed, reconnecting...`);
+    // if (config.cleared) {
+    //   console.clear();
+    // }
+    // config.cleared = false;
+    // console.log(`closed, reconnecting...`);
     setTimeout(connect, 5000);
   });
 
