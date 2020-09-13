@@ -7,8 +7,10 @@ const valueFile = '/tmp/asset_value';
 const green = '#69F0AE';
 const red = '#FF6E40';
 
-const write = (data) => {
-
+const write = (key, data) => {
+  if (key != name) {
+    return;
+  }
   const values = data[name];
   if (values) {
     const price = data[name]['price'];
@@ -20,12 +22,8 @@ const write = (data) => {
     //const percentPrint = `${percent > 0 ? '+' : ''}${percent.toFixed(2)}%`;
     const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
 
-    fs.writeFile(trendFile, `${change > 0 ? green : red}`, () => {
-      console.log(`written to ${trendFile}`);
-    });
-    fs.writeFile(valueFile, `${namePrint}: ${pricePrint} | ${changePrint}`, () => {
-      console.log(`written to ${valueFile}`);
-    });
+    fs.writeFile(trendFile, `${change > 0 ? green : red}`, () => {});
+    fs.writeFile(valueFile, `${namePrint}: ${pricePrint} | ${changePrint}`, () => {});
   }
 
 }

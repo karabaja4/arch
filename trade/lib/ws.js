@@ -4,7 +4,7 @@ const rs = require('randomstring');
 const events = {};
 
 const isEvent = (name) => {
-  return events[name] && typeof(events[name]) == "function";
+  return events[name] && typeof(events[name]) === 'function';
 }
 
 const isDataObject = (o) => {

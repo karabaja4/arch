@@ -47,7 +47,7 @@ ws.on('receive', (name, feed) => {
 
   // feed data object to conky
   if (mode.conky) {
-    conky.write(data);
+    conky.write(name, data);
   }
 
 });
