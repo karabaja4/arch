@@ -29,7 +29,7 @@ case "${extension,,}" in
     *)
         mime=$(file --brief --mime-type "${path}")
         case "${mime}" in
-            text/plain|inode/x-empty|text/x-shellscript)
+            text/*)
                 featherpad "${path}";;
             inode/directory)
                 qtfm "${path}";;
