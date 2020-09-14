@@ -11,4 +11,4 @@ echo "starting server..."
 /usr/bin/vncserver
 
 echo "copying PID..."
-cp ${VNCDIR}/*.pid ${PIDDIR}/vnc.pid
+cp ${VNCDIR}/*.pid ${PIDDIR}/vnc.pid &> /dev/null

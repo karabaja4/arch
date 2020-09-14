@@ -60,9 +60,6 @@ on_shutdown() {
         daemon_poll "${dmn}" && daemon_stop "${dmn}"
     done
 
-    echo "clearing /tmp..."
-    rm -rf /tmp/{*,.*} &> /dev/null
-
     if [ -x /etc/minirc.local.shutdown ]
     then
         echo "loading /etc/minirc.local.shutdown..."

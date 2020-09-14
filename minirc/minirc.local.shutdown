@@ -1,3 +1,4 @@
 umount /home/igor/_azure &> /dev/null
 rm -f /home/igor/.vnc/*.pid
 rm -f /home/igor/.vnc/*.log
+rm -rf /tmp/{*,.*} &> /dev/null
