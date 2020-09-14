@@ -21,7 +21,9 @@ vnc ()
     tint2 -c ${HOME}/arch/tint2/tint2rc-vnc &
 
     # other
+    sleep 1
     xfce4-clipman &
+    sleep 1
     minitraycal &
 }
 
@@ -57,7 +59,9 @@ desktop ()
     tint2 -c ${HOME}/arch/tint2/tint2rc-bottom &
 
     # other
+    sleep 1
     pnmixer &
+    sleep 1
     xfce4-clipman &
     sleep 5
     flameshot &
