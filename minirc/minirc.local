@@ -3,6 +3,7 @@ touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p -m 777 /tmp/qtfm
 mkdir -p -m 777 /tmp/.X11-unix
-mkdir -p -m 777 /tmp/runtime-igor
+mkdir -p -m 700 /tmp/runtime-igor
+chown igor /tmp/runtime-igor
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
