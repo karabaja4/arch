@@ -22,7 +22,7 @@ vnc ()
 
     # other
     xfce4-clipman &
-    ${HOME}/arch/bins/minitraycal &
+    minitraycal &
 }
 
 desktop ()
@@ -64,7 +64,7 @@ desktop ()
     sleep 1
     #synergy &
     #sleep 1
-    ${HOME}/arch/bins/minitraycal &
+    minitraycal &
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
