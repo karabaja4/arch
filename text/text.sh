@@ -8,12 +8,12 @@ then
     declare -r filename="${HOME}/.text/${temp}.js"
     touch "${filename}"
     #echo "Opening ${filename}"
-    featherpad "${filename}" &
+    featherpad "${filename}" &> /dev/null &
     # if [ ! -s "${filename}" ]
     # then
     #     rm "${filename}"
     # fi
 else
     #echo "Opening ${1}"
-    featherpad "${1}" &
+    featherpad "${1}" &> /dev/null &
 fi
