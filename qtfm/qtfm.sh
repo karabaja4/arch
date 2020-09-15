@@ -61,16 +61,4 @@ unrar)
     unrar x "${2}" | spin "extracting ${2}";;
 gzip)
     tar cvzf "${2}.tar.gz" "${@:3}" | spin "creating archive ${2}.tar.gz";;
-copyurl)
-    declare -r dir="$(cat "${base_dir}/store.json" | jq -r ".dir")"
-    if [[ "${2}" != "${dir}"* ]]
-    then
-        zenity --error --no-wrap --text="Not a remote file."
-        exit 1
-    fi
-    declare -r url="$(cat "${base_dir}/store.json" | jq -r ".url")"
-    declare -r sas="$(cat "${base_dir}/store.json" | jq -r ".sas")"
-    declare -r path="$(realpath --relative-to="${dir}" "${2}")"
-    echo "${url}${path}${sas}" | xclip -i -selection clipboard
-    ;;
 esac
