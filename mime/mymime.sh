@@ -22,8 +22,6 @@ case "${extension,,}" in
         featherpad "${path}";;
     torrent)
         qbittorrent "${path}";;
-    html|htm)
-        chromium "${path}";;
     gz|zip|rar|zst)
         xarchiver "${path}";;
     *)
