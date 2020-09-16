@@ -25,9 +25,9 @@ case "${extension,,}" in
     gz|zip|rar|zst)
         xarchiver "${path}";;
     *)
-        mime=$(file --brief --mime-type "${path}")
+        mime="$(file --brief --mime-type "${path}")"
         case "${mime}" in
-            text/*)
+            inode/x-empty|text/*)
                 featherpad "${path}";;
             inode/directory)
                 qtfm "${path}";;
