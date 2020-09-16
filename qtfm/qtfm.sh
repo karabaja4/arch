@@ -26,10 +26,8 @@ paste)
     declare -r action="$(cat "${action_path}")"
     while IFS= read -r line
     do
-        if [ ! -e "${line}" ] # check if source exists
+        if [ -e "${line}" ] # check if source exists
         then
-            zenity --error --no-wrap --text="${line} does not exist"
-        else
             declare dest="${2}/$(basename "${line}")"
             if [ -e "${dest}" ] # check if dest exists
             then
