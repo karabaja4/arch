@@ -6,7 +6,14 @@ declare -r files_path="/tmp/qtfm/files"
 declare -r base_dir="$(dirname "$(readlink -f "${0}")")"
 
 spin() {
-    zenity --progress --pulsate --no-cancel --auto-close --text="${1}"
+    declare -r pid="$!"
+    sleep 0.2 # dont show progress on fast operations
+    kill -0 "${pid}" &> /dev/null
+    if [ "$?" -eq 0 ]
+    then
+   		tail --pid="${pid}" -f /dev/null | zenity --progress --pulsate --auto-close --text="${1}"
+    	kill -9 "${pid}" &> /dev/null
+    fi
 }
 
 case "${1}" in
@@ -35,7 +42,7 @@ paste)
                 dest="${dest}_${suffix}"
             fi
             declare cmd=(${action})
-            "${cmd[@]}" "${line}" "${dest}" | spin "${action} ${line} to ${dest}"
+            "${cmd[@]}" "${line}" "${dest}" & spin "${action} ${line} ${dest}"
         fi
     done < "${files_path}"
     ;;
@@ -44,7 +51,7 @@ rm)
 copypath)
     echo -n "${2}" | xclip -i -selection clipboard;;
 extract)
-    tar xvf "${2}" | spin "extracting ${2}";;
+    tar xvf "${2}" & spin "extracting ${2}";;
 term)
     xfce4-terminal --working-directory="${2}";;
 vscode)
@@ -54,9 +61,9 @@ feh)
 thumb)
     convert -resize 13% "${2}" "thumb_${2}";;
 unzip)
-    unzip "${2}" | spin "extracting ${2}";;
+    unzip "${2}" & spin "extracting ${2}";;
 unrar)
-    unrar x "${2}" | spin "extracting ${2}";;
+    unrar x "${2}" & spin "extracting ${2}";;
 gzip)
-    tar cvzf "${2}.tar.gz" "${@:3}" | spin "creating archive ${2}.tar.gz";;
+    tar cvzf "${2}.tar.gz" "${@:3}" & spin "creating archive ${2}.tar.gz";;
 esac
