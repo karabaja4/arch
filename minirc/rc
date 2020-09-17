@@ -1,4 +1,5 @@
 #!/bin/bash
+set -u
 
 daemon_start() { echo "${1} not configured"; return 1; }
 daemon_stop()  { echo "${1} not configured"; return 1; }
