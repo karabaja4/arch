@@ -17,35 +17,6 @@ spin() {
 }
 
 case "${1}" in
-cut)
-    echo -n "mv" > "${action_path}"
-    printf "%s\n" "${@:2}" > "${files_path}"
-    ;;
-copy)
-    echo -n "cp -r" > "${action_path}"
-    printf "%s\n" "${@:2}" > "${files_path}"
-    ;;
-paste)
-    if [ ! -f "${action_path}" ] || [ ! -f "${files_path}" ]
-    then
-        exit 1
-    fi
-    declare -r action="$(cat "${action_path}")"
-    while IFS= read -r line
-    do
-        if [ -e "${line}" ] # check if source exists
-        then
-            declare dest="${2}/$(basename "${line}")"
-            if [ -e "${dest}" ] # check if dest exists
-            then
-                declare suffix="$(ls "${dest}"* | wc -l)"
-                dest="${dest}_${suffix}"
-            fi
-            declare cmd=(${action})
-            "${cmd[@]}" "${line}" "${dest}" & spin "${action} ${line} ${dest}"
-        fi
-    done < "${files_path}"
-    ;;
 rm)
     rm -rf "${@:2}";;
 copypath)

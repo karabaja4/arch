@@ -52,7 +52,7 @@
         "suppressUpdateNotice": true,
         "suppressWelcomeNotice": true
     },
-    "gitlens.currentLine.enabled": false,
+    "gitlens.currentLine.enabled": true,
     "problems.decorations.enabled": false,
     "breadcrumbs.enabled": false,
     "msbuildProjectTools.nuget.newestVersionsFirst": true,
