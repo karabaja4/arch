@@ -8,7 +8,6 @@ daemon_poll()  { echo "${1} not configured"; return 1; }
 . /etc/minirc.conf
 
 on_boot() {
-
     echo "mounting API filesystem..."
     mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
     mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
@@ -50,11 +49,9 @@ on_boot() {
         echo "loading /etc/minirc.local..."
         /etc/minirc.local
     fi
-
 }
 
 on_shutdown() {
-
     echo "stopping daemons..."
     for dmn in ${DAEMONS}
     do
@@ -72,19 +69,15 @@ on_shutdown() {
 
     echo "unmounting API filesystem..."
     umount -r /run
-
 }
 
 daemon_restart() {
-
     daemon_stop "${1}"
     sleep 1
     daemon_start "${1}"
-
 }
 
 usage() {
-
     echo "Usage: rc [--help] <action> [daemon]"
     echo
     echo "Actions:"
@@ -92,7 +85,6 @@ usage() {
     echo "   rc start [daemon]    starts daemon"
     echo "   rc stop [daemon]     stops daemon"
     echo "   rc restart [daemon]  restarts daemon"
-    
 }
 
 case "${1}" in
