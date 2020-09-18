@@ -8,7 +8,7 @@ declare -r base_dir="$(dirname "$(readlink -f "${0}")")"
 spin() {
     declare -r pid="$!"
     sleep 0.2 # dont show progress on fast operations
-    kill -0 "${pid}" &> /dev/null
+    ps -p "${pid}" &> /dev/null
     if [ "$?" -eq 0 ]
     then
    		tail --pid="${pid}" -f /dev/null | zenity --progress --pulsate --auto-close --text="${1}"
