@@ -8,14 +8,13 @@ declare -r base_dir="$(dirname "$(readlink -f "${0}")")"
 spin() {
     declare -r pid1="$!"
     sleep 0.2
-    ps -p "${pid1}" &> /dev/null
+    kill -0 "${pid1}" &> /dev/null
     if [ "$?" -eq 0 ]
     then
-        trap 'echo "cancel killing ${pid1}" && kill ${pid1}' HUP
+        trap "kill ${pid1}" HUP
         tail -f /dev/null | zenity --progress --pulsate --auto-kill --text="${1}" &
         declare -r pid2="$!"
         wait "${pid1}"
-        echo "after wait killing ${pid2}"
         kill "${pid2}"
     fi
 }
@@ -46,6 +45,6 @@ gzip)
     tar cvzf "${2}.tar.gz" "${@:3}" &
     spin "creating archive ${2}.tar.gz";;
 sleep)
-    sleep 5 &
+    sleep 37 &
     spin "sleeping"
 esac
