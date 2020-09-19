@@ -1,10 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-declare -r action_path="/tmp/qtfm/action"
-declare -r files_path="/tmp/qtfm/files"
-declare -r base_dir="$(dirname "$(readlink -f "${0}")")"
-
 spin() {
     declare -r pid1="$!"
     sleep 0.2
