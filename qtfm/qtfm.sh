@@ -8,14 +8,14 @@ spin() {
     if [ "$?" -eq 0 ]
     then
         # init fifo
-        declare -r fp="$(mktemp -u)"
-        mkfifo "${fp}"
+        declare -r fifo="$(mktemp -u)"
+        mkfifo "${fifo}"
 
         trap "kill ${pid}" HUP
-        cat "${fp}" | zenity --progress --pulsate --auto-close --auto-kill --text="${1}" &
+        cat "${fifo}" | zenity --progress --pulsate --auto-close --auto-kill --text="${1}" &
         wait "${pid}"
-        echo "" > "${fp}"
-        rm -f "${fp}"
+        echo "" > "${fifo}"
+        rm -f "${fifo}"
     fi
 }
 
