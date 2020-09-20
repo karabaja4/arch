@@ -2,16 +2,20 @@
 set -euo pipefail
 
 spin() {
-    declare -r pid1="$!"
+    declare -r pid="$!"
     sleep 0.2
-    kill -0 "${pid1}" &> /dev/null
+    kill -0 "${pid}" &> /dev/null
     if [ "$?" -eq 0 ]
     then
-        trap "kill ${pid1}" HUP
-        tail -f /dev/null | zenity --progress --pulsate --auto-kill --text="${1}" &
-        declare -r pid2="$!"
-        wait "${pid1}"
-        kill "${pid2}"
+        # init fifo
+        declare -r fifopath="$(mktemp -u)"
+        mkfifo "${fifopath}"
+
+        trap "kill ${pid}" HUP
+        cat "${fifopath}" | zenity --progress --pulsate --auto-close --auto-kill --text="${1}" &
+        wait "${pid}"
+        echo "" > "${fifopath}"
+        rm "${fifopath}"
     fi
 }
 
