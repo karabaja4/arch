@@ -18,6 +18,6 @@ conky.text = [[
 $alignr $color1 ${font openlogos:size=36}B${font}
 $color0 $alignr home.aerium.hr ($nodename)
 $alignr $sysname $kernel
-$alignr Available Updates: ${exec cat /tmp/update_count}
+$alignr Available Updates: ${exec cat /tmp/update_count || echo "-"}
 $alignr Uptime: $uptime
 ]];
