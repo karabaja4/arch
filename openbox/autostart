@@ -36,7 +36,7 @@ desktop ()
     
     # alsa
     # alsactl -f ${HOME}/arch/alsa/asound.state store
-    #alsactl -f ${HOME}/arch/alsa/asound.state restore
+    alsactl -f ${HOME}/arch/alsa/asound.state restore
 
     # daemons
     xsettingsd -c ${HOME}/arch/xfce4-terminal/xsettingsd &
@@ -63,7 +63,7 @@ desktop ()
     pnmixer &
     sleep 1
     xfce4-clipman &
-    sleep 5
+    sleep 1
     flameshot &
     sleep 1
     #synergy &

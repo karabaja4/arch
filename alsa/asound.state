@@ -493,3 +493,112 @@ state.HDMI {
 		}
 	}
 }
+state.Headset {
+	control.1 {
+		iface PCM
+		name 'Playback Channel Map'
+		value.0 0
+		value.1 0
+		comment {
+			access read
+			type INTEGER
+			count 2
+			range '0 - 36'
+		}
+	}
+	control.2 {
+		iface PCM
+		name 'Capture Channel Map'
+		value 0
+		comment {
+			access read
+			type INTEGER
+			count 1
+			range '0 - 36'
+		}
+	}
+	control.3 {
+		iface MIXER
+		name 'Mic Playback Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.4 {
+		iface MIXER
+		name 'Mic Playback Volume'
+		value 15
+		comment {
+			access 'read write'
+			type INTEGER
+			count 1
+			range '0 - 15'
+			dbmin -1500
+			dbmax 0
+			dbvalue.0 0
+		}
+	}
+	control.5 {
+		iface MIXER
+		name 'Headphone Playback Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.6 {
+		iface MIXER
+		name 'Headphone Playback Volume'
+		value.0 41
+		value.1 41
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 41'
+			dbmin -4100
+			dbmax 0
+			dbvalue.0 0
+			dbvalue.1 0
+		}
+	}
+	control.7 {
+		iface MIXER
+		name 'Mic Capture Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.8 {
+		iface MIXER
+		name 'Mic Capture Volume'
+		value 13
+		comment {
+			access 'read write'
+			type INTEGER
+			count 1
+			range '0 - 13'
+			dbmin 1600
+			dbmax 2900
+			dbvalue.0 2900
+		}
+	}
+	control.9 {
+		iface CARD
+		name 'Keep Interface'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+}
