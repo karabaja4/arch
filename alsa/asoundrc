@@ -1,0 +1,1 @@
+pcm.!default {type hw card 0}

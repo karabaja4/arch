@@ -1,14 +1,8 @@
 xdpyinfo | grep VNC > /dev/null
-declare isvnc=$? # 0 ako je vnc
+declare -r isvnc="$?" # 0 ako je vnc
 
-# log ()
-# {
-#     mkdir -p ${HOME}/.local/logs
-#     ts "[%Y-%m-%dT%H:%M:%SZ][$1]" >> ${HOME}/.local/logs/openbox.log
-# }
+vnc () {
 
-vnc ()
-{
     echo "Started VNC"
 
     # daemons
@@ -27,8 +21,8 @@ vnc ()
     minitraycal &
 }
 
-desktop ()
-{
+desktop () {
+
     echo "Started Openbox"
     
     # mouse sens
@@ -47,9 +41,7 @@ desktop ()
     feh --bg-scale ${HOME}/arch/wall/default.jpg
 
     # conky
-    [ ! -f "/tmp/asset_trend" ] && echo "#757575" > /tmp/asset_trend
-    [ ! -f "/tmp/asset_value" ] && echo "TRV: not connected" > /tmp/asset_value
-
+    echo "-" > "/tmp/update_count"
     conky -d -c ${HOME}/arch/conky/conkyrc-headless
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 0
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 1

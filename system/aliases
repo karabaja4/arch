@@ -73,6 +73,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export NO_AT_BRIDGE=1
 export XDG_RUNTIME_DIR="/tmp/runtime-igor"
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export EDITOR=nano
 
 # dotnet
 #export DOTNET_ROOT=$PATH:/opt/dotnet

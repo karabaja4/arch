@@ -2,10 +2,18 @@
 const fs = require('fs');
 
 const name = 'FOREXCOM:NSXUSD';
+
 const trendFile = '/tmp/asset_trend';
 const valueFile = '/tmp/asset_value';
+
 const green = '#69F0AE';
 const red = '#FF6E40';
+const gray = '#757575';
+
+const init = () => {
+  fs.writeFile(trendFile, gray, () => {});
+  fs.writeFile(valueFile, 'TRV: not connected', () => {});
+};
 
 const write = (key, data) => {
   if (key != name) {
@@ -28,5 +36,6 @@ const write = (key, data) => {
 };
 
 module.exports = {
+  init,
   write,
 };
