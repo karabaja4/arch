@@ -10,9 +10,9 @@ const green = '#69F0AE';
 const red = '#FF6E40';
 const gray = '#757575';
 
-const init = () => {
-  fs.writeFile(trendFile, gray, () => {});
-  fs.writeFile(valueFile, 'TRV: not connected', () => {});
+const init = async () => {
+  await fs.promises.writeFile(trendFile, gray);
+  await fs.promises.writeFile(valueFile, 'TRV: not connected');
 };
 
 const write = (key, data) => {
