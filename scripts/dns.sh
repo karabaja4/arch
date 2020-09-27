@@ -1,31 +1,34 @@
 #!/bin/bash
 set -euo pipefail
 
-declare -r ipf="/tmp/public_ip"
-declare -r oldip="$(cat "${ipf}")"
 declare -r basedir="$(dirname "$(readlink -f "${0}")")"
 declare -r token="$(cat "${basedir}/secret.json" | jq -r ".DNSToken")"
 declare -r url="https://api.digitalocean.com/v2/domains/aerium.hr/records/53478297"
+declare -ar headers=("-H" "Content-Type: application/json" "-H" "Authorization: Bearer ${token}")
 
-echo "Running in ${basedir}"
+log () {
+    echo "[$(date -Is)]: ${1}"
+}
 
 declare -r ip="$(curl -s -f "https://api.ipify.org")"
-if [ $? != 0 ]
+if [ ${?} -eq 0 ]
 then
-    echo "IP request failed."
-else
-    if [ "${ip}" != "${oldip}" ]
+    declare -r dns="$(curl -s -f -X GET "${headers[@]}" "${url}" | jq -r ".domain_record .data")"
+    if [ ${?} -eq 0 ]
     then
-        curl -s -f -o /dev/null -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer ${token}" -d "{\"data\":\"${ip}\"}" "${url}"
-        if [ $? = 0 ]
+        if [ "${ip}" == "${dns}" ]
         then
-            echo "DigitalOcean request successful. New IP: ${ip}"
-            echo "$(date): Updated DNS: ${ip}"
-            echo "${ip}" > ${ipf}
+            log "No update necessary."
+            exit 0
         else
-            echo "DigitalOcean request failed."
+            curl -s -f -o /dev/null -X PUT "${headers[@]}" -d "{\"data\":\"${ip}\"}" "${url}"
+            if [ $? -eq 0 ]
+            then
+                log "Updated DigitalOcean DNS: ${ip}"
+                exit 0
+            fi
         fi
-    else
-        echo "No changes (${ip})"
     fi
 fi
+
+log "DNS update failed."
