@@ -1,9 +1,17 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 
-until checkupdates | wc -l > /tmp/update_count
+declare -i rv=0
+
+while true
 do
-    echo "retrying..."
+    checkupdates | wc -l > /tmp/update_count
+    rv=$?
+    if [ $rv -eq 0 ] || [ $rv -eq 2 ]
+    then
+        echo "success ($rv)"
+        break
+    fi
+    echo "retrying ($rv)..."
     sleep 1
 done
-
