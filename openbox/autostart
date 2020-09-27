@@ -47,8 +47,9 @@ desktop ()
     feh --bg-scale ${HOME}/arch/wall/default.jpg
 
     # conky
-    echo "#757575" > /tmp/asset_trend
-    echo "TRV: not connected" > /tmp/asset_value
+    [ ! -f "/tmp/asset_trend" ] && echo "#757575" > /tmp/asset_trend
+    [ ! -f "/tmp/asset_value" ] && echo "TRV: not connected" > /tmp/asset_value
+
     conky -d -c ${HOME}/arch/conky/conkyrc-headless
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 0
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 1
