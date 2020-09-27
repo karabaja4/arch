@@ -18,8 +18,8 @@ dns="$(curl -s -f -X GET "${headers[@]}" "${url}" | jq -r ".domain_record .data"
 
 if [ "${ip}" == "${dns}" ]
 then
-    log "No update necessary."
+    end "No update necessary." 0
 else
     curl -s -f -o /dev/null -X PUT "${headers[@]}" -d "{\"data\":\"${ip}\"}" "${url}" || end "DigitalOcean PUT domain failed." ${?}
-    log "Update successful: ${ip}"
+    end "Update successful: ${ip}" 0
 fi
