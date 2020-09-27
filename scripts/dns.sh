@@ -11,24 +11,31 @@ log () {
 }
 
 declare -r ip="$(curl -s -f "https://api.ipify.org")"
-if [ ${?} -eq 0 ]
+if [ ${?} -ne 0 ]
 then
+    log "IP request failed."
+    exit 1
+else
     declare -r dns="$(curl -s -f -X GET "${headers[@]}" "${url}" | jq -r ".domain_record .data")"
-    if [ ${?} -eq 0 ]
+    if [ ${?} -ne 0 ]
     then
+        log "DigitalOcean GET domain failed."
+        exit 1
+    else
         if [ "${ip}" == "${dns}" ]
         then
             log "No update necessary."
             exit 0
         else
             curl -s -f -o /dev/null -X PUT "${headers[@]}" -d "{\"data\":\"${ip}\"}" "${url}"
-            if [ $? -eq 0 ]
+            if [ $? -ne 0 ]
             then
-                log "Updated DigitalOcean DNS: ${ip}"
+                log "DigitalOcean PUT domain failed."
+                exit 1
+            else
+                log "Update successful: ${ip}"
                 exit 0
             fi
         fi
     fi
 fi
-
-log "DNS update failed."
