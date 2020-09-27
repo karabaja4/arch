@@ -1,7 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 
-while ! checkupdates | wc -l > /tmp/update_count
+until checkupdates | wc -l > /tmp/update_count
 do
+    echo "retrying..."
     sleep 1
 done
 
