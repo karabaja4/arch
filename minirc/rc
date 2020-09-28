@@ -1,16 +1,74 @@
 #!/bin/bash
 set -u
 
-daemon_start() { echo "${1} not configured"; return 1; }
-daemon_stop()  { echo "${1} not configured"; return 1; }
-daemon_poll()  { echo "${1} not configured"; return 1; }
+declare -r DAEMONS="dhcpcd sshd ntpd mongodb redis vnc trade samba pulse haveged cron"
+declare -r ENABLED="dhcpcd sshd ntpd vnc trade haveged cron"
+declare -r PIDDIR="/tmp/minirc"
 
-DAEMONS=""
-ENABLED=""
+daemon_start() {
+    echo "Error: daemon_start function not configured"
+    exit 3
+}
 
+# load overriden daemon_start
 . /etc/minirc.conf
 
+# ${1} -> service
+# ${2} -> user
+# ${3} -> command
+daemon_execute() {
+    declare -r pidfile="${PIDDIR}/${1}.pid"
+    echo "Starting ${1}..."
+
+    if daemon_poll "${1}"
+    then
+        echo "Error: ${pidfile} exists"
+    else
+        declare -r fifo="$(mktemp -u)"
+        
+        sudo -u "${2}" mkfifo "${fifo}"
+        sudo -u "${2}" sh -c "echo \$\$ > ${fifo}; exec ${3}" &> /dev/null &
+
+        declare -r pid="$(cat "${fifo}")"
+        echo "${pid}" > "${pidfile}"
+        rm -f "${fifo}"
+        echo "User: ${2}"
+        echo "Exec: ${3}"
+        echo "PID: ${pid}"
+    fi
+}
+
+daemon_stop() {
+    declare -r pidfile="${PIDDIR}/${1}.pid"
+    echo "Stopping ${1}..."
+
+    if daemon_poll "${1}"
+    then
+        declare -r pid="$(cat ${pidfile})"
+        echo -ne "Killing ${pid}... "
+
+        kill -- -$(ps -o pgid= ${pid} | grep -o '[0-9]*')
+        timeout 10 tail --pid="${pid}" -f /dev/null
+
+        kill -9 -$(ps -o pgid= ${pid} | grep -o '[0-9]*') &> /dev/null
+        timeout 10 tail --pid="${pid}" -f /dev/null
+
+        echo "killed."
+        rm -rf "${pidfile}"
+    else
+        echo "Error: ${pidfile} does not exist or service is not running"
+    fi
+}
+
+daemon_poll() {
+    declare -r pidfile="${PIDDIR}/${1}.pid"
+    test -f "${pidfile}" && ps -p "$(cat "${pidfile}")" &> /dev/null
+}
+
 on_boot() {
+    echo "Creating PID dir..."
+    mkdir -p -m 777 "${PIDDIR}"
+
     echo "mounting API filesystem..."
     mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
     mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
@@ -88,6 +146,12 @@ usage() {
     echo "   rc start [daemon]    starts daemon"
     echo "   rc stop [daemon]     stops daemon"
     echo "   rc restart [daemon]  restarts daemon"
+    exit 2
+}
+
+not_root() {
+    echo "Root privileges are required to run this command"
+    exit 1
 }
 
 case "${1}" in
@@ -96,16 +160,8 @@ init)
 shutdown)
     on_shutdown;;
 start|stop|restart)
-    if [ "$#" -ne 2 ]
-    then
-        usage
-        exit 1
-    fi
-    if [ "${EUID}" -ne 0 ]
-    then
-        echo "not root"
-        exit 1
-    fi
+    [ $# -ne 2 ] && usage
+    [ ${EUID} -ne 0 ] && not_root
     daemon_"${1}" "${2}";;
 list)
     for dmn in ${DAEMONS}
