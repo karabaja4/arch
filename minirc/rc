@@ -16,7 +16,7 @@ daemon_start() {
     esac
 }
 
-# load overriden daemon_start
+# load overriden settings
 . /etc/minirc.conf
 
 # ${1} -> service
