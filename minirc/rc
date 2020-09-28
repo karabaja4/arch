@@ -1,13 +1,19 @@
 #!/bin/bash
 set -u
 
-declare -r DAEMONS="dhcpcd sshd ntpd mongodb redis vnc trade samba pulse haveged cron"
-declare -r ENABLED="dhcpcd sshd ntpd vnc trade haveged cron"
-declare -r PIDDIR="/tmp/minirc"
+DAEMONS="svc1 svc2"
+ENABLED="svc1"
+PIDDIR="/tmp/minirc"
 
 daemon_start() {
-    echo "Error: daemon_start function not configured"
-    exit 3
+    case "${1}" in
+    svc1)
+        daemon_execute "${1}" "root" "sleep infinity";;
+    svc2)
+        daemon_execute "${1}" "root" "sleep infinity";;
+    *)
+        echo -e "Error: unknown service: ${1}";;
+    esac
 }
 
 # load overriden daemon_start
