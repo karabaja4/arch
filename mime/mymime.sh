@@ -16,7 +16,7 @@ case "${extension,,}" in
         mupdf -r 96 "${path}";;
     jpg|jpeg|svg|png|bmp|gif|tga)
         gpicview "${path}";;
-    avi|mkv|flac|mp3|wav|mp4)
+    avi|mkv|flac|mp3|wav|mp4|mov)
         vlc "${path}";;
     txt|c|cpp|js|conf|md|sh|json|map|yml|xml|py|log|cs|ini)
         featherpad "${path}";;
