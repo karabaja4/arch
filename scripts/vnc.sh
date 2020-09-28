@@ -1,14 +1,16 @@
 #!/bin/bash
+set -euo pipefail
 
-declare -r VNCDIR="/home/igor/.vnc"
-declare -r PIDDIR="/tmp/minirc"
+declare -r vncdir="/home/igor/.vnc"
+declare -r piddir="/tmp/minirc"
 
-echo "clearing old PIDs..."
-rm -f ${VNCDIR}/*.pid
-rm -f ${VNCDIR}/*.log
+echo "clearing old sessions..."
+rm -f ${vncdir}/*.pid
+rm -f ${vncdir}/*.log
 
 echo "starting server..."
-/usr/bin/vncserver :1
+/usr/bin/vncserver :1 &
 
 echo "copying PID..."
-cp ${VNCDIR}/*.pid ${PIDDIR}/vnc.pid &> /dev/null
+sleep 2
+sudo -u root sh -c "pgrep Xvnc > ${piddir}/vnc.pid"
