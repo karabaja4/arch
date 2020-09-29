@@ -40,7 +40,7 @@ alias rsnc='sudo pacman -Rsnc'
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias fixdate='sudo ntpd -gq'
-alias ed='/home/igor/arch/text/text.sh'
+#alias ed='/home/igor/arch/text/text.sh'
 alias ws='rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20'
 #alias headless='VBoxHeadless -s ws2012r2v2'
 #alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"

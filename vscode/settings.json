@@ -84,6 +84,7 @@
         "inittab": "shellscript",
         "minirc.local": "shellscript",
         "minirc.local.shutdown": "shellscript",
-        "rc": "shellscript"
+        "rc": "shellscript",
+        "aliases": "shellscript"
     }
 }
