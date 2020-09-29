@@ -16,7 +16,7 @@ vnc () {
 
     # other
     sleep 1
-    xfce4-clipman &
+    xfce4-clipman &> /dev/null &
     sleep 1
     minitraycal &
 }
@@ -54,7 +54,7 @@ desktop () {
     sleep 1
     pnmixer &
     sleep 1
-    xfce4-clipman &
+    xfce4-clipman &> /dev/null &
     sleep 1
     flameshot &
     sleep 1
