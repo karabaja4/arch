@@ -53,10 +53,10 @@ daemon_stop() {
         declare -r pid="$(cat ${pidfile})"
         echo -ne "Killing ${pid}... "
 
-        kill -- -$(ps -o pgid= ${pid} | grep -o '[0-9]*')
+        kill -TERM "${pid}"
         timeout 10 tail --pid="${pid}" -f /dev/null
 
-        kill -9 -$(ps -o pgid= ${pid} | grep -o '[0-9]*') &> /dev/null
+        kill -KILL "${pid}" &> /dev/null
         timeout 10 tail --pid="${pid}" -f /dev/null
 
         echo "killed."
