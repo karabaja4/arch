@@ -2,12 +2,13 @@
 set -uo pipefail
 
 declare -i rv=0
+declare result=""
 
 while true
 do
-    checkupdates | wc -l > /tmp/update_count
+    result="$(checkupdates | wc -l)"
     rv=${?}
-    if [ ${rv} -eq 0 ] || [ ${rv} -eq 2 ]
+    if [[ ( ${rv} -eq 0 || ${rv} -eq 2 ) && ( ${result} != "" ) ]]
     then
         echo "success (${rv})"
         break
