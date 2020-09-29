@@ -12,7 +12,7 @@ const gray = '#757575';
 
 const init = async () => {
   await fs.promises.writeFile(trendFile, gray);
-  await fs.promises.writeFile(valueFile, 'TRV: not connected');
+  await fs.promises.writeFile(valueFile, 'TRD: not connected');
 };
 
 const write = (key, data) => {
