@@ -11,6 +11,7 @@ do
     if [[ ( ${rv} -eq 0 || ${rv} -eq 2 ) && ( ${result} != "" ) ]]
     then
         echo "success (${rv})"
+        echo "${result}" > /tmp/update_count
         break
     fi
     echo "retrying (${rv})..."
