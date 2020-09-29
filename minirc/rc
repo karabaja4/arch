@@ -160,14 +160,21 @@ not_root() {
     exit 1
 }
 
+[ ${#} -eq 0 ] && usage
+
 case "${1}" in
+init|shutdown|list)
+    [ ${#} -ne 1 ] && usage
+    ;;&
+start|stop|restart)
+    [ ${#} -ne 2 ] && usage
+    [ ${EUID} -ne 0 ] && not_root
+    ;;&
 init)
     on_boot;;
 shutdown)
     on_shutdown;;
 start|stop|restart)
-    [ $# -ne 2 ] && usage
-    [ ${EUID} -ne 0 ] && not_root
     daemon_"${1}" "${2}";;
 list)
     for dmn in ${DAEMONS}
