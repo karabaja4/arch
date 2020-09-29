@@ -5,7 +5,7 @@ spin() {
     declare -r pid="$!"
     sleep 0.2
     kill -0 "${pid}" &> /dev/null
-    if [ "$?" -eq 0 ]
+    if [ $? -eq 0 ]
     then
         # init fifo
         declare -r fifo="$(mktemp -u)"
@@ -46,5 +46,5 @@ gzip)
     spin "creating archive ${2}.tar.gz";;
 sleep)
     sleep 37 &
-    spin "sleeping"
+    spin "sleeping";;
 esac
