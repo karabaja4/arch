@@ -64,8 +64,6 @@ alias dhcpcd='sudo dhcpcd -4'
 alias start='rc start'
 alias stop='rc stop'
 
-alias sudo='sudo -E'
-
 alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
 
 # exports
