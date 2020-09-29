@@ -41,7 +41,6 @@ desktop () {
     feh --bg-scale ${HOME}/arch/wall/default.jpg
 
     # conky
-    /home/igor/arch/scripts/updates.sh &
     conky -d -c ${HOME}/arch/conky/conkyrc-headless
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 0
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 1
