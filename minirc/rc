@@ -168,6 +168,8 @@ init|shutdown|list)
     ;;&
 start|stop|restart)
     [ ${#} -ne 2 ] && usage
+    ;;&
+init|shutdown|start|stop|restart)
     [ ${EUID} -ne 0 ] && not_root
     ;;&
 init)
