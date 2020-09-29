@@ -22,6 +22,8 @@ daemon_start() {
 # ${1} -> service
 # ${2} -> user
 # ${3} -> command
+# for logging use:
+# |& logger --tag "${1}" &
 daemon_execute() {
     declare -r pidfile="${PIDDIR}/${1}.pid"
     echo "Starting ${1}..."
