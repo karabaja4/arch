@@ -1,5 +1,5 @@
 echo 0 > /proc/sys/kernel/printk
-echo "none" > "/sys/block/$(blkid -U 56855f92-7483-4db9-afaf-5eb05a0dcc82 | grep -oP "(?<=/dev/).*?(?=[0-9])")/queue/scheduler"
+echo "none" > "/sys/block/$(lsblk -no PKNAME /dev/disk/by-uuid/56855f92-7483-4db9-afaf-5eb05a0dcc82)/queue/scheduler"
 touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p -m 777 /tmp/.X11-unix
