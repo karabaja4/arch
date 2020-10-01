@@ -497,8 +497,8 @@ state.Headset {
 	control.1 {
 		iface PCM
 		name 'Playback Channel Map'
-		value.0 0
-		value.1 0
+		value.0 3
+		value.1 4
 		comment {
 			access read
 			type INTEGER
