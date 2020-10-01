@@ -225,23 +225,6 @@ state.PCH {
 			range '0 - 36'
 		}
 	}
-	control.19 {
-		iface MIXER
-		name 'PCM Playback Volume'
-		value.0 255
-		value.1 255
-		comment {
-			access 'read write user'
-			type INTEGER
-			count 2
-			range '0 - 255'
-			tlv '0000000100000008ffffec1400000014'
-			dbmin -5100
-			dbmax 0
-			dbvalue.0 0
-			dbvalue.1 0
-		}
-	}
 }
 state.HDMI {
 	control.1 {
@@ -497,8 +480,8 @@ state.Headset {
 	control.1 {
 		iface PCM
 		name 'Playback Channel Map'
-		value.0 3
-		value.1 4
+		value.0 0
+		value.1 0
 		comment {
 			access read
 			type INTEGER
