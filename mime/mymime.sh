@@ -18,7 +18,7 @@ case "${extension,,}" in
         gpicview "${path}";;
     avi|mkv|flac|mp3|wav|mp4|mov)
         vlc "${path}";;
-    txt|c|cpp|js|conf|md|sh|json|map|yml|xml|py|log|cs|ini)
+    txt|c|cpp|js|conf|md|sh|json|map|yml|xml|py|log|cs|ini|csv)
         featherpad "${path}";;
     torrent)
         qbittorrent "${path}";;
