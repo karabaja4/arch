@@ -10,7 +10,7 @@ cat /usr/share/mime/aliases | cut -d' ' -f 2 >> "${path}"
 cat /usr/share/mime/types >> "${path}"
 cat /usr/share/mime/packages/freedesktop.org.xml | grep "<mime-type type=" | cut -d \" -f2 >> "${path}"
 sort -u -o "${path}" "${path}"
-sed -e 's/$/=mymime.desktop;/' -i "${path}"
+sed -e 's/$/=mymime.desktop/' -i "${path}"
 sed -i '1s/^/[Default Applications]\n/' "${path}"
 sed -i '/^#/d' "${path}"
 chmod 400 ${path}
