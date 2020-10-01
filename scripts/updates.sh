@@ -1,11 +1,12 @@
 #!/bin/bash
 set -uo pipefail
 
-declare path="/tmp/update_count"
+declare -r path="/tmp/update_count"
 
 if [ ! -f "${path}" ]
 then
-    install -m 666 /dev/null "${path}"
+    echo "-" > "${path}"
+    chmod 666 "${path}"
 fi
 
 declare -i rv=0
