@@ -31,7 +31,7 @@ desktop () {
     # alsa
     # alsactl -f ${HOME}/arch/alsa/asound.state.speakers store
     # alsactl -f ${HOME}/arch/alsa/asound.state.headset store
-    alsactl -f ${HOME}/.asound.state restore
+    alsactl -f ${HOME}/arch/alsa/asound.state.speakers restore
 
     # daemons
     xsettingsd -c ${HOME}/arch/xfce4-terminal/xsettingsd &
