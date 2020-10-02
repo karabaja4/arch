@@ -29,9 +29,6 @@ desktop () {
     xinput set-prop 11 326 0.5
     
     # alsa
-    # alsactl -f ${HOME}/arch/alsa/asound.state.speakers store
-    # alsactl -f ${HOME}/arch/alsa/asound.state.headset store
-    # alsactl -f ${HOME}/arch/alsa/asound.state.speakers restore
     ${HOME}/arch/alsa/switch.sh master
 
     # daemons

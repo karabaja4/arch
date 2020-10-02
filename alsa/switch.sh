@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-    echo "usage: switch.sh [speakers|headset|master]"
+    echo "usage: switch.sh [speakers|headphones|master]"
     exit 1
 }
 
@@ -16,8 +16,8 @@ speakers)
     amixer set Master unmute > /dev/null
     amixer set Master 100% > /dev/null
     ;;
-headset)
-    ln -sf "${basedir}/asoundrc.headset" "${HOME}/.asoundrc"
+headphones)
+    ln -sf "${basedir}/asoundrc.headphones" "${HOME}/.asoundrc"
     amixer set Headphone unmute > /dev/null
     amixer set Headphone 100% > /dev/null
     amixer set Mic unmute > /dev/null
