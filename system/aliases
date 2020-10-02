@@ -48,7 +48,8 @@ jtail() {
     /home/igor/arch/minirc/log.sh $1
 }
 
-alias vboxload="sudo modprobe vboxdrv && sudo modprobe vboxnetadp && sudo modprobe vboxnetflt"
+alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
+alias vboxload="sudo modprobe -a vboxdrv vboxnetadp vboxnetflt"
 
 alias dhcpcd='sudo dhcpcd -4'
 alias start='rc start'
