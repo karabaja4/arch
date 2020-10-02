@@ -32,31 +32,21 @@ gitreset() {
     git reset --hard origin/master
 }
 
-#alias regdom='nano /etc/conf.d/wireless-regdom'
-#alias ifedit='nano /etc/udev/rules.d/10-network.rules'
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
-
 alias rsnc='sudo pacman -Rsnc'
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
+alias sound='/home/igor/arch/alsa/switch.sh'
 alias fixdate='sudo ntpd -gq'
-#alias ed='/home/igor/arch/text/text.sh'
 alias ws='rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20'
-#alias headless='VBoxHeadless -s ws2012r2v2'
-#alias mountnas="sudo mount -t cifs //192.168.0.10/storage _nas/ -o username=root,password=password,vers=1.0,uid=$(id -u),gid=$(id -g)"
 alias mountdisk="sudo mount /dev/sdc1 /home/igor/_disk/"
 alias mountmmc="sudo mount /dev/mmcblk0p1 /home/igor/_mmc/"
 alias mountazure="sudo mount -t cifs //igorsaric.file.core.windows.net/storage1 /home/igor/_azure -o vers=3.0,credentials=/etc/smbcredentials/igorsaric.cred,dir_mode=0777,file_mode=0777,serverino"
-#alias vboxadd="VBoxManage registervm"
 alias zxvf="tar zxvf"
 
 jtail() {
     /home/igor/arch/minirc/log.sh $1
 }
-
-# jcat() {
-#     tail -n 10000 /var/log/minirc/$1.log
-# }
 
 alias vboxload="sudo modprobe vboxdrv && sudo modprobe vboxnetadp && sudo modprobe vboxnetflt"
 
@@ -74,11 +64,6 @@ export NO_AT_BRIDGE=1
 export XDG_RUNTIME_DIR="/tmp/runtime-igor"
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export EDITOR=nano
-
-# dotnet
-#export DOTNET_ROOT=$PATH:/opt/dotnet
-#export PATH=$PATH:/opt/dotnet
-#export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 
 source /usr/share/git/completion/git-prompt.sh
