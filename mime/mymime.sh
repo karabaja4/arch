@@ -25,7 +25,7 @@ case "${extension,,}" in
     gz|zip|rar|zst)
         xarchiver "${path}";;
     *)
-        mime="$(file --brief --mime-type "${path}")"
+        declare mime="$(file --brief --mime-type "${path}")"
         case "${mime}" in
             inode/x-empty|application/octet-stream|text/*)
                 featherpad "${path}";;
