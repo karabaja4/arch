@@ -1,7 +1,7 @@
 
 const fs = require('fs');
 
-const name = 'FOREXCOM:NSXUSD';
+// const name = 'FOREXCOM:NSXUSD';
 
 const trendFile = '/tmp/asset_trend';
 const valueFile = '/tmp/asset_value';
@@ -10,13 +10,22 @@ const green = '#69F0AE';
 const red = '#FF6E40';
 const gray = '#757575';
 
+const getName = () => {
+  const day = (new Date()).getDay();
+  if (day === 6 || day === 0) {
+    return 'BITMEX:XBTUSD';
+  }
+  return 'FOREXCOM:NSXUSD';
+};
+
 const init = async () => {
   await fs.promises.writeFile(trendFile, gray);
   await fs.promises.writeFile(valueFile, 'TRD: not connected');
 };
 
 const write = (key, data) => {
-  if (key != name) {
+  const name = getName();
+  if (key !== name) {
     return;
   }
   const values = data[name];
