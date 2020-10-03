@@ -15,3 +15,5 @@ sed -e 's/$/=mymime.desktop/' -i "${path}"
 sed -i '1s/^/[Default Applications]\n/' "${path}"
 sed -i '/^#/d' "${path}"
 chmod 400 ${path}
+
+ln -sf "${path}" "${HOME}/.config/mimeapps.list"
