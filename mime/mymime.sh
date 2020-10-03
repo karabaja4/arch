@@ -1,9 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
-declare extension=""
 declare path="${1}"
+
+if [[ "${path}" == "." ]]
+then
+   path="${PWD}"
+fi
+
 declare filename="$(basename "${path}")"
+declare extension=""
 
 # if not a dotfile and contains a dot, get the extension
 if [[ ${filename:0:1} != "." ]] && [[ ${filename} == *"."* ]]
