@@ -62,6 +62,7 @@ application/CEA=mymime.desktop
 application/cea-2018+xml=mymime.desktop
 application/cellml+xml=mymime.desktop
 application/cfw=mymime.desktop
+application/clr=mymime.desktop
 application/clue_info+xml=mymime.desktop
 application/clue+xml=mymime.desktop
 application/cms=mymime.desktop

@@ -8,6 +8,8 @@ cat /usr/share/mime/globs | cut -d':' -f 1 >> "${path}"
 cat /usr/share/mime/aliases | cut -d' ' -f 1 >> "${path}"
 cat /usr/share/mime/aliases | cut -d' ' -f 2 >> "${path}"
 cat /usr/share/mime/types >> "${path}"
+rm -rf media-types.xml
+wget https://www.iana.org/assignments/media-types/media-types.xml
 cat "${dir}/media-types.xml" | grep -oP '(?<=<file type="template">).*(?=</file>)' >> "${path}"
 cat /usr/share/mime/packages/freedesktop.org.xml | grep "<mime-type type=" | cut -d \" -f2 >> "${path}"
 sort -u -o "${path}" "${path}"
