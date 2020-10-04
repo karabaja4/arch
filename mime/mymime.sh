@@ -19,6 +19,7 @@ declare -r rgx="^[a-z]+://.+$"
 if [[ ${1} =~ ${rgx} ]]
 then
     declare -r uri="${1}"
+    echo "Opening URL: ${uri}"
     declare -r protocol="$(echo "${uri}" | grep -oP ".+?(?=://)")"
     case "${protocol}" in
     slack)
@@ -40,6 +41,7 @@ then
    path="${PWD}"
 fi
 
+echo "Opening file: ${path}"
 declare -r fname="$(basename "${path}")"
 declare ext=""
 
@@ -67,6 +69,7 @@ case "${ext,,}" in
         then
             error "Not a file or directory: ${path}"
         fi
+        echo "Calling file to get MIME type"
         declare mime="$(file --brief --mime-type "${path}")"
         case "${mime}" in
             inode/x-empty|application/octet-stream|text/*)
