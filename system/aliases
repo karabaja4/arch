@@ -45,7 +45,7 @@ alias mountazure="sudo mount -t cifs //igorsaric.file.core.windows.net/storage1 
 alias zxvf="tar zxvf"
 
 jtail() {
-    /home/igor/arch/minirc/log.sh $1
+    /home/igor/arch/scripts/log.sh $1
 }
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
