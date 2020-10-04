@@ -1,9 +1,34 @@
 #!/bin/bash
 set -euo pipefail
 
-declare path="${1}"
+error() {
+    zenity --error --no-wrap --text="${1}"
+    exit 1
+}
 
-if [[ "${path}" == "." ]]
+declare -r regex="^[a-zA-Z0-9]+://.+"
+
+# protocol mode
+if [[ ${1} =~ ${regex} ]]
+then
+    declare -r uri="${1}"
+    declare -r protocol="$(echo "${uri}" | grep -oP ".+?(?=://)")"
+    case "${protocol}" in
+    slack)
+        slack "${uri}";;
+    http|https)
+        chromium "${uri}";;
+    file)
+        qtfm "$(dirname "${uri}")";;
+    *)
+        error "No protocol defined for ${protocol} (${uri})";;
+    esac
+    exit 0
+fi
+
+# file mode
+declare path="${1}"
+if [[ ${path} == "." ]]
 then
    path="${PWD}"
 fi
@@ -31,6 +56,10 @@ case "${extension,,}" in
     gz|zip|rar|zst)
         xarchiver "${path}";;
     *)
+        if [[ ! -e ${path} ]]
+        then
+            error "Not a file or directory: ${path}"
+        fi
         declare mime="$(file --brief --mime-type "${path}")"
         case "${mime}" in
             inode/x-empty|application/octet-stream|text/*)
@@ -38,7 +67,7 @@ case "${extension,,}" in
             inode/directory)
                 qtfm "${path}";;
             *)
-                zenity --info --text="Missing definition for ${extension} as ${mime}" --no-wrap;;
+                error "Missing definition for ${extension} as ${mime}";;
         esac
         ;;
 esac
