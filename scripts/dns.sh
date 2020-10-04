@@ -16,7 +16,7 @@ end () {
 ip="$(curl -s -f "https://api.ipify.org")" || end "IP request failed." ${?} 
 dns="$(curl -s -f -X GET "${headers[@]}" "${url}" | jq -r ".domain_record .data")" || end "DigitalOcean GET domain failed." ${?} 
 
-if [[ ${ip} == ${dns} ]]
+if [[ "${ip}" == "${dns}" ]]
 then
     end "No update necessary." 0
 else
