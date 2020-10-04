@@ -38,7 +38,7 @@ fi
 declare path="${1}"
 if [[ ${path} == "." ]]
 then
-   path="${PWD}"
+    path="${PWD}"
 fi
 
 echo "Opening file: ${path}"
