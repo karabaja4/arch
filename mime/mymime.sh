@@ -66,7 +66,7 @@ case "${ext,,}" in
     gz|zip|rar|zst)
         xarchiver "${path}";;
     *)
-        if [[ ! -e ${path} ]]
+        if [ ! -e "${path}" ]
         then
             error "Not a file or directory: ${path}"
         fi
