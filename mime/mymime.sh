@@ -1,15 +1,22 @@
 #!/bin/bash
 set -euo pipefail
 
+usage() {
+    echo "usage: ${0} [file | URL]"
+    exit 2
+}
+
+[ ${#} -eq 0 ] && usage
+
 error() {
     zenity --error --no-wrap --text="${1}"
     exit 1
 }
 
-declare -r regex="^[a-z]+://.+"
+declare -r rgx="^[a-z]+://.+$"
 
 # protocol mode
-if [[ ${1} =~ ${regex} ]]
+if [[ ${1} =~ ${rgx} ]]
 then
     declare -r uri="${1}"
     declare -r protocol="$(echo "${uri}" | grep -oP ".+?(?=://)")"
@@ -33,16 +40,16 @@ then
    path="${PWD}"
 fi
 
-declare filename="$(basename "${path}")"
-declare extension=""
+declare -r fname="$(basename "${path}")"
+declare ext=""
 
 # if not a dotfile and contains a dot, get the extension
-if [[ ${filename:0:1} != "." ]] && [[ ${filename} == *"."* ]]
+if [[ ${fname:0:1} != "." ]] && [[ ${fname} == *"."* ]]
 then
-    extension="${filename##*.}"
+    ext="${fname##*.}"
 fi
 
-case "${extension,,}" in
+case "${ext,,}" in
     pdf)
         mupdf -r 96 "${path}";;
     jpg|jpeg|svg|png|bmp|gif|tga)
@@ -67,7 +74,7 @@ case "${extension,,}" in
             inode/directory)
                 qtfm "${path}";;
             *)
-                error "Missing definition for ${extension} as ${mime}";;
+                error "Missing definition for ${ext} as ${mime}";;
         esac
         ;;
 esac
