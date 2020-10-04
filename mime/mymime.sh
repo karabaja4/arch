@@ -6,7 +6,7 @@ error() {
     exit 1
 }
 
-declare -r regex="^[a-zA-Z0-9]+://.+"
+declare -r regex="^[a-z]+://.+"
 
 # protocol mode
 if [[ ${1} =~ ${regex} ]]
