@@ -77,7 +77,7 @@
     },
     "javascript.updateImportsOnFileMove.enabled": "never",
     "explorer.compactFolders": false,
-    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "files.associations": {
         "autostart": "shellscript",
         "minirc.conf": "shellscript",
