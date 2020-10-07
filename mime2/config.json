@@ -1,0 +1,17 @@
+{
+  "extensions": {
+    "txt": "featherpad $f",
+    "avi": "vlc $f",
+    "pdf": "mupdf -r 96 $f"
+  },
+  "mimetypes:": {
+    "text/plain": "featherpad $f",
+    "media/video": "vlc $f",
+    "document/pdf": "mupdf -r 96 $f"
+  },
+  "protocols": {
+    "http://": "chromium $f",
+    "https://": "chromium $f",
+    "slack://": "slack $f"
+  }
+}
