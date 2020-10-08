@@ -17,8 +17,8 @@ vnc () {
     # other
     sleep 1
     xfce4-clipman &> /dev/null &
-    sleep 1
-    minitraycal &
+    #sleep 1
+    #minitraycal &
 }
 
 desktop () {
@@ -58,8 +58,8 @@ desktop () {
     flameshot &
     sleep 1
     synergy &
-    sleep 1
-    minitraycal &
+    #sleep 1
+    #minitraycal &
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &

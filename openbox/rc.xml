@@ -154,7 +154,7 @@
     <application name="gsimplecal">
       <position force="yes">
         <x>-0</x>
-        <y>-0</y>
+        <y>0</y>
         <monitor>mouse</monitor>
       </position>
     </application>
