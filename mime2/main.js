@@ -44,7 +44,7 @@ const main = async () => {
   // mimetypes
   try {
     const mimetypes = cfg['mimetypes'] || {};
-    const { stdout } = await exec(`file -E --brief --mime-type ${arg}`);
+    const { stdout } = await exec(`file -E --brief --mime-type '${arg}'`);
     for (const [ mime, cmd ] of Object.entries(mimetypes)) {
       if (nm.isMatch(stdout.trim(), mime)) {
         return exit(cmd);

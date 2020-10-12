@@ -6,6 +6,7 @@
   },
   "mimetypes": {
     "text/*": "featherpad $arg",
+    "video/*": "vlc $arg",
     "media/video": "vlc $arg",
     "document/pdf": "mupdf -r 96 $arg",
     "inode/directory": "qtfm $pwd"
