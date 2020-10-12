@@ -1,0 +1,10 @@
+{
+  "name": "tv",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "minimist": "^1.2.5",
+    "micromatch": "^4.0.2"
+  },
+  "devDependencies": {}
+}

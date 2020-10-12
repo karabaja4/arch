@@ -1,17 +1,18 @@
 {
   "extensions": {
-    "txt": "featherpad $f",
-    "avi": "vlc $f",
-    "pdf": "mupdf -r 96 $f"
+    "txt": "featherpad $arg",
+    "avi": "vlc $arg",
+    "pdf": "mupdf -r 96 $arg"
   },
-  "mimetypes:": {
-    "text/plain": "featherpad $f",
-    "media/video": "vlc $f",
-    "document/pdf": "mupdf -r 96 $f"
+  "mimetypes": {
+    "text/*": "featherpad $arg",
+    "media/video": "vlc $arg",
+    "document/pdf": "mupdf -r 96 $arg",
+    "inode/directory": "qtfm $pwd"
   },
   "protocols": {
-    "http://": "chromium $f",
-    "https://": "chromium $f",
-    "slack://": "slack $f"
+    "http://*": "chromium $arg",
+    "https://*": "chromium $arg",
+    "slack://*": "slack $arg"
   }
 }
