@@ -15,7 +15,7 @@ const main = async () => {
 
   const vars = {
     '$pwd': process.cwd(),
-    '$arg': arg
+    '$arg': `'${arg}'`
   };
   
   const replace = (cmd) => {
@@ -55,8 +55,8 @@ const main = async () => {
   // protocols
   if (arg.match(/^[a-z]+:\/\/.+$/gi)) {
     const protocols = cfg['protocols'] || {};
-    for (const [ ptc, cmd ] of Object.entries(protocols)) {
-      if (mm.isMatch(arg, ptc)) {
+    for (const [ prot, cmd ] of Object.entries(protocols)) {
+      if (mm.isMatch(arg, prot)) {
         return exit(cmd);
       }
     }
