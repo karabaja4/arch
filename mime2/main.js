@@ -12,7 +12,7 @@ if (!arg) {
 }
 
 const vars = {
-  '$pwd': process.cwd(),
+  '$pwd': `'${process.cwd()}'`,
   '$arg': `'${arg}'`
 };
 
