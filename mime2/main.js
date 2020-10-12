@@ -17,15 +17,15 @@ const vars = {
 };
 
 const sub = (cmd) => {
-  for (const [ name, value ] of Object.entries(vars)) {
-    cmd = cmd.replace(name, value);
+  for (const key in vars) {
+    cmd = cmd.replace(key, vars[key]);
   }
   return cmd;
 }
 
 const exit = (cmd) => {
   console.log(sub(cmd));
-  return process.exit(0);
+  return 0;
 }
 
 const match = (value, glob) => {
