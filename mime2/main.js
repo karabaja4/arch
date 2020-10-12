@@ -16,7 +16,7 @@ const vars = {
   '$arg': `'${arg}'`
 };
 
-const replace = (cmd) => {
+const sub = (cmd) => {
   for (const [ name, value ] of Object.entries(vars)) {
     cmd = cmd.replace(name, value);
   }
@@ -24,19 +24,23 @@ const replace = (cmd) => {
 }
 
 const exit = (cmd) => {
-  console.log(replace(cmd));
+  console.log(sub(cmd));
   return process.exit(0);
+}
+
+const match = (value, glob) => {
+  return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
 }
 
 const main = async () => {
 
   // extensions
-  const extension = path.extname(arg).replace('.', '');
-  if (extension) {
+  const ext = path.extname(arg).replace('.', '');
+  if (ext) {
     const extensions = cfg['extensions'] || {};
-    for (const [ ext, cmd ] of Object.entries(extensions)) {
-      if (nm.isMatch(extension, ext)) {
-        return exit(cmd);
+    for (const key in extensions) {
+      if (match(ext, key)) {
+        return exit(extensions[key]);
       }
     }
   }
@@ -45,19 +49,19 @@ const main = async () => {
   try {
     const mimetypes = cfg['mimetypes'] || {};
     const { stdout } = await exec(`file -E --brief --mime-type '${arg}'`);
-    for (const [ mime, cmd ] of Object.entries(mimetypes)) {
-      if (nm.isMatch(stdout.trim(), mime)) {
-        return exit(cmd);
+    for (const key in mimetypes) {
+      if (match(stdout.trim(), key)) {
+        return exit(mimetypes[key]);
       }
     }
   } catch (e) {}
 
   // protocols
-  if (nm.isMatch(arg, '*://**')) {
+  if (arg.match(/^[a-z]+:\/\/.+$/gi)) {
     const protocols = cfg['protocols'] || {};
-    for (const [ prot, cmd ] of Object.entries(protocols)) {
-      if (nm.isMatch(arg, prot)) {
-        return exit(cmd);
+    for (const key in protocols) {
+      if (match(arg, key)) {
+        return exit(protocols[key]);
       }
     }
   }

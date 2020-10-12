@@ -12,8 +12,8 @@
     "inode/directory": "qtfm $pwd"
   },
   "protocols": {
-    "http://**": "chromium $arg",
-    "https://**": "chromium $arg",
-    "slack://**": "slack $arg"
+    "http://*": "chromium $arg",
+    "https://*": "chromium $arg",
+    "slack://*": "slack $arg"
   }
 }
