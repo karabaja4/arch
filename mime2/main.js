@@ -6,30 +6,30 @@ const exec = util.promisify(require('child_process').exec);
 const cfg = require('./config.json');
 const arg = args._[0];
 
+if (!arg) {
+  console.log('invalid arguments');
+  process.exit(1);
+}
+
+const vars = {
+  '$pwd': process.cwd(),
+  '$arg': `'${arg}'`
+};
+
+const replace = (cmd) => {
+  for (const [ name, value ] of Object.entries(vars)) {
+    cmd = cmd.replace(name, value);
+  }
+  return cmd;
+}
+
+const exit = (cmd) => {
+  console.log(replace(cmd));
+  return process.exit(0);
+}
+
 const main = async () => {
 
-  if (!arg) {
-    console.log('invalid arguments');
-    process.exit(1);
-  }
-
-  const vars = {
-    '$pwd': process.cwd(),
-    '$arg': `'${arg}'`
-  };
-  
-  const replace = (cmd) => {
-    for (const [ name, value ] of Object.entries(vars)) {
-      cmd = cmd.replace(name, value);
-    }
-    return cmd;
-  }
-
-  const exit = (cmd) => {
-    console.log(replace(cmd));
-    return process.exit(0);
-  }
-  
   // extensions
   const extension = path.extname(arg).replace('.', '');
   if (extension) {
@@ -53,7 +53,7 @@ const main = async () => {
   } catch (e) {}
 
   // protocols
-  if (arg.match(/^[a-z]+:\/\/.+$/gi)) {
+  if (nm.isMatch(arg, '*://**')) {
     const protocols = cfg['protocols'] || {};
     for (const [ prot, cmd ] of Object.entries(protocols)) {
       if (nm.isMatch(arg, prot)) {
