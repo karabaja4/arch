@@ -1,7 +1,7 @@
 const args = require('minimist')(process.argv.slice(2));
 const path = require('path');
 const util = require('util');
-const mm = require('micromatch');
+const nm = require('nanomatch');
 const exec = util.promisify(require('child_process').exec);
 const cfg = require('./config.json');
 const arg = args._[0];
@@ -35,7 +35,7 @@ const main = async () => {
   if (extension) {
     const extensions = cfg['extensions'] || {};
     for (const [ ext, cmd ] of Object.entries(extensions)) {
-      if (mm.isMatch(extension, ext)) {
+      if (nm.isMatch(extension, ext)) {
         return exit(cmd);
       }
     }
@@ -46,7 +46,7 @@ const main = async () => {
     const mimetypes = cfg['mimetypes'] || {};
     const { stdout } = await exec(`file -E --brief --mime-type ${arg}`);
     for (const [ mime, cmd ] of Object.entries(mimetypes)) {
-      if (mm.isMatch(stdout.trim(), mime)) {
+      if (nm.isMatch(stdout.trim(), mime)) {
         return exit(cmd);
       }
     }
@@ -56,7 +56,7 @@ const main = async () => {
   if (arg.match(/^[a-z]+:\/\/.+$/gi)) {
     const protocols = cfg['protocols'] || {};
     for (const [ prot, cmd ] of Object.entries(protocols)) {
-      if (mm.isMatch(arg, prot)) {
+      if (nm.isMatch(arg, prot)) {
         return exit(cmd);
       }
     }
