@@ -94,6 +94,9 @@
         <command>slock</command>
       </action>
     </keybind>
+    <keybind key="W-M">
+      <action name="ToggleShowDesktop" />
+    </keybind>
   </keyboard>
 
   <mouse>

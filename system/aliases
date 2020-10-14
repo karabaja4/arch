@@ -32,13 +32,21 @@ gitreset() {
     git reset --hard origin/master
 }
 
+workwork() {
+    declare -r secret="$HOME/arch/scripts/secret.json"
+    declare -r server="$(jq -r ".work.server" "$secret")"
+    declare -r user="$(jq -r ".work.user" "$secret")"
+    declare -r password="$(jq -r ".work.password" "$secret")"
+    xfreerdp /cert-ignore /bpp:8 /network:modem /audio-mode:2 /multimon /floatbar:sticky:off /v:$server /u:$user /p:$password +compression +bitmap-cache
+    # rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20
+}
+
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
 alias rsnc='sudo pacman -Rsnc'
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias sound='/home/igor/arch/alsa/switch.sh'
 alias fixdate='sudo ntpd -gq'
-alias ws='rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20'
 alias mountdisk="sudo mount -t ext4 /dev/sdc1 /home/igor/_disk/"
 alias mountmmc="sudo mount /dev/mmcblk0p1 /home/igor/_mmc/"
 alias mountazure="sudo mount -t cifs //igorsaric.file.core.windows.net/storage1 /home/igor/_azure -o vers=3.0,credentials=/etc/smbcredentials/igorsaric.cred,dir_mode=0777,file_mode=0777,serverino"
