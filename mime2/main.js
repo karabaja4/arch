@@ -17,6 +17,10 @@ const vars = {
 };
 
 const sub = (cmd) => {
+  // stupid fix for qtfm
+  if (cmd.startsWith('qtfm') && arg === '.') {
+    cmd = cmd.replace('$arg', '$pwd');
+  }
   for (const key in vars) {
     cmd = cmd.replace(key, vars[key]);
   }
