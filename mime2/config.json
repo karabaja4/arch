@@ -12,7 +12,9 @@
     "video/*": "vlc $arg",
     "media/video": "vlc $arg",
     "document/pdf": "mupdf -r 96 $arg",
-    "inode/directory": "qtfm $arg"
+    "inode/directory": "qtfm $arg",
+    "inode/x-empty": "featherpad $arg",
+    "application/octet-stream": "featherpad $arg"
   },
   "protocols": {
     "http://*": "chromium $arg",
