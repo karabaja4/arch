@@ -33,6 +33,7 @@ gitreset() {
 }
 
 workwork() {
+    # requires ppp_generic
     declare -r secret="$HOME/arch/scripts/secret.json"
     declare -r server="$(jq -r ".work.server" "$secret")"
     declare -r user="$(jq -r ".work.user" "$secret")"
