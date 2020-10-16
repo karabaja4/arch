@@ -17,6 +17,7 @@
   "protocols": {
     "http://*": "chromium $arg",
     "https://*": "chromium $arg",
-    "slack://*": "slack $arg"
+    "slack://*": "slack $arg",
+    "file://*": "qtfm $arg"
   }
 }
