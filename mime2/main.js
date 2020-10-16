@@ -39,8 +39,11 @@ const main = async () => {
   if (ext) {
     const extensions = cfg['extensions'] || {};
     for (const key in extensions) {
-      if (match(ext, key)) {
-        return exit(extensions[key]);
+      const splits = key.split('|');
+      for (let i = 0; i < splits.length; i++) {
+        if (match(ext, splits[i])) {
+          return exit(extensions[key]);
+        }
       }
     }
   }

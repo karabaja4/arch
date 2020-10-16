@@ -11,11 +11,12 @@ const red = '#FF6E40';
 const gray = '#757575';
 
 const getName = () => {
-  const day = (new Date()).getDay();
-  if (day === 6 || day === 0) {
-    return 'BITMEX:XBTUSD';
-  }
-  return 'FOREXCOM:NSXUSD';
+  // const day = (new Date()).getDay();
+  // if (day === 6 || day === 0) {
+  //   return 'BITMEX:XBTUSD';
+  // }
+  // return 'FOREXCOM:NSXUSD';
+  return 'BITMEX:XBTUSD';
 };
 
 const init = async () => {
