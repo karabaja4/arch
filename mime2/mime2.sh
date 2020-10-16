@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+# sudo mv /usr/bin/xdg-open /usr/bin/xdg-open.bak
+# sudo ln -sf /home/igor/arch/mime2/mime2.sh /usr/bin/xdg-open
+
 usage() {
     echo "usage: ${0} [file | URL]"
     exit 2
