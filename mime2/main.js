@@ -27,9 +27,9 @@ const sub = (cmd) => {
   return cmd;
 }
 
-const exit = (cmd) => {
-  console.log(sub(cmd));
-  return 0;
+const exit = async (cmd) => {
+  const command = sub(cmd);
+  return await exec(`( ${command} & ) &> /dev/null &`);
 }
 
 const match = (value, glob) => {
@@ -46,7 +46,7 @@ const main = async () => {
       const splits = key.split(',');
       for (let i = 0; i < splits.length; i++) {
         if (match(ext, splits[i])) {
-          return exit(extensions[key]);
+          return await exit(extensions[key]);
         }
       }
     }
@@ -58,7 +58,7 @@ const main = async () => {
     const { stdout } = await exec(`file -E --brief --mime-type '${arg}'`);
     for (const key in mimetypes) {
       if (match(stdout.trim(), key)) {
-        return exit(mimetypes[key]);
+        return await exit(mimetypes[key]);
       }
     }
   } catch (e) {}
@@ -68,7 +68,7 @@ const main = async () => {
     const protocols = cfg['protocols'] || {};
     for (const key in protocols) {
       if (match(arg, key)) {
-        return exit(protocols[key]);
+        return await exit(protocols[key]);
       }
     }
   }
