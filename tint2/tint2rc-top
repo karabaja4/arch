@@ -61,6 +61,7 @@ launcher_item_app = /usr/share/applications/virtualbox.desktop
 #launcher_item_app = /usr/share/applications/vmware-player.desktop
 launcher_item_app = /usr/share/applications/postman.desktop
 launcher_item_app = /usr/share/applications/slack.desktop
+launcher_item_app = /home/igor/arch/mspaint/mspaint.desktop
 
 #-------------------------------------
 # Executor 1

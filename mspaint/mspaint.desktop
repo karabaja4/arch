@@ -4,7 +4,7 @@ Name=mspaint
 Comment=mspaint
 Type=Application
 Categories=Development;
-Exec=wine /home/igor/arch/mspaint/mspaint.exe
+Exec=chromium --new-window --app=https://jspaint.app
 Terminal=false
 StartupNotify=true
 Icon=mspaint2
