@@ -3,3 +3,5 @@ node_modules
 secret.json
 store.json
 package-lock.json
+qtfm.conf
+fp.conf
