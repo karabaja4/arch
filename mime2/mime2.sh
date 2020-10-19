@@ -22,5 +22,5 @@ then
 else
     echo "mime2: ${1} -> ${result}" >> "$logs/log"
     readarray -t -d '' arr < <(xargs printf "%s\0" <<< "$result")
-    "${arr[@]}"
+    ( "${arr[@]}" & )
 fi
