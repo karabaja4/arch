@@ -35,7 +35,7 @@ daemon_execute() {
         declare -r fifo="$(mktemp -u)"
         
         su - "${2}" -c "mkfifo ${fifo}"
-        su - "${2}" -c "echo \$\$ > ${fifo}; exec ${3}" &> /dev/null &
+        su - "${2}" -c "( ${3} & echo \$! > ${fifo} )" &> /dev/null &
 
         declare -r pid="$(cat "${fifo}")"
         echo "${pid}" > "${pidfile}"
