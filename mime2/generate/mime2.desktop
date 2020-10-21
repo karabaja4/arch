@@ -1,4 +1,4 @@
 [Desktop Entry]
 Name=mime2
 Type=Application
-Exec=/home/igor/arch/mime2/mime2.sh
+Exec=/usr/bin/xdg-open
