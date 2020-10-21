@@ -64,7 +64,7 @@ const print = async (data) => {
         const lines = text.split('\n');
         const color = value.change >= 0 ? escapes.green : escapes.red;
         for (let j = 0; j < lines.length; j++) {
-          let line = lines[j].trimEnd();
+          let line = lines[j].substring(0, 184);
           if (line.includes(block)) {
             line = insert(line, `${escapes.white}`, 8);
             line = insert(line, `${escapes.reset}${escapes.gray}`, 122);
