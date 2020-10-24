@@ -14,12 +14,12 @@ asoundrc() {
 
 case "${1}" in
 speakers)
-    asoundrc "$(cat /proc/asound/cards | grep PCH | head -n1 | cut -c2)"
+    asoundrc "$(awk '/PCH/{print $1; exit;}' /proc/asound/cards)"
     amixer set Master unmute > /dev/null
     amixer set Master 100% > /dev/null
     ;;
 headphones)
-    asoundrc "$(cat /proc/asound/cards | grep Headset | head -n1 | cut -c2)"
+    asoundrc "$(awk '/Headset/{print $1; exit;}' /proc/asound/cards)"
     amixer set Headphone unmute > /dev/null
     amixer set Headphone 100% > /dev/null
     amixer set Mic unmute > /dev/null
