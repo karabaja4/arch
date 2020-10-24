@@ -1,3 +1,5 @@
+// pkg --targets linux main.js
+
 const args = require('minimist')(process.argv.slice(2));
 const path = require('path');
 const util = require('util');
