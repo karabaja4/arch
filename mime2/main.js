@@ -13,8 +13,12 @@ if (!rarg) {
   process.exit(1);
 }
 
-const arg = rarg.replace(/\$/g, '\\$');
-const cwd = process.cwd().replace(/\$/g, '\\$');
+const escape = (value) => {
+  return value.replace(/\$/g, '\\$').replace(/"/g, '\\"');
+}
+
+const arg = escape(rarg);
+const cwd = escape(process.cwd());
 
 const vars = {
   '$pwd': `"${cwd}"`,
