@@ -6,16 +6,19 @@ const util = require('util');
 const nm = require('nanomatch');
 const exec = util.promisify(require('child_process').exec);
 const cfg = require('./config.json');
-const arg = args._[0];
+const rarg = args._[0];
 
-if (!arg) {
+if (!rarg) {
   console.log('invalid arguments');
   process.exit(1);
 }
 
+const arg = rarg.replace(/\$/g, '\\$');
+const cwd = process.cwd().replace(/\$/g, '\\$');
+
 const vars = {
-  '$pwd': `'${process.cwd()}'`,
-  '$arg': `'${arg}'`
+  '$pwd': `"${cwd}"`,
+  '$arg': `"${arg}"`
 };
 
 const sub = (cmd) => {
@@ -24,7 +27,7 @@ const sub = (cmd) => {
     cmd = cmd.replace('$arg', '$pwd');
   }
   for (const key in vars) {
-    cmd = cmd.replace(key, vars[key]);
+    cmd = cmd.replace(key, () => vars[key]);
   }
   return cmd;
 }
