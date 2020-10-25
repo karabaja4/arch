@@ -1,4 +1,3 @@
 @reboot   /home/igor/arch/scripts/updates.sh
-* * * * * /home/igor/arch/scripts/updates.sh
-
+0 * * * * /home/igor/arch/scripts/updates.sh
 * * * * * /home/igor/arch/scripts/dns.sh
