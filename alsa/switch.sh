@@ -8,14 +8,18 @@ usage() {
 
 [ ${#} -eq 0 ] && usage
 
+execute_max_amixer() {
+    amixer set Master unmute
+    amixer set Master 100%
+    amixer set Headphone unmute
+    amixer set Headphone 100%
+    amixer set Mic unmute
+    amixer set Mic 100%
+}
+
 max_amixer() {
-    amixer set Master unmute &> /dev/null || true
-    amixer set Master 100% &> /dev/null || true
-    amixer set Headphone unmute &> /dev/null || true
-    amixer set Headphone 100% &> /dev/null || true
-    amixer set Mic unmute &> /dev/null || true
-    amixer set Mic 100% &> /dev/null || true
-    echo "Set amixer volume to 100%"
+    execute_max_amixer &> /dev/null || true
+    echo "Set volume to 100%"
 }
 
 write_asoundrc() {
