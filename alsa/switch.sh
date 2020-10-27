@@ -2,32 +2,41 @@
 set -euo pipefail
 
 usage() {
-    echo "usage: switch.sh [speakers|headphones|master]"
+    echo "usage: switch.sh [speakers|headphones[headset]|maxvolume]"
     exit 1
 }
 
 [ ${#} -eq 0 ] && usage
 
-asoundrc() {
+max_amixer() {
+    amixer set Master unmute &> /dev/null || true
+    amixer set Master 100% &> /dev/null || true
+    amixer set Headphone unmute &> /dev/null || true
+    amixer set Headphone 100% &> /dev/null || true
+    amixer set Mic unmute &> /dev/null || true
+    amixer set Mic 100% &> /dev/null || true
+    echo "Set amixer volume to 100%"
+}
+
+write_asoundrc() {
     echo -e "defaults.ctl.card ${1}\ndefaults.pcm.card ${1}\ndefaults.pcm.device 0" > "${HOME}/.asoundrc"
+}
+
+switch_card() {
+    declare -r number="$(awk -v pattern="${1}" '$0 ~ pattern {print $1; exit;}' /proc/asound/cards)"
+    write_asoundrc "${number}"
+    echo "Switched to card ${number} (${1})"
 }
 
 case "${1}" in
 speakers)
-    asoundrc "$(awk '/PCH/{print $1; exit;}' /proc/asound/cards)"
-    amixer set Master unmute > /dev/null
-    amixer set Master 100% > /dev/null
-    ;;
-headphones)
-    asoundrc "$(awk '/Headset/{print $1; exit;}' /proc/asound/cards)"
-    amixer set Headphone unmute > /dev/null
-    amixer set Headphone 100% > /dev/null
-    amixer set Mic unmute > /dev/null
-    amixer set Mic 100% > /dev/null
-    ;;
-master)
-    amixer set Master unmute > /dev/null
-    amixer set Master 100% > /dev/null
+    switch_card PCH
+    ;;&
+headphones|headset)
+    switch_card Headset
+    ;;&
+speakers|headphones|headset|maxvolume)
+    max_amixer
     ;;
 *)
     usage
