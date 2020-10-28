@@ -2,13 +2,13 @@
 set -euo pipefail
 
 usage() {
-    echo "usage: switch.sh [speakers|headphones[headset]|maxvolume]"
+    echo "usage: switch.sh [speakers | headphones [headset] | maxvolume]"
     exit 1
 }
 
 [ ${#} -eq 0 ] && usage
 
-execute_max_amixer() {
+set_max_amixer() {
     amixer set Master unmute
     amixer set Master 100%
     amixer set Headphone unmute
@@ -18,7 +18,7 @@ execute_max_amixer() {
 }
 
 max_amixer() {
-    execute_max_amixer &> /dev/null || true
+    set_max_amixer &> /dev/null || true
     echo "Set volume to 100%"
 }
 
@@ -27,9 +27,10 @@ write_asoundrc() {
 }
 
 switch_card() {
-    declare -r number="$(awk -v pattern="${1}" '$0 ~ pattern {print $1; exit;}' /proc/asound/cards)"
-    write_asoundrc "${number}"
-    echo "Switched to card ${number} (${1})"
+    declare -r id="$(grep "${1}" /proc/asound/cards | awk '{print $1; exit;}')"
+    declare -r card_id="${id:-0}"
+    write_asoundrc "${card_id}"
+    echo "Switched to card ${card_id} (${1})"
 }
 
 case "${1}" in
