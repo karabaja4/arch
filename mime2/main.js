@@ -14,15 +14,15 @@ if (!rarg) {
 }
 
 const escape = (value) => {
-  return value.replace(/\$/g, '\\$').replace(/"/g, '\\"');
+  return value.replace(/'/g, "'\\''");
 }
 
 const arg = escape(rarg);
 const cwd = escape(process.cwd());
 
 const vars = {
-  '$pwd': `"${cwd}"`,
-  '$arg': `"${arg}"`
+  '$pwd': `'${cwd}'`,
+  '$arg': `'${arg}'`
 };
 
 const sub = (cmd) => {
