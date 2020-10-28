@@ -28,9 +28,13 @@ write_asoundrc() {
 
 switch_card() {
     declare -r id="$(grep "${1}" /proc/asound/cards | awk '{print $1; exit;}')"
-    declare -r card_id="${id:-0}"
-    write_asoundrc "${card_id}"
-    echo "Switched to card ${card_id} (${1})"
+    if [ -z "$id" ]
+    then
+        echo "Card ${1} not found, exiting"
+        exit 1
+    fi
+    write_asoundrc "${id}"
+    echo "Switched to card ${id} (${1})"
 }
 
 case "${1}" in
