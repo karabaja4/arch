@@ -107,17 +107,17 @@ on_boot() {
     echo "mounting fstab..."
     mount -a
 
-    echo "starting daemons..."
-    for dmn in ${ENABLED}
-    do
-        daemon_start "${dmn}"
-    done
-    
     if [ -x /etc/minirc.local ]
     then
         echo "loading /etc/minirc.local..."
         /etc/minirc.local
     fi
+
+    echo "starting daemons..."
+    for dmn in ${ENABLED}
+    do
+        daemon_start "${dmn}"
+    done
 }
 
 on_shutdown() {
