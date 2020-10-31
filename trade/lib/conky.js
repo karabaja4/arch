@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // const name = 'FOREXCOM:NSXUSD';
 
-const resultFile = '/tmp/trade_data.json';
+const tradeData = '/tmp/trade_data.json';
 
 const getName = () => {
   // const day = (new Date()).getDay();
@@ -35,7 +35,7 @@ const write = (key, data) => {
       trend: change > 0
     }
 
-    fs.writeFile(resultFile, JSON.stringify(result), () => {});
+    fs.writeFile(tradeData, JSON.stringify(result), () => {});
   }
 };
 
