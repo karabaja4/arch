@@ -3,8 +3,8 @@ const util = require('util');
 const sleep = util.promisify(setTimeout);
 
 const files = {
-  data: '/tmp/conky_node.json',
-  value: '/tmp/trade.json'
+  conky: '/tmp/conky_node.json',
+  trade: '/tmp/trade.json'
 }
 
 const colors = {
@@ -65,7 +65,7 @@ const process = async (json) => {
   text += diskspan('edd');
 
   try {
-    const trade = (await fs.promises.readFile(files.value)).toString();
+    const trade = (await fs.promises.readFile(files.trade)).toString();
     const td = JSON.parse(trade);
     const tc = td.trend ? colors.green : colors.red;
     const ti = td.trend ? icons.trendup : icons.trenddown;
@@ -82,7 +82,7 @@ const process = async (json) => {
 const main = async () => {
   while (true) {
     try {
-      const json = (await fs.promises.readFile(files.data)).toString();
+      const json = (await fs.promises.readFile(files.conky)).toString();
       if (json && json.trim()) {
         await process(json);
       }
