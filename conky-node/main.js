@@ -90,7 +90,7 @@ const main = async () => {
     } catch (e) {
       console.log(e);
     }
-    await sleep(200);
+    await sleep(1000);
   }
 };
 
