@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // const name = 'FOREXCOM:NSXUSD';
 
-const resultFile = '/tmp/trade.json';
+const resultFile = '/tmp/trade_data.json';
 
 const getName = () => {
   // const day = (new Date()).getDay();

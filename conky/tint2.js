@@ -3,8 +3,8 @@ const util = require('util');
 const sleep = util.promisify(setTimeout);
 
 const files = {
-  conky: '/tmp/conky_node.json',
-  trade: '/tmp/trade.json'
+  conky: '/tmp/conky_data.json',
+  trade: '/tmp/trade_data.json'
 }
 
 const colors = {
