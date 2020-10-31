@@ -40,6 +40,5 @@ const write = (key, data) => {
 };
 
 module.exports = {
-  init,
   write,
 };
