@@ -73,6 +73,7 @@ const process = async (json) => {
     text += span(8000, -400, tc, ti, value);
   } catch (e) {
     console.log(e);
+    await fs.promises.appendFile('/home/igor/errors', `${e}\n`);
     text += span(8000, -400, colors.gray, icons.trenddown, 'TRA: not connected');
   }
 
@@ -88,6 +89,7 @@ const main = async () => {
         await process(json);
       }
     } catch (e) {
+      await fs.promises.appendFile('/home/igor/errors', `${e}\n`);
       console.log(e);
     }
     await sleep(1000);
