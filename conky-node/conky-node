@@ -1,7 +1,7 @@
 conky.config = {
 	out_to_x = false,
-	out_to_console = true,
-	update_interval = 1
+	update_interval = 1,
+	overwrite_file = '/tmp/conky_node'
 };
 
 conky.text = [[
@@ -19,6 +19,16 @@ conky.text = [[
 		"used": "${mem}",
 		"max": "${memmax}"
 	},
+
+	${if_mounted /}
+		"ssd": {
+			"perc": "${fs_used_perc /}",
+			"used": "${fs_used /}",
+			"size": "${fs_size /}"
+		},
+	${else}
+		"ssd": null,
+	${endif}
 	
 	${if_mounted /home/igor/_mmc}
 		"mmc": {
@@ -31,13 +41,13 @@ conky.text = [[
 	${endif}
 
 	${if_mounted /home/igor/_disk}
-		"disk": {
+		"edd": {
 			"perc": "${fs_used_perc /home/igor/_disk}",
 			"used": "${fs_used /home/igor/_disk}",
 			"size": "${fs_size /home/igor/_disk}"
 		},
 	${else}
-		"disk": null,
+		"edd": null,
 	${endif}
 
 	"time": "${time %A, %d.%m.%Y. %H:%M:%S}"

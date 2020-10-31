@@ -67,7 +67,7 @@ launcher_item_app = /home/igor/arch/mspaint/mspaint.desktop
 # Executor 1
 #-------------------------------------
 execp = new
-execp_command = sed "s/GiB/ GB/g" /tmp/tint2text
+execp_command = cat /tmp/tint2_text
 execp_interval = 1
 execp_font = Roboto Bold 8
 execp_font_color = #ffffff 100

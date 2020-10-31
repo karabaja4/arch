@@ -37,8 +37,11 @@ desktop () {
     ${HOME}/arch/scripts/fixres.sh
     feh --bg-scale ${HOME}/arch/wall/default6.jpg
 
-    # conky
-    conky -d -c ${HOME}/arch/conky/conkyrc-headless
+    # conky tint2
+    conky -d -c ${HOME}/arch/conky-node/conky-node
+    node ${HOME}/arch/conky-node/main.js &
+
+    # conky desktop
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 0
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 1
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 2

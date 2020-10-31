@@ -1,7 +1,7 @@
 conky.config = {
 	out_to_x = false,
 	update_interval = 1,
-	overwrite_file = '/tmp/tint2text'
+	overwrite_file = '/tmp/tint2_text'
 };
 
 conky.text = [[
