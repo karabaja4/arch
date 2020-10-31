@@ -3,8 +3,7 @@ const util = require('util');
 const sleep = util.promisify(setTimeout);
 
 const files = {
-  data: '/tmp/conky_node',
-  tint2: '/tmp/tint2_text',
+  data: '/tmp/conky_node.json',
   value: '/tmp/asset_value'
 }
 
@@ -72,13 +71,12 @@ const process = async (json) => {
     const ti = trend >= 0 ? icons.trendup : icons.trenddown;
     text += span(8000, -400, tc, ti, value);
   } catch (e) {
-    console.log(e);
     await fs.promises.appendFile('/home/igor/errors', `${e}\n`);
     text += span(8000, -400, colors.gray, icons.trenddown, 'TRA: not connected');
   }
 
   text += span(8000, 100, colors.gray, icons.clock, `CLK: ${data.time}`).trimEnd();
-  await fs.promises.writeFile(files.tint2, text);
+  console.log(text);
 };
 
 const main = async () => {
@@ -90,7 +88,6 @@ const main = async () => {
       }
     } catch (e) {
       await fs.promises.appendFile('/home/igor/errors', `${e}\n`);
-      console.log(e);
     }
     await sleep(1000);
   }
