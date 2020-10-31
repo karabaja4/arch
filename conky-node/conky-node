@@ -1,0 +1,45 @@
+conky.config = {
+	out_to_x = false,
+	out_to_console = true,
+	update_interval = 1
+};
+
+conky.text = [[
+{
+	"net": {
+		"down": "${downspeedf enp2s0}",
+		"up": "${upspeedf enp2s0}"
+	},
+	"cpu": {
+		"perc": "${cpu}",
+		"freq": "${freq}"
+	},
+	"mem": {
+		"perc": "${memperc}",
+		"used": "${mem}",
+		"max": "${memmax}"
+	},
+	
+	${if_mounted /home/igor/_mmc}
+		"mmc": {
+			"perc": "${fs_used_perc /home/igor/_mmc}",
+			"used": "${fs_used /home/igor/_mmc}",
+			"size": "${fs_size /home/igor/_mmc}"
+		},
+	${else}
+		"mmc": null,
+	${endif}
+
+	${if_mounted /home/igor/_disk}
+		"disk": {
+			"perc": "${fs_used_perc /home/igor/_disk}",
+			"used": "${fs_used /home/igor/_disk}",
+			"size": "${fs_size /home/igor/_disk}"
+		},
+	${else}
+		"disk": null,
+	${endif}
+
+	"time": "${time %A, %d.%m.%Y. %H:%M:%S}"
+}
+]];
