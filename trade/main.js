@@ -53,9 +53,6 @@ ws.on('receive', (name, feed) => {
 });
 
 const main = async () => {
-  if (mode.conky) {
-    await conky.init();
-  }
   ws.init(symbols);
 };
 

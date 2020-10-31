@@ -3,12 +3,7 @@ const fs = require('fs');
 
 // const name = 'FOREXCOM:NSXUSD';
 
-const trendFile = '/tmp/asset_trend';
-const valueFile = '/tmp/asset_value';
-
-const green = '#69F0AE';
-const red = '#FF6E40';
-const gray = '#757575';
+const resultFile = '/tmp/trade.json';
 
 const getName = () => {
   // const day = (new Date()).getDay();
@@ -17,11 +12,6 @@ const getName = () => {
   // }
   // return 'FOREXCOM:NSXUSD';
   return 'BITMEX:XBTUSD';
-};
-
-const init = async () => {
-  await fs.promises.writeFile(trendFile, gray);
-  await fs.promises.writeFile(valueFile, 'TRD: not connected');
 };
 
 const write = (key, data) => {
@@ -40,8 +30,12 @@ const write = (key, data) => {
     // const percentPrint = `${percent > 0 ? '+' : ''}${percent.toFixed(2)}%`;
     const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
 
-    fs.writeFile(trendFile, `${change >= 0 ? green : red}`, () => {});
-    fs.writeFile(valueFile, `${namePrint}: ${pricePrint} | ${changePrint}`, () => {});
+    const result = {
+      text: `${namePrint}: ${pricePrint} | ${changePrint}`,
+      trend: change > 0
+    }
+
+    fs.writeFile(resultFile, JSON.stringify(result), () => {});
   }
 };
 

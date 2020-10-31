@@ -4,7 +4,7 @@ const sleep = util.promisify(setTimeout);
 
 const files = {
   data: '/tmp/conky_node.json',
-  value: '/tmp/asset_value'
+  value: '/tmp/trade.json'
 }
 
 const colors = {
@@ -65,11 +65,11 @@ const process = async (json) => {
   text += diskspan('edd');
 
   try {
-    const value = (await fs.promises.readFile(files.value)).toString();
-    const trend = parseInt(value.split('|')[1].replace('USD', '').trim());
-    const tc = trend >= 0 ? colors.green : colors.red;
-    const ti = trend >= 0 ? icons.trendup : icons.trenddown;
-    text += span(8000, -400, tc, ti, value);
+    const trade = (await fs.promises.readFile(files.value)).toString();
+    const td = JSON.parse(trade);
+    const tc = td.trend ? colors.green : colors.red;
+    const ti = td.trend ? icons.trendup : icons.trenddown;
+    text += span(8000, -400, tc, ti, td.text);
   } catch (e) {
     await fs.promises.appendFile('/home/igor/errors', `${e}\n`);
     text += span(8000, -400, colors.gray, icons.trenddown, 'TRA: not connected');
