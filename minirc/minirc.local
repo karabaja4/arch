@@ -1,9 +1,3 @@
-# hacky fixes for dhcpcd 9.3.1
-#( nc -lkuU /dev/log & ) &> /dev/null &
-#sleep 1
-#chmod 666 /dev/log
-
-# startup commands
 echo 0 > /proc/sys/kernel/printk
 touch /var/run/utmp
 mkdir -p /run/samba
