@@ -28,7 +28,7 @@ write_asoundrc() {
 
 switch_card() {
     declare -r id="$(grep "${1}" /proc/asound/cards | awk '{print $1; exit;}')"
-    if [ -z "$id" ]
+    if [ -z "${id}" ]
     then
         echo "Card ${1} not found, exiting"
         exit 1
