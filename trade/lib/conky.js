@@ -1,17 +1,10 @@
 
 const fs = require('fs');
-
-// const name = 'FOREXCOM:NSXUSD';
-
 const tradeData = '/tmp/trade_data.json';
 
 const getName = () => {
-  // const day = (new Date()).getDay();
-  // if (day === 6 || day === 0) {
-  //   return 'BITMEX:XBTUSD';
-  // }
-  // return 'FOREXCOM:NSXUSD';
   return 'BITMEX:XBTUSD';
+  // return 'FOREXCOM:NSXUSD';
 };
 
 const write = (key, data) => {
