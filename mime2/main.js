@@ -9,7 +9,7 @@ const cfg = require('./config.json');
 const rarg = args._[0];
 
 if (!rarg) {
-  console.log('invalid arguments');
+  console.error('Invalid arguments');
   process.exit(1);
 }
 
@@ -82,6 +82,7 @@ const main = async () => {
     }
   }
 
+  console.error(`Unable to match suitable application for ${arg}`);
 }
 
 main();
