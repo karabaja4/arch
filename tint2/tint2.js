@@ -86,7 +86,7 @@ const main = async () => {
         await process(json);
       }
     } catch (e) {}
-    await sleep(500);
+    await sleep(1000);
   }
 };
 
