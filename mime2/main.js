@@ -3,14 +3,20 @@
 const args = require('minimist')(process.argv.slice(2));
 const path = require('path');
 const util = require('util');
+const fs = require('fs');
+const os = require('os');
 const nm = require('nanomatch');
 const exec = util.promisify(require('child_process').exec);
-const cfg = require('./config.json');
+const cfgfile = 'mime.json';
 const rarg = args._[0];
 
-if (!rarg) {
-  console.error('Invalid arguments');
+const error = (msg) => {
+  console.error(msg);
   process.exit(1);
+}
+
+if (!rarg) {
+  error('Invalid arguments');
 }
 
 const escape = (value) => {
@@ -47,6 +53,15 @@ const match = (value, glob) => {
 
 const main = async () => {
 
+  const home = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
+  const root = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
+
+  if (!home && !root) {
+    return error('Config file not found or not readable');
+  }
+
+  const cfg = JSON.parse((home || root).toString());
+
   // extensions
   const ext = path.extname(arg).replace('.', '');
   if (ext) {
@@ -82,7 +97,7 @@ const main = async () => {
     }
   }
 
-  console.error(`Unable to match suitable application for ${arg}`);
+  return error(`Unable to match suitable application for ${arg}`);
 }
 
 main();
