@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 
 usage() {
     echo "usage: switch.sh [speakers | headphones [headset] | maxvolume]"
@@ -9,16 +9,16 @@ usage() {
 [ ${#} -eq 0 ] && usage
 
 set_max_amixer() {
-    amixer set Master unmute
-    amixer set Master 100%
-    amixer set Headphone unmute
-    amixer set Headphone 100%
-    amixer set Mic unmute
-    amixer set Mic 100%
+    amixer set Master unmute &> /dev/null
+    amixer set Master 100% &> /dev/null
+    amixer set Headphone unmute &> /dev/null
+    amixer set Headphone 100% &> /dev/null
+    amixer set Mic unmute &> /dev/null
+    amixer set Mic 100% &> /dev/null
 }
 
 max_amixer() {
-    set_max_amixer &> /dev/null || true
+    set_max_amixer
     echo "Set volume to 100%"
 }
 
