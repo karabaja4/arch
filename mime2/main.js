@@ -13,10 +13,11 @@ const clarg = args._[0];
 
 const main = async () => {
 
-  await fs.promises.mkdir(path.join(os.homedir(), '.local/share/mimejs'), { recursive: true });
+  const logdir = path.join(os.homedir(), '.local/share/mimejs');
+  await fs.promises.mkdir(logdir, { recursive: true });
 
   const log = async (tag, msg) => {
-    await fs.promises.appendFile('mimejs.log', `[${(new Date()).toISOString()}][${tag}]: ${msg}`);
+    await fs.promises.appendFile(path.join(logdir, 'mimejs.log'), `[${(new Date()).toISOString()}][${tag}]: ${msg}`);
   }
 
   const fatal = async (msg) => {
