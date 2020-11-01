@@ -1,5 +1,5 @@
 // pkg --targets linux main.js
-// sudo ln -s /home/igor/arch/mime2/main /usr/bin/xdg-open
+// sudo ln -sf /home/igor/arch/mime2/main /usr/bin/xdg-open
 
 const args = require('minimist')(process.argv.slice(2));
 const path = require('path');
@@ -54,14 +54,14 @@ const match = (value, glob) => {
 
 const main = async () => {
 
-  const home = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
-  const root = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
+  const cfghome = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
+  const cfgroot = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
 
-  if (!home && !root) {
+  if (!cfghome && !cfgroot) {
     return error('Config file not found or not readable');
   }
 
-  const cfg = JSON.parse((home || root).toString());
+  const cfg = JSON.parse((cfghome || cfgroot).toString());
 
   // extensions
   const ext = path.extname(arg).replace('.', '');
