@@ -9,59 +9,67 @@ const os = require('os');
 const nm = require('nanomatch');
 const exec = util.promisify(require('child_process').exec);
 const cfgfile = 'mime.json';
-const rarg = args._[0];
-
-const error = (msg) => {
-  console.error(msg);
-  process.exit(1);
-}
-
-if (!rarg) {
-  error('Invalid arguments');
-}
-
-const escape = (value) => {
-  return value.replace(/'/g, "'\\''");
-}
-
-const arg = escape(rarg);
-const cwd = escape(process.cwd());
-
-const vars = {
-  '$pwd': `'${cwd}'`,
-  '$arg': `'${arg}'`
-};
-
-const sub = (cmd) => {
-  // stupid fix for qtfm
-  if (cmd.startsWith('qtfm') && arg === '.') {
-    cmd = cmd.replace('$arg', '$pwd');
-  }
-  for (const key in vars) {
-    cmd = cmd.replace(key, () => vars[key]);
-  }
-  return cmd;
-}
-
-const exit = async (cmd) => {
-  const command = sub(cmd);
-  return await exec(`( ${command} & ) &> /dev/null &`);
-}
-
-const match = (value, glob) => {
-  return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
-}
+const clarg = args._[0];
 
 const main = async () => {
 
-  const cfghome = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
-  const cfgroot = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
+  await fs.promises.mkdir(path.join(os.homedir(), '.local/share/mimejs'), { recursive: true });
 
-  if (!cfghome && !cfgroot) {
-    return error('Config file not found or not readable');
+  const log = async (tag, msg) => {
+    await fs.promises.appendFile('mimejs.log', `[${(new Date()).toISOString()}][${tag}]: ${msg}`);
   }
 
-  const cfg = JSON.parse((cfghome || cfgroot).toString());
+  const fatal = async (msg) => {
+    await log('error', msg);
+    console.error(msg);
+    return process.exit(1);
+  }
+  
+  if (!clarg) {
+    return await fatal('Invalid arguments');
+  }
+  
+  const esc = (value) => {
+    return value.replace(/'/g, "'\\''");
+  }
+  
+  const arg = esc(clarg);
+  const cwd = esc(process.cwd());
+  
+  const vars = {
+    '$arg': `'${arg}'`,
+    '$pwd': `'${cwd}'`
+  };
+  
+  const sub = (cmd) => {
+    // stupid fix for qtfm
+    if (cmd.startsWith('qtfm') && arg === '.') {
+      cmd = cmd.replace('$arg', '$pwd');
+    }
+    for (const key in vars) {
+      cmd = cmd.replace(key, () => vars[key]);
+    }
+    return cmd;
+  }
+  
+  const execute = async (cmd) => {
+    const command = sub(cmd);
+    await log('info', `Executing: ${command}`);
+    return await exec(`( ${command} & ) &> /dev/null &`);
+  }
+  
+  const match = (value, glob) => {
+    return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
+  }
+
+  const cfguser = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
+  const cfgsystem = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
+
+  if (!cfguser && !cfgsystem) {
+    return await fatal('Config file not found or not readable');
+  }
+
+  const cfg = JSON.parse((cfguser || cfgsystem).toString());
 
   // extensions
   const ext = path.extname(arg).replace('.', '');
@@ -71,7 +79,7 @@ const main = async () => {
       const splits = key.split(',');
       for (let i = 0; i < splits.length; i++) {
         if (match(ext, splits[i])) {
-          return await exit(extensions[key]);
+          return await execute(extensions[key]);
         }
       }
     }
@@ -83,7 +91,7 @@ const main = async () => {
     const { stdout } = await exec(`file -E --brief --mime-type '${arg}'`);
     for (const key in mimetypes) {
       if (match(stdout.trim(), key)) {
-        return await exit(mimetypes[key]);
+        return await execute(mimetypes[key]);
       }
     }
   } catch (e) {}
@@ -93,12 +101,12 @@ const main = async () => {
     const protocols = cfg['protocols'] || {};
     for (const key in protocols) {
       if (match(arg, key)) {
-        return await exit(protocols[key]);
+        return await execute(protocols[key]);
       }
     }
   }
 
-  return error(`Unable to match suitable application for ${arg}`);
+  return await fatal(`Unable to match suitable application for ${arg}`);
 }
 
 main();
