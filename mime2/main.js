@@ -17,7 +17,7 @@ const main = async () => {
   await fs.promises.mkdir(logdir, { recursive: true });
 
   const log = async (tag, msg) => {
-    await fs.promises.appendFile(path.join(logdir, 'mimejs.log'), `[${(new Date()).toISOString()}][${tag}]: ${msg}`);
+    await fs.promises.appendFile(path.join(logdir, 'mimejs.log'), `[${(new Date()).toISOString()}][${tag}]: ${msg}\n`);
   }
 
   const fatal = async (msg) => {
