@@ -1,4 +1,5 @@
 // pkg --targets linux main.js
+// sudo ln -s /home/igor/arch/mime2/main /usr/bin/xdg-open
 
 const args = require('minimist')(process.argv.slice(2));
 const path = require('path');
