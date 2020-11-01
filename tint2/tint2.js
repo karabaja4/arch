@@ -71,7 +71,6 @@ const process = async (json) => {
     const ti = td.trend ? icons.trendup : icons.trenddown;
     text += span(8000, -400, tc, ti, td.text);
   } catch (e) {
-    await fs.promises.appendFile('/home/igor/errors', `${e}\n`);
     text += span(8000, -400, colors.gray, icons.trenddown, 'TRA: not connected');
   }
 
@@ -86,9 +85,7 @@ const main = async () => {
       if (json && json.trim()) {
         await process(json);
       }
-    } catch (e) {
-      await fs.promises.appendFile('/home/igor/errors', `${e}\n`);
-    }
+    } catch (e) {}
     await sleep(1000);
   }
 };
