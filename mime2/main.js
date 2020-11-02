@@ -9,6 +9,7 @@ const os = require('os');
 const nm = require('nanomatch');
 const exec = util.promisify(require('child_process').exec);
 const cfgfile = 'mime.json';
+const logfile = 'mimejs.log';
 
 if (args.help || args._.length !== 1) {
   console.log('mimejs 0.1\n\nusage: xdg-open { file | URL }');
@@ -17,11 +18,11 @@ if (args.help || args._.length !== 1) {
 
 const main = async () => {
 
-  const ld = path.join(os.homedir(), '.local/share/mimejs');
-  await fs.promises.mkdir(ld, { recursive: true });
+  const logdir = path.join(os.homedir(), '.local/share/mimejs');
+  await fs.promises.mkdir(logdir, { recursive: true });
 
   const log = async (tag, msg) => {
-    await fs.promises.appendFile(path.join(ld, 'mimejs.log'), `[${(new Date()).toISOString()}][${tag}]: ${msg}\n`);
+    await fs.promises.appendFile(path.join(logdir, logfile), `[${(new Date()).toISOString()}][${tag}]: ${msg}\n`);
   }
 
   const fatal = async (msg) => {
@@ -63,14 +64,14 @@ const main = async () => {
     return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
   }
 
-  const usr = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
-  const sys = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
+  const cfgusr = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
+  const cfgsys = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
 
-  if (!usr && !sys) {
+  if (!cfgusr && !cfgsys) {
     return await fatal('Config file not found or not readable');
   }
 
-  const cfg = JSON.parse((usr || sys).toString());
+  const cfg = JSON.parse((cfgusr || cfgsys).toString());
 
   // extensions
   const ext = path.extname(arg).replace('.', '');
