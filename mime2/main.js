@@ -9,7 +9,11 @@ const os = require('os');
 const nm = require('nanomatch');
 const exec = util.promisify(require('child_process').exec);
 const cfgfile = 'mime.json';
-const clarg = args._[0];
+
+if (args.help || args._.length !== 1) {
+  console.log('mimejs 0.1\n\nusage: xdg-open { file | URL }');
+  process.exit(1);
+}
 
 const main = async () => {
 
@@ -26,15 +30,11 @@ const main = async () => {
     return process.exit(1);
   }
   
-  if (!clarg) {
-    return await fatal('Invalid arguments');
-  }
-  
   const esc = (value) => {
     return value.replace(/'/g, "'\\''");
   }
   
-  const arg = esc(clarg);
+  const arg = esc(args._[0]);
   const cwd = esc(process.cwd());
   
   const vars = {
@@ -107,7 +107,7 @@ const main = async () => {
     }
   }
 
-  return await fatal(`Unable to match suitable application for ${arg}`);
+  return await fatal(`No suitable app: ${arg}`);
 }
 
 main();
