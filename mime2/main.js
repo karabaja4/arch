@@ -17,11 +17,11 @@ if (args.help || args._.length !== 1) {
 
 const main = async () => {
 
-  const logdir = path.join(os.homedir(), '.local/share/mimejs');
-  await fs.promises.mkdir(logdir, { recursive: true });
+  const ld = path.join(os.homedir(), '.local/share/mimejs');
+  await fs.promises.mkdir(ld, { recursive: true });
 
   const log = async (tag, msg) => {
-    await fs.promises.appendFile(path.join(logdir, 'mimejs.log'), `[${(new Date()).toISOString()}][${tag}]: ${msg}\n`);
+    await fs.promises.appendFile(path.join(ld, 'mimejs.log'), `[${(new Date()).toISOString()}][${tag}]: ${msg}\n`);
   }
 
   const fatal = async (msg) => {
@@ -63,14 +63,14 @@ const main = async () => {
     return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
   }
 
-  const cfguser = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
-  const cfgsystem = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
+  const usr = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
+  const sys = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
 
-  if (!cfguser && !cfgsystem) {
+  if (!usr && !sys) {
     return await fatal('Config file not found or not readable');
   }
 
-  const cfg = JSON.parse((cfguser || cfgsystem).toString());
+  const cfg = JSON.parse((usr || sys).toString());
 
   // extensions
   const ext = path.extname(arg).replace('.', '');
