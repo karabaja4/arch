@@ -1,6 +1,6 @@
 {
   "extensions": {
-    "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv": "xfce4-terminal -e 'nano $arg'",
+    "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv": "featherpad $arg",
     "avi,mkv,flac,mp3,wav,mp4,mov": "vlc $arg",
     "jpg,jpeg,svg,png,bmp,gif,tga": "gpicview $arg",
     "gz,zip,rar,zst": "xarchiver $arg",
