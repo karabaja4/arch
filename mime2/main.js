@@ -64,7 +64,7 @@ const main = async () => {
     return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
   }
 
-  const saferf = async (p) => {
+  const readfile = async (p) => {
     return await fs.promises.readFile(p, 'utf-8').catch(e => null);
   }
 
@@ -72,7 +72,7 @@ const main = async () => {
   const readcfg = async () => {
     const cfgusr = path.join(os.homedir(), `.${cfgfile}`);
     const cfgsys = path.join('/etc', cfgfile);
-    return await saferf(cfgusr) || await saferf(cfgsys);
+    return await readfile(cfgusr) || await readfile(cfgsys);
   }
 
   const json = await readcfg();
