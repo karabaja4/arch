@@ -68,6 +68,7 @@ const main = async () => {
     return await fs.promises.readFile(p, 'utf-8').catch(e => null);
   }
 
+  // config
   const readcfg = async () => {
     const cfgusr = path.join(os.homedir(), `.${cfgfile}`);
     const cfgsys = path.join('/etc', cfgfile);
@@ -75,11 +76,9 @@ const main = async () => {
   }
 
   const json = await readcfg();
-
   if (!json) {
     return await fatal('Config file not found or not readable');
   }
-
   const cfg = JSON.parse(json);
 
   // extensions
