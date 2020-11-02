@@ -4,12 +4,10 @@
 const args = require('minimist')(process.argv.slice(2));
 const path = require('path');
 const util = require('util');
-const fs = require('fs');
-const os = require('os');
 const nm = require('nanomatch');
 const exec = util.promisify(require('child_process').exec);
-const cfgfile = 'mime.json';
-const logfile = 'mimejs.log';
+const log = require('./lib/log');
+const cfg = require('./lib/config');
 
 if (args.help || args._.length !== 1) {
   console.log('mimejs 0.1\n\nusage: xdg-open { file | URL }');
@@ -18,22 +16,15 @@ if (args.help || args._.length !== 1) {
 
 const main = async () => {
 
-  const logdir = path.join(os.homedir(), '.local/share/mimejs');
-  await fs.promises.mkdir(logdir, { recursive: true });
-
-  const log = async (tag, msg) => {
-    await fs.promises.appendFile(path.join(logdir, logfile), `[${(new Date()).toISOString()}][${tag}]: ${msg}\n`);
-  }
-
   const fatal = async (msg) => {
-    await log('error', msg);
+    await log.write('error', msg);
     console.error(msg);
     return process.exit(1);
-  }
+  };
   
   const esc = (value) => {
     return value.replace(/'/g, "'\\''");
-  }
+  };
   
   const arg = esc(args._[0]);
   const cwd = esc(process.cwd());
@@ -52,39 +43,27 @@ const main = async () => {
       cmd = cmd.replace(key, () => vars[key]);
     }
     return cmd;
-  }
+  };
   
   const execute = async (cmd) => {
     const command = sub(cmd);
-    await log('info', `Executing: ${command}`);
+    await log.write('info', `Executing: ${command}`);
     return await exec(`( ${command} & ) &> /dev/null &`);
-  }
+  };
   
   const match = (value, glob) => {
     return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
-  }
+  };
 
-  const readfile = async (p) => {
-    return await fs.promises.readFile(p, 'utf-8').catch(e => null);
-  }
-
-  // config
-  const readcfg = async () => {
-    const usr = path.join(os.homedir(), `.${cfgfile}`);
-    const sys = path.join('/etc', cfgfile);
-    return await readfile(usr) || await readfile(sys);
-  }
-
-  const json = await readcfg();
-  if (!json) {
+  const config = await cfg.get();
+  if (!config) {
     return await fatal('Config file not found or not readable');
   }
-  const cfg = JSON.parse(json);
 
   // extensions
   const ext = path.extname(arg).replace('.', '');
   if (ext) {
-    const extensions = cfg['extensions'] || {};
+    const extensions = config['extensions'] || {};
     for (const key in extensions) {
       const splits = key.split(',');
       for (let i = 0; i < splits.length; i++) {
@@ -97,7 +76,7 @@ const main = async () => {
 
   // mimetypes
   try {
-    const mimetypes = cfg['mimetypes'] || {};
+    const mimetypes = config['mimetypes'] || {};
     const { stdout } = await exec(`file -E --brief --mime-type '${arg}'`);
     for (const key in mimetypes) {
       if (match(stdout.trim(), key)) {
@@ -108,7 +87,7 @@ const main = async () => {
 
   // protocols
   if (arg.match(/^[a-z]+:\/\/.+$/gi)) {
-    const protocols = cfg['protocols'] || {};
+    const protocols = config['protocols'] || {};
     for (const key in protocols) {
       if (match(arg, key)) {
         return await execute(protocols[key]);
