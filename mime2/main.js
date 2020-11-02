@@ -47,7 +47,7 @@ const main = async () => {
   
   const execute = async (cmd) => {
     const command = sub(cmd);
-    await log.write('info', `Executing: ${command}`);
+    await log.write('exec', command);
     return await exec(`( ${command} & ) &> /dev/null &`);
   };
   

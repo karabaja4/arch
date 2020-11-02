@@ -15,9 +15,7 @@ const readcfg = async () => {
 };
 
 const read = async () => {
-  const json = await readcfg();
-  if (!json) return null;
-  return JSON.parse(json);
+  return JSON.parse(await readcfg());
 };
 
 module.exports = {
