@@ -108,7 +108,7 @@ const main = async () => {
     }
   }
 
-  return await fatal(`No suitable app: ${arg}`);
+  return await fatal(`No suitable command: ${arg}`);
 }
 
 main();
