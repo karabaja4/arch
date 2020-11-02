@@ -14,12 +14,12 @@ const readcfg = async () => {
   return await readfile(usr) || await readfile(sys);
 };
 
-const get = async () => {
+const read = async () => {
   const json = await readcfg();
   if (!json) return null;
   return JSON.parse(json);
 };
 
 module.exports = {
-  get
+  read
 };

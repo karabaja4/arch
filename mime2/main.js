@@ -35,7 +35,7 @@ const main = async () => {
   };
   
   const sub = (cmd) => {
-    // stupid fix for qtfm
+    // stupid fix for qtfm not being able to open "."
     if (cmd.startsWith('qtfm') && arg === '.') {
       cmd = cmd.replace('$arg', '$pwd');
     }
@@ -55,9 +55,19 @@ const main = async () => {
     return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
   };
 
-  const config = await cfg.get();
+  const config = await cfg.read();
   if (!config) {
     return await fatal('Config file not found or not readable');
+  }
+
+  // protocols
+  if (arg.match(/^[a-z]+:\/\/.+$/gi)) {
+    const protocols = config['protocols'] || {};
+    for (const key in protocols) {
+      if (match(arg, key)) {
+        return await execute(protocols[key]);
+      }
+    }
   }
 
   // extensions
@@ -84,16 +94,6 @@ const main = async () => {
       }
     }
   } catch (e) {}
-
-  // protocols
-  if (arg.match(/^[a-z]+:\/\/.+$/gi)) {
-    const protocols = config['protocols'] || {};
-    for (const key in protocols) {
-      if (match(arg, key)) {
-        return await execute(protocols[key]);
-      }
-    }
-  }
 
   return await fatal(`No suitable command: ${arg}`);
 }
