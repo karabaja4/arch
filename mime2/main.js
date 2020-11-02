@@ -64,14 +64,23 @@ const main = async () => {
     return nm.isMatch(value, glob.replace(/\*+/gi, '**'), { nonegate: true });
   }
 
-  const cfgusr = await fs.promises.readFile(path.join(os.homedir(), `.${cfgfile}`)).catch(e => null);
-  const cfgsys = await fs.promises.readFile(path.join('/etc', cfgfile)).catch(e => null);
+  const saferf = async (p) => {
+    return await fs.promises.readFile(p, 'utf-8').catch(e => null);
+  }
 
-  if (!cfgusr && !cfgsys) {
+  const readcfg = async () => {
+    const cfgusr = path.join(os.homedir(), `.${cfgfile}`);
+    const cfgsys = path.join('/etc', cfgfile);
+    return await saferf(cfgusr) || await saferf(cfgsys);
+  }
+
+  const json = await readcfg();
+
+  if (!json) {
     return await fatal('Config file not found or not readable');
   }
 
-  const cfg = JSON.parse((cfgusr || cfgsys).toString());
+  const cfg = JSON.parse(json);
 
   // extensions
   const ext = path.extname(arg).replace('.', '');
