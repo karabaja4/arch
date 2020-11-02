@@ -70,9 +70,9 @@ const main = async () => {
 
   // config
   const readcfg = async () => {
-    const cfgusr = path.join(os.homedir(), `.${cfgfile}`);
-    const cfgsys = path.join('/etc', cfgfile);
-    return await readfile(cfgusr) || await readfile(cfgsys);
+    const usr = path.join(os.homedir(), `.${cfgfile}`);
+    const sys = path.join('/etc', cfgfile);
+    return await readfile(usr) || await readfile(sys);
   }
 
   const json = await readcfg();
