@@ -171,6 +171,9 @@
         <y>center</y>
       </position>
     </application>
+    <application name="chromium">
+      <maximized>yes</maximized>
+    </application>
   </applications>
 
 </openbox_config>
