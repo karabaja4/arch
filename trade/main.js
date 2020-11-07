@@ -36,12 +36,12 @@ ws.on('receive', (name, feed) => {
   if (feed.change !== undefined) data[name]['change'] = feed.change;
   if (feed.percent !== undefined) data[name]['percent'] = feed.percent;
 
-  if (mode.conky) {
-    const price = `PRICE: ${feed.price}`;
-    const change = `${feed.change ? `, CHANGE: ${feed.change}` : ''}`;
-    const percent = `${feed.percent ? `, PERCENT: ${feed.percent}%` : ''}`;
-    console.log(`${name} -> ${price}${change}${percent}`);
-  }
+  // if (mode.conky) {
+  //   const price = `PRICE: ${feed.price}`;
+  //   const change = `${feed.change ? `, CHANGE: ${feed.change}` : ''}`;
+  //   const percent = `${feed.percent ? `, PERCENT: ${feed.percent}%` : ''}`;
+  //   console.log(`${name} -> ${price}${change}${percent}`);
+  // }
 
   if (mode.plasma) {
     plasma.print(data);
@@ -53,6 +53,7 @@ ws.on('receive', (name, feed) => {
 });
 
 const main = async () => {
+  console.log('started');
   ws.init(symbols);
 };
 
