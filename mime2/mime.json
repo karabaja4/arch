@@ -1,6 +1,6 @@
 {
   "extensions": {
-    "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv": "featherpad $arg",
+    "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv": "leafpad $arg",
     "avi,mkv,flac,mp3,wav,mp4,mov": "vlc $arg",
     "jpg,jpeg,svg,png,bmp,gif,tga": "gpicview $arg",
     "gz,zip,rar,zst": "xarchiver $arg",
@@ -8,13 +8,13 @@
     "pdf": "mupdf -r 96 $arg"
   },
   "mimetypes": {
-    "text/*": "featherpad $arg",
+    "text/*": "leafpad $arg",
     "video/*": "vlc $arg",
     "media/video": "vlc $arg",
     "document/pdf": "mupdf -r 96 $arg",
     "inode/directory": "qtfm $arg",
-    "inode/x-empty": "featherpad $arg",
-    "application/octet-stream": "featherpad $arg"
+    "inode/x-empty": "leafpad $arg",
+    "application/octet-stream": "leafpad $arg"
   },
   "protocols": {
     "http://*": "chromium $arg",
