@@ -3,11 +3,11 @@ const fs = require('fs');
 const tradeData = '/tmp/trade_data.json';
 
 const getName = () => {
-  const day = (new Date()).getDay();
-  if (day === 6 || day === 0) {
-    return 'BITMEX:XBTUSD';
-  }
-  return 'TVC:USOIL';
+  // const day = (new Date()).getDay();
+  // if (day === 6 || day === 0) {
+  //   return 'BITMEX:XBTUSD';
+  // }
+  return 'COINBASE:LTCUSD';
 };
 
 const write = (key, data) => {
