@@ -1,22 +1,12 @@
 {
   "symbols": [
     "BITMEX:XBTUSD",
+    "COINBASE:LTCUSD",
     "TVC:USOIL",
-    "TVC:DXY",
     "FOREXCOM:NSXUSD",
-    "TVC:GOLD",
-    "TVC:SILVER",
     "TVC:SPX",
-    "FX:EURUSD",
-    "FX:AUDUSD",
-    "TVC:VIX",
-    "NASDAQ:AAPL",
     "NASDAQ:TSLA",
-    "NASDAQ:AMZN",
-    "NASDAQ:MSFT",
-    "NASDAQ:FB",
-    "NASDAQ:NVDA",
-    "NASDAQ:AMD",
-    "NASDAQ:INTC"
+    "TVC:GOLD",
+    "TVC:DXY"
   ]
 }

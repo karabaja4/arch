@@ -2,14 +2,14 @@ const figlet = require('figlet');
 const util = require('util');
 
 const symbols = [
-  'FOREXCOM:NSXUSD',
-  'TVC:DXY',
-  'TVC:USOIL',
-  'TVC:SPX',
-  'TVC:GOLD',
-  'FX:EURUSD',
-  'NASDAQ:TSLA',
-  'BITMEX:XBTUSD',
+  "BITMEX:XBTUSD",
+  "COINBASE:LTCUSD",
+  "TVC:USOIL",
+  "FOREXCOM:NSXUSD",
+  "TVC:SPX",
+  "NASDAQ:TSLA",
+  "TVC:GOLD",
+  "TVC:DXY"
 ];
 
 const escapes = {
