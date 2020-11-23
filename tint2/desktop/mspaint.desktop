@@ -6,5 +6,5 @@ Type=Application
 Categories=Development;
 Exec=chromium --new-window --app=https://jspaint.app
 Terminal=false
-StartupNotify=true
+StartupNotify=false
 Icon=mspaint2

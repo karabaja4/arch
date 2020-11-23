@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=plus500
+Comment=plus500
+Type=Application
+Categories=Development;
+Exec=chromium --new-window --app=https://app.plus500.com
+Terminal=false
+StartupNotify=false
+Icon=chrome
