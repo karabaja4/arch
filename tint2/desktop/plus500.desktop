@@ -7,4 +7,4 @@ Categories=Development;
 Exec=chromium --new-window --app=https://app.plus500.com
 Terminal=false
 StartupNotify=false
-Icon=chrome
+Icon=plus500
