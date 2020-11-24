@@ -55,7 +55,7 @@ const process = async (json) => {
   text += span(8000, 100, nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
   text += span(8000, 100, nc(data.net.up), icons.netup, `UPL: ${data.net.up} KB`);
   text += span(5000, 1200, oc(data.cpu.perc), icons.cpu, `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
-  text += span(8000, 100, oc(data.mem.perc), icons.mem, `RAM: ${data.mem.used} / ${data.mem.max}`);
+  text += span(8000, 100, oc(data.mem.perc), icons.mem, `RAM: ${fixgb(data.mem.used)} / ${fixgb(data.mem.max)}`);
 
   const disktext = (name) => `${name.toUpperCase()}: ${data[name] ? `${fixgb(data[name].used)} / ${fixgb(data[name].size)}` : 'not mounted'}`;
   const diskspan = (name) => span(8000, 100, oc(data[name]?.perc), icons[name], disktext(name));
