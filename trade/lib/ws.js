@@ -56,13 +56,17 @@ const connect = (symbols) => {
     // console.log('open');
   });
 
+  const msg = (text) => {
+    return `~m~${text.length}~m~${text}`;
+  }
+
   ws.on('message', (message) => {
     timer.refresh();
     if (message.includes('session_id')) {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
-        `~m~52~m~{"m":"quote_create_session","p":["${sid}"]}`,
-        `~m~189~m~{"m":"quote_add_symbols","p":["${sid}","${symbols.join('","')}",{"flags":["force_permission"]}]}`,
+        msg(`{"m":"quote_create_session","p":["${sid}"]}`),
+        msg(`{"m":"quote_add_symbols","p":["${sid}","${symbols.join('","')}",{"flags":["force_permission"]}]}`)
       ];
       messages.forEach((m) => ws.send(m));
     } else {
