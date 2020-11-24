@@ -44,7 +44,7 @@ ws.on('receive', (name, feed) => {
   // }
 
   if (mode.plasma) {
-    plasma.print(data);
+    plasma.print(data, symbols);
   }
 
   if (mode.conky) {

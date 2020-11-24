@@ -1,17 +1,6 @@
 const figlet = require('figlet');
 const util = require('util');
 
-const symbols = [
-  "BITMEX:XBTUSD",
-  "COINBASE:LTCUSD",
-  "TVC:USOIL",
-  "FOREXCOM:NSXUSD",
-  "TVC:SPX",
-  "NASDAQ:TSLA",
-  "TVC:GOLD",
-  "TVC:DXY"
-];
-
 const escapes = {
   white: '\033[97m',
   gray: '\033[90m',
@@ -40,14 +29,14 @@ const insert = (text, ins, index) => {
   return `${text.substring(0, index)}${ins}${text.substring(index, text.length)}`;
 };
 
-const print = async (data) => {
+const print = async (data, symbols) => {
   if (!lock) {
     lock = true;
     const keys = [];
     for (let i = 0; i < symbols.length; i++) {
       const symbol = symbols[i];
       if (data[symbol]) {
-        keys.push(symbol);
+        keys.push(symbol); // counting symbols in data, do not show if not all are there
       }
     }
     if (keys.length == symbols.length) { // got all
