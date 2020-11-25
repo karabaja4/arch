@@ -4,7 +4,7 @@
 include "/home/igor/.gtkrc-2.0.mine"
 gtk-theme-name="Arc"
 gtk-icon-theme-name="bloom-classic"
-gtk-font-name="Roboto 12"
+gtk-font-name="Segoe UI 11"
 gtk-cursor-theme-name="Vanilla-DMZ"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
