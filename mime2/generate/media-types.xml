@@ -4,7 +4,7 @@
 <registry xmlns="http://www.iana.org/assignments" id="media-types">
   <title>Media Types</title>
   <category>Multipurpose Internet Mail Extensions (MIME) and Media Types</category>
-  <updated>2020-10-19</updated>
+  <updated>2020-11-25</updated>
   
   
  
@@ -125,12 +125,12 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
     </record>
     <record date="2020-03-26">
       <name>alto-updatestreamcontrol+json</name>
-      <xref type="draft" data="RFC-ietf-alto-incr-update-sse-22"/>
+      <xref type="rfc" data="rfc8895"/>
       <file type="template">application/alto-updatestreamcontrol+json</file>
     </record>
     <record date="2020-03-26">
       <name>alto-updatestreamparams+json</name>
-      <xref type="draft" data="RFC-ietf-alto-incr-update-sse-22"/>
+      <xref type="rfc" data="rfc8895"/>
       <file type="template">application/alto-updatestreamparams+json</file>
     </record>
     <record date="2014-11-11">
@@ -577,6 +577,18 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <xref type="person" data="Samer_El-Haj-Mahmoud"/>
       <file type="template">application/efi</file>
     </record>
+    <record date="2020-11-23">
+      <name>elm+json</name>
+      <xref type="person" data="HL7"/>
+      <xref type="person" data="Bryn_Rhodes"/>
+      <file type="template">application/elm+json</file>
+    </record>
+    <record date="2020-11-23">
+      <name>elm+xml</name>
+      <xref type="person" data="HL7"/>
+      <xref type="person" data="Bryn_Rhodes"/>
+      <file type="template">application/elm+xml</file>
+    </record>
     <record date="2020-03-10" updated="2020-08-20">
       <name>EmergencyCallData.cap+xml</name>
       <xref type="rfc" data="rfc8876"/>
@@ -897,6 +909,11 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <name>jrd+json</name>
       <xref type="rfc" data="rfc7033"/>
       <file type="template">application/jrd+json</file>
+    </record>
+    <record updated="2020-11-25">
+      <name>jscalendar+json</name>
+      <xref type="draft" data="RFC-ietf-calext-jscalendar-32"/>
+      <file type="template">application/jscalendar+json</file>
     </record>
     <record updated="2017-07-21">
       <name>json</name>
@@ -12248,6 +12265,11 @@ by the IANA.</note>
       <name>Cynthia Revström</name>
       <uri>mailto:iana&amp;cynthia.re</uri>
       <updated>2020-09-29</updated>
+    </person>
+    <person id="Bryn_Rhodes">
+      <name>Bryn Rhodes</name>
+      <uri>mailto:bryn&amp;dynamiccontentgroup.com</uri>
+      <updated>2020-11-23</updated>
     </person>
     <person id="Steve_Rice">
       <name>Steve Rice</name>
