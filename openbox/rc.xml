@@ -171,7 +171,7 @@
         <y>center</y>
       </position>
     </application>
-    <application name="chromium" type="normal">
+    <application name="chromium" role="browser" type="normal">
       <maximized>yes</maximized>
     </application>
     <application name="leafpad" type="normal">
