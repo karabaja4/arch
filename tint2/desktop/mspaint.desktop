@@ -7,4 +7,4 @@ Categories=Development;
 Exec=chromium --new-window --app=https://jspaint.app
 Terminal=false
 StartupNotify=false
-Icon=mspaint2
+Icon=mspaint3
