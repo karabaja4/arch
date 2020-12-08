@@ -3,7 +3,7 @@ set -euo pipefail
 
 spin() {
     declare -r pid="$!"
-    sleep 0.1
+    sleep 0.2
     kill -0 "${pid}" &> /dev/null
     if [ $? -eq 0 ]
     then
