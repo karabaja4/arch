@@ -38,8 +38,7 @@ workwork() {
     declare -r server="$(jq -r ".work.server" "$secret")"
     declare -r user="$(jq -r ".work.user" "$secret")"
     declare -r password="$(jq -r ".work.password" "$secret")"
-    xfreerdp /cert-ignore /bpp:8 /network:modem /audio-mode:2 /multimon /floatbar:sticky:off /v:$server /u:$user /p:$password +compression
-    # rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20
+    xfreerdp /cert-ignore /bpp:8 /network:modem /audio-mode:2 /multimon /floatbar:sticky:off /v:$server /u:$user /p:$password
 }
 
 worklaptop() {
@@ -49,8 +48,7 @@ worklaptop() {
     declare -r server="$(jq -r ".work.laptop" "$secret")"
     declare -r user="$(jq -r ".work.user" "$secret")"
     declare -r password="$(jq -r ".work.password" "$secret")"
-    xfreerdp /cert-ignore /bpp:16 /network:wan /audio-mode:2 /multimon /floatbar:sticky:off /d:$domain /v:$server /u:$user /p:$password
-    # rdesktop -u Administrator -g 1680x1050 -z -x 0x80 -P -k hr -r sound:off 192.168.0.20
+    xfreerdp /cert-ignore /bpp:32 /network:wan /audio-mode:2 /multimon /floatbar:sticky:off -themes -wallpaper /d:$domain /v:$server /u:$user /p:$password
 }
 
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
