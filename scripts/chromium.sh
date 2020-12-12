@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare running="$(wmctrl -lx | grep chromium.Chromium)"
+declare -r running="$(wmctrl -lx | grep chromium.Chromium)"
 
 if [ -z "$running" ]
 then
