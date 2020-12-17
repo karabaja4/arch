@@ -2,7 +2,7 @@
 set -u
 
 declare -r basedir="$(dirname "$(readlink -f "${0}")")"
-declare -r token="$(cat "${basedir}/secret.json" | jq -r ".dnsToken")"
+declare -r token="$(cat "${basedir}/../secret.json" | jq -r ".dnsToken")"
 declare -r url="https://api.digitalocean.com/v2/domains/aerium.hr/records/53478297"
 declare -ar headers=("-H" "Content-Type: application/json" "-H" "Authorization: Bearer ${token}")
 declare ip=""

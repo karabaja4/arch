@@ -34,21 +34,21 @@ gitreset() {
 
 workwork() {
     # requires ppp_generic
-    declare -r secret="$HOME/arch/scripts/secret.json"
+    declare -r secret="$HOME/arch/secret.json"
     declare -r server="$(jq -r ".work.server" "$secret")"
     declare -r user="$(jq -r ".work.user" "$secret")"
     declare -r password="$(jq -r ".work.password" "$secret")"
-    xfreerdp /cert-ignore /bpp:8 /network:modem /audio-mode:2 /multimon /floatbar:sticky:off /v:$server /u:$user /p:$password
+    xfreerdp /cert-ignore /bpp:8 /network:modem /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX /v:$server /u:$user /p:$password &> /dev/null
 }
 
 worklaptop() {
     # requires ppp_generic
-    declare -r secret="$HOME/arch/scripts/secret.json"
+    declare -r secret="$HOME/arch/secret.json"
     declare -r domain="$(jq -r ".work.domain" "$secret")"
     declare -r server="$(jq -r ".work.laptop" "$secret")"
     declare -r user="$(jq -r ".work.user" "$secret")"
     declare -r password="$(jq -r ".work.password" "$secret")"
-    xfreerdp /cert-ignore /bpp:32 /network:wan /audio-mode:2 /multimon /floatbar:sticky:off -themes -wallpaper /d:$domain /v:$server /u:$user /p:$password
+    xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper /d:$domain /v:$server /u:$user /p:$password &> /dev/null
 }
 
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
