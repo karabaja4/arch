@@ -27,16 +27,15 @@ DAEMONS="${DAEMONS## }"
 ENABLED="${ENABLED## }"
 # ###
 
-echo "DAEMONS: ${DAEMONS}"
-echo "ENABLED: ${ENABLED}"
-
 daemon_start() {
     while IFS='' read -r row
     do
         declare name="$(_jq '.name' "${row}")"
         if [ "${name}" = "${1}" ]
         then
-            daemon_execute "${name}" "$(_jq '.user' "${row}")" "$(_jq '.command' "${row}")"
+            declare -r user="$(_jq '.user' "${row}")"
+            declare -r cmd="$(_jq '.command' "${row}")"
+            daemon_execute "${name}" "${user}" "${cmd}"
             return 0
         fi
     done <<< "${JSON}"
