@@ -4,7 +4,7 @@ set -u
 echo "minirc @ 0.1"
 
 declare -r PIDDIR="/tmp/minirc"
-declare -r CFGFILE="/etc/minirc.json"
+declare -r JSON="$(jq -crM '.[]' /etc/minirc.json)"
 
 _jq() {
     jq -crM ${1} <<< ${2}
@@ -22,10 +22,13 @@ do
     then
         ENABLED="${ENABLED} ${name}"
     fi
-done < <(jq -crM '.[]' < "$CFGFILE")
+done <<< "${JSON}"
 DAEMONS="${DAEMONS## }"
 ENABLED="${ENABLED## }"
 # ###
+
+echo "DAEMONS: ${DAEMONS}"
+echo "ENABLED: ${ENABLED}"
 
 daemon_start() {
     while IFS='' read -r row
@@ -36,7 +39,7 @@ daemon_start() {
             daemon_execute "${name}" "$(_jq '.user' "${row}")" "$(_jq '.command' "${row}")"
             return 0
         fi
-    done < <(jq -crM '.[]' < "$CFGFILE")
+    done <<< "${JSON}"
     echo -e "Error: unknown service: ${1}"
 }
 
@@ -134,6 +137,8 @@ on_boot() {
         /etc/minirc.local
     fi
 
+
+    echo "${ENABLED}" > /home/igor/ajme
     echo "starting daemons..."
     for dmn in ${ENABLED}
     do

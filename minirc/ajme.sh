@@ -3,7 +3,7 @@
 DAEMONS=""
 ENABLED=""
 PIDDIR="/tmp/minirc"
-declare -r CFGFILE="/etc/minirc.json"
+declare -r JSON="$(jq -crM '.[]' /etc/minirc.json)"
 
 _jq() {
     jq -crM ${1} <<< ${2}
@@ -18,7 +18,7 @@ do
     then
         ENABLED="${ENABLED} ${name}"
     fi
-done < <(jq -crM '.[]' < "$CFGFILE")
+done <<< "${JSON}"
 
 DAEMONS="${DAEMONS## }"
 ENABLED="${ENABLED## }"
@@ -35,7 +35,7 @@ daemon_start() {
             daemon_execute "${name}" "$(_jq '.user' "${row}")" "$(_jq '.command' "${row}")"
             return 0
         fi
-    done < <(jq -crM '.[]' < "$CFGFILE")
+    done <<< "${JSON}"
     echo -e "Error: unknown service: ${1}"
 }
 
