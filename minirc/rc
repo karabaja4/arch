@@ -1,7 +1,7 @@
 #!/bin/bash
 set -u
 
-echo -e "\033[34mminirc @ 0.2\033[0m"
+echo -e "minirc @ 0.2"
 
 declare -r PIDDIR="/tmp/minirc"
 declare -r CONFIG="/etc/minirc.json"
