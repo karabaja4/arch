@@ -1,45 +1,23 @@
 #!/bin/bash
 set -u
 
-echo "minirc @ 0.1"
+echo -e "\033[34mminirc @ 0.2\033[0m"
 
 declare -r PIDDIR="/tmp/minirc"
-declare -r JSON="$(jq -crM '.[]' /etc/minirc.json)"
+declare -r CONFIG="/etc/minirc.json"
 
-_jq() {
-    jq -crM ${1} <<< ${2}
-}
-
-# load config
-declare DAEMONS=""
-declare ENABLED=""
-while IFS='' read -r row
-do
-    declare name="$(_jq '.name' "${row}")"
-    declare e="$(_jq '.enabled' "${row}")"
-    DAEMONS="${DAEMONS} ${name}"
-    if [ "${e}" = "true" ]
-    then
-        ENABLED="${ENABLED} ${name}"
-    fi
-done <<< "${JSON}"
-DAEMONS="${DAEMONS## }"
-ENABLED="${ENABLED## }"
-# ###
+declare -r DAEMONS="$(jq -crM '[.[] | .name] | join(" ")' ${CONFIG})"
+declare -r ENABLED="$(jq -crM '[.[] | select(.enabled==true) | .name] | join(" ")' ${CONFIG})"
 
 daemon_start() {
-    while IFS='' read -r row
-    do
-        declare name="$(_jq '.name' "${row}")"
-        if [ "${name}" = "${1}" ]
-        then
-            declare -r user="$(_jq '.user' "${row}")"
-            declare -r cmd="$(_jq '.command' "${row}")"
-            daemon_execute "${name}" "${user}" "${cmd}"
-            return 0
-        fi
-    done <<< "${JSON}"
-    echo -e "Error: unknown service: ${1}"
+    declare -r IFS=$'\n'
+    declare -ar array=( $(jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${CONFIG}) )
+    if [ ${#array[@]} -ne 0 ]
+    then
+        daemon_execute ${1} ${array[@]}
+    else
+        echo -e "Error: unknown service: ${1}"
+    fi
 }
 
 # ${1} -> service
@@ -210,9 +188,9 @@ list)
     do
         if daemon_poll "${dmn}"
         then
-            echo "[X] ${dmn}"
+            echo -e "\033[32m[X]\033[0m ${dmn}"
         else
-            echo "[ ] ${dmn}"
+            echo -e "\033[37m[ ]\033[0m ${dmn}"
         fi
     done;;
 *)
