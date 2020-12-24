@@ -114,8 +114,6 @@ on_boot() {
         /etc/minirc.local
     fi
 
-
-    echo "${ENABLED}" > /home/igor/ajme
     echo "starting daemons..."
     for dmn in ${ENABLED}
     do
