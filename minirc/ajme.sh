@@ -11,6 +11,7 @@ _jq() {
 
 while IFS='' read -r row
 do
+    echo "."
     declare name="$(_jq '.name' "${row}")"
     declare e="$(_jq '.enabled' "${row}")"
     DAEMONS="${DAEMONS} ${name}"
