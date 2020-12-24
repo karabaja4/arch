@@ -135,7 +135,7 @@ on_shutdown() {
     fi
 
     echo "shutting down udev..."
-    killall systemd-udevd
+    killall -q -w systemd-udevd
 
     echo "unmounting API filesystem..."
     umount -r /run
