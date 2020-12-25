@@ -2,7 +2,7 @@
 set -uo pipefail
 
 usage() {
-    echo "usage: switch.sh [speakers | headphones [headset] | maxvolume]"
+    echo "usage: ${0} [speakers | headphones [headset] | maxvolume]"
     exit 1
 }
 

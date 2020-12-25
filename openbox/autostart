@@ -27,7 +27,7 @@ desktop () {
     xinput set-prop 11 326 0.5
     
     # alsa
-    ${HOME}/arch/alsa/switch.sh maxvolume
+    ${HOME}/arch/scripts/sound.sh maxvolume
 
     # daemons
     xsettingsd -c ${HOME}/arch/xfce4-terminal/xsettingsd &
