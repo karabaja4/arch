@@ -32,15 +32,6 @@ gitreset() {
     git reset --hard origin/master
 }
 
-workwork() {
-    # requires ppp_generic
-    declare -r secret="$HOME/arch/secret.json"
-    declare -r server="$(jq -r ".work.server" "$secret")"
-    declare -r user="$(jq -r ".work.user" "$secret")"
-    declare -r password="$(jq -r ".work.password" "$secret")"
-    xfreerdp /cert-ignore /bpp:8 /network:modem /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX /v:$server /u:$user /p:$password &> /dev/null
-}
-
 worklaptop() {
     declare -r secret="$HOME/arch/secret.json"
     declare -r domain="$(jq -r ".work.domain" "$secret")"
@@ -50,8 +41,17 @@ worklaptop() {
     xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper /d:$domain /v:$server /u:$user /p:$password &> /dev/null
 }
 
+rsnc() {
+    sudo pacman -Rsnc "${1}"
+    if [ $? -eq 0 ]
+    then
+        echo -e "\033[31mChecking for remaining files in ${HOME}\033[0m"
+        sudo updatedb
+        locate -ir "${HOME}/.*${1}.*"
+    fi
+}
+
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
-alias rsnc='sudo pacman -Rsnc'
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias sound='/home/igor/arch/alsa/switch.sh'
