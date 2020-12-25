@@ -57,6 +57,7 @@ alias mountdisk="sudo mount -t ext4 /dev/sdc1 /home/igor/_disk/"
 alias mountmmc="sudo mount /dev/mmcblk0p1 /home/igor/_mmc/"
 alias mountazure="sudo mount -t cifs //isaricpfs.file.core.windows.net/pfs /home/igor/_azure -o vers=3.0,credentials=/etc/smbcredentials/isaricpfs.cred,dir_mode=0777,file_mode=0777,serverino"
 alias zxvf="tar zxvf"
+alias sudo='sudo -E'
 
 jtail() {
     /home/igor/arch/scripts/log.sh $1
@@ -64,13 +65,6 @@ jtail() {
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
 alias vboxload="sudo modprobe -a vboxdrv vboxnetadp vboxnetflt"
-
-alias dhcpcd='sudo dhcpcd -4'
-alias start='rc start'
-alias stop='rc stop'
-
-alias sudo='sudo -E'
-
 alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
 
 # exports
