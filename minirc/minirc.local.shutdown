@@ -1,4 +1,4 @@
-umount /home/igor/_azure &> /dev/null
+umount /home/igor/_pfs &> /dev/null
 umount /home/igor/_disk &> /dev/null
 umount /home/igor/_mmc &> /dev/null
 rm -rf /tmp/{*,.*} &> /dev/null
