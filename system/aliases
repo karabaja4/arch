@@ -14,8 +14,8 @@ alias sn='screen -S'
 alias startx='nvidia-xrun'
 
 mkmine() {
-    if [ -n "$1" ]; then
-        sudo chown -R ${USER}:${USER} $1
+    if [ -n "${1}" ]; then
+        sudo chown -R ${USER}:${USER} ${1}
     else
         echo "No file defined."
     fi
@@ -33,7 +33,7 @@ gitreset() {
 }
 
 worklaptop() {
-    declare -ar array=( $(jq -crM '.work | "/d:" + .domain, "/v:" + .host, "/u:" + .user, "/p:" + .password' "$HOME/arch/secret.json") )
+    declare -ar array=( $(jq -crM '.work | "/d:" + .domain, "/v:" + .host, "/u:" + .user, "/p:" + .password' "${HOME}/arch/secret.json") )
     echo "Connecting to: ${array[0]} ${array[1]} ${array[2]}"
     xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper ${array[@]} &> /dev/null
 }
@@ -60,7 +60,7 @@ alias zxvf="tar zxvf"
 alias sudo='sudo -E'
 
 jtail() {
-    /home/igor/arch/scripts/log.sh $1
+    /home/igor/arch/scripts/log.sh ${1}
 }
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
