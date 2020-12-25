@@ -1,7 +1,7 @@
 {
   "extensions": {
     "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv": "leafpad $arg",
-    "avi,mkv,flac,mp3,wav,mp4,mov": "vlc $arg",
+    "avi,mkv,flac,mp3,wav,mp4,mov": "/home/igor/arch/scripts/vlc.sh $arg",
     "jpg,jpeg,svg,png,bmp,gif,tga": "gpicview $arg",
     "gz,zip,rar,zst": "xarchiver $arg",
     "torrent": "qbittorrent $arg",
@@ -10,8 +10,8 @@
   },
   "mimetypes": {
     "text/*": "leafpad $arg",
-    "video/*": "vlc $arg",
-    "media/video": "vlc $arg",
+    "video/*": "/home/igor/arch/scripts/vlc.sh $arg",
+    "media/video": "/home/igor/arch/scripts/vlc.sh $arg",
     "document/pdf": "mupdf -r 96 $arg",
     "inode/directory": "qtfm $arg",
     "inode/x-empty": "leafpad $arg",

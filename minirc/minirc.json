@@ -60,12 +60,6 @@
 		"command": "/usr/bin/crond -n"
 	},
 	{
-		"name": "vpn",
-		"enabled": false,
-		"user": "root",
-		"command": "/usr/bin/openfortivpn"
-	},
-	{
 		"name": "syslog",
 		"enabled": false,
 		"user": "root",
