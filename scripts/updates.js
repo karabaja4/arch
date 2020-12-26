@@ -3,7 +3,7 @@ const fs = require('fs');
 const exec = util.promisify(require('child_process').exec);
 const sleep = util.promisify(setTimeout);
 
-const log = async (tag, msg) => {
+const log = (tag, msg) => {
   console.log(`[${(new Date()).toISOString()}][${tag}]: ${msg}`);
 };
 
