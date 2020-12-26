@@ -2,10 +2,10 @@
 set -euo pipefail
 
 spin() {
-    declare -r pid="$!"
-    sleep 0.2
+    declare -r pid="${!}"
+    sleep 0.1
     kill -0 "${pid}" &> /dev/null
-    if [ $? -eq 0 ]
+    if [ ${?} -eq 0 ]
     then
         # init fifo
         declare -r fifo="$(mktemp -u)"
@@ -44,7 +44,10 @@ unrar)
 gzip)
     tar cvzf "${2}.tar.gz" "${@:3}" &
     spin "creating archive ${2}.tar.gz";;
-sleep)
-    sleep 37 &
-    spin "sleeping";;
+# sleep)
+#     sleep 10 &
+#     spin "sleeping";;
+# echo)
+#     echo "hello" &
+#     spin "echoing";;
 esac
