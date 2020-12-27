@@ -17,11 +17,11 @@ _exit() {
 _print() {
     tput rc
     tput ed
-    echo -n "${1}"
+    echo -ne "${1}" | sed -n 2p | sed 's/^\s*//'
 }
 
 _progress() {
-    /usr/bin/progress ${1:+"${1}"} -p ${pid} 2>/dev/null | sed 's/^\s*//'
+    /usr/bin/progress ${1:+"${1}"} -p ${pid} 2>/dev/null
 }
 
 trap "_exit" EXIT
@@ -38,6 +38,7 @@ do
     line="$(_progress -w)"
     if [[ "${line}" == "" ]]
     then
+        echo ""
         break
     fi
     _print "${line}"
