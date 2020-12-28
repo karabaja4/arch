@@ -17,7 +17,7 @@ declare -r pid=${!}
 
 _exit() {
     kill ${pid} > /dev/null 2>&1
-    if [[ ${?} -eq 0 ]]
+    if (( ${?} == 0 ))
     then
         echo -ne "\nKilled ${pid}"
     fi
@@ -52,7 +52,7 @@ do
 
     # die if cp finished
     kill -0 "${pid}" &> /dev/null
-    if [[ ${?} -ne 0 ]]
+    if (( ${?} != 0 ))
     then
         break
     fi
