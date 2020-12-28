@@ -25,6 +25,10 @@ _exit() {
 
 declare ln=0
 _print() {
+    if [[ "${1}" == "" ]]
+    then
+        return 0
+    fi
     if (( $ln > 0 ))
     then
         tput cuu ${ln}
@@ -40,19 +44,16 @@ _progress() {
 
 trap "_exit" EXIT
 
-declare line="$(_progress)"
-if [[ "${line}" != "" ]]
-then
-    _print "${line}"
-fi
-
+_print "$(_progress)"
 
 while true
 do
-    line="$(_progress -w)"
-    if [[ "${line}" == "" ]]
+    _print "$(_progress -w)"
+
+    # die if cp finished
+    kill -0 "${pid}" &> /dev/null
+    if [[ ${?} -ne 0 ]]
     then
         break
     fi
-    _print "${line}"
 done
