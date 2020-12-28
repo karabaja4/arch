@@ -2,10 +2,10 @@
   "symbols": [
     "BITMEX:XBTUSD",
     "COINBASE:LTCUSD",
-    "COINBASE:XRPUSD",
+    "CME_MINI:ES1!",
     "TVC:USOIL",
     "FOREXCOM:NSXUSD",
-    "TVC:SPX",
+    "CURRENCYCOM:GOLD",
     "NASDAQ:TSLA",
     "TVC:DXY"
   ]
