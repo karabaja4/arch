@@ -1,10 +1,19 @@
 #!/bin/bash
 set -euo pipefail
 
+_dep() {
+    if ! type "${1}" &> /dev/null
+    then
+        echo "${1} could not be found"
+        exit
+    fi
+}
+
+_dep "progress"
+_dep "tput"
+
 cp "$@" &
 declare -r pid=${!}
-
-tput sc
 
 _exit() {
     kill ${pid} > /dev/null 2>&1
@@ -14,14 +23,19 @@ _exit() {
     fi
 }
 
+declare ln=0
 _print() {
-    tput rc
-    tput ed
-    echo -ne "${1}" | sed -n 2p | sed 's/^\s*//'
+    if (( $ln > 0 ))
+    then
+        tput cuu ${ln}
+        tput ed
+    fi
+    echo -e "${1}" | sed 's/^\s*//' | cut -c "-$(tput cols)"
+    ln=2
 }
 
 _progress() {
-    /usr/bin/progress ${1:+"${1}"} -p ${pid} 2>/dev/null
+    progress ${1:+"${1}"} -p ${pid} 2>/dev/null
 }
 
 trap "_exit" EXIT
@@ -38,7 +52,6 @@ do
     line="$(_progress -w)"
     if [[ "${line}" == "" ]]
     then
-        echo ""
         break
     fi
     _print "${line}"
