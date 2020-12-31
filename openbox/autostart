@@ -51,7 +51,7 @@ desktop () {
     sleep 1
     pnmixer &
     sleep 1
-    xfce4-clipman &> /dev/null &
+    ${HOME}/arch/scripts/clip.sh &> /dev/null &
     sleep 1
     flameshot &
     #sleep 1
