@@ -11,7 +11,6 @@ usage() {
 (( ${#} > 0 )) && usage
 
 declare -ar preferred_targets=(
-    "image/bmp"
     "image/png"
     "text/uri-list"
     "code/file-list"
