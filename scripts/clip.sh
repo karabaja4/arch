@@ -7,7 +7,6 @@ declare -ar preferred_targets=(
     "text/uri-list"
     "code/file-list"
     "text/plain"
-    "UTF8_STRING"
 )
 
 usage() {
