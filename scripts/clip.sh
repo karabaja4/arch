@@ -1,21 +1,25 @@
 #!/bin/bash
 set -uo pipefail
 
-echo -e "[$(basename "${0}") - xclip based clipboard manager for XA_CLIPBOARD]"
-
-usage() {
-    echo -e "-> Please define your preferred targets in the 'preferred_targets' array to handle custom formats"
-    exit 1
-}
-
-(( ${#} > 0 )) && usage
-
+# TARGETS configuration
 declare -ar preferred_targets=(
     "image/png"
     "text/uri-list"
     "code/file-list"
     "text/plain"
 )
+
+usage() {
+    echo "Usage:"
+    echo "  ./$(basename "${0}")"
+    echo "Configuration:"
+    echo "  Add your preferred TARGETS to the 'preferred_targets' array in the script to handle custom formats."
+    echo "  Current preferred targets:"
+    printf -- '  - %s\n' "${preferred_targets[@]}"
+    exit 1
+}
+
+(( ${#} > 0 )) && usage
 
 while true
 do
@@ -25,7 +29,7 @@ do
     echo "-> Preferred targets: ${preferred_targets[@]}"
     echo "-> Clipboard targets: ${targets[@]}"
 
-    # prints both lists together, and prints intersection sorted by first occurance of type in preferred_targets
+    # join both lists together, and print first item of targets occuring in preferred_targets
     target="$(echo ${targets[@]} ${preferred_targets[@]} | tr ' ' '\n' | awk 'a[$0]++' | head -n1)"
     echo "-> Target: ${target:-"text/plain (default)"}"
 
