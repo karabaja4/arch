@@ -7,6 +7,7 @@ declare -ar preferred_targets=(
     "text/uri-list"
     "code/file-list"
     "text/plain"
+    "UTF8_STRING"
 )
 
 usage() {
@@ -14,7 +15,7 @@ usage() {
     echo "  ./$(basename "${0}")"
     echo "Configuration:"
     echo "  Add your preferred TARGETS to the 'preferred_targets' array in the script to handle custom formats."
-    echo "  Current preferred targets:"
+    echo "  Current preferred_targets:"
     printf -- '  - %s\n' "${preferred_targets[@]}"
     exit 1
 }
