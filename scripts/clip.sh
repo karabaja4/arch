@@ -32,7 +32,7 @@ do
 
     # join both lists together, and print first item of targets occuring in preferred_targets
     target="$(echo ${targets[@]} ${preferred_targets[@]} | tr ' ' '\n' | awk 'a[$0]++' | head -n1)"
-    echo "-> Target: ${target:-"text/plain (default)"}"
+    echo "-> Target: ${target:-"UTF8_STRING (default)"}"
 
-    xclip -verbose -out -selection clipboard -t "${target:-"text/plain"}" | xclip -verbose -in -selection clipboard -t "${target:-"text/plain"}"
+    xclip -verbose -out -selection clipboard -t "${target:-"UTF8_STRING"}" | xclip -verbose -in -selection clipboard -t "${target:-"UTF8_STRING"}"
 done
