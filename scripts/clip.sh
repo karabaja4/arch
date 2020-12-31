@@ -6,7 +6,6 @@ declare -ar preferred_targets=(
     "image/png"
     "text/uri-list"
     "code/file-list"
-    "text/plain"
 )
 
 usage() {
