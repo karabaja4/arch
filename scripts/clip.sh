@@ -32,7 +32,7 @@ _iteration() {
     if (( ${?} != 0 || ${#targets[@]} == 0 ))
     then
         _log "Initializing using: ${default_target}"
-        echo -n "" | xclip -verbose -in -selection clipboard -t "${default_target}"
+        xclip -verbose -in -selection clipboard -t "${default_target}" < /dev/null
     else
         _log "Preferred targets: ${preferred_targets[@]}"
         _log "Clipboard targets: ${targets[@]}"
