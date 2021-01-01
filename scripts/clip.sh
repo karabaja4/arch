@@ -24,7 +24,6 @@ _usage() {
 declare -r default_target="UTF8_STRING"
 
 _iteration() {
-    echo "-> ------------------------------------------------------------------------------"
     declare -ar targets=( $(xclip -selection clipboard -o -t TARGETS) )
     if (( ${?} != 0 || ${#targets[@]} == 0 ))
     then
@@ -50,5 +49,6 @@ _iteration() {
 
 while true
 do
+    echo "-> $(head -c 80 /dev/zero | tr '\0' '-')"
     _iteration
 done
