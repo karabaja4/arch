@@ -25,7 +25,7 @@ do
     targets=( $(xclip -selection clipboard -o -t TARGETS) )
     if (( ${?} != 0 || ${#targets[@]} == 0 ))
     then
-        echo "-> ERROR: failed to fetch targets"
+        echo "-> Failed to fetch targets"
         sleep 1
     else
         echo "-> Preferred targets: ${preferred_targets[@]}"
@@ -39,7 +39,7 @@ do
             echo "-> Chosen target: ${target}"
             xclip -verbose -out -selection clipboard -t "${target}" | xclip -verbose -in -selection clipboard -t "${target}"
         else
-            echo "-> ERROR: unable to match targets"
+            echo "-> Unable to match targets"
             sleep 1
         fi
     fi
