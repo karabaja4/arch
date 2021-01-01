@@ -20,6 +20,10 @@ _usage() {
 
 (( ${#} > 0 )) && _usage
 
+_log() {
+    echo -e "\033[32m->\033[0m" "${@}"
+}
+
 # main
 declare -r default_target="UTF8_STRING"
 
@@ -27,21 +31,21 @@ _iteration() {
     declare -ar targets=( $(xclip -selection clipboard -o -t TARGETS) )
     if (( ${?} != 0 || ${#targets[@]} == 0 ))
     then
-        echo "-> Initializing using: ${default_target}"
+        _log "Initializing using: ${default_target}"
         echo -n "" | xclip -verbose -in -selection clipboard -t "${default_target}"
     else
-        echo "-> Preferred targets: ${preferred_targets[@]}"
-        echo "-> Clipboard targets: ${targets[@]}"
+        _log "Preferred targets: ${preferred_targets[@]}"
+        _log "Clipboard targets: ${targets[@]}"
 
         # join both lists together, and print first item of targets occuring in preferred_targets
         declare -r target="$(printf '%s\n' "${targets[@]}" "${preferred_targets[@]}" "${default_target}" | awk 'a[$0]++' | head -n1)"
 
         if [[ -n ${target} ]]
         then
-            echo "-> Chosen target: ${target}"
+            _log "Chosen target: ${target}"
             xclip -verbose -out -selection clipboard -t "${target}" | xclip -verbose -in -selection clipboard -t "${target}"
         else
-            echo "-> Unable to match targets"
+            _log "Unable to match targets"
             sleep 1
         fi
     fi
@@ -49,6 +53,6 @@ _iteration() {
 
 while true
 do
-    echo "-> $(head -c 80 /dev/zero | tr '\0' '-')"
+    _log "$(head -c 80 /dev/zero | tr '\0' '-')"
     _iteration
 done
