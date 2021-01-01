@@ -14,10 +14,6 @@ _usage() {
     exit 1
 }
 
-_draw_line() {
-    echo "-> $(head -c 78 /dev/zero | tr '\0' '-')"
-}
-
 (( ${#} > 0 )) && _usage
 
 # default
@@ -25,7 +21,7 @@ preferred_targets+=("UTF8_STRING")
 
 while true
 do
-    _draw_line
+    echo "-> ------------------------------------------------------------------------------"
     targets=( $(xclip -selection clipboard -o -t TARGETS) )
     if (( ${?} != 0 || ${#targets[@]} == 0 ))
     then
