@@ -2,12 +2,7 @@
 set -uo pipefail
 
 # TARGETS configuration
-declare -ar preferred_targets=(
-    "image/png"
-    "text/uri-list"
-    "code/file-list"
-    "UTF8_STRING"
-)
+declare -a preferred_targets=("image/png" "text/uri-list" "code/file-list")
 
 usage() {
     echo "Usage:"
@@ -20,6 +15,9 @@ usage() {
 }
 
 (( ${#} > 0 )) && usage
+
+# default
+preferred_targets+=("UTF8_STRING")
 
 while true
 do
