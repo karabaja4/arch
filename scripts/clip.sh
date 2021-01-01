@@ -43,5 +43,4 @@ do
             sleep 1
         fi
     fi
-
 done
