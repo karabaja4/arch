@@ -34,6 +34,7 @@ _iteration() {
     tt="$(xclip -selection clipboard -o -t TARGETS)"
     declare -ir ec=${?}
     _log "TARGETS check exited with ${ec}"
+    declare -a targets
     mapfile -t targets <<< "${tt}"
 
     if (( ${ec} != 0 || ${#targets[@]} == 0 ))
