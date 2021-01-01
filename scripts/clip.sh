@@ -2,7 +2,11 @@
 set -uo pipefail
 
 # TARGETS configuration
-declare -a preferred_targets=("image/png" "text/uri-list" "code/file-list")
+declare -ar preferred_targets=(
+    "image/png"
+    "text/uri-list"
+    "code/file-list"
+)
 
 _usage() {
     echo "Usage:"
@@ -16,23 +20,22 @@ _usage() {
 
 (( ${#} > 0 )) && _usage
 
-# default
-preferred_targets+=("UTF8_STRING")
+# main
+declare -r default_target="UTF8_STRING"
 
-while true
-do
+_iteration() {
     echo "-> ------------------------------------------------------------------------------"
-    targets=( $(xclip -selection clipboard -o -t TARGETS) )
+    declare -ar targets=( $(xclip -selection clipboard -o -t TARGETS) )
     if (( ${?} != 0 || ${#targets[@]} == 0 ))
     then
-        echo "-> Failed to fetch targets"
-        sleep 1
+        echo "-> Initializing using: ${default_target}"
+        echo -n "" | xclip -verbose -in -selection clipboard -t "${default_target}"
     else
         echo "-> Preferred targets: ${preferred_targets[@]}"
         echo "-> Clipboard targets: ${targets[@]}"
 
         # join both lists together, and print first item of targets occuring in preferred_targets
-        target="$(echo ${targets[@]} ${preferred_targets[@]} | tr ' ' '\n' | awk 'a[$0]++' | head -n1)"
+        declare -r target="$(printf '%s\n' "${targets[@]}" "${preferred_targets[@]}" "${default_target}" | awk 'a[$0]++' | head -n1)"
 
         if [[ -n ${target} ]]
         then
@@ -43,4 +46,9 @@ do
             sleep 1
         fi
     fi
+}
+
+while true
+do
+    _iteration
 done
