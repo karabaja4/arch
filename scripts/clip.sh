@@ -28,10 +28,18 @@ _log() {
 declare -r default_target="UTF8_STRING"
 
 _iteration() {
-    declare -ar targets=( $(xclip -selection clipboard -o -t TARGETS) )
-    if (( ${?} != 0 || ${#targets[@]} == 0 ))
+
+    # test targets of current selection
+    declare tt
+    tt="$(xclip -selection clipboard -o -t TARGETS)"
+    declare -ir ec=${?}
+    _log "TARGETS check exited with ${ec}"
+    mapfile -t targets <<< "${tt}"
+
+    if (( ${ec} != 0 || ${#targets[@]} == 0 ))
     then
-        _log "Initializing using: ${default_target}"
+        # on empty wait for any selection
+        _log "Waiting on initial selection with: ${default_target}"
         xclip -verbose -in -selection clipboard -t "${default_target}" < /dev/null
     else
         _log "Preferred targets: ${preferred_targets[*]}"
