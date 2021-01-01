@@ -34,8 +34,8 @@ _iteration() {
         _log "Initializing using: ${default_target}"
         xclip -verbose -in -selection clipboard -t "${default_target}" < /dev/null
     else
-        _log "Preferred targets: ${preferred_targets[@]}"
-        _log "Clipboard targets: ${targets[@]}"
+        _log "Preferred targets: ${preferred_targets[*]}"
+        _log "Clipboard targets: ${targets[*]}"
 
         # join both lists together, and print first item of targets occuring in preferred_targets
         declare -r target="$(printf '%s\n' "${targets[@]}" "${preferred_targets[@]}" "${default_target}" | awk 'a[$0]++' | head -n1)"
