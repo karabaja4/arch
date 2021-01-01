@@ -182,9 +182,6 @@
     <application name="leafpad" type="normal">
       <maximized>yes</maximized>
     </application>
-    <application name="xfce4-terminal" type="normal">
-      <layer>above</layer>
-    </application>
   </applications>
 
 </openbox_config>
