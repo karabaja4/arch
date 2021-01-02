@@ -3,14 +3,14 @@
 
 set -uo pipefail
 
-usage() {
+_usage() {
     echo "usage: ${0} [speakers | headphones [headset] | maxvolume]"
     exit 1
 }
 
-[ ${#} -eq 0 ] && usage
+(( ${#} == 0 )) && _usage
 
-set_max_amixer() {
+_unmute_max_all() {
     amixer set Master unmute &> /dev/null
     amixer set Master 100% &> /dev/null
     amixer set Headphone unmute &> /dev/null
@@ -19,35 +19,35 @@ set_max_amixer() {
     amixer set Mic 100% &> /dev/null
 }
 
-max_amixer() {
-    set_max_amixer
+_max_volume() {
+    _unmute_max_all
     echo "Set volume to 100%"
 }
 
-write_asoundrc() {
+_write_asoundrc() {
     echo -e "defaults.ctl.card ${1}\ndefaults.pcm.card ${1}\ndefaults.pcm.device 0" > "${HOME}/.asoundrc"
 }
 
-switch_card() {
+_switch_card() {
     declare -r id="$(grep "${1}" /proc/asound/cards | awk '{print $1; exit;}')"
-    if [ -z "${id}" ]
+    if [[ -z ${id} ]]
     then
         echo "Card ${1} not found, exiting"
         exit 1
     fi
-    write_asoundrc "${id}"
+    _write_asoundrc "${id}"
     echo "Switched to card ${id} (${1})"
 }
 
 case "${1}" in
 speakers)
-    switch_card PCH
+    _switch_card PCH
     ;;&
 headphones|headset)
-    switch_card Headset
+    _switch_card Headset
     ;;&
 speakers|headphones|headset|maxvolume)
-    max_amixer
+    _max_volume
     ;;
 *)
     usage
