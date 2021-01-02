@@ -53,7 +53,7 @@ daemon_stop() {
 
     if daemon_poll "${1}"
     then
-        declare -r pid="$(cat ${pidfile})"
+        declare -r pid="$(cat "${pidfile}")"
         echo -ne "Killing ${pid}... "
 
         kill -TERM "${pid}"
@@ -96,7 +96,7 @@ on_boot() {
     /usr/bin/udevadm trigger --action=add --type=devices
 
     echo "setting hostname..."
-    echo "$(cat /etc/hostname)" >| /proc/sys/kernel/hostname
+    cat /etc/hostname >| /proc/sys/kernel/hostname
 
     echo "creating symlinks..."
     ln -s /proc/kcore /dev/core
