@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias ls='LC_COLLATE=C ls -A -o -h --color=always --group-directories-first'
 
 alias chx='chmod +x'
@@ -15,7 +17,7 @@ alias startx='nvidia-xrun'
 
 mkmine() {
     if [ -n "${1}" ]; then
-        sudo chown -R ${USER}:${USER} ${1}
+        sudo chown -R "${USER}:${USER}" "${1}"
     else
         echo "No file defined."
     fi
@@ -33,15 +35,16 @@ gitreset() {
 }
 
 worklaptop() {
-    declare -ar array=( $(jq -crM '.work | "/d:" + .domain, "/v:" + .host, "/u:" + .user, "/p:" + .password' "${HOME}/arch/secret.json") )
+    declare -a array
+    mapfile -t array < <( jq -crM '.work | "/d:" + .domain, "/v:" + .host, "/u:" + .user, "/p:" + .password' "${HOME}/arch/secret.json" )
     echo "Connecting to: ${array[0]} ${array[1]} ${array[2]}"
-    xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper ${array[@]} &> /dev/null
+    xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper "${array[@]}" &> /dev/null
     echo "Disconnected"
 }
 
 rsnc() {
     sudo pacman -Rsnc "${1}"
-    if [ $? -eq 0 ]
+    if (( ${?} == 0 ))
     then
         echo -e "\033[31mChecking for remaining files in ${HOME}\033[0m"
         sudo updatedb
