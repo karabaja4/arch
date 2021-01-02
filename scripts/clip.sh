@@ -24,10 +24,8 @@ _log() {
     echo -e "\033[32m->\033[0m" "${@}"
 }
 
-# main
-declare -r default_target="UTF8_STRING"
-
 _iteration() {
+    declare -r default_target="UTF8_STRING"
 
     # test targets of current selection
     declare tt
@@ -37,7 +35,7 @@ _iteration() {
     declare -a targets
     mapfile -t targets <<< "${tt}"
 
-    if (( ${ec} != 0 || ${#targets[@]} == 0 ))
+    if (( ec != 0 || ${#targets[@]} == 0 ))
     then
         # on empty wait for any selection
         _log "Waiting on initial selection with: ${default_target}"
@@ -47,7 +45,8 @@ _iteration() {
         _log "Clipboard targets: ${targets[*]}"
 
         # join both lists together, and print first item of targets occuring in preferred_targets
-        declare -r target="$(printf '%s\n' "${targets[@]}" "${preferred_targets[@]}" "${default_target}" | awk 'a[$0]++' | head -n1)"
+        declare target
+        target="$(printf '%s\n' "${targets[@]}" "${preferred_targets[@]}" "${default_target}" | awk 'a[$0]++' | head -n1)"
 
         if [[ -n ${target} ]]
         then
