@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2181
+
 set -euo pipefail
 
 _dep() {
@@ -29,7 +31,7 @@ _print() {
     then
         return 0
     fi
-    if (( $ln > 0 ))
+    if (( ln > 0 ))
     then
         tput cuu ${ln}
         tput ed
