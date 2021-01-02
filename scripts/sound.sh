@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2155
+
 set -uo pipefail
 
 usage() {
