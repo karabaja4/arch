@@ -65,7 +65,7 @@ alias sudo='sudo -E'
 alias cp='/home/igor/arch/scripts/cp.sh'
 
 jtail() {
-    /home/igor/arch/scripts/log.sh ${1}
+    /home/igor/arch/scripts/log.sh "${1}"
 }
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
