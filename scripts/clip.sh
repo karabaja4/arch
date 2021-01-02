@@ -2,7 +2,7 @@
 set -uo pipefail
 
 # TARGETS configuration
-declare -ar preferred_targets=(
+declare -ar _pref=(
     "image/png"
     "text/uri-list"
     "code/file-list"
@@ -12,9 +12,9 @@ _usage() {
     echo "Usage:"
     echo "  ./$(basename "${0}")"
     echo "Configuration:"
-    echo "  Add your preferred TARGETS to the 'preferred_targets' array in the script to handle custom formats."
-    echo "  Current preferred_targets:"
-    printf -- '  - %s\n' "${preferred_targets[@]}"
+    echo "  Add your preferred TARGETS to the '_pref' array in the script to handle custom formats."
+    echo "  Current _pref:"
+    printf -- '  - %s\n' "${_pref[@]}"
     exit 1
 }
 
@@ -25,33 +25,33 @@ _log() {
 }
 
 _iteration() {
-    declare -r default_target="UTF8_STRING"
+    declare -r _utf8="UTF8_STRING"
 
-    # test targets of current selection
-    declare tt
-    tt="$(xclip -selection clipboard -o -t TARGETS)"
-    declare -ir ec=${?}
-    _log "TARGETS check exited with ${ec}"
-    declare -a targets
-    mapfile -t targets <<< "${tt}"
+    # target test of current selection
+    declare _ttres
+    _ttres="$(xclip -selection clipboard -o -t TARGETS)"
+    declare -ir _ttec=${?}
+    _log "TARGETS check exited with: ${_ttec}"
+    declare -a _targets
+    mapfile -t _targets <<< "${_ttres}"
 
-    if (( ec != 0 || ${#targets[@]} == 0 ))
+    if (( _ttec != 0 || ${#_targets[@]} == 0 ))
     then
         # on empty wait for any selection
-        _log "Waiting on initial selection with: ${default_target}"
-        xclip -verbose -in -selection clipboard -t "${default_target}" < /dev/null
+        _log "Waiting on initial selection with: ${_utf8}"
+        xclip -verbose -in -selection clipboard -t "${_utf8}" < /dev/null
     else
-        _log "Preferred targets: ${preferred_targets[*]}"
-        _log "Clipboard targets: ${targets[*]}"
+        _log "Preferred targets: ${_pref[*]}"
+        _log "Clipboard targets: ${_targets[*]}"
 
-        # join both lists together, and print first item of targets occuring in preferred_targets
-        declare target
-        target="$(printf '%s\n' "${targets[@]}" "${preferred_targets[@]}" "${default_target}" | awk 'a[$0]++' | head -n1)"
+        # join both lists together, and print first item of targets occuring in _pref
+        declare _match
+        _match="$(printf '%s\n' "${_targets[@]}" "${_pref[@]}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
 
-        if [[ -n ${target} ]]
+        if [[ -n ${_match} ]]
         then
-            _log "Chosen target: ${target}"
-            xclip -verbose -out -selection clipboard -t "${target}" | xclip -verbose -in -selection clipboard -t "${target}"
+            _log "Matched target: ${_match}"
+            xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
         else
             _log "Unable to match targets"
             sleep 1
