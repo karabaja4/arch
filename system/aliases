@@ -80,6 +80,7 @@ export XDG_RUNTIME_DIR="/tmp/runtime-igor"
 export EDITOR=nano
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 
+# shellcheck disable=SC1091
 source /usr/share/git/completion/git-prompt.sh
 
 bold=$(tput bold)
