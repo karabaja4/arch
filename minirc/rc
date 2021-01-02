@@ -10,11 +10,11 @@ declare -r DAEMONS="$(jq -crM '[.[] | .name] | join(" ")' ${CONFIG})"
 declare -r ENABLED="$(jq -crM '[.[] | select(.enabled==true) | .name] | join(" ")' ${CONFIG})"
 
 daemon_start() {
-    declare -r IFS=$'\n'
-    declare -ar array=( $(jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${CONFIG}) )
-    if [ ${#array[@]} -ne 0 ]
+    declare -a array
+    mapfile -t array < <( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${CONFIG} )
+    if (( ${#array[@]} > 0 ))
     then
-        daemon_execute ${1} ${array[@]}
+        daemon_execute "${1}" "${array[@]}"
     else
         echo -e "Error: unknown service: ${1}"
     fi
