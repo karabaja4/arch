@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2155
+
 set -u
 
 echo -e "minirc @ 0.2"
