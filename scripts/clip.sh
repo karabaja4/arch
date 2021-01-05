@@ -27,14 +27,14 @@ _log() {
 }
 
 _iteration() {
-    declare -r _utf8="UTF8_STRING"
+    local -r _utf8="UTF8_STRING"
 
     # target test of current selection
-    declare _ttres
+    local _ttres
     _ttres="$(xclip -selection clipboard -o -t TARGETS)"
-    declare -ir _ttec=${?}
+    local -ir _ttec=${?}
     _log "TARGETS check exited with: ${_ttec}"
-    declare -a _targets
+    local -a _targets
     mapfile -t _targets <<< "${_ttres}"
 
     if (( _ttec != 0 || ${#_targets[@]} == 0 ))
@@ -47,7 +47,7 @@ _iteration() {
         _log "Clipboard targets: ${_targets[*]}"
 
         # join both lists together, and print first item of targets occuring in _pref
-        declare -r _match="$(printf '%s\n' "${_targets[@]}" "${_pref[@]}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
+        local -r _match="$(printf '%s\n' "${_targets[@]}" "${_pref[@]}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
 
         if [[ -n ${_match} ]]
         then
