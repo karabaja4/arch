@@ -9,12 +9,12 @@ declare -a _daemons=()
 declare -a _enabled=()
 
 # load config
-mapfile -t _daemons < <(jq -crM '.[] | .name' ${_config})
-mapfile -t _enabled < <(jq -crM '.[] | select(.enabled==true) | .name' ${_config})
+mapfile -t _daemons <<< "$(jq -crM '.[] | .name' ${_config})"
+mapfile -t _enabled <<< "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 
 _daemon_start() {
     local -a _params
-    mapfile -t _params < <( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )
+    mapfile -t _params <<< "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
     if (( ${#_params[@]} > 0 ))
     then
         _daemon_execute "${1}" "${_params[@]}"
