@@ -7,7 +7,7 @@ const getName = () => {
   // if (day === 6 || day === 0) {
   //   return 'BITMEX:XBTUSD';
   // }
-  return 'CME_MINI:ES1!';
+  return 'FOREXCOM:NSXUSD';
 };
 
 const write = (key, data) => {
