@@ -53,6 +53,18 @@ rsnc() {
     fi
 }
 
+m4atomp3() {
+    for i in "${@}"
+    do
+        echo "-> Converting ${i}"
+        ffmpeg -i "${i}" -c:v copy -c:a libmp3lame -q:a 2 "${i}.mp3"
+    done
+}
+
+ytdl() {
+    youtube-dl -f 'bestaudio[ext=m4a]' "${1}"
+}
+
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
