@@ -50,6 +50,6 @@ speakers|headphones|headset|maxvolume)
     _max_volume
     ;;
 *)
-    usage
+    _usage
     ;;
 esac
