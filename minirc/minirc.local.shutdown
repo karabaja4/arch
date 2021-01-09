@@ -1,0 +1,5 @@
+#!/bin/bash
+
+umount /home/igor/_pfs &> /dev/null
+umount /home/igor/_disk &> /dev/null
+umount /home/igor/_mmc &> /dev/null

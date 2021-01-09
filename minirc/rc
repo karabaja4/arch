@@ -1,0 +1,209 @@
+#!/bin/bash
+set -u
+
+echo -e "minirc-ng @ 0.3"
+
+declare -r _piddir="/tmp/minirc"
+declare -r _config="/etc/minirc.json"
+declare -a _daemons=()
+declare -a _enabled=()
+
+# load config
+mapfile -t _daemons <<< "$(jq -crM '.[] | .name' ${_config})"
+mapfile -t _enabled <<< "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
+
+_daemon_start() {
+    local -a _params
+    mapfile -t _params <<< "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
+    if (( ${#_params[@]} > 0 ))
+    then
+        _daemon_execute "${1}" "${_params[@]}"
+    else
+        echo -e "Error: unknown service: ${1}"
+    fi
+}
+
+# ${1} -> service
+# ${2} -> user
+# ${3} -> command
+# for logging use:
+# |& logger --tag "${1}" &
+_daemon_execute() {
+    local -r _pidfile="${_piddir}/${1}.pid"
+    echo "Starting ${1}..."
+
+    if _daemon_poll "${1}"
+    then
+        echo "Error: ${_pidfile} exists"
+    else
+        local -r _fifo="$(mktemp -u)"
+        
+        su - "${2}" -c "mkfifo ${_fifo}"
+        su - "${2}" -c "( ${3} & echo \$! > ${_fifo} )" &> /dev/null &
+
+        local -r _pid="$(cat "${_fifo}")"
+        echo "${_pid}" > "${_pidfile}"
+        rm -f "${_fifo}"
+        echo "User: ${2}"
+        echo "Exec: ${3}"
+        echo "PID: ${_pid}"
+    fi
+}
+
+_daemon_stop() {
+    local -r _pidfile="${_piddir}/${1}.pid"
+    echo "Stopping ${1}..."
+
+    if _daemon_poll "${1}"
+    then
+        local -r _pid="$(cat "${_pidfile}")"
+        echo -ne "Killing ${_pid}... "
+
+        kill -TERM "${_pid}"
+        timeout 10 tail --pid="${_pid}" -f /dev/null
+
+        kill -KILL "${_pid}" &> /dev/null
+        timeout 10 tail --pid="${_pid}" -f /dev/null
+
+        echo "killed."
+        rm -rf "${_pidfile}"
+    else
+        echo "Error: ${_pidfile} does not exist or service is not running"
+    fi
+}
+
+_daemon_poll() {
+    local -r _pidfile="${_piddir}/${1}.pid"
+    test -f "${_pidfile}" && ps -p "$(cat "${_pidfile}")" &> /dev/null
+}
+
+_clear_tmp() {
+    echo "Clearing /tmp..."
+    rm -rf /tmp/{*,.*} &> /dev/null
+}
+
+_on_boot() {
+    _clear_tmp
+    
+    echo "Creating PID dir..."
+    mkdir -p "${_piddir}"
+    chmod 777 "${_piddir}"
+
+    echo "Mounting API filesystem..."
+    mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
+    mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
+    mountpoint -q /run     || mount -t tmpfs run /run -o mode=0755,nosuid,nodev
+    mountpoint -q /dev     || mount -t devtmpfs dev /dev -o mode=0755,nosuid
+    mkdir -p /dev/pts /dev/shm
+    mountpoint -q /dev/pts || mount -t devpts devpts /dev/pts -o mode=0620,gid=5,nosuid,noexec
+    mountpoint -q /dev/shm || mount -t tmpfs shm /dev/shm -o mode=1777,nosuid,nodev
+
+    echo "Setting up loopback device..."
+    /usr/sbin/ip link set up dev lo
+
+    echo "Initializing udev..."
+    /usr/lib/systemd/systemd-udevd --daemon
+    /usr/bin/udevadm trigger --action=add --type=subsystems
+    /usr/bin/udevadm trigger --action=add --type=devices
+
+    echo "Setting hostname..."
+    cat /etc/hostname >| /proc/sys/kernel/hostname
+
+    echo "Creating symlinks..."
+    ln -s /proc/kcore /dev/core
+    ln -s /proc/self/fd /dev/fd
+    ln -s /proc/self/fd/0 /dev/stdin
+    ln -s /proc/self/fd/1 /dev/stdout
+    ln -s /proc/self/fd/2 /dev/stderr
+
+    echo "Mounting fstab..."
+    mount -a
+
+    if [ -x /etc/minirc.local ]
+    then
+        echo "Loading /etc/minirc.local..."
+        /etc/minirc.local
+    fi
+
+    echo "Starting daemons..."
+    for dmn in "${_enabled[@]}"
+    do
+        _daemon_start "${dmn}"
+    done
+}
+
+_on_shutdown() {
+    echo "Stopping daemons..."
+    for dmn in "${_daemons[@]}"
+    do
+        _daemon_poll "${dmn}" && _daemon_stop "${dmn}"
+    done
+
+    if [ -x /etc/minirc.local.shutdown ]
+    then
+        echo "Loading /etc/minirc.local.shutdown..."
+        /etc/minirc.local.shutdown
+    fi
+
+    echo "Shutting down udev..."
+    killall -q -w systemd-udevd
+
+    _clear_tmp
+
+    echo "Unmounting API filesystem..."
+    umount -r /run
+}
+
+_daemon_restart() {
+    _daemon_stop "${1}"
+    sleep 1
+    _daemon_start "${1}"
+}
+
+_usage() {
+    echo "Usage: rc [--help] <action> [daemon]"
+    echo ""
+    echo "Actions:"
+    echo "   rc list              shows status of all daemons"
+    echo "   rc start [daemon]    starts daemon"
+    echo "   rc stop [daemon]     stops daemon"
+    echo "   rc restart [daemon]  restarts daemon"
+    exit 2
+}
+
+_not_root() {
+    echo "Root privileges are required to run this command"
+    exit 1
+}
+
+(( ${#} == 0 )) && _usage
+
+case "${1}" in
+init|shutdown|list)
+    (( ${#} != 1 )) && _usage
+    ;;&
+start|stop|restart)
+    (( ${#} != 2 )) && _usage
+    ;;&
+init|shutdown|start|stop|restart)
+    (( EUID != 0 )) && _not_root
+    ;;&
+init)
+    _on_boot;;
+shutdown)
+    _on_shutdown;;
+start|stop|restart)
+    _daemon_"${1}" "${2}";;
+list)
+    for dmn in "${_daemons[@]}"
+    do
+        if _daemon_poll "${dmn}"
+        then
+            echo -e "[\033[32mX\033[0m] ${dmn}"
+        else
+            echo -e "[ ] ${dmn}"
+        fi
+    done;;
+*)
+    _usage;;
+esac
