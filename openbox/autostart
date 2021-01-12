@@ -35,7 +35,7 @@ desktop () {
 
     # resolution and background
     ${HOME}/arch/scripts/fixres.sh
-    feh --bg-scale ${HOME}/arch/wall/default6.jpg
+    feh --bg-scale ${HOME}/arch/wall/titanium.jpg
 
     # conky tint2
     conky -d -c ${HOME}/arch/conky/conkyrc-tint2
