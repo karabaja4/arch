@@ -15,7 +15,7 @@ conky.config = {
 };
 
 conky.text = [[
-$alignr $color1 ${font openlogos:size=36}B${font}
+$alignr $color1 ${font openlogos:size=28}B${font}
 $color0 $alignr home.aerium.hr ($nodename)
 $alignr Kernel: $kernel
 $alignr Available Updates: ${exec cat /tmp/update_count || echo "-"}
