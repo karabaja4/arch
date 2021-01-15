@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Roboto:size=13',
+	font = 'Roboto:size=10',
 	draw_shades = false,
 	alignment = 'bottom_right',
 	gap_x = 15,
@@ -15,7 +15,7 @@ conky.config = {
 };
 
 conky.text = [[
-$alignr $color1 ${font openlogos:size=36}B${font}
+$alignr $color1 ${font openlogos:size=28}B${font}
 $color0 $alignr home.aerium.hr ($nodename)
 $alignr Kernel: $kernel
 $alignr Available Updates: ${exec cat /tmp/update_count || echo "-"}
