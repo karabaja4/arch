@@ -1,5 +1,5 @@
 #!/bin/bash
 
-xset -dpms
+xset s off -dpms
 /usr/bin/vlc "$@"
-xset +dpms
+xset s on +dpms
