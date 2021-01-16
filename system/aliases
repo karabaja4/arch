@@ -44,13 +44,8 @@ worklaptop() {
 }
 
 rsnc() {
-    sudo pacman -Rsnc "${1}"
-    if (( ${?} == 0 ))
-    then
-        echo -e "\033[31mChecking for remaining files in ${HOME}\033[0m"
-        sudo updatedb
-        locate -ir "${HOME}/.*${1}.*"
-    fi
+    sudo pacman -Rsnc "$@"
+    echo -e "\033[31mCheck for remaining files in ${HOME}!\033[0m"
 }
 
 m4atomp3() {
@@ -76,6 +71,10 @@ alias mountazure="sudo mount -t cifs //isaricpfs.file.core.windows.net/pfs /home
 alias zxvf="tar zxvf"
 alias sudo='sudo -E'
 alias cp='/home/igor/arch/scripts/cp.sh'
+
+mountflash() {
+    sudo mount _flash/ -o sync,uid="$(id -u)",gid="$(id -g)" "${1}"
+}
 
 jtail() {
     /home/igor/arch/scripts/log.sh "${1}"
