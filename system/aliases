@@ -73,7 +73,7 @@ alias sudo='sudo -E'
 alias cp='/home/igor/arch/scripts/cp.sh'
 
 mountflash() {
-    sudo mount _flash/ -o sync,uid="$(id -u)",gid="$(id -g)" "${1}"
+    sudo mount -o uid="$(id -u)",gid="$(id -g)" "${1}" "/home/igor/_flash"
 }
 
 jtail() {
