@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2155,SC2181
 
 killall -q -0 chromium
 if (( ${?} == 0 )) # zero means chromium is running
