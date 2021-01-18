@@ -51,7 +51,7 @@ desktop () {
     sleep 1
     pnmixer &
     sleep 1
-    ${HOME}/arch/scripts/clip.sh &
+    ${HOME}/arch/scripts/clip.sh &> ${HOME}/clip.log &
     sleep 1
     flameshot &
     #sleep 1
