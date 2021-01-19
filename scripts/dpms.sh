@@ -2,7 +2,7 @@
 
 if grep -q "RUNNING" /proc/asound/card*/pcm*/sub*/status
 then
-    xset -display :0 s off -dpms
+    xset -display :0.0 dpms 0 0 0
 else
-    xset -display :0 s on +dpms
+    xset -display :0.0 dpms 600 600 600
 fi
