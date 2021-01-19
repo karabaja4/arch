@@ -76,10 +76,6 @@ mountflash() {
     sudo mount -o uid="$(id -u)",gid="$(id -g)" "${1}" "/home/igor/_flash"
 }
 
-jtail() {
-    /home/igor/arch/scripts/log.sh "${1}"
-}
-
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
 alias vboxload="sudo modprobe -a vboxdrv vboxnetadp vboxnetflt"
 alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
