@@ -10,12 +10,7 @@ declare -ar _pref=(
 )
 
 _usage() {
-    echo "Usage:"
-    echo "  ./$(basename "${0}")"
-    echo "Configuration:"
-    echo "  Add your preferred TARGETS to the '_pref' array in the script to handle custom formats."
-    echo "  Current _pref:"
-    printf -- '  - %s\n' "${_pref[@]}"
+    echo "Invalid arguments."
     exit 1
 }
 
