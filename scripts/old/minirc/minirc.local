@@ -1,9 +1,0 @@
-#!/bin/bash
-
-echo 0 > /proc/sys/kernel/printk
-touch /var/run/utmp
-mkdir -p /run/samba
-mkdir -m 777 /tmp/.X11-unix
-install -m 700 -g igor -o igor -d /tmp/runtime-igor
-echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
