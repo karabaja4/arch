@@ -12,7 +12,7 @@ do
   MONY=$(awk -F "[x+]" '{print $4}' <<< "${mon}")
   if (( X >= MONX && X <= MONX + MONW && Y >= MONY && Y <= MONY + MONH ))
   then
-    maim -g "${MONW}x${MONH}+${MONX}+${MONY}" | tee "/tmp/screenshots/$(date +%s%N).png" | xclip -selection clipboard -t image/png
+    maim -g "${MONW}x${MONH}+${MONX}+${MONY}" > "/tmp/screenshots/$(date +%s%N).png"
     exit 0
   fi
 done
