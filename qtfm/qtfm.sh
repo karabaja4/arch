@@ -5,19 +5,14 @@ set -euo pipefail
 
 spin() {
     local -r pid="${!}"
-    sleep 0.1
-    if kill -0 "${pid}" &> /dev/null
-    then
-        # init fifo
-        local -r fifo="$(mktemp -u)"
-        mkfifo "${fifo}"
+    local -r fifo="$(mktemp -u)"
+    mkfifo "${fifo}"
 
-        trap 'kill "${pid}"' HUP
-        cat "${fifo}" | zenity --progress --pulsate --auto-close --auto-kill --text="${1}" &
-        wait "${pid}"
-        echo "" > "${fifo}"
-        rm -f "${fifo}"
-    fi
+    trap 'kill "${pid}"' HUP
+    cat "${fifo}" | zenity --progress --pulsate --auto-close --auto-kill --text="${1}" &
+    wait "${pid}"
+    echo "" > "${fifo}"
+    rm -f "${fifo}"
 }
 
 case "${1}" in
@@ -47,10 +42,10 @@ gzip)
     spin "creating archive ${2}.tar.gz";;
 zip)
     zip -r "${2}.zip" "${@:3}" &
-    spin "creating archive ${2}.tar.gz";;
-sleep)
-    sleep 10 &
-    spin "sleeping";;
+    spin "creating archive ${2}.zip";;
+# sleep)
+#     sleep 10 &
+#     spin "sleeping";;
 # echo)
 #     echo "hello" &
 #     spin "echoing";;
