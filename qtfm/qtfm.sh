@@ -36,13 +36,16 @@ extract)
     tar xvf "${2}" &
     spin "extracting ${2}";;
 unzip)
-    unzip "${2}" & 
+    unzip -o "${2}" &
     spin "extracting ${2}";;
 unrar)
-    unrar x "${2}" &
+    unrar x "${2}"&
     spin "extracting ${2}";;
 gzip)
     tar cvzf "${2}.tar.gz" "${@:3}" &
+    spin "creating archive ${2}.tar.gz";;
+zip)
+    zip -r "${2}.zip" "${@:3}" &
     spin "creating archive ${2}.tar.gz";;
 # sleep)
 #     sleep 10 &
