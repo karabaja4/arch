@@ -45,6 +45,8 @@ worklaptop() {
 
 rsnc() {
     sudo pacman -Rsnc "$@"
+    echo -e "\033[32mUpdating db...\033[0m"
+    sudo updatedb
     echo -e "\033[31mCheck for remaining files in ${HOME}\033[0m"
 }
 
