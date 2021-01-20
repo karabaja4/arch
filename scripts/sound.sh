@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck disable=SC2155
 
 set -uo pipefail
 
@@ -29,7 +28,7 @@ _write_asoundrc() {
 }
 
 _switch_card() {
-    declare -r id="$(grep "${1}" /proc/asound/cards | awk '{print $1; exit;}')"
+    local -r id="$(grep "${1}" /proc/asound/cards | awk '{print $1; exit;}')"
     if [[ -z ${id} ]]
     then
         echo "Card ${1} not found, exiting"

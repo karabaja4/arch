@@ -1,17 +1,18 @@
 #!/bin/bash
+# shellcheck disable=SC2002
+
 set -euo pipefail
 
 spin() {
-    declare -r pid="${!}"
+    local -r pid="${!}"
     sleep 0.1
-    kill -0 "${pid}" &> /dev/null
-    if [ ${?} -eq 0 ]
+    if kill -0 "${pid}" &> /dev/null
     then
         # init fifo
-        declare -r fifo="$(mktemp -u)"
+        local -r fifo="$(mktemp -u)"
         mkfifo "${fifo}"
 
-        trap "kill ${pid}" HUP
+        trap 'kill "${pid}"' HUP
         cat "${fifo}" | zenity --progress --pulsate --auto-close --auto-kill --text="${1}" &
         wait "${pid}"
         echo "" > "${fifo}"
@@ -47,9 +48,9 @@ gzip)
 zip)
     zip -r "${2}.zip" "${@:3}" &
     spin "creating archive ${2}.tar.gz";;
-# sleep)
-#     sleep 10 &
-#     spin "sleeping";;
+sleep)
+    sleep 10 &
+    spin "sleeping";;
 # echo)
 #     echo "hello" &
 #     spin "echoing";;
