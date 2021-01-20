@@ -7,7 +7,7 @@ const getName = () => {
   // if (day === 6 || day === 0) {
   //   return 'BITMEX:XBTUSD';
   // }
-  return 'CURRENCYCOM:GOLD';
+  return 'FX:NGAS';
 };
 
 const write = (key, data) => {
