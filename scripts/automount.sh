@@ -1,12 +1,15 @@
 #!/bin/bash
 
+declare -r _user="igor"
 declare -a _partitions=()
 mapfile -t _partitions <<< "$(lsblk -o name -lnp "${1}")"
 
 _mount() {
-    local -r dir="/home/igor/_flash/$(basename "${1}")"
-    install -m 755 -g igor -o igor -d "${dir}"
-    mount -o uid=1000,gid=1000 "${1}" "${dir}"
+    local -r _dir="/mnt/$(basename "${1}")"
+    local -r _uid="$(id -u "${_user}")"
+    local -r _gid="$(id -g "${_user}")"
+    install -m 755 -g "${_user}" -o "${_user}" -d "${_dir}"
+    mount -o uid="${_uid}",gid="${_gid}" "${1}" "${_dir}"
 }
 
 for part in "${_partitions[@]}"
