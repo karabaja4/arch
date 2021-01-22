@@ -1,8 +1,28 @@
 #!/bin/bash
+# shellcheck disable=SC2155
+
+declare -r timeout=600
+declare -r current="$(xset q | awk '/Standby:/ { print $2 }')"
+
+_enable() {
+    if [[ "${current}" == "0" ]]
+    then
+        xset -display :0.0 dpms ${timeout} ${timeout} ${timeout}
+    fi
+}
+
+_disable() {
+    if [[ "${current}" == "${timeout}" ]]
+    then
+        xset -display :0.0 dpms 0 0 0
+    fi
+}
 
 if grep -q "RUNNING" /proc/asound/card*/pcm*/sub*/status
 then
-    xset -display :0.0 dpms 0 0 0
+    echo "Disabling dpms..."
+    _disable
 else
-    xset -display :0.0 dpms 300 300 300
+    echo "Enabling dpms..."
+    _enable
 fi
