@@ -20,9 +20,7 @@ _disable() {
 
 if grep -q "RUNNING" /proc/asound/card*/pcm*/sub*/status
 then
-    echo "Disabling dpms..."
     _disable
 else
-    echo "Enabling dpms..."
     _enable
 fi
