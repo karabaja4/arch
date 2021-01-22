@@ -1,4 +1,4 @@
 @reboot         /usr/bin/node /home/igor/arch/scripts/updates.js
 0    * * * *    /usr/bin/node /home/igor/arch/scripts/updates.js
 */15 * * * *    /usr/bin/node /home/igor/arch/dns/dns.js
-*/10 * * * *    /home/igor/arch/scripts/dpms.sh
+*/5 * * * *     /home/igor/arch/scripts/dpms.sh
