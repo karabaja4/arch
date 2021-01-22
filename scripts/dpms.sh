@@ -12,7 +12,7 @@ _enable() {
 }
 
 _disable() {
-    if [[ "${current}" == "${timeout}" ]]
+    if [[ "${current}" != "0" ]]
     then
         xset -display :0.0 dpms 0 0 0
     fi
