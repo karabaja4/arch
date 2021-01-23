@@ -2,7 +2,7 @@
 # shellcheck disable=SC2155
 
 declare -r timeout=600
-declare -r current="$(xset q | awk '/Standby:/ { print $2 }')"
+declare -r current="$(xset -display :0.0 q | awk '/Standby:/ { print $2 }')"
 
 _enable() {
     if [[ "${current}" == "0" ]]
