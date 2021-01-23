@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 if killall -q -0 chromium # is chromium running?
 then
