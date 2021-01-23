@@ -1,4 +1,5 @@
 #!/bin/bash
+set -uo pipefail
 
 _mount() {
     local -r _user="$(who | awk '{print $1}')"

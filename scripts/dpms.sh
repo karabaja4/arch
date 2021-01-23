@@ -1,18 +1,19 @@
 #!/bin/bash
 # shellcheck disable=SC2155
+set -euo pipefail
 
-declare -r timeout=600
-declare -r current="$(xset -display :0.0 q | awk '/Standby:/ { print $2 }')"
+declare -ir _timeout=600
+declare -ir _current="$(xset -display :0.0 q | awk '/Standby:/ { print $2 }')"
 
 _enable() {
-    if [[ "${current}" == "0" ]]
+    if [[ "${_current}" == "0" ]]
     then
-        xset -display :0.0 dpms ${timeout} ${timeout} ${timeout}
+        xset -display :0.0 dpms ${_timeout} ${_timeout} ${_timeout}
     fi
 }
 
 _disable() {
-    if [[ "${current}" != "0" ]]
+    if [[ "${_current}" != "0" ]]
     then
         xset -display :0.0 dpms 0 0 0
     fi
