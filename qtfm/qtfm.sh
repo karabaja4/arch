@@ -1,6 +1,5 @@
 #!/bin/bash
 # shellcheck disable=SC2002
-
 set -euo pipefail
 
 spin() {
@@ -43,6 +42,12 @@ gzip)
 zip)
     zip -r "${2}.zip" "${@:3}" &
     spin "creating archive ${2}.zip";;
+unmount)
+    ( 
+        sudo umount /mnt/* || echo "umount failed"
+        sudo rm -rf /mnt/* || echo "rm failed"
+     ) &
+    spin "unmounting /mnt";;
 # sleep)
 #     sleep 10 &
 #     spin "sleeping";;

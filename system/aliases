@@ -73,7 +73,7 @@ alias mountazure="sudo mount -t cifs //isaricpfs.file.core.windows.net/pfs /home
 alias zxvf="tar zxvf"
 alias sudo='sudo -E'
 #alias cp='/home/igor/arch/scripts/cp.sh'
-alias unmountall='sudo umount /mnt/* && sudo rm -rf /mnt/*'
+alias unmountall='/home/igor/arch/qtfm/qtfm.sh unmount'
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
 alias vboxload="sudo modprobe -a vboxdrv vboxnetadp vboxnetflt"
