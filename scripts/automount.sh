@@ -1,7 +1,7 @@
 #!/bin/bash
 
 _mount() {
-    local -r _user="igor"
+    local -r _user="$(who | awk '{print $1}')"
     local -r _dir="/mnt/$(basename "${1}")"
     local -r _uid="$(id -u "${_user}")"
     local -r _gid="$(id -g "${_user}")"
