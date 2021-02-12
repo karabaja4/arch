@@ -2,7 +2,7 @@
 {
     "editor.fontFamily": "Consolas",
     "editor.fontSize": 14,
-    "editor.letterSpacing": -0.2,
+    "editor.letterSpacing": 0,
     "explorer.openEditors.visible": 0,
     "workbench.editor.showTabs": true,
     "workbench.sideBar.location": "right",
@@ -46,11 +46,7 @@
         "suppressFileNotUnderSourceControlWarning": false,
         "suppressGitVersionWarning": false,
         "suppressLineUncommittedWarning": false,
-        "suppressNoRepositoryWarning": false,
-        "suppressResultsExplorerNotice": false,
-        "suppressShowKeyBindingsNotice": true,
-        "suppressUpdateNotice": true,
-        "suppressWelcomeNotice": true
+        "suppressNoRepositoryWarning": false
     },
     "gitlens.currentLine.enabled": true,
     "problems.decorations.enabled": false,
