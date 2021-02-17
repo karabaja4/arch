@@ -84,18 +84,21 @@ const tradeSymbol = 'FOREXCOM:NSXUSD';
 
 const getTradeData = () => {
   const values = tradeStore[tradeSymbol];
-  if (values) {
-    const price = values['price'];
-    const change = values['change'];
-    const namePrint = tradeSymbol.split(':')[1].replace('USD', '');
-    const pricePrint = `${price.toFixed(2)} USD`;
-    const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
-    return {
-      text: `${namePrint}: ${pricePrint} | ${changePrint}`,
-      trend: change > 0
-    }
+  if (!values) {
+    return null;
   }
-  return null;
+  const price = values['price'];
+  const change = values['change'];
+  if (price === undefined || change === undefined) {
+    return null;
+  }
+  const namePrint = tradeSymbol.split(':')[1].replace('USD', '');
+  const pricePrint = `${price.toFixed(2)} USD`;
+  const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
+  return {
+    text: `${namePrint}: ${pricePrint} | ${changePrint}`,
+    trend: change > 0
+  }
 }
 
 ws.on('receive', (name, feed) => {
