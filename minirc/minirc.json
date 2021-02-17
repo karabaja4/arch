@@ -36,12 +36,6 @@
 		"command": "/usr/bin/vncserver :1"
 	},
 	{
-		"name": "trade",
-		"enabled": true,
-		"user": "igor",
-		"command": "/usr/bin/node /home/igor/arch/trade/main.js --conky"
-	},
-	{
 		"name": "samba",
 		"enabled": false,
 		"user": "root",

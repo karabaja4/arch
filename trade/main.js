@@ -1,32 +1,16 @@
 const ws = require('./lib/ws');
 const plasma = require('./lib/plasma');
-const conky = require('./lib/conky');
 const symbols = require('./symbols.json').symbols;
-const args = require('minimist')(process.argv.slice(2));
-
-const mode = {
-  plasma: !!args['plasma'],
-  conky: !!args['conky'],
-};
-
-if (mode.conky == mode.plasma) {
-  console.log('requires one: --conky or --plasma');
-  process.exit(1);
-}
 
 const data = {};
 
 ws.on('error', (e) => {
-  if (mode.plasma) {
-    plasma.switchToLogMode();
-  }
+  plasma.switchToLogMode();
   console.log(`ws error: ${e}`);
 });
 
 ws.on('close', (c) => {
-  if (mode.plasma) {
-    plasma.switchToLogMode();
-  }
+  plasma.switchToLogMode();
   console.log(`closed (${c}), reconnecting...`);
 });
 
@@ -35,21 +19,7 @@ ws.on('receive', (name, feed) => {
   if (feed.price !== undefined) data[name]['price'] = feed.price;
   if (feed.change !== undefined) data[name]['change'] = feed.change;
   if (feed.percent !== undefined) data[name]['percent'] = feed.percent;
-
-  // if (mode.conky) {
-  //   const price = `PRICE: ${feed.price}`;
-  //   const change = `${feed.change ? `, CHANGE: ${feed.change}` : ''}`;
-  //   const percent = `${feed.percent ? `, PERCENT: ${feed.percent}%` : ''}`;
-  //   console.log(`${name} -> ${price}${change}${percent}`);
-  // }
-
-  if (mode.plasma) {
-    plasma.print(data, symbols);
-  }
-
-  if (mode.conky) {
-    conky.write(name, data);
-  }
+  plasma.print(data, symbols);
 });
 
 const main = async () => {

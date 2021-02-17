@@ -1,10 +1,11 @@
 const fs = require('fs');
 const util = require('util');
 const sleep = util.promisify(setTimeout);
+const symbols = require('../trade/symbols.json').symbols;
+const ws = require('../trade/lib/ws.js');
 
 const files = {
-  conky: '/tmp/conky_data.json',
-  trade: '/tmp/trade_data.json'
+  conky: '/tmp/conky_data.json'
 }
 
 const colors = {
@@ -64,13 +65,13 @@ const process = async (json) => {
   text += diskspan('mmc');
   text += diskspan('edd');
 
-  try {
-    const trade = (await fs.promises.readFile(files.trade)).toString();
-    const td = JSON.parse(trade);
+  // trade
+  const td = getTradeData();
+  if (td) {
     const tc = td.trend ? colors.green : colors.red;
     const ti = td.trend ? icons.trendup : icons.trenddown;
     text += span(8000, -400, tc, ti, td.text);
-  } catch (e) {
+  } else {
     text += span(8000, -400, colors.gray, icons.trenddown, 'TRA: not connected');
   }
 
@@ -78,14 +79,43 @@ const process = async (json) => {
   console.log(text);
 };
 
+const tradeStore = {};
+const tradeSymbol = 'FOREXCOM:NSXUSD';
+
+const getTradeData = () => {
+  const values = tradeStore[tradeSymbol];
+  if (values) {
+    const price = values['price'];
+    const change = values['change'];
+    const namePrint = tradeSymbol.split(':')[1].replace('USD', '');
+    const pricePrint = `${price.toFixed(2)} USD`;
+    const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
+    return {
+      text: `${namePrint}: ${pricePrint} | ${changePrint}`,
+      trend: change > 0
+    }
+  }
+  return null;
+}
+
+ws.on('receive', (name, feed) => {
+  if (!tradeStore[name]) tradeStore[name] = {};
+  if (feed.price !== undefined) tradeStore[name]['price'] = feed.price;
+  if (feed.change !== undefined) tradeStore[name]['change'] = feed.change;
+  if (feed.percent !== undefined) tradeStore[name]['percent'] = feed.percent;
+});
+
 const main = async () => {
+  ws.init(symbols);
   while (true) {
     try {
       const json = (await fs.promises.readFile(files.conky)).toString();
       if (json && json.trim()) {
         await process(json);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
     await sleep(1000);
   }
 };
