@@ -80,7 +80,7 @@ const process = async (json) => {
 };
 
 const tradeStore = {};
-const tradeSymbol = 'FOREXCOM:NSXUSD';
+const tradeSymbol = 'FX:NGAS';
 
 const getTradeData = () => {
   const values = tradeStore[tradeSymbol];
@@ -93,8 +93,8 @@ const getTradeData = () => {
     return null;
   }
   const namePrint = tradeSymbol.split(':')[1].replace('USD', '');
-  const pricePrint = `${price.toFixed(2)} USD`;
-  const changePrint = `${change > 0 ? '+' : ''}${change.toFixed(2)} USD`;
+  const pricePrint = `${price} USD`;
+  const changePrint = `${change > 0 ? '+' : ''}${change} USD`;
   return {
     text: `${namePrint}: ${pricePrint} | ${changePrint}`,
     trend: change > 0
