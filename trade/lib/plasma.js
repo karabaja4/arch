@@ -77,7 +77,8 @@ const getDecimalLength = (num) => {
   if (parts.length !== 2) {
     return 2;
   }
-  return parts[1].length;
+  const len = parts[1].length;
+  return len < 2 ? 2 : len;
 };
 
 const padFloat = (num, minimumLength) => {
