@@ -60,7 +60,7 @@ const print = async (data, symbols) => {
             line = insert(line, `${escapes.reset}${color}`, 134);
             line = `${line.substring(0, 196).padEnd(196)}${escapes.reset}`;
           } else {
-            line = line.substring(0, 196).padEnd(196); // cannot be 200 because reset char is not visible
+            line = '';
           }
           rows.push(line);
         }
