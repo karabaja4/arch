@@ -45,8 +45,8 @@ const print = async (data, symbols) => {
         const key = keys[i];
         const value = data[key];
         const name = `${key.split(':')[1]}:`.padEnd(12);
-        const price = `${value.price.toFixed(2)} USD`.padEnd(12);
-        const change = `${value.change > 0 ? '+' : ''}${value.change.toFixed(2)} USD`;
+        const price = `${padFloat(value.price)} USD`.padEnd(12);
+        const change = `${value.change > 0 ? '+' : ''}${padFloat(value.change)} USD`;
         let text = await render(`  ${name} ${price}  |  ${change}  `, {font: '3x5', width: 1000});
         text = text.replace(/#/g, block);
         // colorize
@@ -68,6 +68,14 @@ const print = async (data, symbols) => {
     lock = false;
   }
 };
+
+const padFloat = (num) => {
+  return num.toLocaleString("en", {
+    useGrouping: false,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 10
+  });
+}
 
 let cleared = false;
 
