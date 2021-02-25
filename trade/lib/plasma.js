@@ -58,7 +58,7 @@ const print = async (data, symbols) => {
             line = insert(line, `${escapes.white}`, 8);
             line = insert(line, `${escapes.reset}${escapes.gray}`, 114);
             line = insert(line, `${escapes.reset}${color}`, 134);
-            line = `${line.substring(0, 192).padEnd(192)}${escapes.reset}`;
+            line = `${line.substring(0, 194).padEnd(194)}${escapes.reset}`;
           } else {
             line = '';
           }
