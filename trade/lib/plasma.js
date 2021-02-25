@@ -40,7 +40,7 @@ const print = async (data, symbols) => {
       }
     }
     if (keys.length == symbols.length) { // got all
-      const rows = ['', '', '', ''];
+      const rows = ['', '', ''];
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const value = data[key];
