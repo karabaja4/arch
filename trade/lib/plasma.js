@@ -44,7 +44,7 @@ const print = async (data, symbols) => {
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const value = data[key];
-        const name = `${key.split(':')[1]}:`.padEnd(12);
+        const name = `${key.split(':')[1]}:`.padEnd(10);
         const price = `${padFloat(value.price)} USD`.padEnd(12);
         const change = `${value.change > 0 ? '+' : ''}${padFloat(value.change)} USD`;
         let text = await render(`  ${name} ${price}  |  ${change}  `, {font: '3x5', width: 1000});
@@ -53,12 +53,14 @@ const print = async (data, symbols) => {
         const lines = text.split('\n');
         const color = value.change >= 0 ? escapes.green : escapes.red;
         for (let j = 0; j < lines.length; j++) {
-          let line = lines[j].substring(0, 180);
+          let line = lines[j];
           if (line.includes(block)) {
             line = insert(line, `${escapes.white}`, 8);
-            line = insert(line, `${escapes.reset}${escapes.gray}`, 122);
-            line = insert(line, `${escapes.reset}${color}`, 142);
-            line += escapes.reset;
+            line = insert(line, `${escapes.reset}${escapes.gray}`, 114);
+            line = insert(line, `${escapes.reset}${color}`, 134);
+            line = `${line.substring(0, 196).padEnd(196)}${escapes.reset}`;
+          } else {
+            line = line.substring(0, 200).padEnd(200);
           }
           rows.push(line);
         }
