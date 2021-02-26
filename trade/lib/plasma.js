@@ -40,14 +40,14 @@ const print = async (data, symbols) => {
       }
     }
     if (keys.length == symbols.length) { // got all
-      const rows = ['', '', ''];
+      const rows = ['', '', '', ''];
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         const value = data[key];
         const name = `${key.split(':')[1]}:`.padEnd(10);
         const price = `${padFloat(value.price, 2)} USD`.padEnd(12);
         const decimalLength = getDecimalLength(value.price);
-        const change = `${value.change > 0 ? '+' : ''}${padFloat(value.change, decimalLength)} USD`;
+        const change = `${value.change < 0 ? '' : (value.change > 0 ? '+' : ' ')}${padFloat(value.change, decimalLength)} USD`;
         let text = await render(`  ${name} ${price}  |  ${change}  `, {font: '3x5', width: 1000});
         text = text.replace(/#/g, block);
         // colorize
