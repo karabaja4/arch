@@ -3,7 +3,7 @@ set -uo pipefail
 
 if killall -q -0 chromium # is chromium running?
 then
-    if wmctrl -lx | grep chromium.Chromium # is chromium window open?
+    if wmctrl -lx | grep -E "chromium.Chromium|app.Chromium" # is chromium window open?
     then
         # chromium window open
         echo "Found window."
