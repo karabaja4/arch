@@ -1,8 +1,6 @@
 const fs = require('fs');
 const util = require('util');
 const sleep = util.promisify(setTimeout);
-const symbols = require('../trade/symbols.json').symbols;
-const ws = require('../trade/lib/ws.js');
 
 const files = {
   conky: '/tmp/conky_data.json'
@@ -65,51 +63,11 @@ const process = async (json) => {
   text += diskspan('mmc');
   text += diskspan('edd');
 
-  // trade
-  const td = getTradeData();
-  if (td) {
-    const tc = td.trend ? colors.green : colors.red;
-    const ti = td.trend ? icons.trendup : icons.trenddown;
-    text += span(8000, -400, tc, ti, td.text);
-  } else {
-    text += span(8000, -400, colors.gray, icons.trenddown, 'TRA: not connected');
-  }
-
   text += span(8000, 100, colors.gray, icons.clock, `CLK: ${data.time}`).trimEnd();
   console.log(text);
 };
 
-const tradeStore = {};
-const tradeSymbol = 'FX:NGAS';
-
-const getTradeData = () => {
-  const values = tradeStore[tradeSymbol];
-  if (!values) {
-    return null;
-  }
-  const price = values['price'];
-  const change = values['change'];
-  if (price === undefined || change === undefined) {
-    return null;
-  }
-  const namePrint = tradeSymbol.split(':')[1].replace('USD', '');
-  const pricePrint = `${price} USD`;
-  const changePrint = `${change > 0 ? '+' : ''}${change} USD`;
-  return {
-    text: `${namePrint}: ${pricePrint} | ${changePrint}`,
-    trend: change > 0
-  }
-}
-
-ws.on('receive', (name, feed) => {
-  if (!tradeStore[name]) tradeStore[name] = {};
-  if (feed.price !== undefined) tradeStore[name]['price'] = feed.price;
-  if (feed.change !== undefined) tradeStore[name]['change'] = feed.change;
-  if (feed.percent !== undefined) tradeStore[name]['percent'] = feed.percent;
-});
-
 const main = async () => {
-  ws.init(symbols);
   while (true) {
     try {
       const json = (await fs.promises.readFile(files.conky)).toString();
