@@ -27,7 +27,7 @@
 		"name": "redis",
 		"enabled": false,
 		"user": "redis",
-		"command": "/usr/bin/redis-server /etc/redis.conf"
+		"command": "/usr/bin/redis-server /etc/redis/redis.conf"
 	},
 	{
 		"name": "vnc",
