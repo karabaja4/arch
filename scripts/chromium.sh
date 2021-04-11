@@ -13,4 +13,4 @@ then
     fi
 fi
 
-/usr/bin/chromium &> /dev/null
+/usr/bin/chromium "$@" &> /dev/null
