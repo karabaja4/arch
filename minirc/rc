@@ -15,7 +15,7 @@ mapfile -t _enabled <<< "$(jq -crM '.[] | select(.enabled==true) | .name' ${_con
 _daemon_start() {
     local -a _params
     mapfile -t _params <<< "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
-    if (( ${#_params[@]} > 0 ))
+    if [[ -n "${1}" ]] && [[ -n "${_params[0]}" ]] && [[ -n "${_params[1]}" ]]
     then
         _daemon_execute "${1}" "${_params[@]}"
     else
