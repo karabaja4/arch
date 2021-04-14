@@ -1,5 +1,11 @@
 [
 	{
+		"name": "dbus",
+		"enabled": true,
+		"user": "root",
+		"command": "/usr/bin/dbus-daemon --system --nofork --nopidfile --syslog-only"
+	},
+	{
 		"name": "dhcpcd",
 		"enabled": true,
 		"user": "root",
