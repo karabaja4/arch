@@ -1,7 +1,7 @@
 [
 	{
 		"name": "dbus",
-		"enabled": true,
+		"enabled": false,
 		"user": "root",
 		"command": "/usr/bin/dbus-daemon --system --nofork --nopidfile --syslog-only"
 	},
