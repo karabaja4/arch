@@ -14,7 +14,7 @@ alias x='exit'
 alias sr='screen -r'
 alias sn='screen -S'
 
-#alias startx='nvidia-xrun'
+alias startx='nvidia-xrun'
 
 mkmine() {
     if [ -n "${1}" ]; then
