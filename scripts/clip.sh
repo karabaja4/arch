@@ -27,15 +27,16 @@ _iteration() {
     _ttres="$(xclip -selection clipboard -o -t TARGETS)"
     local -ir _ttec=${?}
     _log "TARGETS check exited with: ${_ttec}"
-    local -a _targets
-    mapfile -t _targets <<< "${_ttres}"
 
-    if (( _ttec != 0 || ${#_targets[@]} == 0 ))
+    if (( _ttec != 0 ))
     then
         # on empty wait for any selection
         _log "Waiting on initial selection with: ${_utf8}"
         xclip -verbose -in -selection clipboard -t "${_utf8}" < /dev/null
     else
+        local -a _targets
+        mapfile -t _targets <<< "${_ttres}"
+
         _log "Preferred targets: ${_pref[*]}"
         _log "Clipboard targets: ${_targets[*]}"
 
