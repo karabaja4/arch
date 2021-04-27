@@ -13,10 +13,6 @@ vnc () {
 
     # interface
     tint2 -c ${HOME}/arch/tint2/tint2rc-vnc &
-
-    # other
-    sleep 1
-    xfce4-clipman &> /dev/null &
 }
 
 desktop () {

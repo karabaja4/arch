@@ -54,16 +54,13 @@ launcher_item_app = /usr/share/applications/discord.desktop
 launcher_item_app = /usr/share/applications/qtextpad.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/robo3t.desktop
-#launcher_item_app = /usr/share/applications/pgAdmin4.desktop
 launcher_item_app = /usr/share/applications/azuredatastudio.desktop
 launcher_item_app = /usr/share/applications/sqlbrowser.desktop
 launcher_item_app = /usr/share/applications/filezilla.desktop
 launcher_item_app = /usr/share/applications/virtualbox.desktop
-#launcher_item_app = /usr/share/applications/vmware-player.desktop
 launcher_item_app = /usr/share/applications/postman.desktop
 launcher_item_app = /usr/share/applications/slack.desktop
 launcher_item_app = /home/igor/arch/tint2/desktop/mspaint.desktop
-#launcher_item_app = /home/igor/arch/tint2/desktop/plus500.desktop
 launcher_item_app = /usr/share/applications/vlc.desktop
 
 #-------------------------------------
