@@ -1,11 +1,11 @@
 conky.config = {
 	out_to_x = false,
 	update_interval = 1,
-	overwrite_file = '/tmp/conky_data.json'
+	out_to_console = true
 };
 
 conky.text = [[
-{
+START_OF_JSON{
 	"net": {
 		"down": "${downspeedf enp2s0}",
 		"up": "${upspeedf enp2s0}"
@@ -51,5 +51,5 @@ conky.text = [[
 	${endif}
 
 	"time": "${time %A, %d.%m.%Y. %H:%M:%S}"
-}
+}END_OF_JSON
 ]];

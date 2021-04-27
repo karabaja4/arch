@@ -35,10 +35,9 @@ desktop () {
 
     # resolution and background
     ${HOME}/arch/scripts/fixres.sh
-    feh --bg-scale ${HOME}/arch/wall/titanium.jpg
+    feh --bg-scale ${HOME}/arch/wall/default.jpg
 
     # conky tint2
-    conky -d -c ${HOME}/arch/conky/conkyrc-tint2
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 0
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 1
     conky -d -c ${HOME}/arch/conky/conkyrc-kernel --xinerama-head 2

@@ -1,9 +1,12 @@
-const fs = require('fs');
-const util = require('util');
-const sleep = util.promisify(setTimeout);
+const { spawn } = require('child_process');
 
 const files = {
-  conky: '/tmp/conky_data.json'
+  config: '/home/igor/arch/conky/conkyrc-tint2'
+}
+
+const separators = {
+  start: 'START_OF_JSON',
+  end: 'END_OF_JSON'
 }
 
 const colors = {
@@ -67,18 +70,24 @@ const process = async (json) => {
   console.log(text);
 };
 
+let stream = '';
+
 const main = async () => {
-  while (true) {
-    try {
-      const json = (await fs.promises.readFile(files.conky)).toString();
-      if (json && json.trim()) {
-        await process(json);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    await sleep(1000);
-  }
+  const conky = spawn('conky', ['-c', files.config]);
+  for await (const data of conky.stdout) {
+    stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+    await unbuffer();
+  };
 };
+
+const unbuffer = async () => {
+  var regex = new RegExp(`${separators.start}(.*?)${separators.end}`);
+  const match = stream.match(regex);
+  if (match) {
+    const json = match[1];
+    stream = stream.replace(regex, '');
+    await process(json);
+  }
+}
 
 main();

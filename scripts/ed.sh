@@ -2,4 +2,4 @@
 
 # sudo ln -sf /home/igor/arch/scripts/ed.sh /usr/bin/ed
 
-leafpad "${1}" &> /dev/null &
+qtextpad "${1}" &> /dev/null &
