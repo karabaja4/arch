@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Chromium
-Exec=/home/igor/arch/scripts/chromium.sh --disable-gpu
-StartupNotify=true
-Terminal=false
-Icon=chromium
-Type=Application
-Categories=Network;WebBrowser;
