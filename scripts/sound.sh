@@ -23,7 +23,7 @@ _max_volume() {
 }
 
 _write_asoundrc() {
-    echo -e "defaults.ctl.card ${1}\ndefaults.pcm.card ${1}\ndefaults.pcm.device 0" > "${HOME}/.asoundrc"
+    echo -e "defaults.ctl.card ${1}\ndefaults.pcm.card ${1}" > "${HOME}/.asoundrc"
 }
 
 _switch_card() {
