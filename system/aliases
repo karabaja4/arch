@@ -58,6 +58,12 @@ m4atomp3() {
     done
 }
 
+fixntp() {
+    sudo rc stop ntpd
+    sudo ntpd -gq
+    sudo rc start ntpd
+}
+
 ytdl() {
     youtube-dl -f 'bestaudio[ext=m4a]' "${1}"
 }
@@ -66,7 +72,6 @@ alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debia
 alias syu='sudo pacman -Syu'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias sound='/home/igor/arch/scripts/sound.sh'
-alias fixdate='sudo ntpd -gq'
 alias mountdisk="sudo mount -t ext4 /dev/sdc1 /home/igor/_disk/"
 alias mountmmc="sudo mount /dev/mmcblk0p1 /home/igor/_mmc/"
 alias mountazure="sudo mount -t cifs //isaricpfs.file.core.windows.net/pfs /home/igor/_pfs -o vers=3.0,credentials=/etc/smbcredentials/isaricpfs.cred,dir_mode=0777,file_mode=0777,serverino"
