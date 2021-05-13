@@ -9,7 +9,7 @@ _usage() {
 (( ${#} == 0 )) && _usage
 
 _unmute_max_all() {
-    for channel in $(amixer | grep -B1 -E "Capabilities:.*pvolume" | grep -oP "(?<=Simple mixer control ').+(?=')")
+    for channel in $(amixer | grep -B1 -E "Capabilities:(.*)pvolume" | grep -oP "(?<=Simple mixer control ').+(?=')")
     do
         echo "Unmuting ${channel} to 100%"
         amixer set "${channel}" unmute &> /dev/null
