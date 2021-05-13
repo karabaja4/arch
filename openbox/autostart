@@ -23,7 +23,7 @@ desktop () {
     xinput set-prop 11 326 0.5
     
     # alsa
-    ${HOME}/arch/scripts/sound.sh speakers
+    ${HOME}/arch/scripts/sound.sh pch
 
     # daemons
     xsettingsd -c ${HOME}/arch/xfce4-terminal/xsettingsd &
