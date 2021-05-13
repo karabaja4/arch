@@ -2,7 +2,7 @@
 set -uo pipefail
 
 _usage() {
-    echo "usage: ${0} [speakers | headphones [headset] | maxvolume]"
+    echo "usage: ${0} [ <card_name> | list ]"
     exit 1
 }
 
@@ -22,27 +22,28 @@ _write_asoundrc() {
 }
 
 _switch_card() {
-    local -r id="$(grep -iH "${1}" /proc/asound/card*/id | grep -oP '(?<=/proc/asound/card)[0-9]+(?=/id)')"
-    if [[ -z ${id} ]]
+    local -r search="$(grep -iwH "${1}" /proc/asound/card*/id)"
+    if [[ -z ${search} ]]
     then
-        echo "Card ${1} not found, exiting"
+        echo "Card ${1} not found, exiting."
         exit 1
     fi
-    _write_asoundrc "${id}"
-    echo "Switched to card ${id} (${1})"
+    local -r index="$(echo "${search%:*}" | grep -oP '(?<=/proc/asound/card)[0-9]+(?=/id)')"
+    _write_asoundrc "${index}"
+    echo "Switched to card ${search##*:} (${index})"
+}
+
+_list() {
+    cat /proc/asound/card*/id
+    exit 1
 }
 
 case "${1}" in
-speakers)
-    _switch_card PCH
-    ;;&
-headphones|headset)
-    _switch_card Headset
-    ;;&
-speakers|headphones|headset|maxvolume)
-    _unmute_max_all
+list)
+    _list
     ;;
 *)
-    _usage
+    _switch_card "${1}"
+    _unmute_max_all
     ;;
 esac
