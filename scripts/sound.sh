@@ -22,7 +22,7 @@ _write_asoundrc() {
 }
 
 _switch_card() {
-    local -r search="$(grep -iwH "${1}" /proc/asound/card*/id)"
+    local -r search="$(grep -iwH "^${1}$" /proc/asound/card*/id)"
     if [[ -z ${search} ]]
     then
         echo "Card ${1} not found, exiting."
