@@ -70,6 +70,7 @@ ytdl() {
 
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
 alias syu='sudo pacman -Syu'
+alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
 alias mountdisk="sudo mount -t ext4 /dev/sdc1 /home/igor/_disk/"
