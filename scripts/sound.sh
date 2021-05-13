@@ -9,17 +9,12 @@ _usage() {
 (( ${#} == 0 )) && _usage
 
 _unmute_max_all() {
-    amixer set Master unmute &> /dev/null
-    amixer set Master 100% &> /dev/null
-    amixer set Headphone unmute &> /dev/null
-    amixer set Headphone 100% &> /dev/null
-    amixer set Mic unmute &> /dev/null
-    amixer set Mic 100% &> /dev/null
-}
-
-_max_volume() {
-    _unmute_max_all
-    echo "Set volume to 100%"
+    for channel in $(amixer | grep -B1 -E "Capabilities:.*pvolume" | grep -oP "(?<=Simple mixer control ').+(?=')")
+    do
+        echo "Unmuting ${channel} to 100%"
+        amixer set "${channel}" unmute &> /dev/null
+        amixer set "${channel}" 100% &> /dev/null
+    done
 }
 
 _write_asoundrc() {
@@ -27,7 +22,7 @@ _write_asoundrc() {
 }
 
 _switch_card() {
-    local -r id="$(grep "${1}" /proc/asound/cards | awk '{print $1; exit;}')"
+    local -r id="$(grep -iH "${1}" /proc/asound/card*/id | grep -oP '(?<=/proc/asound/card)[0-9]+(?=/id)')"
     if [[ -z ${id} ]]
     then
         echo "Card ${1} not found, exiting"
@@ -45,7 +40,7 @@ headphones|headset)
     _switch_card Headset
     ;;&
 speakers|headphones|headset|maxvolume)
-    _max_volume
+    _unmute_max_all
     ;;
 *)
     _usage
