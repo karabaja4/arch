@@ -2,20 +2,19 @@
 # shellcheck disable=SC2155
 set -euo pipefail
 
-declare -ir _timeout=600
-declare -ir _current="$(xset -display :0.0 q | awk '/Standby:/ { print $2 }')"
+declare -r _current="$(xset -display :0.0 q | awk '/DPMS is/ { print $3 }')"
 
 _enable() {
-    if [[ "${_current}" == "0" ]]
+    if [[ "${_current}" == "Disabled" ]]
     then
-        xset -display :0.0 dpms ${_timeout} ${_timeout} ${_timeout}
+        xset -display :0.0 +dpms
     fi
 }
 
 _disable() {
-    if [[ "${_current}" != "0" ]]
+    if [[ "${_current}" == "Enabled" ]]
     then
-        xset -display :0.0 dpms 0 0 0
+        xset -display :0.0 -dpms
     fi
 }
 
