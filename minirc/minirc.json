@@ -12,6 +12,12 @@
 		"command": "/usr/bin/dhcpcd -4 -n -B -z enp2s0"
 	},
 	{
+		"name": "wifi",
+		"enabled": false,
+		"user": "root",
+		"command": "/usr/bin/dhcpcd -4 -n -B -z wlp3s0"
+	},
+	{
 		"name": "sshd",
 		"enabled": true,
 		"user": "root",

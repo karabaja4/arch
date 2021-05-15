@@ -1,21 +1,31 @@
 #!/bin/bash
+# shellcheck disable=SC2034
+
 set -u
 
-echo -e "minirc-ng @ 0.3"
+echo -e "minirc-ng @ 0.4a"
 
 declare -r _piddir="/tmp/minirc"
 declare -r _config="/etc/minirc.json"
 declare -a _daemons=()
 declare -a _enabled=()
 
+_mapfile() {
+    local -n _ref=${1}
+    if [[ -n "${2}" ]]
+    then
+        mapfile -t _ref <<< "${2}"
+    fi
+}
+
 # load config
-mapfile -t _daemons <<< "$(jq -crM '.[] | .name' ${_config})"
-mapfile -t _enabled <<< "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
+_mapfile _daemons "$(jq -crM '.[] | .name' ${_config})"
+_mapfile _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 
 _daemon_start() {
-    local -a _params
-    mapfile -t _params <<< "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
-    if [[ -n "${1}" ]] && [[ -n "${_params[0]}" ]] && [[ -n "${_params[1]}" ]]
+    local -a _params=()
+    _mapfile _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
+    if (( ${#_params[@]} == 2 ))
     then
         _daemon_execute "${1}" "${_params[@]}"
     else
