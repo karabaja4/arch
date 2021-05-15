@@ -19,13 +19,13 @@ _run() {
         echo "checkupdates exited with ${_rv}"
         if (( _rv == 0 || _rv == 2 ))
         then
-            if [[ -z "${_cu}" ]]
+            if [[ -n "${_cu}" ]]
             then
-                _write "0"
-            else
                 local -a _upd=()
                 mapfile -t _upd <<< "${_cu}"
                 _write "${#_upd[@]}"
+            else
+                _write "0"
             fi
             break
         else
