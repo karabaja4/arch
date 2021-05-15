@@ -47,8 +47,8 @@ _iteration() {
         local -a _targets=()
         _mapfile _targets "${_ttres}"
 
-        _log "Preferred targets (${#_pref[@]}): ${_pref[*]}"
         _log "Clipboard targets (${#_targets[@]}): ${_targets[*]}"
+        _log "Preferred targets (${#_pref[@]}): ${_pref[*]}"
 
         # join both lists together, and print first item of targets occuring in _pref
         local -r _match="$(printf '%s\n' "${_targets[@]}" "${_pref[@]}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
