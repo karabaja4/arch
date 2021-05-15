@@ -21,14 +21,6 @@ _log() {
     echo -e "\033[32m->\033[0m" "${@}"
 }
 
-_mapfile() {
-    local -n _ref=${1}
-    if [[ -n "${2}" ]]
-    then
-        mapfile -t _ref <<< "${2}"
-    fi
-}
-
 _iteration() {
     local -r _utf8="UTF8_STRING"
 
@@ -45,8 +37,10 @@ _iteration() {
         xclip -verbose -in -selection clipboard -t "${_utf8}" < /dev/null
     else
         local -a _targets=()
-        _mapfile _targets "${_ttres}"
-
+        if [[ -n "${_ttres}" ]]
+        then
+            mapfile -t _targets <<< "${_ttres}"
+        fi
         _log "Clipboard targets (${#_targets[@]}): ${_targets[*]}"
         _log "Preferred targets (${#_pref[@]}): ${_pref[*]}"
         _log "Default targets: ${_utf8}"
@@ -54,7 +48,7 @@ _iteration() {
         # join both lists together, and print first item of targets occuring in _pref
         local -r _match="$(printf '%s\n' "${_targets[@]}" "${_pref[@]}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
 
-        if [[ -n ${_match} ]]
+        if [[ -n "${_match}" ]]
         then
             _log "Matched target: ${_match}"
             xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
