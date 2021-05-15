@@ -17,7 +17,8 @@ alias sn='screen -S'
 alias startx='nvidia-xrun'
 
 mkmine() {
-    if [ -n "${1}" ]; then
+    if [[ -n "${1}" ]]
+    then
         sudo chown -R "${USER}:${USER}" "${1}"
     else
         echo "No file defined."
@@ -35,7 +36,7 @@ gitreset() {
     git reset --hard origin/master
 }
 
-worklaptop() {
+work() {
     local -a array=()
     mapfile -t array < <( jq -crM '.work | "/d:" + .domain, "/v:" + .host, "/u:" + .user, "/p:" + .password' "${HOME}/arch/secret.json" )
     echo "Connecting to: ${array[0]} ${array[1]} ${array[2]}"
