@@ -3,17 +3,9 @@
 
 set -euo pipefail
 
-_mapfile() {
-    local -n _ref=${1}
-    if [[ -n "${2}" ]]
-    then
-        mapfile -t _ref <<< "${2}"
-    fi
-}
-
 _shot() {
     local -a _resolutions=()
-    _mapfile _resolutions "$(xrandr | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*')"
+    mapfile -t _resolutions < <(xrandr | grep -o '[0-9]*x[0-9]*[+-][0-9]*[+-][0-9]*')
     local -i idx=1
     for res in "${_resolutions[@]}"
     do
