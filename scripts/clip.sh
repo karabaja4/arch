@@ -49,7 +49,7 @@ _iteration() {
 
         _log "Clipboard targets (${#_targets[@]}): ${_targets[*]}"
         _log "Preferred targets (${#_pref[@]}): ${_pref[*]}"
-        _log "Default targets (1): ${_utf8}"
+        _log "Default targets: ${_utf8}"
 
         # join both lists together, and print first item of targets occuring in _pref
         local -r _match="$(printf '%s\n' "${_targets[@]}" "${_pref[@]}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
@@ -67,6 +67,6 @@ _iteration() {
 
 while true
 do
-    _log "$(head -c 80 /dev/zero | tr '\0' '-')"
+    _log "--------------------"
     _iteration
 done
