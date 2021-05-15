@@ -1,6 +1,4 @@
 #!/bin/bash
-# shellcheck disable=SC2034
-
 set -uo pipefail
 
 _write() {
@@ -8,14 +6,6 @@ _write() {
     echo "${1}" > "${filepath}"
     chmod 666 "${filepath}"
     echo "write: ${1} updates"
-}
-
-_mapfile() {
-    local -n _ref=${1}
-    if [[ -n "${2}" ]]
-    then
-        mapfile -t _ref <<< "${2}"
-    fi
 }
 
 _run() {
@@ -34,7 +24,7 @@ _run() {
                 _write "0"
             else
                 local -a _upd=()
-                _mapfile _upd "${_cu}"
+                mapfile -t _upd <<< "${_cu}"
                 _write "${#_upd[@]}"
             fi
             break
