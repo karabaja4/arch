@@ -39,8 +39,8 @@ _daemon_start() {
         else
             local -r _user="${_params[0]}"
             local -r _command="${_params[1]}"
+
             local -r _fifo="$(mktemp -u)"
-            
             su - "${_user}" -c "mkfifo ${_fifo}"
             su - "${_user}" -c "( ${_command} & echo \$! > ${_fifo} )" &> /dev/null &
 
