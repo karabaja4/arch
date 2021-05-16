@@ -10,25 +10,37 @@ _write() {
 
 _run() {
     local _cu
-    local -i _rv
+    local _aur
+    local -i _cuec
+    local -i _aurec
     local -i _ec=0
     while true
     do
         _cu="$(checkupdates)"
-        _rv=${?}
-        echo "checkupdates exited with ${_rv}"
-        if (( _rv == 0 || _rv == 2 ))
+        _cuec=${?}
+        echo "checkupdates exited with ${_cuec}"
+
+        _aur="$(auracle outdated)"
+        _aurec=${?}
+        echo "auracle exited with ${_aurec}"
+
+        if (( (_cuec == 0 || _cuec == 2) && (_aurec == 0 || _aurec == 1) ))
         then
+            echo "success"
+            local -a _cupkgs=()
             if [[ -n "${_cu}" ]]
             then
-                local -a _upd=()
-                mapfile -t _upd <<< "${_cu}"
-                _write "${#_upd[@]}"
-            else
-                _write "0"
+                mapfile -t _cupkgs <<< "${_cu}"
             fi
+            local -a _aurpkgs=()
+            if [[ -n "${_aur}" ]]
+            then
+                mapfile -t _aurpkgs <<< "${_aur}"
+            fi
+            _write "${#_cupkgs[@]} (${#_aurpkgs[@]})"
             break
         else
+            echo "failure"
             if (( ++_ec >= 100 ))
             then
                 echo "giving up (${_ec})"
