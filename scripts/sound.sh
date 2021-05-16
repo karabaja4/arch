@@ -23,14 +23,15 @@ _write_asoundrc() {
 
 _switch_card() {
     local -r search="$(grep -iwH "^${1}$" /proc/asound/card*/id)"
-    if [[ -z ${search} ]]
+    if [[ -n "${search}" ]]
     then
+        local -r index="$(echo "${search%:*}" | grep -oP '(?<=/proc/asound/card)[0-9]+(?=/id)')"
+        _write_asoundrc "${index}"
+        echo "Switched to card ${search##*:} (${index})"
+    else
         echo "Card ${1} not found, exiting."
         exit 1
     fi
-    local -r index="$(echo "${search%:*}" | grep -oP '(?<=/proc/asound/card)[0-9]+(?=/id)')"
-    _write_asoundrc "${index}"
-    echo "Switched to card ${search##*:} (${index})"
 }
 
 _list() {
