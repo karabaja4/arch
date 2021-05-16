@@ -10,7 +10,7 @@ declare -r _config="/etc/minirc.json"
 declare -a _daemons=()
 declare -a _enabled=()
 
-_mapfile() {
+_loadarr() {
     local -n _ref=${1}
     if [[ -n "${2}" ]]
     then
@@ -19,12 +19,12 @@ _mapfile() {
 }
 
 # load config
-_mapfile _daemons "$(jq -crM '.[] | .name' ${_config})"
-_mapfile _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
+_loadarr _daemons "$(jq -crM '.[] | .name' ${_config})"
+_loadarr _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 
 _daemon_start() {
     local -a _params=()
-    _mapfile _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
+    _loadarr _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
     if (( ${#_params[@]} == 2 ))
     then
         _daemon_execute "${1}" "${_params[@]}"
