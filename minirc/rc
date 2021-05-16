@@ -70,7 +70,6 @@ _daemon_stop() {
     if _daemon_poll "${1}"
     then
         local -r _pid="$(cat "${_pidfile}")"
-        echo -ne "Killing ${_pid}... "
         /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${_pid}"
         echo "Killed."
         rm -rf "${_pidfile}"
