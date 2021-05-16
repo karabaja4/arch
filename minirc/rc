@@ -22,6 +22,9 @@ _loadarr() {
 _loadarr _daemons "$(jq -crM '.[] | .name' ${_config})"
 _loadarr _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 
+# ${1} -> service
+# ${2} -> user
+# ${3} -> command
 _daemon_start() {
     local -a _params=()
     _loadarr _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
@@ -68,14 +71,8 @@ _daemon_stop() {
     then
         local -r _pid="$(cat "${_pidfile}")"
         echo -ne "Killing ${_pid}... "
-
-        kill -TERM "${_pid}"
-        timeout 10 tail --pid="${_pid}" -f /dev/null
-
-        kill -KILL "${_pid}" &> /dev/null
-        timeout 10 tail --pid="${_pid}" -f /dev/null
-
-        echo "killed."
+        /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${_pid}"
+        echo "Killed."
         rm -rf "${_pidfile}"
     else
         echo "Error: ${_pidfile} does not exist or service is not running"
@@ -84,7 +81,8 @@ _daemon_stop() {
 
 _daemon_poll() {
     local -r _pidfile="${_piddir}/${1}.pid"
-    test -f "${_pidfile}" && ps -p "$(cat "${_pidfile}")" &> /dev/null
+    # if pidfile exists and pid from pidfile is running
+    [[ -f "${_pidfile}" ]] && ps -p "$(cat "${_pidfile}")" &> /dev/null
 }
 
 _on_boot() {
