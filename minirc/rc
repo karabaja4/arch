@@ -1,8 +1,6 @@
 #!/bin/bash
-# shellcheck disable=SC2034
 
 set -u
-
 echo -e "minirc-ng @ 0.4a"
 
 declare -r _piddir="/tmp/minirc"
@@ -14,6 +12,7 @@ _loadarr() {
     local -n _ref=${1}
     if [[ -n "${2}" ]]
     then
+        # shellcheck disable=SC2034
         mapfile -t _ref <<< "${2}"
     fi
 }
@@ -25,41 +24,35 @@ _loadarr _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 # ${1} -> service
 # ${2} -> user
 # ${3} -> command
+# for logging use:
+# |& logger --tag "${1}" &
 _daemon_start() {
     local -a _params=()
     _loadarr _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
     if (( ${#_params[@]} == 2 ))
     then
-        _daemon_execute "${1}" "${_params[@]}"
+        local -r _pidfile="${_piddir}/${1}.pid"
+        echo "Starting ${1}..."
+        if _daemon_poll "${1}"
+        then
+            echo "Error: ${_pidfile} exists"
+        else
+            local -r _user="${_params[0]}"
+            local -r _command="${_params[1]}"
+            local -r _fifo="$(mktemp -u)"
+            
+            su - "${_user}" -c "mkfifo ${_fifo}"
+            su - "${_user}" -c "( ${_command} & echo \$! > ${_fifo} )" &> /dev/null &
+
+            local -r _pid="$(cat "${_fifo}")"
+            echo "${_pid}" > "${_pidfile}"
+            rm -f "${_fifo}"
+            echo "User: ${_user}"
+            echo "Exec: ${_command}"
+            echo "PID: ${_pid}"
+        fi
     else
         echo -e "Error: unknown service: ${1}"
-    fi
-}
-
-# ${1} -> service
-# ${2} -> user
-# ${3} -> command
-# for logging use:
-# |& logger --tag "${1}" &
-_daemon_execute() {
-    local -r _pidfile="${_piddir}/${1}.pid"
-    echo "Starting ${1}..."
-
-    if _daemon_poll "${1}"
-    then
-        echo "Error: ${_pidfile} exists"
-    else
-        local -r _fifo="$(mktemp -u)"
-        
-        su - "${2}" -c "mkfifo ${_fifo}"
-        su - "${2}" -c "( ${3} & echo \$! > ${_fifo} )" &> /dev/null &
-
-        local -r _pid="$(cat "${_fifo}")"
-        echo "${_pid}" > "${_pidfile}"
-        rm -f "${_fifo}"
-        echo "User: ${2}"
-        echo "Exec: ${3}"
-        echo "PID: ${_pid}"
     fi
 }
 
