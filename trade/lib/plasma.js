@@ -48,7 +48,7 @@ const print = async (data, symbols) => {
         const price = `${padFloat(value.price, 2)} USD`.padEnd(12);
         const decimalLength = getDecimalLength(value.price);
         const change = `${value.change < 0 ? '' : (value.change > 0 ? '+' : ' ')}${padFloat(value.change, decimalLength)} USD`;
-        let text = await render(`  ${name} ${price}  |  ${change}  `, {font: '3x5', width: 1000});
+        let text = await render(`  ${name} ${price}  |  ${change}  `, { font: '3x5', width: 1000 });
         text = text.replace(/#/g, block);
         // colorize
         const lines = text.split('\n');
@@ -73,12 +73,9 @@ const print = async (data, symbols) => {
 };
 
 const getDecimalLength = (num) => {
-  const parts = num.toString().split('.');
-  if (parts.length !== 2) {
-    return 2;
-  }
-  const len = parts[1].length;
-  return len < 2 ? 2 : len;
+  const length = Math.floor(num).toString().length;
+  const decimals = 5 - length;
+  return decimals < 2 ? 2 : decimals;
 };
 
 const padFloat = (num, minimumLength) => {
