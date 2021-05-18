@@ -8,7 +8,7 @@ declare -r _config="/etc/minirc.json"
 declare -a _daemons=()
 declare -a _enabled=()
 
-_loadarr() {
+_load_array() {
     local -n _ref=${1}
     if [[ -n "${2}" ]]
     then
@@ -18,8 +18,8 @@ _loadarr() {
 }
 
 # load config
-_loadarr _daemons "$(jq -crM '.[] | .name' ${_config})"
-_loadarr _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
+_load_array _daemons "$(jq -crM '.[] | .name' ${_config})"
+_load_array _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 
 # ${1} -> service
 # ${2} -> user
@@ -28,7 +28,7 @@ _loadarr _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 # |& logger --tag "${1}" &
 _daemon_start() {
     local -a _params=()
-    _loadarr _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
+    _load_array _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
     if (( ${#_params[@]} == 2 ))
     then
         local -r _pidfile="${_piddir}/${1}.pid"
@@ -150,12 +150,6 @@ _on_shutdown() {
     umount -r /run
 }
 
-_daemon_restart() {
-    _daemon_stop "${1}"
-    sleep 1
-    _daemon_start "${1}"
-}
-
 _usage() {
     echo "Usage: rc [--help] <action> [daemon]"
     echo ""
@@ -163,7 +157,6 @@ _usage() {
     echo "   rc list              shows status of all daemons"
     echo "   rc start [daemon]    starts daemon"
     echo "   rc stop [daemon]     stops daemon"
-    echo "   rc restart [daemon]  restarts daemon"
     exit 2
 }
 
@@ -178,17 +171,17 @@ case "${1}" in
 init|shutdown|list)
     (( ${#} != 1 )) && _usage
     ;;&
-start|stop|restart)
+start|stop)
     (( ${#} != 2 )) && _usage
     ;;&
-init|shutdown|start|stop|restart)
+init|shutdown|start|stop)
     (( EUID != 0 )) && _not_root
     ;;&
 init)
     _on_boot;;
 shutdown)
     _on_shutdown;;
-start|stop|restart)
+start|stop)
     _daemon_"${1}" "${2}";;
 list)
     for dmn in "${_daemons[@]}"
