@@ -73,6 +73,9 @@ const print = async (data, symbols) => {
 };
 
 const getDecimalLength = (num) => {
+  if (num === undefined) {
+    return 2;
+  }
   const length = Math.floor(num).toString().length;
   const decimals = 5 - length;
   return decimals < 2 ? 2 : decimals;
