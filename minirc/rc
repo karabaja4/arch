@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -u
-echo -e "minirc-ng @ 0.4a"
+echo -e "minirc-ng @ 0.4"
 
 declare -r _piddir="/tmp/minirc"
 declare -r _config="/etc/minirc.json"
