@@ -6,10 +6,18 @@ _usage() {
     exit 2
 }
 
+_not_root() {
+    echo "Root privileges are required to run this command"
+    exit 1
+}
+
 (( ${#} == 0 )) && _usage
+(( EUID != 0 )) && _not_root
+
+declare -ir _id=1000
 
 _mount() {
-    local -r _user="$(id -un 1000)"
+    local -r _user="$(id -un ${_id})"
     local -r _dir="/mnt/$(basename "${1}")"
     local -ir _uid="$(id -u "${_user}")"
     local -ir _gid="$(id -g "${_user}")"
