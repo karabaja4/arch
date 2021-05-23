@@ -1,9 +1,15 @@
 #!/bin/bash
-
 set -uo pipefail
 
+_usage() {
+    echo "This is script is called by /etc/udev/rules.d/10-flash.rules"
+    exit 2
+}
+
+(( ${#} == 0 )) && _usage
+
 _mount() {
-    local -r _user="igor"
+    local -r _user="$(id -un 1000)"
     local -r _dir="/mnt/$(basename "${1}")"
     local -ir _uid="$(id -u "${_user}")"
     local -ir _gid="$(id -g "${_user}")"
