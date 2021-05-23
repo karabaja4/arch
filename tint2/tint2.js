@@ -74,13 +74,13 @@ let stream = '';
 
 const main = async () => {
   const conky = spawn('conky', ['-c', files.config]);
-  for await (const data of conky.stdout) {
+  conky.stdout.on('data', async (data) => {
     stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
-    await unbuffer();
-  };
+    await pop();
+  });
 };
 
-const unbuffer = async () => {
+const pop = async () => {
   var regex = new RegExp(`${separators.start}(.*?)${separators.end}`);
   const match = stream.match(regex);
   if (match) {
