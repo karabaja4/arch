@@ -62,6 +62,7 @@ launcher_item_app = /usr/share/applications/postman.desktop
 launcher_item_app = /usr/share/applications/slack.desktop
 launcher_item_app = /home/igor/arch/tint2/desktop/mspaint.desktop
 launcher_item_app = /usr/share/applications/vlc.desktop
+launcher_item_app = /usr/share/applications/kvirc.desktop
 
 #-------------------------------------
 # Executor 1

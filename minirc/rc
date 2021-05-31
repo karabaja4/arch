@@ -79,15 +79,11 @@ _daemon_poll() {
 
 _on_boot() {
 
-    echo "Creating PID dir..."
-    rm -rf "${_piddir}"
-    mkdir -p "${_piddir}"
-    chmod 777 "${_piddir}"
-
     echo "Mounting API filesystem..."
     mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
     mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
     mountpoint -q /run     || mount -t tmpfs run /run -o mode=0755,nosuid,nodev
+    mountpoint -q /tmp     || mount -t tmpfs tmp /tmp -o mode=1777,nosuid,nodev
     mountpoint -q /dev     || mount -t devtmpfs dev /dev -o mode=0755,nosuid
     mkdir -p /dev/pts /dev/shm
     mountpoint -q /dev/pts || mount -t devpts devpts /dev/pts -o mode=0620,gid=5,nosuid,noexec
@@ -110,6 +106,11 @@ _on_boot() {
     ln -s /proc/self/fd/0 /dev/stdin
     ln -s /proc/self/fd/1 /dev/stdout
     ln -s /proc/self/fd/2 /dev/stderr
+
+    echo "Creating PID dir..."
+    rm -rf "${_piddir}"
+    mkdir -p "${_piddir}"
+    chmod 777 "${_piddir}"
 
     echo "Mounting fstab..."
     mount -a
