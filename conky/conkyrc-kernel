@@ -18,6 +18,6 @@ conky.text = [[
 ${alignr} ${color1} ${font openlogos:size=28}B${font}
 ${alignr} ${color0} home.aerium.hr (${nodename})
 ${alignr} Kernel: ${kernel}
-${alignr} Available Updates: ${if_existing /tmp/update_count}${execi 600 cat /tmp/update_count}${else}syncing...${endif}
+${alignr} Available Updates: ${if_existing /tmp/update_count}${exec cat /tmp/update_count}${else}(syncing)${endif}
 ${alignr} Uptime: $uptime
 ]];
