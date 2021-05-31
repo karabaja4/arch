@@ -53,4 +53,5 @@ _run() {
     done
 }
 
+_write "(syncing)"
 _run
