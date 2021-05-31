@@ -46,7 +46,6 @@ _run() {
                 echo "giving up (${_ec})"
                 break
             else
-                _write "-"
                 echo "retrying (${_ec})"
                 sleep 1
             fi
