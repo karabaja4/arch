@@ -11,13 +11,14 @@ conky.config = {
 	own_window_type = 'desktop',
 	own_window_transparent = true,
 	color0 = '#f2f2f2',
-	color1 = '#64B5F6'
+	color1 = '#64B5F6',
+	lua_load = '/home/igor/arch/conky/updates.lua'
 };
 
 conky.text = [[
 ${alignr} ${color1} ${font openlogos:size=28}B${font}
 ${alignr} ${color0} home.aerium.hr (${nodename})
 ${alignr} Kernel: ${kernel}
-${alignr} Available Updates: ${execi 60 cat /tmp/update_count || echo "(error)"}
+${alignr} Available Updates: ${lua conky_get_updates}
 ${alignr} Uptime: $uptime
 ]];
