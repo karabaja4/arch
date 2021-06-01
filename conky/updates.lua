@@ -1,4 +1,4 @@
-function conky_get_updates(parameter)
+function conky_get_updates()
     local file = io.open('/tmp/update_count', 'rb')
     if not file then return '(syncing)' end
     local content = file:read "*a"
