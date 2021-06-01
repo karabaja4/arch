@@ -151,6 +151,12 @@ _on_shutdown() {
     umount -r /run
 }
 
+_daemon_restart() {
+    _daemon_stop "${1}"
+    sleep 1
+    _daemon_start "${1}"
+}
+
 _usage() {
     echo "Usage: rc [--help] <action> [daemon]"
     echo ""
@@ -158,6 +164,7 @@ _usage() {
     echo "   rc list              shows status of all daemons"
     echo "   rc start [daemon]    starts daemon"
     echo "   rc stop [daemon]     stops daemon"
+    echo "   rc restart [daemon]  restarts daemon"
     exit 2
 }
 
@@ -172,17 +179,17 @@ case "${1}" in
 init|shutdown|list)
     (( ${#} != 1 )) && _usage
     ;;&
-start|stop)
+start|stop|restart)
     (( ${#} != 2 )) && _usage
     ;;&
-init|shutdown|start|stop)
+init|shutdown|start|stop|restart)
     (( EUID != 0 )) && _not_root
     ;;&
 init)
     _on_boot;;
 shutdown)
     _on_shutdown;;
-start|stop)
+start|stop|restart)
     _daemon_"${1}" "${2}";;
 list)
     for dmn in "${_daemons[@]}"
