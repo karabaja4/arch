@@ -5,6 +5,7 @@
 
 UUID=56855f92-7483-4db9-afaf-5eb05a0dcc82	/         	ext4      	rw,relatime,data=ordered 0 1
 UUID=471ae89a-9131-4de5-9126-a9129bbdc2b5					none swap defaults 0 0
+tmpfs	/home/igor/.cache	tmpfs	noatime,nodev,nosuid	0	0
 
 #/dev/mmcblk0p1  /home/igor/_mmc ntfs-3g		defaults 0 0
 #/dev/sda4  	/home/igor/_win ntfs-3g         defaults 0 0

@@ -84,5 +84,6 @@
         "minirc.local.shutdown": "shellscript",
         "rc": "shellscript",
         "aliases": "shellscript"
-    }
+    },
+    "Lua.telemetry.enable": false
 }
