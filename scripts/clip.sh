@@ -49,7 +49,8 @@ _iteration() {
         if [[ -n "${_match}" ]]
         then
             _log "Matched target: ${_match}"
-            xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
+            timeout -v -s TERM -k 2 1 xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
+            _log "xclip exited"
         else
             _log "Unable to match targets"
             sleep 1
