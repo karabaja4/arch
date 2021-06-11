@@ -7,6 +7,7 @@ image/png
 text/uri-list
 code/file-list
 "
+_utf8="UTF8_STRING"
 
 _log() {
     printf '\033[32m->\033[0m %s' "${1}" | xargs
@@ -20,8 +21,7 @@ _usage() {
 [ "${#}" -gt 0 ] && _usage
 
 _iteration() (
-    _utf8="UTF8_STRING"
-
+    
     # target test of current selection
     _tc="$(xclip -selection clipboard -o -t TARGETS)"
     _tcec=${?}
@@ -56,6 +56,7 @@ _iteration() (
 _log "$(basename "${0}") @ $(readlink /proc/$$/exe)"
 while true
 do
-    _log "--------------------"
+    _log "---------- Iteration start ----------"
     _iteration
+    _log "---------- Iteration end ------------"
 done
