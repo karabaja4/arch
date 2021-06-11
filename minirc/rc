@@ -1,85 +1,81 @@
-#!/bin/bash
-
+#!/bin/sh
 set -u
-echo -e "minirc-ng @ 0.4"
 
-declare -r _piddir="/tmp/minirc"
-declare -r _config="/etc/minirc.json"
-declare -a _daemons=()
-declare -a _enabled=()
-
-_load_array() {
-    local -n _ref=${1}
-    if [[ -n "${2}" ]]
-    then
-        # shellcheck disable=SC2034
-        mapfile -t _ref <<< "${2}"
-    fi
+_echo() {
+    printf '%s\n' "${1}"
 }
 
+_echo "minirc-ng @ 0.5 (running in $(readlink /proc/$$/exe))"
+
+_piddir="/tmp/minirc"
+_config="/etc/minirc.json"
+
 # load config
-_load_array _daemons "$(jq -crM '.[] | .name' ${_config})"
-_load_array _enabled "$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
+_daemons="$(jq -crM '.[] | .name' ${_config})"
+_enabled="$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
 
 # ${1} -> service
 # ${2} -> user
 # ${3} -> command
 # for logging use:
 # |& logger --tag "${1}" &
-_daemon_start() {
-    local -a _params=()
-    _load_array _params "$( jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config} )"
-    if (( ${#_params[@]} == 2 ))
+_daemon_start() (
+
+    _params="$(jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config})"
+    if [ "$(_echo "${_params}" | wc -l)" -ne 2 ]
     then
-        local -r _pidfile="${_piddir}/${1}.pid"
-        echo "Starting ${1}..."
-        if _daemon_poll "${1}"
-        then
-            echo "Error: ${_pidfile} exists"
-        else
-            local -r _user="${_params[0]}"
-            local -r _command="${_params[1]}"
-
-            local -r _fifo="$(mktemp -u)"
-            su - "${_user}" -c "mkfifo ${_fifo}"
-            su - "${_user}" -c "( ${_command} & echo \$! > ${_fifo} )" &> /dev/null &
-
-            local -r _pid="$(cat "${_fifo}")"
-            echo "${_pid}" > "${_pidfile}"
-            rm -f "${_fifo}"
-            echo "User: ${_user}"
-            echo "Exec: ${_command}"
-            echo "PID: ${_pid}"
-        fi
-    else
-        echo -e "Error: unknown service: ${1}"
+        _echo "Error: unknown service: ${1}"
+        exit 1
     fi
-}
 
-_daemon_stop() {
-    local -r _pidfile="${_piddir}/${1}.pid"
-    echo "Stopping ${1}..."
+    _pidfile="${_piddir}/${1}.pid"
+    _echo "Starting ${1}..."
+    
+    if _daemon_poll "${1}"
+    then
+        _echo "Error: ${_pidfile} exists"
+    else
+        _user="$(_echo "${_params}" | head -n1)"
+        _command="$(_echo "${_params}" | tail -n1)"
+
+        _fifo="$(mktemp -u)"
+        su - "${_user}" -c "mkfifo ${_fifo}"
+        su - "${_user}" -c "( ${_command} & printf '%s' "\$!" > ${_fifo} )" > /dev/null 2>&1 &
+
+        _pid="$(cat "${_fifo}")"
+        _echo "${_pid}" > "${_pidfile}"
+        rm -f "${_fifo}"
+        _echo "User: ${_user}"
+        _echo "Exec: ${_command}"
+        _echo "PID: ${_pid}"
+    fi
+)
+
+_daemon_stop() (
+
+    _pidfile="${_piddir}/${1}.pid"
+    _echo "Stopping ${1}..."
 
     if _daemon_poll "${1}"
     then
-        local -r _pid="$(cat "${_pidfile}")"
+        _pid="$(cat "${_pidfile}")"
         /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${_pid}"
-        echo "Killed."
+        _echo "Killed ${_pid}."
         rm -rf "${_pidfile}"
     else
-        echo "Error: ${_pidfile} does not exist or service is not running"
+        _echo "Error: ${_pidfile} does not exist or service is not running"
     fi
-}
+)
 
-_daemon_poll() {
-    local -r _pidfile="${_piddir}/${1}.pid"
+_daemon_poll() (
+    _pidfile="${_piddir}/${1}.pid"
     # if pidfile exists and pid from pidfile is running
-    [[ -f "${_pidfile}" ]] && ps -p "$(cat "${_pidfile}")" &> /dev/null
-}
+    [ -f "${_pidfile}" ] && [ -h "/proc/$(cat "${_pidfile}")/exe" ]
+)
 
-_on_boot() {
+_on_init() (
 
-    echo "Mounting API filesystem..."
+    _echo "Mounting API filesystem..."
     mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
     mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
     mountpoint -q /run     || mount -t tmpfs run /run -o mode=0755,nosuid,nodev
@@ -89,67 +85,65 @@ _on_boot() {
     mountpoint -q /dev/pts || mount -t devpts devpts /dev/pts -o mode=0620,gid=5,nosuid,noexec
     mountpoint -q /dev/shm || mount -t tmpfs shm /dev/shm -o mode=1777,nosuid,nodev
 
-    echo "Setting up loopback device..."
+    _echo "Setting up loopback device..."
     /usr/sbin/ip link set up dev lo
 
-    echo "Initializing udev..."
+    _echo "Initializing udev..."
     /usr/lib/systemd/systemd-udevd --daemon
     /usr/bin/udevadm trigger --action=add --type=subsystems
     /usr/bin/udevadm trigger --action=add --type=devices
 
-    echo "Setting hostname..."
+    _echo "Setting hostname..."
     cat /etc/hostname >| /proc/sys/kernel/hostname
 
-    echo "Creating symlinks..."
+    _echo "Creating symlinks..."
     ln -s /proc/kcore /dev/core
     ln -s /proc/self/fd /dev/fd
     ln -s /proc/self/fd/0 /dev/stdin
     ln -s /proc/self/fd/1 /dev/stdout
     ln -s /proc/self/fd/2 /dev/stderr
 
-    echo "Creating PID dir..."
+    _echo "Creating PID dir..."
     rm -rf "${_piddir}"
     mkdir -p "${_piddir}"
     chmod 777 "${_piddir}"
 
-    echo "Mounting fstab..."
+    _echo "Mounting fstab..."
     mount -a
 
     if [ -x /etc/minirc.local ]
     then
-        echo "Loading /etc/minirc.local..."
+        _echo "Loading /etc/minirc.local..."
         /etc/minirc.local
     fi
 
-    echo "Starting daemons..."
-    for dmn in "${_enabled[@]}"
+    _echo "Starting daemons..."
+    _echo "${_enabled}" | while read -r dmn
     do
         _daemon_start "${dmn}"
     done
-}
+)
 
-_on_shutdown() {
-    echo "Stopping daemons..."
-    for dmn in "${_daemons[@]}"
+_on_shutdown() (
+
+    _echo "Stopping daemons..."
+    _echo "${_daemons}" | while read -r dmn
     do
         _daemon_poll "${dmn}" && _daemon_stop "${dmn}"
     done
 
     if [ -x /etc/minirc.local.shutdown ]
     then
-        echo "Loading /etc/minirc.local.shutdown..."
+        _echo "Loading /etc/minirc.local.shutdown..."
         /etc/minirc.local.shutdown
     fi
 
-    echo "Shutting down udev..."
+    _echo "Shutting down udev..."
     killall -q -w systemd-udevd
 
-    echo "Clearing /tmp..."
-    rm -rf /tmp/{*,.*} &> /dev/null
-
-    echo "Unmounting API filesystem..."
+    _echo "Unmounting API filesystem..."
     umount -r /run
-}
+)
 
 _daemon_restart() {
     _daemon_stop "${1}"
@@ -158,49 +152,47 @@ _daemon_restart() {
 }
 
 _usage() {
-    echo "Usage: rc [--help] <action> [daemon]"
-    echo ""
-    echo "Actions:"
-    echo "   rc list              shows status of all daemons"
-    echo "   rc start [daemon]    starts daemon"
-    echo "   rc stop [daemon]     stops daemon"
-    echo "   rc restart [daemon]  restarts daemon"
+    _echo "Usage: rc [--help] <action> [daemon]"
+    _echo ""
+    _echo "Actions:"
+    _echo "   rc list              shows status of all daemons"
+    _echo "   rc start [daemon]    starts daemon"
+    _echo "   rc stop [daemon]     stops daemon"
+    _echo "   rc restart [daemon]  restarts daemon"
     exit 2
 }
 
 _not_root() {
-    echo "Root privileges are required to run this command"
+    _echo "Root privileges are required to run this command"
     exit 1
 }
 
-(( ${#} == 0 )) && _usage
+[ "${#}" -eq 0 ] && _usage
 
 case "${1}" in
-init|shutdown|list)
-    (( ${#} != 1 )) && _usage
-    ;;&
+init|shutdown)
+    [ "${#}" -ne 1 ] && _usage
+    [ "$(id -u)" -ne 0 ] && _not_root
+    _on_"${1}"
+    ;;
 start|stop|restart)
-    (( ${#} != 2 )) && _usage
-    ;;&
-init|shutdown|start|stop|restart)
-    (( EUID != 0 )) && _not_root
-    ;;&
-init)
-    _on_boot;;
-shutdown)
-    _on_shutdown;;
-start|stop|restart)
-    _daemon_"${1}" "${2}";;
+    [ "${#}" -ne 2 ] && _usage
+    [ "$(id -u)" -ne 0 ] && _not_root
+    _daemon_"${1}" "${2}"
+    ;;
 list)
-    for dmn in "${_daemons[@]}"
+    [ "${#}" -ne 1 ] && _usage
+    _echo "${_daemons}" | while read -r dmn
     do
         if _daemon_poll "${dmn}"
         then
-            echo -e "[\033[32mX\033[0m] ${dmn}"
+            printf '[\033[32mX\033[0m] %s\n' "${dmn}"
         else
-            echo -e "[ ] ${dmn}"
+            _echo "[ ] ${dmn}"
         fi
-    done;;
+    done
+    ;;
 *)
-    _usage;;
+    _usage
+    ;;
 esac
