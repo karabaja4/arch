@@ -1,54 +1,56 @@
-#!/bin/bash
-set -euo pipefail
+#!/bin/sh
+set -eu
 
-declare _secret
-declare _record
-declare _token
-declare -a _headers
+_echo() {
+    printf '%s\n' "${1}"
+}
 
 _secret="/home/igor/arch/secret.json"
 _record=$(jq -r ".dns .record" "${_secret}")
 _token=$(jq -r ".dns .token" "${_secret}")
-_headers=("-H" "Content-Type: application/json" "-H" "Authorization: Bearer ${_token}")
 
-echo "Secret: ${_secret}"
-echo "Record: ${_record}"
+_echo "$(basename "${0}") @ $(readlink /proc/$$/exe)"
+_echo "Secret: ${_secret}"
+_echo "Record: ${_record}"
+_echo "----------"
 
-_get_current_ip() {
-    curl -s -f "https://api.ipify.org"
+_get_current_ip() (
+    curl -s -f "https://api.ipify.org" || exit 128
+)
+
+_ctype="Content-Type: application/json"
+_auth="Authorization: Bearer ${_token}"
+
+_get_do_ip() (
+    _result="$(curl -s -f -X GET -H "${_ctype}" -H "${_auth}" "${_record}")" || exit 129
+    _echo "${_result}" | jq -r ".domain_record .data"
+)
+
+_update_do_ip() (
+    _result="$(curl -s -f -X PUT -H "${_ctype}" -H "${_auth}" -d "{\"data\":\"${1}\"}" "${_record}")" || exit 130
+    _echo "${_result}" | jq -r ".domain_record .data"
+)
+
+_exit() {
+    _echo "Exit ${1}"
+    exit "${1}"
 }
 
-_get_do_ip() {
-    curl -s -f -X GET "${_headers[@]}" "${_record}" | jq -r ".domain_record .data"
-}
+_run() (
+    _current_ip="$(_get_current_ip)" || _exit "${?}"
+    _do_ip="$(_get_do_ip)" || _exit "${?}"
 
-_update_do_ip() {
-    curl -s -f -X PUT "${_headers[@]}" -d "{\"data\":\"${1}\"}" "${_record}" | jq -r ".domain_record .data"
-}
-
-_fatal() {
-    echo "${1}"
-    exit 1
-}
-
-_run() {
-    local _current_ip
-    local _do_ip
-    local _new_ip
-
-    _current_ip="$(_get_current_ip)" || _fatal "Get current IP failed (${?})"
-    _do_ip="$(_get_do_ip)" || _fatal "Get DO IP failed (${?})"
-
-    echo "Current IP: ${_current_ip}"
-    echo "DigitalOcean IP: ${_do_ip}"
+    _echo "Current IP: ${_current_ip}"
+    _echo "DigitalOcean IP: ${_do_ip}"
     
-    if [[ "${_current_ip}" != "${_do_ip}" ]]
+    if [ "${_current_ip}" != "${_do_ip}" ]
     then
-        _new_ip="$(_update_do_ip "${_current_ip}")" || _fatal "Update DO IP failed (${?})"
-        echo "Updated ${_record} to ${_new_ip}"
+        _new_ip="$(_update_do_ip "${_current_ip}")" || _exit "${?}"
+        _echo "Updated ${_record} to ${_new_ip}"
     else
-        echo "Already up to date"
+        _echo "Already up to date"
     fi
-}
+    _exit 0
+)
 
 _run
