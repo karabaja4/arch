@@ -30,8 +30,7 @@ _mount() (
 )
 
 _enum() {
-    _partitions="$(lsblk -J "${1}" | jq -crM '.blockdevices[] | .children[] | select(.type=="part") | .name')"
-    _echo "${_partitions}" | while read -r part
+    lsblk -J "${1}" | jq -crM '.blockdevices[] | .children[] | select(.type=="part") | .name' | while read -r part
     do
         _mount "${part}"
     done

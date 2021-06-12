@@ -11,8 +11,13 @@ _piddir="/tmp/minirc"
 _config="/etc/minirc.json"
 
 # load config
-_daemons="$(jq -crM '.[] | .name' ${_config})"
-_enabled="$(jq -crM '.[] | select(.enabled==true) | .name' ${_config})"
+_get_daemons() {
+    jq -crM '.[] | .name' ${_config}
+}
+
+_get_enabled() {
+    jq -crM '.[] | select(.enabled==true) | .name' ${_config}
+}
 
 # ${1} -> service
 # ${2} -> user
@@ -118,7 +123,7 @@ _on_init() (
     fi
 
     _echo "Starting daemons..."
-    _echo "${_enabled}" | while read -r dmn
+    _get_enabled | while read -r dmn
     do
         _daemon_start "${dmn}"
     done
@@ -127,7 +132,7 @@ _on_init() (
 _on_shutdown() (
 
     _echo "Stopping daemons..."
-    _echo "${_daemons}" | while read -r dmn
+    _get_daemons | while read -r dmn
     do
         _daemon_poll "${dmn}" && _daemon_stop "${dmn}"
     done
@@ -182,7 +187,7 @@ start|stop|restart)
     ;;
 list)
     [ "${#}" -ne 1 ] && _usage
-    _echo "${_daemons}" | while read -r dmn
+    _get_daemons | while read -r dmn
     do
         if _daemon_poll "${dmn}"
         then
