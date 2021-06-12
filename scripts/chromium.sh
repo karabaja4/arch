@@ -1,5 +1,5 @@
-#!/bin/bash
-set -uo pipefail
+#!/bin/sh
+set -u
 
 if killall -q -0 chromium # is chromium running?
 then
@@ -13,4 +13,4 @@ then
     fi
 fi
 
-/usr/bin/chromium "$@" &> /dev/null
+/usr/bin/chromium "$@" > /dev/null 2>&1
