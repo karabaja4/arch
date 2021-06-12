@@ -87,5 +87,6 @@
     },
     "Lua.telemetry.enable": false,
     "workbench.startupEditor": "welcomePage",
-    "security.workspace.trust.enabled": false
+    "security.workspace.trust.enabled": false,
+    "editor.suggest.preview": true
 }
