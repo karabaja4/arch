@@ -1,7 +1,4 @@
-#!/bin/bash
-
-/usr/bin/xdpyinfo | grep VNC > /dev/null
-declare -r isvnc="$?" # 0 if vnc
+#!/bin/sh
 
 _vnc() {
 
@@ -46,7 +43,7 @@ _desktop() {
 
     # other
     sleep 1
-    "${HOME}/arch/scripts/clip.sh" &> "${HOME}/clip.log" &
+    "${HOME}/arch/scripts/clip.sh" > "${HOME}/clip.log" 2>&1 &
     sleep 1
     flameshot &
     #sleep 1
@@ -56,5 +53,8 @@ _desktop() {
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
 }
 
-[ ${isvnc} -eq 0 ] || _desktop
-[ ${isvnc} -eq 0 ] && _vnc
+/usr/bin/xdpyinfo | grep VNC > /dev/null
+_is_vnc="$?" # 0 if vnc
+
+[ ${_is_vnc} -eq 0 ] || _desktop
+[ ${_is_vnc} -eq 0 ] && _vnc
