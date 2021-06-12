@@ -1,0 +1,6 @@
+#!/bin/sh
+
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+
+exec /usr/bin/openbox --sm-disable --startup /home/igor/arch/openbox/autostart
