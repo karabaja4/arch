@@ -1,5 +1,12 @@
 #!/bin/sh
 
+_sockdir="/tmp/.X11-unix"
+if [ ! -d "${_sockdir}" ]
+then
+    printf '%s\n' "${_sockdir} does not exist, exiting."
+    exit 1
+fi
+
 sudo modprobe nvidia
 sudo modprobe nvidia_uvm
 sudo modprobe nvidia_modeset
@@ -10,10 +17,6 @@ export LD_LIBRARY_PATH=/usr/lib64/nvidia/:/usr/lib32/nvidia:/usr/lib:${LD_LIBRAR
 _rootdir="$(dirname "$(readlink -f "${0}")")"
 sudo ln -sfvT "${_rootdir}/nvidia-xorg.conf" "/etc/X11/nvidia-xorg.conf"
 sudo ln -sfvT "${_rootdir}/nvidia-xorg.conf.d" "/etc/X11/nvidia-xorg.conf.d"
-
-_sockdir="/tmp/.X11-unix"
-mkdir -pv "${_sockdir}"
-chmod 1777 "${_sockdir}"
 
 _get_screen() (
     _index=0
