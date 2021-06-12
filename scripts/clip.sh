@@ -56,7 +56,6 @@ _iteration() (
 _log "$(basename "${0}") @ $(readlink /proc/$$/exe)"
 while true
 do
-    _log "---------- Iteration start ----------"
+    _log "----------"
     _iteration
-    _log "---------- Iteration end ------------"
 done
