@@ -14,11 +14,11 @@ sudo modprobe -v nvidia_drm modeset=1
 
 export LD_LIBRARY_PATH=/usr/lib64/nvidia/:/usr/lib32/nvidia:/usr/lib:${LD_LIBRARY_PATH}
 
-_rootdir="$(dirname "$(readlink -f "${0}")")"
-_conf="nvidia-xorg.conf"
+_root_dir="$(dirname "$(readlink -f "${0}")")"
+_config_name="nvidia-xorg"
 
-sudo ln -sfvT "${_rootdir}/${_conf}" "/etc/X11/${_conf}"
-sudo ln -sfvT "${_rootdir}/${_conf}.d" "/etc/X11/${_conf}.d"
+sudo ln -sfvT "${_root_dir}/${_config_name}.conf" "/etc/X11/${_config_name}.conf"
+sudo ln -sfvT "${_root_dir}/${_config_name}.conf.d" "/etc/X11/${_config_name}.conf.d"
 
 _get_screen() (
     _index=0
@@ -29,4 +29,4 @@ _get_screen() (
     printf '%s\n' "${_index}"
 )
 
-exec xinit "${_rootdir}/xinitrc" -- ":$(_get_screen)" "vt$(fgconsole)" -nolisten tcp -br -config "${_conf}" -configdir "${_conf}.d"
+exec xinit "${_root_dir}/xinitrc" -- ":$(_get_screen)" "vt$(fgconsole)" -nolisten tcp -br -config "${_config_name}.conf" -configdir "${_config_name}.conf.d"
