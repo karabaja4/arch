@@ -12,7 +12,6 @@ _token=$(jq -r ".dns .token" "${_secret}")
 _echo "$(basename "${0}") @ $(readlink /proc/$$/exe)"
 _echo "Secret: ${_secret}"
 _echo "Record: ${_record}"
-_echo "----------"
 
 _get_current_ip() (
     curl -s -f "https://api.ipify.org" || exit 128
