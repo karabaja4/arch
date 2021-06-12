@@ -7,10 +7,10 @@ then
     exit 1
 fi
 
-sudo modprobe nvidia
-sudo modprobe nvidia_uvm
-sudo modprobe nvidia_modeset
-sudo modprobe nvidia_drm modeset=1
+sudo modprobe -v nvidia
+sudo modprobe -v nvidia_uvm
+sudo modprobe -v nvidia_modeset
+sudo modprobe -v nvidia_drm modeset=1
 
 export LD_LIBRARY_PATH=/usr/lib64/nvidia/:/usr/lib32/nvidia:/usr/lib:${LD_LIBRARY_PATH}
 
