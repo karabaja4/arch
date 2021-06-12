@@ -5,7 +5,7 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-_echo "minirc-ng @ 0.5 (running in $(readlink /proc/$$/exe))"
+_echo "minirc-ng @ 0.6 (running in $(readlink /proc/$$/exe))"
 
 _piddir="/tmp/minirc"
 _config="/etc/minirc.json"
