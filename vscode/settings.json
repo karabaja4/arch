@@ -85,5 +85,6 @@
         "rc": "shellscript",
         "aliases": "shellscript"
     },
-    "Lua.telemetry.enable": false
+    "Lua.telemetry.enable": false,
+    "workbench.startupEditor": "welcomePage"
 }

@@ -4,7 +4,7 @@
 
 if [ "${TERM}" = "linux" ]
 then
-    nano "${1}" > /dev/null 2>&1
+    nano "${1}"
 else
     fpad "${1}" > /dev/null 2>&1 &
 fi
