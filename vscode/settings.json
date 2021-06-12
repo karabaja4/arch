@@ -86,5 +86,6 @@
         "aliases": "shellscript"
     },
     "Lua.telemetry.enable": false,
-    "workbench.startupEditor": "welcomePage"
+    "workbench.startupEditor": "welcomePage",
+    "security.workspace.trust.enabled": false
 }
