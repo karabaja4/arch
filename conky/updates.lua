@@ -49,4 +49,4 @@ end
 
 -- multiple checkupdates calls cannot run in parallel
 -- so if more than 1 conky is running checkupdates, they need to have different CHECKUPDATES_DB set
--- that is why a new CHECKUPDATES_DB is created with each call
+-- that is why a new CHECKUPDATES_DB is created for each conky instance PID
