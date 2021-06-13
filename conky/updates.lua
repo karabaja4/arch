@@ -50,7 +50,7 @@ end
 -- notes:
 -- auracle returns 1 when check is successful and no packages are upgradable, with empty stdout + stderr
 -- auracle also returns 1 when check failed, with non-empty stdout+stderr
--- so if return code is non-zero, stdour+stderr should be empty, otherwise it should be handles as a failure
+-- so if return code is non-zero, stdour+stderr should be empty, otherwise it should be handled as a failure
 
 -- multiple checkupdates calls cannot run in parallel
 -- so if more than 1 conky is running checkupdates, they need to have different CHECKUPDATES_DB set
