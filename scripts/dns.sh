@@ -35,7 +35,7 @@ _exit() {
     exit "${1}"
 }
 
-_run() (
+_run() {
     _current_ip="$(_get_current_ip)" || _exit "${?}"
     _do_ip="$(_get_do_ip)" || _exit "${?}"
 
@@ -50,6 +50,6 @@ _run() (
         _echo "Already up to date"
     fi
     _exit 0
-)
+}
 
 _run
