@@ -20,7 +20,7 @@ _usage() {
 
 [ "${#}" -gt 0 ] && _usage
 
-_iteration() (
+_iteration() {
     
     # target test of current selection
     _tc="$(xclip -selection clipboard -o -t TARGETS)"
@@ -31,7 +31,7 @@ _iteration() (
     then
         # on empty wait for any selection
         _log "Waiting on initial selection with: ${_utf8}"
-        xclip -verbose -in -selection clipboard -t "${_utf8}" < /dev/null || exit 128
+        xclip -verbose -in -selection clipboard -t "${_utf8}" < /dev/null || exit 3
     else
         _log "Clipboard targets: ${_tc}"
         _log "Preferred targets: ${_pref}"
@@ -51,11 +51,11 @@ _iteration() (
             sleep 1
         fi
     fi
-)
+}
 
 _log "$(basename "${0}") @ $(readlink /proc/$$/exe)"
 while true
 do
     _log "----------"
-    _iteration || exit ${?}
+    _iteration
 done
