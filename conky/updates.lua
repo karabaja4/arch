@@ -22,7 +22,12 @@ function conky_aur(interval)
 end
 
 -- private
-function _exec(interval, command, sc1, sc2)
+function _exec(i, command, sc1, sc2)
+    local interval = tonumber(i)
+    if (interval == nil or interval < 60)
+    then
+        return error("Interval not defined or too short")
+    end
     if (_store[command][1] + interval < os.time())
     then
         local handle = io.popen(command)
