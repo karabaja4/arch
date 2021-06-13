@@ -1,8 +1,8 @@
 ---@diagnostic disable: lowercase-global
 
 -- commands
-_checkupdates = "/usr/bin/checkupdates"
-_auracle = "/usr/bin/auracle outdated";
+_checkupdates = "export CHECKUPDATES_DB=$(mktemp -u); /usr/bin/checkupdates 2>&1; _exit=${?}; rm -rf ${CHECKUPDATES_DB}; exit ${_exit}"
+_auracle = "/usr/bin/auracle outdated 2>&1";
 
 -- ts, count (indexed 1, 2)
 _store = {
@@ -13,19 +13,19 @@ _store = {
 -- public
 function conky_pacman(interval)
     _exec(interval, _checkupdates, 0, 2)
-    return _store[_checkupdates][2] or "reading"
+    return _store[_checkupdates][2] or "wait"
 end
 
 function conky_aur(interval)
     _exec(interval, _auracle, 0, 1)
-    return _store[_auracle][2] or "reading"
+    return _store[_auracle][2] or "wait"
 end
 
 -- private
 function _exec(interval, command, sc1, sc2)
     if (_store[command][1] + interval < os.time())
     then
-        local handle = io.popen(command.." 2>&1")
+        local handle = io.popen(command)
         local stdout = handle:read("*a")
         local rc = { handle:close() }
         local code = rc[3]
@@ -46,3 +46,7 @@ end
 -- auracle returns 1 when check is successful and no packages are upgradable, with empty stdout + stderr
 -- auracle also returns 1 when check failed, with non-empty stdout+stderr
 -- so if return code is non-zero, stdour+stderr should be empty, otherwise it should be handles as a failure
+
+-- multiple checkupdates calls cannot run in parallel
+-- so if more than 1 conky is running checkupdates, they need to have different CHECKUPDATES_DB set
+-- that is why a new CHECKUPDATES_DB is created with each call
