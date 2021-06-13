@@ -19,6 +19,6 @@ conky.text = [[
 ${alignr} ${color1} ${font openlogos:size=28}B${font}
 ${alignr} ${color0} home.aerium.hr (${nodename})
 ${alignr} Kernel: ${kernel}
-${alignr} Available Updates: ${lua conky_pacman 120} (${lua conky_aur 120})
+${alignr} Available Updates: ${lua conky_pacman 300} (${lua conky_aur 300})
 ${alignr} Uptime: $uptime
 ]];

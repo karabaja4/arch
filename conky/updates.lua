@@ -1,7 +1,7 @@
 ---@diagnostic disable: lowercase-global
 
 -- commands
-_checkupdates = "export CHECKUPDATES_DB=$(mktemp -u); /usr/bin/checkupdates 2>&1; _exit=${?}; rm -rf ${CHECKUPDATES_DB}; exit ${_exit}"
+_checkupdates = "CHECKUPDATES_DB=/tmp/checkupdates-conky-${PPID} /usr/bin/checkupdates 2>&1"
 _auracle = "/usr/bin/auracle outdated 2>&1";
 
 -- ts, count (indexed 1, 2)
