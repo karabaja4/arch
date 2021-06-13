@@ -1,6 +1,6 @@
 {
 	"extensions": {
-		"txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv": "fpad $arg",
+		"txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv": "qtextpad $arg",
 		"avi,mkv,flac,mp3,wav,mp4,mov": "vlc $arg",
 		"jpg,jpeg,svg,png,bmp,gif,tga": "gpicview $arg",
 		"gz,zip,rar,zst": "xarchiver $arg",
@@ -9,14 +9,14 @@
 		"html": "chromium $arg"
 	},
 	"mimetypes": {
-		"text/*": "fpad $arg",
+		"text/*": "qtextpad $arg",
 		"video/*": "vlc $arg",
 		"image/*": "gpicview $arg",
 		"media/video": "vlc $arg",
 		"document/pdf": "mupdf -r 96 $arg",
 		"inode/directory": "qtfm $arg",
-		"inode/x-empty": "fpad $arg",
-		"application/octet-stream": "fpad $arg"
+		"inode/x-empty": "qtextpad $arg",
+		"application/octet-stream": "qtextpad $arg"
 	},
 	"protocols": {
 		"http://*": "chromium $arg",
