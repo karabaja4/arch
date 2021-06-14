@@ -123,7 +123,7 @@ _on_init() (
     fi
 
     _echo "Starting daemons..."
-    _get_enabled | while read -r dmn
+    for dmn in $(_get_enabled)
     do
         _daemon_start "${dmn}"
     done
@@ -132,7 +132,7 @@ _on_init() (
 _on_shutdown() (
 
     _echo "Stopping daemons..."
-    _get_daemons | while read -r dmn
+    for dmn in $(_get_daemons)
     do
         _daemon_poll "${dmn}" && _daemon_stop "${dmn}"
     done
@@ -187,7 +187,7 @@ start|stop|restart)
     ;;
 list)
     [ "${#}" -ne 1 ] && _usage
-    _get_daemons | while read -r dmn
+    for dmn in $(_get_daemons)
     do
         if _daemon_poll "${dmn}"
         then
