@@ -23,6 +23,7 @@
 		"https://*": "chromium $arg",
 		"slack://*": "slack $arg",
 		"file://*": "qtfm $arg",
+		"vscode://*": "code $arg",
 		"zoommtg://*": "zoom $arg",
 		"msteams:/l/*": "teams $arg"
 	}
