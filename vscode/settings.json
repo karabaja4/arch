@@ -89,5 +89,6 @@
     "workbench.startupEditor": "welcomePage",
     "security.workspace.trust.enabled": false,
     "files.hotExit": "off",
-    "files.enableTrash": false
+    "files.enableTrash": false,
+    "github.gitAuthentication": false
 }
