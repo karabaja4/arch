@@ -1,0 +1,16 @@
+# Maintainer: Igor Saric <karabaja4 at gmail.com>
+# shellcheck disable=SC2181,SC2148,SC2034,SC2164,SC2154
+
+pkgname=ttf-win81-fonts
+pkgver=1.0
+pkgrel=1
+pkgdesc="Windows 8.1 fonts"
+arch=('any')
+url="https://www.microsoft.com"
+license=('custom')
+source=("https://isaric.blob.core.windows.net/stuff/WindowsFonts.tar.gz")
+sha256sums=('48cbdc6b5bda17faa4d8b9081e9848f287e46b2d46f30e1c51c05e84781e518d')
+
+package() {
+  install -Dm644 WindowsFonts/* -t "$pkgdir/usr/share/fonts/WindowsFonts"
+}
