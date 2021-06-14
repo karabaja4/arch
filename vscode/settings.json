@@ -90,5 +90,6 @@
     "security.workspace.trust.enabled": false,
     "files.hotExit": "off",
     "files.enableTrash": false,
-    "github.gitAuthentication": false
+    "github.gitAuthentication": false,
+    "editor.semanticHighlighting.enabled": true
 }
