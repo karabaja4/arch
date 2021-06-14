@@ -70,7 +70,7 @@ _daemon_stop() (
 _daemon_poll() (
     _pidfile="${_piddir}/${1}.pid"
     # if pidfile exists and pid from pidfile is running
-    [ -f "${_pidfile}" ] && [ -e "/proc/$(cat "${_pidfile}")/exe" ]
+    [ -f "${_pidfile}" ] && [ -h "/proc/$(cat "${_pidfile}")/exe" ]
 )
 
 _on_init() (
