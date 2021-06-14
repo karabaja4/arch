@@ -5,7 +5,7 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-_echo "minirc-ng @ 0.6 (running in $(readlink /proc/$$/exe))"
+_echo "minirc-ng @ 0.8 (running in $(readlink /proc/$$/exe))"
 
 _piddir="/tmp/minirc"
 _config="/etc/minirc.json"
@@ -23,7 +23,7 @@ _get_enabled() {
 # ${2} -> user
 # ${3} -> command
 # for logging use:
-# |& logger --tag "${1}" &
+# > /tmp/logs/${1}.log instead of > /dev/null
 _daemon_start() (
 
     _params="$(jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config})"
@@ -43,16 +43,11 @@ _daemon_start() (
         _user="$(_echo "${_params}" | head -n1)"
         _command="$(_echo "${_params}" | tail -n1)"
 
-        _fifo="$(mktemp -u)"
-        su - "${_user}" -c "mkfifo ${_fifo}"
-        su - "${_user}" -c "( ${_command} & printf '%s' "\$!" > ${_fifo} )" > /dev/null 2>&1 &
+        su - "${_user}" -c "${_command} > /dev/null 2>&1 & printf '%s' \${!}" > "${_pidfile}"
 
-        _pid="$(cat "${_fifo}")"
-        _echo "${_pid}" > "${_pidfile}"
-        rm -f "${_fifo}"
         _echo "User: ${_user}"
         _echo "Exec: ${_command}"
-        _echo "PID: ${_pid}"
+        _echo "PID: $(cat "${_pidfile}")"
     fi
 )
 
