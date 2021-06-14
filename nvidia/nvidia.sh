@@ -20,13 +20,13 @@ _config_name="nvidia-xorg"
 sudo ln -sfvT "${_root_dir}/${_config_name}.conf" "/etc/X11/${_config_name}.conf"
 sudo ln -sfvT "${_root_dir}/${_config_name}.conf.d" "/etc/X11/${_config_name}.conf.d"
 
-_get_screen() (
+_get_screen() {
     _index=0
     while [ -e "${_sockdir}/X${_index}" ]
     do
         _index=$(( _index + 1 ))
     done
     printf '%s\n' "${_index}"
-)
+}
 
 exec xinit "${_root_dir}/xinitrc" -- ":$(_get_screen)" "vt$(fgconsole)" -nolisten tcp -br -config "${_config_name}.conf" -configdir "${_config_name}.conf.d"
