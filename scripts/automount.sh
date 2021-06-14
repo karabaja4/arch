@@ -20,17 +20,17 @@ _not_root() {
 
 _mount_uid=1000
 
-_mount() {
+_mount() (
     _user="$(id -un ${_mount_uid})"
     _dir="/mnt/${1}"
     _uid="$(id -u "${_user}")"
     _gid="$(id -g "${_user}")"
     install -m 0755 -g "${_user}" -o "${_user}" -d "${_dir}"
     mount -o uid="${_uid}",gid="${_gid}" "/dev/${1}" "${_dir}"
-}
+)
 
 _enum() {
-    lsblk -J "${1}" | jq -crM '.blockdevices[] | .children[] | select(.type=="part") | .name' | while read -r part
+    for part in $(lsblk -J "${1}" | jq -crM '.blockdevices[] | .children[] | select(.type=="part") | .name')
     do
         _mount "${part}"
     done
