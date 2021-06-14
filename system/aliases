@@ -76,6 +76,7 @@ alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
 alias mountdisk="sudo mount -t ext4 -U 23147c37-efb6-4837-83aa-87808c70b87a /home/igor/_disk/"
 alias mountmmc="sudo mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_mmc/"
+alias cdiff="code -d"
 
 mountazure() {
     sudo mount -t cifs //isaric.file.core.windows.net/isaricfs /home/igor/_azure -o vers=3.0,credentials=/etc/smbcredentials/isaric.cred,uid="$(id -u)",gid="$(id -g)",serverino
