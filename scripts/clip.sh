@@ -31,6 +31,8 @@ _iteration() {
     then
         # on empty wait for any selection
         _log "Waiting on initial selection with: ${_utf8}"
+
+        # if this fails probably X connection is lost, so exit the script
         xclip -verbose -in -selection clipboard -t "${_utf8}" < /dev/null || exit 3
     else
         _log "Clipboard targets: ${_tc}"
@@ -45,7 +47,7 @@ _iteration() {
             _log "Matched target: ${_match}"
             # timeout fixes the issue when clients like xfreerdp stall out the clipboard
             timeout -v -s TERM -k 2 1 xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
-            _log "xclip exited"
+            _log "xclip pipe exited"
         else
             _log "Unable to match targets"
             sleep 1
