@@ -4,7 +4,7 @@
 <registry xmlns="http://www.iana.org/assignments" id="media-types">
   <title>Media Types</title>
   <category>Multipurpose Internet Mail Extensions (MIME) and Media Types</category>
-  <updated>2021-04-19</updated>
+  <updated>2021-06-11</updated>
   
   
  
@@ -49,6 +49,18 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <xref type="person" data="_3GPP"/>
       <xref type="person" data="Ozgur_Oyman"/>
       <file type="template">application/3gpdash-qoe-report+xml</file>
+    </record>
+    <record date="2021-04-28">
+      <name>3gppHal+json</name>
+      <xref type="person" data="_3GPP"/>
+      <xref type="person" data="Ulrich_Wiehe"/>
+      <file type="template">application/3gppHal+json</file>
+    </record>
+    <record date="2021-04-28">
+      <name>3gppHalForms+json</name>
+      <xref type="person" data="_3GPP"/>
+      <xref type="person" data="Ulrich_Wiehe"/>
+      <file type="template">application/3gppHalForms+json</file>
     </record>
     <record>
       <name>3gpp-ims+xml</name>
@@ -526,9 +538,9 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <xref type="rfc" data="rfc8484"/>
       <file type="template">application/dns-message</file>
     </record>
-    <record date="2020-01-16">
+    <record date="2020-01-16" updated="2021-06-11">
       <name>dots+cbor</name>
-      <xref type="rfc" data="rfc8782"/>
+      <xref type="draft" data="RFC-ietf-dots-rfc8782-bis-08"/>
       <file type="template">application/dots+cbor</file>
     </record>
     <record>
@@ -1156,6 +1168,11 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <xref type="person" data="Bryan_Blank"/>
       <file type="template">application/mipc</file>
     </record>
+    <record date="2021-06-01">
+      <name>missing-blocks+cbor-seq</name>
+      <xref type="draft" data="RFC-ietf-core-new-block-14"/>
+      <file type="template">application/missing-blocks+cbor-seq</file>
+    </record>
     <record date="2019-03-07">
       <name>mmt-aei+xml</name>
       <xref type="person" data="ATSC"/>
@@ -1304,6 +1321,11 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <name>nss</name>
       <xref type="person" data="Michael_Hammer"/>
       <file type="template">application/nss</file>
+    </record>
+    <record date="2021-04-21">
+      <name>oauth-authz-req+jwt</name>
+      <xref type="draft" data="RFC-ietf-oauth-jwsreq-34"/>
+      <file type="template">application/oauth-authz-req+jwt</file>
     </record>
     <record>
       <name>ocsp-request</name>
@@ -1704,13 +1726,20 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <xref type="person" data="OASIS_Security_Services_Technical_Committee_SSTC"/>
       <file type="template">application/samlmetadata+xml</file>
     </record>
+    <record date="2021-04-26">
+      <name>sarif-external-properties+json</name>
+      <xref type="person" data="OASIS"/>
+      <xref type="person" data="David_Keaton"/>
+      <xref type="person" data="Michael_C._Fanning"/>
+      <file type="template">application/sarif-external-properties+json</file>
+    </record>
     <record date="2020-09-15">
       <name>sarif+json</name>
       <xref type="person" data="OASIS"/>
       <xref type="person" data="Michael_C._Fanning"/>
       <xref type="person" data="Laurence_J._Golding"/>
       <file type="template">application/sarif+json</file>
-    </record> 
+    </record>
     <record date="2020-04-14">
       <name>sbe</name>
       <xref type="person" data="FIX_Trading_Community"/>
@@ -3735,6 +3764,21 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <name>vnd.fujifilm.fb.docuworks</name>
       <xref type="person" data="Kazuya_Iimura"/>
       <file type="template">application/vnd.fujifilm.fb.docuworks</file>
+    </record>
+    <record date="2021-04-20">
+      <name>vnd.fujifilm.fb.docuworks.binder</name>
+      <xref type="person" data="Kazuya_Iimura"/>
+      <file type="template">application/vnd.fujifilm.fb.docuworks.binder</file>
+    </record>
+    <record date="2021-04-20">
+      <name>vnd.fujifilm.fb.docuworks.container</name>
+      <xref type="person" data="Kazuya_Iimura"/>
+      <file type="template">application/vnd.fujifilm.fb.docuworks.container</file>
+    </record>
+    <record date="2021-04-27">
+      <name>vnd.fujifilm.fb.jfi+xml</name>
+      <xref type="person" data="Keitaro_Ishida"/>
+      <file type="template">application/vnd.fujifilm.fb.jfi+xml</file>
     </record>
     <record>
       <name>vnd.fujitsu.oasys</name>
@@ -6324,6 +6368,11 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <xref type="person" data="James_Wick"/>
       <file type="template">application/vnd.RenLearn.rlprint</file>
     </record>
+    <record updated="2021-06-02">
+      <name>vnd.resilient.logic</name>
+      <xref type="person" data="Benedikt_Muessig"/>
+      <file type="template">application/vnd.resilient.logic</file>
+    </record>
     <record date="2018-02-01">
       <name>vnd.restful+json</name>
       <xref type="person" data="Stephen_Mizell"/>
@@ -7152,6 +7201,12 @@ Provisional Standard Media Type Registry: <xref type="registry" data="provisiona
       <name>vq-rtcpxr</name>
       <xref type="rfc" data="rfc6035"/>
       <file type="template">application/vq-rtcpxr</file>
+    </record>
+    <record date="2021-04-20">
+      <name>wasm</name>
+      <xref type="person" data="W3C"/>
+      <xref type="person" data="Eric_Prudhommeaux"/>
+      <file type="template">application/wasm</file>
     </record>
     <record>
       <name>watcherinfo+xml</name>
@@ -9268,6 +9323,12 @@ by the IANA.</note>
       <xref type="person" data="Vladimir_Alexiev"/>
       <file type="template">text/shaclc</file>
     </record>
+    <record date="2021-05-10">
+      <name>shex</name>
+      <xref type="person" data="W3C"/>
+      <xref type="person" data="Eric_Prudhommeaux"/>
+      <file type="template">text/shex</file>
+    </record>
     <record date="2020-05-04">
       <name>spdx</name>
       <xref type="person" data="Linux_Foundation"/>
@@ -9943,6 +10004,11 @@ by the IANA.</note>
       <xref type="rfc" data="rfc7741"/>
       <file type="template">video/VP8</file>
     </record>
+    <record date="2021-06-11">
+      <name>VP9</name>
+      <xref type="draft" data="RFC-ietf-payload-vp9-16"/>
+      <file type="template">video/VP9</file>
+    </record>
   </registry>
 
   <people>
@@ -10215,7 +10281,7 @@ by the IANA.</note>
     </person>
     <person id="Bryan_Blank">
       <name>Bryan Blank</name>
-      <uri>ntbchair@nga.mil</uri>
+      <uri>mailto:ntbchair&amp;nga.mil</uri>
       <updated>2019-08-21</updated>
     </person>
     <person id="Kevin_Blumberg">
@@ -10714,7 +10780,7 @@ by the IANA.</note>
     <person id="Michael_C._Fanning">
       <name>Michael C. Fanning</name>
       <uri>mailto:mikefan&amp;microsoft.com</uri>
-      <updated>2020-09-15</updated>
+      <updated>2021-04-26</updated>
     </person>
     <person id="Dirk_Farin">
       <name>Dirk Farin</name>
@@ -11276,7 +11342,7 @@ by the IANA.</note>
     <person id="Kazuya_Iimura">
       <name>Kazuya Iimura</name>
       <uri>mailto:kazuya.iimura.pa&amp;fujifilm.com</uri>
-      <updated>2021-04-19</updated>
+      <updated>2021-04-20</updated>
     </person>
     <person id="IMS_Global">
       <name>IMS Global Learning Consortium Inc.</name>
@@ -11344,6 +11410,11 @@ by the IANA.</note>
       <name>International Digital Publishing Forum</name>
       <uri>http://www.idpf.org</uri>
       <updated>2014-11-06</updated>
+    </person>
+    <person id="Keitaro_Ishida">
+      <name>Keitaro Ishida</name>
+      <uri>mailto:keitaro.ishida.yu&amp;fujifilm.com</uri>
+      <updated>2021-04-27</updated>
     </person>
     <person id="Prakash_Iyer">
       <name>Prakash Iyer</name>
@@ -11439,6 +11510,11 @@ by the IANA.</note>
       <name>Steve Katz</name>
       <uri>mailto:skatz&amp;eshop.com</uri>
       <updated>1995-06-19</updated>
+    </person>
+    <person id="David_Keaton">
+      <name>David Keaton</name>
+      <uri>mailto:dmk&amp;dmk.com</uri>
+      <updated>2021-04-26</updated>
     </person>
     <person id="Sean_Kelley">
       <name>Sean Kelley</name>
@@ -11968,6 +12044,11 @@ by the IANA.</note>
       <uri>mailto:helpdesk&amp;omaorg.org</uri>
       <updated>2020-08-03</updated>
     </person>
+    <person id="Benedikt_Muessig">
+      <name>Benedikt Muessig</name>
+      <uri>mailto:benedikt&amp;resilient-group.de</uri>
+      <updated>2021-06-02</updated>
+    </person>
     <person id="Masanori_Murai">
       <name>Masanori Murai</name>
       <uri>mailto:masanori.murai&amp;mb.softbank.co.jp</uri>
@@ -12383,7 +12464,7 @@ by the IANA.</note>
     <person id="Eric_Prudhommeaux">
       <name>Eric Prud'hommeaux</name>
       <uri>mailto:eric at w3.org</uri>
-      <updated>2017-03-07</updated>
+      <updated>2021-05-10</updated>
     </person>
     <person id="Jann_Pruulman">
       <name>Jann Pruulmann</name>
@@ -13285,6 +13366,11 @@ by the IANA.</note>
       <uri>mailto:frank.wiebeler&amp;dev4agriculture.de</uri>
       <updated>2019-05-17</updated>
     </person>
+    <person id="Ulrich_Wiehe">
+      <name>Ulrich Wiehe</name>
+      <uri>mailto:ulrich.wiehe&amp;nokia.com</uri>
+      <updated>2021-04-28</updated>
+    </person> 
     <person id="James_Wigger">
       <name>James Wigger</name>
       <uri>mailto:james&amp;rootstudio.co.uk</uri>
