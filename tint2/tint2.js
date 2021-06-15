@@ -1,3 +1,5 @@
+const util = require('util');
+const sleep = util.promisify(setTimeout);
 const { spawn } = require('child_process');
 
 const files = {
@@ -50,7 +52,7 @@ const fixunits = (unit) => {
   return unit.replace('GiB', 'GB').replace('MiB', 'MB').replace('KiB', 'KB');
 };
 
-const process = async (json) => {
+const print = async (json) => {
   const data = JSON.parse(json);
   let text = '';
 
@@ -72,22 +74,29 @@ const process = async (json) => {
 
 let stream = '';
 
-const main = async () => {
-  const conky = spawn('conky', ['-c', files.config]);
-  conky.stdout.on('data', async (data) => {
-    stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
-    await pop();
-  });
-};
-
 const pop = async () => {
   var regex = new RegExp(`${separators.start}(.*?)${separators.end}`);
   const match = stream.match(regex);
   if (match) {
     const json = match[1];
     stream = stream.replace(regex, '');
-    await process(json);
+    await print(json);
   }
-}
+};
 
-main();
+const conky = () => {
+  const conky = spawn('conky', ['-c', files.config]);
+  conky.stdout.on('data', async (data) => {
+    stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+  });
+};
+
+const loop = async () => {
+  while (true) {
+    await sleep(500);
+    await pop();
+  }
+};
+
+conky();
+loop();
