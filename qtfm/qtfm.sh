@@ -20,9 +20,9 @@ rm)
 copypath)
     echo -n "${2}" | xclip -i -selection clipboard;;
 term)
-    xfce4-terminal --working-directory="${2}";;
+    xfce4-terminal --working-directory="$PWD";;
 vscode)
-    code --folder-uri "${2}";;
+    code --folder-uri "$PWD";;
 feh)
     feh --bg-scale "${2}";;
 thumb)
