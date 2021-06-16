@@ -40,7 +40,7 @@ work() {
     local -a array=()
     mapfile -t array < <( jq -crM '.work | "/d:" + .domain, "/v:" + .host, "/u:" + .user, "/p:" + .password' "${HOME}/arch/secret.json" )
     echo "Connecting to: ${array[0]} ${array[1]} ${array[2]}"
-    xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper "${array[@]}" &> /dev/null
+    xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper "${array[@]}"
     echo "Disconnected"
 }
 
