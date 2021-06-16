@@ -46,7 +46,7 @@ _iteration() {
         then
             _log "Matched target: ${_match}"
             # timeout fixes the issue when clients like xfreerdp stall out the clipboard
-            timeout -v -s TERM -k 2 1 xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
+            timeout -v -s KILL -k 2 1 xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
             _log "xclip pipe exited"
         else
             _log "Unable to match targets"
