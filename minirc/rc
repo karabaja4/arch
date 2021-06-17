@@ -5,7 +5,7 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-_echo "minirc-ng @ 0.8 (running in $(readlink /proc/$$/exe))"
+_echo "minirc-ng @ 0.9 (${0} @ $(readlink /proc/$$/exe))"
 
 _piddir="/tmp/minirc"
 _config="/etc/minirc.json"
@@ -19,19 +19,16 @@ _get_enabled() {
     jq -crM '.[] | select(.enabled==true) | .name' ${_config}
 }
 
+_get_single() {
+    jq -crM --arg name "${1}" ".[] | select(.name==\$name) | .${2}" ${_config}
+}
+
 # ${1} -> service
 # ${2} -> user
 # ${3} -> command
 # for logging use:
 # > /tmp/logs/${1}.log instead of > /dev/null
 _daemon_start() (
-
-    _params="$(jq -crM --arg name "${1}" '.[] | select(.name==$name) | .user, .command' ${_config})"
-    if [ "$(_echo "${_params}" | wc -l)" -ne 2 ]
-    then
-        _echo "Error: unknown service: ${1}"
-        exit 1
-    fi
 
     _pidfile="${_piddir}/${1}.pid"
     _echo "Starting ${1}..."
@@ -40,8 +37,14 @@ _daemon_start() (
     then
         _echo "Error: ${_pidfile} exists"
     else
-        _user="$(_echo "${_params}" | head -n1)"
-        _command="$(_echo "${_params}" | tail -n1)"
+
+        _user="$(_get_single "${1}" "user")"
+        _command="$(_get_single "${1}" "command")"
+        if [ -z "${_user}" ] || [ -z "${_command}" ]
+        then
+            _echo "Error: unknown service: ${1}"
+            exit 1
+        fi
 
         su - "${_user}" -c "${_command} > /dev/null 2>&1 & printf '%s' \${!}" > "${_pidfile}"
 
