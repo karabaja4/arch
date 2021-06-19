@@ -82,6 +82,12 @@ mountazure() {
     sudo mount -t cifs //isaric.file.core.windows.net/isaricfs /home/igor/_azure -o vers=3.0,credentials=/etc/smbcredentials/isaric.cred,uid="$(id -u)",gid="$(id -g)",serverino
 }
 
+mountlinode() {
+    local -r username="$(jq -crM '.linode.samba.username' "${HOME}/arch/secret.json")"
+    local -r password="$(jq -crM '.linode.samba.password' "${HOME}/arch/secret.json")"
+    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //linode2.aerium.hr/public /home/igor/_linode/
+}
+
 alias zxvf="tar zxvf"
 alias sudo='sudo -E'
 alias unmountall='/home/igor/arch/qtfm/qtfm.sh unmount'
