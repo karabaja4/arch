@@ -8,7 +8,7 @@ pkgdesc="Windows 8.1 fonts"
 arch=('any')
 url="https://www.microsoft.com"
 license=('custom')
-source=("https://isaric.blob.core.windows.net/stuff/WindowsFonts.tar.gz")
+source=("https://linode.aerium.hr/stuff/WindowsFonts.tar.gz")
 sha256sums=('48cbdc6b5bda17faa4d8b9081e9848f287e46b2d46f30e1c51c05e84781e518d')
 
 package() {
