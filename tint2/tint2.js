@@ -6,11 +6,6 @@ const files = {
   config: '/home/igor/arch/conky/conkyrc-tint2'
 }
 
-const separators = {
-  start: 'START_OF_JSON',
-  end: 'END_OF_JSON'
-}
-
 const colors = {
   gray: '#757575',
   red: '#FF6E40',
@@ -18,31 +13,39 @@ const colors = {
   green: '#69F0AE'
 };
 
+const fonts = {
+  awesome: 'Font Awesome 5 Free',
+  ionicons: 'Ionicons',
+  nerd: 'Symbols Nerd Font',
+  flaticon: 'Flaticon'
+}
+
 const icons = {
   netdown: '',
   netup: '',
-  cpu: '',
-  mem: '',
-  ssd: '',
-  mmc: '',
-  edd: '',
-  trenddown: '',
-  trendup: '',
-  clock: ''
+  ping: '',
+  cpu: '',
+  mem: '',
+  ssd: '',
+  mmc: '',
+  edd: '',
+  trenddown: '',
+  trendup: '',
+  clock: ''
 };
 
-const span = (size, rise, color, icon, text) => {
-  return `<span font_family="Flaticon" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}         `;
+const span = (font, size, rise, color, icon, text) => {
+  return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
 };
 
 const nc = (value) => {
-  if (value === null || value === undefined) return colors.gray;
+  if (value !== 0 && !value) return colors.gray;
   if (value > 5) return colors.green;
   return colors.gray;
 };
 
 const oc = (value) => {
-  if (value === null || value === undefined) return colors.gray;
+  if (value !== 0 && !value) return colors.gray;
   if (value > 80) return colors.red;
   if (value > 30) return colors.yellow;
   return colors.green;
@@ -52,51 +55,106 @@ const fixunits = (unit) => {
   return unit.replace('GiB', 'GB').replace('MiB', 'MB').replace('KiB', 'KB');
 };
 
-const print = async (json) => {
-  const data = JSON.parse(json);
+const pad = (value, length, unit) => {
+  if (value !== 0 && !value) {
+    return 'timeout';
+  }
+  const result =  parseFloat(value).toLocaleString('en', {
+    useGrouping: false,
+    minimumFractionDigits: length,
+    maximumFractionDigits: 10
+  });
+  return `${result} ${unit}`;
+};
+
+const print = async () => {
+
+  const data = JSON.parse(store.conky.data);
+  const ms = parseFloat(store.ping.data);
+
   let text = '';
 
-  text += span(8000, 100, nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
-  text += span(8000, 100, nc(data.net.up), icons.netup, `UPL: ${data.net.up} KB`);
-  text += span(5000, 1200, oc(data.cpu.perc), icons.cpu, `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
-  text += span(8000, 100, oc(data.mem.perc), icons.mem, `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
+  text += span(fonts.awesome,  8000, 100, oc(ms),            icons.ping,    `PIN: ${pad(ms,            2, 'ms')}`);
+  text += span(fonts.flaticon, 8000, 100, nc(data.net.down), icons.netdown, `DWL: ${pad(data.net.down, 2, 'KB')}`);
+  text += span(fonts.flaticon, 8000, 100, nc(data.net.up),   icons.netup,   `UPL: ${pad(data.net.up,   2, 'KB')}`);
+
+  text += span(fonts.awesome,  8000, 100, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
+  text += span(fonts.awesome,  8000, 100, oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
 
   const disktext = (name) => `${name.toUpperCase()}: ${data[name] ? `${fixunits(data[name].used)} / ${fixunits(data[name].size)}` : 'not mounted'}`;
-  const diskspan = (name) => span(8000, 100, oc(data[name]?.perc), icons[name], disktext(name));
+  const diskspan = (font, name) => span(font, 8000, 100, oc(data[name]?.perc), icons[name], disktext(name));
 
-  text += diskspan('ssd');
-  text += diskspan('mmc');
-  text += diskspan('edd');
+  text += diskspan(fonts.awesome, 'ssd');
+  text += diskspan(fonts.awesome, 'mmc');
+  text += diskspan(fonts.awesome, 'edd');
 
-  text += span(8000, 100, colors.gray, icons.clock, `CLK: ${data.time}`).trimEnd();
+  text += span(fonts.awesome, 8000, 100, colors.gray, icons.clock, `CLK: ${data.time}`).trimEnd();
   console.log(text);
 };
 
-let stream = '';
+let store = {
+  conky: {
+    stream: '',
+    data: null
+  },
+  ping: {
+    stream: '',
+    data: null
+  }
+}
 
-const pop = async () => {
-  var regex = new RegExp(`${separators.start}(.*?)${separators.end}`);
-  const match = stream.match(regex);
-  if (match) {
-    const json = match[1];
-    stream = stream.replace(regex, '');
-    await print(json);
+const parse = async () => {
+  const regex = {
+    conky: new RegExp(`START_OF_JSON(.*?)END_OF_JSON`),
+    ping: new RegExp('.*?time=(\\S+)\\sms\\n')
+  }
+  const cm = store.conky.stream.match(regex.conky);
+  if (cm) {
+    store.conky.stream = '';
+    store.conky.data = cm[1];
+  }
+  const pm = store.ping.stream.match(regex.ping);
+  if (pm) {
+    store.ping.stream = '';
+    store.ping.data = pm[1];
   }
 };
 
-const conky = () => {
-  const conky = spawn('conky', ['-c', files.config]);
-  conky.stdout.on('data', async (data) => {
-    stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+
+const exec = (command, options, listener) => {
+  store[command].stream = '';
+  store[command].data = null;
+  const proc = spawn(command, options);
+  const timeout = setTimeout(() => {
+    proc.kill('SIGINT');
+  }, 5000);
+  proc.stdout.on('data', (data) => {
+    listener(data);
+    timeout.refresh();
   });
-};
+  proc.on('close', async () => {
+    clearTimeout(timeout);
+    await sleep(1000);
+    exec(command, options, listener);
+  });
+}
 
 const loop = async () => {
   while (true) {
     await sleep(500);
-    await pop();
+    await parse();
+    if (store.conky.data) {
+      await print(store.conky.data, store.ping.data);
+    }
   }
 };
 
-conky();
+exec('conky', ['-c', files.config], (data) => {
+  store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+});
+
+exec('ping', ['-i', 1, '161.53.160.11'], (data) => {
+  store.ping.stream += data.toString();
+});
+
 loop();
