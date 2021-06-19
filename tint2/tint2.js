@@ -55,18 +55,6 @@ const fixunits = (unit) => {
   return unit.replace('GiB', 'GB').replace('MiB', 'MB').replace('KiB', 'KB');
 };
 
-const pad = (value, length, unit) => {
-  if (value !== 0 && !value) {
-    return 'timeout';
-  }
-  const result =  parseFloat(value).toLocaleString('en', {
-    useGrouping: false,
-    minimumFractionDigits: length,
-    maximumFractionDigits: 10
-  });
-  return `${result} ${unit}`;
-};
-
 const print = async () => {
 
   const data = JSON.parse(store.conky.data);
@@ -74,9 +62,9 @@ const print = async () => {
 
   let text = '';
 
-  text += span(fonts.awesome,  8000, 100, oc(ms),            icons.ping,    `PIN: ${pad(ms,            2, 'ms')}`);
-  text += span(fonts.flaticon, 8000, 100, nc(data.net.down), icons.netdown, `DWL: ${pad(data.net.down, 2, 'KB')}`);
-  text += span(fonts.flaticon, 8000, 100, nc(data.net.up),   icons.netup,   `UPL: ${pad(data.net.up,   2, 'KB')}`);
+  text += span(fonts.awesome,  8000, 100, oc(ms),            icons.ping,    `PNG: ${ms ? `${ms} ms` : 'timeout'}`);
+  text += span(fonts.flaticon, 8000, 100, nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
+  text += span(fonts.flaticon, 8000, 100, nc(data.net.up),   icons.netup,   `UPL: ${data.net.up} KB`);
 
   text += span(fonts.awesome,  8000, 100, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
   text += span(fonts.awesome,  8000, 100, oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
