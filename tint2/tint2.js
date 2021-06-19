@@ -23,9 +23,9 @@ const fonts = {
 const icons = {
   netdown: '',
   netup: '',
-  ping: '',
-  cpu: '',
-  mem: '',
+  ping: '',
+  cpu: '',
+  mem: '',
   ssd: '',
   mmc: '',
   edd: '',
@@ -66,7 +66,7 @@ const print = async () => {
   text += span(fonts.flaticon, 8000, 100, nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
   text += span(fonts.flaticon, 8000, 100, nc(data.net.up),   icons.netup,   `UPL: ${data.net.up} KB`);
 
-  text += span(fonts.awesome,  8000, 100, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
+  text += span(fonts.awesome,  6000, 900, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
   text += span(fonts.awesome,  8000, 100, oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
 
   const disktext = (name) => `${name.toUpperCase()}: ${data[name] ? `${fixunits(data[name].used)} / ${fixunits(data[name].size)}` : 'not mounted'}`;
@@ -141,7 +141,7 @@ exec('conky', ['-c', files.config], (data) => {
   store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
 });
 
-exec('ping', ['-i', 1, '161.53.160.11'], (data) => {
+exec('ping', ['-i', 1, 'linode.aerium.hr'], (data) => {
   store.ping.stream += data.toString();
 });
 
