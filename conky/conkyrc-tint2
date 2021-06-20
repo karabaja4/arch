@@ -30,11 +30,11 @@ START_OF_JSON{
 		"ssd": null,
 	${endif}
 	
-	${if_mounted /home/igor/_linode}
+	${if_mounted /home/igor/_public}
 		"cls": {
-			"perc": "${fs_used_perc /home/igor/_linode}",
-			"used": "${fs_used /home/igor/_linode}",
-			"size": "${fs_size /home/igor/_linode}"
+			"perc": "${fs_used_perc /home/igor/_public}",
+			"used": "${fs_used /home/igor/_public}",
+			"size": "${fs_size /home/igor/_public}"
 		},
 	${else}
 		"cls": null,
