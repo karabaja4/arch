@@ -15,8 +15,6 @@ const colors = {
 
 const fonts = {
   awesome: 'Font Awesome 5 Free',
-  ionicons: 'Ionicons',
-  nerd: 'Symbols Nerd Font',
   flaticon: 'Flaticon'
 }
 
@@ -24,7 +22,7 @@ const icons = {
   netdown: '',
   netup: '',
   ping: '',
-  cpu: '',
+  cpu: '',
   mem: '',
   ssd: '',
   cls: '',
@@ -62,12 +60,12 @@ const print = async () => {
 
   let text = '';
 
-  text += span(fonts.flaticon, 7500, 100, nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
-  text += span(fonts.flaticon, 7500, 100, nc(data.net.up),   icons.netup,   `UPL: ${data.net.up} KB`);
-  text += span(fonts.awesome,  7500, 100, oc(ms),            icons.ping,    `PNG: ${ms ? `${ms} ms` : 'timeout'}`);
+  text += span(fonts.flaticon, 7500, 100,  nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
+  text += span(fonts.flaticon, 7500, 100,  nc(data.net.up),   icons.netup,   `UPL: ${data.net.up} KB`);
+  text += span(fonts.awesome,  7500, 100,  oc(ms),            icons.ping,    `PNG: ${ms ? `${ms} ms` : 'timeout'}`);
 
-  text += span(fonts.nerd,     7000, 100, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
-  text += span(fonts.flaticon, 7500, 100, oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
+  text += span(fonts.flaticon, 5000, 1000, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
+  text += span(fonts.flaticon, 7500, 100,  oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
 
   const disktext = (name) => `${name.toUpperCase()}: ${data[name] ? `${fixunits(data[name].used)} / ${fixunits(data[name].size)}` : 'not mounted'}`;
   const diskspan = (font, name, size) => span(font, size, 100, oc(data[name]?.perc), icons[name], disktext(name));
