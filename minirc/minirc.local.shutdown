@@ -1,6 +1,7 @@
 #!/bin/bash
 
-umount /home/igor/_pfs &> /dev/null
 umount /home/igor/_disk &> /dev/null
 umount /home/igor/_mmc &> /dev/null
+umount /home/igor/_private &> /dev/null
+umount /home/igor/_public &> /dev/null
 umount /mnt/* &> /dev/null
