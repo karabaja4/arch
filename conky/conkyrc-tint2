@@ -30,14 +30,14 @@ START_OF_JSON{
 		"ssd": null,
 	${endif}
 	
-	${if_mounted /home/igor/_mmc}
-		"mmc": {
-			"perc": "${fs_used_perc /home/igor/_mmc}",
-			"used": "${fs_used /home/igor/_mmc}",
-			"size": "${fs_size /home/igor/_mmc}"
+	${if_mounted /home/igor/_linode}
+		"cls": {
+			"perc": "${fs_used_perc /home/igor/_linode}",
+			"used": "${fs_used /home/igor/_linode}",
+			"size": "${fs_size /home/igor/_linode}"
 		},
 	${else}
-		"mmc": null,
+		"cls": null,
 	${endif}
 
 	${if_mounted /home/igor/_disk}

@@ -23,11 +23,11 @@ const fonts = {
 const icons = {
   netdown: '',
   netup: '',
-  ping: '',
-  cpu: '',
-  mem: '',
+  ping: '',
+  cpu: '',
+  mem: '',
   ssd: '',
-  mmc: '',
+  cls: '',
   edd: '',
   trenddown: '',
   trendup: '',
@@ -58,25 +58,25 @@ const fixunits = (unit) => {
 const print = async () => {
 
   const data = JSON.parse(store.conky.data);
-  const ms = parseFloat(store.ping.data);
+  const ms = parseInt(store.ping.data);
 
   let text = '';
 
-  text += span(fonts.awesome,  8000, 100, oc(ms),            icons.ping,    `PNG: ${ms ? `${ms} ms` : 'timeout'}`);
-  text += span(fonts.flaticon, 8000, 100, nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
-  text += span(fonts.flaticon, 8000, 100, nc(data.net.up),   icons.netup,   `UPL: ${data.net.up} KB`);
+  text += span(fonts.flaticon, 7500, 100, nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
+  text += span(fonts.flaticon, 7500, 100, nc(data.net.up),   icons.netup,   `UPL: ${data.net.up} KB`);
+  text += span(fonts.awesome,  7500, 100, oc(ms),            icons.ping,    `PNG: ${ms ? `${ms} ms` : 'timeout'}`);
 
-  text += span(fonts.awesome,  6000, 900, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
-  text += span(fonts.awesome,  8000, 100, oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
+  text += span(fonts.nerd,     7000, 100, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
+  text += span(fonts.flaticon, 7500, 100, oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
 
   const disktext = (name) => `${name.toUpperCase()}: ${data[name] ? `${fixunits(data[name].used)} / ${fixunits(data[name].size)}` : 'not mounted'}`;
-  const diskspan = (font, name) => span(font, 8000, 100, oc(data[name]?.perc), icons[name], disktext(name));
+  const diskspan = (font, name, size) => span(font, size, 100, oc(data[name]?.perc), icons[name], disktext(name));
 
-  text += diskspan(fonts.awesome, 'ssd');
-  text += diskspan(fonts.awesome, 'mmc');
-  text += diskspan(fonts.awesome, 'edd');
+  text += diskspan(fonts.awesome, 'ssd', 7500);
+  text += diskspan(fonts.awesome, 'cls', 7000);
+  text += diskspan(fonts.awesome, 'edd', 7500);
 
-  text += span(fonts.awesome, 8000, 100, colors.gray, icons.clock, `CLK: ${data.time}`).trimEnd();
+  text += span(fonts.awesome, 7500, 100, colors.gray, icons.clock, `CLK: ${data.time}`).trimEnd();
   console.log(text);
 };
 
