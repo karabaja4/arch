@@ -79,10 +79,14 @@ alias mountmmc="sudo mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_m
 alias ddiff="code -d"
 
 mountlinode() {
+    local -r public="/home/igor/_public/"
+    local -r private="/home/igor/_private/"
+    mkdir -p "${public}"
+    mkdir -p "${private}"
     local -r username="$(jq -crM '.linode.samba.username' "${HOME}/arch/secret.json")"
     local -r password="$(jq -crM '.linode.samba.password' "${HOME}/arch/secret.json")"
-    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //linode.aerium.hr/public /home/igor/_public/
-    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //linode.aerium.hr/private /home/igor/_private/
+    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //linode.aerium.hr/public "${public}"
+    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //linode.aerium.hr/private "${private}"
 }
 
 alias zxvf="tar zxvf"
