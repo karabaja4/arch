@@ -3,3 +3,4 @@ node_modules
 secret.json
 store.json
 package-lock.json
+id_rsa.pub
