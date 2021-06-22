@@ -1,6 +1,7 @@
 const util = require('util');
 const sleep = util.promisify(setTimeout);
 const { spawn } = require('child_process');
+const WebSocket = require('ws');
 
 const files = {
   config: '/home/igor/arch/conky/conkyrc-tint2'
@@ -84,28 +85,9 @@ let store = {
     data: null
   },
   ping: {
-    stream: '',
     data: null
   }
 }
-
-const parse = async () => {
-  const regex = {
-    conky: new RegExp(`START_OF_JSON(.*?)END_OF_JSON`),
-    ping: new RegExp('.*?time=(\\S+)\\sms\\n')
-  }
-  const cm = store.conky.stream.match(regex.conky);
-  if (cm) {
-    store.conky.stream = '';
-    store.conky.data = cm[1];
-  }
-  const pm = store.ping.stream.match(regex.ping);
-  if (pm) {
-    store.ping.stream = '';
-    store.ping.data = pm[1];
-  }
-};
-
 
 const exec = (command, options, listener) => {
   store[command].stream = '';
@@ -125,6 +107,39 @@ const exec = (command, options, listener) => {
   });
 }
 
+const connect = () => {
+  const ticks = () => process.hrtime.bigint().toString();
+  const ws = new WebSocket('wss://linode.aerium.hr/ping');
+  const timer = setTimeout(() => { ws.terminate(); }, 10000);
+  ws.on('open', () => {
+    setInterval(() => { ws.send(ticks()); }, 1000);
+  });
+  ws.on('message', (message) => {
+    timer.refresh();
+    const end = BigInt(ticks());
+    const start = BigInt(message);
+    const nano = end - start;
+    store.ping.data = parseFloat(nano) / (1000 * 1000);
+  });
+  ws.on('close', () => {
+    store.ping.data = null;
+    setTimeout(() => { connect(); }, 5000);
+  });
+}
+
+exec('conky', ['-c', files.config], (data) => {
+  store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+});
+
+const parse = async () => {
+  const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
+  const match = store.conky.stream.match(regex);
+  if (match) {
+    store.conky.stream = '';
+    store.conky.data = match[1];
+  }
+};
+
 const loop = async () => {
   while (true) {
     await sleep(500);
@@ -135,12 +150,5 @@ const loop = async () => {
   }
 };
 
-exec('conky', ['-c', files.config], (data) => {
-  store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
-});
-
-exec('ping', ['-i', 1, 'linode.aerium.hr'], (data) => {
-  store.ping.stream += data.toString();
-});
-
+connect();
 loop();
