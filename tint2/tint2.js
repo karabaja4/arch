@@ -1,11 +1,5 @@
-const util = require('util');
-const sleep = util.promisify(setTimeout);
 const { spawn } = require('child_process');
 const WebSocket = require('ws');
-
-const files = {
-  config: '/home/igor/arch/conky/conkyrc-tint2'
-}
 
 const colors = {
   gray: '#757575',
@@ -54,10 +48,10 @@ const fixunits = (unit) => {
   return unit.replace('GiB', 'GB').replace('MiB', 'MB').replace('KiB', 'KB');
 };
 
-const print = async () => {
+const print = () => {
 
-  const data = JSON.parse(store.conky.data);
-  const ms = parseInt(store.ping.data);
+  const data = store.conky.data && JSON.parse(store.conky.data);
+  const ms = store.ping.data && parseInt(store.ping.data);
 
   let text = '';
 
@@ -79,7 +73,7 @@ const print = async () => {
   console.log(text);
 };
 
-let store = {
+const store = {
   conky: {
     stream: '',
     data: null
@@ -89,66 +83,58 @@ let store = {
   }
 }
 
-const exec = (command, options, listener) => {
-  store[command].stream = '';
-  store[command].data = null;
-  const proc = spawn(command, options);
-  const timeout = setTimeout(() => {
-    proc.kill('SIGINT');
-  }, 5000);
+const conky = () => {
+
+  const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
+  const timeout = setTimeout(() => { proc.kill('SIGINT'); }, 5000);
+  const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
+
   proc.stdout.on('data', (data) => {
-    listener(data);
     timeout.refresh();
+    store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+    const match = store.conky.stream.match(regex);
+    if (match) {
+      store.conky.stream = '';
+      store.conky.data = match[1];
+      print();
+    }
   });
-  proc.on('close', async () => {
+
+  proc.on('close', () => {
     clearTimeout(timeout);
-    await sleep(1000);
-    exec(command, options, listener);
+    store.conky.stream = '';
+    store.conky.data = null;
+    console.log('conky crashed');
+    setTimeout(() => { conky(); }, 5000);
   });
+
 }
 
-const connect = () => {
+const ping = () => {
+
   const ticks = () => process.hrtime.bigint().toString();
   const ws = new WebSocket('wss://linode.aerium.hr/ping');
-  const timer = setTimeout(() => { ws.terminate(); }, 10000);
+  const timeout = setTimeout(() => { ws.terminate(); }, 5000);
+
   ws.on('open', () => {
     setInterval(() => { ws.send(ticks()); }, 1000);
   });
+
   ws.on('message', (message) => {
-    timer.refresh();
+    timeout.refresh();
     const end = BigInt(ticks());
     const start = BigInt(message);
     const nano = end - start;
     store.ping.data = parseFloat(nano) / (1000 * 1000);
   });
+
   ws.on('close', () => {
+    clearTimeout(timeout);
     store.ping.data = null;
-    setTimeout(() => { connect(); }, 5000);
+    setTimeout(() => { ping(); }, 5000);
   });
+  
 }
 
-exec('conky', ['-c', files.config], (data) => {
-  store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
-});
-
-const parse = async () => {
-  const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
-  const match = store.conky.stream.match(regex);
-  if (match) {
-    store.conky.stream = '';
-    store.conky.data = match[1];
-  }
-};
-
-const loop = async () => {
-  while (true) {
-    await sleep(500);
-    await parse();
-    if (store.conky.data) {
-      await print(store.conky.data, store.ping.data);
-    }
-  }
-};
-
-connect();
-loop();
+conky();
+ping();
