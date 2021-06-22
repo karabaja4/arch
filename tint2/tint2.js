@@ -108,7 +108,7 @@ const ping = () => {
 
   const ticks = () => process.hrtime.bigint().toString();
   const ws = new WebSocket('wss://linode.aerium.hr/ping');
-  const timeout = setTimeout(() => { ws.terminate(); }, 10000);
+  const timeout = setTimeout(() => { ws.terminate(); }, 5000);
 
   ws.on('open', () => {
     setInterval(() => { ws.send(ticks()); }, 1000);
@@ -139,7 +139,7 @@ ping();
 
 setInterval(() => {
   print();
-}, 500);
+}, 1000);
 
 // notes:
 // printing needs to happen in a separate loop, because conky stdout blocks
