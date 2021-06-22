@@ -94,14 +94,12 @@ const conky = () => {
     if (match) {
       store.conky.stream = '';
       store.conky.data = match[1];
-      print();
     }
   });
 
   proc.on('close', () => {
     store.conky.stream = '';
     store.conky.data = null;
-    console.log('conky crashed');
   });
 
 }
@@ -138,3 +136,11 @@ const ping = () => {
 
 conky();
 ping();
+
+setInterval(() => {
+  print();
+}, 500);
+
+// notes:
+// printing needs to happen in a separate loop, because conky stdout blocks
+// when the internet connection is broken, because of mounted internet shares
