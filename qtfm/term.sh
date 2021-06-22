@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 _temp="$(printf '%s\n' "${@}")"
 export _temp
