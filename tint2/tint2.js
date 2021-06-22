@@ -86,11 +86,9 @@ const store = {
 const conky = () => {
 
   const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
-  const timeout = setTimeout(() => { proc.kill('SIGINT'); }, 5000);
   const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
 
   proc.stdout.on('data', (data) => {
-    timeout.refresh();
     store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
     const match = store.conky.stream.match(regex);
     if (match) {
@@ -101,11 +99,9 @@ const conky = () => {
   });
 
   proc.on('close', () => {
-    clearTimeout(timeout);
     store.conky.stream = '';
     store.conky.data = null;
     console.log('conky crashed');
-    setTimeout(() => { conky(); }, 5000);
   });
 
 }
