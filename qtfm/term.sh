@@ -36,8 +36,8 @@ _exec() {
         zip -r "${2}.zip" "${@:3}"
         ;;
     unmount)
-        sudo umount "/mnt/*" || echo "umount failed"
-        sudo rm -vrf "/mnt/*" || echo "rm failed"
+        sudo umount -v /mnt/* || echo "umount failed"
+        sudo rm -vrf /mnt/* || echo "rm failed"
         ;;
     esac
 
