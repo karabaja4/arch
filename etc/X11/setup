@@ -1,8 +1,0 @@
-/etc/X11 >> ls
-total 16K
-lrwxrwxrwx 1 root   41 Jun 22 23:14 nvidia-xorg.conf.d -> /home/igor/arch/nvidia/nvidia-xorg.conf.d
-drwxr-xr-x 2 root 4.0K Nov 25  2020 tigervnc
-drwxr-xr-x 3 root 4.0K Jun 12 21:00 xinit
-drwxr-xr-x 2 root 4.0K Apr 16 01:14 xorg.conf.d
--rw-r--r-- 1 root   48 Apr  3  2019 Xwrapper.config
-lrwxrwxrwx 1 root   39 Jun 22 23:14 nvidia-xorg.conf -> /home/igor/arch/nvidia/nvidia-xorg.conf
