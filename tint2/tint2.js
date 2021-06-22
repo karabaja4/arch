@@ -114,7 +114,7 @@ const ping = () => {
 
   const ticks = () => process.hrtime.bigint().toString();
   const ws = new WebSocket('wss://linode.aerium.hr/ping');
-  const timeout = setTimeout(() => { ws.terminate(); }, 5000);
+  const timeout = setTimeout(() => { ws.terminate(); }, 10000);
 
   ws.on('open', () => {
     setInterval(() => { ws.send(ticks()); }, 1000);
@@ -126,6 +126,10 @@ const ping = () => {
     const start = BigInt(message);
     const nano = end - start;
     store.ping.data = parseFloat(nano) / (1000 * 1000);
+  });
+
+  ws.on('error', () => {
+    // empty handler because otherwise ws crashes
   });
 
   ws.on('close', () => {
