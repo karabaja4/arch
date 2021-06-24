@@ -9,8 +9,8 @@ const colors = {
 };
 
 const fonts = {
-  awesome: 'Font Awesome 5 Free',
-  flaticon: 'Flaticon'
+  awesome: 'Font Awesome 5 Free', // ttf-font-awesome
+  flaticon: 'Flaticon'            // ln -s /home/igor/arch/conky/openlogos.ttf /usr/share/fonts/openlogos.ttf
 }
 
 const icons = {
