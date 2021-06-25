@@ -9,32 +9,30 @@ _exec() {
     [ -z "${_temp}" ] && exit 1
     local -a _params
     mapfile -t _params <<< "${_temp}"
-    set -- "${_params[@]}"
 
-    local -i _idx=0
-    for p in "${_params[@]}"
-    do
-        printf '\033[32m%s\033[0m\n' "$(( ++_idx )): ${p}"
+
+    for i in "${!_params[@]}"; do 
+        printf '\033[32m%s\033[0m\n' "${i}: ${_params[${i}]}"
     done
 
-    case "${1}" in
+    case "${_params[0]}" in
     rm)
-        rm -vrf "${@:2}"
+        rm -vrf "${_params[@]:1}"
         ;;
     extract)
-        tar xvf "${2}"
+        tar xvf "${_params[1]}"
         ;;
     unzip)
-        unzip -o "${2}"
+        unzip -o "${_params[1]}"
         ;;
     unrar)
-        unrar x "${2}"
+        unrar x "${_params[1]}"
         ;;
     gzip)
-        tar cvzf "${2}.tar.gz" "${@:3}"
+        tar cvzf "${_params[1]}.tar.gz" "${_params[@]:2}"
         ;;
     zip)
-        zip -r "${2}.zip" "${@:3}"
+        zip -vr "${_params[1]}.zip" "${_params[@]:2}"
         ;;
     unmount)
         sudo umount -v /mnt/* || echo "umount failed"
