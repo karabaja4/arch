@@ -12,7 +12,6 @@ conky.config = {
 	own_window_transparent = true,
 	color0 = '#f2f2f2',
 	color1 = '#64B5F6',
-	color2 = '#ef9a9a',
 	lua_load = '/home/igor/arch/conky/updates.lua'
 };
 
@@ -20,6 +19,6 @@ conky.text = [[
 ${alignr} ${color1} ${font openlogos:size=28}B${font}
 ${alignr} ${color0} home.aerium.hr (${nodename})
 ${alignr} Kernel: ${kernel}
-${alignr} Available Updates: ${if_match ${lua conky_pacman 300} > 20}${color2}${endif}${lua conky_pacman 300}${color0} (${lua conky_aur 300})
+${alignr} Available Updates: ${lua conky_pacman 300} (${lua conky_aur 300})
 ${alignr} Uptime: $uptime
 ]];
