@@ -10,7 +10,8 @@ _exec() {
     local -a _params
     mapfile -t _params <<< "${_temp}"
 
-    for i in "${!_params[@]}"; do 
+    for i in "${!_params[@]}"
+    do 
         printf '\033[32m%s\033[0m\n' "${i}: ${_params[${i}]}"
     done
 
