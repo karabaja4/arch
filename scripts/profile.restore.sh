@@ -15,7 +15,7 @@ chown "${_user}:${_user}" "${_tmp_config}"
 chown "${_user}:${_user}" "${_tmp_cache}"
 
 rm -rf "${_user_cache}"
-ln -sf "${_tmp_cache}" "${_user_cache}"
+ln -s "${_tmp_cache}" "${_user_cache}"
 chown -h "${_user}:${_user}" "${_user_cache}"
 
 _link_config_dir() {
@@ -24,7 +24,7 @@ _link_config_dir() {
     chown "${_user}:${_user}" "${_tmp_config}/${1}"
     # link temp config dir to user config dir
     rm -rf "${_user_config:?}/${1}"
-    ln -sf "${_tmp_config}/${1}" "${_user_config}/${1}"
+    ln -s "${_tmp_config}/${1}" "${_user_config}/${1}"
     chown -h "${_user}:${_user}" "${_user_config}/${1}"
 }
 
