@@ -8,30 +8,34 @@ mkdir -m 1777 /tmp/.X11-unix
 install -m 700 -g igor -o igor -d /tmp/runtime-igor
 printf '%s' "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
+install -m 755 -g igor -o igor -d /tmp/config
 
 # insane apps get their own sandbox
 tmp_config() {
-    rm -vrf "/home/igor/.config/${1}"
-    install -v -m 755 -g igor -o igor -d "/tmp/config/${1}"
-    ln -vsf "/tmp/config/${1}" "/home/igor/.config/${1}"
+    rm -rf "/home/igor/.config/${1}"
+    install -m 755 -g igor -o igor -d "/tmp/config/${1}"
+    ln -sf "/tmp/config/${1}" "/home/igor/.config/${1}"
 }
 
+# persistant
+tmp_config "chromium"
+tmp_config "Code"
+
+# non-persistant
 tmp_config "Slack"
 tmp_config "Microsoft"
 tmp_config "discord"
 tmp_config "Microsoft Teams - Preview"
 tmp_config "teams"
 tmp_config "azuredatastudio"
-tmp_config "Code"
 tmp_config "Postman"
-tmp_config "chromium"
 
-# restore vscode settings
-install -v -m 755 -g igor -o igor -d "/tmp/config/Code/User"
-ln -s /home/igor/arch/vscode/settings.json /tmp/config/Code/User/settings.json
-ln -s /home/igor/arch/vscode/keybindings.json /tmp/config/Code/User/keybindings.json
+profile_restore() {
+    tar xf "/home/igor/.config/${1}.tar" -C /tmp/config/
+}
 
 # restore profiles
 printf '%s\n' "Restoring profiles"
-tar xf /home/igor/.config/chromium.tar -C /tmp/config/
+profile_restore "chromium"
+profile_restore "Code"
 printf '%s\n' "done"

@@ -6,7 +6,12 @@ umount /home/igor/_private > /dev/null 2>&1
 umount /home/igor/_public > /dev/null 2>&1
 umount /mnt/* > /dev/null 2>&1
 
+profile_backup() {
+    tar cf "/home/igor/.config/${1}.tar" -C /tmp/config/ "${1}" || rm "/home/igor/.config/${1}.tar"
+}
+
 # backup profiles
 printf '%s\n' "Backing up profiles"
-tar cf /home/igor/.config/chromium.tar -C /tmp/config/ chromium
+profile_backup "chromium"
+profile_backup "Code"
 printf '%s\n' "done"
