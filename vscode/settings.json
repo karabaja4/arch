@@ -90,5 +90,7 @@
     "files.hotExit": "off",
     "files.enableTrash": false,
     "github.gitAuthentication": false,
-    "editor.semanticHighlighting.enabled": true
+    "editor.semanticHighlighting.enabled": true,
+    "git.autofetch": false,
+    "gitlens.showWelcomeOnInstall": false
 }
