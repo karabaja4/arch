@@ -2,42 +2,55 @@
 
 _user="igor"
 
-printf '%s' "0" > /proc/sys/kernel/printk
+printf "0" > /proc/sys/kernel/printk
 touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p /run/dbus
 mkdir -m 1777 /tmp/.X11-unix
 install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/runtime-${_user}"
-printf '%s' "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+printf "\n"
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
-install -m 755 -g "${_user}" -o "${_user}" -d "/tmp/config-${_user}"
 
-# insane apps get their own sandbox
-_tmp_config() {
-    rm -rf "/home/igor/.config/${1}"
-    install -m 755 -g igor -o igor -d "/tmp/config-${_user}/${1}"
-    ln -sf "/tmp/config-${_user}/${1}" "/home/igor/.config/${1}"
+# create config dir for user
+_tmp_config="/tmp/config-${_user}"
+mkdir "${_tmp_config}"
+chown "${_user}:${_user}" "${_tmp_config}"
+
+# user config dir
+_usr_config="/home/${_user}/.config"
+
+_link_tmp_config() {
+    # create temp config dir
+    mkdir "${_tmp_config}/${1}"
+    chown "${_user}:${_user}" "${_tmp_config}/${1}"
+    # link temp config dir to user config dir
+    rm -rf "${_usr_config:?}/${1}"
+    ln -sf "${_tmp_config}/${1}" "${_usr_config}/${1}"
+    chown -h "${_user}:${_user}" "${_usr_config}/${1}"
 }
 
 # non-persistant
-_tmp_config "Slack"
-_tmp_config "Microsoft"
-_tmp_config "Microsoft Teams - Preview"
-_tmp_config "teams"
-_tmp_config "Postman"
+_link_tmp_config "Slack"
+_link_tmp_config "Microsoft"
+_link_tmp_config "Microsoft Teams - Preview"
+_link_tmp_config "teams"
+_link_tmp_config "Postman"
 
 # persistant
-_tmp_config "chromium"
-_tmp_config "Code"
-_tmp_config "azuredatastudio"
-_tmp_config "discord"
+_link_tmp_config "chromium"
+_link_tmp_config "Code"
+_link_tmp_config "azuredatastudio"
+_link_tmp_config "discord"
 
 _restore_profile() {
-    tar xf "/home/${_user}/.config/${1}.tar" -C "/tmp/config-${_user}/"
+    # ${1} -> tar name
+    printf '%s\n' "Restoring ${_usr_config}/${1}.tar"
+    tar xf "${_usr_config}/${1}.tar" -C "${_tmp_config}"
 }
 
 # restore profiles
-printf '%s' "Restoring profiles..."
+printf '%s\n' "Restoring profiles..."
 _restore_profile "chromium"
 _restore_profile "Code"
 _restore_profile "azuredatastudio"
