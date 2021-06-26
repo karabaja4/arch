@@ -9,12 +9,15 @@ _user_config="/home/${_user}/.config"
 # ${2} -> directory
 _profile_backup() {
     /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${1}" 2>/dev/null
-    if [ -d "${_tmp_config}/${2}" ] && [ -n "$(ls -A "${_tmp_config}/${2}")" ]
+    _dir="${_tmp_config}/${2}"
+    if [ -d "${_dir}" ] && [ -n "$(ls -A "${_dir}")" ]
     then
         _tar="${_user_config}/${2}.tar"
         printf '%s\n' "Backing up to ${_tar}"
         tar cf "${_tar}" -C "${_tmp_config}" "${2}"
         chown "${_user}:${_user}" "${_tar}"
+    else
+        printf '%s\n' "${_dir} is empty or does not exist"
     fi
 }
 
