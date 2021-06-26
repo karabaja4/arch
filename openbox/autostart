@@ -30,7 +30,7 @@ _desktop() {
 
     # resolution and background
     "${HOME}/arch/scripts/fixres.sh"
-    feh --bg-scale "${HOME}/arch/wall/default.jpg"
+    feh --no-fehbg --bg-scale "${HOME}/arch/wall/default.jpg"
 
     # conky tint2
     conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
