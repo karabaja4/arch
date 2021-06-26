@@ -15,7 +15,7 @@ _profile_backup() (
     _tar="/home/${_user}/.config/${2}.tar"
     printf '%s\n' "Backing up ${2} to ${_tar}"
     tar cf "${_tar}" -C "/tmp/config-${_user}/" "${2}" || rm "${_tar}"
-    [ -e "${_tar}" ] && chown "${_user}:${_user}" "${_tar}"
+    [ -f "${_tar}" ] && chown "${_user}:${_user}" "${_tar}"
 )
 
 # backup profiles
