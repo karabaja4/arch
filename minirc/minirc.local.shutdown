@@ -1,6 +1,6 @@
 #!/bin/sh
 
-_user="igor"
+_user="$(id -un 1000)"
 
 umount "/home/${_user}/_disk" > /dev/null 2>&1
 umount "/home/${_user}/_mmc" > /dev/null 2>&1
@@ -24,9 +24,7 @@ _profile_backup() {
 }
 
 # backup profiles
-printf '%s\n' "Backing up profiles... "
 _profile_backup "chromium" "chromium"
 _profile_backup "code" "Code"
 _profile_backup "azuredatastudio" "azuredatastudio"
 _profile_backup "Discord" "discord"
-printf '%s\n' "done"

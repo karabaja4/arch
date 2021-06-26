@@ -1,6 +1,6 @@
 #!/bin/sh
 
-_user="igor"
+_user="$(id -un 1000)"
 
 printf "0" > /proc/sys/kernel/printk
 touch /var/run/utmp
@@ -12,25 +12,23 @@ printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 printf "\n"
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 
-# map .cache to tmp
+_tmp_config="/tmp/config-${_user}"
 _tmp_cache="/tmp/cache-${_user}"
+
+_usr_config="/home/${_user}/.config"
+_usr_cache="/home/${_user}/.cache"
+
+mkdir "${_tmp_config}"
 mkdir "${_tmp_cache}"
+
+chown "${_user}:${_user}" "${_tmp_config}"
 chown "${_user}:${_user}" "${_tmp_cache}"
 
-_usr_cache="/home/${_user}/.cache"
 rm -rf "${_usr_cache}"
 ln -sf "${_tmp_cache}" "${_usr_cache}"
 chown -h "${_user}:${_user}" "${_usr_cache}"
 
-# create config dir for user
-_tmp_config="/tmp/config-${_user}"
-mkdir "${_tmp_config}"
-chown "${_user}:${_user}" "${_tmp_config}"
-
-# user config dir
-_usr_config="/home/${_user}/.config"
-
-_link_tmp_config() {
+_link_config_dir() {
     # create temp config dir
     mkdir "${_tmp_config}/${1}"
     chown "${_user}:${_user}" "${_tmp_config}/${1}"
@@ -41,17 +39,17 @@ _link_tmp_config() {
 }
 
 # non-persistant
-_link_tmp_config "Slack"
-_link_tmp_config "Microsoft"
-_link_tmp_config "Microsoft Teams - Preview"
-_link_tmp_config "teams"
-_link_tmp_config "Postman"
+_link_config_dir "Slack"
+_link_config_dir "Microsoft"
+_link_config_dir "Microsoft Teams - Preview"
+_link_config_dir "teams"
+_link_config_dir "Postman"
 
 # persistant
-_link_tmp_config "chromium"
-_link_tmp_config "Code"
-_link_tmp_config "azuredatastudio"
-_link_tmp_config "discord"
+_link_config_dir "chromium"
+_link_config_dir "Code"
+_link_config_dir "azuredatastudio"
+_link_config_dir "discord"
 
 _restore_profile() {
     # ${1} -> tar name
@@ -60,9 +58,8 @@ _restore_profile() {
 }
 
 # restore profiles
-printf '%s\n' "Restoring profiles..."
 _restore_profile "chromium"
 _restore_profile "Code"
 _restore_profile "azuredatastudio"
 _restore_profile "discord"
-printf '%s\n' "done"
+
