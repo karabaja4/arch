@@ -12,6 +12,16 @@ printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 printf "\n"
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 
+# map .cache to tmp
+_tmp_cache="/tmp/cache-${_user}"
+mkdir "${_tmp_cache}"
+chown "${_user}:${_user}" "${_tmp_cache}"
+
+_usr_cache="/home/${_user}/.cache"
+rm -rf "${_usr_cache}"
+ln -sf "${_tmp_cache}" "${_usr_cache}"
+chown -h "${_user}:${_user}" "${_usr_cache}"
+
 # create config dir for user
 _tmp_config="/tmp/config-${_user}"
 mkdir "${_tmp_config}"
