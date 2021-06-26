@@ -1,41 +1,45 @@
 #!/bin/sh
 
+_user="igor"
+
 printf '%s' "0" > /proc/sys/kernel/printk
 touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p /run/dbus
 mkdir -m 1777 /tmp/.X11-unix
-install -m 700 -g igor -o igor -d /tmp/runtime-igor
+install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/runtime-${_user}"
 printf '%s' "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
-install -m 755 -g igor -o igor -d /tmp/config
+install -m 755 -g "${_user}" -o "${_user}" -d "/tmp/config-${_user}"
 
 # insane apps get their own sandbox
-tmp_config() {
+_tmp_config() {
     rm -rf "/home/igor/.config/${1}"
-    install -m 755 -g igor -o igor -d "/tmp/config/${1}"
-    ln -sf "/tmp/config/${1}" "/home/igor/.config/${1}"
+    install -m 755 -g igor -o igor -d "/tmp/config-${_user}/${1}"
+    ln -sf "/tmp/config-${_user}/${1}" "/home/igor/.config/${1}"
 }
 
-# persistant
-tmp_config "chromium"
-tmp_config "Code"
+_restore_profile() {
+    tar xf "/home/${_user}/.config/${1}.tar" -C "/tmp/config-${_user}/"
+}
 
 # non-persistant
-tmp_config "Slack"
-tmp_config "Microsoft"
-tmp_config "discord"
-tmp_config "Microsoft Teams - Preview"
-tmp_config "teams"
-tmp_config "azuredatastudio"
-tmp_config "Postman"
+_tmp_config "Slack"
+_tmp_config "Microsoft"
+_tmp_config "Microsoft Teams - Preview"
+_tmp_config "teams"
+_tmp_config "Postman"
 
-profile_restore() {
-    tar xf "/home/igor/.config/${1}.tar" -C /tmp/config/
-}
+# persistant
+_tmp_config "chromium"
+_tmp_config "Code"
+_tmp_config "azuredatastudio"
+_tmp_config "discord"
 
 # restore profiles
-printf '%s\n' "Restoring profiles"
-profile_restore "chromium"
-profile_restore "Code"
+printf '%s' "Restoring profiles..."
+_restore_profile "chromium"
+_restore_profile "Code"
+_restore_profile "azuredatastudio"
+_restore_profile "discord"
 printf '%s\n' "done"

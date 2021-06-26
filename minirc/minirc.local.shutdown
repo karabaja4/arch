@@ -1,17 +1,24 @@
 #!/bin/sh
 
-umount /home/igor/_disk > /dev/null 2>&1
-umount /home/igor/_mmc > /dev/null 2>&1
-umount /home/igor/_private > /dev/null 2>&1
-umount /home/igor/_public > /dev/null 2>&1
+_user="igor"
+
+umount "/home/${_user}/_disk" > /dev/null 2>&1
+umount "/home/${_user}/_mmc" > /dev/null 2>&1
+umount "/home/${_user}/_private" > /dev/null 2>&1
+umount "/home/${_user}/_public" > /dev/null 2>&1
 umount /mnt/* > /dev/null 2>&1
 
-profile_backup() {
-    tar cf "/home/igor/.config/${1}.tar" -C /tmp/config/ "${1}" || rm "/home/igor/.config/${1}.tar"
+_profile_backup() {
+    # ${1} -> process
+    # ${2} -> directory
+    /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${1}"
+    tar cf "/home/${_user}/.config/${2}.tar" -C "/tmp/config-${_user}/" "${2}" || rm "/home/${_user}/.config/${2}.tar"
 }
 
 # backup profiles
-printf '%s\n' "Backing up profiles"
-profile_backup "chromium"
-profile_backup "Code"
+printf '%s' "Backing up profiles... "
+_profile_backup "chromium" "chromium"
+_profile_backup "code" "Code"
+_profile_backup "azuredatastudio" "azuredatastudio"
+_profile_backup "Discord" "discord"
 printf '%s\n' "done"
