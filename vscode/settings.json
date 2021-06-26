@@ -29,6 +29,7 @@
     "editor.minimap.enabled": false,
     "git.enableSmartCommit": true,
     "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
     "workbench.colorTheme": "Default Light+",
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": true,

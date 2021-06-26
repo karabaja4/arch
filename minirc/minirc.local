@@ -1,12 +1,12 @@
 #!/bin/sh
 
-echo 0 > /proc/sys/kernel/printk
+printf '%s' "0" > /proc/sys/kernel/printk
 touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p /run/dbus
 mkdir -m 1777 /tmp/.X11-unix
 install -m 700 -g igor -o igor -d /tmp/runtime-igor
-echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+printf '%s' "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 
 # insane apps get their own sandbox
@@ -31,5 +31,7 @@ install -v -m 755 -g igor -o igor -d "/tmp/config/Code/User"
 ln -s /home/igor/arch/vscode/settings.json /tmp/config/Code/User/settings.json
 ln -s /home/igor/arch/vscode/keybindings.json /tmp/config/Code/User/keybindings.json
 
-# restore chromium profile
-tar zxvf /home/igor/.config/chromium.tar.gz -C /tmp/config/
+# restore profiles
+printf '%s\n' "Restoring profiles"
+tar xf /home/igor/.config/chromium.tar -C /tmp/config/
+printf '%s\n' "done"
