@@ -23,6 +23,7 @@ tmp_config "Microsoft Teams - Preview"
 tmp_config "teams"
 tmp_config "azuredatastudio"
 tmp_config "Code"
+tmp_config "Postman"
 
 # restore vscode settings
 install -v -m 755 -g igor -o igor -d "/tmp/config/Code/User"
