@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 rm -vrf "${HOME}/.nuget"
 rm -vrf "${HOME}/.local/share/NuGet"
