@@ -7,7 +7,7 @@ alias chx='chmod +x'
 alias permof='stat --printf "%n - %a\n"'
 alias sizeof='du -sh'
 alias grep='grep --color'
-#alias df='df -h -T --total'
+alias df='df -h -T --total'
 alias c='clear'
 alias x='exit'
 
@@ -104,6 +104,7 @@ export NO_AT_BRIDGE=1
 export XDG_RUNTIME_DIR="/tmp/runtime-igor"
 export EDITOR=nano
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
+export LESSHISTFILE=/dev/null
 
 # shellcheck disable=SC1091
 source /usr/share/git/completion/git-prompt.sh
