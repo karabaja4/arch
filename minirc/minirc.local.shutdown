@@ -14,7 +14,7 @@ _usr_config="/home/${_user}/.config"
 _profile_backup() {
     # ${1} -> process
     # ${2} -> directory
-    /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${1}"
+    /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${1}" 2>/dev/null
     if [ -n "$(ls -A "${_tmp_config}/${2}")" ]
     then
         printf '%s\n' "Backing up to ${_usr_config}/${2}.tar"
