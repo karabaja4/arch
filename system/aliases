@@ -77,6 +77,7 @@ alias snd='/home/igor/arch/scripts/sound.sh'
 alias mountdisk="sudo mount -t ext4 -U 23147c37-efb6-4837-83aa-87808c70b87a /home/igor/_disk/"
 alias mountmmc="sudo mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_mmc/"
 alias ddiff="code -d"
+alias wget="wget --no-hsts"
 
 mountlinode() {
     local -r public="/home/igor/_public/"
