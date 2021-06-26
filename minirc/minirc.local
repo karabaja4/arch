@@ -19,10 +19,6 @@ _tmp_config() {
     ln -sf "/tmp/config-${_user}/${1}" "/home/igor/.config/${1}"
 }
 
-_restore_profile() {
-    tar xf "/home/${_user}/.config/${1}.tar" -C "/tmp/config-${_user}/"
-}
-
 # non-persistant
 _tmp_config "Slack"
 _tmp_config "Microsoft"
@@ -35,6 +31,10 @@ _tmp_config "chromium"
 _tmp_config "Code"
 _tmp_config "azuredatastudio"
 _tmp_config "discord"
+
+_restore_profile() {
+    tar xf "/home/${_user}/.config/${1}.tar" -C "/tmp/config-${_user}/"
+}
 
 # restore profiles
 printf '%s' "Restoring profiles..."
