@@ -5,3 +5,6 @@ umount /home/igor/_mmc > /dev/null 2>&1
 umount /home/igor/_private > /dev/null 2>&1
 umount /home/igor/_public > /dev/null 2>&1
 umount /mnt/* > /dev/null 2>&1
+
+# backup chromium profile
+tar cvzf /home/igor/.config/chromium.tar.gz -C /home/igor/.config/ chromium

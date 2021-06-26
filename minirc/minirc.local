@@ -24,8 +24,12 @@ tmp_config "teams"
 tmp_config "azuredatastudio"
 tmp_config "Code"
 tmp_config "Postman"
+tmp_config "chromium"
 
 # restore vscode settings
 install -v -m 755 -g igor -o igor -d "/tmp/config/Code/User"
 ln -s /home/igor/arch/vscode/settings.json /tmp/config/Code/User/settings.json
 ln -s /home/igor/arch/vscode/keybindings.json /tmp/config/Code/User/keybindings.json
+
+# restore chromium profile
+tar zxvf /home/igor/.config/chromium.tar.gz -C /tmp/config/
