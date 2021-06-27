@@ -1,8 +1,13 @@
 #!/bin/sh
 
-printf '%s\n' "Profile suspend ($(id -un))"
+if [ "$(id -u)" -eq 0 ]
+then
+    printf '%s\n' "This script needs to be run as a non-root user."
+    exit 1
+fi
 
-_user="$(id -un 1000)"
+_user="$(id -un)"
+printf '%s\n' "Suspending profile (${_user})"
 
 _tmp_config="/tmp/config-${_user}"
 _user_config="/home/${_user}/.config"
