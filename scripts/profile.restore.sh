@@ -1,5 +1,7 @@
 #!/bin/sh
 
+printf '%s\n' "Profile restore ($(id -un))"
+
 _user="$(id -un 1000)"
 
 _tmp_config="/tmp/config-${_user}"
