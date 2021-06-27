@@ -56,7 +56,6 @@
     "breadcrumbs.enabled": false,
     "msbuildProjectTools.nuget.newestVersionsFirst": true,
     "explorer.confirmDelete": false,
-    "omnisharp.loggingLevel": "critical",
     "msbuildProjectTools.logging.level": "Error",
     "omnisharp.disableMSBuildDiagnosticWarning": true,
     "razor.disabled": true,
@@ -93,5 +92,7 @@
     "github.gitAuthentication": false,
     "editor.semanticHighlighting.enabled": true,
     "git.autofetch": false,
-    "gitlens.showWelcomeOnInstall": false
+    "gitlens.showWelcomeOnInstall": false,
+    "omnisharp.loggingLevel": "information",
+    "omnisharp.useGlobalMono": "never"
 }
