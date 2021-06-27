@@ -14,12 +14,8 @@ rm -rf "${_tmp_cache}"
 mkdir "${_tmp_config}"
 mkdir "${_tmp_cache}"
 
-chown "${_user}:${_user}" "${_tmp_config}"
-chown "${_user}:${_user}" "${_tmp_cache}"
-
 rm -rf "${_user_cache}"
 ln -sn "${_tmp_cache}" "${_user_cache}"
-chown -h "${_user}:${_user}" "${_user_cache}"
 
 _link_config_dir() {
     
@@ -27,11 +23,8 @@ _link_config_dir() {
     _user_child="${_user_config}/${1}"
 
     mkdir "${_tmp_child}"
-    chown "${_user}:${_user}" "${_tmp_child}"
-
     rm -rf "${_user_child}"
     ln -sn "${_tmp_child}" "${_user_child}"
-    chown -h "${_user}:${_user}" "${_user_child}"
 }
 
 # non-persistant

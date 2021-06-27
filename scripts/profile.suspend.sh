@@ -15,7 +15,6 @@ _profile_backup() {
         _tar="${_user_config}/${2}.tar"
         printf '%s\n' "Backing up to ${_tar}"
         tar cf "${_tar}" -C "${_tmp_config}" "${2}"
-        chown "${_user}:${_user}" "${_tar}"
     else
         printf '%s\n' "${_dir} is empty or does not exist"
     fi
