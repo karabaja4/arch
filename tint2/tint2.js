@@ -53,6 +53,10 @@ const print = () => {
   const data = store.conky.data && JSON.parse(store.conky.data);
   const ms = store.ping.data && parseInt(store.ping.data);
 
+  if (!data) {
+    return;
+  }
+
   let text = '';
 
   text += span(fonts.flaticon, 7500, 100,  nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
