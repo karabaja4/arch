@@ -93,6 +93,6 @@
     "editor.semanticHighlighting.enabled": true,
     "git.autofetch": false,
     "gitlens.showWelcomeOnInstall": false,
-    "omnisharp.loggingLevel": "information",
+    "omnisharp.loggingLevel": "critical",
     "omnisharp.useGlobalMono": "never"
 }
