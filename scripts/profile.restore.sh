@@ -22,7 +22,7 @@ mkdir "${_tmp_config}"
 mkdir "${_tmp_cache}"
 
 rm -rf "${_user_cache}"
-ln -snfvT "${_tmp_cache}" "${_user_cache}"
+ln -snfT "${_tmp_cache}" "${_user_cache}"
 
 _link_config_dir() {
     
@@ -31,7 +31,7 @@ _link_config_dir() {
 
     mkdir "${_tmp_child}"
     rm -rf "${_user_child}"
-    ln -snfvT "${_tmp_child}" "${_user_child}"
+    ln -snfT "${_tmp_child}" "${_user_child}"
 }
 
 # non-persistant
