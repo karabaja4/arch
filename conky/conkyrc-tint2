@@ -50,6 +50,6 @@ START_OF_JSON{
 		"edd": null,
 	${endif}
 
-	"time": "${time %A, %d.%m.%Y. %H:%M:%S}"
+	"time": "${time %A, %B, %d.%m.%Y. %H:%M:%S}"
 }END_OF_JSON
 ]];
