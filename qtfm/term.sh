@@ -28,6 +28,9 @@ _exec() {
     unrar)
         unrar x "${_params[1]}"
         ;;
+    7z)
+        7z x "${_params[1]}"
+        ;;
     gzip)
         tar cvzf "${_params[1]}.tar.gz" "${_params[@]:2}"
         ;;
