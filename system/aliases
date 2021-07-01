@@ -7,7 +7,7 @@ alias chx='chmod +x'
 alias permof='stat --printf "%n - %a\n"'
 alias sizeof='du -sh'
 alias grep='grep --color'
-alias df='df -h -T --total'
+#alias df='df -h -T --total'
 alias c='clear'
 alias x='exit'
 

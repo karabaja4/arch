@@ -1,0 +1,12 @@
+df cheat sheet
+
+used + available + (reserved_root * 4) + reserved_clusters = 1K-blocks
+
+reserved_root => dumpe2fs -h /dev/sdb1 | grep 'Reserved block count' (* 4 because df deals in 1K-blocks, and dumpe2fs deals in 4K-blocks)
+reserved_clusters => cat /sys/fs/ext4/sdb1/reserved_clusters (4096 blocks = 16777216 bytes (4096 blocks * 4096 block size) = 16384 KiB)
+
+linode
+2515984 + 21414024 + (321121 * 4) + 16384 = 25230876
+
+local
+76442652 + 150236996 + (3039974 * 4) + 16384 = 238855928
