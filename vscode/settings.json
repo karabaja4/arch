@@ -85,7 +85,7 @@
         "rc": "shellscript",
         "aliases": "shellscript"
     },
-    "workbench.startupEditor": "welcomePage",
+    "workbench.startupEditor": "readme",
     "security.workspace.trust.enabled": false,
     "files.hotExit": "off",
     "files.enableTrash": false,
