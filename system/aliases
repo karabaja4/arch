@@ -70,6 +70,12 @@ ytdl() {
 }
 
 todo() {
+    local -r pid="$(pgrep -f conkyrc-todo)"
+    if [ -n "${pid}" ]
+    then
+        echo "Killing existing conky instance (${pid})"
+        /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${pid}"
+    fi
     conky -d -c "${HOME}/arch/conky/conkyrc-todo" --xinerama-head 0 > /dev/null 2>&1
 }
 
