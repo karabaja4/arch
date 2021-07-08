@@ -37,9 +37,6 @@ _desktop() {
     conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
     conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
 
-    # conky todo
-    conky -d -c "${HOME}/arch/conky/conkyrc-todo" --xinerama-head 0
-
     # tray
     tint2 -c "${HOME}/arch/tint2/tint2rc-top" &
     tint2 -c "${HOME}/arch/tint2/tint2rc-bottom" &

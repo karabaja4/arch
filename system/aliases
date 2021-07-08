@@ -69,6 +69,10 @@ ytdl() {
     youtube-dl -f 'bestaudio[ext=m4a]' "${1}"
 }
 
+todo() {
+    conky -d -c "${HOME}/arch/conky/conkyrc-todo" --xinerama-head 0 > /dev/null 2>&1
+}
+
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
 alias syu='sudo pacman -Syu'
 alias aur='auracle outdated'
