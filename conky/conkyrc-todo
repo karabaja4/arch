@@ -1,0 +1,22 @@
+conky.config = {
+	use_xft = true,
+	font = 'Roboto:size=10:bold',
+	draw_shades = false,
+	alignment = 'top_right',
+	gap_x = 15,
+	gap_y = 40,
+    minimum_width = 200,
+	update_interval = 10,
+	double_buffer = true,
+	own_window = true,
+	own_window_type = 'desktop',
+	own_window_transparent = true,
+	lua_load = '/home/igor/arch/conky/drawbg.lua',
+	lua_draw_hook_pre = 'draw_bg'
+};
+
+conky.text = [[
+TODO
+
+${exec cat /home/igor/todo}
+]];
