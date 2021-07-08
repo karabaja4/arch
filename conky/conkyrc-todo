@@ -18,5 +18,5 @@ conky.config = {
 conky.text = [[
 TODO
 
-${exec cat /home/igor/todo}
+${exec cat /home/igor/.todo}
 ]];
