@@ -70,13 +70,25 @@ ytdl() {
 }
 
 todo() {
-    local -r pid="$(pgrep -f conkyrc-todo)"
-    if [ -n "${pid}" ]
+    if [ "${1}" = "off" ] || [ -z "${1}" ]
     then
-        echo "Killing existing conky instance (${pid})"
-        /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${pid}"
+        if [ -z "${1}" ]
+        then
+            qtextpad "${HOME}/.todo" 
+        fi
+        local -r pid="$(pgrep -f conkyrc-todo)"
+        if [ -n "${pid}" ]
+        then
+            echo "Killing existing conky instance (${pid})"
+            /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${pid}"
+        fi
+        if [ -z "${1}" ]
+        then
+            conky -d -c "${HOME}/arch/conky/conkyrc-todo" --xinerama-head 0 > /dev/null 2>&1
+        fi
+    else
+        echo "invalid parameter"
     fi
-    conky -d -c "${HOME}/arch/conky/conkyrc-todo" --xinerama-head 0 > /dev/null 2>&1
 }
 
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
