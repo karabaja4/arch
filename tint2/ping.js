@@ -5,20 +5,15 @@ const timers = require('timers/promises');
 let diskusage = null;
 
 const refresh = async () => {
-  while (true) {
-    try {
-      if (diskusage == null || (diskusage.ts + (30 * 1000)) < Date.now()) {
-        const info = await disk.check('/');
-        const total = info.total / 1024;
-        const available = info.available / 1024;
-        const used = total - available - (321121 * 4) - 16384;
-        diskusage = { total, available, used, ts: Date.now() }
-        console.log(`Fetched disk usage: ${JSON.stringify(diskusage)}`)
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    await timers.setTimeout(10 * 1000);
+  try {
+    const info = await disk.check('/');
+    const total = info.total / 1024;
+    const available = info.available / 1024;
+    const used = total - available - (321121 * 4) - 16384;
+    diskusage = { total, available, used, ts: Date.now() };
+    console.log(`Fetched disk usage: ${JSON.stringify(diskusage)}`);
+  } catch (e) {
+    console.log(e);
   }
 }
 
@@ -38,5 +33,13 @@ const server = () => {
   });
 }
 
-refresh();
-server();
+const main = async () => {
+  await refresh();
+  server();
+  while (true) {
+    await timers.setTimeout(30 * 1000);
+    await refresh();
+  }
+}
+
+main();
