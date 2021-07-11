@@ -143,6 +143,7 @@ const ping = () => {
   ws.on('close', () => {
     clearTimeout(timeout);
     store.ping.data = null;
+    store.cls = null;
     setTimeout(() => { ping(); }, 5000);
   });
   
