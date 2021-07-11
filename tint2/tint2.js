@@ -144,28 +144,14 @@ const ping = () => {
 }
 
 const cls = () => {
-
-  const worker = new wt.Worker(path.join(__dirname, 'du.js'), {
-    workerData: {
-      path: '/home/igor/_private',
-      reserved: 321121
-    }
-  });
-
+  const worker = new wt.Worker(path.join(__dirname, 'cls.js'));
   const timeout = setTimeout(() => {
     store.cls = null;
   }, 60 * 1000);
-
-  worker.on('message', (data) => {
+  worker.on('message', (cls) => {
     timeout.refresh();
-    store.cls = {
-      // strings to sync with conky data
-      perc: Math.round((data.used / data.total) * 100).toString(),
-      used: `${((data.used / 1024) / 1024).toFixed(2)} GiB`,
-      size: `${((data.total / 1024) / 1024).toFixed(2)} GiB`,
-    };
+    store.cls = cls;
   });
-
 }
 
 conky();
