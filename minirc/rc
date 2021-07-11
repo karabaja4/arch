@@ -48,16 +48,9 @@ _daemon_start() (
 
         su - "${_user}" -c "${_command} > /dev/null 2>&1 & printf '%s' \${!}" > "${_pidfile}"
 
-        _pid="$(cat "${_pidfile}")"
-        
         _echo "User: ${_user}"
         _echo "Exec: ${_command}"
-        _echo "PID: ${_pid}"
-
-        if [ -h "/proc/${_pid}/exe" ]
-        then
-            printf "[\033[31mX\033[0m] %s\n" "Process has exited immediately."
-        fi
+        _echo "PID: $(cat "${_pidfile}")"
     fi
 )
 
