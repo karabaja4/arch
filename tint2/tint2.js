@@ -108,73 +108,110 @@ const store = {
 
 const conky = () => {
 
-  const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
-  const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
+  return new Promise((resolve) => {
 
-  proc.stdout.on('data', (data) => {
-    store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
-    const match = store.conky.stream.match(regex);
-    if (match) {
-      store.conky.stream = '';
-      store.conky.data = match[1];
-    }
-  });
-
-  proc.on('close', () => {
-    store.conky.stream = '';
-    store.conky.data = null;
-  });
-
-}
-
-const ping = () => {
-
-  const ticks = () => process.hrtime.bigint().toString();
-  const ws = new WebSocket('wss://linode.aerium.hr/ping');
-  const timeout = setTimeout(() => { ws.terminate(); }, 5000);
-
-  ws.on('open', () => {
-    setInterval(() => { ws.send(ticks()); }, 1000);
-  });
-
-  ws.on('message', (inc) => {
-    timeout.refresh();
-    const obj = JSON.parse(inc);
-    const end = BigInt(ticks());
-    const start = BigInt(obj.message);
-    const nano = end - start;
-    store.ping.data = parseFloat(nano) / (1000 * 1000);
-    const du = obj.diskusage;
-    store.cls = {
-      perc: Math.round((du.used / du.total) * 100).toString(),
-      used: `${(du.used / (1024 * 1024)).toFixed(2)} GiB`,
-      size: `${(du.total / (1024 * 1024)).toFixed(2)} GiB`,
-    };
-  });
-
-  ws.on('error', () => {
-    // empty handler because otherwise ws crashes
-  });
-
-  ws.on('close', () => {
-    clearTimeout(timeout);
-    store.ping.data = null;
-    store.cls = null;
-    setTimeout(() => { ping(); }, 5000);
-  });
+    const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
+    const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
   
+    proc.stdout.on('data', (data) => {
+      store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+      const match = store.conky.stream.match(regex);
+      if (match) {
+        store.conky.stream = '';
+        store.conky.data = match[1];
+      }
+    });
+  
+    proc.on('close', (code) => {
+      store.conky.stream = '';
+      store.conky.data = null;
+      resolve(code);
+    });
+
+  });
+
 }
 
-const main = async () => {
-  conky();
-  ping();
+const ping = async () => {
+
+  return new Promise((resolve) => {
+
+    const ticks = () => process.hrtime.bigint().toString();
+    const ws = new WebSocket('wss://linode.aerium.hr/ping');
+  
+    const timeout = setTimeout(() => {
+      ws.terminate();
+    }, 5000);
+
+    let open = false;
+
+    const loop = async () => {
+      while (open) {
+        ws.send(ticks());
+        await timers.setTimeout(1000);
+      }
+    }
+  
+    ws.on('open', async () => {
+      open = true;
+      loop();
+    });
+  
+    ws.on('message', (inc) => {
+      timeout.refresh();
+      const obj = JSON.parse(inc);
+      const end = BigInt(ticks());
+      const start = BigInt(obj.message);
+      const nano = end - start;
+      store.ping.data = parseFloat(nano) / (1000 * 1000);
+      const du = obj.diskusage;
+      store.cls = {
+        perc: Math.round((du.used / du.total) * 100).toString(),
+        used: `${(du.used / (1024 * 1024)).toFixed(2)} GiB`,
+        size: `${(du.total / (1024 * 1024)).toFixed(2)} GiB`,
+      };
+    });
+  
+    ws.on('error', () => {
+      // empty handler because otherwise ws crashes
+    });
+  
+    ws.on('close', (code) => {
+      open = false;
+      clearTimeout(timeout);
+      store.ping.data = null;
+      store.cls = null;
+      resolve(code);
+    });
+
+  });
+
+}
+
+const mainloop = async () => {
   while (true) {
     await print();
     await timers.setTimeout(1000);
   }
 }
 
-main();
+const pingloop = async () => {
+  while (true) {
+    await ping();
+    await timers.setTimeout(5000);
+  }
+}
+
+const conkyloop = async () => {
+  while (true) {
+    await conky();
+    await timers.setTimeout(5000);
+  }
+}
+
+pingloop();
+conkyloop();
+mainloop();
 
 // notes:
 // printing needs to happen in a separate loop, because conky stdout blocks
