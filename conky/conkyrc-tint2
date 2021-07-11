@@ -29,16 +29,6 @@ START_OF_JSON{
 	${else}
 		"ssd": null,
 	${endif}
-	
-	${if_mounted /home/igor/_public}
-		"cls": {
-			"perc": "${fs_used_perc /home/igor/_public}",
-			"used": "${fs_used /home/igor/_public}",
-			"size": "${fs_size /home/igor/_public}"
-		},
-	${else}
-		"cls": null,
-	${endif}
 
 	${if_mounted /home/igor/_disk}
 		"edd": {

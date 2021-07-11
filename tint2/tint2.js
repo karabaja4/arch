@@ -1,5 +1,7 @@
-const { spawn } = require('child_process');
+const cp = require('child_process');
 const WebSocket = require('ws');
+const wt = require('worker_threads');
+const path = require('path');
 
 const colors = {
   gray: '#757575',
@@ -53,6 +55,8 @@ const print = () => {
   const data = store.conky.data && JSON.parse(store.conky.data);
   const ms = store.ping.data && parseInt(store.ping.data);
 
+  data.cls = store.cls;
+
   if (!data) {
     return;
   }
@@ -84,12 +88,13 @@ const store = {
   },
   ping: {
     data: null
-  }
+  },
+  cls: null
 }
 
 const conky = () => {
 
-  const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
+  const proc = cp.spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
   const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
 
   proc.stdout.on('data', (data) => {
@@ -138,8 +143,33 @@ const ping = () => {
   
 }
 
+const cls = () => {
+
+  const worker = new wt.Worker(path.join(__dirname, 'du.js'), {
+    workerData: {
+      path: '/home/igor/_private',
+      reserved: 321121
+    }
+  });
+
+  const timeout = setTimeout(() => {
+    store.cls = null;
+  }, 60 * 1000);
+
+  worker.on('message', (data) => {
+    timeout.refresh();
+    store.cls = {
+      perc: Math.round((data.used / data.total) * 100).toString(),
+      used: `${((data.used / 1024) / 1024).toFixed(2)} GiB`,
+      size: `${((data.total / 1024) / 1024).toFixed(2)} GiB`,
+    };
+  });
+  
+}
+
 conky();
 ping();
+cls();
 
 setInterval(() => {
   print();
