@@ -159,12 +159,13 @@ const cls = () => {
   worker.on('message', (data) => {
     timeout.refresh();
     store.cls = {
+      // strings to sync with conky data
       perc: Math.round((data.used / data.total) * 100).toString(),
       used: `${((data.used / 1024) / 1024).toFixed(2)} GiB`,
       size: `${((data.total / 1024) / 1024).toFixed(2)} GiB`,
     };
   });
-  
+
 }
 
 conky();
