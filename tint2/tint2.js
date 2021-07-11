@@ -143,18 +143,12 @@ const ping = async () => {
       ws.terminate();
     }, 5000);
 
-    let open = false;
-
-    const loop = async () => {
-      while (open) {
-        ws.send(ticks());
-        await timers.setTimeout(1000);
-      }
-    }
+    let interval = null;
   
-    ws.on('open', async () => {
-      open = true;
-      loop();
+    ws.on('open', () => {
+      interval = setInterval(() => {
+        ws.send(ticks());
+      }, 1000);
     });
   
     ws.on('message', (inc) => {
@@ -177,7 +171,7 @@ const ping = async () => {
     });
   
     ws.on('close', (code) => {
-      open = false;
+      clearInterval(interval);
       clearTimeout(timeout);
       store.ping.data = null;
       store.cls = null;
