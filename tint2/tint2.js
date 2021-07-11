@@ -1,7 +1,5 @@
 const cp = require('child_process');
 const WebSocket = require('ws');
-const threads = require('worker_threads');
-const path = require('path');
 
 const colors = {
   gray: '#757575',
@@ -123,12 +121,19 @@ const ping = () => {
     setInterval(() => { ws.send(ticks()); }, 1000);
   });
 
-  ws.on('message', (message) => {
+  ws.on('message', (inc) => {
     timeout.refresh();
+    const obj = JSON.parse(inc);
     const end = BigInt(ticks());
-    const start = BigInt(message);
+    const start = BigInt(obj.message);
     const nano = end - start;
     store.ping.data = parseFloat(nano) / (1000 * 1000);
+    const du = obj.diskusage;
+    store.cls = {
+      perc: Math.round((du.used / du.total) * 100).toString(),
+      used: `${(du.used / (1024 * 1024)).toFixed(2)} GiB`,
+      size: `${(du.total / (1024 * 1024)).toFixed(2)} GiB`,
+    };
   });
 
   ws.on('error', () => {
@@ -143,20 +148,8 @@ const ping = () => {
   
 }
 
-const cls = () => {
-  const worker = new threads.Worker(path.join(__dirname, 'cls.js'));
-  const timeout = setTimeout(() => {
-    store.cls = null;
-  }, 60 * 1000);
-  worker.on('message', (cls) => {
-    timeout.refresh();
-    store.cls = cls;
-  });
-}
-
 conky();
 ping();
-cls();
 
 setInterval(() => {
   print();
