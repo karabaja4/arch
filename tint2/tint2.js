@@ -63,12 +63,12 @@ const mounted = async (path) => {
 
 const print = async () => {
 
-  const data = store.conky.data && JSON.parse(store.conky.data);
+  const data = store.conky && JSON.parse(store.conky);
   if (!data) {
-    return;
+    return; // no point without conky
   }
 
-  const ms = store.ping.data && parseInt(store.ping.data);
+  const ms = store.ping && parseInt(store.ping);
 
   const clsmnt = await mounted('/home/igor/_private');
   if (clsmnt) {
@@ -96,14 +96,9 @@ const print = async () => {
 };
 
 const store = {
-  conky: {
-    stream: '',
-    data: null
-  },
-  ping: {
-    data: null
-  },
-  cls: null
+  conky: null, // unparsed json
+  ping: null,  // float
+  cls: null    // object
 }
 
 const conky = () => {
@@ -112,19 +107,20 @@ const conky = () => {
 
     const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
     const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
+
+    let stream = '';
   
     proc.stdout.on('data', (data) => {
-      store.conky.stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
-      const match = store.conky.stream.match(regex);
+      stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
+      const match = stream.match(regex);
       if (match) {
-        store.conky.stream = '';
-        store.conky.data = match[1];
+        stream = '';
+        store.conky = match[1];
       }
     });
   
     proc.on('close', (code) => {
-      store.conky.stream = '';
-      store.conky.data = null;
+      store.conky = null;
       resolve(code);
     });
 
@@ -157,7 +153,7 @@ const ping = async () => {
       const end = BigInt(ticks());
       const start = BigInt(obj.message);
       const nano = end - start;
-      store.ping.data = parseFloat(nano) / (1000 * 1000);
+      store.ping = parseFloat(nano) / (1000 * 1000);
       const du = obj.diskusage;
       store.cls = {
         perc: Math.round((du.used / du.total) * 100).toString(),
@@ -173,7 +169,7 @@ const ping = async () => {
     ws.on('close', (code) => {
       clearInterval(interval);
       clearTimeout(timeout);
-      store.ping.data = null;
+      store.ping = null;
       store.cls = null;
       resolve(code);
     });
