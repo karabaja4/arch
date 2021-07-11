@@ -1,5 +1,7 @@
-const cp = require('child_process');
+const { spawn } = require('child_process');
 const WebSocket = require('ws');
+const fs = require('fs');
+const timers = require('timers/promises');
 
 const colors = {
   gray: '#757575',
@@ -48,7 +50,18 @@ const fixunits = (unit) => {
   return unit.replace('GiB', 'GB').replace('MiB', 'MB').replace('KiB', 'KB');
 };
 
-const print = () => {
+const mounted = async (path) => {
+  const mounts = await fs.promises.readFile('/proc/mounts', 'utf8');
+  const lines = mounts.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes(path)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+const print = async () => {
 
   const data = store.conky.data && JSON.parse(store.conky.data);
   const ms = store.ping.data && parseInt(store.ping.data);
@@ -57,7 +70,10 @@ const print = () => {
     return;
   }
 
-  data.cls = store.cls;
+  const clsmnt = await mounted('/home/igor/_private');
+  if (clsmnt) {
+    data.cls = store.cls;
+  }
 
   let text = '';
 
@@ -92,7 +108,7 @@ const store = {
 
 const conky = () => {
 
-  const proc = cp.spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
+  const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
   const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
 
   proc.stdout.on('data', (data) => {
@@ -149,12 +165,16 @@ const ping = () => {
   
 }
 
-conky();
-ping();
+const main = async () => {
+  conky();
+  ping();
+  while (true) {
+    await print();
+    await timers.setTimeout(1000);
+  }
+}
 
-setInterval(() => {
-  print();
-}, 1000);
+main();
 
 // notes:
 // printing needs to happen in a separate loop, because conky stdout blocks
