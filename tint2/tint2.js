@@ -1,6 +1,6 @@
 const cp = require('child_process');
 const WebSocket = require('ws');
-const wt = require('worker_threads');
+const threads = require('worker_threads');
 const path = require('path');
 
 const colors = {
@@ -144,7 +144,7 @@ const ping = () => {
 }
 
 const cls = () => {
-  const worker = new wt.Worker(path.join(__dirname, 'cls.js'));
+  const worker = new threads.Worker(path.join(__dirname, 'cls.js'));
   const timeout = setTimeout(() => {
     store.cls = null;
   }, 60 * 1000);

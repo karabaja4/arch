@@ -1,7 +1,6 @@
 const disk = require('diskusage');
-const wt = require('worker_threads');
-const util = require('util');
-const sleep = util.promisify(setTimeout);
+const threads = require('worker_threads');
+const timers = require('timers/promises');
 
 const get = async () => {
   try {
@@ -14,14 +13,14 @@ const get = async () => {
       used: `${(used / (1024 * 1024)).toFixed(2)} GiB`,
       size: `${(total / (1024 * 1024)).toFixed(2)} GiB`,
     };
-    wt.parentPort.postMessage(result);
+    threads.parentPort.postMessage(result);
   } catch {}
 }
 
 const main = async () => {
-  while (!wt.isMainThread) {
+  while (!threads.isMainThread) {
     await get();
-    await sleep(30 * 1000);
+    await timers.setTimeout(30 * 1000);
   }
 }
 
