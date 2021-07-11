@@ -206,7 +206,3 @@ const conkyloop = async () => {
 pingloop();
 conkyloop();
 mainloop();
-
-// notes:
-// printing needs to happen in a separate loop, because conky stdout blocks
-// when the internet connection is broken, because of mounted internet shares
