@@ -64,11 +64,11 @@ const mounted = async (path) => {
 const print = async () => {
 
   const data = store.conky.data && JSON.parse(store.conky.data);
-  const ms = store.ping.data && parseInt(store.ping.data);
-
   if (!data) {
     return;
   }
+
+  const ms = store.ping.data && parseInt(store.ping.data);
 
   const clsmnt = await mounted('/home/igor/_private');
   if (clsmnt) {
