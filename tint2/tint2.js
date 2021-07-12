@@ -50,17 +50,6 @@ const fixunits = (unit) => {
   return unit.replace('GiB', 'GB').replace('MiB', 'MB').replace('KiB', 'KB');
 };
 
-const mounted = async (path) => {
-  const mounts = await fs.promises.readFile('/proc/mounts', 'utf8');
-  const lines = mounts.split('\n');
-  for (let i = 0; i < lines.length; i++) {
-    if (lines[i].includes(path)) {
-      return true;
-    }
-  }
-  return false;
-}
-
 const print = async () => {
 
   const data = store.conky && JSON.parse(store.conky);
@@ -70,10 +59,7 @@ const print = async () => {
 
   const ms = store.ping && parseInt(store.ping);
 
-  const clsmnt = await mounted('/home/igor/_private');
-  if (clsmnt) {
-    data.cls = store.cls;
-  }
+  data.cls = store.cls;
 
   let text = '';
 
