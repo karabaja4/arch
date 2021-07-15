@@ -45,7 +45,6 @@ _link_config_dir "Postman"
 _link_config_dir "chromium"
 _link_config_dir "Code"
 _link_config_dir "azuredatastudio"
-_link_config_dir "discord"
 
 # ${1} -> tar name
 _restore_profile() {
@@ -63,4 +62,3 @@ _restore_profile() {
 _restore_profile "chromium"
 _restore_profile "Code"
 _restore_profile "azuredatastudio"
-_restore_profile "discord"

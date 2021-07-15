@@ -31,4 +31,3 @@ _profile_backup() {
 _profile_backup "chromium" "chromium"
 _profile_backup "code" "Code"
 _profile_backup "azuredatastudio" "azuredatastudio"
-_profile_backup "Discord" "discord"

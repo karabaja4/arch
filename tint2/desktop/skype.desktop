@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
-Name=mspaint
-Comment=mspaint
+Name=skype
+Comment=skype
 Type=Application
 Categories=Development;
-Exec=chromium --app=https://jspaint.app --incognito
+Exec=chromium --app=https://web.skype.com
 Terminal=false
 StartupNotify=false
-Icon=mspaint2
+Icon=skype
