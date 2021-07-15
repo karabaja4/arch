@@ -40,6 +40,7 @@ _link_config_dir "Microsoft"
 _link_config_dir "Microsoft Teams - Preview"
 _link_config_dir "teams"
 _link_config_dir "Postman"
+_link_config_dir "discord"
 
 # persistant
 _link_config_dir "chromium"
