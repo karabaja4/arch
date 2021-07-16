@@ -129,16 +129,16 @@ const ping = async () => {
   
     ws.on('open', () => {
       interval = setInterval(() => {
-        ws.send({
-          timestamp: ticks()
-        });
+        ws.send(ticks());
       }, 1000);
     });
   
-    ws.on('message', (msg) => {
+    ws.on('message', (inc) => {
       timeout.refresh();
-      const obj = JSON.parse(msg);
-      const nano = BigInt(ticks()) - BigInt(obj.timestamp);
+      const obj = JSON.parse(inc);
+      const end = BigInt(ticks());
+      const start = BigInt(obj.message);
+      const nano = end - start;
       store.ping = parseFloat(nano) / (1000 * 1000);
       const du = obj.diskusage;
       store.cls = {
