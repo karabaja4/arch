@@ -93,6 +93,5 @@
     "git.autofetch": false,
     "gitlens.showWelcomeOnInstall": false,
     "omnisharp.loggingLevel": "critical",
-    "omnisharp.useGlobalMono": "never",
-    "workbench.startupEditor": "readme"
+    "omnisharp.useGlobalMono": "never"
 }
