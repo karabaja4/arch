@@ -101,7 +101,7 @@ alias mountmmc="sudo mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_m
 alias ddiff="code -d"
 alias wget="wget --no-hsts"
 alias md2pdf='markdown-pdf'
-alias rezije='node /home/igor/git/autostan/main.js'
+alias rezije='node /home/igor/git/rezije/main.js'
 
 mountlinode() {
     local -r public="/home/igor/_public/"
