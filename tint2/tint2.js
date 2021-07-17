@@ -1,6 +1,5 @@
 const { spawn } = require('child_process');
 const WebSocket = require('ws');
-const fs = require('fs');
 const timers = require('timers/promises');
 
 const colors = {
