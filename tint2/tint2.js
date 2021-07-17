@@ -118,7 +118,7 @@ const ping = async () => {
 
   return new Promise((resolve) => {
 
-    const ticks = () => process.hrtime.bigint().toString();
+    const ticks = () => process.hrtime.bigint();
     const ws = new WebSocket('wss://linode.aerium.hr/ping');
   
     const timeout = setTimeout(() => {
@@ -129,14 +129,14 @@ const ping = async () => {
   
     ws.on('open', () => {
       interval = setInterval(() => {
-        ws.send(ticks());
+        ws.send(ticks().toString());
       }, 1000);
     });
   
     ws.on('message', (inc) => {
+      const end = ticks();
       timeout.refresh();
       const obj = JSON.parse(inc);
-      const end = BigInt(ticks());
       const start = BigInt(obj.message);
       const nano = end - start;
       store.ping = parseFloat(nano) / (1000 * 1000);
