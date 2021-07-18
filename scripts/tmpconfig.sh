@@ -7,7 +7,7 @@ then
 fi
 
 _user="$(id -un)"
-printf '%s\n' "Creating temporary config dirs (${_user})"
+printf '%s\n' "Symlinking temporary config dirs (${_user})"
 
 _tmp_config="/tmp/config-${_user}"
 _tmp_cache="/tmp/cache-${_user}"
@@ -22,7 +22,7 @@ mkdir "${_tmp_config}"
 mkdir "${_tmp_cache}"
 
 rm -rf "${_user_cache}"
-ln -snfT "${_tmp_cache}" "${_user_cache}"
+ln -sfT "${_tmp_cache}" "${_user_cache}"
 
 _link_config_dir() {
     
@@ -31,13 +31,12 @@ _link_config_dir() {
 
     mkdir "${_tmp_child}"
     rm -rf "${_user_child}"
-    ln -snfT "${_tmp_child}" "${_user_child}"
+    ln -sfT "${_tmp_child}" "${_user_child}"
 }
 
-# non-persistant
-_link_config_dir "Slack"
 _link_config_dir "Microsoft"
 _link_config_dir "Microsoft Teams - Preview"
-_link_config_dir "teams"
 _link_config_dir "Postman"
+_link_config_dir "Slack"
 _link_config_dir "discord"
+_link_config_dir "teams"
