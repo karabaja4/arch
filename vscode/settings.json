@@ -94,5 +94,5 @@
     "gitlens.showWelcomeOnInstall": false,
     "omnisharp.loggingLevel": "critical",
     "omnisharp.useGlobalMono": "never",
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "welcomePage"
 }
