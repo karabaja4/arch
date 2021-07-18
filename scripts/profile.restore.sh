@@ -42,24 +42,24 @@ _link_config_dir "teams"
 _link_config_dir "Postman"
 _link_config_dir "discord"
 
-# persistant
-_link_config_dir "chromium"
-_link_config_dir "Code"
-_link_config_dir "azuredatastudio"
+# # persistant
+# _link_config_dir "chromium"
+# _link_config_dir "Code"
+# _link_config_dir "azuredatastudio"
 
-# ${1} -> tar name
-_restore_profile() {
-    _tar="${_user_config}/${1}.tar"
-    if [ -f "${_tar}" ]
-    then
-        printf '%s\n' "Restoring ${_tar}"
-        tar xf "${_tar}" -C "${_tmp_config}"
-    else
-        printf '%s\n' "${_tar} does not exist"
-    fi
-}
+# # ${1} -> tar name
+# _restore_profile() {
+#     _tar="${_user_config}/${1}.tar"
+#     if [ -f "${_tar}" ]
+#     then
+#         printf '%s\n' "Restoring ${_tar}"
+#         tar xf "${_tar}" -C "${_tmp_config}"
+#     else
+#         printf '%s\n' "${_tar} does not exist"
+#     fi
+# }
 
-# restore profiles
-_restore_profile "chromium"
-_restore_profile "Code"
-_restore_profile "azuredatastudio"
+# # restore profiles
+# _restore_profile "chromium"
+# _restore_profile "Code"
+# _restore_profile "azuredatastudio"
