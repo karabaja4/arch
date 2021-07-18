@@ -50,7 +50,6 @@ launcher_item_app = /usr/share/applications/chromium.desktop
 launcher_item_app = /usr/share/applications/firefox.desktop
 launcher_item_app = /usr/share/applications/qtfm.desktop
 launcher_item_app = /usr/share/applications/org.qbittorrent.qBittorrent.desktop
-launcher_item_app = /usr/share/applications/discord.desktop
 launcher_item_app = /usr/share/applications/qtextpad.desktop
 launcher_item_app = /usr/share/applications/visual-studio-code.desktop
 launcher_item_app = /usr/share/applications/robo3t.desktop
