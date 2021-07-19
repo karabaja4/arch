@@ -17,4 +17,7 @@ feh)
 thumb)
     convert -resize 13% "${2}" "thumb_${2}"
     ;;
+diff)
+    code -d "${@:2}"
+    ;;
 esac
