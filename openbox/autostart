@@ -51,6 +51,8 @@ _desktop() {
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
+
+    xset -display :0.0 dpms 0 0 0
 }
 
 /usr/bin/xdpyinfo | grep VNC > /dev/null
