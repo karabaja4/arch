@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Microsoft Teams
+Type=Application
+Categories=Network;Application;
+Exec=/usr/bin/apulse /usr/bin/teams
+Terminal=false
+StartupNotify=false
+Icon=teams
