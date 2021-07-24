@@ -17,8 +17,8 @@ export LD_LIBRARY_PATH=/usr/lib64/nvidia/:/usr/lib32/nvidia:/usr/lib:${LD_LIBRAR
 _root_dir="$(dirname "$(readlink -f "${0}")")"
 _config_name="nvidia-xorg"
 
-sudo ln -snfvT "${_root_dir}/${_config_name}.conf" "/etc/X11/${_config_name}.conf"
-sudo ln -snfvT "${_root_dir}/${_config_name}.conf.d" "/etc/X11/${_config_name}.conf.d"
+sudo ln -sfvT "${_root_dir}/${_config_name}.conf" "/etc/X11/${_config_name}.conf"
+sudo ln -sfvT "${_root_dir}/${_config_name}.conf.d" "/etc/X11/${_config_name}.conf.d"
 
 _get_screen() {
     _index=0
