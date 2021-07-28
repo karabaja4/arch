@@ -2,4 +2,4 @@
 
 _overlaydir="/usr/share/teams/resources/app.asar.unpacked/node_modules/slimcore/bin"
 sudo mv -v "${_overlaydir}/rect-overlay" "${_overlaydir}/rect-overlay-backup"
-/usr/bin/apulse /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox "$@"
+/usr/bin/apulse /usr/share/teams/teams "$@" --disable-namespace-sandbox --disable-setuid-sandbox
