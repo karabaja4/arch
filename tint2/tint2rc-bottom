@@ -57,7 +57,7 @@ task_font = Roboto Bold 8
 
 task_font_color = #ffffff 100
 task_active_font_color = #ffffff 100
-task_iconified_font_color = #ffffff 60
+task_iconified_font_color = #808080 100
 
 task_icon_asb = 100 0 0
 task_active_icon_asb = 100 0 0
