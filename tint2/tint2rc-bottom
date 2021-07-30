@@ -15,7 +15,7 @@ background_color = #2c2c2c 100
 rounded = 0
 border_width = 0
 background_color = #2c2c2c 100
-background_color_hover = #3b3b3b 100
+background_color_hover = #2c2c2c 100
 
 # ID 3 - selected
 rounded = 0
@@ -57,6 +57,11 @@ task_font = Roboto Bold 8
 
 task_font_color = #ffffff 100
 task_active_font_color = #ffffff 100
+task_iconified_font_color = #ffffff 60
+
+task_icon_asb = 100 0 0
+task_active_icon_asb = 100 0 0
+task_iconified_icon_asb = 50 0 0
 
 task_background_id = 2
 task_active_background_id = 3
