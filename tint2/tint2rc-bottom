@@ -9,23 +9,19 @@
 # ID 1
 rounded = 0
 border_width = 0
-background_color = #2C2C2C 100
+background_color = #2c2c2c 100
 
-# ID 2
+# ID 2 - inactive
 rounded = 0
-border_width = 2
-border_sides = L
-background_color = #2C2C2C 100
-border_color = #007acc 0
-border_color_hover = #007acc 100
+border_width = 0
+background_color = #2c2c2c 100
+background_color_hover = #3b3b3b 100
 
-# ID 3
+# ID 3 - selected
 rounded = 0
-border_width = 2
-border_sides = L
-background_color = #4A4A4A 100
-border_color = #007acc 100
-border_color_hover = #007acc 100
+border_width = 0
+background_color = #4d4d4d 100
+background_color_hover = #4d4d4d 100
 
 #---------------------------------------------
 # PANEL
