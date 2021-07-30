@@ -61,7 +61,7 @@ task_iconified_font_color = #ffffff 60
 
 task_icon_asb = 100 0 0
 task_active_icon_asb = 100 0 0
-task_iconified_icon_asb = 50 0 0
+task_iconified_icon_asb = 60 0 0
 
 task_background_id = 2
 task_active_background_id = 3
