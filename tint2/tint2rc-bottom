@@ -82,3 +82,4 @@ mouse_middle = none
 mouse_right = close
 mouse_scroll_up = maximize_restore
 mouse_scroll_down = maximize_restore
+mouse_hover_icon_asb = 100 0 0
