@@ -44,6 +44,9 @@ const process = async (message) => {
 };
 
 const connect = (symbols) => {
+
+  let initialized = false;
+
   const ws = new WebSocket('wss://data.tradingview.com/socket.io/websocket', {
     origin: 'https://www.tradingview.com',
   });
@@ -62,13 +65,14 @@ const connect = (symbols) => {
 
   ws.on('message', (message) => {
     timer.refresh();
-    if (message.includes('session_id') && message.includes('javastudies') && message.includes('studies_metadata_hash')) {
+    if (!initialized) {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
         msg(`{"m":"quote_create_session","p":["${sid}"]}`),
         msg(`{"m":"quote_add_symbols","p":["${sid}","${symbols.join('","')}",{"flags":["force_permission"]}]}`)
       ];
       messages.forEach((m) => ws.send(m));
+      initialized = true;
     } else {
       if (message.match(/^~m~\d+~m~~h~\d+$/g)) { // ping
         ws.send(message);
