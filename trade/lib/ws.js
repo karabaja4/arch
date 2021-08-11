@@ -62,7 +62,7 @@ const connect = (symbols) => {
 
   ws.on('message', (message) => {
     timer.refresh();
-    if (message.includes('session_id')) {
+    if (message.includes('session_id') && message.includes('javastudies') && message.includes('studies_metadata_hash')) {
       const sid = `qs_${rs.generate(12)}`;
       const messages = [
         msg(`{"m":"quote_create_session","p":["${sid}"]}`),
