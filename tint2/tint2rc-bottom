@@ -15,13 +15,11 @@ background_color = #2c2c2c 100
 rounded = 0
 border_width = 0
 background_color = #2c2c2c 100
-background_color_hover = #2c2c2c 100
 
 # ID 3 - selected
 rounded = 0
 border_width = 0
 background_color = #4d4d4d 100
-background_color_hover = #4d4d4d 100
 
 #---------------------------------------------
 # PANEL
