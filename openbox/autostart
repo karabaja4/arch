@@ -32,10 +32,13 @@ _desktop() {
     "${HOME}/arch/scripts/fixres.sh"
     feh --no-fehbg --bg-scale "${HOME}/arch/wall/default.jpg"
 
-    # conky tint2
+    # conky kernel
     conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
     conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
     conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
+
+    # conky tint2
+    conky -d -c "${HOME}/arch/conky/conkyrc-tint2-v2"
 
     # tray
     tint2 -c "${HOME}/arch/tint2/tint2rc-top" &
