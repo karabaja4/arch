@@ -45,17 +45,18 @@ const colorize2 = (value) => {
   return colors.green;
 };
 
-const span = (font, size, rise, colorize, icon, name, format, data, cidx) => {
+const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
   let text = '';
-  if (data.every(x => x !== undefined && x !== null)) {
+  let color = colors.gray;
+  if (values.every(x => x !== undefined && x !== null)) {
     text = `${name}: ${format}`;
-    for (let i = 0; i < data.length; i++) {
-      text = text.replace(`$${i}`, data[i]);
+    for (let i = 0; i < values.length; i++) {
+      text = text.replace(`$${i}`, values[i]);
     }
+    color = colorize(values[cidx]);
   } else {
     text = `${name}: N/A`;
   }
-  const color = colorize(data[cidx || 0]);
   return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
 };
 
@@ -101,12 +102,11 @@ const print = async () => {
     data?.conky?.time // 0
   ], 0);
   if (text) {
-    console.log(text);
+    console.log(text.trim());
   }
 }
 
 const conky = async () => {
-  data.conky = {};
   while (true) {
     try {
       const content = await fs.promises.readFile('/tmp/conky-tint2.json', 'utf8');
@@ -119,17 +119,18 @@ const conky = async () => {
 }
 
 const mounts = async () => {
-  data.mounts = {};
   while (true) {
     try {
       const content = await fs.promises.readFile('/proc/mounts', 'utf8');
       if (content) {
+        const result = {};
         const lines = content.trim().split('\n');
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i];
           const parts = line.split(' ');
-          data.mounts[parts[1]] = parts[0];
+          result[parts[1]] = parts[0];
         }
+        data.mounts = result;
       }
     } catch (e) {}
     await timers.setTimeout(5000);
@@ -137,7 +138,6 @@ const mounts = async () => {
 }
 
 const ws = async () => {
-  data.ws = {};
   return new Promise((resolve) => {
     const ticks = () => process.hrtime.bigint();
     const ws = new WebSocket('wss://linode.aerium.hr/ping');
@@ -170,7 +170,7 @@ const ws = async () => {
     ws.on('close', (code) => {
       clearInterval(interval);
       clearTimeout(timeout);
-      data.ws = {};
+      delete data.ws;
       resolve(code);
     });
   });
