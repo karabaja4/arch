@@ -1,6 +1,8 @@
-const { spawn } = require('child_process');
-const WebSocket = require('ws');
 const timers = require('timers/promises');
+const fs = require('fs');
+const WebSocket = require('ws');
+
+const data = {};
 
 const colors = {
   gray: '#757575',
@@ -28,162 +30,167 @@ const icons = {
   clock: ''
 };
 
-const span = (font, size, rise, color, icon, text) => {
-  return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
-};
-
-const nc = (value) => {
+// activity color
+const colorize1 = (value) => {
   if (value !== 0 && !value) return colors.gray;
   if (value > 5) return colors.green;
   return colors.gray;
 };
 
-const oc = (value) => {
+// load color
+const colorize2 = (value) => {
   if (value !== 0 && !value) return colors.gray;
   if (value > 80) return colors.red;
   if (value > 30) return colors.yellow;
   return colors.green;
 };
 
-const fixunits = (unit) => {
-  return unit.replace('GiB', 'GB').replace('MiB', 'MB').replace('KiB', 'KB');
+const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
+  let text = '';
+  let color = colors.gray;
+  if (values.every(x => x !== undefined && x !== null)) {
+    text = `${name}: ${format}`;
+    for (let i = 0; i < values.length; i++) {
+      text = text.replace(`$${i}`, values[i]);
+    }
+    color = colorize(values[cidx]);
+  } else {
+    text = `${name}: N/A`;
+  }
+  return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
 };
 
 const print = async () => {
-
-  const data = store.conky && JSON.parse(store.conky);
-  if (!data) {
-    return; // no point without conky
-  }
-
-  const ms = store.ping && parseInt(store.ping);
-
-  data.cls = store.cls;
-
   let text = '';
-
-  text += span(fonts.flaticon, 7500, 100,  nc(data.net.down), icons.netdown, `DWL: ${data.net.down} KB`);
-  text += span(fonts.flaticon, 7500, 100,  nc(data.net.up),   icons.netup,   `UPL: ${data.net.up} KB`);
-  text += span(fonts.awesome,  7500, 100,  oc(ms),            icons.ping,    `PNG: ${ms ? `${ms} ms` : 'timeout'}`);
-
-  text += span(fonts.flaticon, 5000, 1000, oc(data.cpu.perc), icons.cpu,     `CPU: ${data.cpu.perc}% (${data.cpu.freq} MHz)`);
-  text += span(fonts.flaticon, 7500, 100,  oc(data.mem.perc), icons.mem,     `RAM: ${fixunits(data.mem.used)} / ${fixunits(data.mem.max)}`);
-
-  const disktext = (name) => `${name.toUpperCase()}: ${data[name] ? `${fixunits(data[name].used)} / ${fixunits(data[name].size)}` : 'not mounted'}`;
-  const diskspan = (font, name, size) => span(font, size, 100, oc(data[name]?.perc), icons[name], disktext(name));
-
-  text += diskspan(fonts.awesome, 'ssd', 7500);
-  text += diskspan(fonts.awesome, 'cls', 7000);
-  text += diskspan(fonts.awesome, 'edd', 7500);
-
-  text += span(fonts.awesome, 7500, 100, colors.gray, icons.clock, `CLK: ${data.time}`).trimEnd();
-  console.log(text);
-};
-
-const store = {
-  conky: null, // unparsed json
-  ping: null,  // float
-  cls: null    // object
+  text += span(fonts.flaticon, 7500, 100, colorize1, icons.netdown, 'DWL', '$0 KB', [ 
+    data?.conky?.net?.down // 0
+  ], 0);
+  text += span(fonts.flaticon, 7500, 100, colorize1, icons.netup, 'UPL', '$0 KB', [
+    data?.conky?.net?.up // 0
+  ], 0);
+  text += span(fonts.awesome, 7500, 100, colorize2, icons.ping, 'PNG', '$0 ms', [
+    data?.ws?.ping // 0
+  ], 0);
+  text += span(fonts.flaticon, 5000, 1000, colorize2, icons.cpu, 'CPU', '$0% ($1 MHz)', [
+    data?.conky?.cpu?.perc, // 0
+    data?.conky?.cpu?.freq // 1
+  ], 0);
+  text += span(fonts.flaticon, 7500, 100, colorize2, icons.mem, 'RAM', '$0B / $1B', [
+    data?.conky?.mem?.used, // 0
+    data?.conky?.mem?.max, // 1
+    data?.conky?.mem?.perc // 2
+  ], 2);
+  text += span(fonts.awesome, 7500, 100, colorize2, icons.ssd, 'SSD', '$1B / $2B', [
+    data.mounts?.['/'], // 0
+    data?.conky?.ssd?.used, // 1
+    data?.conky?.ssd?.size, // 2
+    data?.conky?.ssd?.perc // 3
+  ], 3);
+  text += span(fonts.awesome, 7000, 100, colorize2, icons.cls, 'CLS', '$1 GB / $2 GB', [
+    data.mounts?.['/home/igor/_private'], // 0
+    data?.ws?.cls?.used, // 1
+    data?.ws?.cls?.size, // 2
+    data?.ws?.cls?.perc // 3
+  ], 3);
+  text += span(fonts.awesome, 7500, 100, colorize2, icons.edd, 'EDD', '$1B / $2B', [
+    data.mounts?.['/home/igor/_disk'], // 0
+    data?.conky?.edd?.used, // 1
+    data?.conky?.edd?.size, // 2
+    data?.conky?.edd?.perc // 3
+  ], 3);
+  text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
+    data?.conky?.time // 0
+  ], 0);
+  if (text) {
+    console.log(text.trim());
+  }
 }
 
-const conky = () => {
-
-  return new Promise((resolve) => {
-
-    const proc = spawn('conky', ['-c', '/home/igor/arch/conky/conkyrc-tint2']);
-    const regex = new RegExp(`START_OF_JSON(.*?)END_OF_JSON`);
-
-    let stream = '';
-  
-    proc.stdout.on('data', (data) => {
-      stream += data.toString().replace(/(\r\n|\n|\r|\t)/gm, '');
-      const match = stream.match(regex);
-      if (match) {
-        stream = '';
-        store.conky = match[1];
+const conky = async () => {
+  while (true) {
+    try {
+      const content = await fs.promises.readFile('/tmp/conky-tint2.json', 'utf8');
+      if (content) {
+        data.conky = JSON.parse(content.replaceAll(/[\t\n\r]/gm, ''));
       }
-    });
-  
-    proc.on('close', (code) => {
-      store.conky = null;
-      resolve(code);
-    });
-
-  });
-
+    } catch (e) {}
+    await timers.setTimeout(1000);
+  }
 }
 
-const ping = async () => {
+const mounts = async () => {
+  while (true) {
+    try {
+      const content = await fs.promises.readFile('/proc/mounts', 'utf8');
+      if (content) {
+        const result = {};
+        const lines = content.trim().split('\n');
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const parts = line.split(' ');
+          result[parts[1]] = parts[0];
+        }
+        data.mounts = result;
+      }
+    } catch (e) {}
+    await timers.setTimeout(5000);
+  }
+}
 
+const ws = async () => {
   return new Promise((resolve) => {
-
     const ticks = () => process.hrtime.bigint();
     const ws = new WebSocket('wss://linode.aerium.hr/ping');
-  
     const timeout = setTimeout(() => {
       ws.terminate();
     }, 5000);
-
     let interval = null;
-  
     ws.on('open', () => {
       interval = setInterval(() => {
         ws.send(ticks().toString());
       }, 1000);
     });
-  
     ws.on('message', (inc) => {
       const end = ticks();
       timeout.refresh();
       const obj = JSON.parse(inc);
       const start = BigInt(obj.message);
       const nano = end - start;
-      store.ping = parseFloat(nano) / (1000 * 1000);
       const du = obj.diskusage;
-      store.cls = {
-        perc: Math.round((du.used / du.total) * 100).toString(),
-        used: `${(du.used / (1024 * 1024)).toFixed(2)} GiB`,
-        size: `${(du.total / (1024 * 1024)).toFixed(2)} GiB`,
-      };
+      data.ws = {
+        ping: parseInt(parseFloat(nano) / (1000 * 1000)),
+        cls: {
+          perc: Math.round((du.used / du.total) * 100).toString(),
+          used: (du.used / (1024 * 1024)).toFixed(2),
+          size: (du.total / (1024 * 1024)).toFixed(2),
+        }
+      }
     });
-  
-    ws.on('error', () => {
-      // empty handler because otherwise ws crashes
-    });
-  
+    ws.on('error', () => {});
     ws.on('close', (code) => {
       clearInterval(interval);
       clearTimeout(timeout);
-      store.ping = null;
-      store.cls = null;
+      delete data.ws;
       resolve(code);
     });
-
   });
-
 }
 
-const mainloop = async () => {
+const ping = async () => {
+  while (true) {
+    await ws();
+    await timers.setTimeout(5000); // ws crashed
+  }
+}
+
+const main = async () => {
   while (true) {
     await print();
     await timers.setTimeout(1000);
   }
 }
 
-const pingloop = async () => {
-  while (true) {
-    await ping();
-    await timers.setTimeout(5000);
-  }
-}
-
-const conkyloop = async () => {
-  while (true) {
-    await conky();
-    await timers.setTimeout(5000);
-  }
-}
-
-pingloop();
-conkyloop();
-mainloop();
+conky();
+mounts();
+ping();
+main();

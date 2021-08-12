@@ -1,11 +1,12 @@
 conky.config = {
 	out_to_x = false,
 	update_interval = 1,
-	out_to_console = true
+	overwrite_file = '/tmp/conky-tint2.json',
+	short_units	= true
 };
 
 conky.text = [[
-START_OF_JSON{
+{
 	"net": {
 		"down": "${downspeedf enp2s0}",
 		"up": "${upspeedf enp2s0}"
@@ -19,27 +20,16 @@ START_OF_JSON{
 		"used": "${mem}",
 		"max": "${memmax}"
 	},
-
-	${if_mounted /}
-		"ssd": {
-			"perc": "${fs_used_perc /}",
-			"used": "${fs_used /}",
-			"size": "${fs_size /}"
-		},
-	${else}
-		"ssd": null,
-	${endif}
-
-	${if_mounted /home/igor/_disk}
-		"edd": {
-			"perc": "${fs_used_perc /home/igor/_disk}",
-			"used": "${fs_used /home/igor/_disk}",
-			"size": "${fs_size /home/igor/_disk}"
-		},
-	${else}
-		"edd": null,
-	${endif}
-
+	"ssd": {
+		"perc": "${fs_used_perc /}",
+		"used": "${fs_used /}",
+		"size": "${fs_size /}"
+	},
+	"edd": {
+		"perc": "${fs_used_perc /home/igor/_disk}",
+		"used": "${fs_used /home/igor/_disk}",
+		"size": "${fs_size /home/igor/_disk}"
+	},
 	"time": "${time %A, %B, %d.%m.%Y. %H:%M:%S}"
-}END_OF_JSON
+}
 ]];
