@@ -81,19 +81,19 @@ const print = async () => {
     data?.conky?.mem?.perc // 2
   ], 2);
   text += span(fonts.awesome, 7500, 100, colorize2, icons.ssd, 'SSD', '$1B / $2B', [
-    data.mounts?.['/'], // 0
+    data?.mounts?.['/'], // 0
     data?.conky?.ssd?.used, // 1
     data?.conky?.ssd?.size, // 2
     data?.conky?.ssd?.perc // 3
   ], 3);
   text += span(fonts.awesome, 7000, 100, colorize2, icons.cls, 'CLS', '$1 GB / $2 GB', [
-    data.mounts?.['/home/igor/_private'], // 0
+    data?.mounts?.['/home/igor/_private'], // 0
     data?.ws?.cls?.used, // 1
     data?.ws?.cls?.size, // 2
     data?.ws?.cls?.perc // 3
   ], 3);
   text += span(fonts.awesome, 7500, 100, colorize2, icons.edd, 'EDD', '$1B / $2B', [
-    data.mounts?.['/home/igor/_disk'], // 0
+    data?.mounts?.['/home/igor/_disk'], // 0
     data?.conky?.edd?.used, // 1
     data?.conky?.edd?.size, // 2
     data?.conky?.edd?.perc // 3
