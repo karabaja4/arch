@@ -46,7 +46,7 @@ const colorize2 = (value) => {
 };
 
 const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
-  let text = '';
+  let text = `${name}: N/A`;
   let color = colors.gray;
   if (values.every(x => x !== undefined && x !== null)) {
     text = `${name}: ${format}`;
@@ -54,8 +54,6 @@ const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
       text = text.replace(`$${i}`, values[i]);
     }
     color = colorize(values[cidx]);
-  } else {
-    text = `${name}: N/A`;
   }
   return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
 };
