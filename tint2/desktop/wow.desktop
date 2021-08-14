@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=skype
+Comment=skype
+Type=Application
+Categories=Development;
+Exec=wine /home/igor/.wine/drive_c/wow/WoW.exe
+Terminal=false
+StartupNotify=false
+Icon=wow

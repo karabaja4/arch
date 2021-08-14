@@ -66,6 +66,7 @@ launcher_item_app = /home/igor/arch/tint2/desktop/mspaint.desktop
 launcher_item_app = /usr/share/applications/vlc.desktop
 launcher_item_app = /home/igor/arch/tint2/desktop/kvirc.desktop
 launcher_item_app = /usr/share/applications/com.obsproject.Studio.desktop
+launcher_item_app = /home/igor/arch/tint2/desktop/wow.desktop
 
 #-------------------------------------
 # Executor 1
