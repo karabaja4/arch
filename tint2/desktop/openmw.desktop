@@ -6,5 +6,5 @@ Comment=An engine replacement for The Elder Scrolls III: Morrowind
 Keywords=Morrowind;Reimplementation Mods;esm;bsa;
 TryExec=openmw-launcher
 Exec=openmw-launcher
-Icon=mw1
+Icon=mw3
 Categories=Game;RolePlaying;
