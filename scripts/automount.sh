@@ -36,4 +36,4 @@ _enum() {
     done
 }
 
-( _enum "${1}" & )
+( _enum "${1}" & ) > /dev/null 2>&1 &
