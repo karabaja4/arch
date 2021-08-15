@@ -14,19 +14,19 @@ _echo "Secret: ${_secret}"
 _echo "Record: ${_record}"
 
 _get_current_ip() (
-    curl -s -f "https://api.ipify.org" || exit 128
+    curl -s -f "https://api.ipify.org" || exit 1
 )
 
 _ctype="Content-Type: application/json"
 _auth="Authorization: Bearer ${_token}"
 
 _get_do_ip() (
-    _result="$(curl -s -f -X GET -H "${_ctype}" -H "${_auth}" "${_record}")" || exit 129
+    _result="$(curl -s -f -X GET -H "${_ctype}" -H "${_auth}" "${_record}")" || exit 2
     _echo "${_result}" | jq -r ".domain_record .data"
 )
 
 _update_do_ip() (
-    _result="$(curl -s -f -X PUT -H "${_ctype}" -H "${_auth}" -d "{\"data\":\"${1}\"}" "${_record}")" || exit 130
+    _result="$(curl -s -f -X PUT -H "${_ctype}" -H "${_auth}" -d "{\"data\":\"${1}\"}" "${_record}")" || exit 3
     _echo "${_result}" | jq -r ".domain_record .data"
 )
 
