@@ -1,10 +1,5 @@
 [Desktop Entry]
-Version=1.0
 Name=mspaint
-Comment=mspaint
 Type=Application
-Categories=Development;
 Exec=chromium --app=https://jspaint.app --incognito
-Terminal=false
-StartupNotify=false
 Icon=mspaint2

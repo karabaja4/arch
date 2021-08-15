@@ -1,10 +1,5 @@
 [Desktop Entry]
-Version=1.0
 Name=ssh-sqlite-manager
-Comment=SSH SQLite Manager
 Type=Application
-Categories=Development;
 Exec=/opt/ssh-sqlite-manager-linux-x64/ssh-sqlite-manager
-Terminal=false
-StartupNotify=true
 Icon=sqlitebrowser

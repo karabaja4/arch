@@ -1,9 +1,5 @@
 [Desktop Entry]
-Version=1.0
-Name=Microsoft Teams
+Name=teams
 Type=Application
-Categories=Network;Application;
 Exec=teams2
-Terminal=false
-StartupNotify=false
 Icon=teams
