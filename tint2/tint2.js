@@ -107,7 +107,7 @@ const print = async () => {
 const conky = async () => {
   while (true) {
     try {
-      const content = await fs.promises.readFile('/tmp/conky-tint2.json', 'utf8');
+      const content = await fs.promises.readFile('/tmp/conky-tint2.fifo', 'utf8');
       if (content) {
         data.conky = JSON.parse(content.replaceAll(/[\t\n\r]/gm, ''));
       }
