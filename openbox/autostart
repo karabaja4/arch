@@ -51,7 +51,7 @@ _desktop() {
     sleep 1
     flameshot &
     sleep 1
-    synergy &
+    #synergy &
 
     # autolock
     #xautolock -time 60 -locker "systemctl suspend" -detectsleep &
