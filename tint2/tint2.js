@@ -1,6 +1,7 @@
 const timers = require('timers/promises');
 const fs = require('fs');
 const WebSocket = require('ws');
+const dayjs = require('dayjs');
 
 const data = {};
 
@@ -97,7 +98,7 @@ const print = async () => {
     data?.conky?.edd?.perc // 3
   ], 3);
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
-    data?.conky?.time // 0
+    dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss') // 0
   ], 0);
   if (text) {
     console.log(text.trim());

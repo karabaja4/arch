@@ -29,7 +29,6 @@ conky.text = [[
 		"perc": "${fs_used_perc /home/igor/_disk}",
 		"used": "${fs_used /home/igor/_disk}",
 		"size": "${fs_size /home/igor/_disk}"
-	},
-	"time": "${time %A, %B, %d.%m.%Y. %H:%M:%S}"
+	}
 }
 ]];
