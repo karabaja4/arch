@@ -21,6 +21,13 @@ _usage() {
 [ "${#}" -gt 0 ] && _usage
 
 _iteration() {
+
+    if xdotool getactivewindow getwindowname | grep FreeRDP
+    then
+        _log "FreeRDP clipboard is not supported"
+        sleep 1
+        return 1
+    fi
     
     # target test of current selection
     _tc="$(xclip -selection clipboard -o -t TARGETS)"
@@ -45,8 +52,7 @@ _iteration() {
         if [ -n "${_match}" ]
         then
             _log "Matched target: ${_match}"
-            # timeout fixes the issue when clients like xfreerdp stall out the clipboard
-            timeout -v -s KILL -k 2 1 xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
+            xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
             _log "xclip pipe exited"
         else
             _log "Unable to match targets"
