@@ -48,7 +48,7 @@ _iteration() {
         _log "Default targets: ${_utf8}"
 
         # join both lists together, and print first item of targets occuring in _pref
-        _match="$(printf '%s\n' "${_tc}" "${_pref}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
+        _match="$(printf '%s%s%s\n' "${_tc}" "${_pref}" "${_utf8}" | awk 'a[$0]++' | head -n1)"
 
         if [ -n "${_match}" ]
         then
