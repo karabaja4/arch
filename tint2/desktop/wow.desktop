@@ -2,6 +2,6 @@
 Name=wow
 Type=Application
 Exec=wine /home/igor/.wine/drive_c/wow/WoW.exe
-Icon=wow
+Icon=wow1
 Terminal=false
 StartupNotify=false
