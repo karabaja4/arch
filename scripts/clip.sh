@@ -4,6 +4,7 @@ set -u
 # TARGETS configuration
 _pref="
 image/png
+image/bmp
 text/uri-list
 code/file-list
 "
