@@ -2,6 +2,6 @@
 Name=openmw
 Type=Application
 Exec=openmw-launcher
-Icon=mw3
+Icon=openmw
 Terminal=false
 StartupNotify=false
