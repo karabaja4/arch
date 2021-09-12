@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=d2
 Type=Application
-Exec=env __GL_FSAA_MODE=11 wine /home/igor/.wine/drive_c/d2/ProjectD2/Game.exe
+Exec=sh -c "cd /home/igor/.wine/drive_c/d2/ProjectD2 && __GL_FSAA_MODE=11 wine Game.exe"
 Icon=d21
 Terminal=false
 StartupNotify=false
