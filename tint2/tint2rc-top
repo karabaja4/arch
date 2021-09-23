@@ -55,133 +55,133 @@ execp_lclick_command = gsimplecal
 #-------------------------------------
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/utilities-terminal.svg
-button_lclick_command = xfce4-terminal
+button_lclick_command = /home/igor/arch/tint2/menu.sh terminal
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/chromium-browser.svg
-button_lclick_command = chromium
+button_lclick_command = /home/igor/arch/tint2/menu.sh chromium
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/firefox.svg
-button_lclick_command = firefox
+button_lclick_command = /home/igor/arch/tint2/menu.sh firefox
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/qtfm.svg
-button_lclick_command = qtfm
+button_lclick_command = /home/igor/arch/tint2/menu.sh qtfm
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/qbittorrent.svg
-button_lclick_command = qbittorrent
+button_lclick_command = /home/igor/arch/tint2/menu.sh qbittorrent
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/accessories-text-editor.svg
-button_lclick_command = qtextpad
+button_lclick_command = /home/igor/arch/tint2/menu.sh qtextpad
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/visual-studio-code.svg
-button_lclick_command = code
+button_lclick_command = /home/igor/arch/tint2/menu.sh code
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/azuredatastudio.svg
-button_lclick_command = azuredatastudio
+button_lclick_command = /home/igor/arch/tint2/menu.sh azuredatastudio
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/sqlitebrowser.svg
-button_lclick_command = /opt/ssh-sqlite-manager-linux-x64/ssh-sqlite-manager
+button_lclick_command = /home/igor/arch/tint2/menu.sh sqlite
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/virtualbox.svg
-button_lclick_command = VirtualBox
+button_lclick_command = /home/igor/arch/tint2/menu.sh virtualbox
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/postman.svg
-button_lclick_command = postman
+button_lclick_command = /home/igor/arch/tint2/menu.sh postman
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/slack.svg
-button_lclick_command = slack -s
+button_lclick_command = /home/igor/arch/tint2/menu.sh slack
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/teams-for-linux.svg
-button_lclick_command = /home/igor/arch/misc/teams/teams2
+button_lclick_command = /home/igor/arch/tint2/menu.sh teams
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/discord.svg
-button_lclick_command = /usr/bin/apulse /usr/bin/discord
+button_lclick_command = /home/igor/arch/tint2/menu.sh discord
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/skype.svg
-button_lclick_command = chromium --app=https://web.skype.com
+button_lclick_command = /home/igor/arch/tint2/menu.sh skype
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/lazpaint.svg
-button_lclick_command = chromium --app=https://jspaint.app --incognito
+button_lclick_command = /home/igor/arch/tint2/menu.sh paint
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/vlc.svg
-button_lclick_command = vlc
+button_lclick_command = /home/igor/arch/tint2/menu.sh vlc
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/obs.svg
-button_lclick_command = obs
+button_lclick_command = /home/igor/arch/tint2/menu.sh obs
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/preferences-desktop-gaming.svg
-button_lclick_command = xdotool key ctrl+alt+space
+button_lclick_command = /home/igor/arch/tint2/menu.sh gaming
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
