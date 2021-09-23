@@ -1,27 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
 
-	<menu id="root-menu" label="Openbox 3">
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+  <menu id="games-menu" label="games">
 
-		<item label="terminal">
-			<action name="Execute">
-				<execute>xfce4-terminal</execute>
-			</action>
-		</item>
-		
-		<separator/>
+    <item label="Project Diablo 2         " icon="/usr/share/icons/Papirus/16x16/apps/doom3.svg">
+      <action name="Execute">
+        <execute>/home/igor/arch/tint2/menu.sh pd2</execute>
+      </action>
+    </item>
 
-		<item label="reboot">
-			<action name="Execute">
-				<execute>sudo reboot</execute>
-			</action>
-		</item>
+    <separator />
 
-		<item label="poweroff">
-			<action name="Execute">
-				<execute>sudo poweroff</execute>
-			</action>
-		</item>
+    <item label="World of Warcraft" icon="/usr/share/icons/Papirus/16x16/apps/wargus.svg">
+      <action name="Execute">
+        <execute>/home/igor/arch/tint2/menu.sh wow</execute>
+      </action>
+    </item>
 
-	</menu>
+    <separator />
+
+    <item label="OpenMW" icon="/usr/share/icons/Papirus/16x16/apps/openmw.svg">
+      <action name="Execute">
+        <execute>/home/igor/arch/tint2/menu.sh openmw</execute>
+      </action>
+    </item>
+
+  </menu>
 </openbox_menu>

@@ -1,11 +1,15 @@
 !! menu items
 menu.items.bg: flat solid
-menu.items.bg.color: #212121
+menu.items.bg.color: #4A4A4A
 menu.items.text.color: #ffffff
 menu.items.disabled.text.color: #ffffff
 menu.items.active.bg: flat solid
 menu.items.active.bg.color: #ffffff
 menu.items.active.text.color: #212121
+
+menu.separator.color: #4A4A4A
+menu.separator.width: 3
+menu.separator.padding.height: 0
 
 !! osd labels
 window.active.label.text.color: #ffffff

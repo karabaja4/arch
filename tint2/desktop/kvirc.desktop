@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=KVIrc
-Type=Application
-Exec=kvirc -m %u
-Icon=irc-chat
-Terminal=false
-StartupNotify=false

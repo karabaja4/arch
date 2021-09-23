@@ -40,6 +40,12 @@
       <weight>Bold</weight>
       <slant>Normal</slant>
     </font>
+    <font place="MenuItem">
+      <name>Roboto</name>
+      <size>9</size>
+      <weight>Bold</weight>
+      <slant>Normal</slant>
+    </font>
   </theme>
 
   <desktops>
@@ -102,6 +108,11 @@
         <command>/home/igor/arch/scripts/scrot.sh</command>
       </action>
     </keybind>
+    <keybind key="C-A-space">
+      <action name="ShowMenu">
+        <menu>games-menu</menu>
+      </action>
+    </keybind>
   </keyboard>
 
   <mouse>
@@ -148,6 +159,16 @@
     </context>
 
   </mouse>
+
+  <menu>
+    <file>menu.xml</file>
+    <hideDelay>200</hideDelay>
+    <middle>no</middle>
+    <submenuShowDelay>100</submenuShowDelay>
+    <submenuHideDelay>400</submenuHideDelay>
+    <showIcons>yes</showIcons>
+    <manageDesktops>yes</manageDesktops>
+  </menu>
 
   <applications>
     <application type="normal">

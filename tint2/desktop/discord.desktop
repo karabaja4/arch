@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Discord
-Type=Application
-Exec=/usr/bin/apulse /usr/bin/discord
-Icon=discord
-Terminal=false
-StartupNotify=false

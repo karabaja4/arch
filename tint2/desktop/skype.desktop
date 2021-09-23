@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=skype
-Type=Application
-Exec=chromium --app=https://web.skype.com
-Icon=skype
-Terminal=false
-StartupNotify=false

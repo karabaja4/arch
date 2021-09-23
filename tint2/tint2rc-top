@@ -35,38 +35,8 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = top
-panel_items = LFE
+panel_items = PPPPPPPPPPPPPPPPPPPFE
 strut_policy = follow_size
-
-#---------------------------------------------
-# LAUNCHER
-#---------------------------------------------
-launcher_icon_theme = Papirus
-launcher_padding = 7 5 6
-launcher_background_id = 1
-launcher_icon_size = 16
-launcher_item_app = /usr/share/applications/xfce4-terminal.desktop
-launcher_item_app = /usr/share/applications/chromium.desktop
-launcher_item_app = /usr/share/applications/firefox.desktop
-launcher_item_app = /usr/share/applications/qtfm.desktop
-launcher_item_app = /usr/share/applications/org.qbittorrent.qBittorrent.desktop
-launcher_item_app = /usr/share/applications/qtextpad.desktop
-launcher_item_app = /usr/share/applications/visual-studio-code.desktop
-#launcher_item_app = /usr/share/applications/robo3t.desktop
-launcher_item_app = /usr/share/applications/azuredatastudio.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/sqlbrowser.desktop
-launcher_item_app = /usr/share/applications/virtualbox.desktop
-launcher_item_app = /usr/share/applications/postman.desktop
-launcher_item_app = /usr/share/applications/slack.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/teams.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/discord.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/skype.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/mspaint.desktop
-launcher_item_app = /usr/share/applications/vlc.desktop
-launcher_item_app = /usr/share/applications/com.obsproject.Studio.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/pd2.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/wow.desktop
-launcher_item_app = /home/igor/arch/tint2/desktop/openmw.desktop
 
 #-------------------------------------
 # Executor 1
@@ -80,3 +50,139 @@ execp_padding = 10 0
 execp_tooltip =
 execp_markup = 1
 execp_lclick_command = gsimplecal
+
+# Buttons
+#-------------------------------------
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/utilities-terminal.svg
+button_lclick_command = xfce4-terminal
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/chromium-browser.svg
+button_lclick_command = chromium
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/firefox.svg
+button_lclick_command = firefox
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/qtfm.svg
+button_lclick_command = qtfm
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/qbittorrent.svg
+button_lclick_command = qbittorrent
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/accessories-text-editor.svg
+button_lclick_command = qtextpad
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/visual-studio-code.svg
+button_lclick_command = code
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/azuredatastudio.svg
+button_lclick_command = azuredatastudio
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/sqlitebrowser.svg
+button_lclick_command = /opt/ssh-sqlite-manager-linux-x64/ssh-sqlite-manager
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/virtualbox.svg
+button_lclick_command = VirtualBox
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/postman.svg
+button_lclick_command = postman
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/slack.svg
+button_lclick_command = slack -s
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/teams-for-linux.svg
+button_lclick_command = /home/igor/arch/misc/teams/teams2
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/discord.svg
+button_lclick_command = /usr/bin/apulse /usr/bin/discord
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/skype.svg
+button_lclick_command = chromium --app=https://web.skype.com
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/lazpaint.svg
+button_lclick_command = chromium --app=https://jspaint.app --incognito
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/vlc.svg
+button_lclick_command = vlc
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/obs.svg
+button_lclick_command = obs
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/preferences-desktop-gaming.svg
+button_lclick_command = xdotool key ctrl+alt+space
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16
+
