@@ -1,7 +1,7 @@
 #!/bin/sh
 
 _detach() {
-    ( "${@}" & ) > /dev/null 2>&1 &
+    ( "${@}" & ) > /dev/null 2>&1
 }
 
 case "${1}" in
