@@ -1,63 +1,63 @@
 #!/bin/sh
 
-_detach() {
-    ( "${@}" & ) > /dev/null 2>&1
+_run() {
+    "${@}" > /dev/null 2>&1
 }
 
 case "${1}" in
 terminal)
-    _detach xfce4-terminal
+    _run xfce4-terminal
     ;;
 chromium)
-    _detach chromium
+    _run chromium
     ;;
 firefox)
-    _detach firefox
+    _run firefox
     ;;
 qtfm)
-    _detach qtfm
+    _run qtfm
     ;;
 qbittorrent)
-    _detach qbittorrent
+    _run qbittorrent
     ;;
 qtextpad)
-    _detach qtextpad
+    _run qtextpad
     ;;
 code)
-    _detach code
+    _run code
     ;;
 azuredatastudio)
-    _detach azuredatastudio
+    _run azuredatastudio
     ;;
 sqlite)
-    _detach /opt/ssh-sqlite-manager-linux-x64/ssh-sqlite-manager
+    _run /opt/ssh-sqlite-manager-linux-x64/ssh-sqlite-manager
     ;;
 virtualbox)
-    _detach VirtualBox
+    _run VirtualBox
     ;;
 postman)
-    _detach postman
+    _run postman
     ;;
 slack)
-    _detach slack -s
+    _run slack -s
     ;;
 teams)
-    _detach /home/igor/arch/misc/teams/teams2
+    _run /home/igor/arch/misc/teams/teams2
     ;;
 discord)
-    _detach /usr/bin/apulse /usr/bin/discord
+    _run /usr/bin/apulse /usr/bin/discord
     ;;
 skype)
-    _detach chromium --app=https://web.skype.com
+    _run chromium --app=https://web.skype.com
     ;;
 paint)
-    _detach chromium --app=https://jspaint.app --incognito
+    _run chromium --app=https://jspaint.app --incognito
     ;;
 vlc)
-    _detach vlc
+    _run vlc
     ;;
 obs)
-    _detach obs
+    _run obs
     ;;
 gaming)
     xdotool key ctrl+alt+space
@@ -65,13 +65,13 @@ gaming)
 pd2)
     export __GL_FSAA_MODE=11
     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
-    _detach wine Game.exe
+    _run wine Game.exe
     ;;
 wow)
-    _detach wine /home/igor/.wine/drive_c/wow/WoW.exe
+    _run wine /home/igor/.wine/drive_c/wow/WoW.exe
     ;;
 openmw)
-    _detach openmw-launcher
+    _run openmw-launcher
     ;;
 *)
     echo "unknown app"
