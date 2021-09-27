@@ -24,18 +24,6 @@
 		"command": "/usr/bin/ntpd -n -g -u ntp"
 	},
 	{
-		"name": "mongodb",
-		"enabled": false,
-		"user": "mongodb",
-		"command": "/usr/bin/mongod --config /etc/mongodb.conf"
-	},
-	{
-		"name": "redis",
-		"enabled": false,
-		"user": "redis",
-		"command": "/usr/bin/redis-server /etc/redis/redis.conf"
-	},
-	{
 		"name": "vnc",
 		"enabled": false,
 		"user": "igor",
