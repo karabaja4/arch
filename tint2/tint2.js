@@ -70,9 +70,10 @@ const print = async () => {
   text += span(fonts.awesome, 7500, 100, colorize2, icons.ping, 'PNG', '$0 ms', [
     data?.ws?.ping // 0
   ], 0);
-  text += span(fonts.flaticon, 5000, 1000, colorize2, icons.cpu, 'CPU', '$0% ($1 MHz)', [
+  text += span(fonts.flaticon, 5000, 1000, colorize2, icons.cpu, 'CPU', '$0% ($1 MHz, $2°C)', [
     data?.conky?.cpu?.perc, // 0
-    data?.conky?.cpu?.freq // 1
+    data?.conky?.cpu?.freq, // 1
+    data?.conky?.cpu?.temp // 2
   ], 0);
   text += span(fonts.flaticon, 7500, 100, colorize2, icons.mem, 'RAM', '$0B / $1B', [
     data?.conky?.mem?.used, // 0

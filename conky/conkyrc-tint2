@@ -13,7 +13,8 @@ conky.text = [[
 	},
 	"cpu": {
 		"perc": "${cpu}",
-		"freq": "${freq}"
+		"freq": "${freq}",
+		"temp": "${hwmon 1 temp 1}"
 	},
 	"mem": {
 		"perc": "${memperc}",
