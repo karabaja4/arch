@@ -51,7 +51,7 @@ skype)
     _run chromium --app=https://web.skype.com
     ;;
 paint)
-    _run chromium --app=https://jspaint.app --incognito
+    _run chromium --app=https://jspaint.app
     ;;
 vlc)
     _run vlc
