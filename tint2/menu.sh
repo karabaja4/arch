@@ -68,6 +68,7 @@ pd2)
     _run wine Game.exe
     ;;
 wow)
+    rm -r /home/igor/.wine/drive_c/wow/WDB
     _run wine /home/igor/.wine/drive_c/wow/WoW.exe
     ;;
 openmw)
