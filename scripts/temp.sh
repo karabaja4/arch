@@ -37,6 +37,6 @@ _link_config_dir() {
 _link_config_dir "Microsoft"
 _link_config_dir "Microsoft Teams - Preview"
 _link_config_dir "Postman"
-_link_config_dir "Slack"
+#_link_config_dir "Slack"
 _link_config_dir "discord"
 _link_config_dir "teams"
