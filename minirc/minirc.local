@@ -6,7 +6,6 @@ printf "0" > /proc/sys/kernel/printk
 touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p /run/dbus
-mkdir -m 1777 /tmp/.X11-unix
 install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/runtime-${_user}"
 printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 printf "\n"
