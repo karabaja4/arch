@@ -2,5 +2,6 @@
 
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
+xrandr --dpi 96
 
 exec /usr/bin/openbox --sm-disable --startup /home/igor/arch/openbox/autostart
