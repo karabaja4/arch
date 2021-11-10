@@ -1,0 +1,2 @@
+sudo ln -sfvT /home/igor/arch/nvidia/xorg.conf.d /etc/X11/xorg.conf.d
+ln -s /home/igor/arch/nvidia/xinitrc /home/igor/.xinitrc

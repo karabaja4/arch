@@ -14,8 +14,6 @@ alias x='exit'
 alias sr='screen -r'
 alias sn='screen -S'
 
-alias startx='exec /home/igor/arch/nvidia/nvidia.sh'
-
 mkmine() {
     if [[ -n "${1}" ]]
     then
