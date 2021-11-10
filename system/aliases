@@ -14,6 +14,8 @@ alias x='exit'
 alias sr='screen -r'
 alias sn='screen -S'
 
+alias startx='exec startx'
+
 mkmine() {
     if [[ -n "${1}" ]]
     then
