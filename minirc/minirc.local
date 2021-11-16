@@ -3,7 +3,6 @@
 _user="$(id -un 1000)"
 
 printf "0" > /proc/sys/kernel/printk
-touch /var/run/utmp
 mkdir -p /run/samba
 mkdir -p /run/dbus
 install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/runtime-${_user}"
