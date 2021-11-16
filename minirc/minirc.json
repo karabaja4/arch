@@ -1,62 +1,62 @@
 [
-	{
-		"name": "dbus",
-		"enabled": false,
-		"user": "root",
-		"command": "/usr/bin/dbus-daemon --system --nofork --nopidfile --syslog-only"
-	},
-	{
-		"name": "dhcpcd",
-		"enabled": true,
-		"user": "root",
-		"command": "/usr/bin/dhcpcd -4 -n -B -z enp2s0"
-	},
-	{
-		"name": "sshd",
-		"enabled": true,
-		"user": "root",
-		"command": "/usr/bin/sshd -D -e"
-	},
-	{
-		"name": "ntpd",
-		"enabled": true,
-		"user": "root",
-		"command": "/usr/bin/ntpd -n -g -u ntp"
-	},
-	{
-		"name": "vnc",
-		"enabled": false,
-		"user": "igor",
-		"command": "/usr/bin/vncserver :1"
-	},
-	{
-		"name": "samba",
-		"enabled": false,
-		"user": "root",
-		"command": "/usr/bin/smbd --foreground --no-process-group"
-	},
-	{
-		"name": "haveged",
-		"enabled": true,
-		"user": "root",
-		"command": "/usr/bin/haveged -w 1024 -v 1 --Foreground"
-	},
-	{
-		"name": "cron",
-		"enabled": true,
-		"user": "root",
-		"command": "/usr/bin/crond -n"
-	},
-	{
-		"name": "syslog",
-		"enabled": false,
-		"user": "root",
-		"command": "/usr/bin/syslog-ng -F"
-	},
-	{
-		"name": "vpn",
-		"enabled": false,
-		"user": "root",
-		"command": "/usr/bin/openfortivpn"
-	}
+    {
+        "name": "dbus",
+        "enabled": false,
+        "user": "root",
+        "command": "/usr/bin/dbus-daemon --system --nofork --nopidfile --syslog-only"
+    },
+    {
+        "name": "dhcpcd",
+        "enabled": true,
+        "user": "root",
+        "command": "/usr/bin/dhcpcd -4 -n -B -z enp2s0"
+    },
+    {
+        "name": "sshd",
+        "enabled": true,
+        "user": "root",
+        "command": "/usr/bin/sshd -D -e"
+    },
+    {
+        "name": "ntpd",
+        "enabled": true,
+        "user": "root",
+        "command": "/usr/bin/ntpd -n -g -u ntp"
+    },
+    {
+        "name": "vnc",
+        "enabled": false,
+        "user": "igor",
+        "command": "/usr/bin/vncserver :1"
+    },
+    {
+        "name": "samba",
+        "enabled": false,
+        "user": "root",
+        "command": "/usr/bin/smbd --foreground --no-process-group"
+    },
+    {
+        "name": "haveged",
+        "enabled": true,
+        "user": "root",
+        "command": "/usr/bin/haveged -w 1024 -v 1 --Foreground"
+    },
+    {
+        "name": "cron",
+        "enabled": true,
+        "user": "root",
+        "command": "/usr/bin/crond -n"
+    },
+    {
+        "name": "syslog",
+        "enabled": false,
+        "user": "root",
+        "command": "/usr/bin/syslog-ng -F"
+    },
+    {
+        "name": "vpn",
+        "enabled": false,
+        "user": "root",
+        "command": "/usr/bin/openfortivpn"
+    }
 ]

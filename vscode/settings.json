@@ -94,5 +94,6 @@
     "omnisharp.useGlobalMono": "never",
     "workbench.startupEditor": "welcomePage",
     "terminal.integrated.persistentSessionReviveProcess": "never",
-    "terminal.integrated.tabs.enabled": false
+    "terminal.integrated.tabs.enabled": false,
+    "diffEditor.ignoreTrimWhitespace": false
 }
