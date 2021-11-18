@@ -26,7 +26,7 @@ _desktop() {
 
     # daemons
     xsettingsd -c "${HOME}/arch/xfce4-terminal/xsettingsd" &
-    #xcompmgr -a &
+    xcompmgr -a &
 
     # resolution and background
     "${HOME}/arch/scripts/fixres.sh"
