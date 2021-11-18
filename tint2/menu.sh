@@ -1,7 +1,7 @@
 #!/bin/sh
 
 _run() {
-    "${@}" > /dev/null 2>&1
+    exec "${@}" > /dev/null 2>&1
 }
 
 case "${1}" in
