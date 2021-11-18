@@ -140,7 +140,7 @@ const mounts = async () => {
 const ws = async () => {
   return new Promise((resolve) => {
     const ticks = () => process.hrtime.bigint();
-    const ws = new WebSocket('wss://linode.aerium.hr/ping');
+    const ws = new WebSocket('wss://avacyn.aerium.hr/ping');
     const timeout = setTimeout(() => {
       ws.terminate();
     }, 5000);

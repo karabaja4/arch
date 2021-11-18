@@ -110,8 +110,8 @@ mountlinode() {
     mkdir -p "${private}"
     local -r username="$(jq -crM '.linode.samba.username' "${HOME}/arch/secret.json")"
     local -r password="$(jq -crM '.linode.samba.password' "${HOME}/arch/secret.json")"
-    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //linode.aerium.hr/public "${public}"
-    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //linode.aerium.hr/private "${private}"
+    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/public "${public}"
+    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/private "${private}"
 }
 
 alias zxvf="tar zxvf"
