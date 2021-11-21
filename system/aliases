@@ -102,6 +102,7 @@ alias ddiff="code -d"
 alias wget="wget --no-hsts"
 alias md2pdf='markdown-pdf'
 alias rezije='node /home/igor/git/rezije/main.js'
+alias code='code --use-gl=desktop'
 
 mountlinode() {
     local -r public="/home/igor/_public/"

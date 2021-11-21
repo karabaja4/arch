@@ -24,7 +24,7 @@ qtextpad)
     _run qtextpad
     ;;
 code)
-    _run code
+    _run code --use-gl=desktop
     ;;
 azuredatastudio)
     _run azuredatastudio
