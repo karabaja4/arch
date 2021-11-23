@@ -55,7 +55,7 @@
     "breadcrumbs.enabled": false,
     "msbuildProjectTools.nuget.newestVersionsFirst": true,
     "explorer.confirmDelete": false,
-    "msbuildProjectTools.logging.level": "Error",
+    "msbuildProjectTools.logging.level": "Verbose",
     "omnisharp.disableMSBuildDiagnosticWarning": true,
     "razor.disabled": true,
     "window.titleBarStyle": "custom",
