@@ -137,50 +137,41 @@ const mounts = async () => {
   }
 }
 
-const ws = async () => {
-  return new Promise((resolve) => {
-    const ticks = () => process.hrtime.bigint();
-    const ws = new WebSocket('wss://avacyn.aerium.hr/ping');
-    const timeout = setTimeout(() => {
-      ws.terminate();
-    }, 5000);
-    let interval = null;
-    ws.on('open', () => {
-      interval = setInterval(() => {
-        ws.send(ticks().toString());
-      }, 1000);
-    });
-    ws.on('message', (inc) => {
-      const end = ticks();
-      timeout.refresh();
-      const obj = JSON.parse(inc);
-      const start = BigInt(obj.message);
-      const nano = end - start;
-      const du = obj.diskusage;
-      data.ws = {
-        ping: parseInt(parseFloat(nano) / (1000 * 1000)),
-        cls: {
-          perc: Math.round((du.used / du.total) * 100).toString(),
-          used: (du.used / (1024 * 1024)).toFixed(2),
-          size: (du.total / (1024 * 1024)).toFixed(2),
-        }
-      }
-    });
-    ws.on('error', () => {});
-    ws.on('close', (code) => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-      delete data.ws;
-      resolve(code);
-    });
+const ping = () => {
+  const ticks = () => process.hrtime.bigint();
+  const ws = new WebSocket('wss://avacyn.aerium.hr/ping');
+  const timeout = setTimeout(() => {
+    ws.terminate();
+  }, 5000);
+  let interval = null;
+  ws.on('open', () => {
+    interval = setInterval(() => {
+      ws.send(ticks().toString());
+    }, 1000);
   });
-}
-
-const ping = async () => {
-  while (true) {
-    await ws();
-    await timers.setTimeout(5000); // ws crashed
-  }
+  ws.on('message', (inc) => {
+    const end = ticks();
+    timeout.refresh();
+    const obj = JSON.parse(inc);
+    const start = BigInt(obj.message);
+    const nano = end - start;
+    const du = obj.diskusage;
+    data.ws = {
+      ping: parseInt(parseFloat(nano) / (1000 * 1000)),
+      cls: {
+        perc: Math.round((du.used / du.total) * 100).toString(),
+        used: (du.used / (1024 * 1024)).toFixed(2),
+        size: (du.total / (1024 * 1024)).toFixed(2),
+      }
+    }
+  });
+  ws.on('error', () => {});
+  ws.on('close', () => {
+    clearInterval(interval);
+    clearTimeout(timeout);
+    delete data.ws;
+    ping(); // ws crashed
+  });
 }
 
 const main = async () => {
