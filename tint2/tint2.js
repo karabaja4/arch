@@ -170,7 +170,9 @@ const ping = () => {
     clearInterval(interval);
     clearTimeout(timeout);
     delete data.ws;
-    ping(); // ws crashed
+    setTimeout(() => {
+      ping(); // ws crashed
+    }, 5000);
   });
 }
 
