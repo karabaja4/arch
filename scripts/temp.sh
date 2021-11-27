@@ -9,8 +9,8 @@ fi
 _user="$(id -un)"
 printf '%s\n' "Symlinking temporary config dirs (${_user})"
 
-_tmp_config="/tmp/config-${_user}"
-_tmp_cache="/tmp/cache-${_user}"
+_tmp_config="/tmp/xdg-${_user}/config"
+_tmp_cache="/tmp/xdg-${_user}/cache"
 
 _user_config="/home/${_user}/.config"
 _user_cache="/home/${_user}/.cache"
