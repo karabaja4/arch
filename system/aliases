@@ -115,7 +115,7 @@ mountlinode() {
 }
 
 alias zxvf="tar zxvf"
-alias sudo='sudo -E'
+#alias sudo='sudo -E'
 alias unmountall='/home/igor/arch/qtfm/qtfm.sh unmount'
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
