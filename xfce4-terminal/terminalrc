@@ -34,4 +34,5 @@ TitleMode=TERMINAL_TITLE_REPLACE
 MiscSearchDialogOpacity=100
 MiscShowUnsafePasteDialog=FALSE
 ColorBoldIsBright=FALSE
+ColorPalette=rgb(0,0,0);rgb(163,21,21);rgb(0,128,0);rgb(116,83,31);rgb(0,0,255);rgb(143,8,196);rgb(43,145,175);rgb(170,170,170);rgb(85,85,85);rgb(255,0,0);rgb(85,255,85);rgb(255,255,85);rgb(85,85,255);rgb(255,85,255);rgb(85,255,255);rgb(255,255,255)
 
