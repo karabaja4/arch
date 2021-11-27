@@ -8,9 +8,9 @@ pkgdesc="Windows 8.1 fonts"
 arch=('any')
 url="https://www.microsoft.com"
 license=('custom')
-source=("https://avacyn.aerium.hr/stuff/WindowsFonts.tar.gz")
-sha256sums=('48cbdc6b5bda17faa4d8b9081e9848f287e46b2d46f30e1c51c05e84781e518d')
+source=("https://avacyn.aerium.hr/stuff/win81fonts.tar.gz")
+sha256sums=('547f31430175e03231649c0ad076b261722758ac985afe56439b2bd4f59827af')
 
 package() {
-  install -Dm644 WindowsFonts/* -t "$pkgdir/usr/share/fonts/WindowsFonts"
+  install -Dm644 win81fonts/* -t "$pkgdir/usr/share/fonts/win81fonts"
 }

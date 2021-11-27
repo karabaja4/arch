@@ -1,0 +1,16 @@
+# Maintainer: Igor Saric <karabaja4 at gmail.com>
+# shellcheck disable=SC2181,SC2148,SC2034,SC2164,SC2154
+
+pkgname=ttf-win11-fonts
+pkgver=1.0
+pkgrel=1
+pkgdesc="Windows 11 fonts"
+arch=('any')
+url="https://www.microsoft.com"
+license=('custom')
+source=("https://avacyn.aerium.hr/stuff/win11fonts.tar.gz")
+sha256sums=('e907d32037cd31c453f6c9cac06af0d5bbcadc983ecd6d2d953b702c3aad518b')
+
+package() {
+  install -Dm644 win11fonts/* -t "$pkgdir/usr/share/fonts/win11fonts"
+}
