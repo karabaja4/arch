@@ -3,16 +3,15 @@
 _user="$(id -un 1000)"
 
 _mkxdg() {
-    install -m 755 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
+    install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
 }
 
 printf "0" > /proc/sys/kernel/printk
 mkdir -p /run/samba
 mkdir -p /run/dbus
 
+_mkxdg ""
 _mkxdg "runtime"
-_mkxdg "config"
-_mkxdg "cache"
 
 printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 printf "\n"
