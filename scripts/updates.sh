@@ -48,9 +48,12 @@ _cu() {
     _cu_rv="${?}"
     _cu_wc=""
 
-    if [ "${_cu_rv}" -eq 0 ] || [ "${_cu_rv}" -eq 2 ]
+    if [ "${_cu_rv}" -eq 0 ] && [ -n "${_cu_out}" ]
     then
         _cu_wc="$(echo "${_cu_out}" | wc -l)"
+    elif [ "${_cu_rv}" -eq 2 ] && [ -z "${_cu_out}" ]
+    then
+        _cu_wc="0"
     else
         _echo "checkupdates failed with [${_cu_rv}]:" "[${_cu_out}]"
     fi
