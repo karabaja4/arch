@@ -7,3 +7,5 @@ umount "/home/${_user}/_mmc" > /dev/null 2>&1
 umount "/home/${_user}/_private" > /dev/null 2>&1
 umount "/home/${_user}/_public" > /dev/null 2>&1
 umount /mnt/* > /dev/null 2>&1
+
+rm -rf "/home/${_user}/.cache"

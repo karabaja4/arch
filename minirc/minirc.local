@@ -20,4 +20,3 @@ swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 # modules
 modprobe ppp_generic
 
-su - "${_user}" -c "/bin/sh /home/igor/arch/scripts/temp.sh"
