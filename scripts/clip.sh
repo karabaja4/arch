@@ -23,7 +23,7 @@ _usage() {
 
 _iteration() {
 
-    if xdotool getactivewindow getwindowname | grep FreeRDP
+    if xdotool getactivewindow getwindowname | grep FreeRDP > /dev/null
     then
         _log "FreeRDP clipboard is not supported"
         sleep 1
