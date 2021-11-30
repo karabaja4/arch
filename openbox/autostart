@@ -38,7 +38,6 @@ _desktop() {
     conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
 
     # conky tint2
-    mkfifo /tmp/conky-tint2.fifo
     conky -d -c "${HOME}/arch/conky/conkyrc-tint2"
 
     # tray
