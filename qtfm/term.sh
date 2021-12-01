@@ -39,7 +39,7 @@ _exec() {
         ;;
     unmount)
         sudo umount -v /mnt/igor/* || echo "umount failed"
-        sudo rm -vrf /mnt/igor/* || echo "rm failed"
+        rm -vrf /mnt/igor/* || echo "rm failed"
         ;;
     esac
 
