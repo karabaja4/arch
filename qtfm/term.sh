@@ -38,8 +38,8 @@ _exec() {
         zip -vr "${_params[1]}.zip" "${_params[@]:2}"
         ;;
     unmount)
-        sudo umount -v /mnt/* || echo "umount failed"
-        sudo rm -vrf /mnt/* || echo "rm failed"
+        sudo umount -v /mnt/igor/* || echo "umount failed"
+        sudo rm -vrf /mnt/igor/* || echo "rm failed"
         ;;
     esac
 
