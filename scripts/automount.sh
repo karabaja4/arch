@@ -18,15 +18,19 @@ _not_root() {
 [ "${#}" -ne 1 ] && _usage
 [ "$(id -u)" -ne 0 ] && _not_root
 
-_mount_uid=1000
+_user="$(id -un 1000)"
+
+_mkdir() {
+    install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
+}
 
 _mount() (
-    _user="$(id -un ${_mount_uid})"
-    _dir="/mnt/${1}"
+    _mkdir "/mnt/${_user}"
+    _mkdir "/mnt/${_user}/${1}"
+
     _uid="$(id -u "${_user}")"
     _gid="$(id -g "${_user}")"
-    install -m 0755 -g "${_user}" -o "${_user}" -d "${_dir}"
-    mount -o uid="${_uid}",gid="${_gid}" "/dev/${1}" "${_dir}"
+    mount -o uid="${_uid}",gid="${_gid}" "/dev/${1}" "/mnt/${_user}/${1}"
 )
 
 _enum() {
