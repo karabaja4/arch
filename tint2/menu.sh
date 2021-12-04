@@ -45,7 +45,7 @@ teams)
     _run /home/igor/arch/misc/teams/teams2
     ;;
 discord)
-    _run /usr/bin/apulse /usr/bin/discord
+    _run chromium --app=https://discord.com/app
     ;;
 skype)
     _run chromium --app=https://web.skype.com
