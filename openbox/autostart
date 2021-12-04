@@ -18,8 +18,10 @@ _desktop() {
 
     echo "Started Openbox"
     
-    # mouse sens
+    # xorg settings
     xinput set-prop 11 326 0.5
+    xset -display :0.0 dpms 0 0 0
+    nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
     
     # alsa
     "${HOME}/arch/scripts/sound.sh" pch
@@ -49,11 +51,8 @@ _desktop() {
     "${HOME}/arch/scripts/clip.sh" > /dev/null 2>&1 &
     sleep 1
     flameshot &
-    sleep 1
+    #sleep 1
     #synergy &
-
-    xset -display :0.0 dpms 0 0 0
-    nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
 }
 
 /usr/bin/xdpyinfo | grep VNC > /dev/null
