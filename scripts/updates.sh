@@ -1,6 +1,15 @@
 #!/bin/sh
 set -u
 
+# multiple checkupdates calls cannot run in parallel
+# so if more than 1 conky is running checkupdates, they need to have different CHECKUPDATES_DB set
+# that is why a new CHECKUPDATES_DB is created only for this script
+
+# auracle returns 0 when there are upgradable packages and stdout is non-empty
+# auracle returns 1 when check is successful and no packages are upgradable, with empty stdout + stderr
+# auracle also returns 1 when check failed, with non-empty stdout+stderr
+# so if return code is non-zero, stdour+stderr should be empty, otherwise it should be handled as a failure
+
 _echo() {
     printf '%s\n' "${@}"
 }
@@ -8,18 +17,9 @@ _echo() {
 _root="${HOME}/.local/share/updatecount"
 mkdir -p "${_root}"
 
-# multiple checkupdates calls cannot run in parallel
-# so if more than 1 conky is running checkupdates, they need to have different CHECKUPDATES_DB set
-# that is why a new CHECKUPDATES_DB is created only for this script
-
 export CHECKUPDATES_DB="${_root}"
 
 _aur() {
-
-    # auracle returns 0 when there are upgradable packages and stdout is non-empty
-    # auracle returns 1 when check is successful and no packages are upgradable, with empty stdout + stderr
-    # auracle also returns 1 when check failed, with non-empty stdout+stderr
-    # so if return code is non-zero, stdour+stderr should be empty, otherwise it should be handled as a failure
 
     _aur_out="$(/usr/bin/auracle outdated 2>&1)"
     _aur_rv="${?}"
