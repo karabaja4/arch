@@ -33,20 +33,20 @@ _desktop() {
     xwallpaper --stretch "${HOME}/arch/wall/default8.jpg"
 
     # conky kernel
-    conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
-    conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
-    conky -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
+    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
+    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
+    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
 
     # conky tint2
-    conky -d -c "${HOME}/arch/conky/conkyrc-tint2"
+    conky -q -d -c "${HOME}/arch/conky/conkyrc-tint2"
 
     # tray
-    tint2 -c "${HOME}/arch/tint2/tint2rc-top" &
-    tint2 -c "${HOME}/arch/tint2/tint2rc-bottom" &
+    tint2 -c "${HOME}/arch/tint2/tint2rc-top" > /dev/null 2>&1 &
+    tint2 -c "${HOME}/arch/tint2/tint2rc-bottom" > /dev/null 2>&1 &
 
     # other
     sleep 1
-    "${HOME}/arch/scripts/clip.sh" > "${HOME}/clip.log" 2>&1 &
+    "${HOME}/arch/scripts/clip.sh" > /dev/null 2>&1 &
     sleep 1
     flameshot &
     sleep 1
