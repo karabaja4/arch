@@ -7,3 +7,39 @@
     purple: #8f08c4;
     methods: #74531f;
 }
+
+.fp {
+    BuiltinFunction: #8f08c4;
+    comment: #008000;
+    cssValue: #0202fd;
+    function: #020202;
+    keyWord: #0101fe;
+    number: #010101;
+    other: #ff0000;
+    quote: #a31515;
+    regex: #a21616;
+    type: #2b91af;
+    xmlElement: #0000ff;
+}
+
+.dark {
+    blk: #000000;
+    rd:  #A31515;
+    grn: #008000;
+    ylw: #74531F;
+    blu: #1F377F;
+    prp: #8F08C4;
+    cyn: #2B91AF;
+    gry: #808080;
+}
+
+.light {
+    blk: #555555;
+    rd:  #FF0000;
+    grn: #00FF00;
+    ylw: #FFFF00;
+    blu: #0000FF;
+    prp: #FF00FF;
+    cyn: #00FFFF;
+    gry: #FFFFFF;
+}
