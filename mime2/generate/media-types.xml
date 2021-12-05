@@ -4,7 +4,7 @@
 <registry xmlns="http://www.iana.org/assignments" id="media-types">
   <title>Media Types</title>
   <category>Multipurpose Internet Mail Extensions (MIME) and Media Types</category>
-  <updated>2021-11-03</updated>
+  <updated>2021-11-26</updated>
   
   
  
@@ -81,7 +81,7 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2021-07-27">
       <name>ace+cbor</name>
-      <xref type="draft" data="RFC-ietf-ace-oauth-authz-45"/>
+      <xref type="draft" data="RFC-ietf-ace-oauth-authz-46"/>
       <file type="template">application/ace+cbor</file>
     </record>
     <record>
@@ -475,6 +475,11 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="ISO-IEC_JTC1"/>
       <xref type="person" data="Thomas_Stockhammer"/>
       <file type="template">application/dash+xml</file>
+    </record>
+    <record date="2021-11-09">
+      <name>dash-patch+xml</name>
+      <xref type="person" data="ISO-IEC_JTC1"/>
+      <file type="template">application/dash-patch+xml</file>
     </record>
     <record>
       <name>dashdelta</name>
@@ -6748,6 +6753,11 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Johann_Terblanche"/>
       <file type="template">application/vnd.sycle+xml</file>
     </record>
+    <record date="2021-11-15">
+      <name>vnd.syft+json</name>
+      <xref type="person" data="Dan_Luhring"/>
+      <file type="template">application/vnd.syft+json</file>
+    </record>
     <record>
       <name>vnd.syncml.dm.notification</name>
       <xref type="person" data="Peter_Thompson"/>
@@ -11950,6 +11960,11 @@ by the IANA.</note>
       <name>Matthias Ludwig</name>
       <uri>mailto:mludwig&amp;quobject.com</uri>
       <updated>2011-03-08</updated>
+    </person>
+    <person id="Dan_Luhring">
+      <name>Dan Luhring</name>
+      <uri>mailto:dan.luhring&amp;anchore.com</uri>
+      <updated>2021-11-15</updated>
     </person>
     <person id="Howard_Lukk">
       <name>Howard Lukk</name>
