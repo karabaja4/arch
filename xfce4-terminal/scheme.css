@@ -1,27 +1,3 @@
-.colors {
-    comments: #008000;
-    class: #2b91af;
-    keyword: #0000ff;
-    red: #ff0000;
-    string: #a31515;
-    purple: #8f08c4;
-    methods: #74531f;
-}
-
-.fp {
-    BuiltinFunction: #8f08c4;
-    comment: #008000;
-    cssValue: #0202fd;
-    function: #020202;
-    keyWord: #0101fe;
-    number: #010101;
-    other: #ff0000;
-    quote: #a31515;
-    regex: #a21616;
-    type: #2b91af;
-    xmlElement: #0000ff;
-}
-
 .dark {
     blk: #000000;
     rd:  #A31515;
