@@ -2,8 +2,6 @@
 
 _vnc() {
 
-    echo "Started VNC"
-
     # daemons
     xsettingsd -c "${HOME}/arch/xfce4-terminal/xsettingsd" &
 
@@ -16,8 +14,6 @@ _vnc() {
 
 _desktop() {
 
-    echo "Started Openbox"
-    
     # xorg settings
     xset -display :0.0 dpms 0 0 0
     nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
@@ -54,8 +50,9 @@ _desktop() {
     #synergy &
 }
 
-/usr/bin/xdpyinfo | grep VNC > /dev/null
-_is_vnc="$?" # 0 if vnc
-
-[ ${_is_vnc} -eq 0 ] || _desktop
-[ ${_is_vnc} -eq 0 ] && _vnc
+if /usr/bin/xdpyinfo | grep VNC > /dev/null
+then
+    _vnc
+else
+    _desktop
+fi
