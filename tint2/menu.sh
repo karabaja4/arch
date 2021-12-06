@@ -59,6 +59,9 @@ vlc)
 obs)
     _run obs
     ;;
+kvirc)
+    _run kvirc
+    ;;
 gaming)
     xdotool key ctrl+alt+space
     ;;
