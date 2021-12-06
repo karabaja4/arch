@@ -56,7 +56,7 @@
   </desktops>
 
   <resize>
-    <drawContents>yes</drawContents>
+    <drawContents>no</drawContents>
     <popupShow>Nonpixel</popupShow>
     <popupPosition>Center</popupPosition>
     <popupFixedPosition>
