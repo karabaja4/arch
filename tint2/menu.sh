@@ -39,7 +39,7 @@ postman)
     _run postman
     ;;
 slack)
-    _run slack --disable-smooth-scrolling --start-maximized #--ignore-gpu-blocklist --enable-gpu-rasterization --enable-zero-copy
+    _run slack --disable-smooth-scrolling --start-maximized
     ;;
 teams)
     #_run /home/igor/arch/misc/teams/teams2
