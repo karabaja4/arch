@@ -43,7 +43,7 @@ slack)
     ;;
 teams)
     #_run /home/igor/arch/misc/teams/teams2
-    chromium --app=https://teams.microsoft.com
+    _run chromium --app=https://teams.microsoft.com
     ;;
 discord)
     _run chromium --app=https://discord.com/app
