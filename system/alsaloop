@@ -1,15 +1,17 @@
+# playback is the feed (source), it sends sounds to the outputs, we feed system playback to hw:Loobback,0,7 and capture on hw:Loopback,1,7
+# whatever audio is played back into hw:Loopback,0,7 could be captured from hw:Loopback,1,7 and viceversa
+
 pcm.!default {
   type asym
   playback.pcm "LoopAndReal"
-  #capture.pcm "looprec"
-  capture.pcm "hw:0,0"
+  capture.pcm "hw:Headset,0,0"
 }
 
 pcm.looprec {
     type hw
     card "Loopback"
     device 1
-    subdevice 0
+    subdevice 7
 }
 
 
@@ -41,12 +43,11 @@ pcm.MixReale {
   type dmix
   ipc_key 1024
   slave {
-    pcm "hw:0,0"
+    pcm "hw:Headset,0,0"
     rate 48000
-    #rate 44100
     periods 128
     period_time 0
-    period_size 1024 # must be power of 2
+    period_size 1024
     buffer_size 8192
   }
 }
@@ -55,12 +56,11 @@ pcm.MixLoopback {
   type dmix
   ipc_key 1025
   slave {
-    pcm "hw:Loopback,0,0"
+    pcm "hw:Loopback,0,7"
     rate 48000
-    #rate 44100
     periods 128
     period_time 0
-    period_size 1024 # must be power of 2
+    period_size 1024
     buffer_size 8192
   }
 }
