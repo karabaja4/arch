@@ -1,3 +1,4 @@
+# modprobe snd-aloop
 # playback is the feed (source), it sends sounds to the outputs, we feed system playback to hw:Loobback,0,7 and capture on hw:Loopback,1,7
 # whatever audio is played back into hw:Loopback,0,7 could be captured from hw:Loopback,1,7 and viceversa
 
