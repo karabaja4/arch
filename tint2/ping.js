@@ -25,9 +25,10 @@ const server = () => {
   wss.on('connection', (ws) => {
     ws.on('message', (message) => {
       const response = JSON.stringify({
-        message: message,
+        message: message.toString(),
         diskusage: diskusage
       });
+      console.log(`sending response: ${response}`);
       ws.send(response);
     });
   });
