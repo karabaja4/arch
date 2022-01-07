@@ -83,6 +83,9 @@ wow)
 openmw)
     _run openmw-launcher
     ;;
+quake3)
+    _run quake3
+    ;;
 *)
     echo "unknown app"
     ;;

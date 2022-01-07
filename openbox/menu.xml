@@ -25,5 +25,11 @@
       </action>
     </item>
 
+    <item label="Quake III Arena" icon="/usr/share/icons/Papirus/16x16/apps/quake3.svg">
+      <action name="Execute">
+        <execute>/home/igor/arch/tint2/menu.sh quake3</execute>
+      </action>
+    </item>
+
   </menu>
 </openbox_menu>
