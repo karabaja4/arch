@@ -209,6 +209,9 @@
     <application name="qtextpad" type="normal">
       <maximized>yes</maximized>
     </application>
+    <application name="conky">
+      <skip_taskbar>yes</skip_taskbar>
+    </application>
   </applications>
 
 </openbox_config>

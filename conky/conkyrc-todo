@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Roboto:size=9:bold',
+	font = 'Consolas:size=11',
 	draw_shades = false,
 	alignment = 'top_right',
 	gap_x = 30,
@@ -9,13 +9,15 @@ conky.config = {
 	update_interval = 86400,
 	double_buffer = true,
 	own_window = true,
-	own_window_type = 'desktop',
+	own_window_type = 'normal',
 	own_window_transparent = false,
-	own_window_colour = '#4a4a4a'
+	own_window_colour = '#FAFAFA',
+	color1 = '#212121',
+	border_width = 5
 };
 
 conky.text = [[
-${font Font Awesome 5 Free:size=10}${font}  TODO
+${color1}${font Font Awesome 5 Free:size=10}${font} TODO
 
 ${exec cat /home/igor/.todo}
 ]];
