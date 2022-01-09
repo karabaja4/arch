@@ -31,5 +31,11 @@
       </action>
     </item>
 
+    <item label="Need For Speed: High Stakes" icon="/usr/share/icons/Papirus/16x16/apps/classic-racers.svg">
+      <action name="Execute">
+        <execute>/home/igor/arch/tint2/menu.sh nfs4</execute>
+      </action>
+    </item>
+
   </menu>
 </openbox_menu>
