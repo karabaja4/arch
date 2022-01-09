@@ -76,11 +76,6 @@ pd2)
     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
     _run wine Game.exe
     ;;
-nfs4)
-    export __GL_FSAA_MODE=11
-    cd /home/igor/.wine/drive_c/nfs4 || exit
-    _run wine nfs4.exe
-    ;;
 wow)
     rm -r /home/igor/.wine/drive_c/wow/WDB
     _run wine /home/igor/.wine/drive_c/wow/WoW.exe
