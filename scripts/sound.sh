@@ -6,7 +6,7 @@ _echo() {
 }
 
 _usage() {
-    _echo "usage: $(basename "${0}") [ <card_name> | list ]"
+    _echo "usage: $(basename "${0}") [ <card_name> | l | list ]"
     exit 1
 }
 
@@ -39,12 +39,21 @@ _switch_card() {
 }
 
 _list() {
-    cat /proc/asound/card*/id
+    _default="$(amixer info | grep -oP "(?<=Card default ').+?(?='/)")"
+    cat /proc/asound/card*/id | while IFS= read -r name
+    do
+        if [ "${name}" = "${_default}" ]
+        then
+            _echo "[ ${name} ]"
+        else
+            _echo "${name}"
+        fi
+    done
     exit 1
 }
 
 case "${1}" in
-list)
+list|l)
     _list
     ;;
 *)
