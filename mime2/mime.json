@@ -24,6 +24,7 @@
     "slack://": "slack $arg",
     "file://": "qtfm $arg",
     "vscode://": "code $arg",
-    "zoommtg://": "zoom $arg"
+    "zoommtg://": "zoom $arg",
+    "msteams:/l/": "/home/igor/arch/misc/teams/teams2 $arg"
   }
 }
