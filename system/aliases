@@ -51,22 +51,10 @@ rsnc() {
     echo -e "\033[31mCheck for remaining files in ${HOME}\033[0m"
 }
 
-m4atomp3() {
-    for i in "${@}"
-    do
-        echo "-> Converting ${i}"
-        ffmpeg -i "${i}" -c:v copy -c:a libmp3lame -q:a 2 "${i}.mp3"
-    done
-}
-
 fixntp() {
     sudo rc stop ntpd
     sudo ntpd -gq
     sudo rc start ntpd
-}
-
-ytdl() {
-    youtube-dl -f 'bestaudio[ext=m4a]' "${1}"
 }
 
 todo() {
@@ -102,6 +90,8 @@ alias ddiff="code -d"
 alias wget="wget --no-hsts"
 alias md2pdf='markdown-pdf'
 alias rezije='node /home/igor/git/rezije/main.js'
+alias ytdl='youtube-dl --extract-audio --audio-format mp3 '
+alias torr='xdg-open "$(locate $HOME/_disk/torrents | fzy -l 200)"'
 
 mountlinode() {
     local -r public="/home/igor/_public/"
