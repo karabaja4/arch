@@ -14,7 +14,7 @@ alias x='exit'
 alias sr='screen -r'
 alias sn='screen -S'
 
-alias startx='exec startx -- -logverbose 0'
+alias startx='exec startx -- -logverbose 0 -nolisten tcp -nolisten unix'
 
 mkmine() {
     if [[ -n "${1}" ]]
@@ -91,7 +91,6 @@ alias wget="wget --no-hsts"
 alias md2pdf='markdown-pdf'
 alias rezije='node /home/igor/git/rezije/main.js'
 alias ytdl='youtube-dl --extract-audio --audio-format mp3 '
-alias torr='xdg-open "$(locate $HOME/_disk/torrents | fzy -l 200)"'
 
 mountlinode() {
     local -r public="/home/igor/_public/"
@@ -105,7 +104,6 @@ mountlinode() {
 }
 
 alias zxvf="tar zxvf"
-#alias sudo='sudo -E'
 alias unmountall='/home/igor/arch/qtfm/qtfm.sh unmount'
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
