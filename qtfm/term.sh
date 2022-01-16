@@ -22,12 +22,6 @@ _exec() {
     extract)
         tar xvf "${_params[1]}"
         ;;
-    unzip)
-        unzip -o "${_params[1]}"
-        ;;
-    unrar)
-        unrar x "${_params[1]}"
-        ;;
     7z)
         7z x "${_params[1]}"
         ;;
@@ -41,6 +35,28 @@ _exec() {
         sudo umount -v /mnt/igor/* || echo "umount failed"
         rm -vrf /mnt/igor/* || echo "rm failed"
         ;;
+    copyhere)
+        local _file
+        _file="$(xclip -o -selection clipboard)"
+        if [ -f "${_file}" ]
+        then
+            cp -v "${_file}" "${PWD}"
+        elif [ -d "${_file}" ]
+        then
+            cp -v -r "${_file}" "${PWD}"
+        else
+            echo "Not a file or directory."
+        fi
+        ;;
+    movehere)
+        local _file
+        _file="$(xclip -o -selection clipboard)"
+        if [ -e "${_file}" ]
+        then
+            mv -v "${_file}" "${PWD}"
+        else
+            echo "Not a file or directory."
+        fi
     esac
 
     exec bash
