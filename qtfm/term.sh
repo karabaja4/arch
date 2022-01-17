@@ -36,24 +36,24 @@ _exec() {
         rm -vrf /mnt/igor/* || echo "rm failed"
         ;;
     copyhere)
-        local _file
-        _file="$(xclip -o -selection clipboard)"
-        if [ -f "${_file}" ]
+        local _path
+        _path="$(xclip -o -selection clipboard)"
+        if [ -f "${_path}" ]
         then
-            cp -v "${_file}" "${PWD}"
-        elif [ -d "${_file}" ]
+            cp -v "${_path}" "${PWD}"
+        elif [ -d "${_path}" ]
         then
-            cp -v -r "${_file}" "${PWD}"
+            cp -v -r "${_path}" "${PWD}"
         else
             echo "Not a file or directory."
         fi
         ;;
     movehere)
-        local _file
-        _file="$(xclip -o -selection clipboard)"
-        if [ -e "${_file}" ]
+        local _path
+        _path="$(xclip -o -selection clipboard)"
+        if [ -e "${_path}" ]
         then
-            mv -v "${_file}" "${PWD}"
+            mv -v "${_path}" "${PWD}"
         else
             echo "Not a file or directory."
         fi
