@@ -29,7 +29,7 @@ _exec() {
         tar cvzf "${_params[1]}.tar.gz" "${_params[@]:2}"
         ;;
     zip)
-        zip -vr "${_params[1]}.zip" "${_params[@]:2}"
+        7z a -tzip "${_params[1]}.zip" "${_params[@]:2}"
         ;;
     copyhere|movehere)
         if [ -f "/tmp/qtfm.paths" ]
