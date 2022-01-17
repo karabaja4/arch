@@ -31,10 +31,6 @@ _exec() {
     zip)
         zip -vr "${_params[1]}.zip" "${_params[@]:2}"
         ;;
-    unmount)
-        sudo umount -v /mnt/igor/* || echo "umount failed"
-        rm -vrf /mnt/igor/* || echo "rm failed"
-        ;;
     copyhere|movehere)
         if [ -f "/tmp/qtfm.paths" ]
         then

@@ -104,7 +104,11 @@ mountlinode() {
 }
 
 alias zxvf="tar zxvf"
-alias unmountall='/home/igor/arch/qtfm/qtfm.sh unmount'
+
+unmountusb() {
+    sudo umount -v /mnt/igor/* || echo "umount failed"
+    rm -vrf /mnt/igor/* || echo "rm failed"
+}
 
 alias vmwareload="sudo modprobe -a vmw_vmci vmmon"
 alias vboxload="sudo modprobe -a vboxdrv vboxnetadp vboxnetflt"
