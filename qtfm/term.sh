@@ -35,28 +35,21 @@ _exec() {
         sudo umount -v /mnt/igor/* || echo "umount failed"
         rm -vrf /mnt/igor/* || echo "rm failed"
         ;;
-    copyhere)
-        local _path
-        _path="$(xclip -o -selection clipboard)"
-        if [ -f "${_path}" ]
+    copyhere|movehere)
+        if [ -f "/tmp/qtfm.paths" ]
         then
-            cp -v "${_path}" "${PWD}"
-        elif [ -d "${_path}" ]
-        then
-            cp -v -r "${_path}" "${PWD}"
-        else
-            echo "Not a file or directory."
+            while IFS= read -r _line
+            do
+                if [ "${_params[0]}" = "copyhere" ]
+                then
+                    cp -v -r "${_line}" "${PWD}"
+                else
+                    mv -v "${_line}" "${PWD}"
+                fi
+                
+            done < "/tmp/qtfm.paths"
         fi
         ;;
-    movehere)
-        local _path
-        _path="$(xclip -o -selection clipboard)"
-        if [ -e "${_path}" ]
-        then
-            mv -v "${_path}" "${PWD}"
-        else
-            echo "Not a file or directory."
-        fi
     esac
 
     exec bash
