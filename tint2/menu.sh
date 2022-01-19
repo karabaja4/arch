@@ -17,7 +17,12 @@ chromium)
     _run chromium
     ;;
 firefox)
-    _run firefox
+    if wmctrl -a Firefox
+    then
+        xdotool key ctrl+n
+    else
+        _run firefox
+    fi
     ;;
 qtfm)
     _run qtfm
