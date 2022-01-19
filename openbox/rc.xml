@@ -89,8 +89,18 @@
       </action>
     </keybind>
     <keybind key="W-1">
-      <action name="MoveResizeTo">
-        <monitor>1</monitor>
+      <action name="Execute">
+        <command>/home/igor/arch/tint2/menu.sh terminal</command>
+      </action>
+    </keybind>
+    <keybind key="W-2">
+      <action name="Execute">
+        <command>/home/igor/arch/tint2/menu.sh firefox</command>
+      </action>
+    </keybind>
+    <keybind key="W-3">
+      <action name="Execute">
+        <command>/home/igor/arch/tint2/menu.sh qtfm</command>
       </action>
     </keybind>
     <keybind key="W-T">
