@@ -35,7 +35,7 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = top
-panel_items = PPPPPPPPPPPPPPPPPPPPFE
+panel_items = PPPPPPPPPPPPPPPPPPPFE
 strut_policy = follow_size
 
 #-------------------------------------
@@ -62,15 +62,15 @@ button_background_id = 1
 button_max_icon_size = 16
 
 button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/chromium-browser.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh chromium
+button_icon = /usr/share/icons/Papirus/16x16/apps/firefox.svg
+button_lclick_command = /home/igor/arch/tint2/menu.sh firefox
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/firefox.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh firefox
+button_icon = /usr/share/icons/Papirus/16x16/apps/chromium-browser.svg
+button_lclick_command = /home/igor/arch/tint2/menu.sh chromium
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
@@ -106,13 +106,6 @@ button_max_icon_size = 16
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/azuredatastudio.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh azuredatastudio
-button_padding = 3 0 0
-button_background_id = 1
-button_max_icon_size = 16
-
-button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/sqlitebrowser.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh sqlite
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
