@@ -17,9 +17,9 @@ chromium)
     _run chromium
     ;;
 firefox)
-    if wmctrl -a Firefox
+    if wmctrl -lp | grep Firefox
     then
-        xdotool key ctrl+n
+        xdotool key --window "$(wmctrl -lp | grep Firefox | awk '{print $1}' | head -n1)" ctrl+n
     else
         _run firefox
     fi
