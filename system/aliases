@@ -118,17 +118,21 @@ alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export NO_AT_BRIDGE=1
-export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
 export EDITOR=nano
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 export LESSHISTFILE=/dev/null
+
+# xdg
+export XDG_DOWNLOAD_DIR="${HOME}/downloads"
+export XDG_DESKTOP_DIR="/tmp/xdg-igor/desktop"
+export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
 
 # shellcheck disable=SC1091
 source /usr/share/git/completion/git-prompt.sh
 
 bold=$(tput bold)
-red=$(tput setaf 9)
+green=$(tput setaf 2)
 gray=$(tput setaf 7)
 reset=$(tput sgr0)
-PS1='\w $(__git_ps1 "\[$gray\](%s)\[$reset\] ")\[$red\]\[$bold\]>>\[$reset\] '
+PS1='\w $(__git_ps1 "\[$gray\](%s)\[$reset\] ")\[$green\]\[$bold\]>>\[$reset\] '
 
