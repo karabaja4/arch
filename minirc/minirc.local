@@ -8,7 +8,6 @@ _mkxdg() {
 
 printf "0" > /proc/sys/kernel/printk
 mkdir -p /run/samba
-mkdir -p /run/dbus
 
 _mkxdg ""
 _mkxdg "runtime"
