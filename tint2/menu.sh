@@ -6,7 +6,7 @@ export NO_AT_BRIDGE=1
 export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
 
 # dbus info for launched apps
-_dbus_address="$(netstat -a -p --unix 2>/dev/null | grep "@/tmp/dbus" | cut -d"@" -f2)"
+_dbus_address="$(netstat -a -p --unix 2>/dev/null | grep "LISTENING" | grep "@/tmp/dbus" | cut -d"@" -f2 | head -n1)"
 if [ -n "${_dbus_address}" ]
 then
     export DBUS_SESSION_BUS_ADDRESS="unix:abstract=${_dbus_address}"
