@@ -2,8 +2,8 @@
     {
         "name": "dbus",
         "enabled": false,
-        "user": "root",
-        "command": "/usr/bin/dbus-daemon --system --nofork --nopidfile --syslog-only"
+        "user": "igor",
+        "command": "/usr/bin/dbus-daemon --session --nofork --nopidfile --nosyslog"
     },
     {
         "name": "dhcpcd",
