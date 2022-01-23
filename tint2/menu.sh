@@ -24,11 +24,12 @@ chromium)
     _run chromium
     ;;
 firefox)
-    if wmctrl -lp | grep Firefox
+    _ffid="$(wmctrl -lx | awk '$3 == "Navigator.firefox" {print $1;exit}')"
+    if [ -z "${_ffid}" ]
     then
-        xdotool key --window "$(wmctrl -lp | grep Firefox | awk '{print $1}' | head -n1)" ctrl+n
-    else
         _run firefox
+    else
+        xdotool key --window "${_ffid}" ctrl+n
     fi
     ;;
 qtfm)
