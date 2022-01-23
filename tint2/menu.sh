@@ -1,9 +1,6 @@
 #!/bin/sh
 
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export NO_AT_BRIDGE=1
-export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
+. "/home/igor/arch/scripts/env.sh"
 
 # dbus info for launched apps
 _dbus_address="$(ss -lp --unix | grep "dbus-daemon" | awk '{print substr($5,2)}')"

@@ -95,5 +95,6 @@
     "workbench.startupEditor": "welcomePage",
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.tabs.enabled": false,
-    "diffEditor.ignoreTrimWhitespace": false
+    "diffEditor.ignoreTrimWhitespace": false,
+    "shellcheck.customArgs": ["-x"]
 }
