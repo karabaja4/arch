@@ -1,7 +1,5 @@
 #!/bin/sh
 
-. "/home/igor/arch/scripts/env.sh"
-
 # dbus info for launched apps
 _dbus_address="$(ss -lp --unix | grep "dbus-daemon" | awk '{print substr($5,2)}')"
 if [ -n "${_dbus_address}" ]
