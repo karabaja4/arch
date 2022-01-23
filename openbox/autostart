@@ -43,7 +43,7 @@ _desktop() {
 
     # other
     sleep 1
-    "${HOME}/arch/scripts/clip.sh" > /dev/null 2>&1 &
+    "${HOME}/arch/scripts/clip.sh" > "${HOME}/clip.log" 2>&1 &
     sleep 1
     flameshot &
     #sleep 1
