@@ -123,12 +123,6 @@ export EDITOR=nano
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 export LESSHISTFILE=/dev/null
 
-_dbus_address="$(netstat -a -p --unix 2>/dev/null | grep /tmp/dbus | cut -d"@" -f2)"
-if [ -n "${_dbusaddr}" ]
-then
-    export DBUS_SESSION_BUS_ADDRESS="unix:abstract=${_dbus_address}"
-fi
-
 # shellcheck disable=SC1091
 source /usr/share/git/completion/git-prompt.sh
 

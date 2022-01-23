@@ -5,6 +5,13 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export NO_AT_BRIDGE=1
 export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
 
+# dbus info for launched apps
+_dbus_address="$(netstat -a -p --unix 2>/dev/null | grep @/tmp/dbus | cut -d"@" -f2)"
+if [ -n "${_dbusaddr}" ]
+then
+    export DBUS_SESSION_BUS_ADDRESS="unix:abstract=${_dbus_address}"
+fi
+
 _run() {
     exec "${@}" > /dev/null 2>&1
 }
