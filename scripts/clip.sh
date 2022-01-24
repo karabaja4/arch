@@ -23,7 +23,8 @@ _usage() {
 
 _iteration() {
 
-    if xdotool getactivewindow getwindowname | grep FreeRDP > /dev/null
+    _awcn="$(xdotool getactivewindow getwindowclassname 2>/dev/null)"
+    if [ "${_awcn}" = "xfreerdp" ]
     then
         # stay in this loop while FreeRDP is in focus so clipboard stays under ownership of FreeRDP
         # after FreeRDP loses focus transfer the contents into xclip so it's available to other apps
