@@ -25,6 +25,8 @@ _iteration() {
 
     if xdotool getactivewindow getwindowname | grep FreeRDP > /dev/null
     then
+        # stay in this loop while FreeRDP is in focus so clipboard stays under ownership of FreeRDP
+        # after FreeRDP loses focus transfer the contents into xclip so it's available to other apps
         _log "FreeRDP clipboard is not supported"
         sleep 1
         return 1
@@ -40,8 +42,9 @@ _iteration() {
         # on empty wait for any selection
         _log "Waiting on initial selection with: ${_utf8}"
 
+        # take ownership of clipboard so we block the loop and wait for someone to take ownership
         # if this fails probably X connection is lost, so exit the script
-        xclip -verbose -in -selection clipboard -t "${_utf8}" < /dev/null || exit 3
+        xclip -verbose -in -selection clipboard -t "${_utf8}" /dev/null || exit 3
     else
         _log "Clipboard targets: ${_tc}"
         _log "Preferred targets: ${_pref}"
@@ -53,8 +56,15 @@ _iteration() {
         if [ -n "${_match}" ]
         then
             _log "Matched target: ${_match}"
-            xclip -verbose -out -selection clipboard -t "${_match}" | xclip -verbose -in -selection clipboard -t "${_match}"
-            _log "xclip pipe exited"
+
+            # put clipboard content into temp file
+            xclip -verbose -out -selection clipboard -t "${_match}" > /tmp/xclip.out
+            _log "xclip out exited"
+
+            # read temp file, take ownership of clipboard and wait for pastes
+            # after something else is copied, xclip loses ownership and exits, and another iteration begins
+            xclip -verbose -in -selection clipboard -t "${_match}" /tmp/xclip.out
+            _log "xclip in exited"
         else
             _log "Unable to match targets"
             sleep 1
