@@ -6,7 +6,7 @@
     "gz,zip,rar,zst,tar,7z,iso": "xarchiver $arg",
     "torrent": "qbittorrent $arg",
     "pdf": "mupdf -r 96 $arg",
-    "html": "chromium $arg"
+    "html": "firefox $arg"
   },
   "mimetypes": {
     "text/*": "qtextpad $arg",
@@ -19,8 +19,8 @@
     "application/octet-stream": "qtextpad $arg"
   },
   "protocols": {
-    "http://": "chromium $arg",
-    "https://": "chromium $arg",
+    "http://": "firefox $arg",
+    "https://": "firefox $arg",
     "slack://": "slack $arg",
     "file://": "qtfm $arg",
     "vscode://": "code $arg",
