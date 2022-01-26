@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # dbus info for launched apps
-_dbus_address="$(ss -lp --unix | grep "dbus-daemon" | awk '{print substr($5,2)}')"
-if [ -n "${_dbus_address}" ]
-then
-    export DBUS_SESSION_BUS_ADDRESS="unix:abstract=${_dbus_address}"
-fi
+# _dbus_address="$(ss -lp --unix | grep "dbus-daemon" | awk '{print substr($5,2)}')"
+# if [ -n "${_dbus_address}" ]
+# then
+#     export DBUS_SESSION_BUS_ADDRESS="unix:abstract=${_dbus_address}"
+# fi
 
 _run() {
     exec "${@}" > /dev/null 2>&1
