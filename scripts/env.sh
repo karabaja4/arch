@@ -10,5 +10,4 @@ export LESSHISTFILE=/dev/null
 
 # xdg
 export XDG_DOWNLOAD_DIR="${HOME}/downloads"
-export XDG_DESKTOP_DIR="/tmp/xdg-igor/desktop"
 export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
