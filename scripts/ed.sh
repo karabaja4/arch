@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# sudo ln -sf /home/igor/arch/scripts/ed.sh /usr/bin/ed
+# ln -sf /home/igor/arch/scripts/ed.sh /usr/bin/ed
 
 if [ "${TERM}" = "linux" ]
 then

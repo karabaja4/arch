@@ -9,6 +9,7 @@ alias sizeof='du -sh'
 alias grep='grep --color'
 alias c='clear'
 alias x='exit'
+alias sudo='doas'
 
 alias sr='screen -r'
 alias sn='screen -S'
@@ -24,16 +25,16 @@ work() {
 }
 
 rsnc() {
-    sudo pacman -Rsnc "$@"
+    doas pacman -Rsnc "$@"
     echo -e "\033[32mUpdating db...\033[0m"
-    sudo updatedb
+    doas updatedb
     echo -e "\033[31mCheck for remaining files in ${HOME}\033[0m"
 }
 
 fixntp() {
-    sudo rc stop ntpd
-    sudo ntpd -gq
-    sudo rc start ntpd
+    doas rc stop ntpd
+    doas ntpd -gq
+    doas rc start ntpd
 }
 
 todo() {
@@ -59,12 +60,12 @@ todo() {
 }
 
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/7.8.0/amd64/iso-cd/debian-7.8.0-amd64-netinst.iso -O /dev/null'
-alias syu='sudo pacman -Syu'
+alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
-alias mountdisk="sudo mount -t ext4 -U 23147c37-efb6-4837-83aa-87808c70b87a /home/igor/_disk/"
-alias mountmmc="sudo mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_mmc/"
+alias mountdisk="doas mount -t ext4 -U 23147c37-efb6-4837-83aa-87808c70b87a /home/igor/_disk/"
+alias mountmmc="doas mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_mmc/"
 alias ddiff="code -d"
 alias wget="wget --no-hsts"
 alias rezije='node /home/igor/git/rezije/main.js'
@@ -77,17 +78,17 @@ mountlinode() {
     mkdir -p "${private}"
     local -r username="$(jq -crM '.linode.samba.username' "${HOME}/arch/secret.json")"
     local -r password="$(jq -crM '.linode.samba.password' "${HOME}/arch/secret.json")"
-    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/public "${public}"
-    sudo mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/private "${private}"
+    doas mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/public "${public}"
+    doas mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/private "${private}"
 }
 
 unmountusb() {
-    sudo umount -v /mnt/igor/* || echo "umount failed"
+    doas umount -v /mnt/igor/* || echo "umount failed"
     rm -vrf /mnt/igor/* || echo "rm failed"
 }
 
-alias vboxload='sudo modprobe -a vboxdrv vboxnetadp vboxnetflt'
-alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
+alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
+#alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
 
 source '/home/igor/arch/scripts/env.sh'
 source '/usr/share/git/completion/git-prompt.sh'
