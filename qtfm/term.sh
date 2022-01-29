@@ -12,7 +12,7 @@ _exec() {
 
     for i in "${!_params[@]}"
     do 
-        printf '\033[32m%s\033[0m\n' "${i}: ${_params[${i}]}"
+        printf '\033[31m%s\033[0m\n' "${i}: ${_params[${i}]}"
     done
 
     case "${_params[0]}" in
@@ -31,19 +31,21 @@ _exec() {
     zip)
         7z a -tzip "${_params[1]}.zip" "${_params[@]:2}"
         ;;
-    copyhere|movehere)
-        if [ -f "/tmp/qtfm.paths" ]
+    paste)
+        local _paths="/tmp/qtfm.paths"
+        if [ -f "${_paths}" ]
         then
-            while IFS= read -r _line
+            _action="$(head -n1 ${_paths})"
+            while IFS= read -r -u9 _line
             do
-                if [ "${_params[0]}" = "copyhere" ]
+                if [ "${_action}" = "cut" ]
                 then
-                    cp -v -r "${_line}" "${PWD}"
-                else
-                    mv -v "${_line}" "${PWD}"
+                    mv -v -i "${_line}" "${PWD}"
+                elif [ "${_action}" = "copy" ]
+                then
+                    cp -v -r -i "${_line}" "${PWD}"
                 fi
-                
-            done < "/tmp/qtfm.paths"
+            done 9< <(sed 1d "${_paths}")
         fi
         ;;
     esac
@@ -53,4 +55,3 @@ _exec() {
 
 export -f _exec
 xfce4-terminal -x bash -c _exec
-

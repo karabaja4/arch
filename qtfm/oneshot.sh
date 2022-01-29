@@ -2,8 +2,8 @@
 set -euo pipefail
 
 case "${1}" in
-selectcopy)
-    printf '%s\n' "${@:2}" > /tmp/qtfm.paths
+cut|copy)
+    printf '%s\n%s\n' "${1}" "${@:2}" | grep -v '^\s*$' > /tmp/qtfm.paths
     ;;
 copypath)
     echo -n "${2}" | xclip -i -selection clipboard
