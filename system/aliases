@@ -4,7 +4,7 @@
 alias ls='LC_COLLATE=C ls -A -o -h --color=always --group-directories-first'
 
 alias chx='chmod +x'
-alias permof='stat --printf "%n - %a\n"'
+alias permof='stat --printf "%a\n"'
 alias sizeof='du -sh'
 alias grep='grep --color'
 alias c='clear'
@@ -86,12 +86,11 @@ unmountusb() {
     rm -vrf /mnt/igor/* || echo "rm failed"
 }
 
-alias vboxload="sudo modprobe -a vboxdrv vboxnetadp vboxnetflt"
+alias vboxload='sudo modprobe -a vboxdrv vboxnetadp vboxnetflt'
 alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
 
-source "/home/igor/arch/scripts/env.sh"
-
-source /usr/share/git/completion/git-prompt.sh
+source '/home/igor/arch/scripts/env.sh'
+source '/usr/share/git/completion/git-prompt.sh'
 
 bold=$(tput bold)
 green=$(tput setaf 2)
