@@ -10,8 +10,6 @@ _term() {
     local -r _red="$(tput setaf 1)"
     local -r _reset="$(tput sgr0)"
 
-    printf '%s%s%s\n' "${_green}" "Start." "${_reset}"
-
     local _i=1
     for _arg in "${@}"
     do
@@ -53,7 +51,6 @@ _term() {
         ;;
     esac
 
-    printf '%s%s%s\n' "${_green}" "End." "${_reset}"
     exec bash
 }
 
