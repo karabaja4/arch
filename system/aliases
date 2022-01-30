@@ -64,23 +64,15 @@ alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
-alias mountdisk="doas mount -t ext4 -U 23147c37-efb6-4837-83aa-87808c70b87a /home/igor/_disk/"
-alias mountmmc="doas mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_mmc/"
-alias ddiff="code -d"
-alias wget="wget --no-hsts"
+alias mountdisk='doas mount -t ext4 -U 23147c37-efb6-4837-83aa-87808c70b87a /home/igor/_disk/'
+alias mountmmc='doas mount -U ce63484b-3828-4024-9f9c-c120f43ca4ec /home/igor/_mmc/'
+alias mountlinode='/home/igor/arch/scripts/linode.sh'
+alias ddiff='code -d'
+alias wget='wget --no-hsts'
 alias rezije='node /home/igor/git/rezije/main.js'
 alias ytdl='youtube-dl --extract-audio --audio-format mp3 '
 
-mountlinode() {
-    local -r public="/home/igor/_public/"
-    local -r private="/home/igor/_private/"
-    mkdir -p "${public}"
-    mkdir -p "${private}"
-    local -r username="$(jq -crM '.linode.samba.username' "${HOME}/arch/secret.json")"
-    local -r password="$(jq -crM '.linode.samba.password' "${HOME}/arch/secret.json")"
-    doas mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/public "${public}"
-    doas mount -t cifs -o username="${username}",password="${password}",uid="$(id -u)",gid="$(id -g)" //avacyn.aerium.hr/private "${private}"
-}
+
 
 unmountusb() {
     doas umount -v /mnt/igor/* || echo "umount failed"
