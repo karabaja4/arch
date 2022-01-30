@@ -36,8 +36,8 @@ _term() {
     paste)
         if [ -f "${_paths}" ]
         then
-            _action="$(head -n1 ${_paths})"
-            while IFS= read -r -u9 _line
+            _action="$(head -n 1 ${_paths})"
+            while IFS= read -r -u 9 _line
             do
                 if [ "${_action}" = "cut" ]
                 then
