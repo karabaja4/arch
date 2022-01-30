@@ -49,6 +49,9 @@ _term() {
             done 9< <(sed 1d "${_paths}")
         fi
         ;;
+    *)
+        printf '%s\n' "Unknown command!"
+        ;;
     esac
 
     exec bash
