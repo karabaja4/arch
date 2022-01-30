@@ -1,35 +1,31 @@
 #!/bin/bash
+# shellcheck disable=SC2016
 set -euo pipefail
-
-_temp="$(printf '%s\n' "${@}")"
-export _temp
 
 _exec() {
 
-    [ -z "${_temp}" ] && exit 1
-    local -a _params
-    mapfile -t _params <<< "${_temp}"
-
-    for i in "${!_params[@]}"
-    do 
-        printf '\033[31m%s\033[0m\n' "${i}: ${_params[${i}]}"
+    local _i=1
+    for _arg in "${@}"
+    do
+        printf '\033[31m%s: [ %s ]\033[0m\n' "${_i}" "${_arg}"
+        _i=$((_i + 1))
     done
 
-    case "${_params[0]}" in
+    case "${1}" in
     rm)
-        rm -vrf "${_params[@]:1}"
+        rm -vrf "${@:2}"
         ;;
     extract)
-        tar xvf "${_params[1]}"
+        tar xvf "${2}"
         ;;
     7z)
-        7z x "${_params[1]}"
+        7z x "${2}"
         ;;
     gzip)
-        tar cvzf "${_params[1]}.tar.gz" "${_params[@]:2}"
+        tar cvzf "${2}.tar.gz" "${@:3}"
         ;;
     zip)
-        7z a -tzip "${_params[1]}.zip" "${_params[@]:2}"
+        7z a -tzip "${2}.zip" "${@:3}"
         ;;
     paste)
         local _paths="/tmp/qtfm.paths"
@@ -50,8 +46,24 @@ _exec() {
         ;;
     esac
 
+    printf '\033[32mExited.\033[0m\n'
     exec bash
 }
-
 export -f _exec
-xfce4-terminal -x bash -c _exec
+
+case "${1}" in
+cut|copy)
+    printf '%s\n%s\n' "${1}" "${@:2}" | grep -v '^\s*$' > /tmp/qtfm.paths
+    ;;
+copypath)
+    echo -n "${2}" | xclip -i -selection clipboard
+    ;;
+openterm)
+    xfce4-terminal --working-directory="${PWD}"
+    ;;
+vscode)
+    code --folder-uri "${PWD}"
+    ;;
+*)
+    xfce4-terminal -x bash -c '_exec "${@}"' _ "${@}"
+esac
