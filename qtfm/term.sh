@@ -56,7 +56,7 @@ cut|copy)
     printf '%s\n%s\n' "${1}" "${@:2}" | grep -v '^\s*$' > /tmp/qtfm.paths
     ;;
 copypath)
-    echo -n "${2}" | xclip -i -selection clipboard
+    printf '%s' "${2}" | xclip -i -selection clipboard
     ;;
 openterm)
     xfce4-terminal --working-directory="${PWD}"
