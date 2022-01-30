@@ -213,9 +213,6 @@
     <application name="chromium" role="browser" type="normal">
       <maximized>yes</maximized>
     </application>
-    <application name="jspaint.app">
-      <maximized>yes</maximized>
-    </application>
     <application name="qtextpad" type="normal">
       <maximized>yes</maximized>
     </application>
