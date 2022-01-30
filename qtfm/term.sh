@@ -2,7 +2,9 @@
 # shellcheck disable=SC2016
 set -euo pipefail
 
-_exec() {
+declare -xr _paths="/tmp/qtfm.paths"
+
+_term() {
 
     local -r _green="$(tput setaf 2)"
     local -r _red="$(tput setaf 1)"
@@ -34,7 +36,6 @@ _exec() {
         7z a -tzip "${2}.zip" "${@:3}"
         ;;
     paste)
-        local -r _paths="/tmp/qtfm.paths"
         if [ -f "${_paths}" ]
         then
             _action="$(head -n1 ${_paths})"
@@ -55,11 +56,10 @@ _exec() {
     printf '%s%s%s\n' "${_green}" "End." "${_reset}"
     exec bash
 }
-export -f _exec
 
 case "${1}" in
 cut|copy)
-    printf '%s\n%s\n' "${1}" "${@:2}" | grep -v '^\s*$' > /tmp/qtfm.paths
+    printf '%s\n' "${@}" > "${_paths}"
     ;;
 copypath)
     printf '%s' "${2}" | xclip -i -selection clipboard
@@ -71,5 +71,6 @@ vscode)
     code --folder-uri "${PWD}"
     ;;
 *)
-    xfce4-terminal -x bash -c '_exec "${@}"' _ "${@}"
+    export -f _term
+    xfce4-terminal -x bash -c '_term "${@}"' _ "${@}"
 esac
