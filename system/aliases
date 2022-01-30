@@ -10,6 +10,7 @@ alias grep='grep --color'
 alias c='clear'
 alias x='exit'
 alias sudo='doas'
+alias please='doas !!'
 
 alias sr='screen -r'
 alias sn='screen -S'
