@@ -4,10 +4,16 @@ set -euo pipefail
 
 _exec() {
 
+    local -r _green="$(tput setaf 2)"
+    local -r _red="$(tput setaf 1)"
+    local -r _reset="$(tput sgr0)"
+
+    printf '%s%s%s\n' "${_green}" "Start." "${_reset}"
+
     local _i=1
     for _arg in "${@}"
     do
-        printf '\033[31m%s: [ %s ]\033[0m\n' "${_i}" "${_arg}"
+        printf '%s%s: [ %s ]%s\n' "${_red}" "${_i}" "${_arg}" "${_reset}"
         _i=$((_i + 1))
     done
 
@@ -28,7 +34,7 @@ _exec() {
         7z a -tzip "${2}.zip" "${@:3}"
         ;;
     paste)
-        local _paths="/tmp/qtfm.paths"
+        local -r _paths="/tmp/qtfm.paths"
         if [ -f "${_paths}" ]
         then
             _action="$(head -n1 ${_paths})"
@@ -46,7 +52,7 @@ _exec() {
         ;;
     esac
 
-    printf '\033[32mExited.\033[0m\n'
+    printf '%s%s%s\n' "${_green}" "End." "${_reset}"
     exec bash
 }
 export -f _exec
