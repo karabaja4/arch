@@ -19,7 +19,7 @@ _term() {
 
     case "${1}" in
     rm)
-        rm -vrf "${@:2}"
+        rm -Ivr "${@:2}"
         ;;
     extract)
         tar xvf "${2}"
