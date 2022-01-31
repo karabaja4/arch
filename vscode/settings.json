@@ -96,5 +96,6 @@
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.tabs.enabled": false,
     "diffEditor.ignoreTrimWhitespace": false,
-    "shellcheck.customArgs": ["-x"]
+    "shellcheck.customArgs": ["-x"],
+    "editor.scrollbar.verticalScrollbarSize": 25
 }
