@@ -200,16 +200,6 @@
         <monitor>mouse</monitor>
       </position>
     </application>
-    <application name="gpicview">
-      <size>
-        <width>1538</width>
-        <height>899</height>
-      </size>
-      <position>
-        <x>center</x>
-        <y>center</y>
-      </position>
-    </application>
     <application name="chromium" role="browser" type="normal">
       <maximized>yes</maximized>
     </application>
