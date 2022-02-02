@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2181
+# shellcheck disable=SC2181,SC2115
 
 alias ls='LC_COLLATE=C ls -A -o -h --color=always --group-directories-first'
 
@@ -72,9 +72,9 @@ alias wget='wget --no-hsts'
 alias rezije='node /home/igor/git/rezije/main.js'
 alias ytdl='youtube-dl --extract-audio --audio-format mp3 '
 
-unmountusb() {
-    doas umount -v /mnt/igor/* || echo "umount failed"
-    rm -vrf /mnt/igor/* || echo "rm failed"
+usb() {
+    doas umount -v /mnt/* || echo "umount failed"
+    rm -vrf /mnt/* || echo "rm failed"
 }
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'

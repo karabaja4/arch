@@ -25,12 +25,9 @@ _mkdir() {
 }
 
 _mount() (
-    _mkdir "/mnt/${_user}"
-    _mkdir "/mnt/${_user}/${1}"
-
-    _uid="$(id -u "${_user}")"
-    _gid="$(id -g "${_user}")"
-    mount -o uid="${_uid}",gid="${_gid}" "/dev/${1}" "/mnt/${_user}/${1}"
+    _mkdir "/mnt/${1}"
+    mount "/dev/${1}" "/mnt/${1}"
+    chown "${_user}:${_user}" "/mnt/${1}"
 )
 
 _enum() {
