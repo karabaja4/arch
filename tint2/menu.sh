@@ -16,7 +16,7 @@ terminal)
     _run xfce4-terminal
     ;;
 chromium)
-    _run chromium --disable-gpu
+    _run chromium
     ;;
 firefox)
     _ffid="$(wmctrl -lx | awk '$3 == "Navigator.firefox" {print $1;exit}')"
@@ -56,13 +56,13 @@ slack)
     ;;
 teams)
     _run /home/igor/arch/misc/teams/teams2
-    #_run chromium --disable-gpu --app=https://teams.microsoft.com
+    #_run chromium --app=https://teams.microsoft.com
     ;;
 discord)
-    _run chromium --disable-gpu --app=https://discord.com/app
+    _run chromium --app=https://discord.com/app
     ;;
 skype)
-    _run chromium --disable-gpu --app=https://web.skype.com
+    _run chromium --app=https://web.skype.com
     ;;
 paint)
     _run chromium --app=https://jspaint.app
