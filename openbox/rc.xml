@@ -121,6 +121,11 @@
         <command>/home/igor/arch/scripts/scrot.sh</command>
       </action>
     </keybind>
+    <keybind key="C-Print">
+      <action name="Execute">
+        <command>flameshot gui</command>
+      </action>
+    </keybind>
     <keybind key="C-A-space">
       <action name="ShowMenu">
         <menu>games-menu</menu>
