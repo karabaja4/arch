@@ -55,8 +55,8 @@ slack)
     _run slack --disable-smooth-scrolling --start-maximized
     ;;
 teams)
-    _run /home/igor/arch/misc/teams/teams2
     #_run chromium --app=https://teams.microsoft.com
+    _run /home/igor/arch/misc/teams/teams2
     ;;
 discord)
     _run chromium --app=https://discord.com/app
@@ -65,7 +65,8 @@ skype)
     _run chromium --app=https://web.skype.com
     ;;
 paint)
-    _run chromium --app=https://jspaint.app
+    #_run chromium --app=https://jspaint.app
+    _run falkon -e https://jspaint.app
     ;;
 vlc)
     _run vlc
