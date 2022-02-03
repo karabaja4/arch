@@ -116,9 +116,14 @@
     <keybind key="W-M">
       <action name="ToggleShowDesktop" />
     </keybind>
-    <keybind key="Print">
+    <keybind key="C-Print">
       <action name="Execute">
         <command>/home/igor/arch/scripts/scrot.sh</command>
+      </action>
+    </keybind>
+    <keybind key="Print">
+      <action name="Execute">
+        <command>/home/igor/arch/tint2/menu.sh flameshot</command>
       </action>
     </keybind>
     <keybind key="C-A-space">

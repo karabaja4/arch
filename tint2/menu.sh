@@ -94,6 +94,9 @@ openmw)
 quake3)
     _run quake3
     ;;
+flameshot)
+    flameshot gui --raw | tee /home/igor/flameshot.png | xclip -i -selection clipboard -t image/png
+    ;;
 *)
     echo "unknown app"
     ;;
