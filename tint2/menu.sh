@@ -19,13 +19,7 @@ chromium)
     _run chromium
     ;;
 firefox)
-    _ffid="$(wmctrl -lx | awk '$3 == "Navigator.firefox" {print $1;exit}')"
-    if [ -z "${_ffid}" ]
-    then
-        _run firefox
-    else
-        xdotool key --window "${_ffid}" ctrl+n
-    fi
+    _run /home/igor/arch/scripts/firefox.sh
     ;;
 qtfm)
     _run qtfm
