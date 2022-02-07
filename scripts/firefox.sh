@@ -17,10 +17,12 @@ else
     then
         # firefox running and new empty window has been requested
         xdotool key --window "${_windowid}" ctrl+n
+        xdotool keyup ctrl+n
     else
         # firefox running and url was opened
         printf '%s\n' "${@}" | xclip -i -selection clipboard
         xdotool windowactivate "${_windowid}"
         xdotool key --window "${_windowid}" ctrl+shift+v
+        xdotool keyup ctrl+shift+v
     fi
 fi

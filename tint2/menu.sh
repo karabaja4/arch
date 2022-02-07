@@ -73,6 +73,7 @@ kvirc)
     ;;
 gaming)
     xdotool key ctrl+alt+space
+    xdotool keyup ctrl+alt+space
     ;;
 pd2)
     export __GL_FSAA_MODE=11
