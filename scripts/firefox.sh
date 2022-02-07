@@ -16,11 +16,11 @@ else
     if [ -z "${1}" ]
     then
         # firefox running and new empty window has been requested
-        xdotool key --clearmodifiers --window "${_windowid}" ctrl+n
+        xdotool key --window "${_windowid}" ctrl+n
     else
         # firefox running and url was opened
         printf '%s\n' "${@}" | xclip -i -selection clipboard
         xdotool windowactivate "${_windowid}"
-        xdotool key --clearmodifiers --window "${_windowid}" ctrl+shift+v
+        xdotool key --window "${_windowid}" ctrl+shift+v
     fi
 fi
