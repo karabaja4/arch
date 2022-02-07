@@ -71,6 +71,7 @@ alias ddiff='code -d'
 alias wget='wget --no-hsts'
 alias rezije='node /home/igor/git/rezije/main.js'
 alias ytdl='youtube-dl --extract-audio --audio-format mp3 '
+alias firefox='/home/igor/arch/scripts/firefox.sh'
 
 usb() {
     doas umount -v /mnt/* || echo "umount failed"
