@@ -72,7 +72,7 @@ kvirc)
     _run kvirc
     ;;
 gaming)
-    xdotool key ctrl+alt+space
+    xdotool key --clearmodifiers ctrl+alt+space
     ;;
 pd2)
     export __GL_FSAA_MODE=11
