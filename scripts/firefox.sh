@@ -12,7 +12,7 @@ if [ -z "${_windowid}" ]
 then
     # firefox not running, start new instance
     # TODO check if firefox process is running
-    _run firefox "${@}"
+    _run /usr/bin/firefox "${@}"
 else
     if [ -z "${1}" ]
     then
