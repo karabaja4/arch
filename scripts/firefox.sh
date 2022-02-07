@@ -11,6 +11,7 @@ _windowid="$(wmctrl -lx | awk '$3 == "Navigator.firefox" {print $1;exit}')"
 if [ -z "${_windowid}" ]
 then
     # firefox not running, start new instance
+    # TODO check if firefox process is running
     _run firefox "${@}"
 else
     if [ -z "${1}" ]
