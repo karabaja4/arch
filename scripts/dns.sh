@@ -14,7 +14,7 @@ _echo "Secret: ${_secret}"
 _echo "Record: ${_record}"
 
 _get_current_ip() (
-    curl -s -f "https://api.ipify.org" || exit 1
+    curl -s -f "https://avacyn.aerium.hr/ip" || exit 1
 )
 
 _ctype="Content-Type: application/json"
