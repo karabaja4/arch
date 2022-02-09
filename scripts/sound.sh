@@ -6,7 +6,7 @@ _echo() {
 }
 
 _usage() {
-    _echo "usage: $(basename "${0}") [ <card_name> | l | list ]"
+    _echo "usage: $(basename "${0}") [ <card_name> | l(ist) ]"
     exit 1
 }
 
