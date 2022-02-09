@@ -16,7 +16,7 @@ then
         _run /usr/lib/firefox/firefox "${@}"
     fi
 else
-    if [ -z "${1}" ]
+    if [ ${#} -eq 0 ]
     then
         # firefox running and new empty window has been requested
         xdotool key --window "${_windowid}" ctrl+n
