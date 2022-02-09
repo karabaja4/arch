@@ -44,9 +44,9 @@ _list() {
     do
         if [ "${name}" = "${_default}" ]
         then
-            _echo "[ ${name} ]"
+            _echo "+ ${name}"
         else
-            _echo "${name}"
+            _echo "  ${name}"
         fi
     done
     exit 1
