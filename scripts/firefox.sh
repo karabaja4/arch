@@ -7,12 +7,14 @@ _run() {
     exec "${@}" > /dev/null 2>&1
 }
 
-_windowid="$(wmctrl -lx | awk '$3 == "Navigator.firefox" {print $1;exit}')"
+_windowid="$(wmctrl -lx | awk '$3 == "Navigator.firefox" {print $1}' | head -n1)"
 if [ -z "${_windowid}" ]
 then
     # firefox not running, start new instance
-    # TODO check if firefox process is running
-    _run /usr/bin/firefox "${@}"
+    if ! pgrep -x "firefox"
+    then
+        _run /usr/lib/firefox/firefox "${@}"
+    fi
 else
     if [ -z "${1}" ]
     then
