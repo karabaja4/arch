@@ -19,7 +19,7 @@ chromium)
     _run chromium
     ;;
 firefox)
-    _run /home/igor/arch/scripts/firefox.sh
+    _run firefox-socket-control
     ;;
 qtfm)
     _run qtfm

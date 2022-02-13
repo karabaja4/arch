@@ -19,8 +19,8 @@
     "application/octet-stream": "qtextpad $arg"
   },
   "protocols": {
-    "http://": "/home/igor/arch/scripts/firefox.sh $arg",
-    "https://": "/home/igor/arch/scripts/firefox.sh $arg",
+    "http://": "firefox-socket-control $arg",
+    "https://": "firefox-socket-control $arg",
     "slack://": "slack $arg",
     "file://": "qtfm $arg",
     "vscode://": "code $arg",
