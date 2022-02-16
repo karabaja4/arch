@@ -59,8 +59,9 @@ skype)
     _run chromium --app=https://web.skype.com
     ;;
 paint)
-    _run chromium --app=https://jspaint.app
+    #_run chromium --app=https://jspaint.app
     #_run falkon -e https://jspaint.app
+    _run wine /home/igor/arch/mspaint/mspaint32.exe
     ;;
 vlc)
     _run vlc
