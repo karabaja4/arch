@@ -49,8 +49,8 @@ slack)
     _run slack --disable-smooth-scrolling --start-maximized
     ;;
 teams)
-    _run chromium --app=https://teams.microsoft.com
-    #_run /home/igor/arch/misc/teams/teams2
+    #_run chromium --app=https://teams.microsoft.com
+    _run /home/igor/arch/misc/teams/teams2
     ;;
 discord)
     _run chromium --app=https://discord.com/app
