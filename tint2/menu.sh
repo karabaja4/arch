@@ -59,7 +59,7 @@ skype)
     _run chromium --disable-gpu --app=https://web.skype.com
     ;;
 paint)
-    _run chromium --app=https://jspaint.app
+    _run chromium --incognito --app=https://jspaint.app
     #_run falkon -e https://jspaint.app
     #_run wine /home/igor/arch/mspaint/mspaint32.exe
     ;;
