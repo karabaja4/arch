@@ -50,7 +50,8 @@ slack)
     ;;
 teams)
     #_run chromium --app=https://teams.microsoft.com
-    _run /home/igor/arch/misc/teams/teams2
+    export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox --disable-seccomp-filter-sandbox
     ;;
 discord)
     _run chromium --disable-gpu --app=https://discord.com/app
