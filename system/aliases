@@ -42,7 +42,7 @@ todo() {
     then
         if [ -z "${1}" ]
         then
-            qtextpad "${HOME}/.todo" 
+            featherpad "${HOME}/.todo" 
         fi
         local -r pid="$(pgrep -f conkyrc-todo)"
         if [ -n "${pid}" ]

@@ -205,7 +205,7 @@
         <monitor>mouse</monitor>
       </position>
     </application>
-    <application name="qtextpad" type="normal">
+    <application name="featherpad" type="normal">
       <maximized>yes</maximized>
     </application>
     <application name="conky">

@@ -6,5 +6,5 @@ if [ "${TERM}" = "linux" ]
 then
     nano "${1}"
 else
-    qtextpad "${1}" > /dev/null 2>&1 &
+    featherpad "${1}" > /dev/null 2>&1 &
 fi
