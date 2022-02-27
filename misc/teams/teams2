@@ -1,7 +1,0 @@
-#!/bin/sh
-
-#mv -v "/usr/share/teams/resources/app.asar.unpacked/node_modules/slimcore/bin/rect-overlay" "/usr/share/teams/resources/app.asar.unpacked/node_modules/slimcore/bin/rect-overlay-backup"
-
-export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-
-/usr/share/teams/teams "$@" --disable-namespace-sandbox --disable-setuid-sandbox --disable-seccomp-filter-sandbox
