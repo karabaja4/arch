@@ -54,10 +54,10 @@ teams)
     _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox --disable-seccomp-filter-sandbox
     ;;
 discord)
-    _run chromium --disable-gpu --app=https://discord.com/app
+    _run chromium --app=https://discord.com/app
     ;;
 skype)
-    _run chromium --disable-gpu --app=https://web.skype.com
+    _run chromium --app=https://web.skype.com
     ;;
 paint)
     #_run chromium --incognito --app=https://jspaint.app
