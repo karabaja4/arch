@@ -72,6 +72,7 @@ alias wget='wget --no-hsts'
 alias rezije='node /home/igor/git/rezije/main.js'
 alias ytdl='youtube-dl --extract-audio --audio-format mp3 '
 alias firefox='firefox-socket-control'
+alias ncdu='ncdu --color dark'
 
 usb() {
     doas umount -v /mnt/* || echo "umount failed"
