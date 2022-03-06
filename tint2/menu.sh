@@ -62,7 +62,7 @@ skype)
 paint)
     #_run chromium --incognito --app=https://jspaint.app
     #_run falkon -e https://jspaint.app
-    _run wine /home/igor/arch/mspaint/mspaint64.exe
+    _run wine /home/igor/arch/mspaint/mspaint32.exe
     ;;
 vlc)
     _run vlc
