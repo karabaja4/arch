@@ -27,7 +27,7 @@
         "name": "vnc",
         "enabled": false,
         "user": "igor",
-        "command": "/usr/bin/vncserver :1"
+        "command": "/usr/bin/vncserver :2"
     },
     {
         "name": "samba",
