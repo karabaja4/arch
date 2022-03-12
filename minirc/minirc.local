@@ -11,6 +11,7 @@ mkdir -p /run/samba
 
 _mkxdg ""
 _mkxdg "runtime"
+_mkxdg "other"
 
 printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 printf "\n"
