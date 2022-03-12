@@ -32,7 +32,7 @@ qbittorrent)
     _run qbittorrent
     ;;
 featherpad)
-    _run featherpad
+    _run featherpad -s
     ;;
 code)
     _run code

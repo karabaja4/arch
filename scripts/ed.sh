@@ -6,5 +6,5 @@ if [ "${TERM}" = "linux" ]
 then
     nano "${1}"
 else
-    featherpad "${1}" > /dev/null 2>&1 &
+    featherpad -s "${1}" > /dev/null 2>&1 &
 fi
