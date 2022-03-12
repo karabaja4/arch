@@ -11,6 +11,10 @@ _run() {
     exec "${@}" > /dev/null 2>&1
 }
 
+_load_apulse() {
+    export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+}
+
 case "${1}" in
 terminal)
     _run xfce4-terminal
@@ -50,7 +54,7 @@ slack)
     ;;
 teams)
     #_run chromium --app=https://teams.microsoft.com
-    export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    _load_apulse
     _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox --disable-seccomp-filter-sandbox
     ;;
 discord)
@@ -58,7 +62,7 @@ discord)
     ;;
 skype)
     #_run chromium --app=https://web.skype.com
-    export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    _load_apulse
     _run /usr/share/skypeforlinux/skypeforlinux
     ;;
 paint)
