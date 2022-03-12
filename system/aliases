@@ -14,7 +14,7 @@ alias sudo='doas'
 alias sr='screen -r'
 alias sn='screen -S'
 
-alias startx='exec startx -- -logverbose 0 -nolisten tcp -nolisten unix'
+alias startx='exec sx'
 
 work() {
     local -a array=()

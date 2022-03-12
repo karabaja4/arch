@@ -9,5 +9,4 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=true
 export LESSHISTFILE=/dev/null
 
 # xdg
-#export XDG_DOWNLOAD_DIR="${HOME}/downloads"
 export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
