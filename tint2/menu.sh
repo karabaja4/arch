@@ -57,7 +57,9 @@ discord)
     _run chromium --app=https://discord.com/app
     ;;
 skype)
-    _run chromium --app=https://web.skype.com
+    #_run chromium --app=https://web.skype.com
+    export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    _run /usr/share/skypeforlinux/skypeforlinux
     ;;
 paint)
     #_run chromium --incognito --app=https://jspaint.app
