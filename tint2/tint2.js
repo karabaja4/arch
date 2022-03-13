@@ -6,7 +6,7 @@ const dayjs = require('dayjs');
 const data = {};
 
 const colors = {
-  gray: '#757575',
+  gray: '#FFFFFF',
   red: '#FF6E40',
   yellow: '#EEFF41',
   green: '#69F0AE'
@@ -23,7 +23,7 @@ const icons = {
   ping: '',
   cpu: '',
   mem: '',
-  ssd: '',
+  ssd: '',
   cls: '',
   edd: '',
   trenddown: '',
@@ -80,7 +80,7 @@ const print = async () => {
     data?.conky?.mem?.max, // 1
     data?.conky?.mem?.perc // 2
   ], 2);
-  text += span(fonts.awesome, 7500, 100, colorize2, icons.ssd, 'SSD', '$1B / $2B', [
+  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1B / $2B', [
     data?.mounts?.['/'], // 0
     data?.conky?.ssd?.used, // 1
     data?.conky?.ssd?.size, // 2
