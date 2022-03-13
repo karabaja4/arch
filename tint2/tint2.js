@@ -6,7 +6,7 @@ const dayjs = require('dayjs');
 const data = {};
 
 const colors = {
-  gray: '#FFFFFF',
+  gray: '#757575',
   red: '#FF6E40',
   yellow: '#EEFF41',
   green: '#69F0AE'
