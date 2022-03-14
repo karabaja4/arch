@@ -99,8 +99,9 @@ quake3)
     _run quake3
     ;;
 flameshot)
-    mkdir -p /tmp/screenshots
-    flameshot gui --raw | tee /tmp/screenshots/flameshot.png | xclip -i -selection clipboard -t image/png
+    #mkdir -p /tmp/screenshots
+    #flameshot gui --raw | tee /tmp/screenshots/flameshot.png | xclip -i -selection clipboard -t image/png
+    _run flameshot
     ;;
 *)
     echo "unknown app"
