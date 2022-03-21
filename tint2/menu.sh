@@ -63,7 +63,7 @@ discord)
 skype)
     #_run chromium --app=https://web.skype.com
     _load_apulse
-    _run /usr/share/skypeforlinux/skypeforlinux
+    _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
     ;;
 paint)
     #_run chromium --incognito --app=https://jspaint.app
