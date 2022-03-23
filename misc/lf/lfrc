@@ -1,0 +1,68 @@
+set nopreview
+set nohidden
+
+set drawbox
+set icons
+set ignorecase
+set wrapscroll
+
+set ratios '1:3'
+
+map d
+map c
+map x
+map v
+map a
+map s
+map u
+
+map r
+map p
+map w
+map e
+map y
+map h
+map j
+map k
+map l
+
+map . set hidden!
+map d delete
+map c copy
+map x cut
+map v paste
+map a invert
+map s :toggle; down
+map u :unselect; clear
+map <esc> :unselect; clear
+map <f-2> rename
+
+map <space> shell
+
+cmd open ${{
+}}
+cmd open2 ${{
+    if [ ! -d "$f" ]
+    then
+        xdg-open "$f" > /dev/null 2>&1 &
+    fi
+}}
+map o open2
+map <enter> :open; open2
+
+cmd cp ${{
+    printf "$f" | xclip -i -selection clipboard
+}}
+
+cmd term ${{
+    xfce4-terminal --working-directory="$PWD" > /dev/null 2>&1 &
+}}
+map t term
+
+map <backspace2> updir
+
+map gg
+map gt top
+map gb bottom
+
+map gd cd ~/_disk/torrents
