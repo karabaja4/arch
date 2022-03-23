@@ -26,7 +26,7 @@ firefox)
     _run firefox-socket-control
     ;;
 qtfm)
-    _run xfce4-terminal -e lf
+    _run qtfm
     ;;
 qbittorrent)
     _run qbittorrent
