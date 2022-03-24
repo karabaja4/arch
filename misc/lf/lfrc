@@ -47,7 +47,7 @@ cmd open &{{
 cmd open2 &{{
     if [ ! -d "$f" ]
     then
-        xdg-open "$f" > /dev/null 2>&1 &
+        xdg-open "$f" > /dev/null 2>&1
     fi
 }}
 map o open2
@@ -58,7 +58,7 @@ cmd cp &{{
 }}
 
 cmd term &{{
-    xfce4-terminal --working-directory="$PWD" > /dev/null 2>&1 &
+    xfce4-terminal --working-directory="$PWD" > /dev/null 2>&1
 }}
 map t term
 
