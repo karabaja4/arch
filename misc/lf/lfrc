@@ -27,6 +27,7 @@ map k
 map l
 
 map . set hidden!
+map <delete> delete
 map d delete
 map c copy
 map x cut
@@ -66,3 +67,31 @@ map gt top
 map gb bottom
 
 map gd cd ~/_disk/torrents
+
+# archives
+
+cmd gz ${{
+    set -f
+    for x in $fx
+    do
+        set -- "$@" "$(basename $x)"
+    done
+    tar cvzf "$f.tar.gz" "$@"
+}}
+
+cmd ex ${{
+    set -f
+    case $f in
+        *.tar.*) tar xvf $f;;
+        *.7z|*.zip|*.rar) 7z x $f;;
+    esac
+}}
+
+cmd zip ${{
+    set -f
+    for x in $fx
+    do
+        set -- "$@" "$(basename $x)"
+    done
+    7z a -tzip "$f.zip" "$@"
+}}
