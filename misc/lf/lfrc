@@ -42,9 +42,9 @@ map <f-2> rename
 
 map <space> shell
 
-cmd open ${{
+cmd open &{{
 }}
-cmd open2 ${{
+cmd open2 &{{
     if [ ! -d "$f" ]
     then
         xdg-open "$f" > /dev/null 2>&1 &
@@ -53,11 +53,11 @@ cmd open2 ${{
 map o open2
 map <enter> :open; open2
 
-cmd cp ${{
+cmd cp &{{
     printf "$f" | xclip -i -selection clipboard
 }}
 
-cmd term ${{
+cmd term &{{
     xfce4-terminal --working-directory="$PWD" > /dev/null 2>&1 &
 }}
 map t term
