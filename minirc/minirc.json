@@ -33,7 +33,7 @@
         "name": "samba",
         "enabled": false,
         "user": "root",
-        "command": "/usr/bin/smbd --foreground --no-process-group"
+        "command": "/usr/bin/smbd --foreground"
     },
     {
         "name": "haveged",
