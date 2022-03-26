@@ -1,6 +1,6 @@
 {
   "extensions": {
-    "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv,cfg": "featherpad -s $arg",
+    "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv,cfg": "qtextpad $arg",
     "avi,mkv,flac,mp3,wav,mp4,mov,ogg": "vlc $arg",
     "jpg,jpeg,svg,png,bmp,gif,tga": "gpicview $arg",
     "gz,zip,rar,zst,tar,7z,iso": "xarchiver $arg",
@@ -10,14 +10,14 @@
     "exe": "wine $arg"
   },
   "mimetypes": {
-    "text/*": "featherpad -s $arg",
+    "text/*": "qtextpad $arg",
     "video/*": "vlc $arg",
     "image/*": "gpicview $arg",
     "media/video": "vlc $arg",
     "document/pdf": "mupdf -r 96 $arg",
     "inode/directory": "qtfm $arg",
-    "inode/x-empty": "featherpad -s $arg",
-    "application/octet-stream": "featherpad -s $arg"
+    "inode/x-empty": "qtextpad $arg",
+    "application/octet-stream": "qtextpad $arg"
   },
   "protocols": {
     "http://": "firefox-socket-control $arg",

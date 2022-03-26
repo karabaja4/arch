@@ -31,8 +31,8 @@ qtfm)
 qbittorrent)
     _run qbittorrent
     ;;
-featherpad)
-    _run featherpad -s
+qtextpad)
+    _run qtextpad
     ;;
 code)
     _run code
