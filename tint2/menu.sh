@@ -7,6 +7,8 @@
 #     export DBUS_SESSION_BUS_ADDRESS="unix:abstract=${_dbus_address}"
 # fi
 
+# nvidia-settings --query=fsaa --verbose
+
 _run() {
     exec "${@}" > /dev/null 2>&1
 }
@@ -99,6 +101,7 @@ quake3)
     _run quake3
     ;;
 openjk)
+    export __GL_FSAA_MODE=5
     _run openjk
     ;;
 flameshot)
