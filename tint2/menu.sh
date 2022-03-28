@@ -98,6 +98,9 @@ openmw)
 quake3)
     _run quake3
     ;;
+openjk)
+    _run openjk
+    ;;
 flameshot)
     #mkdir -p /tmp/screenshots
     #flameshot gui --raw | tee /tmp/screenshots/flameshot.png | xclip -i -selection clipboard -t image/png

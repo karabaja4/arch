@@ -31,5 +31,11 @@
       </action>
     </item>
 
+    <item label="OpenJK" icon="/usr/share/pixmaps/openjo.png">
+      <action name="Execute">
+        <execute>/home/igor/arch/tint2/menu.sh openjk</execute>
+      </action>
+    </item>
+
   </menu>
 </openbox_menu>
