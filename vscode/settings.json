@@ -97,5 +97,6 @@
     "terminal.integrated.tabs.enabled": false,
     "diffEditor.ignoreTrimWhitespace": false,
     "shellcheck.customArgs": ["-x"],
-    "editor.scrollbar.verticalScrollbarSize": 25
+    "editor.scrollbar.verticalScrollbarSize": 25,
+    "settingsSync.keybindingsPerPlatform": false
 }
