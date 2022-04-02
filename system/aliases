@@ -59,6 +59,26 @@ todo() {
     fi
 }
 
+_on_reboot() {
+    doas umount -qv "${HOME}/_disk"
+    doas umount -qv "${HOME}/_mmc"
+    doas umount -qv "${HOME}/_private"
+    doas umount -qv "${HOME}/_public"
+    doas umount -qv /mnt/*
+    rm -rf "${HOME}/.cache"
+    printf "$(tput setaf 1)%s$(tput sgr0)\n" "Rebooting!"
+}
+
+reboot() {
+    _on_reboot
+    doas /usr/bin/reboot
+}
+
+poweroff() {
+    _on_reboot
+    doas /usr/bin/poweroff
+}
+
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/10.10.0/amd64/iso-cd/debian-10.10.0-amd64-netinst.iso -O /dev/null'
 alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
