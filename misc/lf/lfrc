@@ -39,6 +39,7 @@ map s :toggle; down
 map u :unselect; clear
 map <esc> :unselect; clear
 map <f-2> rename
+map <f-5> reload
 
 map <space> shell
 
