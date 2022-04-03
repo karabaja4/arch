@@ -17,7 +17,7 @@
 
 export LF_ICONS="\
 ln=📌:\
-or=📌:\
+or=💔:\
 tw=📁:\
 ow=📁:\
 st=📁:\
