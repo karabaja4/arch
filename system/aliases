@@ -60,6 +60,7 @@ todo() {
 }
 
 _on_reboot() {
+    killall -v -w qbittorrent
     doas umount -qv "${HOME}/_disk"
     doas umount -qv "${HOME}/_mmc"
     doas umount -qv "${HOME}/_private"
