@@ -1,18 +1,35 @@
 #!/bin/sh
 
+# ln  LINK
+# or  ORPHAN
+# tw  STICKY_OTHER_WRITABLE
+# ow  OTHER_WRITABLE
+# st  STICKY
+# di  DIR
+# pi  FIFO
+# so  SOCK
+# bd  BLK
+# cd  CHR
+# su  SETUID
+# sg  SETGID
+# ex  EXEC
+# fi  FILE
+
 export LF_ICONS="\
-tw=📁:\
-st=📁:\
-ow=📁:\
-dt=📁:\
-di=📁:\
-so=🔌:\
-bd=🔌:\
-pi=⏩:\
-fi=📄:\
 ln=📌:\
 or=📌:\
+tw=📁:\
+ow=📁:\
+st=📁:\
+di=📁:\
+pi=⏩:\
+so=🔌:\
+bd=🔌:\
+cd=📌:\
+su=📜:\
+sg=📜:\
 ex=📜:\
+fi=📄:\
 *.txt=📝:\
 *.log=📄:\
 *.avi=📺:\
