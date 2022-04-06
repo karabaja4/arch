@@ -62,6 +62,11 @@ _iteration() {
             xclip -verbose -out -selection clipboard -t "${_match}" > /tmp/xclip.out
             _log "xclip out exited"
 
+            if [ "${_match}" = "${_utf8}" ]
+            then
+                cat /tmp/xclip.out >> /tmp/xclip.history
+            fi
+
             # read temp file, take ownership of clipboard and wait for pastes
             # after something else is copied, xclip loses ownership and exits, and another iteration begins
             xclip -verbose -in -selection clipboard -t "${_match}" /tmp/xclip.out
