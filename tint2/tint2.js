@@ -32,8 +32,8 @@ const icons = {
 };
 
 const reserved = {
-  root: ((3039974 * 4) / 1024) / 1024,
-  disk: ((12209510 * 4) / 1024) / 1024
+  ssd: ((3039974 * 4) / 1024) / 1024,
+  edd: ((12209510 * 4) / 1024) / 1024
 }
 
 // activity color
@@ -88,7 +88,7 @@ const print = async () => {
   text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1B / $2 GB', [
     data?.mounts?.['/'], // 0
     data?.conky?.ssd?.used, // 1
-    data?.conky?.ssd?.size && (parseInt(data.conky.ssd.size) - parseInt(reserved.root)), // 2
+    data?.conky?.ssd?.size && (parseInt(data.conky.ssd.size) - parseInt(reserved.ssd)), // 2
     data?.conky?.ssd?.perc // 3
   ], 3);
   text += span(fonts.awesome, 7000, 100, colorize2, icons.cls, 'CLS', '$1 GB / $2 GB', [
@@ -100,7 +100,7 @@ const print = async () => {
   text += span(fonts.awesome, 7500, 100, colorize2, icons.edd, 'EDD', '$1B / $2 GB', [
     data?.mounts?.['/home/igor/_disk'], // 0
     data?.conky?.edd?.used, // 1
-    data?.conky?.edd?.size && (parseInt(data.conky.edd.size) - parseInt(reserved.disk)), // 2
+    data?.conky?.edd?.size && (parseInt(data.conky.edd.size) - parseInt(reserved.edd)), // 2
     data?.conky?.edd?.perc // 3
   ], 3);
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
