@@ -65,6 +65,7 @@ _iteration() {
             if [ "${_match}" = "${_utf8}" ]
             then
                 cat /tmp/xclip.out >> /tmp/xclip.history
+                printf '\n' >> /tmp/xclip.history
             fi
 
             # read temp file, take ownership of clipboard and wait for pastes
