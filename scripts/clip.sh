@@ -66,6 +66,7 @@ _iteration() {
             then
                 cat /tmp/xclip.out >> /tmp/xclip.history
                 printf '\n' >> /tmp/xclip.history
+                _log "saved to history"
             fi
 
             # read temp file, take ownership of clipboard and wait for pastes
