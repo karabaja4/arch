@@ -64,8 +64,12 @@ _iteration() {
 
             if [ "${_match}" = "${_utf8}" ]
             then
-                cat /tmp/xclip.out >> /tmp/xclip.history
-                printf '\n' >> /tmp/xclip.history
+                if [ -f /tmp/xclip.history ]
+                then
+                    printf '%s\n%s\n' "$(cat /tmp/xclip.out)" "$(cat /tmp/xclip.history)" > /tmp/xclip.history
+                else
+                    printf '%s\n' "$(cat /tmp/xclip.out)" > /tmp/xclip.history
+                fi
                 _log "saved to history"
             fi
 
