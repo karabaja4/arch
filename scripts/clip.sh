@@ -10,6 +10,9 @@ code/file-list
 "
 _utf8="UTF8_STRING"
 
+_out="/tmp/xclip.out"
+_history="/tmp/xclip.history"
+
 _log() {
     printf '\033[32m->\033[0m %s' "${1}" | xargs
 }
@@ -59,23 +62,23 @@ _iteration() {
             _log "Matched target: ${_match}"
 
             # put clipboard content into temp file
-            xclip -verbose -out -selection clipboard -t "${_match}" > /tmp/xclip.out
+            xclip -verbose -out -selection clipboard -t "${_match}" > "${_out}"
             _log "xclip out exited"
 
             if [ "${_match}" = "${_utf8}" ]
             then
-                if [ -f /tmp/xclip.history ]
+                if [ -f "${_history}" ]
                 then
-                    printf '%s\n%s\n' "$(cat /tmp/xclip.out)" "$(cat /tmp/xclip.history)" > /tmp/xclip.history
+                    printf '%s\n%s\n' "$(cat "${_out}")" "$(cat "${_history}")" > "${_history}"
                 else
-                    printf '%s\n' "$(cat /tmp/xclip.out)" > /tmp/xclip.history
+                    printf '%s\n' "$(cat "${_out}")" > "${_history}"
                 fi
                 _log "saved to history"
             fi
 
             # read temp file, take ownership of clipboard and wait for pastes
             # after something else is copied, xclip loses ownership and exits, and another iteration begins
-            xclip -verbose -in -selection clipboard -t "${_match}" /tmp/xclip.out
+            xclip -verbose -in -selection clipboard -t "${_match}" "${_out}"
             _log "xclip in exited"
         else
             _log "Unable to match targets"
