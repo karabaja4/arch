@@ -67,12 +67,7 @@ _iteration() {
 
             if [ "${_match}" = "${_utf8}" ]
             then
-                if [ -f "${_history}" ]
-                then
-                    printf '%s\n%s\n' "$(cat "${_out}")" "$(cat "${_history}")" > "${_history}"
-                else
-                    printf '%s\n' "$(cat "${_out}")" > "${_history}"
-                fi
+                printf '%s\n' "$(cat "${_out}")" >> "${_history}"
                 _log "saved to history"
             fi
 
