@@ -65,6 +65,12 @@ _iteration() {
             xclip -verbose -out -selection clipboard -t "${_match}" > "${_out}"
             _log "xclip out exited"
 
+            # read temp file, take ownership of clipboard and wait for pastes
+            # after something else is copied, xclip loses ownership and exits, and another iteration begins
+            xclip -verbose -in -selection clipboard -t "${_match}" "${_out}"
+            _log "xclip in exited"
+
+            # save to history
             if [ "${_match}" = "${_utf8}" ]
             then
                 if [ -f "${_history}" ]
@@ -75,11 +81,7 @@ _iteration() {
                 fi
                 _log "saved to history"
             fi
-
-            # read temp file, take ownership of clipboard and wait for pastes
-            # after something else is copied, xclip loses ownership and exits, and another iteration begins
-            xclip -verbose -in -selection clipboard -t "${_match}" "${_out}"
-            _log "xclip in exited"
+            
         else
             _log "Unable to match targets"
             sleep 1
