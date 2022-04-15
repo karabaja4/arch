@@ -26,6 +26,6 @@
     "file://": "qtfm $arg",
     "vscode://": "code $arg",
     "zoommtg://": "zoom $arg",
-    "msteams:/l/": "/home/igor/arch/misc/teams/teams2 $arg"
+    "msteams:/l/": "/usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox --disable-seccomp-filter-sandbox $arg"
   }
 }

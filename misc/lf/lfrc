@@ -9,6 +9,7 @@ set autoquit
 
 set ratios '1:3'
 set info 'size'
+set ifs "\n"
 
 map d
 map c
@@ -77,16 +78,16 @@ cmd gz ${{
     set -f
     for x in $fx
     do
-        set -- "$@" "$(basename $x)"
+        set -- "$@" "$(basename "$x")"
     done
     tar cvzf "$f.tar.gz" "$@"
 }}
 
 cmd ex ${{
     set -f
-    case $f in
-        *.tar.*) tar xvf $f;;
-        *.7z|*.zip|*.rar) 7z x $f;;
+    case "$f" in
+        *.tar.*) tar xvf "$f";;
+        *.7z|*.zip|*.rar) 7z x "$f";;
     esac
 }}
 
@@ -94,7 +95,7 @@ cmd zip ${{
     set -f
     for x in $fx
     do
-        set -- "$@" "$(basename $x)"
+        set -- "$@" "$(basename "$x")"
     done
     7z a -tzip "$f.zip" "$@"
 }}
