@@ -24,8 +24,6 @@
     "https://": "firefox-socket-control $arg",
     "slack://": "slack $arg",
     "file://": "qtfm $arg",
-    "vscode://": "code $arg",
-    "zoommtg://": "zoom $arg",
-    "msteams:/l/": "/usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox --disable-seccomp-filter-sandbox $arg"
+    "vscode://": "code $arg"
   }
 }
