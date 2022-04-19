@@ -57,7 +57,7 @@ slack)
 teams)
     #_run chromium --app=https://teams.microsoft.com
     _load_apulse
-    _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox --disable-seccomp-filter-sandbox
+    _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
     ;;
 discord)
     _run chromium --app=https://discord.com/app
