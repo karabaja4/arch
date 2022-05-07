@@ -37,7 +37,7 @@ qtextpad)
     _run qtextpad
     ;;
 code)
-    _run code --disable-keytar
+    _run code
     ;;
 azuredatastudio)
     _run azuredatastudio
