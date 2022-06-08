@@ -27,7 +27,10 @@ _desktop() {
 
     # resolution and background
     "${HOME}/arch/scripts/fixres.sh"
-    xwallpaper --stretch "${HOME}/arch/wall/default5.png"
+    #xwallpaper --stretch "${HOME}/arch/wall/default5.png"
+    xwallpaper --output eDP-1-1 --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png"
+    xwallpaper --output HDMI-1-1 --stretch "${HOME}/arch/wall/exodus_v02_5120x2880.png"
+    xwallpaper --output DP-1-1 --stretch "${HOME}/arch/wall/exodus_v04_5120x2880.png"
 
     # conky kernel
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
