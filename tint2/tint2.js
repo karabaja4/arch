@@ -44,7 +44,7 @@ const colorize1 = (value) => {
 const colorize2 = (value) => {
   if (value !== 0 && !value) return colors.gray;
   if (value > 80) return colors.red;
-  if (value > 30) return colors.yellow;
+  if (value > 40) return colors.yellow;
   return colors.green;
 };
 
