@@ -101,24 +101,24 @@ const print = async () => {
   // root
   text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1 GB / $2 GB', [
     rootAvailable,                                                                                              // 0
-    rootAvailable && parseInt((data.df[root].used / 1024) / 1024),                                              // 1
-    rootAvailable && parseInt(((data.df[root].total - reserved.root) / 1024) / 1024),                           // 2
+    rootAvailable && Math.floor((data.df[root].used / 1024) / 1024),                                              // 1
+    rootAvailable && Math.floor(((data.df[root].total - reserved.root) / 1024) / 1024),                           // 2
     rootAvailable && ((data.df[root].used / (data.df[root].total - reserved.root)) * 100)                       // 3
   ], 3);
 
   // disk
   text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$1 GB / $2 GB', [
     diskAvailable,                                                                                              // 0
-    diskAvailable && parseInt((data.df[disk].used / 1024) / 1024),                                              // 1
-    diskAvailable && parseInt(((data.df[disk].total - reserved.disk) / 1024) / 1024),                           // 2
+    diskAvailable && Math.floor((data.df[disk].used / 1024) / 1024),                                              // 1
+    diskAvailable && Math.floor(((data.df[disk].total - reserved.disk) / 1024) / 1024),                           // 2
     diskAvailable && ((data.df[disk].used / (data.df[disk].total - reserved.disk)) * 100)                       // 3
   ], 3);
 
   // linode, samba adds reserved space to used
   text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LND', '$1 GB / $2 GB', [
     linoAvailable,                                                                                              // 0
-    linoAvailable && parseInt(((data.df[lino].used - reserved.linode) / 1024) / 1024),                          // 1
-    linoAvailable && parseInt(((data.df[lino].total - reserved.linode) / 1024) / 1024),                         // 2
+    linoAvailable && Math.floor(((data.df[lino].used - reserved.linode) / 1024) / 1024),                          // 1
+    linoAvailable && Math.floor(((data.df[lino].total - reserved.linode) / 1024) / 1024),                         // 2
     linoAvailable && (((data.df[lino].used - reserved.linode) / (data.df[lino].total - reserved.linode)) * 100) // 3
   ], 3);
 
