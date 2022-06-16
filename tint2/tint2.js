@@ -33,7 +33,7 @@ const icons = {
 
 const reserved = {
   ssd: ((3039974 * 4) / 1024) / 1024,
-  edd: ((12209510 * 4) / 1024) / 1024
+  edd: ((24418918 * 4) / 1024) / 1024
 }
 
 // activity color
