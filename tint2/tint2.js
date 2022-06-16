@@ -97,32 +97,32 @@ const print = async () => {
   }
 
   const avail = {
-    root:   (data?.mounts?.[mp.root] && data?.df?.[mp.root]?.used && data?.df?.[mp.root]?.total) || null,
-    disk:   (data?.mounts?.[mp.disk] && data?.df?.[mp.disk]?.used && data?.df?.[mp.disk]?.total) || null,
+    root:   (data?.mounts?.[mp.root]   && data?.df?.[mp.root]?.used   && data?.df?.[mp.root]?.total  ) || null,
+    disk:   (data?.mounts?.[mp.disk]   && data?.df?.[mp.disk]?.used   && data?.df?.[mp.disk]?.total  ) || null,
     linode: (data?.mounts?.[mp.linode] && data?.df?.[mp.linode]?.used && data?.df?.[mp.linode]?.total) || null
   }
 
   // root
   text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1 GB / $2 GB', [
-    avail.root,                                                                                                // 0
-    avail.root && Math.floor((data.df[mp.root].used / 1024) / 1024),                                              // 1
-    avail.root && Math.floor(((data.df[mp.root].total - reserved.root) / 1024) / 1024),                           // 2
-    avail.root && ((data.df[mp.root].used / (data.df[mp.root].total - reserved.root)) * 100)                         // 3
+    avail.root,                                                                                                          // 0
+    avail.root && Math.floor((data.df[mp.root].used / 1024) / 1024),                                                     // 1
+    avail.root && Math.floor(((data.df[mp.root].total - reserved.root) / 1024) / 1024),                                  // 2
+    avail.root && ((data.df[mp.root].used / (data.df[mp.root].total - reserved.root)) * 100)                             // 3
   ], 3);
 
   // disk
   text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$1 GB / $2 GB', [
-    avail.disk,                                                                                                // 0
-    avail.disk && Math.floor((data.df[mp.disk].used / 1024) / 1024),                                              // 1
-    avail.disk && Math.floor(((data.df[mp.disk].total - reserved.disk) / 1024) / 1024),                           // 2
-    avail.disk && ((data.df[mp.disk].used / (data.df[mp.disk].total - reserved.disk)) * 100)                         // 3
+    avail.disk,                                                                                                          // 0
+    avail.disk && Math.floor((data.df[mp.disk].used / 1024) / 1024),                                                     // 1
+    avail.disk && Math.floor(((data.df[mp.disk].total - reserved.disk) / 1024) / 1024),                                  // 2
+    avail.disk && ((data.df[mp.disk].used / (data.df[mp.disk].total - reserved.disk)) * 100)                             // 3
   ], 3);
 
   // linode, samba adds reserved space to used
   text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LND', '$1 GB / $2 GB', [
-    avail.linode,                                                                                              // 0
-    avail.linode && Math.floor(((data.df[mp.linode].used - reserved.linode) / 1024) / 1024),                        // 1
-    avail.linode && Math.floor(((data.df[mp.linode].total - reserved.linode) / 1024) / 1024),                       // 2
+    avail.linode,                                                                                                        // 0
+    avail.linode && Math.floor(((data.df[mp.linode].used - reserved.linode) / 1024) / 1024),                             // 1
+    avail.linode && Math.floor(((data.df[mp.linode].total - reserved.linode) / 1024) / 1024),                            // 2
     avail.linode && (((data.df[mp.linode].used - reserved.linode) / (data.df[mp.linode].total - reserved.linode)) * 100) // 3
   ], 3);
 
