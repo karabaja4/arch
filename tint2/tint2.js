@@ -95,31 +95,31 @@ const print = async () => {
   }
 
   const rootAvailable = (data?.mounts?.[root] && data?.df?.[root]?.used && data?.df?.[root]?.total) || null;
-  const linoAvailable = (data?.mounts?.[lino] && data?.df?.[lino]?.used && data?.df?.[lino]?.total) || null;
   const diskAvailable = (data?.mounts?.[disk] && data?.df?.[disk]?.used && data?.df?.[disk]?.total) || null;
+  const linoAvailable = (data?.mounts?.[lino] && data?.df?.[lino]?.used && data?.df?.[lino]?.total) || null;
 
   // root
   text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1 GB / $2 GB', [
     rootAvailable,                                                                                              // 0
-    rootAvailable && ((data.df[root].used / 1024) / 1024).toFixed(2),                                           // 1
-    rootAvailable && (((data.df[root].total - reserved.root) / 1024) / 1024).toFixed(2),                        // 2
+    rootAvailable && parseInt((data.df[root].used / 1024) / 1024),                                              // 1
+    rootAvailable && parseInt(((data.df[root].total - reserved.root) / 1024) / 1024),                           // 2
     rootAvailable && ((data.df[root].used / (data.df[root].total - reserved.root)) * 100)                       // 3
-  ], 3);
-
-  // linode, samba adds reserved space to used
-  text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LIN', '$1 GB / $2 GB', [
-    linoAvailable,                                                                                              // 0
-    linoAvailable && (((data.df[lino].used - reserved.linode) / 1024) / 1024).toFixed(2),                       // 1
-    linoAvailable && (((data.df[lino].total - reserved.linode) / 1024) / 1024).toFixed(2),                      // 2
-    linoAvailable && (((data.df[lino].used - reserved.linode) / (data.df[lino].total - reserved.linode)) * 100) // 3
   ], 3);
 
   // disk
   text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$1 GB / $2 GB', [
     diskAvailable,                                                                                              // 0
-    diskAvailable && ((data.df[disk].used / 1024) / 1024).toFixed(2),                                           // 1
-    diskAvailable && (((data.df[disk].total - reserved.disk) / 1024) / 1024).toFixed(2),                        // 2
+    diskAvailable && parseInt((data.df[disk].used / 1024) / 1024),                                              // 1
+    diskAvailable && parseInt(((data.df[disk].total - reserved.disk) / 1024) / 1024),                           // 2
     diskAvailable && ((data.df[disk].used / (data.df[disk].total - reserved.disk)) * 100)                       // 3
+  ], 3);
+
+  // linode, samba adds reserved space to used
+  text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LND', '$1 GB / $2 GB', [
+    linoAvailable,                                                                                              // 0
+    linoAvailable && parseInt(((data.df[lino].used - reserved.linode) / 1024) / 1024),                          // 1
+    linoAvailable && parseInt(((data.df[lino].total - reserved.linode) / 1024) / 1024),                         // 2
+    linoAvailable && (((data.df[lino].used - reserved.linode) / (data.df[lino].total - reserved.linode)) * 100) // 3
   ], 3);
 
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
