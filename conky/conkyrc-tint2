@@ -20,16 +20,6 @@ conky.text = [[
 		"perc": "${memperc}",
 		"used": "${mem}",
 		"max": "${memmax}"
-	},
-	"ssd": {
-		"perc": "${fs_used_perc /}",
-		"used": "${fs_used /}",
-		"size": "${fs_size /}"
-	},
-	"edd": {
-		"perc": "${fs_used_perc /home/igor/_disk}",
-		"used": "${fs_used /home/igor/_disk}",
-		"size": "${fs_size /home/igor/_disk}"
 	}
 }
 ]];

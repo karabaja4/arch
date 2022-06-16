@@ -2,6 +2,8 @@ const timers = require('timers/promises');
 const fs = require('fs');
 const WebSocket = require('ws');
 const dayjs = require('dayjs');
+const os = require('os');
+const path = require('path');
 
 const data = {};
 
@@ -24,17 +26,12 @@ const icons = {
   cpu: '',
   mem: '',
   ssd: '',
-  cls: '',
-  edd: '',
+  linode: '',
+  disk: '',
   trenddown: '',
   trendup: '',
   clock: ''
 };
-
-const reserved = {
-  ssd: ((3039974 * 4) / 1024) / 1024,
-  edd: ((24418918 * 4) / 1024) / 1024
-}
 
 // activity color
 const colorize1 = (value) => {
@@ -85,24 +82,46 @@ const print = async () => {
     data?.conky?.mem?.max, // 1
     data?.conky?.mem?.perc // 2
   ], 2);
-  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1B / $2 GB', [
-    data?.mounts?.['/'], // 0
-    data?.conky?.ssd?.used, // 1
-    data?.conky?.ssd?.size && (parseInt(data.conky.ssd.size) - parseInt(reserved.ssd)), // 2
-    data?.conky?.ssd?.perc // 3
+
+  const root = '/';
+  const lino = '/home/igor/_private';
+  const disk = '/home/igor/_disk';
+
+  // used + available + (reserved_root * 4) + reserved_clusters = 1K-blocks
+  const reserved = {
+    root: (3039974 * 4) + 16384,
+    disk: (24418918 * 4) + 16384,
+    linode: (321123 * 4) + 16384
+  }
+
+  const rootAvailable = (data?.mounts?.[root] && data?.df?.[root]?.used && data?.df?.[root]?.total) || null;
+  const linoAvailable = (data?.mounts?.[lino] && data?.df?.[lino]?.used && data?.df?.[lino]?.total) || null;
+  const diskAvailable = (data?.mounts?.[disk] && data?.df?.[disk]?.used && data?.df?.[disk]?.total) || null;
+
+  // root
+  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1 GB / $2 GB', [
+    rootAvailable,                                                                                              // 0
+    rootAvailable && ((data.df[root].used / 1024) / 1024).toFixed(2),                                           // 1
+    rootAvailable && (((data.df[root].total - reserved.root) / 1024) / 1024).toFixed(2),                        // 2
+    rootAvailable && ((data.df[root].used / (data.df[root].total - reserved.root)) * 100)                       // 3
   ], 3);
-  text += span(fonts.awesome, 7000, 100, colorize2, icons.cls, 'CLS', '$1 GB / $2 GB', [
-    data?.mounts?.['/home/igor/_private'], // 0
-    data?.ws?.cls?.used, // 1
-    data?.ws?.cls?.size, // 2
-    data?.ws?.cls?.perc // 3
+
+  // linode, samba adds reserved space to used
+  text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LIN', '$1 GB / $2 GB', [
+    linoAvailable,                                                                                              // 0
+    linoAvailable && (((data.df[lino].used - reserved.linode) / 1024) / 1024).toFixed(2),                       // 1
+    linoAvailable && (((data.df[lino].total - reserved.linode) / 1024) / 1024).toFixed(2),                      // 2
+    linoAvailable && (((data.df[lino].used - reserved.linode) / (data.df[lino].total - reserved.linode)) * 100) // 3
   ], 3);
-  text += span(fonts.awesome, 7500, 100, colorize2, icons.edd, 'EDD', '$1B / $2 GB', [
-    data?.mounts?.['/home/igor/_disk'], // 0
-    data?.conky?.edd?.used, // 1
-    data?.conky?.edd?.size && (parseInt(data.conky.edd.size) - parseInt(reserved.edd)), // 2
-    data?.conky?.edd?.perc // 3
+
+  // disk
+  text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$1 GB / $2 GB', [
+    diskAvailable,                                                                                              // 0
+    diskAvailable && ((data.df[disk].used / 1024) / 1024).toFixed(2),                                           // 1
+    diskAvailable && (((data.df[disk].total - reserved.disk) / 1024) / 1024).toFixed(2),                        // 2
+    diskAvailable && ((data.df[disk].used / (data.df[disk].total - reserved.disk)) * 100)                       // 3
   ], 3);
+
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
     dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss') // 0
   ], 0);
@@ -160,14 +179,8 @@ const ping = () => {
     const obj = JSON.parse(inc);
     const start = BigInt(obj.message);
     const nano = end - start;
-    const du = obj.diskusage;
     data.ws = {
-      ping: parseInt(parseFloat(nano) / (1000 * 1000)),
-      cls: {
-        perc: Math.round((du.used / du.total) * 100).toString(),
-        used: (du.used / (1024 * 1024)).toFixed(2),
-        size: (du.total / (1024 * 1024)).toFixed(2),
-      }
+      ping: parseInt(parseFloat(nano) / (1000 * 1000))
     }
   });
   ws.on('error', () => {});
@@ -181,6 +194,30 @@ const ping = () => {
   });
 }
 
+const df = async () => {
+  while (true) {
+    try {
+      const file = path.join(os.homedir(), '.local/share/diskusage/df');
+      const content = await fs.promises.readFile(file, 'utf8');
+      if (content) {
+        const result = {};
+        const lines = content.trim().split('\n');
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i];
+          const parts = line.split(/\s+/);
+          result[parts[5]] = {
+            total: parts[1],
+            used: parts[2],
+            available: parts[3]
+          };
+        }
+        data.df = result;
+      }
+    } catch (e) {}
+    await timers.setTimeout(60000);
+  }
+}
+
 const main = async () => {
   while (true) {
     await print();
@@ -191,4 +228,5 @@ const main = async () => {
 conky();
 mounts();
 ping();
+df();
 main();
