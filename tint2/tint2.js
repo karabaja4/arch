@@ -89,41 +89,36 @@ const print = async () => {
     linode: '/home/igor/_private'
   }
 
-  // used + available + (reserved_root * 4) + reserved_clusters = 1K-blocks
-  const reserved = {
-    root: (3039974 * 4) + 16384,
-    disk: (24418918 * 4) + 16384,
-    linode: (321123 * 4) + 16384
-  }
-
   const avail = {
-    root:   (data?.mounts?.[mp.root]   && data?.df?.[mp.root]?.used   && data?.df?.[mp.root]?.total  ) || null,
-    disk:   (data?.mounts?.[mp.disk]   && data?.df?.[mp.disk]?.used   && data?.df?.[mp.disk]?.total  ) || null,
-    linode: (data?.mounts?.[mp.linode] && data?.df?.[mp.linode]?.used && data?.df?.[mp.linode]?.total) || null
+    root:   (data?.mounts?.[mp.root]   && data?.df?.[mp.root]?.total   && data?.df?.[mp.root]?.used   && data?.df?.[mp.root]?.available  ) || null,
+    disk:   (data?.mounts?.[mp.disk]   && data?.df?.[mp.disk]?.total   && data?.df?.[mp.disk]?.used   && data?.df?.[mp.disk]?.available  ) || null,
+    linode: (data?.mounts?.[mp.linode] && data?.df?.[mp.linode]?.total && data?.df?.[mp.linode]?.used && data?.df?.[mp.linode]?.available) || null
   }
 
   // root
   text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1 GB / $2 GB', [
-    avail.root,                                                                                                          // 0
-    avail.root && Math.floor((data.df[mp.root].used / 1024) / 1024),                                                     // 1
-    avail.root && Math.floor(((data.df[mp.root].total - reserved.root) / 1024) / 1024),                                  // 2
-    avail.root && ((data.df[mp.root].used / (data.df[mp.root].total - reserved.root)) * 100)                             // 3
+    avail.root,                                                                                          // 0
+    avail.root && Math.floor((data.df[mp.root].used / 1024) / 1024),                                     // 1
+    avail.root && Math.floor(((data.df[mp.root].used + data.df[mp.root].available) / 1024) / 1024),      // 2
+    avail.root && ((data.df[mp.root].used / (data.df[mp.root].used + data.df[mp.root].available)) * 100) // 3
   ], 3);
 
   // disk
   text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$1 GB / $2 GB', [
-    avail.disk,                                                                                                          // 0
-    avail.disk && Math.floor((data.df[mp.disk].used / 1024) / 1024),                                                     // 1
-    avail.disk && Math.floor(((data.df[mp.disk].total - reserved.disk) / 1024) / 1024),                                  // 2
-    avail.disk && ((data.df[mp.disk].used / (data.df[mp.disk].total - reserved.disk)) * 100)                             // 3
+    avail.disk,                                                                                          // 0
+    avail.disk && Math.floor((data.df[mp.disk].used / 1024) / 1024),                                     // 1
+    avail.disk && Math.floor(((data.df[mp.disk].used + data.df[mp.disk].available) / 1024) / 1024),      // 2
+    avail.disk && ((data.df[mp.disk].used / (data.df[mp.disk].used + data.df[mp.disk].available)) * 100) // 3
   ], 3);
 
   // linode, samba adds reserved space to used
+  // used + available + (reserved_root * 4) + reserved_clusters = 1K-blocks
+  const reserved = (321123 * 4) + 16384;
   text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LND', '$1 GB / $2 GB', [
-    avail.linode,                                                                                                        // 0
-    avail.linode && Math.floor(((data.df[mp.linode].used - reserved.linode) / 1024) / 1024),                             // 1
-    avail.linode && Math.floor(((data.df[mp.linode].total - reserved.linode) / 1024) / 1024),                            // 2
-    avail.linode && (((data.df[mp.linode].used - reserved.linode) / (data.df[mp.linode].total - reserved.linode)) * 100) // 3
+    avail.linode,                                                                                          // 0
+    avail.linode && Math.floor(((data.df[mp.linode].used - reserved) / 1024) / 1024),                      // 1
+    avail.linode && Math.floor(((data.df[mp.linode].total - reserved) / 1024) / 1024),                     // 2
+    avail.linode && (((data.df[mp.linode].used - reserved) / (data.df[mp.linode].total - reserved)) * 100) // 3
   ], 3);
 
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
