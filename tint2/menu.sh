@@ -90,10 +90,6 @@ pd2)
     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
     _run wine Game.exe
     ;;
-wow)
-    rm -r /home/igor/.wine/drive_c/wow/WDB
-    _run wine /home/igor/.wine/drive_c/wow/WoW.exe
-    ;;
 openmw)
     _run openmw-launcher
     ;;
