@@ -22,7 +22,7 @@ terminal)
     _run xfce4-terminal
     ;;
 chromium)
-    _run chromium --disable-gpu
+    _run chromium --disable-gpu --start-maximized
     ;;
 firefox)
     _run firefox-socket-control
