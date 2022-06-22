@@ -60,7 +60,7 @@ teams)
     _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
     ;;
 discord)
-    _run chromium --app=https://discord.com/app
+    _run chromium --start-maximized --disable-gpu --app=https://discord.com/app
     ;;
 skype)
     #_run chromium --app=https://web.skype.com
