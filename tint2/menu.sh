@@ -22,7 +22,7 @@ terminal)
     _run xfce4-terminal
     ;;
 chromium)
-    _run chromium
+    _run chromium --disable-gpu
     ;;
 firefox)
     _run firefox-socket-control
@@ -68,9 +68,9 @@ skype)
     _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
     ;;
 paint)
-    #_run chromium --incognito --app=https://jspaint.app
+    _run chromium --start-maximized --incognito --app=https://jspaint.app
     #_run falkon -e https://jspaint.app
-    _run wine /home/igor/arch/mspaint/mspaint32.exe
+    #_run wine /home/igor/arch/mspaint/mspaint32.exe
     ;;
 vlc)
     _run vlc
