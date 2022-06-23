@@ -51,7 +51,7 @@ const colorize2 = (value) => {
 const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
   let text = `${name}: N/A`;
   let color = colors.gray;
-  if (values.every(x => x !== undefined && x !== null)) {
+  if (values.length > 0 && values.every(x => x !== undefined && x !== null)) {
     text = `${name}: ${format}`;
     for (let i = 0; i < values.length; i++) {
       text = text.replace(`$${i}`, values[i]);
@@ -96,31 +96,41 @@ const print = async () => {
   }
 
   // root
-  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$1 GB / $2 GB', [
-    avail.root,                                                                                          // 0
-    avail.root && Math.floor((data.df[mp.root].used / 1024) / 1024),                                     // 1
-    avail.root && Math.floor(((data.df[mp.root].used + data.df[mp.root].available) / 1024) / 1024),      // 2
-    avail.root && ((data.df[mp.root].used / (data.df[mp.root].used + data.df[mp.root].available)) * 100) // 3
-  ], 3);
+  const root = [];
+  if (avail.root) {
+    const rootUsed  = data.df[mp.root].used;
+    const rootTotal = rootUsed + data.df[mp.root].available;
+    root[0] = Math.floor((rootUsed / 1024) / 1024);
+    root[1] = Math.floor((rootTotal / 1024) / 1024);
+    root[2] = (rootUsed / rootTotal) * 100;
+  }
+  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$0 GB / $1 GB', root, 2);
 
   // disk
-  text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$1 GB / $2 GB', [
-    avail.disk,                                                                                          // 0
-    avail.disk && Math.floor((data.df[mp.disk].used / 1024) / 1024),                                     // 1
-    avail.disk && Math.floor(((data.df[mp.disk].used + data.df[mp.disk].available) / 1024) / 1024),      // 2
-    avail.disk && ((data.df[mp.disk].used / (data.df[mp.disk].used + data.df[mp.disk].available)) * 100) // 3
-  ], 3);
+  const disk = [];
+  if (avail.disk) {
+    const diskUsed  = data.df[mp.disk].used;
+    const diskTotal = diskUsed + data.df[mp.disk].available;
+    disk[0] = Math.floor((diskUsed / 1024) / 1024);
+    disk[1] = Math.floor((diskTotal / 1024) / 1024);
+    disk[2] = (diskUsed / diskTotal) * 100;
+  }
+  text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$0 GB / $1 GB', disk, 2);
 
   // linode, samba adds reserved space to used
   // used + available + (reserved_root * 4) + reserved_clusters = 1K-blocks
-  const reserved = (321123 * 4) + 16384;
-  text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LND', '$1 GB / $2 GB', [
-    avail.linode,                                                                                          // 0
-    avail.linode && Math.floor(((data.df[mp.linode].used - reserved) / 1024) / 1024),                      // 1
-    avail.linode && Math.floor(((data.df[mp.linode].total - reserved) / 1024) / 1024),                     // 2
-    avail.linode && (((data.df[mp.linode].used - reserved) / (data.df[mp.linode].total - reserved)) * 100) // 3
-  ], 3);
+  const linode = [];
+  if (avail.linode) {
+    const reserved = (321123 * 4) + 16384;
+    const linodeUsed  = data.df[mp.linode].used - reserved;
+    const linodeTotal = linodeUsed + data.df[mp.linode].available;
+    linode[0] = Math.floor((linodeUsed / 1024) / 1024);
+    linode[1] = Math.floor((linodeTotal / 1024) / 1024);
+    linode[2] = (linodeUsed / linodeTotal) * 100;
+  }
+  text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LND', '$0 GB / $1 GB', linode, 2);
 
+  // clock
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
     dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss') // 0
   ], 0);
