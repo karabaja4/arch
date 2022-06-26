@@ -55,22 +55,18 @@ slack)
     _run slack --disable-smooth-scrolling --start-maximized
     ;;
 teams)
-    #_run chromium --app=https://teams.microsoft.com
     _load_apulse
     _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
     ;;
 discord)
-    _run chromium --start-maximized --disable-gpu --app=https://discord.com/app
+    _run chromium --disable-gpu --start-maximized --app=https://discord.com/app
     ;;
 skype)
-    #_run chromium --app=https://web.skype.com
     _load_apulse
     _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
     ;;
 paint)
     _run chromium --start-maximized --incognito --app=https://jspaint.app
-    #_run falkon -e https://jspaint.app
-    #_run wine /home/igor/arch/mspaint/mspaint32.exe
     ;;
 vlc)
     _run vlc
