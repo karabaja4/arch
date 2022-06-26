@@ -9,8 +9,6 @@
       </action>
     </item>
 
-    <separator />
-
     <item label="OpenMW" icon="/usr/share/icons/Papirus/16x16/apps/openmw.svg">
       <action name="Execute">
         <execute>/home/igor/arch/tint2/menu.sh openmw</execute>
