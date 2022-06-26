@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 _uid="$(id -u)"
 _gid="$(id -g)"
