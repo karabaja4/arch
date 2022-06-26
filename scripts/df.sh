@@ -13,7 +13,7 @@ _exit() {
     exit "${1}"
 }
 
-if pgrep -x "df"
+if pgrep -x "df" > /dev/null
 then
     _echo "df is running"
     exit 1
