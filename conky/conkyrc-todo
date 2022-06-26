@@ -17,7 +17,7 @@ conky.config = {
 };
 
 conky.text = [[
-${color1}${font Font Awesome 5 Free:size=10}${font} TODO
+${color1}${font Font Awesome 6 Free:size=10}${font} TODO
 
 ${exec cat /home/igor/.todo}
 ]];
