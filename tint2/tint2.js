@@ -25,7 +25,7 @@ const icons = {
   ping: '',
   cpu: '',
   mem: '',
-  ssd: '',
+  ssd: '',
   linode: '',
   disk: '',
   trenddown: '',
