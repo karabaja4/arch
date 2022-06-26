@@ -22,7 +22,7 @@ const fonts = {
 const icons = {
   netdown: '',
   netup: '',
-  ping: '',
+  ping: '',
   cpu: '',
   mem: '',
   ssd: '',
