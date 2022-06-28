@@ -65,6 +65,7 @@ _on_reboot() {
     doas umount -qv "${HOME}/_mmc"
     doas umount -qv "${HOME}/_private"
     doas umount -qv "${HOME}/_public"
+    doas umount -qv "${HOME}/_azure"
     doas umount -qv /mnt/*
     rm -rf "${HOME}/.cache"
     printf "$(tput setaf 1)%s$(tput sgr0)\n" "Rebooting!"
