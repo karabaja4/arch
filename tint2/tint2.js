@@ -85,14 +85,12 @@ const print = async () => {
 
   const mp = {
     root: '/',
-    disk: '/home/igor/_disk',
-    linode: '/home/igor/_private'
+    disk: '/home/igor/_disk'
   }
 
   const avail = {
     root:   (data?.mounts?.[mp.root]   && data?.df?.[mp.root]?.total   && data?.df?.[mp.root]?.used   && data?.df?.[mp.root]?.available  ) || null,
-    disk:   (data?.mounts?.[mp.disk]   && data?.df?.[mp.disk]?.total   && data?.df?.[mp.disk]?.used   && data?.df?.[mp.disk]?.available  ) || null,
-    linode: (data?.mounts?.[mp.linode] && data?.df?.[mp.linode]?.total && data?.df?.[mp.linode]?.used && data?.df?.[mp.linode]?.available) || null
+    disk:   (data?.mounts?.[mp.disk]   && data?.df?.[mp.disk]?.total   && data?.df?.[mp.disk]?.used   && data?.df?.[mp.disk]?.available  ) || null
   }
 
   // root
@@ -116,19 +114,6 @@ const print = async () => {
     disk[2] = (diskUsed / diskTotal) * 100;
   }
   text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$0 GB / $1 GB', disk, 2);
-
-  // linode, samba adds reserved space to used
-  // used + available + (reserved_root * 4) + reserved_clusters = 1K-blocks
-  const linode = [];
-  if (avail.linode) {
-    const reserved = (321123 * 4) + 16384;
-    const linodeUsed  = data.df[mp.linode].used - reserved;
-    const linodeTotal = linodeUsed + data.df[mp.linode].available;
-    linode[0] = Math.floor((linodeUsed / 1024) / 1024);
-    linode[1] = Math.floor((linodeTotal / 1024) / 1024);
-    linode[2] = (linodeUsed / linodeTotal) * 100;
-  }
-  text += span(fonts.awesome, 7000, 100, colorize2, icons.linode, 'LND', '$0 GB / $1 GB', linode, 2);
 
   // clock
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
