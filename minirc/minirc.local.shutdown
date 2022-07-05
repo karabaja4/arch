@@ -1,11 +1,3 @@
 #!/bin/sh
 
-_user="$(id -un 1000)"
-
-umount "/home/${_user}/_disk" > /dev/null 2>&1
-umount "/home/${_user}/_mmc" > /dev/null 2>&1
-umount "/home/${_user}/_private" > /dev/null 2>&1
-umount "/home/${_user}/_public" > /dev/null 2>&1
-umount /mnt/* > /dev/null 2>&1
-
-rm -rf "/home/${_user}/.cache"
+# add shutdown commands here
