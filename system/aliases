@@ -60,12 +60,12 @@ todo() {
 }
 
 reboot() {
-    /home/igor/arch/scripts/reboot.sh
+    "${HOME}/arch/scripts/reboot.sh"
     doas /usr/bin/reboot
 }
 
 poweroff() {
-    /home/igor/arch/scripts/reboot.sh
+    "${HOME}/arch/scripts/reboot.sh"
     doas /usr/bin/poweroff
 }
 
