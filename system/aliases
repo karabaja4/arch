@@ -59,24 +59,13 @@ todo() {
     fi
 }
 
-_on_reboot() {
-    killall -v -w qbittorrent
-    doas umount -qv "${HOME}/_disk"
-    doas umount -qv "${HOME}/_mmc"
-    doas umount -qv "${HOME}/_private"
-    doas umount -qv "${HOME}/_public"
-    doas umount -qv /mnt/*
-    rm -rf "${HOME}/.cache"
-    printf "$(tput setaf 1)%s$(tput sgr0)\n" "Rebooting!"
-}
-
 reboot() {
-    _on_reboot
+    /home/igor/arch/scripts/reboot.sh
     doas /usr/bin/reboot
 }
 
 poweroff() {
-    _on_reboot
+    /home/igor/arch/scripts/reboot.sh
     doas /usr/bin/poweroff
 }
 
