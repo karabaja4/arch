@@ -21,14 +21,14 @@ case "${1}" in
 terminal)
     _run xfce4-terminal
     ;;
-chromium)
-    _run chromium --disable-gpu --start-maximized --disable-smooth-scrolling
-    ;;
 firefox)
     _run firefox-socket-control
     ;;
 qtfm)
     _run qtfm
+    ;;
+chromium)
+    _run chromium --disable-gpu --start-maximized --disable-smooth-scrolling
     ;;
 qbittorrent)
     _run qbittorrent
@@ -59,6 +59,9 @@ skype)
     _load_apulse
     _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
     ;;
+flameshot)
+    _run flameshot
+    ;;
 paint)
     _run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
     ;;
@@ -83,11 +86,6 @@ quake3)
 openjk)
     export __GL_FSAA_MODE=5
     _run openjk
-    ;;
-flameshot)
-    #mkdir -p /tmp/screenshots
-    #flameshot gui --raw | tee /tmp/screenshots/flameshot.png | xclip -i -selection clipboard -t image/png
-    _run flameshot
     ;;
 *)
     echo "unknown app"
