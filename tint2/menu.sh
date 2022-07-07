@@ -22,7 +22,7 @@ terminal)
     _run xfce4-terminal
     ;;
 chromium)
-    _run chromium --disable-gpu --start-maximized
+    _run chromium --disable-gpu --start-maximized --disable-smooth-scrolling
     ;;
 firefox)
     _run firefox-socket-control
@@ -59,14 +59,14 @@ teams)
     _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
     ;;
 discord)
-    _run chromium --disable-gpu --start-maximized --app=https://discord.com/app
+    _run chromium --disable-gpu --start-maximized --disable-smooth-scrolling --app=https://discord.com/app
     ;;
 skype)
     _load_apulse
     _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
     ;;
 paint)
-    _run chromium --start-maximized --incognito --app=https://jspaint.app
+    _run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
     ;;
 vlc)
     _run vlc
