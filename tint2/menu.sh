@@ -42,14 +42,8 @@ code)
 azuredatastudio)
     _run azuredatastudio
     ;;
-sqlite)
-    _run /opt/ssh-sqlite-manager-linux-x64/ssh-sqlite-manager
-    ;;
 virtualbox)
     _run VirtualBox
-    ;;
-postman)
-    _run postman
     ;;
 slack)
     _run slack --start-maximized --disable-smooth-scrolling
@@ -68,12 +62,6 @@ skype)
 paint)
     _run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
     ;;
-vlc)
-    _run vlc
-    ;;
-obs)
-    _run obs
-    ;;
 kvirc)
     _run kvirc
     ;;
@@ -85,10 +73,6 @@ pd2)
     export __GL_FSAA_MODE=11
     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
     _run wine Game.exe
-    ;;
-wow)
-    rm -r /home/igor/.wine/drive_c/wow/WDB
-    _run wine /home/igor/.wine/drive_c/wow/WoW.exe
     ;;
 openmw)
     _run openmw-launcher
