@@ -52,7 +52,7 @@ postman)
     _run postman
     ;;
 slack)
-    _run slack --disable-smooth-scrolling --start-maximized
+    _run slack --start-maximized --disable-smooth-scrolling
     ;;
 teams)
     _load_apulse
