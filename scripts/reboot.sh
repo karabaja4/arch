@@ -17,8 +17,14 @@ _umount "${HOME}/_mmc"
 _umount "${HOME}/_private"
 _umount "${HOME}/_public"
 
-_umount /mnt/*
-rm -vrf /mnt/*
+for f in /mnt/*
+do
+    if [ "$f" != "/mnt/*" ]
+    then
+        _umount "$f"
+        rm -vrf "$f"
+    fi
+done
 
 rm -rf "${HOME}/.cache"
 _echo "Rebooting!"
