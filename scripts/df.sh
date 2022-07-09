@@ -27,10 +27,11 @@ else
         then
             _echo "${_stripped}" > "${_out}"
             _echo "df file initialized"
+        else
+            # merge latest df with old df
+            _echo "${_stripped}" | cat - "${_out}" | sort -k1,1 -u > "${_out}.tmp" && mv "${_out}.tmp" "${_out}"
+            _echo "df successfully executed"
         fi
-        # merge latest df with old df
-        _echo "${_stripped}" | cat - "${_out}" | sort -k1,1 -u > "${_out}.tmp" && mv "${_out}.tmp" "${_out}"
-        _echo "df successfully executed"
         _exit 0
     else
         _echo "df failed"
