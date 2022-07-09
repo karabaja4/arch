@@ -22,13 +22,14 @@ else
     _dfec=${?}
     if [ "${_dfec}" -eq 0 ]
     then
+        _stripped="$(_echo "${_df}" | awk 'NR>1{print $6, $2, $3, $4}')"
         if [ ! -f "${_out}" ]
         then
-            _echo "${_df}" | sed '1d' > "${_out}"
+            _echo "${_stripped}" > "${_out}"
             _echo "df file initialized"
         fi
         # merge latest df with old df
-        _echo "${_df}" | sed '1d' | cat - "${_out}" | sort -V -u -k1,1 > "${_out}.tmp" && mv "${_out}.tmp" "${_out}"
+        _echo "${_stripped}" | cat - "${_out}" | sort -k1,1 -u > "${_out}.tmp" && mv "${_out}.tmp" "${_out}"
         _echo "df successfully executed"
         _exit 0
     else

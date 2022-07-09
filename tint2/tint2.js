@@ -199,7 +199,7 @@ const df = async () => {
         for (let i = 1; i < lines.length; i++) {
           const line = lines[i];
           const parts = line.split(/\s+/);
-          result[parts[5]] = {
+          result[parts[0]] = {
             total: parseInt(parts[1]),
             used: parseInt(parts[2]),
             available: parseInt(parts[3])
