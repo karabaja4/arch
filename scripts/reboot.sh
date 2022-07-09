@@ -1,5 +1,6 @@
 #!/bin/sh
 # shellcheck disable=SC2115
+set -u
 
 _echo() {
     printf "$(tput setaf 1)%s$(tput sgr0)\n" "${1}"
@@ -17,12 +18,12 @@ _umount "${HOME}/_mmc"
 _umount "${HOME}/_private"
 _umount "${HOME}/_public"
 
-for f in /mnt/*
+for _f in /mnt/*
 do
-    if [ "$f" != "/mnt/*" ]
+    if [ "${_f}" != "/mnt/*" ]
     then
-        _umount "$f"
-        rm -vrf "$f"
+        _umount "${_f}"
+        rm -vrf "${_f}"
     fi
 done
 
