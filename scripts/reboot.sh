@@ -2,10 +2,6 @@
 # shellcheck disable=SC2115
 set -u
 
-_echo() {
-    printf "$(tput setaf 1)%s$(tput sgr0)\n" "${1}"
-}
-
 _umount() {
     fuser -Mk "${@}"
     doas umount -qv "${@}"
@@ -28,4 +24,3 @@ do
 done
 
 rm -rf "${HOME}/.cache"
-_echo "Rebooting!"

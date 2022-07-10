@@ -16,11 +16,17 @@ alias sn='screen -S'
 
 alias startx='exec sx'
 
+__echo() {
+    printf "$(tput setaf "${1}")%s$(tput sgr0)\n" "${2}"
+}
+
 rsnc() {
-    doas pacman -Rsnc "$@"
-    echo -e "\033[32mUpdating db...\033[0m"
-    doas updatedb
-    echo -e "\033[31mCheck for remaining files in ${HOME}\033[0m"
+    if doas pacman -Rsnc "${@}"
+    then
+        __echo 1 "Updating db..."
+        doas updatedb
+        __echo 2 "Check for remaining files in ${HOME}"
+    fi
 }
 
 fixntp() {
@@ -53,11 +59,13 @@ todo() {
 
 reboot() {
     "${HOME}/arch/scripts/reboot.sh"
+    __echo 1 "Rebooting"
     doas /usr/bin/reboot
 }
 
 poweroff() {
     "${HOME}/arch/scripts/reboot.sh"
+    __echo 1 "Powering off"
     doas /usr/bin/poweroff
 }
 
