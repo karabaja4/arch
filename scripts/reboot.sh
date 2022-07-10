@@ -7,7 +7,7 @@ _umount() {
     doas umount -qv "${@}"
 }
 
-/usr/bin/kill --verbose --signal TERM --timeout 30000 KILL qbittorrent
+/usr/bin/kill --verbose --signal TERM --timeout 60000 KILL qbittorrent
 
 _umount "${HOME}/_disk"
 _umount "${HOME}/_mmc"

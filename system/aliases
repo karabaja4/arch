@@ -59,13 +59,13 @@ todo() {
 
 reboot() {
     "${HOME}/arch/scripts/reboot.sh"
-    __echo 1 "Rebooting"
+    __echo 1 "Rebooting..."
     doas /usr/bin/reboot
 }
 
 poweroff() {
     "${HOME}/arch/scripts/reboot.sh"
-    __echo 1 "Powering off"
+    __echo 1 "Powering off..."
     doas /usr/bin/poweroff
 }
 
