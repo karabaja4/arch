@@ -16,14 +16,6 @@ alias sn='screen -S'
 
 alias startx='exec sx'
 
-work() {
-    local -a array=()
-    mapfile -t array < <( jq -crM '.work | "/d:" + .domain, "/v:" + .host, "/u:" + .user, "/p:" + .password' "${HOME}/arch/secret.json" )
-    echo "Connecting to: ${array[0]} ${array[1]} ${array[2]}"
-    xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper "${array[@]}"
-    echo "Disconnected"
-}
-
 rsnc() {
     doas pacman -Rsnc "$@"
     echo -e "\033[32mUpdating db...\033[0m"
@@ -69,6 +61,7 @@ poweroff() {
     doas /usr/bin/poweroff
 }
 
+alias work='/home/igor/arch/scripts/work.sh'
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/10.10.0/amd64/iso-cd/debian-10.10.0-amd64-netinst.iso -O /dev/null'
 alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
