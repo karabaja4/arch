@@ -78,8 +78,15 @@ alias firefox='firefox-socket-control'
 alias ncdu='ncdu --color dark'
 
 usb() {
-    doas umount -v /mnt/* || echo "umount failed"
-    rm -vrf /mnt/* || echo "rm failed"
+    for _f in /mnt/*
+    do
+        if [ "${_f}" != "/mnt/*" ]
+        then
+            fuser -Mk "${_f}"
+            doas umount -qv "${_f}"
+            rm -vrf "${_f}"
+        fi
+    done
 }
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
