@@ -1,18 +1,30 @@
 #!/bin/sh
 # shellcheck disable=SC2115
-set -u
+
+_echo() {
+    printf '%s\n' "${1}"
+}
+
+_not_root() {
+    _echo "Must be root"
+    exit 1
+}
+
+[ "$(id -u)" -ne 0 ] && _not_root
+
+_home="/home/$(id -un 1000)"
 
 _umount() {
     fuser -Mk "${@}"
-    doas umount -qv "${@}"
+    umount -qv "${@}"
 }
 
-/usr/bin/kill --verbose --signal TERM --timeout 60000 KILL qbittorrent
+killall -v -w qbittorrent
 
-_umount "${HOME}/_disk"
-_umount "${HOME}/_mmc"
-_umount "${HOME}/_private"
-_umount "${HOME}/_public"
+_umount "${_home}/_disk"
+_umount "${_home}/_mmc"
+_umount "${_home}/_private"
+_umount "${_home}/_public"
 
 for _f in /mnt/*
 do
@@ -23,4 +35,16 @@ do
     fi
 done
 
-rm -rf "${HOME}/.cache"
+rm -rf "${_home}/.cache"
+
+if [ "${1}" = "reboot" ]
+then
+    _echo "Rebooting..."
+    /usr/bin/reboot
+fi
+
+if [ "${1}" = "poweroff" ]
+then
+    _echo "Powering off..."
+    /usr/bin/poweroff
+fi

@@ -16,59 +16,16 @@ alias sn='screen -S'
 
 alias startx='exec sx'
 
-__echo() {
-    printf "$(tput setaf "${1}")%s$(tput sgr0)\n" "${2}"
-}
-
-rsnc() {
-    if doas pacman -Rsnc "${@}"
-    then
-        __echo 1 "Updating db..."
-        doas updatedb
-        __echo 2 "Check for remaining files in ${HOME}"
-    fi
-}
-
 fixntp() {
     doas rc stop ntpd
     doas ntpd -gq
     doas rc start ntpd
 }
 
-todo() {
-    if [ "${1}" = "off" ] || [ -z "${1}" ]
-    then
-        if [ -z "${1}" ]
-        then
-            qtextpad "${HOME}/.todo" 
-        fi
-        local -r pid="$(pgrep -f conkyrc-todo)"
-        if [ -n "${pid}" ]
-        then
-            echo "Killing existing conky instance (${pid})"
-            /usr/bin/kill --verbose --signal TERM --timeout 10000 KILL "${pid}"
-        fi
-        if [ -z "${1}" ]
-        then
-            conky -d -c "${HOME}/arch/conky/conkyrc-todo" --xinerama-head 0 > /dev/null 2>&1
-        fi
-    else
-        echo "invalid parameter"
-    fi
-}
+alias reboot='doas /home/igor/arch/scripts/reboot.sh reboot'
+alias poweroff='doas /home/igor/arch/scripts/reboot.sh poweroff'
 
-reboot() {
-    "${HOME}/arch/scripts/reboot.sh"
-    __echo 1 "Rebooting..."
-    doas /usr/bin/reboot
-}
-
-poweroff() {
-    "${HOME}/arch/scripts/reboot.sh"
-    __echo 1 "Powering off..."
-    doas /usr/bin/poweroff
-}
-
+alias rsnc='doas pacman -Rsnc'
 alias work='/home/igor/arch/scripts/work.sh'
 alias speedtest='wget http://mirror.carnet.hr/debian-cd/10.10.0/amd64/iso-cd/debian-10.10.0-amd64-netinst.iso -O /dev/null'
 alias syu='doas pacman -Syu'
