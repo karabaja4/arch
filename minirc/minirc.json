@@ -48,12 +48,6 @@
         "command": "/usr/bin/crond -n"
     },
     {
-        "name": "syslog",
-        "enabled": false,
-        "user": "root",
-        "command": "/usr/bin/syslog-ng -F"
-    },
-    {
         "name": "vpn",
         "enabled": false,
         "user": "root",
