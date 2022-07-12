@@ -48,8 +48,8 @@ map <space> shell
 # mouse
 map <m-up> up
 map <m-down> down
-map <m-1> updir
-map <m-2> open
+#map <m-1> updir
+#map <m-2> open
 
 # empty open so it navigates but doesnt open anything
 cmd open &{{
