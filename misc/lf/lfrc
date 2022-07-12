@@ -6,7 +6,7 @@ set icons
 set ignorecase
 set wrapscroll
 set autoquit
-set mouse
+#set mouse
 
 set ratios '1:3'
 set info 'size'
@@ -46,8 +46,8 @@ map <f-5> reload
 map <space> shell
 
 # mouse
-map <m-up> up
-map <m-down> down
+#map <m-up> up
+#map <m-down> down
 #map <m-1> updir
 #map <m-2> open
 
