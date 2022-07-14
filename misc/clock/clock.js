@@ -2,22 +2,25 @@ const fs = require('fs');
 const timers = require('timers/promises');
 
 const colors = [
-  "#ff0000",
-  "#00ff00",
   "#0000ff",
-  "#ffff00",
-  "#ff00ff",
   "#00ff00",
   "#00ffff",
-  "#0000ff"
+  "#ff0000",
+  "#ff00ff",
+  "#ffff00",
+  "#ffffff"
 ]
 
 const interval = 1000;
 let idx = 0;
 
+const localDate = () => {
+  return new Date().toLocaleString('en-US', { timeZone: 'Europe/Zagreb' });
+}
+
 const main = async () => {
   while (true) {
-    const date = new Date();
+    const date = new Date(localDate());
     const h = date.getHours();
     const m = date.getMinutes().toString().padStart(2, '0');
     const s = date.getSeconds().toString().padStart(2, '0');
