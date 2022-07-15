@@ -11,10 +11,10 @@ const colors = [
   "#ffffff"
 ];
 
-const morning = [ "Dobro", "jutro", ":)" ];
-const day =     [ "Želim", "ti", "dobar", "dan", ":)" ];
-const evening = [ "Želim", "ti", "ugodnu", "večer", ":)" ];
-const night =   [ "Želim", "ti", "laku", "noć", ":)" ];
+const morning = "Dobro jutro :)";
+const day =     "Želim ti dobar dan :)";
+const evening = "Želim ti ugodnu večer :)";
+const night =   "Želim ti laku noć :)";
 
 const greetings = (hour) => {
   if (hour == 23 || (hour >= 0 && hour <= 3)) {
@@ -46,7 +46,7 @@ const main = async () => {
     const m = date.getMinutes().toString().padStart(2, '0');
     const sec = date.getSeconds();
 
-    const words = greetings(h);
+    const words = greetings(h).split(' ');
     const word = words[sec - 30];
 
     const result = {
