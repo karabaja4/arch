@@ -81,29 +81,33 @@ map gb bottom
 map gd cd ~/_disk/torrents
 
 # archives
+# ${f} = current file
+# ${fs} = selected file(s)
+# ${fx} = selected file(s) or a current file
+# set -f = the shell shall disable pathname expansion
 
 cmd gz ${{
     set -f
-    for x in $fx
+    for _x in ${fx}
     do
-        set -- "$@" "$(basename "$x")"
+        set -- "${@}" "$(basename "${_x}")"
     done
-    tar cvzf "$f.tar.gz" "$@"
+    tar cvzf "${f}.tar.gz" "${@}"
 }}
 
 cmd ex ${{
     set -f
-    case "$f" in
-        *.tar.*) tar xvf "$f";;
-        *.7z|*.zip|*.rar) 7z x "$f";;
+    case "${f}" in
+        *.tar.*) tar xvf "${f}";;
+        *.7z|*.zip|*.rar) 7z x "${f}";;
     esac
 }}
 
 cmd zip ${{
     set -f
-    for x in $fx
+    for _x in ${fx}
     do
-        set -- "$@" "$(basename "$x")"
+        set -- "${@}" "$(basename "${_x}")"
     done
-    7z a -tzip "$f.zip" "$@"
+    7z a -tzip "${f}.zip" "${@}"
 }}
