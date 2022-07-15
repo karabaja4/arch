@@ -25,6 +25,7 @@ const greetings = (hour) => {
   if (hour >= 18 && hour <= 23) {
     return evening;
   }
+  return [];
 };
 
 const interval = 1000;
