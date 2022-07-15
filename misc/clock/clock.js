@@ -52,7 +52,7 @@ const main = async () => {
     const result = {
       text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
       color: colors[idx++ % colors.length],
-      size: 200,
+      size: word ? 180 : 200,
       interval: interval,
       digital: !word
     };
