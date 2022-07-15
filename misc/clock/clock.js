@@ -37,7 +37,7 @@ let idx = 0;
 
 const localDate = () => {
   return new Date().toLocaleString('en-US', { timeZone: 'Europe/Zagreb' });
-}
+};
 
 const main = async () => {
   while (true) {
@@ -59,6 +59,6 @@ const main = async () => {
     await fs.promises.writeFile('/home/igor/_static/ad307b2c60c32dc4.json', JSON.stringify(result));
     await timers.setTimeout(interval);
   }
-}
+};
 
 main();
