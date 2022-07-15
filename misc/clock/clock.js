@@ -9,7 +9,23 @@ const colors = [
   "#ff00ff",
   "#ffff00",
   "#ffffff"
-]
+];
+
+const morning = [ "Dobro", "jutro", ":)" ];
+const day =     [ "Želim", "ti", "dobar", "dan", ":)" ];
+const evening = [ "Želim", "ti", "ugodnu", "večer", ":)" ];
+
+const greetings = (hour) => {
+  if (hour >= 0 && hour < 12) {
+    return morning;
+  }
+  if (hour >= 12 && hour < 18) {
+    return day;
+  }
+  if (hour >= 18 && hour <= 23) {
+    return evening;
+  }
+};
 
 const interval = 1000;
 let idx = 0;
@@ -24,16 +40,12 @@ const main = async () => {
     const h = date.getHours();
     const m = date.getMinutes().toString().padStart(2, '0');
     const sec = date.getSeconds();
-    let word = null;
-    let s = null;
-    if (sec === 30) word = "Have";
-    else if (sec === 31) word = "a";
-    else if (sec === 32) word = "nice";
-    else if (sec === 33) word = "day";
-    else if (sec === 34) word = ":)"
-    else s = sec.toString().padStart(2, '0');
+
+    const words = greetings(h);
+    const word = words[sec - 30];
+
     const result = {
-      text: word || `${h}:${m}:${s}`,
+      text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
       color: colors[idx++ % colors.length],
       size: 200,
       interval: interval,
