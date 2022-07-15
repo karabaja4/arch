@@ -14,15 +14,19 @@ const colors = [
 const morning = [ "Dobro", "jutro", ":)" ];
 const day =     [ "Želim", "ti", "dobar", "dan", ":)" ];
 const evening = [ "Želim", "ti", "ugodnu", "večer", ":)" ];
+const night =   [ "Želim", "ti", "laku", "noć", ":)" ];
 
 const greetings = (hour) => {
-  if (hour >= 0 && hour < 12) {
+  if (hour == 23 || (hour >= 0 && hour <= 3)) {
+    return night;
+  }
+  if (hour >= 4 && hour <= 11) {
     return morning;
   }
-  if (hour >= 12 && hour < 18) {
+  if (hour >= 12 && hour <= 17) {
     return day;
   }
-  if (hour >= 18 && hour <= 23) {
+  if (hour >= 18 && hour <= 22) {
     return evening;
   }
   return [];
