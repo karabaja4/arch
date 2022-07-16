@@ -22,6 +22,10 @@ fixntp() {
     doas rc start ntpd
 }
 
+hs() {
+    grep "${1}" "${HOME}/.bash_history"
+}
+
 alias reboot='doas /home/igor/arch/scripts/reboot.sh reboot'
 alias poweroff='doas /home/igor/arch/scripts/reboot.sh poweroff'
 
