@@ -18,4 +18,4 @@ sed -i '1s/^/[Default Applications]\n/' "${path}"
 sed -i '/^#/d' "${path}"
 chmod 400 ${path}
 
-ln -sf "${path}" "${HOME}/.config/mimeapps.list"
+ln -sfv "${path}" "${HOME}/.config/mimeapps.list"
