@@ -1,4 +1,0 @@
-sudo useradd -m -d /var/run/pulse pulse
-sudo groupadd pulse-access
-sudo gpasswd -a igor pulse-access
-sudo gpasswd -a pulse audio
