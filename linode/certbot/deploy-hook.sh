@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo /usr/bin/nginx -s reload
+doas /usr/bin/nginx -s reload

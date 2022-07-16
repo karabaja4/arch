@@ -1,1 +1,0 @@
-%igor ALL= NOPASSWD: /usr/bin/nginx -s reload
