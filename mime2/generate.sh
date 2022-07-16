@@ -19,3 +19,4 @@ sed -i '/^#/d' "${path}"
 chmod 400 ${path}
 
 ln -sfv "${path}" "${HOME}/.config/mimeapps.list"
+ln -sfv "${path}" "${HOME}/.local/share/applications/mimeapps.list"
