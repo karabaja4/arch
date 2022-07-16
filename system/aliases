@@ -59,7 +59,7 @@ alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
 
 source '/home/igor/arch/scripts/env.sh'
 source '/usr/share/git/completion/git-prompt.sh'
-source '/home/igor/arch/misc/lf/icons.sh'
+source '/home/igor/arch/lf/icons.sh'
 
 _bold=$(tput bold)
 _green=$(tput setaf 2)
