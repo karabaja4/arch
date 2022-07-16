@@ -55,7 +55,6 @@ usb() {
 }
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
-#alias watchincrease='sudo sysctl fs.inotify.max_user_watches=524288'
 
 source '/home/igor/arch/scripts/env.sh'
 source '/usr/share/git/completion/git-prompt.sh'
