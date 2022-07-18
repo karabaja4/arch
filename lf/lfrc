@@ -10,6 +10,7 @@ set autoquit
 
 set ratios '1:3'
 set info 'size'
+set period 1
 
 # should be set to \n only so spaces in files are handled correctly
 # used mostly when archiving
