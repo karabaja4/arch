@@ -90,6 +90,11 @@ map gd cd ~/_disk/torrents
 # ${fx} = selected file(s) or a current file
 # set -f = the shell shall disable pathname expansion
 
+# ${{ -> exit UI, run command and return to the UI
+# %{{ -> run command with output in the 1-line UI prompt
+# !{{ -> same as ${{, but requires a keypress once command exists
+# &{{ -> run command completely in the background, invisible to the UI
+
 cmd gz ${{
     set -f
     for _x in ${fx}
@@ -116,7 +121,7 @@ cmd zip ${{
     7z a -tzip "${f}.zip" "${@}"
 }}
 
-cmd clip ${{
+cmd clip &{{
     set -f
     case "${f}" in
         *.png|*.jpg) xclip -selection clipboard -t image/png -i "${f}";;
