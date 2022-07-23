@@ -115,3 +115,10 @@ cmd zip ${{
     done
     7z a -tzip "${f}.zip" "${@}"
 }}
+
+cmd clip ${{
+    set -f
+    case "${f}" in
+        *.png|*.jpg) xclip -selection clipboard -t image/png -i "${f}";;
+    esac
+}}
