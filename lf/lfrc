@@ -61,20 +61,20 @@ map <space> shell
 cmd open &{{
 }}
 cmd open2 &{{
-    if [ ! -d "$f" ]
+    if [ ! -d "${f}" ]
     then
-        xdg-open "$f" > /dev/null 2>&1
+        xdg-open "${f}" > /dev/null 2>&1
     fi
 }}
 map o open2
 map <enter> :open; open2
 
 cmd cp &{{
-    printf "$f" | xclip -i -selection clipboard
+    printf "${f}" | xclip -i -selection clipboard
 }}
 
 cmd term &{{
-    xfce4-terminal --working-directory="$PWD" > /dev/null 2>&1
+    xfce4-terminal --working-directory="${PWD}" > /dev/null 2>&1
 }}
 map t term
 
