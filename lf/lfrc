@@ -33,6 +33,7 @@ map h
 map j
 map k
 map l
+map /
 
 map . set hidden!
 map <delete> delete
@@ -46,6 +47,7 @@ map u :unselect; clear
 map <esc> :unselect; clear
 map <f-2> rename
 map <f-5> reload
+map <tab> search
 
 map <space> shell
 
@@ -79,10 +81,10 @@ map t term
 map <backspace2> updir
 
 map gg
-map gt top
-map gb bottom
+#map gt top
+#map gb bottom
 
-map gd cd ~/_disk/torrents
+map gt cd ~/_disk/torrents
 
 # archives
 # ${f} = current file
