@@ -61,7 +61,7 @@ map <space> shell
 cmd open &{{
 }}
 cmd open2 &{{
-    if [ ! -d "${f}" ]
+    if [ -n "${f}" ] && [ ! -d "${f}" ]
     then
         xdg-open "${f}" > /dev/null 2>&1
     fi
