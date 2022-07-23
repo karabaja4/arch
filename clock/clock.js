@@ -38,7 +38,7 @@ const localDate = () => {
   return new Date().toLocaleString('en-US', { timeZone: 'Europe/Zagreb' });
 };
 
-const port = 42811;
+const port = 42822;
 
 app.get('/', async (req, res) => {
 
