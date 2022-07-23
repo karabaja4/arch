@@ -64,18 +64,13 @@ map <space> shell
 cmd open &{{
 }}
 cmd open2 &{{
-    if [ -z "${SSH_CONNECTION}" ] && [ -n "${f}" ] && [ ! -d "${f}" ]
+    if [ -n "${f}" ] && [ ! -d "${f}" ]
     then
         xdg-open "${f}" > /dev/null 2>&1
     fi
 }}
-cmd open3 ${{
-    if [ -n "${SSH_CONNECTION}" ] && [ -n "${f}" ] && [ ! -d "${f}" ]
-    then
-        nano "${f}"
-    fi
-}}
-map <enter> :open; open2; open3
+
+map <enter> :open; open2
 
 cmd cp &{{
     printf "${f}" | xclip -i -selection clipboard
