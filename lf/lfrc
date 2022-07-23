@@ -70,7 +70,7 @@ cmd open2 &{{
     fi
 }}
 cmd open3 ${{
-    if [ -n "${SSH_CONNECTION}" ]
+    if [ -n "${SSH_CONNECTION}" ] && [ -n "${f}" ] && [ ! -d "${f}" ]
     then
         nano "${f}"
     fi
