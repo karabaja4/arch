@@ -64,7 +64,7 @@ map <space> shell
 cmd open &{{
 }}
 cmd open2 &{{
-    if [ -n "${f}" ] && [ ! -d "${f}" ]
+    if [ -z "${SSH_CONNECTION}" ] && [ -n "${f}" ] && [ ! -d "${f}" ]
     then
         xdg-open "${f}" > /dev/null 2>&1
     fi
