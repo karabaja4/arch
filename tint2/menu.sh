@@ -63,7 +63,8 @@ flameshot)
     _run flameshot
     ;;
 paint)
-    _run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
+    #_run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
+    _run firefox-socket-control https://jspaint.app
     ;;
 kvirc)
     _run kvirc
