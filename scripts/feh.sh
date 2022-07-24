@@ -6,6 +6,7 @@ exec feh \
 --fontpath "/usr/share/fonts/TTF" \
 --font "Roboto-Bold/10" \
 --action1 ';[copy]xclip -selection clipboard -t image/png -i %F' \
+--action2 ';[wall]xwallpaper --stretch %F' \
 --no-menus \
 --scale-down \
 --geometry 1280x720 \
