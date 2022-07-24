@@ -1,19 +1,20 @@
 #!/bin/sh
 set -u
 
-_root="/home/igor/certbot"
+_root="${HOME}/certbot"
 
 _work="${_root}/work"
 _config="${_root}/config"
 _logs="${_root}/logs"
-_creds="${_root}/creds.ini"
-
-_email="burt.harbinson@outlook.com"
-_domain="aerium.hr"
 
 mkdir -p "${_work}"
 mkdir -p "${_config}"
 mkdir -p "${_logs}"
+
+_creds="${_root}/creds.ini"
+
+_email="burt.harbinson@outlook.com"
+_domain="aerium.hr"
 
 certbot certonly \
    --work-dir "${_work}" \
