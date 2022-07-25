@@ -3,7 +3,7 @@ const app = express();
 const axios = require('axios');
 const timers = require('timers/promises');
 
-app.get('/tick/:id', async (req, res) => {
+app.get('/tick/:id', (req, res) => {
 
   console.log(`tick @ ${req.params.id}`);
 
@@ -24,7 +24,7 @@ app.get('/tick/:id', async (req, res) => {
     res.send(getHello());
     return;
   }
-  
+
   // btc
   else {
     res.send(getPrice());
