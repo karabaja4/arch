@@ -24,6 +24,7 @@ app.get('/tick/:id', async (req, res) => {
     res.send(getHello());
     return;
   }
+  
   // btc
   else {
     res.send(getPrice());
