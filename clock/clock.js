@@ -23,7 +23,7 @@ app.get('/tick/:id', async (req, res) => {
   //   return;
   // }
 
-  res.send(getPrice());
+  res.send(getHello());
 });
 
 const getHello = () => {
