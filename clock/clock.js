@@ -8,7 +8,7 @@ app.get('/tick/:id', async (req, res) => {
   console.log(`tick @ ${req.params.id}`);
 
   // GT-I9300
-  if (req.params.id === 'ad307b2c60c32dc4') {
+  if (['ad307b2c60c32dc4', 'e24058c14eb304fc'].contains(req.params.id)) {
     res.send(getClock());
     return;
   }
