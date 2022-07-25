@@ -114,7 +114,7 @@ const getPrice = () => {
   const result = {
     text: price,
     color: colors[1],
-    size: 150,
+    size: 200,
     interval: 5000,
     digital: true
   };
