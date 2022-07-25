@@ -1,16 +1,48 @@
 const express = require('express');
 const app = express();
+const axios = require('axios');
+const timers = require('timers/promises');
+
+app.get('/tick/:id', async (req, res) => {
+  // GT-I9300
+  if (req.params.id === 'ad307b2c60c32dc4') {
+    res.send(getClock());
+    return;
+  }
+  // android studio emulator
+  else if (req.params.id === 'b4041919f2a050e7') {
+    res.send(getHello());
+    return;
+  }
+  // btc
+  else {
+    res.send(getPrice());
+    return;
+  }
+});
+
+const getHello = () => {
+  const result = {
+    text: "Hello :)",
+    color: colors[4],
+    size: 150,
+    interval: 1000,
+    digital: false
+  };
+  return result;
+}
 
 const colors = [
-  "#0000ff",
-  "#00ff00",
-  "#00ffff",
-  "#ff0000",
-  "#ff00ff",
-  "#ffff00",
-  "#ffffff"
+  "#0000ff", // blue
+  "#00ff00", // green
+  "#00ffff", // cyan
+  "#ff0000", // red
+  "#ff00ff", // pink
+  "#ffff00", // yellow
+  "#ffffff"  // white
 ];
 
+// clock
 const morning = "Dobro jutro :)";
 const day =     "Želim ti dobar dan :)";
 const evening = "Želim ti ugodnu večer :)";
@@ -32,16 +64,11 @@ const greetings = (hour) => {
   return [];
 };
 
-const interval = 1000;
-
 const localDate = () => {
   return new Date().toLocaleString('en-US', { timeZone: 'Europe/Zagreb' });
 };
 
-const port = 42822;
-
-app.get('/', async (req, res) => {
-
+const getClock = () => {
   const date = new Date(localDate());
   const h = date.getHours();
   const m = date.getMinutes().toString().padStart(2, '0');
@@ -55,13 +82,42 @@ app.get('/', async (req, res) => {
     text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
     color: colors[ts % colors.length],
     size: word ? 180 : 200,
-    interval: interval,
+    interval: 500,
     digital: !word
   };
+  return result;
+}
 
-  res.send(result);
-});
+// price
+let price = '---';
+const loop = async () => {
+  const url = 'https://www.bitmex.com/api/v1/trade?symbol=XBT&count=1&reverse=true';
+  while (true) {
+    try {
+      const result = await axios.get(url);
+      price = Math.trunc(result.data[0].price).toString();
+      console.log(`GET ${url} => ${result.status} ${result.statusText}`);
+    } catch (e) {
+      price = '---';
+      console.log(e.message);
+    }
+    await timers.setTimeout(10000);
+  }
+}
+loop();
+const getPrice = () => {
+  const result = {
+    text: price,
+    color: colors[1],
+    size: 150,
+    interval: 5000,
+    digital: true
+  };
+  return result;
+}
 
+// listen
+const port = 42822;
 app.listen(port, () => {
-  console.log(`listening on port ${port}`)
+  console.log(`Listening on port ${port}.`);
 });
