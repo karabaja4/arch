@@ -4,6 +4,9 @@ const axios = require('axios');
 const timers = require('timers/promises');
 
 app.get('/tick/:id', async (req, res) => {
+
+  console.log(`tick @ ${req.params.id}`);
+
   // GT-I9300
   if (req.params.id === 'ad307b2c60c32dc4') {
     res.send(getClock());
@@ -82,7 +85,7 @@ const getClock = () => {
     text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
     color: colors[ts % colors.length],
     size: word ? 180 : 200,
-    interval: 500,
+    interval: 1000,
     digital: !word
   };
   return result;
