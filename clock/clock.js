@@ -7,21 +7,23 @@ app.get('/tick/:id', async (req, res) => {
 
   console.log(`tick @ ${req.params.id}`);
 
-  // GT-I9300
-  if (req.params.id === 'ad307b2c60c32dc4') {
-    res.send(getClock());
-    return;
-  }
-  // android studio emulator
-  else if (req.params.id === 'b4041919f2a050e7') {
-    res.send(getHello());
-    return;
-  }
-  // btc
-  else {
-    res.send(getPrice());
-    return;
-  }
+  // // GT-I9300
+  // if (req.params.id === 'ad307b2c60c32dc4') {
+  //   res.send(getClock());
+  //   return;
+  // }
+  // // android studio emulator
+  // else if (req.params.id === 'b4041919f2a050e7') {
+  //   res.send(getHello());
+  //   return;
+  // }
+  // // btc
+  // else {
+  //   res.send(getPrice());
+  //   return;
+  // }
+
+  res.send(getPrice());
 });
 
 const getHello = () => {
