@@ -8,10 +8,17 @@ app.get('/tick/:id', async (req, res) => {
   console.log(`tick @ ${req.params.id}`);
 
   // GT-I9300
-  if (['ad307b2c60c32dc4', 'e24058c14eb304fc'].includes(req.params.id)) {
-    res.send(getClock());
+  if (req.params.id === 'ad307b2c60c32dc4') {
+    res.send(getClock(200));
     return;
   }
+
+  // tv box
+  else if (req.params.id === 'e24058c14eb304fc') {
+    res.send(getClock(300));
+    return;
+  }
+
   // android studio emulator
   else if (req.params.id === 'b4041919f2a050e7') {
     res.send(getHello());
@@ -72,7 +79,7 @@ const localDate = () => {
   return new Date().toLocaleString('en-US', { timeZone: 'Europe/Zagreb' });
 };
 
-const getClock = () => {
+const getClock = (size) => {
   const date = new Date(localDate());
   const h = date.getHours();
   const m = date.getMinutes().toString().padStart(2, '0');
@@ -85,7 +92,7 @@ const getClock = () => {
   const result = {
     text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
     color: colors[ts % colors.length],
-    size: word ? 180 : 200,
+    size: word ? (size - 20) : size,
     interval: 1000,
     digital: !word
   };
