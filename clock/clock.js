@@ -33,7 +33,7 @@ app.get('/tick/:id', async (req, res) => {
   
 });
 
-const getAmount = () => {
+const getAmount = async () => {
   const am = await axios.get('http://127.0.0.1:32781/amount');
   return am.data;
 }
