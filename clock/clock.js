@@ -3,14 +3,13 @@ const app = express();
 const axios = require('axios');
 const timers = require('timers/promises');
 
-app.get('/tick/:id', async (req, res) => {
+app.get('/tick/:id', (req, res) => {
 
   console.log(`tick @ ${req.params.id}`);
 
   // GT-I9300
   if (req.params.id === 'ad307b2c60c32dc4') {
-    //res.send(getClock(200));
-    res.send(await getAmount());
+    res.send(getClock(200));
     return;
   }
 
@@ -33,11 +32,6 @@ app.get('/tick/:id', async (req, res) => {
   }
   
 });
-
-const getAmount = async () => {
-  const am = await axios.get('http://127.0.0.1:32781/amount');
-  return am.data;
-}
 
 const getHello = () => {
   const result = {
