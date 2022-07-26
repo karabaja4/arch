@@ -19,12 +19,6 @@ app.get('/tick/:id', (req, res) => {
     return;
   }
 
-  // android studio emulator
-  else if (req.params.id === 'b4041919f2a050e7') {
-    res.send(getHello());
-    return;
-  }
-
   // btc
   else {
     res.send(getPrice());
@@ -32,17 +26,6 @@ app.get('/tick/:id', (req, res) => {
   }
   
 });
-
-const getHello = () => {
-  const result = {
-    text: "Hello :)",
-    color: colors[4],
-    size: 150,
-    interval: 1000,
-    digital: false
-  };
-  return result;
-}
 
 const colors = [
   "#0000ff", // blue
@@ -94,7 +77,7 @@ const getClock = (size) => {
     text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
     color: colors[ts % colors.length],
     size: word ? (size - 20) : size,
-    interval: 1000,
+    interval: 500,
     digital: !word
   };
   return result;
