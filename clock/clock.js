@@ -77,7 +77,7 @@ const getClock = (size) => {
     text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
     color: colors[ts % colors.length],
     size: word ? (size - 20) : size,
-    interval: 500,
+    interval: 300,
     digital: !word
   };
   return result;
