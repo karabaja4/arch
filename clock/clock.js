@@ -14,7 +14,7 @@ app.get('/tick/:id', (req, res) => {
   }
 
   if (req.params.id == '4f4afbf894cda47a') {
-    res.send(getClock(240));
+    res.send(getClock(235));
     return;
   }
 
@@ -79,7 +79,7 @@ const getClock = (size) => {
   const word = words[sec - 30];
 
   const result = {
-    text: '23:00:00',
+    text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
     color: colors[ts % colors.length],
     size: word ? (size - 20) : size,
     interval: 1000,
