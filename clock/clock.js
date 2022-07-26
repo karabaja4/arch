@@ -79,7 +79,7 @@ const getClock = (size) => {
   const word = words[sec - 30];
 
   const result = {
-    text: word || `${h}:${m}:${sec.toString().padStart(2, '0')}`,
+    text: '23:00:00',
     color: colors[ts % colors.length],
     size: word ? (size - 20) : size,
     interval: 1000,
