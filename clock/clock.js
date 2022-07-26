@@ -14,7 +14,7 @@ app.get('/tick/:id', (req, res) => {
   }
 
   if (req.params.id == '4f4afbf894cda47a') {
-    res.send(getClock(235));
+    res.send(getClock(240));
     return;
   }
 
