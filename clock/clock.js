@@ -8,8 +8,13 @@ app.get('/tick/:id', (req, res) => {
   console.log(`tick @ ${req.params.id}`);
 
   // GT-I9300
-  if (req.params.id === 'ad307b2c60c32dc4' || req.params.id == '4f4afbf894cda47a') {
+  if (req.params.id === 'ad307b2c60c32dc4') {
     res.send(getClock(200));
+    return;
+  }
+
+  if (req.params.id == '4f4afbf894cda47a') {
+    res.send(getClock(250));
     return;
   }
 
