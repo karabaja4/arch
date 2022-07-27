@@ -24,6 +24,7 @@
     "https://": "firefox-socket-control $arg",
     "slack://": "slack $arg",
     "file://": "qtfm $arg",
-    "vscode://": "code $arg"
+    "vscode://": "code $arg",
+    "msteams:/l/": "teams $arg"
   }
 }
