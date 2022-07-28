@@ -52,6 +52,10 @@ _list() {
     exit 1
 }
 
+_play_sound() {
+    aplay "${HOME}/arch/sounds/notify.wav" > /dev/null 2>&1 &
+}
+
 case "${1}" in
 list|l)
     _list
@@ -59,5 +63,6 @@ list|l)
 *)
     _switch_card "${1}"
     _unmute_max_all
+    _play_sound
     ;;
 esac
