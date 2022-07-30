@@ -197,7 +197,3 @@ esac
 # eF8j+TWCLwQi/qce3jszfz7eQQtREJxAhnv8V1P+B8HGv9+BrSOuKEGX/2D79x0Ykg37953/A3i6
 # 8G0uHQAA
 # ----- SOUND END -----
-
-# sound encoded with:
-# ffmpeg -i notify.wav -acodec libmp3lame -qscale:a 9 notify.mp3
-# cat notify.mp3 | gzip | base64 > notify.txt
