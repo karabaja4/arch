@@ -204,7 +204,7 @@ esac
 # VVVVVVVVVVVVVVVVVf/zIETnAAAB/gAAAAACmGKBgAFSMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 # VVVVVVVVVVX/8xBE+wAAAf4AAAAAAPgChCAAAABVVVVVVf/zEET6AAAB/gAAAAAAAAP8AAAAAFVV
 # VVVV
-# --- SOUND END ---
+# ----- SOUND END -----
 
 # sound encoded with:
 # ffmpeg -i notify.wav -acodec libmp3lame -qscale:a 9 notify.mp3
