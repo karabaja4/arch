@@ -99,9 +99,8 @@
     "editor.scrollbar.verticalScrollbarSize": 25,
     "settingsSync.keybindingsPerPlatform": false,
     "git.showActionButton": {
-        "commit": true,
+        "commit": false,
         "publish": false,
         "sync": false
-    },
-    "git.postCommitCommand": "push"
+    }
 }
