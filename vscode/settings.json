@@ -97,5 +97,10 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "shellcheck.customArgs": ["-x"],
     "editor.scrollbar.verticalScrollbarSize": 25,
-    "settingsSync.keybindingsPerPlatform": false
+    "settingsSync.keybindingsPerPlatform": false,
+    "git.showActionButton": {
+        "commit": false,
+        "publish": false,
+        "sync": false
+    }
 }
