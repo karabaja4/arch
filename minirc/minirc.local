@@ -6,8 +6,8 @@ _mkxdg() {
     install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
 }
 
-echo $((4*1024*1024)) > /proc/sys/vm/dirty_background_bytes
-echo $((4*1024*1024)) > /proc/sys/vm/dirty_bytes
+printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
+printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
 
 printf "0" > /proc/sys/kernel/printk
 mkdir -p /run/samba
