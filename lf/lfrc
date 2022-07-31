@@ -97,7 +97,7 @@ map gt cd ~/_disk/torrents
 
 # ${{ -> exit UI, run command and return to the UI
 # %{{ -> run command with output in the 1-line UI prompt
-# !{{ -> same as ${{, but requires a keypress once command exists
+# !{{ -> same as ${{, but requires a keypress once command exits
 # &{{ -> run command completely in the background, invisible to the UI
 
 cmd gz ${{
