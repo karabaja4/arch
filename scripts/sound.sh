@@ -13,11 +13,11 @@ _usage() {
 [ "${#}" -ne 1 ] && _usage
 
 _unmute_max_all() {
-    for channel in $(amixer | grep -P -B1 "^.*Capabilities:.* pvolume( .*$|$)" | grep -oP "(?<=Simple mixer control ').+(?=')")
+    for _channel in $(amixer | grep -P -B1 "^.*Capabilities:.* pvolume( .*$|$)" | grep -oP "(?<=Simple mixer control ').+(?=')")
     do
-        _echo "Unmuting ${channel} to 100%"
-        amixer set "${channel}" unmute > /dev/null 2>&1
-        amixer set "${channel}" 100% > /dev/null 2>&1
+        _echo "Unmuting ${_channel} to 100%"
+        amixer set "${_channel}" unmute > /dev/null 2>&1
+        amixer set "${_channel}" 100% > /dev/null 2>&1
     done
 }
 
@@ -40,13 +40,13 @@ _switch_card() {
 
 _list() {
     _default="$(amixer info | grep -oP "(?<=Card default ').+?(?='/)")"
-    cat /proc/asound/card*/id | while IFS= read -r name
+    cat /proc/asound/card*/id | while IFS= read -r _name
     do
-        if [ "${name}" = "${_default}" ]
+        if [ "${_name}" = "${_default}" ]
         then
-            _echo "+ ${name}"
+            _echo "+ ${_name}"
         else
-            _echo "  ${name}"
+            _echo "  ${_name}"
         fi
     done
     exit 1
