@@ -48,6 +48,7 @@ map <esc> :unselect; clear
 map <f-2> rename
 map <f-5> reload
 map <tab> search
+map <f-3> search-next
 
 map <c-c> quit
 map <c-x> quit
