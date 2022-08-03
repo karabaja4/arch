@@ -132,13 +132,6 @@ button_background_id = 1
 button_max_icon_size = 16
 
 button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/skype.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh skype
-button_padding = 3 0 0
-button_background_id = 1
-button_max_icon_size = 16
-
-button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/krita.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh paint
 button_padding = 3 0 0
