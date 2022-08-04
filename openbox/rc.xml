@@ -121,6 +121,9 @@
         <menu>games-menu</menu>
       </action>
     </keybind>
+    <keybind key="C-A-T">
+      <action name="ToggleAlwaysOnTop" />
+    </keybind>
   </keyboard>
 
   <mouse>
