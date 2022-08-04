@@ -27,19 +27,13 @@
         "name": "vnc",
         "enabled": false,
         "user": "igor",
-        "command": "/usr/bin/vncserver :2"
+        "command": "XAUTHORITY='/home/igor/.local/share/sx/xvncauthority' /usr/bin/vncserver :2"
     },
     {
         "name": "samba",
         "enabled": false,
         "user": "root",
         "command": "/usr/bin/smbd --foreground"
-    },
-    {
-        "name": "haveged",
-        "enabled": false,
-        "user": "root",
-        "command": "/usr/bin/haveged -w 1024 -v 1 --Foreground"
     },
     {
         "name": "cron",
