@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# add startup commands here
+
 _user="$(id -un 1000)"
 
 _mkxdg() {
