@@ -116,7 +116,7 @@
         <command>/home/igor/arch/tint2/menu.sh flameshot</command>
       </action>
     </keybind>
-    <keybind key="C-A-space">
+    <keybind key="W-0">
       <action name="ShowMenu">
         <menu>games-menu</menu>
       </action>
