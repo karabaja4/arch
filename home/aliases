@@ -16,12 +16,6 @@ alias sn='screen -S'
 
 alias startx='exec sx'
 
-fixntp() {
-    doas rc stop ntpd
-    doas ntpd -gq
-    doas rc start ntpd
-}
-
 hs() {
     grep "${1}" "${HOME}/.bash_history"
 }

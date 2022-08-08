@@ -21,7 +21,7 @@
         "name": "ntpd",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/ntpd -n -g -u ntp"
+        "command": "/usr/bin/ntpd -d"
     },
     {
         "name": "vnc",
