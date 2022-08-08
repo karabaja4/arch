@@ -51,6 +51,6 @@
         "name": "clock",
         "enabled": true,
         "user": "igor",
-        "command": "node /home/igor/arch/misc/clock/clock.js"
+        "command": "node /home/igor/arch/clock/clock.js"
     }
 ]
