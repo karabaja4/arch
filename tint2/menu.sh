@@ -66,6 +66,12 @@ paint)
     _run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
     #_run firefox-socket-control https://jspaint.app
     ;;
+vlc)
+    _run vlc
+    ;;
+obs)
+    _run obs
+    ;;
 kvirc)
     _run kvirc
     ;;
