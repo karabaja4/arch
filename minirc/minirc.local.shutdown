@@ -1,4 +1,5 @@
 #!/bin/sh
 
 # add shutdown commands here
+
 hwclock --systohc
