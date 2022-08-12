@@ -53,10 +53,16 @@ task_centered = 1
 task_padding = 6 6
 task_font = Roboto Bold 8
 
+# active but not selected
 task_font_color = #ffffff 100
+
+# selected
 task_active_font_color = #ffffff 100
 
+# minimized
 task_iconified_font_color = #ffffff 70
+
+# icon when minimized
 task_iconified_icon_asb = 70 0 0
 
 task_background_id = 2
