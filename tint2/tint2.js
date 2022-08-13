@@ -16,7 +16,7 @@ const colors = {
 
 const fonts = {
   awesome: 'Font Awesome 6 Free', // ttf-font-awesome
-  flaticon: 'Flaticon'            // ln -s /home/igor/arch/conky/openlogos.ttf /usr/share/fonts/openlogos.ttf
+  flaticon: 'Flaticon'            // ln -s /home/igor/arch/conky/flaticon.ttf /usr/share/fonts/flaticon.ttf
 }
 
 const icons = {
@@ -89,8 +89,8 @@ const print = async () => {
   }
 
   const avail = {
-    root:   (data?.mounts?.[mp.root]   && data?.df?.[mp.root]?.total   && data?.df?.[mp.root]?.used   && data?.df?.[mp.root]?.available  ) || null,
-    disk:   (data?.mounts?.[mp.disk]   && data?.df?.[mp.disk]?.total   && data?.df?.[mp.disk]?.used   && data?.df?.[mp.disk]?.available  ) || null
+    root: (data?.mounts?.[mp.root] && data?.df?.[mp.root]?.total && data?.df?.[mp.root]?.used && data?.df?.[mp.root]?.available) || null,
+    disk: (data?.mounts?.[mp.disk] && data?.df?.[mp.disk]?.total && data?.df?.[mp.disk]?.used && data?.df?.[mp.disk]?.available) || null
   }
 
   // root
