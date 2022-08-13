@@ -11,7 +11,7 @@ set autoquit
 set ratios '1:3'
 set info 'size'
 set period 1
-set promptfmt ''
+set promptfmt "\033[0;37m%d%f\033[0m"
 set timefmt ''
 set errorfmt "\033[0;91m%s\033[0m"
 
