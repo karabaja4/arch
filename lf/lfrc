@@ -1,7 +1,7 @@
 set nopreview
 set nohidden
 
-set drawbox
+#set drawbox
 set icons
 set ignorecase
 set wrapscroll
@@ -11,6 +11,9 @@ set autoquit
 set ratios '1:3'
 set info 'size'
 set period 1
+set promptfmt ''
+set timefmt ''
+set errorfmt "\033[0;91m%s\033[0m"
 
 # should be set to \n only so spaces in files are handled correctly
 # used mostly when archiving
@@ -34,6 +37,12 @@ map j
 map k
 map l
 map /
+map za
+map zh
+map zn
+map zr
+map zs
+map zt
 
 map . set hidden!
 map <delete> delete
@@ -49,6 +58,7 @@ map <f-2> rename
 map <f-5> reload
 map <tab> search
 map <f-3> search-next
+map i calcdirsize
 
 map <c-c> quit
 map <c-x> quit
