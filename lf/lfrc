@@ -43,6 +43,8 @@ map zn
 map zr
 map zs
 map zt
+map m
+map n
 
 map . set hidden!
 map <delete> delete
