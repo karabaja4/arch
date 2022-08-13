@@ -83,37 +83,31 @@ const print = async () => {
     data?.conky?.mem?.perc // 2
   ], 2);
 
-  const mp = {
+  const mnt = {
     root: '/',
     disk: '/home/igor/_disk'
   }
 
   const avail = {
-    root: (data?.mounts?.[mp.root] && data?.df?.[mp.root]?.total && data?.df?.[mp.root]?.used && data?.df?.[mp.root]?.available) || null,
-    disk: (data?.mounts?.[mp.disk] && data?.df?.[mp.disk]?.total && data?.df?.[mp.disk]?.used && data?.df?.[mp.disk]?.available) || null
+    root: (data?.mounts?.[mnt.root] && data?.df?.[mnt.root]?.total && data?.df?.[mnt.root]?.used && data?.df?.[mnt.root]?.available) || null,
+    disk: (data?.mounts?.[mnt.disk] && data?.df?.[mnt.disk]?.total && data?.df?.[mnt.disk]?.used && data?.df?.[mnt.disk]?.available) || null
   }
 
-  // root
-  const root = [];
-  if (avail.root) {
-    const rootUsed  = data.df[mp.root].used;
-    const rootTotal = rootUsed + data.df[mp.root].available;
-    root[0] = Math.floor((rootUsed / 1024) / 1024);
-    root[1] = Math.floor((rootTotal / 1024) / 1024);
-    root[2] = (rootUsed / rootTotal) * 100;
+  const diskusage = (key) => {
+    const res = [];
+    if (avail[key]) {
+      const dfi = data.df[mnt[key]];
+      const used  = dfi.used;
+      const total = used + dfi.available;
+      res[0] = Math.floor((used / 1024) / 1024);
+      res[1] = Math.floor((total / 1024) / 1024);
+      res[2] = (used / total) * 100;
+    }
+    return res;
   }
-  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$0 GB / $1 GB', root, 2);
 
-  // disk
-  const disk = [];
-  if (avail.disk) {
-    const diskUsed  = data.df[mp.disk].used;
-    const diskTotal = diskUsed + data.df[mp.disk].available;
-    disk[0] = Math.floor((diskUsed / 1024) / 1024);
-    disk[1] = Math.floor((diskTotal / 1024) / 1024);
-    disk[2] = (diskUsed / diskTotal) * 100;
-  }
-  text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$0 GB / $1 GB', disk, 2);
+  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$0 GB / $1 GB', diskusage('root'), 2);
+  text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$0 GB / $1 GB', diskusage('disk'), 2);
 
   // clock
   text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
@@ -189,9 +183,9 @@ const ping = () => {
 }
 
 const df = async () => {
+  const file = path.join(os.homedir(), '.local/share/diskusage/df');
   while (true) {
     try {
-      const file = path.join(os.homedir(), '.local/share/diskusage/df');
       const content = await fs.promises.readFile(file, 'utf8');
       if (content) {
         const result = {};
