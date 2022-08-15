@@ -7,5 +7,5 @@ then
     # no GUI or root
     nano "${1}"
 else
-    qtextpad --syntax "INI Files" "${1}" > /dev/null 2>&1
+    qtextpad "${1}" > /dev/null 2>&1
 fi
