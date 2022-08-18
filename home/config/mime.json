@@ -15,7 +15,7 @@
     "image/*": "/home/igor/arch/feh/feh.sh $arg",
     "media/video": "vlc $arg",
     "document/pdf": "mupdf -r 96 $arg",
-    "inode/directory": "qtfm $arg",
+    "inode/directory": "/home/igor/arch/lf/lf.sh $arg",
     "inode/x-empty": "qtextpad $arg",
     "application/octet-stream": "qtextpad $arg"
   },
@@ -23,7 +23,7 @@
     "http://": "firefox-socket-control $arg",
     "https://": "firefox-socket-control $arg",
     "slack://": "slack $arg",
-    "file://": "qtfm $arg",
+    "file://": "/home/igor/arch/lf/lf.sh $arg",
     "vscode://": "code $arg",
     "msteams:/l/": "teams $arg"
   }
