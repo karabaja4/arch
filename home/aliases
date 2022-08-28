@@ -17,7 +17,7 @@ alias sn='screen -S'
 alias startx='exec sx'
 
 hs() {
-    grep "${1}" "${HOME}/.bash_history"
+    history -w /dev/stdout | cat - "${HOME}/.bash_history" | awk '!x[$0]++' | grep "${1}"
 }
 
 alias reboot='doas /home/igor/arch/scripts/reboot.sh reboot'
