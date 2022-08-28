@@ -15,7 +15,7 @@ _not_root() {
 
 _home="/home/$(id -un 1000)"
 
-killall -v -w qbittorrent
+killall -v -w qbittorrent 2>/dev/null
 
 _umount() {
     /home/igor/arch/scripts/umount.sh "${1}"
@@ -26,6 +26,7 @@ _umount "${_home}/_mmc"
 _umount "${_home}/_private"
 _umount "${_home}/_public"
 
+# cleanup /mnt
 /home/igor/arch/scripts/umnt.sh
 
 rm -rf "${_home}/.cache"

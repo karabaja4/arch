@@ -14,7 +14,7 @@ _not_root() {
 [ "$(id -u)" -ne 0 ] && _not_root
 
 # param check
-if [ -z "${1}" ]
+if [ "${#}" -ne 1 ]
 then
     _echo "Needs a parameter"
     exit 1
