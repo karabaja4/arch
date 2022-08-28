@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 # ln -sf /home/igor/arch/scripts/ed.sh /usr/bin/ed
 

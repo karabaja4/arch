@@ -40,18 +40,8 @@ alias ytdl='youtube-dl --extract-audio --audio-format mp3 '
 alias firefox='firefox-socket-control'
 alias ncdu='ncdu --color dark'
 alias menu='/home/igor/arch/tint2/menu.sh'
-
-usb() {
-    for _f in /mnt/*
-    do
-        if [ "${_f}" != "/mnt/*" ]
-        then
-            fuser -Mk "${_f}"
-            doas umount -qv "${_f}"
-            rm -vrf "${_f}"
-        fi
-    done
-}
+alias umount='doas /home/igor/arch/scripts/umount.sh'
+alias usb='doas /home/igor/arch/scripts/umnt.sh'
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
 

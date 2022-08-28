@@ -1,10 +1,11 @@
 #!/bin/sh
-# shellcheck disable=SC2115
+set -eu
 
 _echo() {
     printf '%s\n' "${1}"
 }
 
+# root check
 _not_root() {
     _echo "Must be root"
     exit 1
@@ -14,26 +15,18 @@ _not_root() {
 
 _home="/home/$(id -un 1000)"
 
-_umount() {
-    fuser -Mk "${@}"
-    umount -qv "${@}"
-}
-
 killall -v -w qbittorrent
+
+_umount() {
+    /home/igor/arch/scripts/umount.sh "${1}"
+}
 
 _umount "${_home}/_disk"
 _umount "${_home}/_mmc"
 _umount "${_home}/_private"
 _umount "${_home}/_public"
 
-for _f in /mnt/*
-do
-    if [ "${_f}" != "/mnt/*" ]
-    then
-        _umount "${_f}"
-        rm -vrf "${_f}"
-    fi
-done
+/home/igor/arch/scripts/umnt.sh
 
 rm -rf "${_home}/.cache"
 
