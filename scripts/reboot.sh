@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -u
 
 _echo() {
     printf '%s\n' "${1}"
@@ -15,7 +15,7 @@ _not_root() {
 
 _home="/home/$(id -un 1000)"
 
-killall -v -w qbittorrent 2>/dev/null || true
+killall -v -w qbittorrent 2>/dev/null
 
 _umount() {
     /home/igor/arch/scripts/umount.sh "${1}"
