@@ -1,5 +1,5 @@
 #!/bin/sh
-set -u
+set -eu
 
 printf '%s%s%s\n' "$(tput setaf 12)" "$(readlink -f "${0}")" "$(tput sgr0)"
 
@@ -17,7 +17,7 @@ _not_root() {
 
 _home="/home/$(id -un 1000)"
 
-killall -v -w qbittorrent 2>/dev/null
+killall -v -w qbittorrent 2>/dev/null || true
 
 _umount() {
     /home/igor/arch/scripts/umount.sh "${1}"
