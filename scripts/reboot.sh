@@ -27,7 +27,7 @@ _umount "${_home}/_private"
 _umount "${_home}/_public"
 
 # cleanup /mnt
-/home/igor/arch/scripts/umnt.sh
+/home/igor/arch/scripts/usb.sh
 
 rm -rf "${_home}/.cache"
 
