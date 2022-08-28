@@ -36,7 +36,7 @@ _kill() {
         _signal="HUP"
     fi
     _echo "Sending ${_signal} to ${1} (${_exe})"
-    /usr/bin/kill --verbose --signal "${_signal}" --timeout 20000 KILL "${1}"
+    /usr/bin/kill --verbose --signal "${_signal}" --timeout 30000 KILL "${1}"
 }
 
 _get_pids() {
