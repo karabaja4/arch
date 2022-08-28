@@ -1,8 +1,6 @@
 #!/bin/sh
 set -eu
 
-printf '%s%s%s\n' "$(tput setaf 12)" "$(readlink -f "${0}")" "$(tput sgr0)"
-
 _echo() {
     printf '%s\n' "${1}"
 }
