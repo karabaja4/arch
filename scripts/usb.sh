@@ -17,7 +17,7 @@ for _f in /mnt/*
 do
     if [ -d "${_f}" ]
     then
-        /home/igor/arch/scripts/umount.sh "${_f}"
+        umount -qv "${_f}"
         rm -vrf "${_f}"
     fi
 done

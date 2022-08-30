@@ -18,13 +18,18 @@ _home="/home/$(id -un 1000)"
 killall -v -w qbittorrent 2>/dev/null
 
 _umount() {
-    /home/igor/arch/scripts/umount.sh "${1}"
+    umount -qv "${1}"
+    if [ "${?}" -eq 32 ]
+    then
+        # if the target is busy, stop the reboot
+        exit 32
+    fi
 }
 
-_umount "${_home}/_disk"
-_umount "${_home}/_mmc"
-_umount "${_home}/_private"
-_umount "${_home}/_public"
+umount -qv "${_home}/_disk"
+umount -qv "${_home}/_mmc"
+umount -qv "${_home}/_private"
+umount -qv "${_home}/_public"
 
 # cleanup /mnt
 /home/igor/arch/scripts/usb.sh
