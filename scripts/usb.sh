@@ -17,7 +17,7 @@ for _f in /mnt/*
 do
     if [ -d "${_f}" ]
     then
-        umount -qv "${_f}"
+        umount -v "${_f}"
         rm -vrf "${_f}"
     fi
 done
