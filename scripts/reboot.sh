@@ -15,10 +15,10 @@ _not_root() {
 
 _home="/home/$(id -un 1000)"
 
-killall -v -w qbittorrent 2>/dev/null
+killall -q -v -w qbittorrent
 
 _umount() {
-    if mountpoint -q "${1}" > /dev/null 2>&1
+    if mountpoint -q "${1}"
     then
         if ! umount -v "${1}"
         then
