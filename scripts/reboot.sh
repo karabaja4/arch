@@ -18,12 +18,13 @@ _home="/home/$(id -un 1000)"
 killall -v -w qbittorrent 2>/dev/null
 
 _umount() {
-    umount -qv "${1}"
-    if [ "${?}" -eq 32 ]
+    if mountpoint -q "${1}" > /dev/null 2>&1
     then
-        # if the target is busy, stop the reboot
-        _echo "Not rebooting because ${1} is busy."
-        exit 32
+        if ! umount -v "${1}"
+        then
+            _echo "Not rebooting because umount of ${1} failed."
+            exit 1
+        fi
     fi
 }
 
