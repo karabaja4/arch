@@ -22,7 +22,7 @@ _umount() {
     then
         if ! umount -v "${1}"
         then
-            _echo "Not rebooting because umount of ${1} failed."
+            _echo "Not rebooting, umount ${1} failed."
             exit 1
         fi
     fi
