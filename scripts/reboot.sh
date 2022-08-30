@@ -22,14 +22,15 @@ _umount() {
     if [ "${?}" -eq 32 ]
     then
         # if the target is busy, stop the reboot
+        _echo "Not rebooting because ${1} is busy."
         exit 32
     fi
 }
 
-umount -qv "${_home}/_disk"
-umount -qv "${_home}/_mmc"
-umount -qv "${_home}/_private"
-umount -qv "${_home}/_public"
+_umount "${_home}/_disk"
+_umount "${_home}/_mmc"
+_umount "${_home}/_private"
+_umount "${_home}/_public"
 
 # cleanup /mnt
 /home/igor/arch/scripts/usb.sh
