@@ -23,3 +23,5 @@ swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 
 # modules
 modprobe ppp_generic
+
+/home/igor/arch/scripts/info.sh > /etc/issue

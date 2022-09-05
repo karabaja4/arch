@@ -19,16 +19,21 @@ printf '  * Packages: %s (%s AUR)\n' "$(pacman -Qq | wc -l)" "$(pacman -Qm | wc 
 printf '\n'
 
 printf '  '
-_i=0
-while [ ${_i} -le 15 ]
-do
-    if [ ${_i} -eq 8 ]
-    then
-        printf '\n  '
-    fi
-    printf '%s%s%s' "$(tput setaf "${_i}")" "████" "$(tput sgr0)"
-    _i=$((_i+1))
-done
+
+_print_color_row() {
+    _i=0
+    _base="${1}"
+    while [ ${_i} -lt 8 ]
+    do
+        _code=$((_base+_i))
+        printf '\033[%sm████\033[0m' "${_code}"
+        _i=$((_i+1))
+    done
+}
+
+_print_color_row 30
+printf '\n  '
+_print_color_row 90
 
 printf '\n\n'
 
