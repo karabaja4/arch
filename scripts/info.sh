@@ -26,7 +26,7 @@ _print_color_row() {
     while [ ${_i} -lt 8 ]
     do
         _code=$((_base+_i))
-        printf ' \033[%sm⏺\033[0m ' "${_code}"
+        printf '\033[%sm⏺\033[0m  ' "${_code}"
         _i=$((_i+1))
     done
 }
