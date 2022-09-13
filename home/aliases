@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck disable=SC2181,SC2115
 
 alias ls='LC_COLLATE=C ls -A -o -h --color=always --group-directories-first'
 
