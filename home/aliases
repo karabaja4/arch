@@ -19,6 +19,13 @@ hs() {
     history -w /dev/stdout | cat - "${HOME}/.bash_history" | awk '!x[$0]++' | grep "${1}"
 }
 
+gitpullall() {
+    for _dir in */.git
+    do
+        git -C "$(realpath "${_dir}/..")" pull
+    done
+}
+
 alias reboot='doas /home/igor/arch/scripts/reboot.sh reboot'
 alias poweroff='doas /home/igor/arch/scripts/reboot.sh poweroff'
 
