@@ -125,7 +125,7 @@ const conky = async () => {
     try {
       const content = await fs.promises.readFile('/tmp/conky-tint2.json', 'utf8');
       if (content) {
-        data.conky = JSON.parse(content.replaceAll(/[\t\n\r]/gm, ''));
+        data.conky = JSON.parse(content);
       }
     } catch (e) {}
     await timers.setTimeout(1000);
@@ -147,7 +147,7 @@ const mounts = async () => {
         data.mounts = result;
       }
     } catch (e) {}
-    await timers.setTimeout(5000);
+    await timers.setTimeout(10000);
   }
 }
 
