@@ -56,7 +56,9 @@ const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
     for (let i = 0; i < values.length; i++) {
       text = text.replace(`$${i}`, values[i]);
     }
-    color = colorize(values[cidx]);
+    if (colorize) {
+      color = colorize(values[cidx]);
+    }
   }
   return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
 };
@@ -110,7 +112,7 @@ const print = async () => {
   text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$0 GB / $1 GB', diskusage('disk'), 2);
 
   // clock
-  text += span(fonts.awesome, 7500, 100, colorize1, icons.clock, 'CLK', '$0', [
+  text += span(fonts.awesome, 7500, 100, null, icons.clock, 'CLK', '$0', [
     dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss') // 0
   ], 0);
   if (text) {
