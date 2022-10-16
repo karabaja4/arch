@@ -9,6 +9,9 @@
 
 # nvidia-settings --query=fsaa --verbose
 
+# $HOME/.config/glib-2.0/settings/keyfile
+export GSETTINGS_BACKEND="keyfile"
+
 _run() {
     exec "${@}" > /dev/null 2>&1
 }
