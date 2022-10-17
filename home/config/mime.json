@@ -25,6 +25,6 @@
     "slack://": "slack $arg",
     "file://": "/home/igor/arch/lf/lf.sh $arg",
     "vscode://": "code $arg",
-    "msteams:/l/": "/home/igor/teams/teams.sh $arg"
+    "msteams:/l/": "/home/igor/arch/teams/teams.sh $arg"
   }
 }
