@@ -4,7 +4,7 @@
 <registry xmlns="http://www.iana.org/assignments" id="media-types">
   <title>Media Types</title>
   <category>Multipurpose Internet Mail Extensions (MIME) and Media Types</category>
-  <updated>2022-07-14</updated>
+  <updated>2022-10-10</updated>
   
   
  
@@ -81,7 +81,7 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2021-07-27">
       <name>ace+cbor</name>
-      <xref type="draft" data="RFC-ietf-ace-oauth-authz-46"/>
+      <xref type="rfc" data="rfc9200"/>
       <file type="template">application/ace+cbor</file>
     </record>
     <record date="2022-03-31">
@@ -102,22 +102,22 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2022-03-23">
       <name>aif+cbor</name>
-      <xref type="draft" data="RFC-ietf-ace-aif-07"/>
+      <xref type="rfc" data="rfc9237"/>
       <file type="template">application/aif+cbor</file>
     </record>
     <record date="2022-03-23">
       <name>aif+json</name>
-      <xref type="draft" data="RFC-ietf-ace-aif-07"/>
+      <xref type="rfc" data="rfc9237"/>
       <file type="template">application/aif+json</file>
     </record>
     <record date="2022-02-28">
       <name>alto-cdni+json</name>
-      <xref type="draft" data="RFC-ietf-alto-cdni-request-routing-alto-22"/>
+      <xref type="rfc" data="rfc9241"/>
       <file type="template">application/alto-cdni+json</file>
     </record>
     <record date="2022-02-28">
       <name>alto-cdnifilter+json</name>
-      <xref type="draft" data="RFC-ietf-alto-cdni-request-routing-alto-22"/>
+      <xref type="rfc" data="rfc9241"/>
       <file type="template">application/alto-cdnifilter+json</file>
     </record>
     <record date="2014-03-18">
@@ -172,12 +172,12 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2022-02-28">
       <name>alto-propmap+json</name>
-      <xref type="draft" data="RFC-ietf-alto-unified-props-new-24"/>
+      <xref type="rfc" data="rfc9240"/>
       <file type="template">application/alto-propmap+json</file>
     </record>
     <record date="2022-02-28">
       <name>alto-propmapparams+json</name>
-      <xref type="draft" data="RFC-ietf-alto-unified-props-new-24"/>
+      <xref type="rfc" data="rfc9240"/>
       <file type="template">application/alto-propmapparams+json</file>
     </record>
     <record date="2020-03-26">
@@ -284,6 +284,16 @@ Hence, the media type registry disallows parameters named "q".
       <name>auth-policy+xml</name>
       <xref type="rfc" data="rfc4745"/>
       <file type="template">application/auth-policy+xml</file>
+    </record>
+    <record date="2022-07-26">
+      <name>automationml-aml+xml</name>
+      <xref type="person" data="AutomationML_e.V."/>
+      <file type="template">application/automationml-aml+xml</file>
+    </record>
+    <record date="2022-07-20">
+      <name>automationml-amlx+zip</name>
+      <xref type="person" data="AutomationML_e.V."/>
+      <file type="template">application/automationml-amlx+zip</file>
     </record>
     <record>
       <name>bacnet-xdd+zip</name>
@@ -478,17 +488,17 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2017-01-11">
       <name>cose</name>
-      <xref type="draft" data="RFC-ietf-cose-rfc8152bis-struct-15"/>
+      <xref type="rfc" data="rfc9052"/>
       <file type="template">application/cose</file>
     </record>
     <record date="2017-01-11">
       <name>cose-key</name>
-      <xref type="draft" data="RFC-ietf-cose-rfc8152bis-struct-15"/>
+      <xref type="rfc" data="rfc9052"/>
       <file type="template">application/cose-key</file>
     </record>
     <record date="2017-01-11">
       <name>cose-key-set</name>
-      <xref type="draft" data="RFC-ietf-cose-rfc8152bis-struct-15"/>
+      <xref type="rfc" data="rfc9052"/>
       <file type="template">application/cose-key-set</file>
     </record>
     <record>
@@ -583,13 +593,13 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2016-09-19" updated="2021-08-27">
       <name>dicom+json</name>
-      <xref type="person" data="DICOM_Standards_Committee"/>
+      <xref type="person" data="DICOM_Standard_Committee"/>
       <xref type="person" data="David_Clunie"/>
       <file type="template">application/dicom+json</file>
     </record>
     <record date="2016-09-26" updated="2021-08-27">
       <name>dicom+xml</name>
-      <xref type="person" data="DICOM_Standards_Committee"/>
+      <xref type="person" data="DICOM_Standard_Committee"/>
       <xref type="person" data="David_Clunie"/>
       <file type="template">application/dicom+xml</file>
     </record>
@@ -709,6 +719,12 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="rfc" data="rfc8147"/>
       <file type="template">application/EmergencyCallData.eCall.MSD</file>
     </record>
+    <record date="2022-10-10">
+      <name>EmergencyCallData.LegacyESN+json</name>
+      <xref type="person" data="NENA"/>
+      <xref type="person" data="Randall_Gellens"/>
+      <file type="template">application/EmergencyCallData.LegacyESN+json</file>
+    </record>
     <record date="2015-12-10">
       <name>EmergencyCallData.ProviderInfo+xml</name>
       <xref type="rfc" data="rfc7852"/>
@@ -753,10 +769,10 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="rfc" data="rfc5730"/>
       <file type="template">application/epp+xml</file>
     </record>
-    <record>
+    <record updated="2022-08-16">
       <name>epub+zip</name>
-      <xref type="person" data="International_Digital_Publishing_Forum"/>
-      <xref type="person" data="William_McCoy"/>
+      <xref type="person" data="W3C"/>
+      <xref type="person" data="EPUB_3_WG"/>
       <file type="template">application/epub+zip</file>
     </record>
     <record>
@@ -1090,18 +1106,23 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2022-05-11">
       <name>linkset</name>
-      <xref type="draft" data="RFC-ietf-httpapi-linkset-10"/>
+      <xref type="rfc" data="rfc9264"/>
       <file type="template">application/linkset</file>
     </record>
     <record date="2022-05-11">
       <name>linkset+json</name>
-      <xref type="draft" data="RFC-ietf-httpapi-linkset-10"/>
+      <xref type="rfc" data="rfc9264"/>
       <file type="template">application/linkset+json</file>
     </record>
     <record date="2014-02-03">
       <name>load-control+xml</name>
       <xref type="rfc" data="rfc7200"/>
       <file type="template">application/load-control+xml</file>
+    </record>
+    <record date="2022-10-07">
+      <name>logout+jwt</name>
+      <xref type="person" data="OpenID_Foundation_Artifact_Binding_WG"/>
+      <file type="template">application/logout+jwt</file>
     </record>
     <record>
       <name>lost+xml</name>
@@ -1484,9 +1505,10 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Thomas_Thomsen"/>
       <file type="template">application/ODX</file>
     </record>
-    <record>
+    <record date="2022-08-16">
       <name>oebps-package+xml</name>
-      <xref type="rfc" data="rfc4839"/>
+      <xref type="person" data="W3C"/>
+      <xref type="person" data="EPUB_3_WG"/>
       <file type="template">application/oebps-package+xml</file>
     </record>
     <record>
@@ -1811,6 +1833,11 @@ Hence, the media type registry disallows parameters named "q".
       <name>rls-services+xml</name>
       <xref type="rfc" data="rfc4826"/>
       <file type="template">application/rls-services+xml</file>
+    </record>
+    <record date="2022-09-20">
+      <name>rpki-checklist</name>
+      <xref type="draft" data="RFC-ietf-sidrops-rpki-rsc-11"/>
+      <file type="template">application/rpki-checklist</file>
     </record>
     <record>
       <name>rpki-ghostbusters</name>
@@ -2140,7 +2167,12 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="OASIS"/>
       <xref type="person" data="Chet_Ensign"/>
       <file type="template">application/stix+json</file>
-    </record> 
+    </record>
+    <record date="2022-08-01">
+      <name>swid+cbor</name>
+      <xref type="draft" data="RFC-ietf-sacm-coswid-22"/>
+      <file type="template">application/swid+cbor</file>
+    </record>
     <record date="2019-09-03">
       <name>swid+xml</name>
       <xref type="person" data="ISO-IEC_JTC1"/>
@@ -2255,6 +2287,12 @@ Hence, the media type registry disallows parameters named "q".
       <name>tlsrpt+json</name>
       <xref type="rfc" data="rfc8460"/>
       <file type="template">application/tlsrpt+json</file>
+    </record>
+    <record date="2022-08-22">
+      <name>tm+json</name>
+      <xref type="person" data="W3C"/>
+      <xref type="person" data="Sebastian_Kaebisch"/>
+      <file type="template">application/tm+json</file>
     </record>
     <record date="2017-12-15">
       <name>tnauthlist</name>
@@ -2561,10 +2599,25 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="John_M_Meredith"/>
       <file type="template">application/vnd.3gpp.pic-bw-var</file>
     </record>
+    <record date="2022-09-05">
+      <name>vnd.3gpp-prose-pc3a+xml</name>
+      <xref type="person" data="Haorui_Yang"/>
+      <file type="template">application/vnd.3gpp-prose-pc3a+xml</file>
+    </record>
+    <record date="2022-09-05">
+      <name>vnd.3gpp-prose-pc3ach+xml</name>
+      <xref type="person" data="Haorui_Yang"/>
+      <file type="template">application/vnd.3gpp-prose-pc3ach+xml</file>
+    </record>
     <record date="2015-09-11">
       <name>vnd.3gpp-prose-pc3ch+xml</name>
       <xref type="person" data="Frederic_Firmin"/>
       <file type="template">application/vnd.3gpp-prose-pc3ch+xml</file>
+    </record>
+    <record date="2022-09-05">
+      <name>vnd.3gpp-prose-pc8+xml</name>
+      <xref type="person" data="Haorui_Yang"/>
+      <file type="template">application/vnd.3gpp-prose-pc8+xml</file>
     </record>
     <record date="2015-09-01">
       <name>vnd.3gpp-prose+xml</name>
@@ -2849,6 +2902,11 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Roger_Meier"/>
       <file type="template">application/vnd.apache.thrift.json</file>
     </record>
+    <record date="2022-09-05">
+      <name>vnd.apexlang</name>
+      <xref type="person" data="Fawad_Shaikh"/>
+      <file type="template">application/vnd.apexlang</file>
+    </record>
     <record>
       <name>vnd.api+json</name>
       <xref type="person" data="Steve_Klabnik"/>
@@ -3126,6 +3184,16 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Gaige_Paulsen"/>
       <file type="template">application/vnd.cluetrust.cartomobile-config-pkg</file>
     </record>
+    <record date="2022-09-01">
+      <name>vnd.cncf.helm.chart.content.v1.tar+gzip</name>
+      <xref type="person" data="Andrew_Block"/>
+      <file type="template">application/vnd.cncf.helm.chart.content.v1.tar+gzip</file>
+    </record>
+    <record date="2022-10-04">
+      <name>vnd.cncf.helm.chart.provenance.v1.prov</name>
+      <xref type="person" data="Andrew_Block"/>
+      <file type="template">application/vnd.cncf.helm.chart.provenance.v1.prov</file>
+    </record>
     <record date="2014-11-21">
       <name>vnd.coffeescript</name>
       <xref type="person" data="Devyn_Collier_Johnson"/>
@@ -3345,6 +3413,11 @@ Hence, the media type registry disallows parameters named "q".
       <name>vnd.data-vision.rdz</name>
       <xref type="person" data="James_Fields"/>
       <file type="template">application/vnd.data-vision.rdz</file>
+    </record>
+    <record date="2022-07-20">
+      <name>vnd.datalog</name>
+      <xref type="person" data="Simon_Johnston"/>
+      <file type="template">application/vnd.datalog</file>
     </record>
     <record date="2017-05-01">
       <name>vnd.datapackage+json</name>
@@ -4060,6 +4133,11 @@ Hence, the media type registry disallows parameters named "q".
       <name>vnd.gentics.grd+json</name>
       <xref type="person" data="Philipp_Gortan"/>
       <file type="template">application/vnd.gentics.grd+json</file>
+    </record>
+    <record date="2022-10-04">
+      <name>vnd.gentoo.manifest</name>
+      <xref type="person" data="Michał_Górny"/>
+      <file type="template">application/vnd.gentoo.manifest</file>
     </record>
     <record date="2014-05-20">
       <name>vnd.geo+json (OBSOLETED by <xref type="rfc" data="rfc7946"/> in favor of application/geo+json)</name>
@@ -6908,6 +6986,11 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Glenn_Widener"/>
       <file type="template">application/vnd.swiftview-ics</file>
     </record>
+    <record date="2022-09-08">
+      <name>vnd.sybyl.mol2</name>
+      <xref type="person" data="Finn_Rayk_Gärtner"/>
+      <file type="template">application/vnd.sybyl.mol2</file>
+    </record>
     <record date="2020-09-02">
       <name>vnd.sycle+xml</name>
       <xref type="person" data="Johann_Terblanche"/>
@@ -7221,6 +7304,11 @@ Hence, the media type registry disallows parameters named "q".
       <name>vnd.wap.wmlscriptc</name>
       <xref type="person" data="Peter_Stark"/>
       <file type="template">application/vnd.wap.wmlscriptc</file>
+    </record>
+    <record date="2022-09-01">
+      <name>vnd.wasmflow.wafl</name>
+      <xref type="person" data="Fawad_Shaikh"/>
+      <file type="template">application/vnd.wasmflow.wafl</file>
     </record>
     <record>
       <name>vnd.webturbo</name>
@@ -7649,7 +7737,7 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2022-04-13">
       <name>yang-data+cbor</name>
-      <xref type="draft" data="RFC-ietf-core-yang-cbor-20"/>
+      <xref type="rfc" data="rfc9254"/>
       <file type="template">application/yang-data+cbor</file>
     </record>
     <record>
@@ -8226,10 +8314,10 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Piotr_Majdak"/>
       <file type="template">audio/sofa</file>
     </record>
-    <record>
+    <record updated="2022-10-04">
       <name>sp-midi</name>
-      <xref type="person" data="Timo_Kosonen"/>
-      <xref type="person" data="Tom_White"/>
+      <xref type="person" data="Athan_Billias"/>
+      <xref type="person" data="MIDI_Association"/>
       <file type="template">audio/sp-midi</file>
     </record>
     <record>
@@ -8606,7 +8694,7 @@ by the IANA.</note>
     </record>
     <record date="2016-07-01">
       <name>dicom-rle</name>
-      <xref type="person" data="DICOM_Standards_Committee"/>
+      <xref type="person" data="DICOM_Standard_Committee"/>
       <xref type="person" data="David_Clunie"/>
       <file type="template">image/dicom-rle</file>
     </record>
@@ -8683,7 +8771,7 @@ by the IANA.</note>
     </record>
     <record date="2016-07-01">
       <name>jls</name>
-      <xref type="person" data="DICOM_Standards_Committee"/>
+      <xref type="person" data="DICOM_Standard_Committee"/>
       <xref type="person" data="David_Clunie"/>
       <file type="template">image/jls</file>
     </record>
@@ -8992,7 +9080,7 @@ by the IANA.</note>
     <hide/>
     <record date="2022-07-14">
       <name>bhttp</name>
-      <xref type="draft" data="RFC-ietf-httpbis-binary-message-06"/>
+      <xref type="rfc" data="rfc9292"/>
       <file type="template">message/bhttp</file>
     </record>
     <record>
@@ -9146,16 +9234,18 @@ by the IANA.</note>
       <name>mesh</name>
       <xref type="rfc" data="rfc2077"/>
     </record>
-    <record date="2020-02-13">
+    <record date="2020-02-13" updated="2022-09-20">
       <name>mtl</name>
-      <xref type="person" data="DICOM_Standards_Committee"/>
-      <xref type="person" data="Luiza_Kowalczyk"/>
+      <xref type="person" data="DICOM_Standard_Committee"/>
+      <xref type="person" data="DICOM_WG_17"/>
+      <xref type="person" data="Carolyn_Hull"/>
       <file type="template">model/mtl</file>
     </record>
-    <record date="2020-02-13">
+    <record date="2020-02-13" updated="2022-09-20">
       <name>obj</name>
-      <xref type="person" data="DICOM_Standards_Committee"/>
-      <xref type="person" data="Luiza_Kowalczyk"/>
+      <xref type="person" data="DICOM_Standard_Committee"/>
+      <xref type="person" data="DICOM_WG_17"/>
+      <xref type="person" data="Carolyn_Hull"/>
       <file type="template">model/obj</file>
     </record>
     <record date="2022-03-08">
@@ -9188,10 +9278,11 @@ by the IANA.</note>
       <xref type="person" data="Dana_Tripp"/>
       <file type="template">model/step-xml+zip</file>
     </record>
-    <record date="2018-03-06">
+    <record date="2018-03-06" updated="2022-09-20">
       <name>stl</name>
-      <xref type="person" data="DICOM_Standards_Committee"/>
-      <xref type="person" data="Lisa_Spellman"/>
+      <xref type="person" data="DICOM_Standard_Committee"/>
+      <xref type="person" data="DICOM_WG_17"/>
+      <xref type="person" data="Carolyn_Hull"/>
       <file type="template">model/stl</file>
     </record>
     <record date="2022-02-25">
@@ -9270,6 +9361,11 @@ by the IANA.</note>
       <xref type="person" data="SAP_SE"/>
       <xref type="person" data="Igor_Afanasyev"/>
       <file type="template">model/vnd.sap.vds</file>
+    </record>
+    <record date="2022-09-19">
+      <name>vnd.usda</name>
+      <xref type="person" data="Sebastian_Grassia"/>
+      <file type="template">model/vnd.usda</file>
     </record>
     <record date="2018-06-01">
       <name>vnd.usdz+zip</name>
@@ -9731,6 +9827,11 @@ by the IANA.</note>
       <xref type="person" data="Stefan_Eilemann"/>
       <file type="template">text/vnd.esmertec.theme-descriptor</file>
     </record>
+    <record date="2022-08-03">
+      <name>vnd.exchangeable</name>
+      <xref type="person" data="Martin_Cizek"/>
+      <file type="template">text/vnd.exchangeable</file>
+    </record>
     <record date="2021-10-27" updated="2021-12-07">
       <name>vnd.familysearch.gedcom</name>
       <xref type="person" data="Gordon_Clarke"/>
@@ -9989,6 +10090,11 @@ by the IANA.</note>
       <name>H265</name>
       <xref type="rfc" data="rfc7798"/>
       <file type="template">video/H265</file>
+    </record>
+    <record date="2022-09-30">
+      <name>H266</name>
+      <xref type="draft" data="RFC-ietf-avtcore-rtp-vvc-18"/>
+      <file type="template">video/H266</file>
     </record>
     <record date="2014-01-29">
       <name>iso.segment</name>
@@ -10478,6 +10584,11 @@ by the IANA.</note>
       <uri>mailto:jwhitaker&amp;atsc.org</uri>
       <updated>2020-03-18</updated>
     </person>
+    <person id="AutomationML_e.V.">
+      <name>AutomationML e.V.</name>
+      <uri>mailto:office&amp;automationml.org</uri>
+      <updated>2022-07-26</updated>
+    </person>
     <person id="Steve_Aubrey">
       <name>Steve Aubrey</name>
       <uri>mailto:steve_aubrey&amp;hp.com</uri>
@@ -10588,6 +10699,11 @@ by the IANA.</note>
       <uri>mailto:installer-mime&amp;group.apple.com</uri>
       <updated>2005-11-20</updated>
     </person>
+    <person id="Athan_Billias">
+      <name>Athan Billias</name>
+      <uri>mailto:info&amp;midi.org</uri>
+      <updated>2022-10-04</updated>
+    </person>
     <person id="Jason_Birch">
       <name>Jason Birch</name>
       <uri>mailto:jason.birch&amp;osgeo.org</uri>
@@ -10612,6 +10728,11 @@ by the IANA.</note>
       <name>Bryan Blank</name>
       <uri>mailto:ntbchair&amp;nga.mil</uri>
       <updated>2019-08-21</updated>
+    </person>
+    <person id="Andrew_Block">
+      <name>Andrew Block</name>
+      <uri>mailto:andy.block&amp;gmail.com</uri>
+      <updated>2022-10-04</updated>
     </person>
     <person id="Kevin_Blumberg">
       <name>Kevin Blumberg</name>
@@ -10811,6 +10932,11 @@ by the IANA.</note>
       <uri>mailto:shayc&amp;everad.com</uri>
       <updated>2000-05-20</updated>
     </person>
+    <person id="Martin_Cizek">
+      <name>Martin Cizek</name>
+      <uri>mailto:martin.cizek&amp;cuzk.cz</uri>
+      <updated>2022-08-03</updated>
+    </person>
     <person id="John_Clark">
       <name>John Clark</name>
       <uri>mailto:jclark&amp;dbvision.net</uri>
@@ -10964,10 +11090,15 @@ by the IANA.</note>
       <uri>mailto:stevedia&amp;microsoft.com</uri>
       <updated>2008-06-03</updated>
     </person>
-    <person id="DICOM_Standards_Committee">
-      <name>DICOM Standards Committee</name>
-      <uri>mailto:dicom&amp;medicalimaging.org</uri>
-      <updated>2020-02-13</updated>
+    <person id="DICOM_Standard_Committee">
+      <name>DICOM Standard Committee</name>
+      <uri>mailto:dicom&amp;dicomstandard.org</uri>
+      <updated>2022-09-16</updated>
+    </person>
+    <person id="DICOM_WG_17">
+      <name>DICOM Working Group 17 Chairs</name>
+      <uri>mailto:wg17chairs&amp;dicomstandard.org</uri>
+      <updated>2022-09-20</updated>
     </person>
     <person id="Dirk_DiGiorgio-Haag">
       <name>Dirk DiGiorgio-Haag</name>
@@ -11113,6 +11244,11 @@ by the IANA.</note>
       <name>Chet Ensign</name>
       <uri>mailto:chet.ensign&amp;oasis-open.org</uri>
       <updated>2020-04-23</updated>
+    </person>
+    <person id="EPUB_3_WG">
+      <name>EPUB 3 Working Group</name>
+      <uri>mailto:public-epub-wg&amp;w3.org</uri>
+      <updated>2022-08-16</updated>
     </person>
     <person id="Per_Ersson">
       <name>Per Ersson</name>
@@ -11321,6 +11457,16 @@ by the IANA.</note>
       <uri>mailto:cliff&amp;solenttec.net</uri>
       <updated>2006-04-25</updated>
     </person>
+    <person id="Finn_Rayk_Gärtner">
+      <name>Finn Rayk Gärtner</name>
+      <uri>mailto:finngaertner&amp;protonmail.com</uri>
+      <updated>2022-08-09</updated>
+    </person>
+    <person id="Randall_Gellens">
+      <name>Randall Gellens</name>
+      <uri>mailto:rg+nena.mime&amp;randy.pensive.org</uri>
+      <updated>2022-10-10</updated>
+    </person>
     <person id="GeoGebra">
       <name>GeoGebra</name>
       <uri>mailto:office&amp;geogebra.org</uri>
@@ -11371,6 +11517,11 @@ by the IANA.</note>
       <uri>mailto:ytb-external&amp;google.com</uri>
       <updated>2019-06-07</updated>
     </person>
+    <person id="Michał_Górny">
+      <name>Michał Górny</name>
+      <uri>mailto:mgorny&amp;gentoo.org</uri>
+      <updated>2022-10-04</updated>
+    </person>
     <person id="Mikhail_Gorshenev">
       <name>Mikhail Gorshenev</name>
       <uri>mailto:Mikhail.Gorshenev&amp;sun.com</uri>
@@ -11399,7 +11550,7 @@ by the IANA.</note>
     <person id="Sebastian_Grassia">
       <name>Sebastian Grassia</name>
       <uri>mailto:usd-iana&amp;pixar.com</uri>
-      <updated>2018-06-01</updated>
+      <updated>2022-09-19</updated>
     </person>
     <person id="Phil_Green">
       <name>Phil Green</name>
@@ -11680,6 +11831,11 @@ by the IANA.</note>
       <uri>mailto:nihuini&amp;tencent.com</uri>
       <updated>2014-09-10</updated>
     </person>
+    <person id="Carolyn_Hull">
+      <name>Carolyn Hull</name>
+      <uri>mailto:dicom&amp;dicomstandard.org</uri>
+      <updated>2022-09-16</updated>
+    </person>
     <person id="Sam_Hume">
       <name>Sam Hume</name>
       <uri>mailto:shume&amp;cdisc.org</uri>
@@ -11798,11 +11954,6 @@ by the IANA.</note>
       <uri>mailto:mail&amp;tobyinkster.co.uk</uri>
       <updated>2010-10-19</updated>
     </person>
-    <person id="International_Digital_Publishing_Forum">
-      <name>International Digital Publishing Forum</name>
-      <uri>http://www.idpf.org</uri>
-      <updated>2014-11-06</updated>
-    </person>
     <person id="Keitaro_Ishida">
       <name>Keitaro Ishida</name>
       <uri>mailto:keitaro.ishida.yu&amp;fujifilm.com</uri>
@@ -11837,6 +11988,11 @@ by the IANA.</note>
       <name>Ken Jibiki</name>
       <uri>mailto:ken&amp;kenjij.com</uri>
       <updated>2010-07-23</updated>
+    </person>
+    <person id="Simon_Johnston">
+      <name>Simon Johnston</name>
+      <uri>mailto:johnstonskj&amp;gmail.com</uri>
+      <updated>2022-07-20</updated>
     </person>
     <person id="Randy_Jones">
       <name>Randy Jones</name>
@@ -11887,6 +12043,11 @@ by the IANA.</note>
       <name>Allen K. Kabayama</name>
       <uri>mailto:akabayam&amp;mobius.com</uri>
       <updated>1999-06-19</updated>
+    </person>
+    <person id="Sebastian_Kaebisch">
+      <name>Sebastian Kaebisch</name>
+      <uri>mailto:sebastian.kaebisch&amp;siemens.com</uri>
+      <updated>2022-08-22</updated>
     </person>
     <person id="Greg_Kaiser">
       <name>Greg Kaiser</name>
@@ -12021,11 +12182,6 @@ by the IANA.</note>
       <name>Matthias Kovatsch</name>
       <uri>mailto:w3c&amp;kovatsch.net</uri>
       <updated>2020-02-12</updated>
-    </person>
-    <person id="Luiza_Kowalczyk">
-      <name>Luiza Kowalczyk</name>
-      <uri>mailto:LKowalczyk&amp;dicomstandard.org</uri>
-      <updated>2020-02-13</updated>
     </person>
     <person id="Yves_Kreis">
       <name>Yves Kreis</name>
@@ -12327,11 +12483,6 @@ by the IANA.</note>
       <uri>mailto:b_mccolgan&amp;hotmail.com</uri>
       <updated>2011-05-04</updated>
     </person>
-    <person id="William_McCoy">
-      <name>William McCoy</name>
-      <uri>mailto:bmccoy&amp;idpf.org</uri>
-      <updated>2014-11-06</updated>
-    </person>
     <person id="Braden_N_McDaniel">
       <name>Braden N. McDaniel</name>
       <uri>mailto:braden&amp;endoframe.com</uri>
@@ -12390,6 +12541,11 @@ by the IANA.</note>
       <name>John M. Meredith</name>
       <uri>mailto:john.meredith&amp;etsi.org</uri>
       <updated>2009-10-13</updated>
+    </person>
+    <person id="MIDI_Association">
+      <name>MIDI Manufacturers Association (d/b/a The MIDI Association)</name>
+      <uri>mailto:info&amp;midi.org</uri>
+      <updated>2022-10-04</updated>
     </person>
     <person id="Andy_Miller">
       <name>Andy Miller</name>
@@ -12531,6 +12687,11 @@ by the IANA.</note>
       <uri>mailto:jann&amp;microsoft.com</uri>
       <updated>2000-05-20</updated>
     </person>
+    <person id="NENA">
+      <name>National Emergency Number Association (NENA)</name>
+      <uri>https://www.nena.org</uri>
+      <updated>2022-10-10</updated>
+    </person>
     <person id="Max_Neuendorf">
       <name>Max Neuendorf</name>
       <uri>mailto:max.neuendorf&amp;iis.fraunhofer.de</uri>
@@ -12662,6 +12823,11 @@ by the IANA.</note>
       <name>OPC Foundation</name>
       <uri>mailto:sysadmin&amp;opcfoundation.org</uri>
       <updated>2020-09-01</updated>
+    </person>
+    <person id="OpenID_Foundation_Artifact_Binding_WG">
+      <name>OpenID Foundation Artifact Binding Working Group</name>
+      <uri>mailto:openid-specs-ab&amp;lists.openid.net</uri>
+      <updated>2022-10-07</updated>
     </person> 
     <person id="Open_Mobile_Naming_Authority">
       <name>Open Mobile Naming Authority (OMNA)</name>
@@ -13154,6 +13320,11 @@ by the IANA.</note>
       <uri>mailto:doug.serres&amp;hummingbird.com</uri>
       <updated>2014-05-01</updated>
     </person>
+    <person id="Fawad_Shaikh">
+      <name>Fawad Shaikh</name>
+      <uri>mailto:fawad&amp;candle.dev</uri>
+      <updated>2022-09-05</updated>
+    </person>
     <person id="Rafie_Shamsaasef">
       <name>Rafie Shamsaasef</name>
       <uri>mailto:rafie&amp;motorola.com</uri>
@@ -13295,11 +13466,6 @@ by the IANA.</note>
       <name>Monty Solomon</name>
       <uri>mailto:monty&amp;noblenet.com</uri>
       <updated>1997-02-19</updated>
-    </person>
-    <person id="Lisa_Spellman">
-      <name>Lisa Spellman</name>
-      <uri>mailto:LSpellman&amp;medicalimaging.org</uri>
-      <updated>2018-03-06</updated>
     </person>
     <person id="Henry_Spencer">
       <name>Henry Spencer</name>
@@ -13887,6 +14053,11 @@ by the IANA.</note>
       <name>Yasuo Yamanaka</name>
       <uri>mailto:yasuo.yamanaka&amp;dir-bi.co.jp</uri>
       <updated>2009-02-24</updated>
+    </person>
+    <person id="Haorui_Yang">
+      <name>Haorui Yang</name>
+      <uri>mailto:yanghaorui&amp;oppo.com</uri>
+      <updated>2022-09-05</updated>
     </person>
     <person id="Mr._Yellow">
       <name>Mr. Yellow</name>

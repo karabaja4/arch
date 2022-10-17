@@ -12,6 +12,8 @@ rm -rf media-types.xml
 wget https://www.iana.org/assignments/media-types/media-types.xml
 cat "${dir}/media-types.xml" | grep -oP '(?<=<file type="template">).*(?=</file>)' >> "${path}"
 cat /usr/share/mime/packages/freedesktop.org.xml | grep "<mime-type type=" | cut -d \" -f2 >> "${path}"
+echo "x-scheme-handler/http" >> "${path}"
+echo "x-scheme-handler/https" >> "${path}"
 sort -u -o "${path}" "${path}"
 sed -e 's/$/=mime2.desktop/' -i "${path}"
 sed -i '1s/^/[Default Applications]\n/' "${path}"
