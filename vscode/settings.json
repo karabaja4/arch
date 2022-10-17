@@ -102,5 +102,6 @@
         "commit": false,
         "publish": false,
         "sync": false
-    }
+    },
+    "editor.renderWhitespace": "boundary"
 }
