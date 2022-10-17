@@ -1,4 +1,4 @@
 */5 * * * *    /home/igor/arch/scripts/dns.sh
-* * * * *      /home/igor/arch/scripts/dpms.sh
+*/5 * * * *    /home/igor/arch/scripts/dpms.sh
 */5 * * * *    /home/igor/arch/scripts/updates.sh
 */5 * * * *    /home/igor/arch/scripts/df.sh
