@@ -5,7 +5,6 @@ set -u
 _pref="
 image/png
 image/bmp
-application/x-moz-custom-clipdata
 text/uri-list
 code/file-list
 "
