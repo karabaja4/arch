@@ -6,10 +6,10 @@
         "command": "/usr/bin/dbus-daemon --session --nofork --nopidfile --nosyslog"
     },
     {
-        "name": "dhcpcd",
+        "name": "dhcp",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/busybox udhcpc -nRfv -s /home/igor/arch/udhcpc/default.script -i enp2s0"
+        "command": "/home/igor/arch/scripts/network.sh"
     },
     {
         "name": "sshd",
