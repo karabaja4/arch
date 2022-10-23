@@ -39,7 +39,7 @@
         "name": "cron",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/crond -n"
+        "command": "/usr/bin/busybox crond -f -c /home/igor/arch/crontabs"
     },
     {
         "name": "vpn",
