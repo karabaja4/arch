@@ -21,7 +21,7 @@
         "name": "ntpd",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/busybox ntpd -dd -n -p time.cloudflare.com"
+        "command": "/usr/bin/busybox ntpd -n -p time.cloudflare.com"
     },
     {
         "name": "vnc",
