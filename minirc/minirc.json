@@ -9,7 +9,7 @@
         "name": "dhcpcd",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/dhcpcd -4 -n -B -z enp2s0"
+        "command": "/usr/bin/busybox udhcpc -nRfv -s /home/igor/arch/udhcpc/default.script -i enp2s0"
     },
     {
         "name": "sshd",
