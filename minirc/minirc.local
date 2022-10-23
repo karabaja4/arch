@@ -2,6 +2,8 @@
 
 # add startup commands here
 
+/usr/bin/ip link set enp2s0 up
+
 _user="$(id -un 1000)"
 
 _mkxdg() {
