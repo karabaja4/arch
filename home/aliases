@@ -68,7 +68,7 @@ _source '/home/igor/arch/lf/icons.sh'
 
 case "$(hostname)" in
 avacyn-alpine)
-    PS1='\w \h \[\033[34m\]\[\033[1m\]>>\[\033[0m\] '
+    PS1='\w \[\033[34m\]\[\033[1m\]\h >>\[\033[0m\] '
     ;;
 laptop)
     PS1='\w $(__git_ps1 "\[\033[37m\](%s)\[\033[0m\] ")\[\033[32m\]\[\033[1m\]>>\[\033[0m\] '
