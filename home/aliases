@@ -61,15 +61,15 @@ _source '/home/igor/arch/scripts/env.sh'
 _source '/usr/share/git/completion/git-prompt.sh'
 _source '/home/igor/arch/lf/icons.sh'
 
-# _bold="\033[1m"
-# _color="\033[32m"
-# _gray="\033[37m"
-# _reset="\033[0m"
-
-PS1='\w $(__git_ps1 "\[\033[37m\](%s)\[\033[0m\] ")\[\033[32m\]\[\033[1m\]>>\[\033[0m\] '
+_bold="\033[1m"
+_green="\033[32m"
+_blue="\033[34m"
+_gray="\033[37m"
+_reset="\033[0m"
+PS1="\w \$(__git_ps1 \"\[${_gray}\](%s)\[${_reset}\] \")\[${_green}\]\[${_bold}\]>>\[${_reset}\] "
 
 if [ "$(hostname)" = "avacyn-alpine" ]
 then
-    PS1='\w \[\033[34m\]\[\033[1m\]\h >>\[\033[0m\] '
+    PS1="\w \[${_blue}\]\[${_bold}\]>>\[${_reset}\] "
     alias ls='LC_COLLATE=C ls -A -l -h --color=always --group-directories-first'
 fi
