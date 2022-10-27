@@ -6,7 +6,7 @@
         "command": "/usr/bin/dbus-daemon --session --nofork --nopidfile --nosyslog"
     },
     {
-        "name": "dhcp",
+        "name": "udhcpc",
         "enabled": true,
         "user": "root",
         "command": "/usr/bin/busybox udhcpc -nRfv -s /home/igor/arch/udhcpc/default.script -i enp2s0"
