@@ -36,7 +36,7 @@
         "command": "/usr/bin/smbd --foreground"
     },
     {
-        "name": "cron",
+        "name": "crond",
         "enabled": true,
         "user": "root",
         "command": "/usr/bin/busybox crond -f -d8 -c /home/igor/arch/crontabs"
