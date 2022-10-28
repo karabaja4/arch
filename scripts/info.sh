@@ -15,10 +15,7 @@ printf '  * CPU:      %s\n' "$(grep 'model name' /proc/cpuinfo | head -n1 | sed 
 printf '  * Memory:   %.2f GB / %.2f GB\n' "${_mem_used_gb}" "${_mem_total_gb}"
 printf '  * Shell:    %s\n' "$(readlink /proc/$PPID/exe | sed 's/\/usr\/bin\///')"
 printf '  * Uptime:   %s\n' "$(uptime -p | cut -c 4-)"
-if command -v pacman
-then
-    printf '  * Packages: %s (%s AUR)\n' "$(pacman -Qq | wc -l)" "$(pacman -Qm | wc -l)"
-fi
+printf '  * Packages: %s (%s AUR)\n' "$(pacman -Qq | wc -l)" "$(pacman -Qm | wc -l)"
 printf '\n'
 
 printf '  '
