@@ -25,7 +25,7 @@ terminal)
     _run xfce4-terminal
     ;;
 firefox)
-    _run firefox-socket-control
+    _run firefox-socket
     ;;
 qtfm)
     _run qtfm
