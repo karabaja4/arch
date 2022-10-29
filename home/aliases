@@ -74,3 +74,9 @@ then
     PS1="\w \[${_blue}\]\[${_bold}\]avacyn >>\[${_reset}\] "
     alias ls='LC_COLLATE=C ls -A -l -h --color=always --group-directories-first'
 fi
+
+if [ "$(hostname)" = "avacyn3" ]
+then
+    PS1="\w \[${_blue}\]\[${_bold}\]avacyn3 >>\[${_reset}\] "
+    alias ls='LC_COLLATE=C ls -A -l -h --color=always --group-directories-first'
+fi
