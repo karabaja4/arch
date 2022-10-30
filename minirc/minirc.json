@@ -27,7 +27,7 @@
         "name": "vnc",
         "enabled": false,
         "user": "igor",
-        "command": "XAUTHORITY='/home/igor/.local/share/sx/xvncauthority' /usr/bin/vncserver :2"
+        "command": "/home/igor/arch/scripts/vnc.sh"
     },
     {
         "name": "samba",

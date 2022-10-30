@@ -12,7 +12,6 @@ _mkxdg() {
 
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
-printf '50' > /proc/sys/vm/vfs_cache_pressure
 
 printf "0" > /proc/sys/kernel/printk
 mkdir -p /run/samba
