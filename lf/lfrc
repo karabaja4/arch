@@ -113,6 +113,9 @@ map gt cd ~/_disk/torrents
 # !{{ -> same as ${{, but requires a keypress once command exits
 # &{{ -> run command completely in the background, invisible to the UI
 
+# do not quote ${fx}, it will have an effect of adding just one file to the parameters
+# IFS is \n, otherwise the files processed by spaces in filenames
+
 cmd gz ${{
     set -f
     for _x in ${fx}
