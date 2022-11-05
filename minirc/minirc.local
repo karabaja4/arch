@@ -13,6 +13,9 @@ _mkxdg() {
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
 
+# no spindowns
+hdparm -S 0 /dev/disk/by-uuid/9989d2cc-d8bd-4919-a8ca-2395b60969b8
+
 printf "0" > /proc/sys/kernel/printk
 mkdir -p /run/samba
 
