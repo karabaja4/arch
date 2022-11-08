@@ -16,11 +16,14 @@ _mkxdg() {
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
 
-# load arch sysctl settings
-sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-default.conf" "${_sysctl}/50-pid-max.conf" > /dev/null
+# load (some) of the arch sysctl settings
+sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-pid-max.conf" > /dev/null
+
+# enable ping as non root
+printf '0 2147483647' > /proc/sys/net/ipv4/ping_group_range
 
 # prevent kernel from printing messages into framebuffer
-printf "0" > /proc/sys/kernel/printk
+printf '0' > /proc/sys/kernel/printk
 
 # create samba tmpfs dir
 mkdir -p /run/samba
@@ -31,7 +34,7 @@ _mkxdg "runtime"
 _mkxdg "other"
 
 # set CPU to performance preset
-printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
+printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
 
 # activate swap
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
