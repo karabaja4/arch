@@ -14,7 +14,7 @@ _mkxdg() {
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
 
-sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-default.conf" "${_sysctl}/50-pid-max.conf"
+sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-default.conf" "${_sysctl}/50-pid-max.conf" > /dev/null
 
 printf "0" > /proc/sys/kernel/printk
 mkdir -p /run/samba
