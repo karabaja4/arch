@@ -2,6 +2,7 @@
 
 # add startup commands here
 
+# bring ethernet interface up so udhcpc can operate
 /usr/bin/ip link set enp2s0 up
 
 _user="$(id -un 1000)"
@@ -11,22 +12,32 @@ _mkxdg() {
     install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
 }
 
+# improve responsivness under heavy IO
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
 
+# load arch sysctl settings
 sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-default.conf" "${_sysctl}/50-pid-max.conf" > /dev/null
 
+# prevent kernel from printing messages into framebuffer
 printf "0" > /proc/sys/kernel/printk
+
+# create samba tmpfs dir
 mkdir -p /run/samba
 
+# create XDG directories for current user (read from $HOME/.config/user-dirs.dirs and env.sh)
 _mkxdg ""
 _mkxdg "runtime"
 _mkxdg "other"
 
+# set CPU to performance preset
 printf "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
+
+# activate swap
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 
-# modules
+# load PPP module required for VPN
 modprobe ppp_generic
 
+# write /etc/issue to display a nice greeting message
 /home/igor/arch/scripts/info.sh > /etc/issue
