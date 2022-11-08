@@ -5,6 +5,7 @@
 /usr/bin/ip link set enp2s0 up
 
 _user="$(id -un 1000)"
+_sysctl="/usr/lib/sysctl.d"
 
 _mkxdg() {
     install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
@@ -12,6 +13,8 @@ _mkxdg() {
 
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
+
+sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-default.conf" "${_sysctl}/50-pid-max.conf"
 
 printf "0" > /proc/sys/kernel/printk
 mkdir -p /run/samba
