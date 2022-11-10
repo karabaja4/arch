@@ -8,5 +8,8 @@ export EDITOR=nano
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 export LESSHISTFILE=/dev/null
 
+# vnc does not export $SHELL
+export SHELL="/bin/bash"
+
 # xdg
 export XDG_RUNTIME_DIR="/tmp/xdg-igor/runtime"
