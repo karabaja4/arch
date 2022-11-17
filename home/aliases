@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias ls='LC_COLLATE=C ls -A -o -h --color=always --group-directories-first'
+alias ls='LC_COLLATE=C ls -A -l -h --color=always --group-directories-first'
 
 alias chx='chmod +x'
 alias permof='stat --printf "%a\n"'
