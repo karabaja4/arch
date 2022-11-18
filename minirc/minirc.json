@@ -45,7 +45,7 @@
         "name": "crond",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/busybox crond -f -d8 -c /etc/crontabs"
+        "command": "/usr/bin/crond -f -d8"
     },
     {
         "name": "vpn",
