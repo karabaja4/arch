@@ -9,7 +9,7 @@
         "name": "udhcpc",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/busybox udhcpc -nqfv -s /home/igor/arch/udhcpc/default.script -i enp2s0"
+        "command": "/usr/bin/udhcpc -nqfv -i enp2s0"
     },
     {
         "name": "sshd",
