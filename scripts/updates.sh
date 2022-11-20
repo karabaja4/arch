@@ -2,7 +2,6 @@
 set -u
 
 # multiple checkupdates calls cannot run in parallel
-# so if more than 1 conky is running checkupdates, they need to have different CHECKUPDATES_DB set
 # that is why a new CHECKUPDATES_DB is created only for this script
 
 # auracle returns 0 when there are upgradable packages and stdout is non-empty
