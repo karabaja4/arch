@@ -6,7 +6,7 @@
     "gz,zip,rar,zst,tar,7z,iso,bz2": "xarchiver $arg",
     "torrent": "qbittorrent $arg",
     "pdf": "mupdf -r 96 $arg",
-    "html": "firefox-socket $arg",
+    "html": "chromium $arg",
     "exe": "wine $arg"
   },
   "mimetypes": {
