@@ -1,0 +1,22 @@
+{
+    "workbench.enablePreviewFeatures": true,
+    "workbench.startupEditor": "none",
+    "workbench.settings.editor": "json",
+    "editor.fontFamily": "Consolas",
+    "editor.fontSize": 14,
+    "resultsGrid.fontSize": 16,
+    "resultsGrid.rowHeight": 32,
+    "resultsGrid.fontFamily": "Consolas",
+    "datasource.connectionGroups": [
+        {
+            "name": "ROOT",
+            "id": "C777F06B-202E-4480-B475-FA416154D458"
+        }
+    ],
+    "datasource.connections": [],
+    "telemetry.telemetryLevel": "off",
+    "workbench.editorAssociations": {
+        "*.{sqlplan}": "workbench.editor.executionplan"
+    },
+    "azure.noSystemKeychain": true
+}

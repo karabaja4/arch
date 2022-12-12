@@ -48,20 +48,20 @@ azuredatastudio)
 virtualbox)
     _run VirtualBox
     ;;
-slack)
-    _run slack --start-maximized --disable-smooth-scrolling
-    ;;
-teams)
-    _load_apulse
-    _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
-    ;;
+# slack)
+#     _run slack --start-maximized --disable-smooth-scrolling
+#     ;;
+# teams)
+#     _load_apulse
+#     _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
+#     ;;
 discord)
     _run chromium --disable-gpu --start-maximized --disable-smooth-scrolling --app=https://discord.com/app
     ;;
-skype)
-    _load_apulse
-    _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
-    ;;
+# skype)
+#     _load_apulse
+#     _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
+#     ;;
 flameshot)
     _run flameshot
     ;;
