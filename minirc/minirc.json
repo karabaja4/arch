@@ -46,5 +46,11 @@
         "enabled": true,
         "user": "root",
         "command": "/usr/bin/crond -f -d8"
+    },
+    {
+        "name": "pg",
+        "enabled": true,
+        "user": "postgres",
+        "command": "/usr/bin/postgres -D /var/lib/postgres/data"
     }
 ]
