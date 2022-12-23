@@ -49,7 +49,7 @@
     },
     {
         "name": "pg",
-        "enabled": true,
+        "enabled": false,
         "user": "postgres",
         "command": "/usr/bin/postgres -D /var/lib/postgres/data"
     }
