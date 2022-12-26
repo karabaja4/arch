@@ -52,5 +52,11 @@
         "enabled": false,
         "user": "postgres",
         "command": "/usr/bin/postgres -D /var/lib/postgres/data"
+    },
+    {
+        "name": "redis",
+        "enabled": false,
+        "user": "redis",
+        "command": "/usr/bin/redis-server /etc/redis/redis.conf"
     }
 ]
