@@ -13,5 +13,3 @@ export SHELL='/bin/bash'
 
 # xdg
 export XDG_RUNTIME_DIR='/tmp/xdg-igor/runtime'
-
-export TZ='Europe/Zagreb'
