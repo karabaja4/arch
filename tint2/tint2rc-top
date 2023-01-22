@@ -97,7 +97,7 @@ button_background_id = 1
 button_max_icon_size = 16
 
 button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/sqlitebrowser.svg
+button_icon = /opt/azuredatastudio/resources/app/extensions/azurecore/resources/azureArcService.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh azuredatastudio
 button_padding = 3 0 0
 button_background_id = 1
@@ -118,21 +118,21 @@ button_background_id = 1
 button_max_icon_size = 16
 
 button = new
-button_icon = /home/igor/arch/mspaint/mspaint2.png
+button_icon = /usr/share/icons/Papirus/16x16/apps/kcoloredit.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh paint
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/irc-chat.svg
+button_icon = /usr/share/icons/Papirus/16x16/apps/hashit.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh kvirc
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
 
 button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/smc.svg
+button_icon = /usr/share/icons/Papirus/16x16/apps/pirut.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh gaming
 button_padding = 3 0 0
 button_background_id = 1
