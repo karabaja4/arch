@@ -4,12 +4,12 @@
 <registry xmlns="http://www.iana.org/assignments" id="media-types">
   <title>Media Types</title>
   <category>Multipurpose Internet Mail Extensions (MIME) and Media Types</category>
-  <updated>2022-10-27</updated>
+  <updated>2023-01-24</updated>
   
   
  
   <registration_rule>Expert Review for Vendor and Personal Trees</registration_rule>
-  <expert>Alexey Melnikov, Murray Kucherawy (backup)</expert>
+  <expert>Alexey Melnikov, Darrel Miller, Murray Kucherawy (backup)</expert>
   <xref type="rfc" data="rfc6838"/>
   <xref type="rfc" data="rfc4855"/>
   <note>Per Section 3.1 of <xref type="rfc" data="rfc6838"/>, Standards Tree requests made through IETF
@@ -1798,10 +1798,11 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="uri" data="http://www.jtc1sc34.org/repository/0661.pdf"/>
       <file type="template">application/relax-ng-compact-syntax</file>
     </record>
-    <record>
-      <name>remote-printing</name>
+    <record updated="2022-12-15">
+      <name>remote-printing (OBSOLETE)</name>
       <xref type="rfc" data="rfc1486"/>
       <xref type="person" data="Marshall_Rose"/>
+      <xref type="uri" data="https://datatracker.ietf.org/doc/status-change-int-tlds-to-historic">status-change-int-tlds-to-historic</xref>
       <file type="template">application/remote-printing</file>
     </record>
     <record>
@@ -1841,7 +1842,7 @@ Hence, the media type registry disallows parameters named "q".
     </record>
     <record date="2022-09-20">
       <name>rpki-checklist</name>
-      <xref type="draft" data="RFC-ietf-sidrops-rpki-rsc-11"/>
+      <xref type="rfc" data="rfc9323"/>
       <file type="template">application/rpki-checklist</file>
     </record>
     <record>
@@ -4144,12 +4145,32 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Michał_Górny"/>
       <file type="template">application/vnd.gentoo.catmetadata+xml</file>
     </record>
+    <record date="2022-11-07">
+      <name>vnd.gentoo.ebuild</name>
+      <xref type="person" data="Michał_Górny"/>
+      <file type="template">application/vnd.gentoo.ebuild</file>
+    </record>
+    <record date="2022-11-07">
+      <name>vnd.gentoo.eclass</name>
+      <xref type="person" data="Michał_Górny"/>
+      <file type="template">application/vnd.gentoo.eclass</file>
+    </record>
+    <record date="2022-11-30">
+      <name>vnd.gentoo.gpkg</name>
+      <xref type="person" data="Michał_Górny"/>
+      <file type="template">application/vnd.gentoo.gpkg</file>
+    </record>
     <record date="2022-10-04">
       <name>vnd.gentoo.manifest</name>
       <xref type="person" data="Michał_Górny"/>
       <file type="template">application/vnd.gentoo.manifest</file>
     </record>
     <record date="2022-10-21">
+      <name>vnd.gentoo.xpak</name>
+      <xref type="person" data="Gentoo_Portage_Project"/>
+      <file type="template">application/vnd.gentoo.xpak</file>
+    </record>
+    <record date="2022-11-28">
       <name>vnd.gentoo.pkgmetadata+xml</name>
       <xref type="person" data="Michał_Górny"/>
       <file type="template">application/vnd.gentoo.pkgmetadata+xml</file>
@@ -4942,6 +4963,11 @@ Hence, the media type registry disallows parameters named "q".
       <name>vnd.mediastation.cdkey</name>
       <xref type="person" data="Henry_Flurry"/>
       <file type="template">application/vnd.mediastation.cdkey</file>
+    </record>
+    <record date="2023-01-02">
+      <name>vnd.medicalholodeck.recordxr</name>
+      <xref type="person" data="Dominique_Sandoz"/>
+      <file type="template">application/vnd.medicalholodeck.recordxr</file>
     </record>
     <record>
       <name>vnd.meridian-slingshot</name>
@@ -7387,6 +7413,11 @@ Hence, the media type registry disallows parameters named "q".
       <xref type="person" data="Wolfram"/>
       <file type="template">application/vnd.wolfram.player</file>
     </record>
+    <record date="2023-01-04">
+      <name>vnd.wordlift</name>
+      <xref type="person" data="David_Riccitelli"/>
+      <file type="template">application/vnd.wordlift</file>
+    </record>
     <record>
       <name>vnd.wordperfect</name>
       <xref type="person" data="Kim_Scarborough"/>
@@ -8689,6 +8720,12 @@ by the IANA.</note>
       <xref type="person" data="Howard_Lukk"/>
       <file type="template">image/aces</file>
     </record>
+    <record date="2022-11-21">
+      <name>apng</name>
+      <xref type="person" data="W3C"/>
+      <xref type="person" data="W3C_PNG_Working_Group"/>
+      <file type="template">image/apng</file>
+    </record>
     <record date="2018-07-30">
       <name>avci</name>
       <xref type="person" data="ISO-IEC_JTC1"/>
@@ -9082,6 +9119,11 @@ by the IANA.</note>
       <xref type="person" data="Chris_Charabaruk"/>
       <file type="template">image/vnd.zbrush.pcx</file>
     </record>
+    <record date="2023-01-18">
+      <name>webp</name>
+      <xref type="draft" data="RFC-zern-webp-12"/>
+      <file type="template">image/webp</file>
+    </record>
     <record date="2016-05-16">
       <name>wmf</name>
       <xref type="rfc" data="rfc7903"/>
@@ -9250,6 +9292,12 @@ by the IANA.</note>
       <xref type="person" data="Uli_Klumpp"/>
       <file type="template">model/gltf+json</file>
     </record>
+    <record date="2023-01-24">
+      <name>JT</name>
+      <xref type="person" data="ISO-TC_184-SC_4"/>
+      <xref type="person" data="Michael_Zink"/>
+      <file type="template">model/JT</file>
+    </record>
     <record>
       <name>iges</name>
       <xref type="person" data="Curtis_Parks"/>
@@ -9315,6 +9363,11 @@ by the IANA.</note>
       <xref type="person" data="PDF_Association"/>
       <xref type="person" data="Peter_Wyatt"/>
       <file type="template">model/u3d</file>
+    </record>
+    <record date="2022-12-22">
+      <name>vnd.cld</name>
+      <xref type="person" data="Robert_Monaghan"/>
+      <file type="template">model/vnd.cld</file>
     </record>
     <record>
       <name>vnd.collada+xml</name>
@@ -9993,6 +10046,12 @@ by the IANA.</note>
       <xref type="person" data="Silvia_Pfeiffer"/>
       <file type="template">text/vtt</file>
     </record>
+    <record date="2023-01-12">
+      <name>wgsl</name>
+      <xref type="person" data="W3C"/>
+      <xref type="person" data="David_Neto"/>
+      <file type="template">text/wgsl</file>
+    </record>
     <record>
       <name>xml</name>
       <xref type="rfc" data="rfc7303"/>
@@ -10118,7 +10177,7 @@ by the IANA.</note>
     </record>
     <record date="2022-09-30">
       <name>H266</name>
-      <xref type="draft" data="RFC-ietf-avtcore-rtp-vvc-18"/>
+      <xref type="rfc" data="rfc9328"/>
       <file type="template">video/H266</file>
     </record>
     <record date="2014-01-29">
@@ -10917,7 +10976,7 @@ by the IANA.</note>
     <person id="Mark_Callow">
       <name>Mark Callow</name>
       <uri>mailto:khronos&amp;callow.im</uri>
-      <updated>2020-08-11</updated>
+      <updated>2022-12-26</updated>
     </person>
     <person id="Larry_Campbell">
       <name>Larry Campbell</name>
@@ -11492,6 +11551,11 @@ by the IANA.</note>
       <uri>mailto:rg+nena.mime&amp;randy.pensive.org</uri>
       <updated>2022-10-10</updated>
     </person>
+    <person id="Gentoo_Portage_Project">
+      <name>Portage Project</name>
+      <uri>mailto:dev-portage&amp;gentoo.org</uri>
+      <updated>2022-11-28</updated>
+    </person>
     <person id="GeoGebra">
       <name>GeoGebra</name>
       <uri>mailto:office&amp;geogebra.org</uri>
@@ -11545,7 +11609,7 @@ by the IANA.</note>
     <person id="Michał_Górny">
       <name>Michał Górny</name>
       <uri>mailto:mgorny&amp;gentoo.org</uri>
-      <updated>2022-10-21</updated>
+      <updated>2022-11-30</updated>
     </person>
     <person id="Mikhail_Gorshenev">
       <name>Mikhail Gorshenev</name>
@@ -11784,8 +11848,8 @@ by the IANA.</note>
     </person>
     <person id="Hans-Dieter_A._Hiep">
       <name>Hans-Dieter A. Hiep</name>
-      <uri>mailto:info&amp;aexiz.com</uri>
-      <updated>2016-04-04</updated>
+      <uri>mailto:hdh&amp;cwi.nl</uri>
+      <updated>2022-11-10</updated>
     </person>
     <person id="Ben_Hinman">
       <name>Ben Hinman</name>
@@ -12607,6 +12671,11 @@ by the IANA.</note>
       <uri>mailto:andreas.molzer&amp;nebumind.com</uri>
       <updated>2021-03-17</updated>
     </person>
+    <person id="Robert_Monaghan">
+      <name>Robert Monaghan</name>
+      <uri>mailto:cld&amp;illuscio.com</uri>
+      <updated>2022-12-22</updated>
+    </person>
     <person id="Brent_Moore">
       <name>Brent Moore</name>
       <uri>mailto:brent_moore&amp;byu.edu</uri>
@@ -12716,6 +12785,11 @@ by the IANA.</note>
       <name>National Emergency Number Association (NENA)</name>
       <uri>https://www.nena.org</uri>
       <updated>2022-10-10</updated>
+    </person>
+    <person id="David_Neto">
+      <name>David Neto</name>
+      <uri>mailto:dneto&amp;google.com</uri>
+      <updated>2023-01-12</updated>
     </person>
     <person id="Max_Neuendorf">
       <name>Max Neuendorf</name>
@@ -13155,6 +13229,11 @@ by the IANA.</note>
       <uri>mailto:bryn&amp;dynamiccontentgroup.com</uri>
       <updated>2020-12-08</updated>
     </person>
+    <person id="David_Riccitelli">
+      <name>David Riccitelli</name>
+      <uri>mailto:david&amp;wordlift.io</uri>
+      <updated>2023-01-04</updated>
+    </person>
     <person id="Steve_Rice">
       <name>Steve Rice</name>
       <uri>mailto:developers&amp;pagerduty.com</uri>
@@ -13239,6 +13318,11 @@ by the IANA.</note>
       <name>Anders Sandholm</name>
       <uri>mailto:sandholm&amp;google.com</uri>
       <updated>2011-12-14</updated>
+    </person>
+    <person id="Dominique_Sandoz">
+      <name>Dominique Sandoz</name>
+      <uri>mailto:dominique&amp;medicalholodeck.com</uri>
+      <updated>2023-01-02</updated>
     </person>
     <person id="Gary_Sands">
       <name>Gary Sands</name>
@@ -13845,6 +13929,11 @@ by the IANA.</note>
       <uri>mailto:public-music-notation&amp;w3.org</uri>
       <updated>2017-01-19</updated>
     </person>
+    <person id="W3C_PNG_Working_Group">
+      <name>PNG Working Group</name>
+      <uri>mailto:public-png&amp;w3.org</uri>
+      <updated>2022-11-21</updated>
+    </person>
     <person id="W3C_RDF_Working_Group">
       <name>RDF Working Group</name>
       <uri>mailto:public-rdf-comments&amp;w3.org</uri>
@@ -14148,6 +14237,11 @@ by the IANA.</note>
       <name>Gottfried Zimmermann</name>
       <uri>mailto:gzimmermann at acm.org</uri>
       <updated>2013-06-24</updated>
+    </person>
+    <person id="Michael_Zink">
+      <name>Michael Zink</name>
+      <uri>mailto:mike.zink&amp;siemens.com</uri>
+      <updated>2023-01-24</updated>
     </person>
     <person id="William_Zou">
       <name>William Zou</name>
