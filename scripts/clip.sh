@@ -27,18 +27,18 @@ _usage() {
 _iteration() {
 
     # fix for FreeRDP
-    if command -v xdotool > /dev/null 2>&1
-    then
-        _awcn="$(xdotool getactivewindow getwindowclassname 2>/dev/null)"
-        if [ "${_awcn}" = "xfreerdp" ]
-        then
-            # stay in this loop while FreeRDP is in focus so clipboard stays under ownership of FreeRDP
-            # after FreeRDP loses focus transfer the contents into xclip so it's available to other apps
-            _log "FreeRDP clipboard is not supported"
-            sleep 1
-            return 1
-        fi
-    fi
+    # if command -v xdotool > /dev/null 2>&1
+    # then
+    #     _awcn="$(xdotool getactivewindow getwindowclassname 2>/dev/null)"
+    #     if [ "${_awcn}" = "xfreerdp" ]
+    #     then
+    #         # stay in this loop while FreeRDP is in focus so clipboard stays under ownership of FreeRDP
+    #         # after FreeRDP loses focus transfer the contents into xclip so it's available to other apps
+    #         _log "FreeRDP clipboard is not supported"
+    #         sleep 1
+    #         return 1
+    #     fi
+    # fi
     
     # target test of current selection
     _tc="$(xclip -selection clipboard -o -t TARGETS)"
