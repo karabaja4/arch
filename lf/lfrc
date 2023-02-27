@@ -94,6 +94,10 @@ cmd term &{{
 }}
 map t term
 
+cmd code &{{
+    code "${PWD}"
+}}
+
 map <backspace2> updir
 
 map gg
