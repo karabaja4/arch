@@ -24,6 +24,12 @@
         "command": "/usr/bin/busybox ntpd -n -p time.cloudflare.com"
     },
     {
+        "name": "fans",
+        "enabled": true,
+        "user": "root",
+        "command": "/home/igor/arch/scripts/fans.sh"
+    },
+    {
         "name": "vnc",
         "enabled": false,
         "user": "igor",
