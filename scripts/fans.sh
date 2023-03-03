@@ -31,6 +31,12 @@ do
     fi
 
     _value="$(( (((_input1 - _t1) * _output_range) / _input_range) + _v1 ))"
+
+    if [ "${_value}" -lt "${_v1}" ]
+    then
+        _value="${_v1}"
+    fi
+    
     if [ "${_value}" -gt "${_v2}" ]
     then
         _value="${_v2}"
