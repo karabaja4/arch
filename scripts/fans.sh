@@ -7,13 +7,9 @@ _not_root() {
 
 [ "$(id -u)" -ne 0 ] && _not_root
 
-### settings ###
-
 _temp1=40
 _temp2=80
 _interval=10
-
-################
 
 _t1="$(( _temp1 * 1000 ))"
 _t2="$(( _temp2 * 1000 ))"
@@ -35,9 +31,9 @@ do
     fi
 
     _value="$(( (((_input1 - _t1) * _output_range) / _input_range) + _v1 ))"
-    if [ "${_value}" -gt 255 ]
+    if [ "${_value}" -gt "255" ]
     then
-        _value=255;
+        _value="255"
     fi
 
     printf '%s°C -> %s\n' "$(( _input1 / 1000 ))" "${_value}"
