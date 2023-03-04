@@ -1,7 +1,11 @@
 #!/bin/sh
 
+_echo() {
+    printf '%s\n' "${1}"
+}
+
 _not_root() {
-    printf "Root privileges are required to run this command\n"
+    _echo "Root privileges are required to run this command\n"
     exit 1
 }
 
@@ -35,7 +39,7 @@ do
     [ "${_value}" -lt "${_v1}" ] && _value="${_v1}"
     [ "${_value}" -gt "${_v2}" ] && _value="${_v2}"
 
-    printf '%s°C -> %s\n' "$(( _input / 1000 ))" "${_value}"
+    _echo "$(( _input / 1000 ))°C -> ${_value}"
     printf '%s' "${_value}" > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
     sleep "${_interval}"
 done
