@@ -22,27 +22,20 @@ _output_range="$(( _v2 - _v1 ))"
 
 while true
 do
-    _input1="$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
-    _input2="$(cat /sys/devices/virtual/thermal/thermal_zone1/temp)"
+    # cpu temp
+    _input="$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
 
-    if [ "${_input2}" -gt "${_input1}" ]
-    then
-        _input1="${_input2}"
-    fi
+    # if nvidia is hotter, use that temp
+    _nvdir="$(dirname "$(grep -l TMEM /sys/devices/virtual/thermal/thermal_zone*/type)")"
+    _nvtemp="$(cat "${_nvdir}/temp")"
+    [ "${_nvtemp}" -gt "${_input}" ] && _input="${_nvtemp}"
 
-    _value="$(( (((_input1 - _t1) * _output_range) / _input_range) + _v1 ))"
+    _value="$(( (((_input - _t1) * _output_range) / _input_range) + _v1 ))"
 
-    if [ "${_value}" -lt "${_v1}" ]
-    then
-        _value="${_v1}"
-    fi
-    
-    if [ "${_value}" -gt "${_v2}" ]
-    then
-        _value="${_v2}"
-    fi
+    [ "${_value}" -lt "${_v1}" ] && _value="${_v1}"
+    [ "${_value}" -gt "${_v2}" ] && _value="${_v2}"
 
-    printf '%s°C -> %s\n' "$(( _input1 / 1000 ))" "${_value}"
+    printf '%s°C -> %s\n' "$(( _input / 1000 ))" "${_value}"
     printf '%s' "${_value}" > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
     sleep "${_interval}"
 done
