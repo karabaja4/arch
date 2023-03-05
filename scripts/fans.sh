@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+enable -f /usr/lib/bash/sleep sleep
 
 _echo() {
     printf '%s\n' "${1}"
