@@ -33,8 +33,7 @@ do
 
     # if nvidia is hotter, use that temp
     _nvtype="$(grep -l TMEM /sys/devices/virtual/thermal/thermal_zone*/type)"
-    _nvdir="$(dirname "${_nvtype}")"
-    _nvtemp="$(cat "${_nvdir}/temp")"
+    _nvtemp="$(cat "${_nvtype%/*}/temp")"
 
     [ "${_nvtemp}" -gt "${_input}" ] && _input="${_nvtemp}"
 
