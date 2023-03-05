@@ -5,8 +5,16 @@ _echo() {
 }
 
 _not_root() {
-    _echo "Root privileges are required to run this command\n"
+    _echo 'Root privileges are required to run this command'
     exit 1
+}
+
+_pwm='/sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1'
+
+_fatal_error() {
+    _echo '255' > "${_pwm}"
+    _echo 'Fatal error occurred.'
+    exit 2
 }
 
 [ "$(id -u)" -ne 0 ] && _not_root
@@ -28,10 +36,16 @@ while true
 do
     # cpu temp
     _input="$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
+    [ -z "${_input}" ] && _fatal_error
 
     # if nvidia is hotter, use that temp
-    _nvdir="$(dirname "$(grep -l TMEM /sys/devices/virtual/thermal/thermal_zone*/type)")"
+    _nvtype="$(grep -l TMEM /sys/devices/virtual/thermal/thermal_zone*/type)"
+    [ -z "${_nvtype}" ] && _fatal_error
+
+    _nvdir="$(dirname "${_nvtype}")"
     _nvtemp="$(cat "${_nvdir}/temp")"
+    [ -z "${_nvtemp}" ] && _fatal_error
+
     [ "${_nvtemp}" -gt "${_input}" ] && _input="${_nvtemp}"
 
     _value="$(( (((_input - _t1) * _output_range) / _input_range) + _v1 ))"
@@ -40,6 +54,6 @@ do
     [ "${_value}" -gt "${_v2}" ] && _value="${_v2}"
 
     _echo "$(( _input / 1000 ))°C -> ${_value}"
-    printf '%s' "${_value}" > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
+    _echo "${_value}" > "${_pwm}"
     sleep "${_interval}"
 done
