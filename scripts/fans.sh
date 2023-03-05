@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -eu
 enable -f /usr/lib/bash/sleep sleep
 
 _echo() {
@@ -9,14 +9,6 @@ _echo() {
 _not_root() {
     _echo 'Root privileges are required to run this command'
     exit 1
-}
-
-_pwm='/sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1'
-
-_fatal_error() {
-    _echo '255' > "${_pwm}"
-    _echo 'Fatal error occurred.'
-    exit 2
 }
 
 [ "$(id -u)" -ne 0 ] && _not_root
@@ -38,15 +30,11 @@ while true
 do
     # cpu temp
     _input="$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
-    [ -z "${_input}" ] && _fatal_error
 
     # if nvidia is hotter, use that temp
     _nvtype="$(grep -l TMEM /sys/devices/virtual/thermal/thermal_zone*/type)"
-    [ -z "${_nvtype}" ] && _fatal_error
-
     _nvdir="$(dirname "${_nvtype}")"
     _nvtemp="$(cat "${_nvdir}/temp")"
-    [ -z "${_nvtemp}" ] && _fatal_error
 
     [ "${_nvtemp}" -gt "${_input}" ] && _input="${_nvtemp}"
 
@@ -56,6 +44,6 @@ do
     [ "${_value}" -gt "${_v2}" ] && _value="${_v2}"
 
     _echo "$(( _input / 1000 ))°C -> ${_value}"
-    _echo "${_value}" > "${_pwm}"
+    _echo "${_value}" > /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
     sleep "${_interval}"
 done
