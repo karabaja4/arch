@@ -1,0 +1,6 @@
+QEMU_AUDIO_DRV=alsa qemu-system-x86_64 -accel kvm -m 5120 -drive file=win81-v3.qcow2,format=qcow2 -smp 2 -vga qxl -usbdevice tablet -audiodev alsa,id=snd0,out.try-poll=off -device ich9-intel-hda -device hda-output,audiodev=snd0
+
+-cpu host
+-vga virtio -display sdl,gl=on
+
+QEMU_AUDIO_DRV=alsa qemu-system-x86_64 -accel kvm -m 5120 -drive file=win81.qcow2,format=qcow2 -cpu host -smp 2 -vga virtio -display sdl,gl=on -usbdevice tablet -audiodev alsa,id=snd0,out.try-poll=off -device ich9-intel-hda -device hda-output,audiodev=snd0
