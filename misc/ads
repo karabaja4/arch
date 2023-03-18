@@ -1,2 +1,0 @@
-sed -i 's/this._connectionStore.saveProfile(\$,void 0,j);/this._connectionStore.saveProfile(\$,true,j);/g' workbench.desktop.main.js
-printf '\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }' >> workbench.desktop.main.css
