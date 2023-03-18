@@ -1,5 +1,8 @@
 #!/bin/sh
 
+ulimit -c unlimited
+ulimit -c
+
 printf '%s' "/home/igor/dumps" > /proc/sys/kernel/core_pattern
 printf '%s' "2" > /proc/sys/fs/suid_dumpable
 printf '%s' "1" > /proc/sys/kernel/core_uses_pid
