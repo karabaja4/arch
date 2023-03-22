@@ -5,22 +5,29 @@ _js="${_file}.js"
 _css="${_file}.css"
 
 _success() {
-    printf '\033[32m%s\033[0m\n' "${1} was patched successfully"
+    printf '%s \033[32m%s\033[0m %s %s\n' '[' 'OK' ']' "${1} was patched successfully."
 }
 
 _fail() {
-    printf '\033[31m%s\033[0m\n' "${1} was not changed"
+    printf '%s \033[31m%s\033[0m %s %s\n' '[' 'ERROR' ']' "${1} was not changed."
 }
 
-_sum1="$(md5sum "${_js}")"
-sed -i 's/this._connectionStore.saveProfile(\$,void 0,j);/this._connectionStore.saveProfile(\$,true,j);/g' "${_js}"
-_sum2="$(md5sum "${_js}")"
 
-if [ "${_sum1}" != "${_sum2}" ]
+_s1='this._connectionStore.saveProfile(J,void 0,q);'
+_s2='this._connectionStore.saveProfile(J,true,q);'
+if grep -q "${_s1}" "${_js}"
 then
+    sed -i "s/${_s1}/${_s2}/g" "${_js}"
     _success "${_js}"
 else
     _fail "${_js}"
 fi
 
-printf '\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }' >> "${_css}"
+_sig='patched by karabaja4'
+if ! grep -q "${_sig}" "${_css}"
+then
+    printf '\n%s\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }'  "/* ${_sig} */" >> "${_css}"
+    _success "${_css}"
+else
+    _fail "${_css}"
+fi
