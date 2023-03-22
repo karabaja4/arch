@@ -13,9 +13,7 @@ _fail() {
 }
 
 _sum1="$(md5sum "${_js}")"
-# patch 1
 sed -i 's/this._connectionStore.saveProfile(\$,void 0,j);/this._connectionStore.saveProfile(\$,true,j);/g' "${_js}"
-# -------
 _sum2="$(md5sum "${_js}")"
 
 if [ "${_sum1}" != "${_sum2}" ]
@@ -25,5 +23,4 @@ else
     _fail "${_js}"
 fi
 
-# patch 2
 printf '\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }' >> "${_css}"
