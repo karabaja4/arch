@@ -25,15 +25,5 @@ else
     _fail "${_js}"
 fi
 
-_sum1="$(md5sum "${_css}")"
 # patch 2
 printf '\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }' >> "${_css}"
-# -------
-_sum2="$(md5sum "${_css}")"
-
-if [ "${_sum1}" != "${_sum2}" ]
-then
-    _success "${_css}"
-else
-    _fail "${_css}"
-fi
