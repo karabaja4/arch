@@ -20,7 +20,7 @@ _desktop() {
     nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
     
     # alsa
-    "${HOME}/arch/scripts/sound.sh" sound
+    "${HOME}/arch/scripts/sound.sh" pch
 
     # daemons
     xsettingsd -c "${HOME}/arch/xfce4-terminal/xsettingsd" &
