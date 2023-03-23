@@ -42,12 +42,6 @@
         "command": "/usr/bin/smbd --foreground"
     },
     {
-        "name": "haveged",
-        "enabled": false,
-        "user": "root",
-        "command": "/usr/bin/haveged -w 1024 -v 1 --Foreground"
-    },
-    {
         "name": "crond",
         "enabled": true,
         "user": "root",
