@@ -3,7 +3,7 @@
     "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv,cfg": "qtextpad $arg",
     "avi,mkv,flac,mp3,wav,mp4,mov,ogg,aac": "vlc $arg",
     "jpg,jpeg,svg,png,bmp,gif,tga": "/home/igor/arch/feh/feh.sh $arg",
-    "gz,zip,rar,zst,tar,7z,iso,bz2": "xarchiver $arg",
+    "gz,zip,rar,zst,tar,7z,iso,bz2,xz": "xarchiver $arg",
     "torrent": "qbittorrent $arg",
     "pdf": "mupdf -r 96 $arg",
     "htm,html": "chromium $arg",
