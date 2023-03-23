@@ -10,6 +10,7 @@
 # nvidia-settings --query=fsaa --verbose
 
 # $HOME/.config/glib-2.0/settings/keyfile
+# filepicker settings
 export GSETTINGS_BACKEND="keyfile"
 
 _run() {
