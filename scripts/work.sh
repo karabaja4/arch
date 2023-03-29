@@ -11,7 +11,7 @@ _user="$(jq -crM '.work.user' "${HOME}/arch/secret.json")"
 _password="$(jq -crM '.work.password' "${HOME}/arch/secret.json")"
 
 _echo "Connecting to: ${_user} @ ${_domain}/${_host}"
-exec xfreerdp /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper \
+exec xfreerdp /monitors:0 /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper \
 /d:"${_domain}" \
 /v:"${_host}" \
 /u:"${_user}" \
