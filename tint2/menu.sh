@@ -57,7 +57,9 @@ virtualbox)
 #     _run /usr/share/teams/teams --disable-namespace-sandbox --disable-setuid-sandbox
 #     ;;
 discord)
-    _run chromium --disable-gpu --start-maximized --disable-smooth-scrolling --app=https://discord.com/app
+    #_run chromium --disable-gpu --start-maximized --disable-smooth-scrolling --app=https://discord.com/app
+    _load_apulse
+    _run discord
     ;;
 # skype)
 #     _load_apulse
