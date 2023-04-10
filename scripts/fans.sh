@@ -6,14 +6,7 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-_not_root() {
-    _echo 'Root privileges are required to run this command'
-    exit 1
-}
-
-[ "$(id -u)" -ne 0 ] && _not_root
-
-_temp1=40
+_temp1=45
 _temp2=80
 _interval=10
 

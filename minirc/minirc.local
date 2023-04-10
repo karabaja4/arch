@@ -12,6 +12,9 @@ _mkxdg() {
     install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
 }
 
+# allow non-root to change fan speed
+chmod 666 /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
+
 # improve responsivness under heavy IO
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes

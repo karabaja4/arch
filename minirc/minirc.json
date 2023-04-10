@@ -26,7 +26,7 @@
     {
         "name": "fans",
         "enabled": true,
-        "user": "root",
+        "user": "igor",
         "command": "/home/igor/arch/scripts/fans.sh"
     },
     {
