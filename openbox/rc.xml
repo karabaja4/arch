@@ -104,7 +104,7 @@
       </action>
     </keybind>
     <keybind key="W-M">
-      <action name="ToggleShowDesktop" />
+      <action name="Iconify" />
     </keybind>
     <keybind key="C-Print">
       <action name="Execute">
