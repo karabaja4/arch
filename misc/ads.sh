@@ -13,8 +13,8 @@ _fail() {
 }
 
 
-_s1='this._connectionStore.saveProfile(J,void 0,q);'
-_s2='this._connectionStore.saveProfile(J,true,q);'
+_s1='this._connectionStore.saveProfile(J,void 0,K);'
+_s2='this._connectionStore.saveProfile(J,true,K);'
 if grep -q "${_s1}" "${_js}"
 then
     sed -i "s/${_s1}/${_s2}/g" "${_js}"
