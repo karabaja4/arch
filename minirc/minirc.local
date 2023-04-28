@@ -19,6 +19,9 @@ chmod 666 /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
 
+# increase virtual memory count
+printf '2147483642' > /proc/sys/vm/max_map_count
+
 # load (some) of the arch sysctl settings
 sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-pid-max.conf" > /dev/null
 
