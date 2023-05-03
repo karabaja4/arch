@@ -29,7 +29,11 @@ do
 
     # if nvidia is hotter, use that temp
     _nvtemp="$(cat "${_nvpath}")"
-    [ "${_nvtemp}" -gt "${_input}" ] && _input="${_nvtemp}"
+    if [ "${_nvtemp}" -gt "${_input}" ]
+    then
+        _echo "Using NVIDIA temp."
+        _input="${_nvtemp}"
+    fi
 
     _value="$(( (((_input - _t1) * _output_range) / _input_range) + _v1 ))"
 
