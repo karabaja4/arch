@@ -19,15 +19,16 @@ _v2=255
 _input_range="$(( _t2 - _t1 ))"
 _output_range="$(( _v2 - _v1 ))"
 
+_nvtype="$(grep -l TMEM /sys/devices/virtual/thermal/thermal_zone*/type)"
+_nvpath="${_nvtype%/*}/temp"
+
 while true
 do
     # cpu temp
     _input="$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
 
     # if nvidia is hotter, use that temp
-    _nvtype="$(grep -l TMEM /sys/devices/virtual/thermal/thermal_zone*/type)"
-    _nvtemp="$(cat "${_nvtype%/*}/temp")"
-
+    _nvtemp="$(cat "${_nvpath}")"
     [ "${_nvtemp}" -gt "${_input}" ] && _input="${_nvtemp}"
 
     _value="$(( (((_input - _t1) * _output_range) / _input_range) + _v1 ))"
