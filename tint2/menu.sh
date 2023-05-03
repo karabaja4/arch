@@ -88,7 +88,7 @@ gaming)
 pd2)
     export __GL_FSAA_MODE=11
     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
-    _run wine Game.exe
+    _run wine Game.exe -3dfx
     ;;
 wow)
     rm -r /home/igor/.wine/drive_c/wow/WDB
