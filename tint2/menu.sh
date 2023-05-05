@@ -86,7 +86,7 @@ gaming)
     xdotool keyup Super_L+0
     ;;
 pd2)
-    export __GL_FSAA_MODE=11
+    #export __GL_FSAA_MODE=11
     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
     _run wine Game.exe -3dfx
     ;;
