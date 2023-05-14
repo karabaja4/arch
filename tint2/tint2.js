@@ -87,14 +87,14 @@ const print = async () => {
   const disks = [
     {
       path: '/',
-      icon: '',
       label: 'SSD',
+      icon: '',
       font: fonts.flaticon
     },
     {
       path: '/home/igor/_disk',
-      icon: '',
       label: 'EDD',
+      icon: '',
       font: fonts.awesome
     }
   ];
