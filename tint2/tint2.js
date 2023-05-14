@@ -25,9 +25,7 @@ const icons = {
   ping: '',
   cpu: '',
   mem: '',
-  ssd: '',
   linode: '',
-  disk: '',
   trenddown: '',
   trendup: '',
   clock: ''
@@ -85,31 +83,39 @@ const print = async () => {
     data?.conky?.mem?.perc // 2
   ], 2);
 
-  const mnt = {
-    root: '/',
-    disk: '/home/igor/_disk'
-  }
+  // disks
+  const disks = [
+    {
+      path: '/',
+      icon: '',
+      label: 'SSD',
+      font: fonts.flaticon
+    },
+    {
+      path: '/home/igor/_disk',
+      icon: '',
+      label: 'EDD',
+      font: fonts.awesome
+    }
+  ];
 
-  const avail = {
-    root: (data?.mounts?.[mnt.root] && data?.df?.[mnt.root]?.total && data?.df?.[mnt.root]?.used && data?.df?.[mnt.root]?.available) || null,
-    disk: (data?.mounts?.[mnt.disk] && data?.df?.[mnt.disk]?.total && data?.df?.[mnt.disk]?.used && data?.df?.[mnt.disk]?.available) || null
-  }
-
-  const diskusage = (key) => {
+  for (let i = 0; i < disks.length; i++) {
+    const item = disks[i];
+    const avail = data?.mounts?.[item.path] &&
+                  data?.df?.[item.path]?.total &&
+                  data?.df?.[item.path]?.used &&
+                  data?.df?.[item.path]?.available || null;
     const res = [];
-    if (avail[key]) {
-      const dfi = data.df[mnt[key]];
+    if (avail) {
+      const dfi = data.df[item.path];
       const used  = dfi.used;
       const total = used + dfi.available;
       res[0] = Math.floor((used / 1024) / 1024);
       res[1] = Math.floor((total / 1024) / 1024);
       res[2] = (used / total) * 100;
     }
-    return res;
+    text += span(item.font, 7500, 100, colorize2, item.icon, item.label, '$0 GB / $1 GB', res, 2);
   }
-
-  text += span(fonts.flaticon, 7500, 100, colorize2, icons.ssd, 'SSD', '$0 GB / $1 GB', diskusage('root'), 2);
-  text += span(fonts.awesome, 7500, 100, colorize2, icons.disk, 'EDD', '$0 GB / $1 GB', diskusage('disk'), 2);
 
   // clock
   text += span(fonts.awesome, 7500, 100, null, icons.clock, 'CLK', '$0', [
