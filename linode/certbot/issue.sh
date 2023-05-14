@@ -14,7 +14,8 @@ mkdir -p "${_logs}"
 _creds="${_root}/creds.ini"
 
 _email="burt.harbinson@outlook.com"
-_domain="aerium.hr"
+_domain1="aerium.hr"
+_domain2="radiance.hr"
 
 certbot certonly \
    --work-dir "${_work}" \
@@ -26,5 +27,7 @@ certbot certonly \
    --dns-digitalocean-propagation-seconds 30 \
    --dns-digitalocean \
    --dns-digitalocean-credentials "${_creds}" \
-   -d "${_domain}" \
-   -d "*.${_domain}"
+   -d "${_domain1}" \
+   -d "*.${_domain1}" \
+   -d "${_domain2}" \
+   -d "*.${_domain2}"
