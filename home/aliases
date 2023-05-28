@@ -51,7 +51,7 @@ alias busy='fuser -Mv'
 alias myip='curl ipinfo.io'
 alias srcinfo='makepkg --printsrcinfo > .SRCINFO'
 alias df2='lfs'
-alias racuni='node /home/igor/git/racuni/utils/email.js'
+alias racuni='node /home/igor/git/racuni-mailer/src/email.js'
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
 
