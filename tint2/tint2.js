@@ -61,6 +61,15 @@ const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
   return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
 };
 
+const norm = (input) => {
+  if (input === null || input === undefined) {
+    return input;
+  }
+  const unit = input.slice(-1);
+  const num = input.slice(0, -1);
+  return `${num} ${unit}B`;
+}
+
 const print = async () => {
   let text = '';
   text += span(fonts.flaticon, 7500, 100, colorize1, icons.netdown, 'DWL', '$0 KB', [ 
@@ -78,8 +87,8 @@ const print = async () => {
     data?.conky?.cpu?.temp // 2
   ], 0);
   text += span(fonts.flaticon, 7500, 100, colorize2, icons.mem, 'RAM', '$0B / $1B', [
-    data?.conky?.mem?.used, // 0
-    data?.conky?.mem?.max, // 1
+    norm(data?.conky?.mem?.used), // 0
+    norm(data?.conky?.mem?.max), // 1
     data?.conky?.mem?.perc // 2
   ], 2);
 
