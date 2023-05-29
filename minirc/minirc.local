@@ -42,6 +42,7 @@ _mkxdg "runtime"
 _mkxdg "other"
 
 # set CPU to performance preset
+printf 'active' > /sys/devices/system/cpu/intel_pstate/status
 printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
 
 # activate swap
