@@ -86,7 +86,7 @@ const print = async () => {
     data?.conky?.cpu?.freq, // 1
     data?.conky?.cpu?.temp // 2
   ], 0);
-  text += span(fonts.flaticon, 7500, 100, colorize2, icons.mem, 'RAM', '$0B / $1B', [
+  text += span(fonts.flaticon, 7500, 100, colorize2, icons.mem, 'RAM', '$0 / $1', [
     norm(data?.conky?.mem?.used), // 0
     norm(data?.conky?.mem?.max), // 1
     data?.conky?.mem?.perc // 2
