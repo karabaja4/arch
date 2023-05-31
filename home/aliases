@@ -68,8 +68,3 @@ _blue="\033[94m"
 _gray="\033[37m"
 _reset="\033[0m"
 PS1="\w \$(__git_ps1 \"\[${_gray}\](%s)\[${_reset}\] \")\[${_green}\]\[${_bold}\]>>\[${_reset}\] "
-
-if [ "$(hostname)" = "avacyn3" ]
-then
-    PS1="\w \[${_blue}\]\[${_bold}\]avacyn3 >>\[${_reset}\] "
-fi
