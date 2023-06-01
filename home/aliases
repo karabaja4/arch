@@ -3,7 +3,7 @@
 alias ls='LC_COLLATE=C ls -A -l -h --color=always --group-directories-first'
 
 alias chx='chmod +x'
-alias permof='stat --printf "%a\n"'
+alias permof='stat -c "%a"'
 alias sizeof='du -sh'
 alias grep='grep --color'
 alias c='clear'
