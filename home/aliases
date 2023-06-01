@@ -1,7 +1,7 @@
 #!/bin/bash
 
 alias ls='LC_COLLATE=C ls -A -l -h --color=always --group-directories-first'
-
+alias su='su -l'
 alias chx='chmod +x'
 alias permof='stat -c "%a"'
 alias sizeof='du -sh'
