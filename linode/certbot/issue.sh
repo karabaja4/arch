@@ -1,7 +1,8 @@
 #!/bin/sh
 set -u
 
-_root="${HOME}/certbot"
+_home="${HOME}/certbot"
+_root="/var/www/certbot"
 
 _work="${_root}/work"
 _config="${_root}/config"
@@ -11,7 +12,7 @@ mkdir -p "${_work}"
 mkdir -p "${_config}"
 mkdir -p "${_logs}"
 
-_creds="${_root}/creds.ini"
+_creds="${_home}/creds.ini"
 
 _certname="avacyn"
 _email="burt.harbinson@outlook.com"
