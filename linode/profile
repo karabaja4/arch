@@ -8,6 +8,10 @@ alias sn='screen -S'
 alias racuni='node /home/igor/git/racuni-mailer/src/main.js'
 alias rezije='node /home/igor/git/rezije/src/main.js'
 
+alias nxstart='doas rc-service nginx start'
+alias nxstop='doas rc-service nginx stop'
+alias nxrestart='doas rc-service nginx restart'
+
 _bold="\033[1m"
 _blue="\033[94m"
 _reset="\033[0m"
