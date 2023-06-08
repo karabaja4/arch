@@ -1,0 +1,16 @@
+#!/sbin/openrc-run
+
+user="nobody"
+group="nobody"
+command="/usr/bin/node"
+command_args="/var/www/contactform/src/main.js"
+command_user="${user}:${group}"
+command_background="yes"
+pidfile="/run/${RC_SVCNAME}.pid"
+output_log="/var/log/${RC_SVCNAME}.log"
+
+export NODE_ENV="production"
+
+depend() {
+	use net
+}
