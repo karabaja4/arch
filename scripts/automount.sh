@@ -1,5 +1,5 @@
 #!/bin/sh
-set -u
+set -eu
 
 _echo() {
     printf '%s\n' "${1}"
@@ -24,16 +24,31 @@ _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
 }
 
+_get_partitions() {
+    _parts="$(lsblk -J "${1}" | jq -crM '.blockdevices[] | select(.children) | .children[] | select(.type=="part") | .name')"
+    if [ -n "${_parts}" ]
+    then
+        _echo "${_parts}"
+    else
+        # some usb drives have partition on /dev/sdd
+        _echo "$(basename "${1}")"
+    fi
+}
+
 _mount() (
     _mkdir "/mnt/${1}"
-    mount "/dev/${1}" "/mnt/${1}"
+
+    # ntfs, fat32 || ext4 || failed, remove dir
+    mount -o uid=1000,fmask=113,dmask=002 "/dev/${1}" "/mnt/${1}" || mount "/dev/${1}" "/mnt/${1}" || rm -r "/mnt/${1:?}"
+
+    # ext4
     chown "${_user}:${_user}" "/mnt/${1}"
 )
 
 _enum() {
-    for part in $(lsblk -J "${1}" | jq -crM '.blockdevices[] | .children[] | select(.type=="part") | .name')
+    for _part in $(_get_partitions "${1}")
     do
-        _mount "${part}"
+        _mount "${_part}"
     done
 }
 
