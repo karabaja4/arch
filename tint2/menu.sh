@@ -72,6 +72,9 @@ paint)
     _run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
     #_run firefox-socket https://jspaint.app
     ;;
+inkscape)
+    _run inkscape
+    ;;
 vlc)
     _run vlc
     ;;
