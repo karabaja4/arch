@@ -3,7 +3,7 @@
     "editor.fontFamily": "Consolas",
     "editor.fontSize": 14,
     "editor.letterSpacing": 0,
-    "explorer.openEditors.visible": 0,
+    "explorer.openEditors.visible": 1,
     "workbench.editor.showTabs": true,
     "workbench.sideBar.location": "right",
     "search.exclude":
