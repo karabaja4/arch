@@ -41,7 +41,7 @@ _mount() (
     _mkdir "/mnt/${1}"
 
     # ntfs, fat32 || ext4 || failed, remove dir
-    mount -o uid=1000,fmask=113,dmask=002 "/dev/${1}" "/mnt/${1}" || mount "/dev/${1}" "/mnt/${1}" || rm -r "/mnt/${1:?}"
+    mount -o uid=1000,fmask=133,dmask=022 "/dev/${1}" "/mnt/${1}" || mount "/dev/${1}" "/mnt/${1}" || rm -r "/mnt/${1:?}"
 
     # ext4
     chown "${_user}:${_user}" "/mnt/${1}"
