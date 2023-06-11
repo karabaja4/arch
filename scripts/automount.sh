@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -u
 
 _echo() {
     printf '%s\n' "${1}"
