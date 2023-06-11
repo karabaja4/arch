@@ -1,6 +1,8 @@
 #!/bin/sh
 set -u
 
+# not -e because we want to try iterate all partitions
+
 _echo() {
     printf '%s\n' "${1}"
 }
