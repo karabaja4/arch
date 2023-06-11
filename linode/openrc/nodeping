@@ -1,7 +1,7 @@
 #!/sbin/openrc-run
  
-user="nobody"
-group="nobody"
+user="nodey"
+group="nodey"
 command="/usr/bin/node"
 command_args="/var/www/ping/ping.js"
 command_user="${user}:${group}"
