@@ -76,7 +76,7 @@ inkscape)
     _run inkscape
     ;;
 onlyoffice)
-    _run /opt/appimage/DesktopEditors-x86_64.AppImage
+    _run onlyoffice
     ;;
 vlc)
     _run vlc
