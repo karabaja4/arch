@@ -3,7 +3,7 @@ set -u
 
 # not -e because we want to try to iterate all partitions
 
-# dont' mount anything on boot
+# don't mount anything on boot
 if ! pgrep -x "Xorg" > /dev/null
 then
     exit 0
