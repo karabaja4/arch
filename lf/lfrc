@@ -66,6 +66,7 @@ map <c-c> quit
 map <c-x> quit
 
 map <space> shell
+map e ed
 
 # mouse
 #map <m-up> up
@@ -119,6 +120,10 @@ map gt cd ~/_disk/torrents
 
 # do not quote ${fx}, it will have an effect of adding just one file to the parameters
 # IFS is \n, otherwise the files processed by spaces in filenames
+
+cmd ed &{{
+    /usr/bin/qtextpad "${f}"
+}}
 
 cmd gz ${{
     set -f
