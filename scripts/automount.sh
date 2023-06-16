@@ -1,7 +1,13 @@
 #!/bin/sh
 set -u
 
-# not -e because we want to try iterate all partitions
+# not -e because we want to try to iterate all partitions
+
+# dont' mount anything on boot
+if ! pgrep -x "Xorg" > /dev/null
+then
+    exit 0
+fi
 
 _echo() {
     printf '%s\n' "${1}"
