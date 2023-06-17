@@ -6,7 +6,7 @@ _uid="$(id -u "${_user}")"
 _gid="$(id -g "${_user}")"
 
 _mount() {
-    mount -t cifs -o vers=3.0,credentials=/etc/smbcredentials/linode.cred,uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,serverino,nosharesock,actimeo=30 "${@}"
+    mount -t cifs -o credentials=/etc/smbcredentials/linode.cred,uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,serverino,nosharesock,actimeo=30 "${@}"
 }
 
 _mount "//linode.file.core.windows.net/public1" "/var/www/_public"
