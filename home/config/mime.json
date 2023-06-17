@@ -8,7 +8,7 @@
     "pdf": "mupdf -r 96 $arg",
     "htm,html": "chromium $arg",
     "exe": "wine $arg",
-    "docx,xlsx,pptx,odt": "onlyoffice $arg"
+    "doc,xls,ppt,docx,xlsx,pptx,odt": "onlyoffice $arg"
   },
   "mimetypes": {
     "text/*": "qtextpad $arg",
