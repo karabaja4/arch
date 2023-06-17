@@ -7,7 +7,8 @@
     "torrent": "qbittorrent $arg",
     "pdf": "mupdf -r 96 $arg",
     "htm,html": "chromium $arg",
-    "exe": "wine $arg"
+    "exe": "wine $arg",
+    "docx,xlsx,pptx": "onlyoffice $arg"
   },
   "mimetypes": {
     "text/*": "qtextpad $arg",

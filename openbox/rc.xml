@@ -183,9 +183,10 @@
 
   <applications>
     <application type="normal">
-      <position>
+      <position force="yes">
         <x>center</x>
         <y>center</y>
+        <monitor>mouse</monitor>
       </position>
     </application>
     <application name="*">
@@ -203,12 +204,6 @@
     </application>
     <application name="conky">
       <skip_taskbar>yes</skip_taskbar>
-    </application>
-    <application name="feh">
-      <position force="yes">
-        <x>center</x>
-        <y>center</y>
-      </position>
     </application>
   </applications>
 
