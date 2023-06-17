@@ -49,7 +49,7 @@
   </theme>
 
   <desktops>
-    <number>1</number>
+    <number>4</number>
     <firstdesk>1</firstdesk>
     <names></names>
     <popupTime>875</popupTime>
@@ -123,6 +123,18 @@
     </keybind>
     <keybind key="C-A-T">
       <action name="ToggleAlwaysOnTop" />
+    </keybind>
+    <keybind key="W-F1">
+      <action name="GoToDesktop"><to>1</to></action>
+    </keybind>
+    <keybind key="W-F2">
+      <action name="GoToDesktop"><to>2</to></action>
+    </keybind>
+    <keybind key="W-F3">
+      <action name="GoToDesktop"><to>3</to></action>
+    </keybind>
+    <keybind key="W-F4">
+      <action name="GoToDesktop"><to>4</to></action>
     </keybind>
   </keyboard>
 
