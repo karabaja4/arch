@@ -49,6 +49,7 @@ alias busy='fuser -Mv'
 alias myip='curl ipinfo.io'
 alias srcinfo='makepkg --printsrcinfo > .SRCINFO'
 alias df2='lfs'
+alias dmesg='doas mesg'
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
 
