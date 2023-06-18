@@ -32,7 +32,7 @@ qtfm)
     _run qtfm
     ;;
 chromium)
-    _run chromium --disable-gpu --start-maximized --disable-smooth-scrolling
+    _run chromium --start-maximized --disable-smooth-scrolling
     ;;
 qbittorrent)
     _run qbittorrent
