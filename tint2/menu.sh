@@ -69,8 +69,8 @@ flameshot)
     _run flameshot
     ;;
 paint)
-    _run chromium --start-maximized --disable-smooth-scrolling --incognito --app=https://jspaint.app
-    #_run firefox-socket https://jspaint.app
+    rm -f "/home/igor/.config/chromium/Default/Local Storage/leveldb/"*
+    _run chromium --start-maximized --disable-smooth-scrolling --disable-audio-output --app=https://jspaint.app
     ;;
 inkscape)
     _run inkscape
