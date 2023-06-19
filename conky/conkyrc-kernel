@@ -18,5 +18,5 @@ conky.text = [[
 ${alignr}${color1}${font openlogos:size=28}B${font}
 ${alignr}${color0}Kernel: ${kernel}
 ${alignr}Available Updates: ${execi 300 cat /home/igor/.local/share/updatecount/pacman || echo "-"} (${execi 300 cat /home/igor/.local/share/updatecount/aur || echo "-"})
-${alignr}Uptime: $uptime
+${alignr}Uptime: ${uptime}
 ]];
