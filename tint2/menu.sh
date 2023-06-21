@@ -77,12 +77,14 @@ paint)
     rm -f "/home/igor/.config/chromium/Default/Local Storage/leveldb/"*
     _run chromium --start-maximized --disable-smooth-scrolling --disable-audio-output --app=https://jspaint.app
     ;;
+onlyoffice)
+    _run onlyoffice
+    ;;
+krita)
+    _run krita
+    ;;
 inkscape)
     _run inkscape
-    ;;
-onlyoffice)
-    doas modprobe fuse
-    _run onlyoffice
     ;;
 vlc)
     _run vlc
