@@ -7,12 +7,6 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-if [ "${#}" -gt 0 ]
-then
-    _echo "No arguments are allowed."
-    exit 1
-fi
-
 _filename="$(basename "${0}")"
 _scriptpath="$(readlink -f "${0}")"
 _scriptname="$(basename "${_scriptpath}")"
