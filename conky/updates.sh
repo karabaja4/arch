@@ -1,3 +1,3 @@
 #!/bin/sh
 
-printf '%s (%s)' "$(cat "/home/igor/.local/share/updatecount/pacman" || echo "-")" "$(cat "/home/igor/.local/share/updatecount/aur" || echo "-")"
+printf '%s (%s)' "$(cat "/home/igor/.local/share/updatecount/pacman" || printf '%s' "-")" "$(cat "/home/igor/.local/share/updatecount/aur" || printf '%s' "-")"

@@ -32,6 +32,7 @@ _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
 }
 
+# TODO: fix labels
 _get_partitions() {
     _parts="$(lsblk -J "${1}" | jq -crM '.blockdevices[] | select(.children) | .children[] | select(.type=="part") | .name')"
     if [ -n "${_parts}" ]

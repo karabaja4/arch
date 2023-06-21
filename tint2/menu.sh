@@ -81,6 +81,7 @@ inkscape)
     _run inkscape
     ;;
 onlyoffice)
+    doas modprobe fuse
     _run onlyoffice
     ;;
 vlc)
