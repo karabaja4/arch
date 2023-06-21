@@ -75,6 +75,12 @@ paint)
 inkscape)
     _run inkscape
     ;;
+onlyofficehotkey)
+    # run through openbox, otherwise when onlyoffice is run from tint2
+    # it just runs in background and doesn't bring up the main window
+    xdotool key Super_L+9
+    xdotool keyup Super_L+9
+    ;;
 onlyoffice)
     _run onlyoffice
     ;;

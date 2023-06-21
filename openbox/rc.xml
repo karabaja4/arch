@@ -116,6 +116,11 @@
         <command>/home/igor/arch/tint2/menu.sh flameshot</command>
       </action>
     </keybind>
+    <keybind key="W-9">
+      <action name="Execute">
+        <command>/home/igor/arch/tint2/menu.sh onlyoffice</command>
+      </action>
+    </keybind>
     <keybind key="W-0">
       <action name="ShowMenu">
         <menu>games-menu</menu>
