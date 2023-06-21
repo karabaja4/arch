@@ -21,6 +21,11 @@ _load_apulse() {
     export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 }
 
+_keypress() {
+    xdotool key "${@}"
+    xdotool keyup "${@}"
+}
+
 case "${1}" in
 terminal)
     _run xfce4-terminal
@@ -78,8 +83,7 @@ inkscape)
 onlyofficehotkey)
     # run through openbox, otherwise when onlyoffice is run from tint2
     # it just runs in background and doesn't bring up the main window
-    xdotool key Super_L+9
-    xdotool keyup Super_L+9
+    _keypress "Super_L+9"
     ;;
 onlyoffice)
     _run onlyoffice
@@ -94,8 +98,7 @@ kvirc)
     _run kvirc
     ;;
 gaming)
-    xdotool key Super_L+0
-    xdotool keyup Super_L+0
+    _keypress "Super_L+0"
     ;;
 pd2)
     #export __GL_FSAA_MODE=11
