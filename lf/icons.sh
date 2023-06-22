@@ -16,7 +16,7 @@
 # fi  FILE
 
 export LF_ICONS="\
-ln=📌:\
+ln=🔗:\
 or=💔:\
 tw=📁:\
 ow=📁:\
