@@ -35,4 +35,7 @@ MiscShowUnsafePasteDialog=FALSE
 ColorBoldIsBright=FALSE
 ColorPalette=rgb(0,0,0);rgb(163,21,21);rgb(0,128,0);rgb(116,83,31);rgb(31,55,127);rgb(143,8,196);rgb(43,145,175);rgb(128,128,128);rgb(85,85,85);rgb(255,0,0);rgb(0,255,0);rgb(255,128,0);rgb(0,0,255);rgb(255,0,255);rgb(0,255,255);rgb(255,255,255)
 MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
+ShortcutsNoMenukey=TRUE
+ShortcutsNoMnemonics=TRUE
+ShortcutsNoHelpkey=TRUE
 
