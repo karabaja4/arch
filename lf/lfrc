@@ -29,7 +29,7 @@ map <delete> delete
 map d delete
 map c copy
 map x cut
-map v paste
+map v :paste; clear
 map a invert
 map s :toggle; down
 map u :unselect; clear
