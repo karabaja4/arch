@@ -47,6 +47,8 @@ map <down> down
 map <up> up
 map <right> open
 map <left> updir
+map <pgdn> page-down
+map <pgup> page-up
 
 map <c-c> quit
 map <c-x> quit
