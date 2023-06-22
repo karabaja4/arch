@@ -40,7 +40,7 @@ map <f-2> rename
 map <f-5> reload
 map <tab> search
 map <f-3> search-next
-map i calcdirsize
+map <f-1> calcdirsize
 map g bottom
 map q quit
 map <down> down
