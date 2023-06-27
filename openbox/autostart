@@ -10,6 +10,10 @@ _vnc() {
 
     # interface
     tint2 -c "${HOME}/arch/tint2/tint2rc-vnc" &
+
+    # keyboard (because raw inputs revert to US)
+    # raw inputs are necessary for VirtualBox keyboard layout
+    setxkbmap hr
 }
 
 _desktop() {
