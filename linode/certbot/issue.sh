@@ -16,8 +16,7 @@ _creds="${_home}/creds.ini"
 
 _certname="avacyn"
 _email="burt.harbinson@outlook.com"
-_domain1="aerium.hr"
-_domain2="radiance.hr"
+_domain1="radiance.hr"
 
 certbot certonly \
    --work-dir "${_work}" \
@@ -31,6 +30,4 @@ certbot certonly \
    --dns-digitalocean-credentials "${_creds}" \
    --cert-name "${_certname}" \
    -d "${_domain1}" \
-   -d "*.${_domain1}" \
-   -d "${_domain2}" \
-   -d "*.${_domain2}"
+   -d "*.${_domain1}"
