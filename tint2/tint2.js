@@ -1,9 +1,9 @@
-const timers = require('timers/promises');
-const fs = require('fs');
+const timers = require('node:timers/promises');
+const fs = require('node:fs');
 const WebSocket = require('ws');
 const dayjs = require('dayjs');
-const os = require('os');
-const path = require('path');
+const util = require('node:util');
+const execFile = util.promisify(require('node:child_process').execFile);
 
 const data = {};
 
@@ -30,6 +30,22 @@ const icons = {
   trendup: '',
   clock: ''
 };
+
+// disks
+const disks = [
+  {
+    mountpoint: '/',
+    label: 'SSD',
+    icon: '',
+    font: fonts.flaticon
+  },
+  {
+    mountpoint: '/home/igor/_disk',
+    label: 'EDD',
+    icon: '',
+    font: fonts.awesome
+  }
+];
 
 // activity color
 const colorize1 = (value) => {
@@ -92,31 +108,15 @@ const print = async () => {
     data?.conky?.mem?.perc // 2
   ], 2);
 
-  // disks
-  const disks = [
-    {
-      path: '/',
-      label: 'SSD',
-      icon: '',
-      font: fonts.flaticon
-    },
-    {
-      path: '/home/igor/_disk',
-      label: 'EDD',
-      icon: '',
-      font: fonts.awesome
-    }
-  ];
-
   for (let i = 0; i < disks.length; i++) {
     const item = disks[i];
-    const avail = data?.mounts?.[item.path] &&
-                  data?.df?.[item.path]?.total &&
-                  data?.df?.[item.path]?.used &&
-                  data?.df?.[item.path]?.available || null;
+    const avail = data?.mounts?.[item.mountpoint] &&
+                  data?.du?.[item.mountpoint]?.total &&
+                  data?.du?.[item.mountpoint]?.used &&
+                  data?.du?.[item.mountpoint]?.available || null;
     const res = [];
     if (avail) {
-      const dfi = data.df[item.path];
+      const dfi = data.du[item.mountpoint];
       const used  = dfi.used;
       const total = used + dfi.available;
       res[0] = Math.floor((used / 1024) / 1024);
@@ -142,7 +142,7 @@ const conky = async () => {
       if (content) {
         data.conky = JSON.parse(content);
       }
-    } catch (e) {}
+    } catch {}
     await timers.setTimeout(1000);
   }
 }
@@ -161,7 +161,7 @@ const mounts = async () => {
         }
         data.mounts = result;
       }
-    } catch (e) {}
+    } catch {}
     await timers.setTimeout(10000);
   }
 }
@@ -199,27 +199,27 @@ const ping = () => {
   });
 }
 
-const df = async () => {
-  const file = path.join(os.homedir(), '.local/share/diskusage/df');
+const diskusage = async () => {
   while (true) {
+    const result = {};
     try {
-      const content = await fs.promises.readFile(file, 'utf8');
-      if (content) {
-        const result = {};
-        const lines = content.trim().split('\n');
-        for (let i = 0; i < lines.length; i++) {
-          const line = lines[i];
-          const parts = line.split(/\s+/);
-          result[parts[0]] = {
-            total: parseInt(parts[1]),
-            used: parseInt(parts[2]),
-            available: parseInt(parts[3])
-          };
+      const proc = await execFile('lsblk', ['--output', 'UUID,PATH,MOUNTPOINT,FSAVAIL,FSSIZE,FSUSED,TYPE', '--json', '--bytes']);
+      const parsed = JSON.parse(proc.stdout);
+      if (parsed.blockdevices) {
+        for (let i = 0; i < parsed.blockdevices.length; i++) {
+          const device = parsed.blockdevices[i];
+          if (device.mountpoint && device.fssize && typeof device.fssize === 'number') {
+            result[device.mountpoint] = {
+              total: Math.floor(device.fssize / 1024),
+              used: Math.floor(device.fsused / 1024),
+              available: Math.floor(device.fsavail / 1024)
+            };
+          }
         }
-        data.df = result;
       }
-    } catch (e) {}
-    await timers.setTimeout(60000);
+    } catch {}
+    data.du = result;
+    await timers.setTimeout(5 * 60 * 1000);
   }
 }
 
@@ -233,5 +233,5 @@ const main = async () => {
 conky();
 mounts();
 ping();
-df();
+diskusage();
 main();
