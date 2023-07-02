@@ -149,20 +149,20 @@ const conky = async () => {
 
 const mounts = async () => {
   while (true) {
+    const result = {};
     try {
       const content = await fs.promises.readFile('/proc/mounts', 'utf8');
       if (content) {
-        const result = {};
         const lines = content.trim().split('\n');
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i];
           const parts = line.split(' ');
           result[parts[1]] = parts[0];
         }
-        data.mounts = result;
       }
     } catch {}
-    await timers.setTimeout(10000);
+    data.mounts = result;
+    await timers.setTimeout(10 * 1000);
   }
 }
 
