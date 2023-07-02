@@ -168,7 +168,7 @@ const mounts = async () => {
 
 const ping = () => {
   const ticks = () => process.hrtime.bigint();
-  const ws = new WebSocket('wss://avacyn.aerium.hr/ping');
+  const ws = new WebSocket('wss://avacyn.radiance.hr/ping');
   const timeout = setTimeout(() => {
     ws.terminate();
   }, 5000);
