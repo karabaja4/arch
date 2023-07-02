@@ -35,15 +35,15 @@ const icons = {
 const disks = [
   {
     mountpoint: '/',
-    label: 'SSD',
+    font: fonts.flaticon,
     icon: '',
-    font: fonts.flaticon
+    label: 'SSD'
   },
   {
     mountpoint: '/home/igor/_disk',
-    label: 'EDD',
+    font: fonts.awesome,
     icon: '',
-    font: fonts.awesome
+    label: 'EDD'
   }
 ];
 
