@@ -58,11 +58,11 @@ _mount() (
 
 _enum() {
     # wait for uuid to populate
-    sleep 1
+    sleep 2
     for _part in $(_get_partitions "${1}")
     do
         _mount "${_part}"
     done
 }
 
-_enum "${1}" > /dev/null 2>&1 &
+( _enum "${1}" & ) > /dev/null 2>&1
