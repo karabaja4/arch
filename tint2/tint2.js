@@ -207,16 +207,11 @@ const diskusage = async () => {
   const dufile = path.join(dudir, 'du.json');
   while (true) {
     try {
-      const result = {};
+      let result = {};
       // fill in previous mountpoint diskusages
       try {
         const content = await fs.promises.readFile(dufile, 'utf8');
-        const parsed = JSON.parse(content);
-        for (const key in parsed) {
-          if (parsed.hasOwnProperty(key)) {
-            result[key] = parsed[key];
-          }
-        }
+        result = JSON.parse(content);
       } catch {}
       const proc = await execFile('lsblk', ['--output', 'UUID,PATH,MOUNTPOINT,FSAVAIL,FSSIZE,FSUSED,TYPE', '--json', '--bytes']);
       const parsed = JSON.parse(proc.stdout);
