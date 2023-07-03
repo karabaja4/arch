@@ -32,29 +32,33 @@ _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
 }
 
-# TODO: fix labels
 _get_partitions() {
-    _parts="$(lsblk -J "${1}" | jq -crM '.blockdevices[] | select(.children) | .children[] | select(.type=="part") | .name')"
+    _parts="$(lsblk --output UUID,KNAME --json "${1}" | jq -crM '.blockdevices[] | select(.uuid != null) | { uuid, kname }')"
     if [ -n "${_parts}" ]
     then
         _echo "${_parts}"
-    else
-        # some usb drives have partition on /dev/sdd
-        _echo "$(basename "${1}")"
     fi
 }
 
 _mount() (
-    _mkdir "/mnt/${1}"
+    _uuid="$(_echo "${1}" | jq -crM '.uuid')"
+    _kname="$(_echo "${1}" | jq -crM '.kname')"
+
+    _devpath="/dev/${_kname}"
+    _mntpath="/mnt/${_kname}-${_uuid}"
+
+    _mkdir "${_mntpath}"
 
     # ntfs, fat32 || ext4 || failed, remove dir
-    mount -o uid=1000,fmask=133,dmask=022 "/dev/${1}" "/mnt/${1}" || mount "/dev/${1}" "/mnt/${1}" || rm -r "/mnt/${1:?}"
+    mount -o uid=1000,fmask=133,dmask=022 "${_devpath}" "${_mntpath}" || mount "${_devpath}" "${_mntpath}" || rm -r "${_mntpath}"
 
     # ext4
-    chown "${_user}:${_user}" "/mnt/${1}"
+    chown "${_user}:${_user}" "${_mntpath}"
 )
 
 _enum() {
+    # wait for uuid to populate
+    sleep 1
     for _part in $(_get_partitions "${1}")
     do
         _mount "${_part}"
