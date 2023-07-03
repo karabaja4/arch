@@ -58,7 +58,7 @@ _mount() (
 
 _enum() {
     # wait for uuid to populate
-    sleep 2
+    sleep 1
     for _part in $(_get_partitions "${1}")
     do
         _mount "${_part}"
