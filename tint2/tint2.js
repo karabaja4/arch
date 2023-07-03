@@ -4,6 +4,8 @@ const WebSocket = require('ws');
 const dayjs = require('dayjs');
 const util = require('node:util');
 const execFile = util.promisify(require('node:child_process').execFile);
+const os = require('node:os');
+const path = require('node:path');
 
 const data = {};
 
@@ -149,8 +151,8 @@ const conky = async () => {
 
 const mounts = async () => {
   while (true) {
-    const result = {};
     try {
+      const result = {};
       const content = await fs.promises.readFile('/proc/mounts', 'utf8');
       if (content) {
         const lines = content.trim().split('\n');
@@ -160,8 +162,8 @@ const mounts = async () => {
           result[parts[1]] = parts[0];
         }
       }
+      data.mounts = result;
     } catch {}
-    data.mounts = result;
     await timers.setTimeout(10 * 1000);
   }
 }
@@ -200,9 +202,22 @@ const ping = () => {
 }
 
 const diskusage = async () => {
+  const dudir = path.join(os.homedir(), '.local/share/diskusage');
+  await fs.promises.mkdir(dudir, { recursive: true });
+  const dufile = path.join(dudir, 'du.json');
   while (true) {
-    const result = {};
     try {
+      const result = {};
+      // fill in previous mountpoint diskusages
+      try {
+        const content = await fs.promises.readFile(dufile, 'utf8');
+        const parsed = JSON.parse(content);
+        for (const key in parsed) {
+          if (parsed.hasOwnProperty(key)) {
+            result[key] = parsed[key];
+          }
+        }
+      } catch {}
       const proc = await execFile('lsblk', ['--output', 'UUID,PATH,MOUNTPOINT,FSAVAIL,FSSIZE,FSUSED,TYPE', '--json', '--bytes']);
       const parsed = JSON.parse(proc.stdout);
       if (parsed.blockdevices) {
@@ -217,8 +232,9 @@ const diskusage = async () => {
           }
         }
       }
+      await fs.promises.writeFile(dufile, JSON.stringify(result, null, 4));
+      data.du = result;
     } catch {}
-    data.du = result;
     await timers.setTimeout(5 * 60 * 1000);
   }
 }
