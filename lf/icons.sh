@@ -106,7 +106,6 @@ fi=📄:\
 *.ppt=🌠:\
 *.pptx=🌠:\
 /home/igor=🏡:\
-/home/igor/_c=🍷:\
 /home/igor/_disk=💿:\
 /home/igor/_mmc=💿:\
 /home/igor/_private=🔌:\
