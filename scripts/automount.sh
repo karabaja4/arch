@@ -54,7 +54,7 @@ _mount() (
     vfat|ntfs)
         mount -o uid=1000,fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
         ;;
-    ext*|jfs|reiserfs|xfs|f2fs)
+    ext*|jfs|reiserfs|xfs|f2fs|btrfs|nilfs2|hfsplus)
         mount "${_devpath}" "${_mntpath}" && chown "${_user}:${_user}" "${_mntpath}"
         ;;
     *)
