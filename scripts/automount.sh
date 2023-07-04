@@ -33,7 +33,7 @@ _mkdir() {
 }
 
 _get_partitions() {
-    _parts="$(lsblk --output UUID,KNAME --json "${1}" | jq -crM '.blockdevices[] | select(.uuid != null) | { uuid, kname }')"
+    _parts="$(lsblk --output UUID,KNAME,FSTYPE --json "${1}" | jq -crM '.blockdevices[] | select(.uuid != null) | { uuid, kname, fstype }')"
     if [ -n "${_parts}" ]
     then
         _echo "${_parts}"
@@ -43,17 +43,29 @@ _get_partitions() {
 _mount() (
     _uuid="$(_echo "${1}" | jq -crM '.uuid')"
     _kname="$(_echo "${1}" | jq -crM '.kname')"
+    _fstype="$(_echo "${1}" | jq -crM '.fstype')"
 
     _devpath="/dev/${_kname}"
-    _mntpath="/mnt/${_kname}-${_uuid}"
+    _mntpath="/mnt/${_kname}-${_fstype}-${_uuid}"
 
     _mkdir "${_mntpath}"
 
-    # ntfs, fat32 || ext4 || failed, remove dir
-    mount -o uid=1000,fmask=133,dmask=022 "${_devpath}" "${_mntpath}" || mount "${_devpath}" "${_mntpath}" || rm -r "${_mntpath}"
-
-    # ext4
-    chown "${_user}:${_user}" "${_mntpath}"
+    case "${_fstype}" in
+    vfat|ntfs)
+        mount -o uid=1000,fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
+        ;;
+    ext*|jfs|reiserfs|xfs|f2fs)
+        mount "${_devpath}" "${_mntpath}" && chown "${_user}:${_user}" "${_mntpath}"
+        ;;
+    *)
+        mount "${_devpath}" "${_mntpath}"
+        ;;
+    esac
+    _ec="${?}"
+    if [ "${_ec}" -ne 0 ]
+    then
+        rm -r "${_mntpath}"
+    fi
 )
 
 _enum() {
