@@ -61,6 +61,7 @@ _mount() (
         mount "${_devpath}" "${_mntpath}"
         ;;
     esac
+    
     _ec="${?}"
     if [ "${_ec}" -ne 0 ]
     then
