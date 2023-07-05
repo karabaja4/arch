@@ -3,12 +3,6 @@ set -u
 
 # not -e because we want to try to iterate all partitions
 
-# don't mount anything on boot
-if ! pgrep -x "Xorg" > /dev/null
-then
-    exit 0
-fi
-
 _echo() {
     printf '%s\n' "${1}"
 }
@@ -24,7 +18,7 @@ _not_root() {
 }
 
 _multiple_users() {
-    _echo "Multiple users logged in"
+    _echo "Cannot find a single logged in user"
     exit 3
 }
 
