@@ -35,7 +35,6 @@ _multiple_users() {
 _user="$(users)"
 _usercount="$(_echo "${_user}" | wc -w)"
 [ "${_usercount}" -ne 1 ] && _multiple_users
-_uid="$(id -u "${_user}")"
 
 _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
@@ -61,6 +60,7 @@ _mount() (
 
     case "${_fstype}" in
     vfat|ntfs)
+        _uid="$(id -u "${_user}")"
         mount -o uid="${_uid}",fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
         ;;
     ext*|jfs|reiserfs|xfs|f2fs|btrfs|nilfs2|hfsplus)
