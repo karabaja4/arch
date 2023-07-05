@@ -15,18 +15,26 @@ _echo() {
 
 _usage() {
     _echo "This is script is called by /etc/udev/rules.d/10-flash.rules"
-    exit 2
+    exit 1
 }
 
 _not_root() {
     _echo "Root privileges are required to run this command"
-    exit 1
+    exit 2
 }
 
 [ "${#}" -ne 1 ] && _usage
 [ "$(id -u)" -ne 0 ] && _not_root
 
-_user="$(id -un 1000)"
+# find a user
+_user="$(users)"
+_usercount="$(echo "${_user}" | wc -w)"
+if [ "${_usercount}" -ne 1 ]
+then
+    _echo "Multiple users logged in"
+    exit 3
+fi
+_uid="$(id -u "${_user}")"
 
 _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
@@ -52,7 +60,7 @@ _mount() (
 
     case "${_fstype}" in
     vfat|ntfs)
-        mount -o uid=1000,fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
+        mount -o uid="${_uid}",fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
         ;;
     ext*|jfs|reiserfs|xfs|f2fs|btrfs|nilfs2|hfsplus)
         mount "${_devpath}" "${_mntpath}" && chown "${_user}:${_user}" "${_mntpath}"
@@ -61,7 +69,7 @@ _mount() (
         mount "${_devpath}" "${_mntpath}"
         ;;
     esac
-    
+
     _ec="${?}"
     if [ "${_ec}" -ne 0 ]
     then
