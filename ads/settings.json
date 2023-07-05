@@ -18,5 +18,8 @@
     "workbench.editorAssociations": {
         "*.{sqlplan}": "workbench.editor.executionplan"
     },
-    "azure.noSystemKeychain": true
+    "azure.noSystemKeychain": true,
+    "[sql]": {
+        "editor.defaultFormatter": "Microsoft.azuredatastudio-postgresql"
+    }
 }

@@ -1,9 +1,9 @@
-#	$OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
+#       $OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
 
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
-# This sshd was compiled with PATH=/usr/local/sbin:/usr/local/bin:/usr/bin
+# This sshd was compiled with PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # The strategy used for options in the default sshd_config shipped with
 # OpenSSH is to specify options with their default value where
@@ -38,7 +38,7 @@ PermitRootLogin no
 
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys
-AuthorizedKeysFile	.ssh/authorized_keys
+AuthorizedKeysFile      .ssh/authorized_keys
 
 #AuthorizedPrincipalsFile none
 
@@ -75,16 +75,17 @@ KbdInteractiveAuthentication no
 # be allowed through the KbdInteractiveAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
 # PAM authentication via KbdInteractiveAuthentication may bypass
-# the setting of "PermitRootLogin prohibit-password".
+# the setting of "PermitRootLogin without-password".
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and KbdInteractiveAuthentication to 'no'.
 #UsePAM no
 
 #AllowAgentForwarding yes
-#AllowTcpForwarding yes
-#GatewayPorts no
-#X11Forwarding no
+# Feel free to re-enable these if your use case requires them.
+AllowTcpForwarding yes
+GatewayPorts no
+X11Forwarding no
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
@@ -106,11 +107,11 @@ ClientAliveCountMax 720
 #Banner none
 
 # override default of no subsystems
-Subsystem	sftp	/usr/lib/ssh/sftp-server
+Subsystem       sftp    internal-sftp
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
-#	X11Forwarding no
-#	AllowTcpForwarding no
-#	PermitTTY no
-#	ForceCommand cvs server
+#       X11Forwarding no
+#       AllowTcpForwarding no
+#       PermitTTY no
+#       ForceCommand cvs server
