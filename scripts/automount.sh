@@ -23,17 +23,18 @@ _not_root() {
     exit 2
 }
 
+_multiple_users() {
+    _echo "Multiple users logged in"
+    exit 3
+}
+
 [ "${#}" -ne 1 ] && _usage
 [ "$(id -u)" -ne 0 ] && _not_root
 
 # find a user
 _user="$(users)"
 _usercount="$(echo "${_user}" | wc -w)"
-if [ "${_usercount}" -ne 1 ]
-then
-    _echo "Multiple users logged in"
-    exit 3
-fi
+[ "${_usercount}" -ne 1 ] && _multiple_users
 _uid="$(id -u "${_user}")"
 
 _mkdir() {
