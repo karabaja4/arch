@@ -42,7 +42,7 @@ _iteration() {
     
     # target test of current selection
     _tc="$(xclip -selection clipboard -o -t TARGETS)"
-    _tcec=${?}
+    _tcec="${?}"
     _log "TARGETS check exited with: ${_tcec}"
 
     if [ "${_tcec}" -ne 0 ]
