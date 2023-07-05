@@ -33,7 +33,7 @@ _multiple_users() {
 
 # find a user
 _user="$(users)"
-_usercount="$(echo "${_user}" | wc -w)"
+_usercount="$(_echo "${_user}" | wc -w)"
 [ "${_usercount}" -ne 1 ] && _multiple_users
 _uid="$(id -u "${_user}")"
 
