@@ -1,11 +1,7 @@
 #!/bin/sh
 
 # dbus info for launched apps
-# _dbus_address="$(ss -lp --unix | grep "dbus-daemon" | awk '{print substr($5,2)}')"
-# if [ -n "${_dbus_address}" ]
-# then
-#     export DBUS_SESSION_BUS_ADDRESS="unix:abstract=${_dbus_address}"
-# fi
+# export DBUS_SESSION_BUS_ADDRESS="unix:path=/tmp/dbus-H5gshkgIVu,guid=c18e8027cd4de7167f51739364a5ea69"
 
 # nvidia-settings --query=fsaa --verbose
 
