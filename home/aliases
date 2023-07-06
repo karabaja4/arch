@@ -51,6 +51,7 @@ alias srcinfo='makepkg --printsrcinfo > .SRCINFO'
 alias df2='dysk'
 alias df3='duf'
 alias dmesg='doas dmesg'
+alias locate='locate --ignore-case'
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
 
