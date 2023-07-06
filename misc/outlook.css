@@ -1,0 +1,66 @@
+/* right ad area */
+.GssDD {
+  display: none !important;
+}
+
+/* navigation ad area */
+.Ogqyq {
+  display: none !important;
+}
+
+/* left other products bar */
+.QVF0n {
+  display: none !important;
+}
+
+/* groups in navigation */
+.slWCo > div:nth-of-type(3) {
+  display: none !important;
+}
+
+/* meet now button */
+#owaMeetNowButton_container {
+  display: none !important;
+}
+
+/* remove border radius on new mail button */
+.ms-Button {
+  border-radius: 0 !important;
+}
+
+.splitPrimaryButton {
+  border-radius: 0 !important;
+}
+
+/* navigation rounded selection */
+.C2IG3.LPIso {
+  border-radius: 0 !important;
+}
+
+/* remove padding right from navigation selection */
+.slWCo {
+  padding-right: 0 !important;
+}
+
+/* ads on top of emails */
+#SearchAnswerTop {
+  display: none !important;
+}
+
+.s8wta {
+  display: none !important;
+}
+
+/* ad area on top (it dissapears) */
+.cJ3F3.full {
+  display: none !important;
+}
+
+/* search input border radius */
+.Q_UnC.H_9Db {
+  border-radius: 0 !important;
+}
+
+#searchBoxId-Mail {
+  border-radius: 0 !important;
+}
