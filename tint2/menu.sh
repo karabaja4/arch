@@ -70,8 +70,9 @@ flameshot)
     _run flameshot
     ;;
 paint)
-    rm -f "/home/igor/.config/chromium/Default/Local Storage/leveldb/"*
-    _run chromium --start-maximized --disable-smooth-scrolling --disable-audio-output --app=https://jspaint.app
+    rm -f "/home/igor/.config/falkon/profiles/default/Local Storage/leveldb/"*
+    #_run chromium --start-maximized --disable-smooth-scrolling --disable-audio-output --app=https://jspaint.app
+    _run falkon -e https://jspaint.app
     ;;
 onlyoffice)
     _run onlyoffice
