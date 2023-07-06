@@ -3,10 +3,11 @@ set -eu
 
 _uid="$(id -u)"
 _gid="$(id -g)"
+_secret="${HOME}/arch/secret.json"
 
 _azure() {
-    _user="$(jq -crM '.azure.username' "${HOME}/arch/secret.json")"
-    _pass="$(jq -crM '.azure.password' "${HOME}/arch/secret.json")"
+    _user="$(jq -crM '.azure.username' "${_secret}")"
+    _pass="$(jq -crM '.azure.password' "${_secret}")"
     doas mount -t cifs -o username="${_user}",password="${_pass}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,serverino,nosharesock,actimeo=30 "${@}"
 }
 
