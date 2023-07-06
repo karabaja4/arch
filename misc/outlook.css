@@ -64,3 +64,8 @@
 #searchBoxId-Mail {
   border-radius: 0 !important;
 }
+
+/* bigger scrollbar */
+.customScrollBar {
+  scrollbar-width: unset !important;
+}
