@@ -12,18 +12,22 @@ _fail() {
     printf '%s \033[31m%s\033[0m %s %s\n' '[' 'ERROR' ']' "${1} was not changed."
 }
 
-_s1='this\._connectionStore\.saveProfile\((.{1,2}),void 0,(.{1,2})\)'
+_s1='this\._connectionStore\.saveProfile\((.{1,3}),void 0,(.{1,3})\)'
 _s2='this\._connectionStore\.saveProfile\(\1,true,\2\)'
+
+_s3='\(s\?\.dontShowPrompt&&s\.commit===this\.productService.commit\)'
+_s4='\(true\)'
 
 _tmp="/tmp/$(basename "${_js}")"
 
 cp -v "${_js}" "${_tmp}"
 perl -p -i -e "s/${_s1}/${_s2}/g" "${_js}"
+perl -p -i -e "s/${_s3}/${_s4}/g" "${_js}"
 
 _result="$(wdiff -3 "${_tmp}" "${_js}" | grep -vx '=.*' | grep -v '^\s*$')"
 if [ -n "${_result}" ]
 then
-    printf 'Changed:%s\n' "${_result}"
+    printf 'Changed:\n%s\n' "${_result}"
     _success "${_js}"
 else
     _fail "${_js}"
