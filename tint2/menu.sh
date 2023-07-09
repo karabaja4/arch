@@ -78,7 +78,7 @@ onlyoffice)
     _run onlyoffice
     ;;
 mailspring)
-    _run /opt/mailspring/mailspring-linux-x64/mailspring
+    _run /opt/mailspring/mailspring-linux-x64/mailspring --disable-smooth-scrolling
     ;;
 krita)
     _run krita
