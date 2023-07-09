@@ -77,6 +77,9 @@ paint)
 onlyoffice)
     _run onlyoffice
     ;;
+mailspring)
+    _run /opt/mailspring/mailspring-linux-x64/mailspring
+    ;;
 krita)
     _run krita
     ;;
