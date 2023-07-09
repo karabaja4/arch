@@ -1,24 +1,32 @@
-#!/bin/bash
+#!/bin/sh
 
-declare dir="$(dirname "$(readlink -f "${0}")")"
-declare path="${dir}/mimeapps.list"
+_dir="$(dirname "$(readlink -f "${0}")")"
+_path="${_dir}/mimeapps.list"
 
-rm -f "${path}"
-cat /usr/share/mime/globs | cut -d':' -f 1 >> "${path}"
-cat /usr/share/mime/aliases | cut -d' ' -f 1 >> "${path}"
-cat /usr/share/mime/aliases | cut -d' ' -f 2 >> "${path}"
-cat /usr/share/mime/types >> "${path}"
-rm -rf media-types.xml
-wget https://www.iana.org/assignments/media-types/media-types.xml
-cat "${dir}/media-types.xml" | grep -oP '(?<=<file type="template">).*(?=</file>)' >> "${path}"
-cat /usr/share/mime/packages/freedesktop.org.xml | grep "<mime-type type=" | cut -d \" -f2 >> "${path}"
-echo "x-scheme-handler/http" >> "${path}"
-echo "x-scheme-handler/https" >> "${path}"
-sort -u -o "${path}" "${path}"
-sed -e 's/$/=mime2.desktop/' -i "${path}"
-sed -i '1s/^/[Default Applications]\n/' "${path}"
-sed -i '/^#/d' "${path}"
-chmod 400 ${path}
+_echo() {
+    printf '%s\n' "${1}"
+}
 
-ln -sfv "${path}" "${HOME}/.config/mimeapps.list"
-ln -sfv "${path}" "${HOME}/.local/share/applications/mimeapps.list"
+rm -f "${_path}"
+{
+    cut -d':' -f1 "/usr/share/mime/globs"
+    cut -d' ' -f1 "/usr/share/mime/aliases"
+    cut -d' ' -f2 "/usr/share/mime/aliases"
+    cat "/usr/share/mime/types"
+} >> "${_path}"
+rm -rf "${_dir}/media-types.xml"
+wget "https://www.iana.org/assignments/media-types/media-types.xml"
+{
+    grep -oP '(?<=<file type="template">).*(?=</file>)' "${_dir}/media-types.xml"
+    grep "<mime-type type=" "/usr/share/mime/packages/freedesktop.org.xml" | cut -d'"' -f2
+    _echo "x-scheme-handler/http"
+    _echo "x-scheme-handler/https"
+}  >> "${_path}"
+sort -u -o "${_path}" "${_path}"
+sed -e 's/$/=mime2.desktop/' -i "${_path}"
+sed -i '1s/^/[Default Applications]\n/' "${_path}"
+sed -i '/^#/d' "${_path}"
+chmod 400 "${_path}"
+
+ln -sfv "${_path}" "${HOME}/.config/mimeapps.list"
+ln -sfv "${_path}" "${HOME}/.local/share/applications/mimeapps.list"
