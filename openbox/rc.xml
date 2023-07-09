@@ -195,7 +195,7 @@
 
   <applications>
     <application type="normal">
-      <position force="yes">
+      <position>
         <x>center</x>
         <y>center</y>
         <monitor>mouse</monitor>
