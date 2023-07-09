@@ -1,3 +1,9 @@
+# 1 (left mouse button)
+# 2 (middle mouse button)
+# 3 (right mouse button)
+# 4 (mousewheel down)
+# 5 (mousewheel up)
+
 pan 1
 zoom_in 4
 zoom_out 5

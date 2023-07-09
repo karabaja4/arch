@@ -1,2 +1,4 @@
+# unbind reload_image and bind r to rotate clockwise
+
 reload_image
-orient_3 r
+orient_1 r
