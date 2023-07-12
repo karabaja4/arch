@@ -58,7 +58,7 @@ if [ ! -f "${_config}" ]
 then
     _prompt "Enter password: "
     read -r _password
-    _echo "Generating config ${_config}..."
+    _echo "Saving config ${_config}"
     printf '%s\n%s\n%s\n%s\n%s\n' \
         "ctrl_interface=/run/wpa_supplicant" \
         "network={" \
