@@ -76,6 +76,7 @@ _pid1="${!}"
 setsid dhcpcd -4 -B "${_interface}" &
 _pid2="${!}"
 
+# kill all on exit
 _trap() {
     echo "killing ${_pid1} ${_pid2}"
     kill -TERM "${_pid1}" "${_pid2}"
