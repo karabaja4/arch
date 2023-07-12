@@ -18,9 +18,14 @@ _not_root() {
 
 [ "$(id -u)" -ne 0 ] && _not_root
 
+_invalid_input() {
+    _echo "Invalid input"
+    exit 2
+}
+
 _multiple_users() {
     _echo "Cannot find a single logged in user"
-    exit 2
+    exit 3
 }
 
 # get logged in user info
@@ -33,6 +38,7 @@ _interface="wlp0s20u2u2u4"
 ip link set "${_interface}" up
 
 # scan for networks and present a choice
+_echo "Scanning for networks..."
 _essids="$(iwlist "${_interface}" scan | grep 'ESSID' | cut -d'"' -f2)"
 _i=1
 for _essid in ${_essids}
@@ -45,6 +51,7 @@ done
 _prompt "Select network: "
 read -r _idx
 _selected_essid="$(_echo "${_essids}" | sed -n "${_idx}p")"
+[ -z "${_selected_essid}" ] && _invalid_input
 _md5="$(_echo "${_selected_essid}" | md5sum | cut -d' ' -f1)"
 _echo "Selected: ${_selected_essid} (md5: ${_md5})"
 
@@ -80,12 +87,10 @@ _pid2="${!}"
 _trap() {
     echo "killing ${_pid1} ${_pid2}"
     kill -TERM "${_pid1}" "${_pid2}"
+    ip link set "${_interface}" down
+    _echo "Goodbye"
 }
 
-trap '_trap' INT TERM HUP
+trap '_trap' INT TERM QUIT HUP
 
 wait
-
-ip link set "${_interface}" down
-
-_echo "Goodbye"
