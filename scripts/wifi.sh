@@ -16,12 +16,12 @@ _not_root() {
     exit 1
 }
 
+[ "$(id -u)" -ne 0 ] && _not_root
+
 _multiple_users() {
     _echo "Cannot find a single logged in user"
     exit 2
 }
-
-[ "$(id -u)" -ne 0 ] && _not_root
 
 # get logged in user info
 _user="$(users)"
