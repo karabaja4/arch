@@ -85,7 +85,7 @@ _pid2="${!}"
 
 # kill all on exit
 _trap() {
-    echo "killing ${_pid1} ${_pid2}"
+    _echo "killing ${_pid1} ${_pid2}"
     kill -TERM "${_pid1}" "${_pid2}"
     ip link set "${_interface}" down
     _echo "Goodbye"
