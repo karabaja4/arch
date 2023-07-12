@@ -3,6 +3,8 @@ set -eu
 IFS='
 '
 
+_interface="wlp0s20u2u2u4"
+
 _echo() {
     printf '%s\n' "${1}"
 }
@@ -23,18 +25,6 @@ _invalid_input() {
     exit 2
 }
 
-_multiple_users() {
-    _echo "Cannot find a single logged in user"
-    exit 3
-}
-
-# get logged in user info
-_user="$(users)"
-_usercount="$(_echo "${_user}" | wc -w)"
-[ "${_usercount}" -ne 1 ] && _multiple_users
-_homedir="$(getent passwd "${_user}" | cut -d':' -f6)"
-
-_interface="wlp0s20u2u2u4"
 ip link set "${_interface}" up
 
 # scan for networks and present a choice
@@ -56,7 +46,7 @@ _md5="$(_echo "${_selected_essid}" | md5sum | cut -d' ' -f1)"
 _echo "Selected: ${_selected_essid} (md5: ${_md5})"
 
 # config paths
-_config_dir="${_homedir}/.config/wifi"
+_config_dir="/root/.config/wifi"
 mkdir -p "${_config_dir}"
 _config="${_config_dir}/${_md5}.conf"
 
