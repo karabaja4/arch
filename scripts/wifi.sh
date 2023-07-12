@@ -1,4 +1,7 @@
 #!/bin/sh
+set -eu
+IFS='
+'
 
 _echo() {
     printf '%s\n' "${1}"
