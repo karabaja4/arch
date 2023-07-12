@@ -15,7 +15,7 @@ _not_root() {
 
 [ "$(id -u)" -ne 0 ] && _not_root
 
-_interface="wlan0"
+_interface="wlp0s20u2u2u4"
 ip link set "${_interface}" up
 
 # scan for networks and present a choice
