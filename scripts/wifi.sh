@@ -21,6 +21,10 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
+_log() {
+    printf '\033[0;34m%s\033[0m\n' "${1}"
+}
+
 _not_root() {
     _echo "Not root."
     exit 1
@@ -48,7 +52,7 @@ then
             "Please specify an interface as an argument."
         exit 3
     else
-        _echo "Detected interface ${_interface}"
+        _log "Detected interface ${_interface}"
     fi
 else
     # interface provided by user on arg1
@@ -59,14 +63,14 @@ else
         exit 4
     else
          _interface="${_match}"
-        _echo "Using interface ${_interface}"
+        _log "Using interface ${_interface}"
     fi
 fi
 
 ip link set "${_interface}" up
 
 # scan for networks and present a choice
-_echo "Scanning for networks..."
+_log "Scanning for networks..."
 _essids="$(iwlist "${_interface}" scan | grep -F 'ESSID' | cut -d'"' -f2)"
 _i=1
 for _essid in ${_essids}
@@ -97,7 +101,7 @@ _ssid="$(_echo "${_essids}" | sed -n "${_idx}p")"
 [ -z "${_ssid}" ] && _invalid_input
 
 _md5="$(_echo "${_ssid}" | md5sum | cut -d' ' -f1)"
-_echo "Selected: ${_ssid} (md5: ${_md5})"
+_log "Selected: ${_ssid} (md5: ${_md5})"
 
 # config paths
 _config_dir="/root/.config/wifi"
@@ -109,7 +113,7 @@ if [ ! -f "${_config}" ]
 then
     _prompt "Enter password: "
     read -r _psk
-    _echo "Saving config ${_config}"
+    _log "Saving config ${_config}"
     printf '%s\n%s\n%s\n%s\n%s\n' \
         "ctrl_interface=/run/wpa_supplicant" \
         "network={" \
@@ -117,7 +121,7 @@ then
         "    psk=\"${_psk}\"" \
         "}" > "${_config}"
 else
-    _echo "Using config ${_config}"
+    _log "Using config ${_config}"
 fi
 
 # run with setsid to prevent terminal sending sigint to children
@@ -129,19 +133,19 @@ _pid2="${!}"
 
 # kill all on exit
 _trap() {
-    _echo "killing ${_pid1} ${_pid2}"
+    _log "killing ${_pid1} ${_pid2}"
     kill -TERM "${_pid1}" "${_pid2}"
     ip link set "${_interface}" down
-    _echo "Interface ${_interface} down"
+    _log "Interface ${_interface} down"
 }
 
 trap '_trap' INT TERM QUIT HUP
 
-_echo "All components initialized."
+_log "All components initialized."
 /bin/sleep infinity || true
 
 # wait exists with non zero on SIGINT so mask it
-_echo "Waiting for child processes to exit..."
+_log "Waiting for child processes to exit..."
 wait || true
 
-_echo "Goodbye."
+_log "Goodbye."
