@@ -32,12 +32,23 @@ _not_root() {
 
 [ "$(id -u)" -ne 0 ] && _not_root
 
+_is_running() {
+    if pgrep -x "${1}" > /dev/null
+    then
+        _echo "${1} is running, cannot continue."
+        exit 2
+    fi
+}
+
+_is_running 'wpa_supplicant'
+_is_running 'dhcpcd'
+
 # resolve interface
 _interface="$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' | cat)"
 if [ -z "${_interface}" ]
 then
     _echo "No wireless interfaces found."
-    exit 2
+    exit 3
 fi
 
 if [ -z "${_arg1}" ]
@@ -50,7 +61,7 @@ then
             "More than one interface found:" \
             "${_interface}" \
             "Please specify an interface as an argument."
-        exit 3
+        exit 4
     else
         _log "Detected interface ${_interface}"
     fi
@@ -60,7 +71,7 @@ else
     if [ -z "${_match}" ]
     then
         _echo "Interface ${_arg1} not found."
-        exit 4
+        exit 5
     else
          _interface="${_match}"
         _log "Using interface ${_interface}"
@@ -85,7 +96,7 @@ _prompt() {
 
 _invalid_input() {
     _echo "Invalid input."
-    exit 5
+    exit 6
 }
 
 # read a choice
@@ -145,6 +156,11 @@ _trap() {
 trap '_trap' INT TERM QUIT HUP
 
 _log "All components initialized."
+
+# sleep is the catch for SIGINT
+# better than interrupting wait, which if killed
+# ends the script before the children had the chance
+# to exit and print the closing text to stdout
 /bin/sleep infinity || true
 
 # wait exists with non zero on SIGINT so mask it
