@@ -22,7 +22,7 @@ _echo() {
 }
 
 _not_root() {
-    _echo "Not root"
+    _echo "Not root."
     exit 1
 }
 
@@ -132,13 +132,14 @@ _trap() {
     _echo "killing ${_pid1} ${_pid2}"
     kill -TERM "${_pid1}" "${_pid2}"
     ip link set "${_interface}" down
-    _echo "Goodbye"
+    _echo "Interface ${_interface} down"
 }
 
 trap '_trap' INT TERM QUIT HUP
 
+sleep infinity
+
 # wait exists with non zero on SIGINT so mask it
 wait || true
 
-# wait for buffered messages
-sleep 3
+_echo "Goodbye."
