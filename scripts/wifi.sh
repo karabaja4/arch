@@ -137,9 +137,11 @@ _trap() {
 
 trap '_trap' INT TERM QUIT HUP
 
-sleep infinity
+_echo "All components initialized."
+/bin/sleep infinity || true
 
 # wait exists with non zero on SIGINT so mask it
+_echo "Waiting for child processes to exit..."
 wait || true
 
 _echo "Goodbye."
