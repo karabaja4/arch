@@ -121,10 +121,10 @@ else
 fi
 
 # run with setsid to prevent terminal sending sigint to children
-setsid /usr/bin/wpa_supplicant -c "${_config}" -i "${_interface}" &
+setsid wpa_supplicant -c "${_config}" -i "${_interface}" &
 _pid1="${!}"
 
-setsid /usr/bin/dhcpcd -4 -B "${_interface}" &
+setsid dhcpcd -4 -B "${_interface}" &
 _pid2="${!}"
 
 # kill all on exit
