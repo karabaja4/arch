@@ -137,4 +137,8 @@ _trap() {
 
 trap '_trap' INT TERM QUIT HUP
 
-wait
+# wait exists with non zero on SIGINT so mask it
+wait || true
+
+# wait for buffered messages
+sleep 3
