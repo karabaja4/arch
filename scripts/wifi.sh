@@ -88,9 +88,12 @@ _invalid_input() {
     exit 5
 }
 
-# read a choice and save
+# read a choice
 _prompt "Select network: "
 read -r _idx
+
+# check empty input
+[ -z "${_idx}" ] && _invalid_input
 
 # check if there are non-numbers in input
 _idx_validate="$(_echo "${_idx}" | tr -d '0-9')"
