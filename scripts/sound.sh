@@ -55,7 +55,7 @@ _list() {
 _play_sound() {
     sed -n '/^# ----- SOUND START -----$/,/^# ----- SOUND END -----$/p' "$(readlink -f "${0}")" \
         | sed 's/^..//;1d;$d' \
-        | base64 --decode \
+        | base64 -d \
         | gunzip \
         | mpg123 -q - \
         > /dev/null 2>&1 &
