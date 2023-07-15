@@ -5,7 +5,7 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-_secret="/home/igor/arch/secret.json"
+_secret="${HOME}/arch/secret.json"
 _record=$(jq -r ".dns .record" "${_secret}")
 _token=$(jq -r ".dns .token" "${_secret}")
 
