@@ -13,7 +13,7 @@ _not_root() {
 
 [ "$(id -u)" -ne 0 ] && _not_root
 
-for _f in /mnt/*
+for _f in "/mnt/"*
 do
     if [ -d "${_f}" ]
     then

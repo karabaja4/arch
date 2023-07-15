@@ -5,6 +5,20 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
+_no_argument() {
+    _echo "Invalid argument"
+    exit 1
+}
+
+_arg1="${1-}"
+case "${_arg1}" in
+reboot|poweroff)
+    ;;
+*)
+    _no_argument
+    ;;
+esac
+
 # root check
 _not_root() {
     _echo "Must be root"
@@ -12,8 +26,6 @@ _not_root() {
 }
 
 [ "$(id -u)" -ne 0 ] && _not_root
-
-_home="/home/$(id -un 1000)"
 
 killall -q -v -w qbittorrent
 
@@ -28,23 +40,25 @@ _umount() {
     fi
 }
 
-_umount "${_home}/_disk"
-_umount "${_home}/_mmc"
-_umount "${_home}/_private"
-_umount "${_home}/_public"
+_home="/home/$(id -un 1000)"
+
+for _mp in "${_home}/_"*
+do
+    _umount "${_mp}"
+done
 
 # cleanup /mnt
-/home/igor/arch/scripts/usb.sh
+"${_home}/arch/scripts/usb.sh"
 
 rm -rf "${_home}/.cache"
 
-if [ "${1}" = "reboot" ]
+if [ "${_arg1}" = "reboot" ]
 then
     _echo "Rebooting..."
     /usr/bin/reboot
 fi
 
-if [ "${1}" = "poweroff" ]
+if [ "${_arg1}" = "poweroff" ]
 then
     _echo "Powering off..."
     /usr/bin/poweroff
