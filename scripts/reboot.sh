@@ -5,17 +5,14 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-_no_argument() {
-    _echo "Invalid argument"
-    exit 1
-}
-
+# argument check
 _arg1="${1-}"
 case "${_arg1}" in
 reboot|poweroff)
     ;;
 *)
-    _no_argument
+    _echo "Invalid argument"
+    exit 1
     ;;
 esac
 
