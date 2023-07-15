@@ -8,6 +8,7 @@ export EDITOR='nano'
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 export LESSHISTFILE=/dev/null
 export BROWSER='firefox-socket'
+export HISTFILESIZE=10000
 
 # vnc does not export $SHELL
 export SHELL='/bin/bash'
