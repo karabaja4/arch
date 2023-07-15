@@ -5,7 +5,8 @@
 # bring ethernet interface up so udhcpc can operate
 /usr/bin/ip link set enp2s0 up
 
-_user="$(id -un 1000)"
+_uid="1000"
+_user="$(getent passwd "${_uid}" | cut -d':' -f1)"
 _sysctl="/usr/lib/sysctl.d"
 
 _mkxdg() {

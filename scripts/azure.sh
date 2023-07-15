@@ -1,10 +1,9 @@
 #!/bin/sh
 set -eu
 
-_user="$(id -un 1000)"
-_home="/home/${_user}"
+_uid="1000"
+_home="$(getent passwd "${_uid}" | cut -d':' -f6)"
 
-_uid="$(id -u "${_user}")"
 _secret="${_home}/arch/secret.json"
 
 _azure() {

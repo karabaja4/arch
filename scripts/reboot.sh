@@ -40,7 +40,8 @@ _umount() {
     fi
 }
 
-_home="/home/$(id -un 1000)"
+_uid="1000"
+_home="$(getent passwd "${_uid}" | cut -d':' -f6)"
 
 for _mp in "${_home}/_"*
 do
