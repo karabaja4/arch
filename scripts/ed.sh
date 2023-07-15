@@ -6,7 +6,7 @@ set -eu
 if [ "${TERM}" = "linux" ] || [ "$(id -u)" -eq 0 ]
 then
     # no GUI or root
-    nano "${1}"
+    nano "${1-}"
 else
-    qtextpad "${1}" > /dev/null 2>&1
+    qtextpad "${1-}" > /dev/null 2>&1
 fi
