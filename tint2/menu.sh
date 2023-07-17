@@ -77,6 +77,9 @@ paint)
 onlyoffice)
     _run onlyoffice
     ;;
+work)
+    _run /home/igor/arch/scripts/work.sh
+    ;;
 krita)
     _run krita
     ;;
