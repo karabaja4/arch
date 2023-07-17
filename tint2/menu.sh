@@ -75,7 +75,7 @@ paint)
     _run falkon -e https://jspaint.app
     ;;
 onlyoffice)
-    _run onlyoffice
+    _run onlyoffice-desktopeditors
     ;;
 work)
     _run /home/igor/arch/scripts/work.sh
