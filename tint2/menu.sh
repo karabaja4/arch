@@ -77,6 +77,9 @@ paint)
 onlyoffice)
     _run onlyoffice-desktopeditors
     ;;
+thunderbird)
+    _run thunderbird
+    ;;
 work)
     _run /home/igor/arch/scripts/work.sh
     ;;
