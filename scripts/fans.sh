@@ -1,7 +1,6 @@
-#!/bin/ash
-# shellcheck shell=dash
-
+#!/bin/bash
 set -eu
+enable -f /usr/lib/bash/sleep sleep
 
 _echo() {
     printf '%s\n' "${1}"
