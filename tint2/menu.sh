@@ -8,6 +8,7 @@
 # $HOME/.config/glib-2.0/settings/keyfile
 # filepicker settings
 export GSETTINGS_BACKEND="keyfile"
+export ALSOFT_DRIVERS="alsa"
 
 _run() {
     exec "${@}" > /dev/null 2>&1
