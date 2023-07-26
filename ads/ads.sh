@@ -15,7 +15,7 @@ _fail() {
 _s1='this\._connectionStore\.saveProfile\((.{1,3}),void 0,(.{1,3})\)'
 _s2='this\._connectionStore\.saveProfile\(\1,true,\2\)'
 
-_s3='\(s\?\.dontShowPrompt&&s\.commit===this\.productService.commit\)'
+_s3='\(.{1,3}\?\.dontShowPrompt&&.{1,3}\.commit===this\.productService.commit\)'
 _s4='\(true\)'
 
 _tmp="/tmp/$(basename "${_js}")"
