@@ -93,11 +93,6 @@
         <command>/home/igor/arch/tint2/menu.sh terminal</command>
       </action>
     </keybind>
-    <keybind key="W-F">
-      <action name="Execute">
-        <command>/home/igor/arch/tint2/menu.sh firefox</command>
-      </action>
-    </keybind>
     <keybind key="W-L">
       <action name="Execute">
         <command>slock</command>
