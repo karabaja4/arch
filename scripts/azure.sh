@@ -4,7 +4,7 @@ set -eu
 _uid="1000"
 _home="$(getent passwd "${_uid}" | cut -d':' -f6)"
 
-_secret="${_home}/arch/secret.json"
+_secret="/etc/secret/secret.json"
 
 _azure() {
     _username="$(jq -crM '.azure.username' "${_secret}")"

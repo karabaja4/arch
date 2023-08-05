@@ -5,7 +5,7 @@ _echo() {
     printf "$(tput setaf 1)%s$(tput sgr0)\n" "${1}"
 }
 
-_secret="${HOME}/arch/secret.json"
+_secret="/etc/secret/secret.json"
 
 _domain="$(jq -crM '.work.domain' "${_secret}")"
 _host="$(jq -crM '.work.host' "${_secret}")"
