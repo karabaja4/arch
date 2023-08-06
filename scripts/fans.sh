@@ -25,7 +25,7 @@ _nvpath="${_nvtype%/*}/temp"
 while true
 do
     # cpu temp
-    _input="$(</sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
+    _input="$(<"/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input")"
 
     # if nvidia is hotter, use that temp
     _nvtemp="$(<"${_nvpath}")"
