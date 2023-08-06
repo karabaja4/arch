@@ -25,10 +25,10 @@ _nvpath="${_nvtype%/*}/temp"
 while true
 do
     # cpu temp
-    _input="$(cat /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
+    _input="$(< /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input)"
 
     # if nvidia is hotter, use that temp
-    _nvtemp="$(cat "${_nvpath}")"
+    _nvtemp="$(< "${_nvpath}")"
     if [ "${_nvtemp}" -gt "${_input}" ]
     then
         _echo "Using NVIDIA temp."
