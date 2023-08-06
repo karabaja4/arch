@@ -6,7 +6,7 @@
     "gz,zip,rar,zst,tar,7z,iso,bz2,xz": "xarchiver $arg",
     "torrent": "qbittorrent $arg",
     "pdf": "mupdf -r 96 $arg",
-    "htm,html": "chromium $arg",
+    "htm,html": "firefox-socket file://$arg",
     "exe": "wine $arg",
     "doc,xls,ppt,docx,xlsx,pptx,odt": "onlyoffice-desktopeditors $arg"
   },
