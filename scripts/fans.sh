@@ -29,9 +29,9 @@ while true
 do
     # cpu temp
     _input="$(<"${_cpupath}")"
+    _nvtemp="$(<"${_nvpath}")"
 
     # if nvidia is hotter, use that temp
-    _nvtemp="$(<"${_nvpath}")"
     if [ "${_nvtemp}" -gt "${_input}" ]
     then
         _echo "Using NVIDIA temp."
