@@ -10,7 +10,7 @@ _run() {
 if [ "${TERM}" = "linux" ] || [ "$(id -u)" -eq 0 ]
 then
     # no GUI or root
-    nano "${1-}"
+    exec nano "${1-}"
 else
     _run qtextpad "${1-}"
 fi
