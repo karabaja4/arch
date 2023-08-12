@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 _file='/opt/azuredatastudio/resources/app/out/vs/workbench/workbench.desktop.main'
 _js="${_file}.js"
