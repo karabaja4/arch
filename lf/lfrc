@@ -89,9 +89,10 @@ cmd code &{{
 
 map <backspace2> updir
 
-map n1 cd ~/_disk/torrents
-map n2 cd ~/_private
-map n3 cd ~/_public
+# bookmarks
+map b1 cd ~/_disk/torrents
+map b2 cd ~/_private
+map b3 cd ~/_public
 
 # archives
 # ${f} = current file
