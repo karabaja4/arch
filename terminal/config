@@ -1,7 +1,7 @@
 [options]
 #allow_bold = true
 #audible_bell = false
-#bold_is_bright = true
+bold_is_bright = false
 #cell_height_scale = 1.0
 #cell_width_scale = 1.0
 #clickable_url = true
@@ -67,22 +67,22 @@ background = #FAFAFA
 #highlight = #2f2f2f
 
 # Colors from color0 to color254 can be set
-color0 = #555555
-color1 = #FF0000
-color2 = #00FF00
-color3 = #FF8000
-color4 = #0000FF
-color5 = #FF00FF
-color6 = #00FFFF
-color7 = #FFFFFF
-color8 = #000000
-color9 = #A31515
-color10 = #008000
-color11 = #74531F
-color12 = #1F377F
-color13 = #8F08C4
-color14 = #2B91AF
-color15 = #808080
+color0 = #000000
+color1 = #A31515
+color2 = #008000
+color3 = #74531F
+color4 = #1F377F
+color5 = #8F08C4
+color6 = #2B91AF
+color7 = #808080
+color8 = #555555
+color9 = #FF0000
+color10 = #00FF00
+color11 = #FF8000
+color12 = #0000FF
+color13 = #FF00FF
+color14 = #00FFFF
+color15 = #FFFFFF
 
 [hints]
 #font = Monospace 12
