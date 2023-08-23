@@ -212,6 +212,12 @@
     <application name="conky">
       <skip_taskbar>yes</skip_taskbar>
     </application>
+    <application name="termite">
+      <size>
+        <height>506</height>
+        <width>938</width>
+      </size>
+    </application>
   </applications>
 
 </openbox_config>

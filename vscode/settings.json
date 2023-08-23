@@ -63,7 +63,7 @@
     "workbench.settings.editor": "json",
     "razor.trace": "Off",
     "debug.console.fontFamily": "Consolas",
-    "terminal.external.linuxExec": "xfce4-terminal",
+    "terminal.external.linuxExec": "termite",
     "terminal.explorerKind": "external",
     "update.mode": "none",
     "files.watcherExclude": {

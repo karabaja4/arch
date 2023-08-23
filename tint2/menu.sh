@@ -25,7 +25,7 @@ _keypress() {
 
 case "${1}" in
 terminal)
-    _run xfce4-terminal
+    _run termite
     ;;
 firefox)
     _run firefox-socket

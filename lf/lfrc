@@ -79,7 +79,7 @@ cmd cp &{{
 }}
 
 cmd term &{{
-    xfce4-terminal --working-directory="${PWD}" > /dev/null 2>&1
+    termite --directory="${PWD}" > /dev/null 2>&1
 }}
 map t term
 
