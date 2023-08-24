@@ -121,6 +121,15 @@ cmd gz ${{
     tar cvzf "${f}.tar.gz" "${@}"
 }}
 
+cmd xz ${{
+    set -f
+    for _x in ${fx}
+    do
+        set -- "${@}" "$(basename "${_x}")"
+    done
+    tar cvJf "${f}.tar.xz" "${@}"
+}}
+
 cmd ex ${{
     set -f
     case "${f}" in
