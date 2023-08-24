@@ -3,7 +3,7 @@
 _vnc() {
 
     # daemons
-    xsettingsd -c "${HOME}/arch/terminal/xsettingsd" &
+    xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
 
     # bacgkround
     xsetroot -solid '#008080'
@@ -27,7 +27,7 @@ _desktop() {
     "${HOME}/arch/scripts/sound.sh" pch
 
     # daemons
-    xsettingsd -c "${HOME}/arch/terminal/xsettingsd" &
+    xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
     #xcompmgr -a &
 
     # resolution and background
