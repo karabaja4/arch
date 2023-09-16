@@ -16,7 +16,7 @@ set timefmt '2006-01-02T15:04:05'
 
 set promptfmt "\033[0;37m%d%f\033[0m"
 set errorfmt "\033[0;91m%s\033[0m"
-set statfmt "\033[0;37m%p %u:%g\033[0m \033[0;32m%s\033[0m \033[0;36m%L\033[0m"
+set statfmt "\033[0;37m%p %u:%g\033[0m \033[0;32m%s\033[0m \033[0;36m%l\033[0m"
 
 #set number
 #set numberfmt "\033[0;37m"
