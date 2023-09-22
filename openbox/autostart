@@ -13,6 +13,7 @@ _vnc() {
 
     # keyboard (because raw inputs revert to US)
     # raw inputs are necessary for VirtualBox keyboard layout
+    # requires rawkeyboard=1 in vnc config
     setxkbmap hr
 }
 
@@ -51,7 +52,7 @@ _desktop() {
 
     # other
     sleep 1
-    "${HOME}/arch/scripts/clip.sh" > "${HOME}/clip.log" 2>&1 &
+    "${HOME}/arch/scripts/clip.sh" > /dev/null 2>&1 &
 }
 
 if /usr/bin/xdpyinfo | grep VNC > /dev/null
