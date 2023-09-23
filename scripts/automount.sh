@@ -17,18 +17,22 @@ _not_root() {
     exit 2
 }
 
-_multiple_users() {
-    _echo "Cannot find a single logged in user"
-    exit 3
-}
-
 [ "${#}" -ne 1 ] && _usage
 [ "$(id -u)" -ne 0 ] && _not_root
 
+_passwd() {
+    _u="$(users)"
+    _uc="$(_echo "${_u}" | wc -w)"
+    if [ "${_uc}" -ne 1 ]
+    then
+        _echo "Cannot find a single logged in user" >&2
+        exit 3
+    fi
+    _echo "$(getent passwd "${_u}" | cut -d ':' -f "${1}")"
+}
+
 # find a user
-_user="$(users)"
-_usercount="$(_echo "${_user}" | wc -w)"
-[ "${_usercount}" -ne 1 ] && _multiple_users
+_user="$(_passwd 1)"
 
 _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
