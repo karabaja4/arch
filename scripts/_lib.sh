@@ -3,7 +3,7 @@ IFS='
 '
 
 _echo() {
-    printf '%s\n' "${1}"
+    printf '%s\n' "${@}"
 }
 
 _passwd() {

@@ -29,7 +29,7 @@ _aur() {
     then
         _aur_wc="0"
     else
-        _echo "auracle failed with [${_aur_rv}]: [${_aur_out}]"
+        _echo "auracle failed with [${_aur_rv}]:" "[${_aur_out}]"
     fi
 
     if [ -n "${_aur_wc}" ]
@@ -52,7 +52,7 @@ _cu() {
     then
         _cu_wc="0"
     else
-        _echo "checkupdates failed with [${_cu_rv}]: [${_cu_out}]"
+        _echo "checkupdates failed with [${_cu_rv}]:" "[${_cu_out}]"
     fi
 
     if [ -n "${_cu_wc}" ]
