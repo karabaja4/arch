@@ -5,18 +5,19 @@ _echo() {
     printf '%s\n' "${1}"
 }
 
-_multiple_users() {
-    _echo "Cannot find a single logged in user"
-    exit 1
+_passwd() {
+    _user="$(users)"
+    _usercount="$(_echo "${_user}" | wc -w)"
+    if [ "${_usercount}" -ne 1 ]
+    then
+        _echo "Cannot find a single logged in user" >&2
+        exit 1
+    fi
+    _echo "$(getent passwd "${_user}" | cut -d ':' -f "${1}")"
 }
 
-_user="$(users)"
-_usercount="$(_echo "${_user}" | wc -w)"
-[ "${_usercount}" -ne 1 ] && _multiple_users
-_passwd="$(getent passwd "${_user}")"
-
-_home="$(_echo "${_passwd}" | cut -d':' -f6)"
-_uid="$(_echo "${_passwd}" | cut -d':' -f3)"
+_home="$(_passwd 6)"
+_uid="$(_passwd 3)"
 
 _secret="/etc/secret/secret.json"
 
