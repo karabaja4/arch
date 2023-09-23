@@ -6,14 +6,14 @@ _echo() {
 }
 
 _passwd() {
-    _user="$(users)"
-    _usercount="$(_echo "${_user}" | wc -w)"
-    if [ "${_usercount}" -ne 1 ]
+    _u="$(users)"
+    _uc="$(_echo "${_u}" | wc -w)"
+    if [ "${_uc}" -ne 1 ]
     then
         _echo "Cannot find a single logged in user" >&2
         exit 1
     fi
-    _echo "$(getent passwd "${_user}" | cut -d ':' -f "${1}")"
+    _echo "$(getent passwd "${_u}" | cut -d ':' -f "${1}")"
 }
 
 _home="$(_passwd 6)"
