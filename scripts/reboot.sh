@@ -37,8 +37,15 @@ _umount() {
     fi
 }
 
-_uid="1000"
-_home="$(getent passwd "${_uid}" | cut -d':' -f6)"
+_multiple_users() {
+    _echo "Cannot find a single logged in user"
+    exit 1
+}
+
+_user="$(users)"
+_usercount="$(_echo "${_user}" | wc -w)"
+[ "${_usercount}" -ne 1 ] && _multiple_users
+_home="$(getent passwd "${_user}" | cut -d':' -f6)"
 
 for _mp in "${_home}/_"*
 do
