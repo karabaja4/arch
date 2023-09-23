@@ -37,15 +37,18 @@ _umount() {
     fi
 }
 
-_multiple_users() {
-    _echo "Cannot find a single logged in user"
-    exit 1
+_passwd() {
+    _u="$(users)"
+    _uc="$(_echo "${_u}" | wc -w)"
+    if [ "${_uc}" -ne 1 ]
+    then
+        _echo "Cannot find a single logged in user" >&2
+        exit 2
+    fi
+    _echo "$(getent passwd "${_u}" | cut -d ':' -f "${1}")"
 }
 
-_user="$(users)"
-_usercount="$(_echo "${_user}" | wc -w)"
-[ "${_usercount}" -ne 1 ] && _multiple_users
-_home="$(getent passwd "${_user}" | cut -d':' -f6)"
+_home="$(_passwd 6)"
 
 for _mp in "${_home}/_"*
 do
