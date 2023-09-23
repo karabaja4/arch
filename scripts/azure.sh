@@ -1,8 +1,22 @@
 #!/bin/sh
 set -eu
 
-_uid="1000"
-_home="$(getent passwd "${_uid}" | cut -d':' -f6)"
+_echo() {
+    printf '%s\n' "${1}"
+}
+
+_multiple_users() {
+    _echo "Cannot find a single logged in user"
+    exit 1
+}
+
+_user="$(users)"
+_usercount="$(_echo "${_user}" | wc -w)"
+[ "${_usercount}" -ne 1 ] && _multiple_users
+_passwd="$(getent passwd "${_user}")"
+
+_home="$(_echo "${_passwd}" | cut -d':' -f6)"
+_uid="$(_echo "${_passwd}" | cut -d':' -f3)"
 
 _secret="/etc/secret/secret.json"
 
