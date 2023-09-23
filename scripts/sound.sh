@@ -1,9 +1,7 @@
 #!/bin/sh
-set -u
+. "/home/igor/arch/scripts/_lib.sh"
 
-_echo() {
-    printf '%s\n' "${1}"
-}
+set -u
 
 _usage() {
     _echo "usage: $(basename "${0}") [ <card_name> | l(ist) ]"

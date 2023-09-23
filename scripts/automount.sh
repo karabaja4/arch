@@ -1,37 +1,18 @@
 #!/bin/sh
-set -u
+. "/home/igor/arch/scripts/_lib.sh"
 
 # not -e because we want to try to iterate all partitions
+set -u
 
-_echo() {
-    printf '%s\n' "${1}"
-}
+_check_root
 
 _usage() {
     _echo "This is script is called by /etc/udev/rules.d/10-flash.rules"
     exit 1
 }
 
-_not_root() {
-    _echo "Root privileges are required to run this command"
-    exit 2
-}
-
 [ "${#}" -ne 1 ] && _usage
-[ "$(id -u)" -ne 0 ] && _not_root
 
-_passwd() {
-    _u="$(users)"
-    _uc="$(_echo "${_u}" | wc -w)"
-    if [ "${_uc}" -ne 1 ]
-    then
-        _echo "Cannot find a single logged in user" >&2
-        exit 3
-    fi
-    _echo "$(getent passwd "${_u}" | cut -d ':' -f "${1}")"
-}
-
-# find a user
 _user="$(_passwd 1)"
 
 _mkdir() {

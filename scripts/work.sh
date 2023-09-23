@@ -1,9 +1,7 @@
 #!/bin/sh
-set -eu
+. "/home/igor/arch/scripts/_lib.sh"
 
-_echo() {
-    printf "$(tput setaf 1)%s$(tput sgr0)\n" "${1}"
-}
+set -eu
 
 _secret="/etc/secret/secret.json"
 
@@ -12,7 +10,7 @@ _host="$(jq -crM '.work.host' "${_secret}")"
 _user="$(jq -crM '.work.user' "${_secret}")"
 _password="$(jq -crM '.work.password' "${_secret}")"
 
-_echo "Connecting to: ${_user} @ ${_domain}/${_host}"
+_color_echo 91 "Connecting to: ${_user} @ ${_domain}/${_host}"
 exec xfreerdp /monitors:0 /cert-ignore /bpp:32 /network:lan /audio-mode:2 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper \
 /d:"${_domain}" \
 /v:"${_host}" \

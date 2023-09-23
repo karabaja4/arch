@@ -1,10 +1,8 @@
 #!/bin/bash
+. "/home/igor/arch/scripts/_lib.sh"
+
 set -eu
 enable -f /usr/lib/bash/sleep sleep
-
-_echo() {
-    printf '%s\n' "${1}"
-}
 
 _temp1=45
 _temp2=80

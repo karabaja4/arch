@@ -1,20 +1,7 @@
 #!/bin/sh
+. "/home/igor/arch/scripts/_lib.sh"
+
 set -eu
-
-_echo() {
-    printf '%s\n' "${1}"
-}
-
-_passwd() {
-    _u="$(users)"
-    _uc="$(_echo "${_u}" | wc -w)"
-    if [ "${_uc}" -ne 1 ]
-    then
-        _echo "Cannot find a single logged in user" >&2
-        exit 1
-    fi
-    _echo "$(getent passwd "${_u}" | cut -d ':' -f "${1}")"
-}
 
 _home="$(_passwd 6)"
 _uid="$(_passwd 3)"

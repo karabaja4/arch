@@ -1,11 +1,9 @@
 #!/bin/sh
+. "/home/igor/arch/scripts/_lib.sh"
+
 set -e
 
 doas modprobe fuse
-
-_echo() {
-    printf '%s\n' "${1}"
-}
 
 _latest() {
     find "$(dirname "${1}")" -name "$(basename "${1}")" -printf "%Ts/%p\n" | sort -nr | cut -d'/' -f2- | head -n1

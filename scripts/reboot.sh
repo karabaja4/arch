@@ -1,9 +1,7 @@
 #!/bin/sh
-set -u
+. "/home/igor/arch/scripts/_lib.sh"
 
-_echo() {
-    printf '%s\n' "${1}"
-}
+set -u
 
 # argument check
 _arg1="${1-}"
@@ -16,13 +14,7 @@ reboot|poweroff)
     ;;
 esac
 
-# root check
-_not_root() {
-    _echo "Must be root"
-    exit 1
-}
-
-[ "$(id -u)" -ne 0 ] && _not_root
+_check_root
 
 killall -q -v -w qbittorrent
 
@@ -35,17 +27,6 @@ _umount() {
             exit 1
         fi
     fi
-}
-
-_passwd() {
-    _u="$(users)"
-    _uc="$(_echo "${_u}" | wc -w)"
-    if [ "${_uc}" -ne 1 ]
-    then
-        _echo "Cannot find a single logged in user" >&2
-        exit 2
-    fi
-    _echo "$(getent passwd "${_u}" | cut -d ':' -f "${1}")"
 }
 
 _home="$(_passwd 6)"

@@ -1,7 +1,7 @@
 #!/bin/sh
+. "/home/igor/arch/scripts/_lib.sh"
+
 set -eu
-IFS='
-'
 
 _usage() {
     printf '%s\n%s\n' \
@@ -17,20 +17,11 @@ case "${_arg1}" in
     ;;
 esac
 
-_echo() {
-    printf '%s\n' "${1}"
-}
-
 _log() {
-    printf '\033[0;34m%s\033[0m\n' "${1}"
+    _color_echo 34 "${1}"
 }
 
-_not_root() {
-    _echo "Not root."
-    exit 1
-}
-
-[ "$(id -u)" -ne 0 ] && _not_root
+_check_root
 
 _is_running() {
     if pgrep -x "${1}" > /dev/null

@@ -1,9 +1,7 @@
 #!/bin/sh
-set -eu
+. "/home/igor/arch/scripts/_lib.sh"
 
-_echo() {
-    printf '%s\n' "${1}"
-}
+set -eu
 
 _secret="/etc/secret/secret.json"
 _record=$(jq -r ".dns .record" "${_secret}")
