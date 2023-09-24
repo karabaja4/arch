@@ -36,7 +36,7 @@ _passwd() {
     __uc="$(_echo "${__u}" | wc -w)"
     if [ "${__uc}" -ne 1 ]
     then
-        _err 100 "Cannot find a single logged in user."
+        _err 200 "Cannot find a single logged in user."
     fi
     _echo "$(getent passwd "${__u}" | cut -d ':' -f "${1}")"
 }
@@ -44,7 +44,7 @@ _passwd() {
 _check_root() {
     if [ "$(id -u)" -ne 0 ]
     then
-        _err 101 "Root privileges are required to run this command."
+        _err 201 "Root privileges are required to run this command."
     fi
 }
 
@@ -59,11 +59,11 @@ _check_arg() {
     __larg2="${2-}"
     if [ -z "${__larg1}" ]
     then
-        _err 102 "Invalid parameter."
+        _err 202 "Invalid parameter."
     fi
     if [ -z "${__larg2}" ]
     then
-        _err 103 "This function needs 2 arguments"
+        _err 203 "This function needs 2 arguments"
     fi
     __found=0
     __param_list=$(_echo "${__larg2}" | tr '|' '\n')
@@ -76,7 +76,7 @@ _check_arg() {
     done
     if [ "${__found}" -eq 0 ]
     then
-        _err 104 "Invalid parameter."
+        _err 204 "Invalid parameter."
     fi
 }
 

@@ -25,7 +25,7 @@ _check_root
 _is_running() {
     if pgrep -x "${1}" > /dev/null
     then
-        _err 2 "${1} is running, cannot continue."
+        _err 100 "${1} is running, cannot continue."
     fi
 }
 
@@ -36,7 +36,7 @@ _is_running 'dhcpcd'
 _interface="$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' | cat)"
 if [ -z "${_interface}" ]
 then
-    _err 3 "No wireless interfaces found."
+    _err 101 "No wireless interfaces found."
 fi
 
 if [ -z "${_arg1}" ]
@@ -45,9 +45,9 @@ then
     _count="$(_echo "${_interface}" | wc -l)"
     if [ "${_count}" -ne 1 ]
     then
-        _err 4 "More than one interface found:" \
-               "${_interface}" \
-               "Please specify an interface as an argument." >&2
+        _err 102 "More than one interface found:" \
+                 "${_interface}" \
+                 "Please specify an interface as an argument." >&2
     else
         _log "Detected interface ${_interface}"
     fi
@@ -56,7 +56,7 @@ else
     _match="$(_echo "${_interface}" | grep -F "${_arg1}" | cat)"
     if [ -z "${_match}" ]
     then
-        _err 5 "Interface ${_arg1} not found."
+        _err 103 "Interface ${_arg1} not found."
     else
          _interface="${_match}"
         _log "Using interface ${_interface}"
@@ -72,7 +72,7 @@ _i=1
 
 if [ -z "${_essids}" ]
 then
-    _err 6 "No networks found."
+    _err 104 "No networks found."
 fi
 
 for _essid in ${_essids}
@@ -86,7 +86,7 @@ _prompt() {
 }
 
 _invalid_input() {
-    _err 7 "Invalid input."
+    _err 105 "Invalid input."
 }
 
 # read a choice
