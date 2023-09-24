@@ -10,6 +10,6 @@ do
     if [ -d "${_f}" ]
     then
         umount -v "${_f}"
-        rm -vrf "${_f}"
+        rmdir -v "${_f}"
     fi
 done
