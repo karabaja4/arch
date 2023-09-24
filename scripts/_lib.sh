@@ -8,7 +8,12 @@ _echo() {
 }
 
 _err() {
-    __ec="${1}"
+    __ec="${1-}"
+    if [ -z "${__ec}" ]
+    then
+        _echo "This function needs an argument."
+        exit 255
+    fi
     case "${__ec}" in
         ''|*[!0-9]*)
             _echo "Invalid exit code (not integer)."
