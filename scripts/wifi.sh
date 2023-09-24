@@ -25,8 +25,7 @@ _check_root
 _is_running() {
     if pgrep -x "${1}" > /dev/null
     then
-        _echo "${1} is running, cannot continue."
-        exit 2
+        _err "${1} is running, cannot continue." 2
     fi
 }
 
@@ -37,8 +36,7 @@ _is_running 'dhcpcd'
 _interface="$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' | cat)"
 if [ -z "${_interface}" ]
 then
-    _echo "No wireless interfaces found."
-    exit 3
+    _err "No wireless interfaces found." 3
 fi
 
 if [ -z "${_arg1}" ]
@@ -50,7 +48,7 @@ then
         printf '%s\n%s\n%s\n' \
             "More than one interface found:" \
             "${_interface}" \
-            "Please specify an interface as an argument."
+            "Please specify an interface as an argument." >&2
         exit 4
     else
         _log "Detected interface ${_interface}"
@@ -60,8 +58,7 @@ else
     _match="$(_echo "${_interface}" | grep -F "${_arg1}" | cat)"
     if [ -z "${_match}" ]
     then
-        _echo "Interface ${_arg1} not found."
-        exit 5
+        _err "Interface ${_arg1} not found." 5
     else
          _interface="${_match}"
         _log "Using interface ${_interface}"
@@ -85,8 +82,7 @@ _prompt() {
 }
 
 _invalid_input() {
-    _echo "Invalid input."
-    exit 6
+    _err "Invalid input." 6
 }
 
 # read a choice
