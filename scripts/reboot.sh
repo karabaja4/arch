@@ -4,15 +4,7 @@
 set -u
 
 # argument check
-_arg1="${1-}"
-case "${_arg1}" in
-reboot|poweroff)
-    ;;
-*)
-    _echo "Invalid argument"
-    exit 1
-    ;;
-esac
+_check_arg "${_arg1}" "reboot|poweroff"
 
 _check_root
 
