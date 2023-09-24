@@ -53,7 +53,7 @@ _mount() (
     _ec="${?}"
     if [ "${_ec}" -ne 0 ]
     then
-        rm -r "${_mntpath}"
+        rmdir "${_mntpath}"
     fi
 )
 
