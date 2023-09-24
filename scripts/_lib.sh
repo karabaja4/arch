@@ -8,8 +8,27 @@ _echo() {
 }
 
 _err() {
-    _echo "${1}" >&2
-    exit "${2:-255}"
+    __ec="${1}"
+    case "${__ec}" in
+        ''|*[!0-9]*)
+            _echo "Invalid exit code (not integer)."
+            exit 255
+            ;;
+        *)
+            if [ "${__ec}" -ge 0 ] && [ "${__ec}" -le 255 ]
+            then
+                if [ "${#}" -gt 1 ]
+                then
+                    shift
+                    _echo "${@}" >&2
+                fi
+                exit "${__ec:-255}"
+            else
+                _echo "Invalid exit code (not between 0-255)."
+                exit 255
+            fi
+            ;;
+    esac
 }
 
 _passwd() {
@@ -17,7 +36,7 @@ _passwd() {
     __uc="$(_echo "${__u}" | wc -w)"
     if [ "${__uc}" -ne 1 ]
     then
-        _err "Cannot find a single logged in user." 100
+        _err 100 "Cannot find a single logged in user."
     fi
     _echo "$(getent passwd "${__u}" | cut -d ':' -f "${1}")"
 }
@@ -25,7 +44,7 @@ _passwd() {
 _check_root() {
     if [ "$(id -u)" -ne 0 ]
     then
-        _err "Root privileges are required to run this command." 101
+        _err 101 "Root privileges are required to run this command."
     fi
 }
 
@@ -40,11 +59,11 @@ _check_arg() {
     __larg2="${2-}"
     if [ -z "${__larg1}" ]
     then
-        _err "Invalid parameter." 102
+        _err 102 "Invalid parameter."
     fi
     if [ -z "${__larg2}" ]
     then
-        _err "This function needs 2 arguments" 103
+        _err 103 "This function needs 2 arguments"
     fi
     __found=0
     __param_list=$(_echo "${__larg2}" | tr '|' '\n')
@@ -57,7 +76,7 @@ _check_arg() {
     done
     if [ "${__found}" -eq 0 ]
     then
-        _err "Invalid parameter." 104
+        _err 104 "Invalid parameter."
     fi
 }
 
