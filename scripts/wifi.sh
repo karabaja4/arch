@@ -71,6 +71,12 @@ ip link set "${_interface}" up
 _log "Scanning for networks..."
 _essids="$(iwlist "${_interface}" scan | grep -F 'ESSID' | cut -d'"' -f2)"
 _i=1
+
+if [ -z "${_essids}" ]
+then
+    _err "No networks found." 6
+fi
+
 for _essid in ${_essids}
 do
     _echo "${_i}) ${_essid}"
@@ -82,7 +88,7 @@ _prompt() {
 }
 
 _invalid_input() {
-    _err "Invalid input." 6
+    _err "Invalid input." 7
 }
 
 # read a choice
