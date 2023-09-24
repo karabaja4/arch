@@ -45,11 +45,9 @@ then
     _count="$(_echo "${_interface}" | wc -l)"
     if [ "${_count}" -ne 1 ]
     then
-        printf '%s\n%s\n%s\n' \
-            "More than one interface found:" \
-            "${_interface}" \
-            "Please specify an interface as an argument." >&2
-        exit 4
+        _err 4 "More than one interface found:" \
+               "${_interface}" \
+               "Please specify an interface as an argument." >&2
     else
         _log "Detected interface ${_interface}"
     fi
