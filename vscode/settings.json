@@ -103,5 +103,6 @@
         "publish": false,
         "sync": false
     },
-    "editor.roundedSelection": false
+    "editor.roundedSelection": false,
+    "diffEditor.experimental.showEmptyDecorations": false
 }
