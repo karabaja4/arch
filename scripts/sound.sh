@@ -31,8 +31,7 @@ _switch_card() {
         _write_asoundrc "${_index}"
         _echo "Switched to card ${_search##*:} (${_index})"
     else
-        _echo "Card ${1} not found, exiting."
-        exit 1
+        _err 100 "Card ${1} not found, exiting."
     fi
 }
 
@@ -47,7 +46,6 @@ _list() {
             _echo "  ${_name}"
         fi
     done
-    exit 1
 }
 
 _play_sound() {

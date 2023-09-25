@@ -12,8 +12,7 @@ _latest() {
 _exec() {
     if [ -z "${1}" ]
     then
-        _echo "Appimage not found."
-        exit 1
+        _err 100 "Appimage not found."
     fi
     exec "${@}" 
 }
