@@ -4,10 +4,9 @@
 set -eu
 
 _usage() {
-    printf '%s\n%s\n' \
-        "Connect to a WiFi network." \
-        "Usage: $(basename "${0}") [interface (omit to autodetect)]"
-    exit 0
+    _echo "Connect to a WiFi network." \
+          "Usage: $(basename "${0}") [interface (omit to autodetect)]"
+    exit 1
 }
 
 case "${_arg1}" in
