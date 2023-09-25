@@ -15,8 +15,7 @@ _umount() {
     then
         if ! umount -v "${1}"
         then
-            _echo "Not rebooting, umount ${1} failed."
-            exit 1
+            _err 100 "Not rebooting, umount ${1} failed."
         fi
     fi
 }
