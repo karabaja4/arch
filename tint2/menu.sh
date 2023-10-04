@@ -43,10 +43,10 @@ qtextpad)
     _run qtextpad
     ;;
 code)
-    _run code
+    _run code --use-inmemory-secretstorage
     ;;
 azuredatastudio)
-    _run azuredatastudio
+    _run azuredatastudio --disable-keytar
     ;;
 virtualbox)
     _run VirtualBox
