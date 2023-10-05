@@ -21,7 +21,7 @@ _desktop() {
 
     # xorg settings
     #xinput set-prop 15 345 0.2
-    #xset -display :1 dpms 0 0 0
+    xset -display :1 dpms 0 0 0
     nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
     
     # alsa
