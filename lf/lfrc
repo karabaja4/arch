@@ -7,7 +7,7 @@ set ignorecase
 set wrapscroll
 set autoquit
 #set mouse
-set dircache false
+#set dircache false
 
 set ratios '1:3'
 set info 'size'
