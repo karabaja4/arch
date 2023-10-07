@@ -252,7 +252,7 @@ const weather = async () => {
         temp = data.match(regex);
       }
     } catch {}
-    data.weather = temp && temp[1] ? { temp: temp[1].trim().split('.')[0] } : null;
+    data.weather = temp && temp[1] && (temp[1].length < 10) ? { temp: temp[1].trim().split('.')[0] } : null;
     await timers.setTimeout(60 * 60 * 1000);
   }
 }
