@@ -248,7 +248,7 @@ const weather = async () => {
       const response = await fetch(url, { method: 'GET' });
       if (response.status === 200) {
         const data = await response.text();
-        const regex = new RegExp(`<GradIme>${station}<\/GradIme>.+?<Temp>(.+?)<\/Temp>.+?<\/Grad>`, 's');
+        const regex = new RegExp(`<GradIme>${station}<\/GradIme>.+?<Temp>(.+?)<\/Temp>`, 's');
         temp = data.match(regex);
       }
     } catch {}
