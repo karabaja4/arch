@@ -240,12 +240,12 @@ const diskusage = async () => {
 }
 
 const weather = async () => {
-  const station = "Zagreb-Maksimir";
-  const url = "https://vrijeme.hr/hrvatska_n.xml";
+  const station = 'Zagreb-Maksimir';
+  const url = 'https://vrijeme.hr/hrvatska_n.xml';
   while (true) {
     let temp = null;
     try {
-      const response = await fetch(url, { method: "GET" });
+      const response = await fetch(url, { method: 'GET' });
       if (response.status === 200) {
         const data = await response.text();
         const regex = new RegExp(`<GradIme>${station}<\/GradIme>.+?<Temp>(.+?)<\/Temp>.+?<\/Grad>`, 's');
