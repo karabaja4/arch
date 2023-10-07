@@ -128,9 +128,14 @@ const print = async () => {
     text += span(item.font, 7500, 100, colorize2, item.icon, item.label, '$0 GB / $1 GB', res, 2);
   }
 
+  let clk = dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss');
+  if (data?.weather?.temp) {
+    clk += `, ${data.weather.temp}°C`;
+  }
+
   // clock
   text += span(fonts.awesome, 7500, 100, null, icons.clock, 'CLK', '$0', [
-    dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss') // 0
+    clk // 0
   ], 0);
   if (text) {
     console.log(text.trim());
@@ -234,6 +239,24 @@ const diskusage = async () => {
   }
 }
 
+const weather = async () => {
+  const station = "Zagreb-Maksimir";
+  const url = "https://vrijeme.hr/hrvatska_n.xml";
+  while (true) {
+    let temp = null;
+    try {
+      const response = await fetch(url, { method: "GET" });
+      if (response.status === 200) {
+        const data = await response.text();
+        const regex = new RegExp(`<GradIme>${station}<\/GradIme>.+?<Temp>(.+?)<\/Temp>.+?<\/Grad>`, 's');
+        temp = data.match(regex);
+      }
+    } catch {}
+    data.weather = temp && temp[1] ? { temp: temp[1].trim() } : null;
+    await timers.setTimeout(60 * 60 * 1000);
+  }
+}
+
 const main = async () => {
   while (true) {
     await print();
@@ -245,4 +268,5 @@ conky();
 mounts();
 ping();
 diskusage();
+weather();
 main();
