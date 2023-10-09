@@ -45,7 +45,7 @@ _mkxdg "other"
 # set CPU to performance preset
 #printf 'active' > /sys/devices/system/cpu/intel_pstate/status
 printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
-#printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq > /dev/null
+printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq > /dev/null
 
 # activate swap
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
