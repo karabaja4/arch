@@ -146,7 +146,7 @@ const print = async () => {
 }
 
 const conky = async () => {
-  const conkyrc = path.join(os.homedir(), 'arch/conky/conkyrc-tint2');
+  const conkyrc = path.join(__dirname, 'conkyrc-tint2');
   const instance = cp.spawn('conky', ['-q', '-c', conkyrc]);
   instance.stdout.pipe(JSONStream.parse()).on('data', (result) => {
     data.conky = result;
