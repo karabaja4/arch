@@ -1,11 +1,14 @@
 const timers = require('node:timers/promises');
 const fs = require('node:fs');
-const WebSocket = require('ws');
-const dayjs = require('dayjs');
 const util = require('node:util');
-const execFile = util.promisify(require('node:child_process').execFile);
 const os = require('node:os');
 const path = require('node:path');
+const cp = require('node:child_process');
+const execFile = util.promisify(cp.execFile);
+
+const JSONStream = require('JSONStream');
+const WebSocket = require('ws');
+const dayjs = require('dayjs');
 
 const data = {};
 
@@ -143,15 +146,11 @@ const print = async () => {
 }
 
 const conky = async () => {
-  while (true) {
-    try {
-      const content = await fs.promises.readFile('/tmp/conky-tint2.json', 'utf8');
-      if (content) {
-        data.conky = JSON.parse(content);
-      }
-    } catch {}
-    await timers.setTimeout(1000);
-  }
+  const conkyrc = path.join(os.homedir(), 'arch/conky/conkyrc-tint2');
+  const instance = cp.spawn('conky', ['-q', '-c', conkyrc]);
+  instance.stdout.pipe(JSONStream.parse()).on('data', (result) => {
+    data.conky = result;
+  }); 
 }
 
 const mounts = async () => {
