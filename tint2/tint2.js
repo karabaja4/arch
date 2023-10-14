@@ -222,7 +222,7 @@ const diskusage = async () => {
       if (parsed.blockdevices) {
         for (let i = 0; i < parsed.blockdevices.length; i++) {
           const device = parsed.blockdevices[i];
-          if (device.mountpoint && device.fssize && typeof device.fssize === 'number') {
+          if (device.mountpoint && device.fssize && typeof device.fssize === 'number' && device.type !== 'loop') {
             result[device.mountpoint] = {
               total: Math.floor(device.fssize / 1024),
               used: Math.floor(device.fsused / 1024),
