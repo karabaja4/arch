@@ -46,7 +46,7 @@ _passwd() {
     _echo "$(getent passwd "${__u}" | cut -d ':' -f "${1}")"
 }
 
-_check_root() {
+_must_be_root() {
     if [ "$(id -u)" -ne 0 ]
     then
         _err 201 "Root privileges are required to run this command."

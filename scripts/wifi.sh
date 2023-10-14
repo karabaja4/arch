@@ -19,7 +19,7 @@ _log() {
     _color_echo 34 "${1}"
 }
 
-_check_root
+_must_be_root
 
 _is_running() {
     if pgrep -x "${1}" > /dev/null

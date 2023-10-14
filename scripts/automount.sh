@@ -4,7 +4,7 @@
 # not -e because we want to try to iterate all partitions
 set -u
 
-_check_root
+_must_be_root
 
 _usage() {
     _echo "This is script is called by /etc/udev/rules.d/10-flash.rules"

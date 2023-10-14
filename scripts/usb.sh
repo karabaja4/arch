@@ -3,7 +3,7 @@
 
 set -eu
 
-_check_root
+_must_be_root
 
 for _f in "/mnt/"*
 do

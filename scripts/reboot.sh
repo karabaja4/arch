@@ -6,7 +6,7 @@ set -u
 # argument check
 _check_arg "${_arg1}" "reboot|poweroff"
 
-_check_root
+_must_be_root
 
 killall -q -v -w qbittorrent
 
