@@ -32,7 +32,10 @@ map <delete> delete
 map d delete
 map c copy
 map x cut
+
+# clear paste to not accidentally delete selection
 map v :paste; clear
+
 map a invert
 map s :toggle; down
 map u :unselect; clear
