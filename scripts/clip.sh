@@ -69,10 +69,35 @@ _iteration() {
             xclip -verbose -out -selection clipboard -t "${_match}" > "${_out}"
             _log "xclip out exited"
 
+            # mspaint fix
+            case "${_match}" in
+            "image/"*)
+                _exe="mspaint32.exe"
+                if pgrep -x "${_exe}" > /dev/null && command -v "convert" > /dev/null
+                then
+                    _oldmatch="${_match}"
+                    if [ "${_match}" = "image/bmp" ]
+                    then
+                        # convert bitmaps (copy from mspaint to outside) to png
+                        #_match="image/png"
+                        :
+                    else
+                        # copy everything else (copy from outside to mspaint) to bmp
+                        _match="image/bmp"
+                    fi
+                    if [ "${_oldmatch}" != "${_match}" ]
+                    then
+                        _log "${_exe} is running, converting from ${_oldmatch} to ${_match}"
+                        convert "${_out}" "${_match##*/}:${_out}"
+                    fi
+                fi
+                ;;
+            esac
+
             if [ "${_match}" = "${_utf8}" ]
             then
                 printf '%s\n' "$(cat "${_out}")" >> "${_history}"
-                _log "saved to history"
+                _log "Saved to history"
             fi
 
             # read temp file, take ownership of clipboard and wait for pastes
