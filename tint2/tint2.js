@@ -97,7 +97,7 @@ const norm = (input) => {
   return `${num} ${unit}B`;
 }
 
-const print = async () => {
+const print = () => {
   let text = '';
   text += span(icons.netdown, colorize1, 'DWL', '$0 KB', [ 
     data?.conky?.net?.down // 0
@@ -264,7 +264,7 @@ const weather = async () => {
 
 const main = async () => {
   while (true) {
-    await print();
+    print();
     await timers.setTimeout(1000);
   }
 }
