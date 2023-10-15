@@ -6,6 +6,11 @@ set -eu
 _home="$(_passwd 6)"
 _uid="$(_passwd 3)"
 
+if [ -z "${_home}" ] ||  [ -z "${_uid}" ]
+then
+    _err 100 "Cannot find user's home or uid."
+fi
+
 _secret="/etc/secret/secret.json"
 
 _azure() {
