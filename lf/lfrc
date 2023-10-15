@@ -33,7 +33,7 @@ map d delete
 map c copy
 map x cut
 
-# clear paste to not accidentally delete selection
+# clear after paste to not accidentally delete selection
 map v :paste; clear
 
 map a invert
