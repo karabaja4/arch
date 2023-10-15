@@ -116,6 +116,8 @@ _check_arg() {
 # 5 - purple
 # 6 - cyan
 # 7 - white
+
+# prints colored text
 _color_echo() {
     printf '\033[%sm%s\033[0m\n' "${1}" "${2}"
 }
