@@ -104,5 +104,6 @@
         "sync": false
     },
     "editor.roundedSelection": false,
-    "diffEditor.experimental.showEmptyDecorations": false
+    "diffEditor.experimental.showEmptyDecorations": false,
+    "window.commandCenter": false
 }
