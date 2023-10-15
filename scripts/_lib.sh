@@ -89,7 +89,7 @@ _check_arg() {
     __larg2="${2-}"
     if [ -z "${__larg1}" ] || [ -z "${__larg2}" ]
     then
-        _err 202 "This function needs exactly 2 arguments."
+        _err 203 "Invalid parameter."
     fi
     __found=0
     __param_list=$(_echo "${__larg2}" | tr '|' '\n')
