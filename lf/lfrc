@@ -11,7 +11,7 @@ set autoquit
 
 set ratios '1:3'
 set info 'size'
-#set period 1
+set period 1
 set timefmt '2006-01-02T15:04:05'
 
 set promptfmt "\033[0;37m%d%f\033[0m"
@@ -32,7 +32,7 @@ map <delete> delete
 map d delete
 map c copy
 map x cut
-map v paste
+map v :paste; clear
 map a invert
 map s :toggle; down
 map u :unselect; clear
