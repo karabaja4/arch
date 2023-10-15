@@ -5,6 +5,7 @@ IFS='
 
 # print text
 # usage: _echo "<text1>" "<text2>"
+# each parameter will be printed as a new line
 _echo() {
     printf '%s\n' "${@}"
 }
