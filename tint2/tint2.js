@@ -37,7 +37,7 @@ const icons = {
   netdown: mkicon('', fonts.flaticon, 7500, 100),
   netup: mkicon('', fonts.flaticon, 7500, 100),
   ping: mkicon('', fonts.awesome, 7500, 100),
-  cpu: mkicon('', fonts.awesome, 6000, 800),
+  cpu: mkicon('', fonts.flaticon, 5000, 1000),
   mem: mkicon('', fonts.flaticon, 7500, 100),
   clock: mkicon('', fonts.awesome, 7500, 100),
   ssd: mkicon('', fonts.awesome, 7500, 100),
