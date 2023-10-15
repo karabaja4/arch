@@ -120,21 +120,21 @@ const print = async () => {
   ], 2);
 
   for (let i = 0; i < disks.length; i++) {
-    const item = disks[i];
-    const avail = data?.mounts?.[item.mountpoint] &&
-                  data?.du?.[item.mountpoint]?.total &&
-                  data?.du?.[item.mountpoint]?.used &&
-                  data?.du?.[item.mountpoint]?.available || null;
+    const disk = disks[i];
+    const avail = data?.mounts?.[disk.mountpoint] &&
+                  data?.du?.[disk.mountpoint]?.total &&
+                  data?.du?.[disk.mountpoint]?.used &&
+                  data?.du?.[disk.mountpoint]?.available || null;
     const res = [];
     if (avail) {
-      const dfi = data.du[item.mountpoint];
+      const dfi = data.du[disk.mountpoint];
       const used  = dfi.used;
       const total = used + dfi.available;
       res[0] = Math.floor((used / 1024) / 1024);
       res[1] = Math.floor((total / 1024) / 1024);
       res[2] = (used / total) * 100;
     }
-    text += span(item.icon, colorize2, item.label, '$0 GB / $1 GB', res, 2);
+    text += span(disk.icon, colorize2, disk.label, '$0 GB / $1 GB', res, 2);
   }
 
   let clk = dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss');
