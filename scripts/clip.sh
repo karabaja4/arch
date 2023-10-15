@@ -73,7 +73,7 @@ _iteration() {
             # just ignore this block, it's for my benefit only
             case "${_match}" in
             "image/"*)
-                _exe="mspaint32.exe"
+                _exe="mspaint.exe"
                 if pgrep -x "${_exe}" > /dev/null && \
                    command -v "convert" > /dev/null && \
                    command -v "xset" > /dev/null

@@ -73,7 +73,7 @@ flameshot)
 paint)
     #rm -f "/home/igor/.config/chromium/Default/Local Storage/leveldb/"*
     #_run chromium --start-maximized --disable-smooth-scrolling --disable-audio-output --app=https://jspaint.app
-    wine /home/igor/arch/mspaint/xp/mspaint32.exe
+    wine /home/igor/arch/mspaint/vista/mspaint.exe
     ;;
 onlyoffice)
     _run onlyoffice-desktopeditors
