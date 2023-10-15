@@ -51,7 +51,7 @@ printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 
 # set edd spindown to 4 hours
-hdparm -S 248 /dev/disk/by-uuid/90a45777-18ae-4d75-b6dc-9b79276dc712
+hdparm -S 248 /dev/disk/by-uuid/90a45777-18ae-4d75-b6dc-9b79276dc712 > /dev/null
 
 # write /etc/issue to display a nice greeting message
 /home/igor/arch/scripts/info.sh > /etc/issue
