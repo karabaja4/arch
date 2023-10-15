@@ -24,32 +24,38 @@ const fonts = {
   flaticon: 'Flaticon'            // ln -s /home/igor/arch/conky/flaticon.ttf /usr/share/fonts/flaticon.ttf
 }
 
+const mkicon = (char, font, size, rise) => {
+  return {
+    char: char,
+    font: font,
+    size: size,
+    rise: rise
+  };
+}
+
 const icons = {
-  netdown: '',
-  netup: '',
-  ping: '',
-  cpu: '',
-  mem: '',
-  linode: '',
-  trenddown: '',
-  trendup: '',
-  clock: ''
+  netdown: mkicon('', fonts.flaticon, 7500, 100),
+  netup: mkicon('', fonts.flaticon, 7500, 100),
+  ping: mkicon('', fonts.awesome, 7500, 100),
+  cpu: mkicon('', fonts.flaticon, 5000, 1000),
+  mem: mkicon('', fonts.flaticon, 7500, 100),
+  clock: mkicon('', fonts.awesome, 7500, 100),
+  ssd: mkicon('', fonts.flaticon, 7500, 100),
+  edd: mkicon('', fonts.awesome, 7500, 100)
 };
+
+const mkdisk = (mountpoint, icon, label) => {
+  return {
+    mountpoint: mountpoint,
+    icon: icon,
+    label: label
+  }
+}
 
 // disks
 const disks = [
-  {
-    mountpoint: '/',
-    font: fonts.flaticon,
-    icon: '',
-    label: 'SSD'
-  },
-  {
-    mountpoint: '/home/igor/_disk',
-    font: fonts.awesome,
-    icon: '',
-    label: 'EDD'
-  }
+  mkdisk('/', icons.ssd, 'SSD'),
+  mkdisk('/home/igor/_disk', icons.edd, 'EDD')
 ];
 
 // activity color
@@ -67,7 +73,7 @@ const colorize2 = (value) => {
   return colors.green;
 };
 
-const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
+const span = (icon, colorize, name, format, values, cidx) => {
   let text = `${name}: N/A`;
   let color = colors.gray;
   if (values.length > 0 && values.every(x => x !== undefined && x !== null)) {
@@ -79,7 +85,7 @@ const span = (font, size, rise, colorize, icon, name, format, values, cidx) => {
       color = colorize(values[cidx]);
     }
   }
-  return `<span font_family="${font}" size="${size}" rise="${rise}" foreground="${color}">${icon}</span>  ${text}          `;
+  return `<span font_family="${icon.font}" size="${icon.size}" rise="${icon.rise}" foreground="${color}">${icon.char}</span>  ${text}          `;
 };
 
 const norm = (input) => {
@@ -93,21 +99,21 @@ const norm = (input) => {
 
 const print = async () => {
   let text = '';
-  text += span(fonts.flaticon, 7500, 100, colorize1, icons.netdown, 'DWL', '$0 KB', [ 
+  text += span(icons.netdown, colorize1, 'DWL', '$0 KB', [ 
     data?.conky?.net?.down // 0
   ], 0);
-  text += span(fonts.flaticon, 7500, 100, colorize1, icons.netup, 'UPL', '$0 KB', [
+  text += span(icons.netup, colorize1, 'UPL', '$0 KB', [
     data?.conky?.net?.up // 0
   ], 0);
-  text += span(fonts.awesome, 7500, 100, colorize2, icons.ping, 'PNG', '$0 ms', [
+  text += span(icons.ping, colorize2, 'PNG', '$0 ms', [
     data?.ws?.ping // 0
   ], 0);
-  text += span(fonts.flaticon, 5000, 1000, colorize2, icons.cpu, 'CPU', '$0% ($1 MHz, $2°C)', [
+  text += span(icons.cpu, colorize2, 'CPU', '$0% ($1 MHz, $2°C)', [
     data?.conky?.cpu?.perc, // 0
     data?.conky?.cpu?.freq, // 1
     data?.conky?.cpu?.temp // 2
   ], 0);
-  text += span(fonts.flaticon, 7500, 100, colorize2, icons.mem, 'RAM', '$0 / $1', [
+  text += span(icons.mem, colorize2, 'RAM', '$0 / $1', [
     norm(data?.conky?.mem?.used), // 0
     norm(data?.conky?.mem?.max), // 1
     data?.conky?.mem?.perc // 2
@@ -128,7 +134,7 @@ const print = async () => {
       res[1] = Math.floor((total / 1024) / 1024);
       res[2] = (used / total) * 100;
     }
-    text += span(item.font, 7500, 100, colorize2, item.icon, item.label, '$0 GB / $1 GB', res, 2);
+    text += span(item.icon, colorize2, item.label, '$0 GB / $1 GB', res, 2);
   }
 
   let clk = dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss');
@@ -137,7 +143,7 @@ const print = async () => {
   }
 
   // clock
-  text += span(fonts.awesome, 7500, 100, null, icons.clock, 'CLK', '$0', [
+  text += span(icons.clock, null, 'CLK', '$0', [
     clk // 0
   ], 0);
   if (text) {
