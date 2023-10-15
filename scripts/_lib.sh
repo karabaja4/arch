@@ -36,16 +36,39 @@ _err() {
     esac
 }
 
+_fatal() {
+    __em="${1-}"
+    if [ -n "${__em}" ]
+    then
+        _echo "${__em}" >&2
+    fi
+    kill 0
+}
+
+# gets the passwd column for the single logged in user
+# e.g. _passwd 6 will get the 6th column from the user's passwd, that is, a user's home directory
+# if there is more than one logged in user, kill the script
 _passwd() {
+    __idx="${1-}"
+    if [ -z "${__idx}" ]
+    then
+        _fatal "This function needs an argument."
+    fi
     __u="$(users)"
     __uc="$(_echo "${__u}" | wc -w)"
     if [ "${__uc}" -ne 1 ]
     then
-        _err 200 "Cannot find a single logged in user."
+        _fatal "Cannot find a single logged in user."
     fi
-    _echo "$(getent passwd "${__u}" | cut -d ':' -f "${1}")"
+    __col="$(getent passwd "${__u}" | cut -d ':' -f "${__idx}")"
+    if [ -z "${__col}" ]
+    then
+        _fatal "Invalid passwd column."
+    fi
+    _echo "${__col}"
 }
 
+# exits if the current user is not root
 _must_be_root() {
     if [ "$(id -u)" -ne 0 ]
     then
@@ -59,6 +82,8 @@ _arg3="${3-}"
 _arg4="${4-}"
 _arg5="${5-}"
 
+# checks arguments, for example _check_arg "$arg1" "hello|world"
+# if arg1 is not "hello" or "world", exit
 _check_arg() {
     __larg1="${1-}"
     __larg2="${2-}"
