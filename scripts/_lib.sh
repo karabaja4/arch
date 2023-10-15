@@ -3,10 +3,14 @@ set -u
 IFS='
 '
 
+# print text
+# usage: _echo "<text1>" "<text2>"
 _echo() {
     printf '%s\n' "${@}"
 }
 
+# exit with an error and print text to stderr
+# usage: _err <exit-code> <exit-text>
 _err() {
     __ec="${1-}"
     if [ -z "${__ec}" ]
@@ -37,8 +41,9 @@ _err() {
 }
 
 # gets the passwd column for the single logged in user
-# e.g. _passwd 6 will get the 6th column from the user's passwd, that is, a user's home directory
-# if there is more than one logged in user, kill the script
+# usage: _passwd <passwd-index>
+# for example, _passwd 6 will get the 6th column from the user's passwd, that is, a user's home directory
+# if there is more than one logged in user or there is no value in the column, exit with an error
 _passwd() {
     __idx="${1-}"
     if [ -z "${__idx}" ]
@@ -73,8 +78,9 @@ _arg3="${3-}"
 _arg4="${4-}"
 _arg5="${5-}"
 
-# checks arguments, for example _check_arg "$arg1" "hello|world"
-# if arg1 is not "hello" or "world", exit
+# checks arguments
+# usage: _check_arg "<arg-to-check>" "<valid-arg1>|<valid-arg2>|<valid-arg3>"
+# if the argument is not valid, exit with an error
 _check_arg() {
     __larg1="${1-}"
     __larg2="${2-}"
