@@ -15,6 +15,12 @@ _usage() {
 
 _user="$(_passwd 1)"
 
+# if there is no logged in user, exit
+if [ -z "${_user}" ]
+then
+    exit 0
+fi
+
 _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
 }

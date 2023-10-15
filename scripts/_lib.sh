@@ -36,15 +36,6 @@ _err() {
     esac
 }
 
-_fatal() {
-    __em="${1-}"
-    if [ -n "${__em}" ]
-    then
-        _echo "${__em}" >&2
-    fi
-    kill 0
-}
-
 # gets the passwd column for the single logged in user
 # e.g. _passwd 6 will get the 6th column from the user's passwd, that is, a user's home directory
 # if there is more than one logged in user, kill the script
@@ -52,18 +43,18 @@ _passwd() {
     __idx="${1-}"
     if [ -z "${__idx}" ]
     then
-        _fatal "This function needs an argument."
+        _err 200 "This function needs an argument."
     fi
     __u="$(users)"
     __uc="$(_echo "${__u}" | wc -w)"
     if [ "${__uc}" -ne 1 ]
     then
-        _fatal "Cannot find a single logged in user."
+        _err 201 "Cannot find a single logged in user."
     fi
     __col="$(getent passwd "${__u}" | cut -d ':' -f "${__idx}")"
     if [ -z "${__col}" ]
     then
-        _fatal "Invalid passwd column."
+        _err 202 "Invalid passwd column."
     fi
     _echo "${__col}"
 }
@@ -72,7 +63,7 @@ _passwd() {
 _must_be_root() {
     if [ "$(id -u)" -ne 0 ]
     then
-        _err 201 "Root privileges are required to run this command."
+        _err 203 "Root privileges are required to run this command."
     fi
 }
 
@@ -87,9 +78,13 @@ _arg5="${5-}"
 _check_arg() {
     __larg1="${1-}"
     __larg2="${2-}"
-    if [ -z "${__larg1}" ] || [ -z "${__larg2}" ]
+    if [ -z "${__larg1}" ]
     then
-        _err 203 "Invalid parameter."
+        _err 204 "Invalid parameter."
+    fi
+    if [ -z "${__larg2}" ]
+    then
+        _err 205 "This function needs 2 arguments"
     fi
     __found=0
     __param_list=$(_echo "${__larg2}" | tr '|' '\n')
@@ -102,7 +97,7 @@ _check_arg() {
     done
     if [ "${__found}" -eq 0 ]
     then
-        _err 203 "Invalid parameter."
+        _err 206 "Invalid parameter."
     fi
 }
 
