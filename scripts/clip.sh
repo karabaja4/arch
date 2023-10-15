@@ -104,6 +104,7 @@ _iteration() {
                 fi
                 ;;
             esac
+            # end mspaint block
 
             if [ "${_match}" = "${_utf8}" ]
             then
