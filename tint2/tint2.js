@@ -22,7 +22,7 @@ const colors = {
 const fonts = {
   awesome: 'Font Awesome 6 Free', // ttf-font-awesome
   flaticon: 'Flaticon'            // ln -s /home/igor/arch/conky/flaticon.ttf /usr/share/fonts/flaticon.ttf
-}
+};
 
 const mkicon = (char, font, size, rise) => {
   return {
@@ -31,7 +31,7 @@ const mkicon = (char, font, size, rise) => {
     size: size,
     rise: rise
   };
-}
+};
 
 const icons = {
   netdown: mkicon('', fonts.flaticon, 7500, 100),
@@ -50,7 +50,7 @@ const mkdisk = (mountpoint, icon, label) => {
     icon: icon,
     label: label
   }
-}
+};
 
 // disks
 const disks = [
@@ -95,7 +95,7 @@ const norm = (input) => {
   const unit = input.slice(-1);
   const num = input.slice(0, -1);
   return `${num} ${unit}B`;
-}
+};
 
 const print = () => {
   let text = '';
@@ -149,7 +149,7 @@ const print = () => {
   if (text) {
     console.log(text.trim());
   }
-}
+};
 
 const conky = async () => {
   const conkyrc = path.join(__dirname, 'conkyrc-tint2');
@@ -157,7 +157,7 @@ const conky = async () => {
   instance.stdout.pipe(JSONStream.parse()).on('data', (result) => {
     data.conky = result;
   }); 
-}
+};
 
 const mounts = async () => {
   while (true) {
@@ -176,7 +176,7 @@ const mounts = async () => {
     } catch {}
     await timers.setTimeout(10 * 1000);
   }
-}
+};
 
 const ping = () => {
   const ticks = () => process.hrtime.bigint();
@@ -209,7 +209,7 @@ const ping = () => {
       ping(); // ws crashed
     }, 5000);
   });
-}
+};
 
 const diskusage = async () => {
   const dudir = path.join(os.homedir(), '.local/share/diskusage');
@@ -242,7 +242,7 @@ const diskusage = async () => {
     } catch {}
     await timers.setTimeout(5 * 60 * 1000);
   }
-}
+};
 
 const weather = async () => {
   const station = 'Zagreb-Maksimir';
@@ -260,14 +260,14 @@ const weather = async () => {
     data.weather = temp && temp[1] && (temp[1].length < 10) ? { temp: temp[1].trim().split('.')[0] } : null;
     await timers.setTimeout(60 * 60 * 1000);
   }
-}
+};
 
 const main = async () => {
   while (true) {
     print();
     await timers.setTimeout(1000);
   }
-}
+};
 
 conky();
 mounts();
