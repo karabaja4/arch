@@ -11,5 +11,14 @@ then
     if [ "$(xprintidle)" -gt 300000 ] # 5 min = 300000 ms
     then
         xset dpms force off
+        exit 0
     fi
+fi
+
+# if we didn't exit, means computer is used
+# ping disk to prevent spindown
+_mp="${HOME}/_disk"
+if mountpoint -q "${_mp}"
+then
+    printf '%s\n' 'ping' > "${_mp}/ping"
 fi
