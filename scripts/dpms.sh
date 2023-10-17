@@ -20,5 +20,5 @@ fi
 _mp="${HOME}/_disk"
 if mountpoint -q "${_mp}"
 then
-    printf '%s\n' 'ping' > "${_mp}/ping"
+    printf '%s\n' "$(date -Is)" > "${_mp}/ping"
 fi
