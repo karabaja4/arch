@@ -175,7 +175,7 @@ const mounts = async () => {
       data.mounts = result;
     } catch {}
     // increase timeout if everything is mounted
-    let timeout = 180;
+    let timeout = 600;
     for (let i = 0; i < disks.length; i++) {
       if (!data?.mounts?.[disks[i].mountpoint]) {
         timeout = 10;
