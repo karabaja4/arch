@@ -174,7 +174,15 @@ const mounts = async () => {
       }
       data.mounts = result;
     } catch {}
-    await timers.setTimeout(10 * 1000);
+    // increase timeout if everything is mounted
+    let timeout = 180;
+    for (let i = 0; i < disks.length; i++) {
+      if (!data?.mounts?.[disks[i].mountpoint]) {
+        timeout = 10;
+        break;
+      }
+    }
+    await timers.setTimeout(timeout * 1000);
   }
 };
 
