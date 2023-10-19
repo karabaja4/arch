@@ -257,6 +257,7 @@ const weather = async () => {
   const url = 'https://vrijeme.hr/hrvatska_n.xml';
   while (true) {
     let temp = null;
+    let success = true;
     try {
       const response = await fetch(url, { method: 'GET' });
       if (response.status === 200) {
@@ -264,9 +265,11 @@ const weather = async () => {
         const regex = new RegExp(`<GradIme>${station}<\/GradIme>.+?<Temp>(.+?)<\/Temp>`, 's');
         temp = data.match(regex);
       }
-    } catch {}
+    } catch {
+      success = false;
+    }
     data.weather = temp && temp[1] && (temp[1].length < 10) ? { temp: temp[1].trim().split('.')[0] } : null;
-    await timers.setTimeout(60 * 60 * 1000);
+    await timers.setTimeout(success ? (60 * 60 * 1000) : (10 * 1000));
   }
 };
 
