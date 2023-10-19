@@ -7,7 +7,7 @@ _secret="/etc/secret/secret.json"
 _record=$(jq -r ".dns .record" "${_secret}")
 _token=$(jq -r ".dns .token" "${_secret}")
 
-_echo "$(basename "${0}") @ $(readlink /proc/$$/exe)"
+_echo "$(_script_fn) @ $(_shell_path)"
 _echo "Secret: ${_secret}"
 _echo "Record: ${_record}"
 

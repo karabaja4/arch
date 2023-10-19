@@ -3,6 +3,32 @@ set -u
 IFS='
 '
 
+# prints current shell path
+_shell_path() {
+    readlink /proc/$$/exe
+}
+
+# prints current script path
+_script_fp() {
+    readlink -f "${0}"
+}
+
+# prints current dir
+_script_dir() {
+    dirname "$(_script_fp)"
+}
+
+# prints current script file name
+_script_fn() {
+    basename "$(_script_fp)"
+}
+
+# if script is symlinked, prints link name
+# otherwise prints script name
+_script_ln() {
+    basename "${0}"
+}
+
 # print text
 # usage: _echo "<text1>" "<text2>"
 # each parameter will be printed as a new line

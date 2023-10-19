@@ -49,7 +49,7 @@ _list() {
 }
 
 _play_sound() {
-    sed -n '/^# ----- SOUND START -----$/,/^# ----- SOUND END -----$/p' "$(readlink -f "${0}")" \
+    sed -n '/^# ----- SOUND START -----$/,/^# ----- SOUND END -----$/p' "$(_script_fp)" \
         | sed 's/^..//;1d;$d' \
         | base64 -d \
         | gunzip \

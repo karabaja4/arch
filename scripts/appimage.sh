@@ -17,11 +17,7 @@ _exec() {
     exec "${@}" 
 }
 
-_filename="$(basename "${0}")"
-_scriptpath="$(readlink -f "${0}")"
-_scriptname="$(basename "${_scriptpath}")"
-
-case "${_filename}" in
+case "$(_script_ln)" in
 onlyoffice-desktopeditors)
     _exec /opt/appimage/DesktopEditors-x86_64.AppImage "${@}"
     ;;
@@ -31,8 +27,8 @@ krita)
 inkscape)
     _exec "$(_latest /opt/appimage/Inkscape-*-x86_64.AppImage)" "${@}"
     ;;
-"${_scriptname}")
-    _echo "Symlink the script to the app, e.g. ln -s ${_scriptpath} /usr/bin/onlyoffice-desktopeditors"
+"$(_script_fn)")
+    _echo "Symlink the script to the app, e.g. ln -s $(_script_fp) /usr/bin/onlyoffice-desktopeditors"
     ;;
 *)
     _echo "Unknown app"
