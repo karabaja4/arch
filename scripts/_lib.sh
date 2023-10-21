@@ -77,7 +77,7 @@ _passwd() {
     then
         _err 200 "This function needs an argument."
     fi
-    __u="$(users | tr ' ' '\n' | sort | uniq)"
+    __u="$(users | tr ' ' '\n' | sort -u)"
     __uc="$(_echo "${__u}" | grep -c -v '^\s*$')"
     if [ "${__uc}" -ne 1 ]
     then
