@@ -78,7 +78,7 @@ _passwd() {
         _err 200 "This function needs an argument."
     fi
     __u="$(users | tr ' ' '\n' | sort | uniq)"
-    __uc="$(_echo "${__u}" | grep -cv '^\s*$')"
+    __uc="$(_echo "${__u}" | grep -c -v '^\s*$')"
     if [ "${__uc}" -ne 1 ]
     then
         _err 201 "Cannot find a single logged in user (${__uc})."
