@@ -9,6 +9,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=true
 export LESSHISTFILE=/dev/null
 export BROWSER='firefox-socket'
 export HISTFILESIZE=2000
+export GIT_PS1_SHOWCONFLICTSTATE="no"
 
 # vnc does not export $SHELL
 export SHELL='/bin/bash'
