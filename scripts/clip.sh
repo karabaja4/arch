@@ -112,7 +112,7 @@ _iteration() {
             if [ "${_match}" = "${_utf8}" ]
             then
                 printf '%s\n' "$(cat "${_out}")" >> "${_history}"
-                _log "Saved to history"
+                _log "Added to history ${_history}"
             fi
 
             # read temp file, take ownership of clipboard and wait for pastes
