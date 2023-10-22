@@ -16,7 +16,7 @@ case "${_arg1}" in
 esac
 
 _log() {
-    _color_echo 34 "${1}"
+    _color_echo 94 "${1}"
 }
 
 _must_be_root
@@ -41,7 +41,7 @@ fi
 if [ -z "${_arg1}" ]
 then
     # no argument given, autodetect interface
-    _count="$(_echo "${_interface}" | wc -l)"
+    _count="$(_nelc "${_interface}")"
     if [ "${_count}" -ne 1 ]
     then
         _err 102 "More than one interface found:" \
