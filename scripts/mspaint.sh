@@ -41,7 +41,7 @@ case "${_match}" in
             convert "${_out}" "${_match##*/}:${_out}"
             printf '%s\n' "${_match}"
         else
-            _log "Not converting ${_match}"
+            _log "Keeping ${_match}"
         fi
     fi
     ;;
