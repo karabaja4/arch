@@ -12,10 +12,10 @@ then
 fi
 
 _secret="/etc/secret/secret.json"
+_username="$(jq -crM '.azure.username' "${_secret}")"
+_password="$(jq -crM '.azure.password' "${_secret}")"
 
-_azure() {
-    _username="$(jq -crM '.azure.username' "${_secret}")"
-    _password="$(jq -crM '.azure.password' "${_secret}")"
+_mount() {
     mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",dir_mode=0755,file_mode=0644,serverino,nosharesock,actimeo=30 "${@}"
 }
 
@@ -25,5 +25,5 @@ _private="${_home}/_private"
 mkdir -p "${_public}"
 mkdir -p "${_private}"
 
-_azure "//linode.file.core.windows.net/public1" "${_public}"
-_azure "//linode.file.core.windows.net/private1" "${_private}"
+_mount "//linode.file.core.windows.net/public1" "${_public}"
+_mount "//linode.file.core.windows.net/private1" "${_private}"
