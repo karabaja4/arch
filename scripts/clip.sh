@@ -13,9 +13,10 @@ _utf8="UTF8_STRING"
 
 _out="/tmp/xclip.out"
 _history="/tmp/xclip.history"
+_script="$(basename "${0}")"
 
 _log() {
-    printf '\033[32m->\033[0m %s' "${1}" | xargs
+    printf '[\033[94m%s\033[0m] %s' "${_script}" "${1}" | xargs >&2
 }
 
 _usage() {
@@ -99,10 +100,10 @@ _iteration() {
     fi
 }
 
-_log "$(basename "${0}") @ $(readlink /proc/$$/exe)"
+_log "Shell: $(readlink /proc/$$/exe)"
 while true
 do
-    _log "start"
+    _log "Start"
     _iteration
-    _log "end"
+    _log "End"
 done
