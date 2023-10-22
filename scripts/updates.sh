@@ -24,7 +24,7 @@ _aur() {
 
     if [ "${_aur_rv}" -eq 0 ] && [ -n "${_aur_out}" ]
     then
-        _aur_wc="$(echo "${_aur_out}" | wc -l)"
+        _aur_wc="$(_nelc "${_aur_out}")"
     elif [ "${_aur_rv}" -eq 1 ] && [ -z "${_aur_out}" ]
     then
         _aur_wc="0"
@@ -47,7 +47,7 @@ _cu() {
 
     if [ "${_cu_rv}" -eq 0 ] && [ -n "${_cu_out}" ]
     then
-        _cu_wc="$(echo "${_cu_out}" | wc -l)"
+        _cu_wc="$(_nelc "${_cu_out}")"
     elif [ "${_cu_rv}" -eq 2 ] && [ -z "${_cu_out}" ]
     then
         _cu_wc="0"

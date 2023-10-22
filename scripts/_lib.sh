@@ -38,7 +38,12 @@ _echo() {
 
 # non-empty line count
 _nelc() {
-    grep -c -v '^\s*$'
+    if [ "${#}" -eq 0 ]
+    then
+        grep -c -v '^\s*$'
+    else
+        _echo "${@}" | grep -c -v '^\s*$'
+    fi
 }
 
 # exit with an error and print text to stderr
@@ -83,7 +88,7 @@ _passwd() {
         _err 200 "This function needs an argument."
     fi
     __u="$(users | tr ' ' '\n' | sort -u)"
-    __uc="$(_echo "${__u}" | _nelc)"
+    __uc="$(_nelc "${__u}")"
     if [ "${__uc}" -ne 1 ]
     then
         _err 201 "Cannot find a single logged in user (${__uc})."
