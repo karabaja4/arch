@@ -14,6 +14,7 @@ _usage() {
 [ "${#}" -ne 1 ] && _usage
 
 _user="$(_passwd 1)"
+_uid="$(_passwd 3)"
 
 # if there is no logged in user, exit
 if [ -z "${_user}" ]
@@ -45,7 +46,6 @@ _mount() (
 
     case "${_fstype}" in
     vfat|ntfs)
-        _uid="$(id -u "${_user}")"
         mount -o uid="${_uid}",fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
         ;;
     ext*|jfs|reiserfs|xfs|f2fs|btrfs|nilfs2|hfsplus)
