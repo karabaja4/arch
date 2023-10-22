@@ -42,12 +42,12 @@ _err() {
     __ec="${1-}"
     if [ -z "${__ec}" ]
     then
-        _echo "This function needs an argument."
+        _echo "This function needs an argument." >&2
         exit 255
     fi
     case "${__ec}" in
         ''|*[!0-9]*)
-            _echo "Invalid exit code (not integer)."
+            _echo "Invalid exit code (not integer)." >&2
             exit 255
             ;;
         *)
@@ -60,7 +60,7 @@ _err() {
                 fi
                 exit "${__ec:-255}"
             else
-                _echo "Invalid exit code (not between 0-255)."
+                _echo "Invalid exit code (not between 0-255)." >&2
                 exit 255
             fi
             ;;
