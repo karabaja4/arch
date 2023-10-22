@@ -33,7 +33,7 @@ do
 done
 
 # cleanup /mnt
-"${_home}/arch/scripts/usb.sh"
+"$(_script_dir)/usb.sh"
 
 rm -rf "${_home}/.cache"
 
