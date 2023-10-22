@@ -100,7 +100,7 @@ _iteration() {
     fi
 }
 
-_log "Shell: $(readlink /proc/$$/exe)"
+_log "${_script} @ $(readlink /proc/$$/exe)"
 while true
 do
     _log "Start"
