@@ -76,8 +76,8 @@ _iteration() {
             # just ignore this block, it's for my benefit only
             case "${_match}" in
             "image/"*)
-                _exe="mspaint.exe"
-                if pgrep -x "${_exe}" > /dev/null && \
+                _mspaint="mspaint.exe"
+                if pgrep -x "${_mspaint}" > /dev/null && \
                    command -v "convert" > /dev/null && \
                    command -v "xset" > /dev/null
                 then
@@ -88,7 +88,7 @@ _iteration() {
                         # only do this if numlock is on so it's controllable
                         # because pngs can't be pasted back to mspaint
                         _numlock="$(xset q | sed -n 's/^.*Num Lock:\s*\(\S*\).*$/\1/p')"
-                        _log "[${_exe}] Num Lock is ${_numlock}"
+                        _log "[${_mspaint}] NUMLOCK is ${_numlock}"
                         if [ "${_numlock}" = "on" ]
                         then
                             _match="image/png"
@@ -99,10 +99,10 @@ _iteration() {
                     fi
                     if [ "${_oldmatch}" != "${_match}" ]
                     then
-                        _log "[${_exe}] Converting from ${_oldmatch} to ${_match}"
+                        _log "[${_mspaint}] Converting from ${_oldmatch} to ${_match}"
                         convert "${_out}" "${_match##*/}:${_out}"
                     else
-                        _log "[${_exe}] Not converting ${_match}"
+                        _log "[${_mspaint}] Not converting ${_match}"
                     fi
                 fi
                 ;;
