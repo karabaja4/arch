@@ -156,6 +156,7 @@ const conky = async () => {
   const instance = cp.spawn('conky', ['-q', '-c', conkyrc]);
   instance.stdout.pipe(JSONStream.parse()).on('data', (result) => {
     data.conky = result;
+    print();
   }); 
 };
 
@@ -270,16 +271,8 @@ const weather = async () => {
   }
 };
 
-const main = async () => {
-  while (true) {
-    print();
-    await timers.setTimeout(1000);
-  }
-};
-
-conky();
 mounts();
 ping();
 diskusage();
 weather();
-main();
+conky(); // conky calls print() on each update event
