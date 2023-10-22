@@ -21,7 +21,6 @@ _umount() {
 }
 
 _home="$(_passwd 6)"
-
 if [ -z "${_home}" ]
 then
     _err 101 "Cannot find user's home"
