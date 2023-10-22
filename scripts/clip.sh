@@ -5,6 +5,7 @@ set -u
 _pref="
 image/png
 image/bmp
+image/jpeg
 text/uri-list
 code/file-list
 "
