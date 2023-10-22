@@ -14,13 +14,12 @@ _usage() {
 [ "${#}" -ne 1 ] && _usage
 
 _user="$(_passwd 1)"
-_uid="$(_passwd 3)"
-
-# if there is no logged in user, exit
 if [ -z "${_user}" ]
 then
+    # if there is no logged in user, exit
     exit 0
 fi
+_uid="$(_passwd 3)"
 
 _mkdir() {
     install -m 0755 -g "${_user}" -o "${_user}" -d "${1}"
