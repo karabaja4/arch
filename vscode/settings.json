@@ -4,7 +4,7 @@
     "editor.fontSize": 14,
     "editor.letterSpacing": 0,
     "explorer.openEditors.visible": 1,
-    "workbench.editor.showTabs": true,
+    "workbench.editor.showTabs": "multiple",
     "workbench.sideBar.location": "right",
     "search.exclude":
     {
