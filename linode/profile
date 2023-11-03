@@ -16,4 +16,4 @@ _bold="\033[1m"
 _blue="\033[94m"
 _reset="\033[0m"
 
-PS1="\w \[${_blue}\]\[${_bold}\]avacyn3 >>\[${_reset}\] "
+PS1="\w \[${_blue}\]\[${_bold}\]avacyn4 >>\[${_reset}\] "
