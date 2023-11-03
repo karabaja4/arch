@@ -12,5 +12,5 @@ output_log="/var/log/${RC_SVCNAME}.log"
 export NODE_ENV="production"
 
 depend() {
-	use net
+        use net
 }

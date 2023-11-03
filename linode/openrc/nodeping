@@ -1,5 +1,5 @@
 #!/sbin/openrc-run
- 
+
 user="nodey"
 group="nodey"
 command="/usr/bin/node"
@@ -7,7 +7,7 @@ command_args="/var/www/ping/ping.js"
 command_user="${user}:${group}"
 command_background="yes"
 pidfile="/run/${RC_SVCNAME}.pid"
- 
+
 depend() {
-	use net
+        use net
 }
