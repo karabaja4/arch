@@ -105,5 +105,6 @@
     },
     "editor.roundedSelection": false,
     "diffEditor.experimental.showEmptyDecorations": false,
-    "window.commandCenter": false
+    "window.commandCenter": false,
+    "editor.useTabStops": false
 }
