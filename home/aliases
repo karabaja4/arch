@@ -2,7 +2,7 @@
 
 alias ls='LC_COLLATE=C ls -A -l -h -N --color=always --group-directories-first --time-style="+[%Y-%m-%dT%H:%M:%S]"'
 alias chx='chmod +x'
-alias permof='/home/igor/arch/scripts/permof.sh'
+#alias permof='/home/igor/arch/scripts/permof.sh'
 alias sizeof='du -sh'
 alias grep='grep --color'
 alias c='clear'
