@@ -19,7 +19,7 @@ _usage() {
 if [ "${#}" -eq 2 ]
 then
     # start
-    if [ "${1}" = "start" ] 
+    if [ "${1}" = "start" ]
     then
         rc-service "${2}" start
 
