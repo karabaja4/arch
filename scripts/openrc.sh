@@ -3,16 +3,16 @@ set -eu
 
 _usage() {
     _bn="$(basename "${0}")"
-    printf '%s\n' "Usage: ${_bn} [--help] <action> [daemon]" \
+    printf '%s\n' "Usage: ${_bn} <action> [service]" \
                   "" \
                   "Actions:" \
-                  "   ${_bn} start [daemon]    starts daemon" \
-                  "   ${_bn} stop [daemon]     stops daemon" \
-                  "   ${_bn} restart [daemon]  restarts daemon" \
-                  "   ${_bn} status [daemon]   daemon status" \
-                  "   ${_bn} enable [daemon]   enable daemon" \
-                  "   ${_bn} disable [daemon]  disable daemon" \
-                  "   ${_bn} list              shows status of all daemons"
+                  "   ${_bn} start [service]    starts service" \
+                  "   ${_bn} stop [service]     stops service" \
+                  "   ${_bn} restart [service]  restarts service" \
+                  "   ${_bn} status [service]   service status" \
+                  "   ${_bn} enable [service]   enable service" \
+                  "   ${_bn} disable [service]  disable service" \
+                  "   ${_bn} list               shows status of all services"
     exit 1
 }
 
@@ -56,6 +56,8 @@ then
     if [ "${1}" = "list" ]
     then
         rc-update -v show
+    else
+        _usage
     fi
 else
     _usage
