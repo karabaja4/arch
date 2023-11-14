@@ -106,5 +106,6 @@
     "editor.roundedSelection": false,
     "diffEditor.experimental.showEmptyDecorations": false,
     "window.commandCenter": false,
-    "editor.useTabStops": false
+    "editor.useTabStops": false,
+    "editor.trimAutoWhitespace": false
 }
