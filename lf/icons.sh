@@ -130,6 +130,7 @@ fi=📄:\
 *.desktop=🌠:\
 *.rdp=📡:\
 *.ttf=💯:\
+*.otf=💯:\
 /home/igor=🏡:\
 /home/igor/_disk=💿:\
 /home/igor/_mmc=💿:\
