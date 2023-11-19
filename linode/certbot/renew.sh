@@ -18,4 +18,4 @@ certbot renew \
    --work-dir "${_work}" \
    --config-dir "${_config}" \
    --logs-dir "${_logs}" \
-   --deploy-hook "${_hook}" >> "${_home}/renew.log" 2>&1
+   --deploy-hook "${_hook}"
