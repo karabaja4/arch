@@ -8,7 +8,6 @@ image/bmp
 image/jpeg
 text/uri-list
 code/file-list
-chromium/x-web-custom-data
 "
 _utf8="UTF8_STRING"
 
