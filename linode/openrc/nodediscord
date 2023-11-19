@@ -3,7 +3,7 @@
 user="nodey"
 group="nodey"
 command="/usr/bin/node"
-command_args="/var/www/discord-api/src/main.js"
+command_args="/var/www/discordapi/src/main.js"
 command_user="${user}:${group}"
 command_background="yes"
 pidfile="/run/${RC_SVCNAME}.pid"
