@@ -1,7 +1,7 @@
 #!/bin/sh
 set -u
 
-_home="${HOME}/certbot"
+_home="$(dirname "$(readlink -f "${0}")")"
 _root="/var/www/certbot"
 
 _work="${_root}/work"
