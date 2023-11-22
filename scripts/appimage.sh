@@ -15,6 +15,9 @@ krita)
 inkscape)
     exec "/opt/appimage/Inkscape-5ab75fa-x86_64.AppImage" "${@}"
     ;;
+bruno)
+    exec "/opt/appimage/bruno_1.2.0_x86_64_linux.AppImage" "${@}"
+    ;;
 "$(_script_fn)")
     _echo "Symlink the script to the app, e.g. ln -s $(_script_fp) /usr/bin/onlyoffice-desktopeditors"
     ;;
