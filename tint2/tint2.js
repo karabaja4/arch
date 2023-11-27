@@ -266,7 +266,7 @@ const weather = async () => {
         temp = data.match(regex);
       }
     } catch {}
-    data.weather = temp && temp[1] && (temp[1].length < 10) ? { temp: Math.round(temp[1].trim().split('.')[0]).toString() } : null;
+    data.weather = temp && temp[1] && (temp[1].length < 10) ? { temp: Math.round(temp[1].trim()).toString() } : null;
     await timers.setTimeout(data.weather ? (60 * 60 * 1000) : (60 * 1000));
   }
 };
