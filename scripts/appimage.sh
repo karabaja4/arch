@@ -13,7 +13,7 @@ krita)
     exec "/opt/appimage/krita-5.2.0-x86_64.appimage" "${@}"
     ;;
 inkscape)
-    exec "/opt/appimage/Inkscape-5ab75fa-x86_64.AppImage" "${@}"
+    exec "/opt/appimage/Inkscape-091e20e-x86_64.AppImage" "${@}"
     ;;
 bruno)
     exec "/opt/appimage/bruno_1.2.0_x86_64_linux.AppImage" "${@}"
