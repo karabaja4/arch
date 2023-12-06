@@ -6,8 +6,8 @@ modprobe r8169
 for _i in $(seq 100)
 do
     ip link | grep -Fq "${_ethernet}" && break
-    printf 'Waiting on %s to come up (%s)' "${_ethernet}" "${_i}"
-    sleep 0.5
+    printf 'Waiting on %s to come up (%s)\n' "${_ethernet}" "${_i}"
+    sleep 1
 done
 ip link set "${_ethernet}" up
 
