@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# Windows 7 bug workaround
+# Rebooting from Arch to Windows 7 leaves ethernet adapter in an unusuable state
+# blacklist both r8168 and r8169 in /etc/modprobe.d/blacklist.conf
+# on boot load r8169 (default module)
+# on shutdown remove r8169 and load r8168 which leaves the card in a usable state
+# r8168 is unstable for normal use (drops when used with VirtualBox), it is provided by r8168-lts package
+modprobe r8169
+sleep 3
+
 # bring ethernet interface up so udhcpc can operate
 /usr/bin/ip link set enp2s0 up
 
