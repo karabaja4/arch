@@ -1,6 +1,14 @@
 #!/bin/sh
 
 # bring ethernet interface up so udhcpc can operate
+_ethernet='enp2s0'
+modprobe r8169
+for _i in $(seq 100)
+do
+    ip link | grep -Fq "${_ethernet}" && break
+    printf 'Waiting on %s (%s) to come up' "${_ethernet}" "${_i}"
+    sleep 0.2
+done
 /usr/bin/ip link set enp2s0 up
 
 _uid="1000"
