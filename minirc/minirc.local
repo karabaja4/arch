@@ -9,7 +9,7 @@ do
     printf 'Waiting on %s (%s) to come up' "${_ethernet}" "${_i}"
     sleep 0.2
 done
-/usr/bin/ip link set "${_ethernet}" up
+ip link set "${_ethernet}" up
 
 _uid="1000"
 _user="$(getent passwd "${_uid}" | cut -d':' -f1)"
