@@ -8,7 +8,7 @@ hwclock --systohc
 # Rebooting from Arch to Windows 7 leaves ethernet adapter in an unusuable state
 # blacklist r8168 and r8169 in /etc/modprobe.d/blacklist.conf
 # r8169 is also blacklisted in /usr/lib/modprobe.d/r8168-lts.conf (provided by r8168-lts package)
-# on boot r8169 is loaded manually by minirc.local
+# on boot r8169 is modprobed manually by minirc.local
 # on shutdown drop r8169 and modprobe r8168 which leaves the card in a usable state
 # r8168 is unstable for normal use (drops when used with VirtualBox)
 ifconfig enp2s0 down
