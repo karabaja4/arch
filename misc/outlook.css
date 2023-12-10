@@ -32,23 +32,9 @@
   border-radius: 0 !important;
 }
 
-/* navigation rounded selection */
-.C2IG3.LPIso {
-  border-radius: 0 !important;
-}
-
 /* remove padding right from navigation selection */
 .slWCo {
   padding-right: 0 !important;
-}
-
-/* ads on top of emails */
-#SearchAnswerTop {
-  display: none !important;
-}
-
-.s8wta {
-  display: none !important;
 }
 
 /* ad area on top (it dissapears) */
@@ -56,20 +42,21 @@
   display: none !important;
 }
 
-/* search input border radius */
-.Q_UnC.H_9Db {
-  border-radius: 0 !important;
-}
-
-#searchBoxId-Mail {
-  border-radius: 0 !important;
-}
-
-/* bigger scrollbar */
-.customScrollBar {
-  scrollbar-width: unset !important;
-}
-
 .kk1xx._Bfyd.iIsOF.yedzL.L18y8 {
   display: none !important;
+}
+
+/* empty e-mail on top when reading list is enabled */
+.ab0a0.jYY8g {
+  display: none !important;
+}
+
+/* remove From, Subject, Received header so e-mails don't move on load */
+.s8wta {
+  display: none !important;
+}
+
+/* restore fat scrollbars */
+.customScrollBar {
+  scrollbar-width: unset !important;
 }
