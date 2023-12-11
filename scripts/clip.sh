@@ -27,7 +27,7 @@ _usage() {
 [ "${#}" -gt 0 ] && _usage
 
 _iteration() {
-    
+
     # target test of current selection
     _tc="$(xclip -selection clipboard -o -t TARGETS)"
     _tcec="${?}"
