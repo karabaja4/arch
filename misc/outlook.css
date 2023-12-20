@@ -14,7 +14,7 @@
 }
 
 /* groups in navigation */
-.slWCo > div:nth-of-type(3) {
+.slWCo > div > div:nth-of-type(3) {
   display: none !important;
 }
 
