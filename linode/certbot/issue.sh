@@ -29,5 +29,7 @@ certbot certonly \
    --dns-digitalocean \
    --dns-digitalocean-credentials "${_creds}" \
    --cert-name "${_certname}" \
+   --key-type rsa \
+   --rsa-key-size 4096 \
    -d "${_domain1}" \
    -d "*.${_domain1}"
