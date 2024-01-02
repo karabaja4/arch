@@ -17,7 +17,7 @@ _username="$(jq -crM '.smb.username' "${_secret}")"
 _password="$(jq -crM '.smb.password' "${_secret}")"
 
 _mount() {
-    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644 "${@}"
+    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,nosharesock,actimeo=30 "${@}"
 }
 
 _public="${_home}/_public"
