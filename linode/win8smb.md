@@ -256,7 +256,7 @@ Function Remove-Host { Param(
 }
 ```
 
-### 7. Source the script and Create-Host
+### 7. (powershell) Source the script and Create-Host
 
 ```ps1
 . .\smb.ps1
@@ -265,7 +265,13 @@ Create-Host -Name radiance -Ip 10.254.0.1 -Dest 116.202.8.165 -Port 44555
 
 Reboot.
 
-### 8. Add SMB server
+### 8. (powershell) Verify that the port is listening
+
+```ps1
+netstat -an | sls ':445'
+```
+
+### 9. Add SMB server
 
 ```
 \\10.254.0.1\public
