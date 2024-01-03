@@ -272,6 +272,10 @@ Reboot.
 ```ps1
 netstat -an | sls ':445'
 ```
+Should be:
+```ps1
+TCP    10.254.0.1:445         0.0.0.0:0              LISTENING
+```
 
 ### 9. Add SMB server
 
