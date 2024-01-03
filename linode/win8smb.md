@@ -12,6 +12,8 @@ Reboot.
 sc config lanmanserver start= delayed-auto
 ```
 
+Also make sure "IP Helper" is set to Automatic.
+
 Reboot.
 
 ### 3. (powershell) Enable unrestricted execution
