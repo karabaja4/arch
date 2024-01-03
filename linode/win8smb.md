@@ -287,8 +287,8 @@ or
 
 ## References
 
-https://superuser.com/questions/702948/how-to-mount-a-samba-share-on-non-standard-port
-https://apolonioserafim.blogspot.com/2021/05/acessar-servidor-samba-em-porta.html
-https://superuser.com/questions/1094931/ssh-tunnel-on-windows-10-to-linux-samba
-https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system
-https://devblogs.microsoft.com/powershell/when-powershellget-v1-fails-to-install-the-nuget-provider/
+* https://superuser.com/questions/702948/how-to-mount-a-samba-share-on-non-standard-port
+* https://apolonioserafim.blogspot.com/2021/05/acessar-servidor-samba-em-porta.html
+* https://superuser.com/questions/1094931/ssh-tunnel-on-windows-10-to-linux-samba
+* https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system
+* https://devblogs.microsoft.com/powershell/when-powershellget-v1-fails-to-install-the-nuget-provider/
