@@ -1,2 +1,3 @@
 0 1 * * *     /home/igor/certbot/renew.sh >> /home/igor/certbot/renew.log 2>&1
 0 * * * *     /home/igor/outlook/keepalive.sh >> /home/igor/outlook/keepalive.log 2>&1
+0 10 10 * *   /home/igor/rent/rent.sh >> /home/igor/rent/rent.log 2>&1
