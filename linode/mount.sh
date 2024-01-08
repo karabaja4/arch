@@ -13,4 +13,4 @@ _mount() {
 _mount "//linode.file.core.windows.net/hacker" "/var/www/public/hacker"
 
 # private mounts
-_mount "//linode.file.core.windows.net/azure" "/var/samba/private/azure"
+_mount "//linode.file.core.windows.net/azure" "/home/igor/private/azure"
