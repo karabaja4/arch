@@ -8,9 +8,9 @@ _echo() {
 
 _config="${HOME}/git/racuni-mailer/src/config.json"
 
-for _item in $(jq -crM '.templates[] | { sender, password }' "${_config}")
+for _item in $(jq -crM '.templates[] | { username, password }' "${_config}")
 do
-    _username="$(_echo "${_item}" | jq -crM '.sender')"
+    _username="$(_echo "${_item}" | jq -crM '.username')"
     _password="$(_echo "${_item}" | jq -crM '.password')"
     _echo "[$(date -Is)] ${_username}:"
     curl -s -u "${_username}:${_password}" -X 'LIST "" "*"' --url 'imaps://outlook.office365.com:993/INBOX'
