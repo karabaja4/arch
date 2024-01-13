@@ -13,6 +13,6 @@ do
     _username="$(_echo "${_item}" | jq -crM '.username')"
     _password="$(_echo "${_item}" | jq -crM '.password')"
     _echo "[$(date -Is)] ${_username}:"
-    curl -m 30 -u "${_username}:${_password}" -X 'LIST "" "*"' --url 'imaps://outlook.office365.com:993/INBOX'
+    curl -s -m 30 -u "${_username}:${_password}" -X 'LIST "" "*"' --url 'imaps://outlook.office365.com:993/INBOX'
     _echo "Exited with ${?}"
 done
