@@ -7,5 +7,5 @@ then
     curl -s -X POST 'https://api.radiance.hr/alerts' \
         --header "Authorization: ${_auth}" \
         --header 'Content-Type: application/json' \
-        --data-raw "{\"text\": \"Certbot reneweal complete!\nDirectory: ${RENEWED_LINEAGE:-"NOTSET"}\nDomains: ${RENEWED_DOMAINS:-"NOTSET"}\"}"
+        --data-raw "{\"text\": \"Certbot reneweal complete!\nDirectory: ${RENEWED_LINEAGE:-"NOTSET"}\nDomains: ${RENEWED_DOMAINS:-"NOTSET"}\n\"}"
 fi
