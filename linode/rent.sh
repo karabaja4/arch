@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -u
 
 _echo() {
     printf '%s %s\n' "[$(date -Is)]" "${1}"
@@ -9,10 +9,9 @@ _auth="$(jq -crM '.endpoints[] | select(.route=="/alerts") | .authorization' "/v
 if [ -n "${_auth}" ]
 then
     _echo "Sending alert to Discord"
-    curl -s -X POST 'https://api.radiance.hr/alerts' \
+    curl -i -s -f -X POST 'https://api.radiance.hr/alerts' \
         --header "Authorization: ${_auth}" \
         --header 'Content-Type: application/json' \
         --data-raw "{\"text\": \"Uplati si stanarinu sa firme za $(date +%-m). mjesec!\"}"
-    printf '\n'
     _echo "Exited with ${?}"
 fi
