@@ -2,7 +2,7 @@
 set -u
 
 _echo() {
-    printf '%s %s\n' "[$(date -Is)]" "${1}"
+    printf '[%s] %s\n' "$(date -Is)" "${1}"
 }
 
 _auth="$(jq -crM '.endpoints[] | select(.route=="/alerts") | .authorization' "/var/www/discordapi/src/config.json")"
