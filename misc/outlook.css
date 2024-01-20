@@ -60,3 +60,8 @@
 .customScrollBar {
   scrollbar-width: unset !important;
 }
+
+/* try microsoft 365 basic, bottom of navigation */
+.syTot {
+  display: none !important;
+}
