@@ -21,5 +21,6 @@
     "azure.noSystemKeychain": true,
     "[sql]": {
         "editor.defaultFormatter": "Microsoft.azuredatastudio-postgresql"
-    }
+    },
+    "extensions.autoUpdate": false
 }
