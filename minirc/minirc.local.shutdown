@@ -11,8 +11,12 @@ hwclock --systohc
 # on boot r8169 is modprobed manually by minirc.local
 # on shutdown drop r8169 and modprobe r8168 which leaves the card in a usable state
 # r8168 is unstable for normal use (drops when used with VirtualBox)
-_ethernet='enp2s0'
-printf 'Powering down %s\n' "${_ethernet}"
-ip link set "${_ethernet}" down
-modprobe -r r8169
-modprobe r8168
+# do only if kernel did not just upgrade
+if uname -a | grep -q "$(pacman -Q linux-lts | cut -d' ' -f2)"
+then
+    _ethernet='enp2s0'
+    printf 'Powering down %s\n' "${_ethernet}"
+    ip link set "${_ethernet}" down
+    modprobe -r r8169
+    modprobe r8168
+fi
