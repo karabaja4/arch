@@ -15,6 +15,8 @@ _vnc() {
     # raw inputs are necessary for VirtualBox keyboard layout
     # requires rawkeyboard=1 in vnc config
     setxkbmap hr
+    
+    wine /home/igor/work/ticker/MouseTicker.App.exe -qs
 }
 
 _desktop() {
