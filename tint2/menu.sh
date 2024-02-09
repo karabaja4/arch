@@ -99,6 +99,9 @@ obs)
 kvirc)
     _run kvirc
     ;;
+vncviewer)
+    _run vncviewer
+    ;;
 gaming)
     _keypress "Super_L+0"
     ;;
