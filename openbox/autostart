@@ -16,7 +16,7 @@ _vnc() {
     # requires rawkeyboard=1 in vnc config
     setxkbmap hr
     
-    wine /home/igor/work/ticker/MouseTicker.App.exe -qs
+    wine /home/igor/work/ticker/MouseTicker.App.exe -qs &
 }
 
 _desktop() {
