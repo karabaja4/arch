@@ -61,13 +61,8 @@ _mount() (
         rmdir "${_mntpath}"
     fi
     
-    # if herbe is installed, display notification
-    if command -v herbe > /dev/null 2>&1
-    then
-        export XAUTHORITY="/home/igor/.local/share/sx/xauthority"
-        export DISPLAY=":1"
-        herbe "Mounted ${_devpath} to ${_mntpath} (${_fstype})"
-    fi
+    # display notification
+    _herbe "Mounted ${_devpath} to ${_mntpath} (${_fstype})"
 )
 
 _enum() {
@@ -78,5 +73,19 @@ _enum() {
         _mount "${_part}"
     done
 }
+
+_herbe() {
+    if command -v herbe > /dev/null 2>&1
+    then
+        herbe "${@}"
+    fi
+}
+
+if command -v herbe > /dev/null 2>&1
+then
+    _home="$(_passwd 6)"
+    export XAUTHORITY="${_home}/.local/share/sx/xauthority"
+    export DISPLAY=":1"
+fi
 
 ( _enum "${1}" & ) > /dev/null 2>&1
