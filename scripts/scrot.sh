@@ -1,6 +1,5 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
-. "/home/igor/arch/scripts/_herbe.sh"
 
 set -eu
 
