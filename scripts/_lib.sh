@@ -163,6 +163,6 @@ _color_echo() {
 _herbe() {
     if command -v herbe > /dev/null 2>&1
     then
-        XAUTHORITY="$(_passwd 6)/.local/share/sx/xauthority" DISPLAY=":1" herbe "${@}"
+        ( XAUTHORITY="$(_passwd 6)/.local/share/sx/xauthority" DISPLAY=":1" herbe "${@}" & ) > /dev/null 2>&1
     fi
 }
