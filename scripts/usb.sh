@@ -11,5 +11,6 @@ do
     then
         umount -v "${_f}"
         rmdir -v "${_f}"
+        _herbe "Unmounted ${_f}"
     fi
 done

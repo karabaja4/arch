@@ -1,6 +1,5 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
-. "/home/igor/arch/scripts/_herbe.sh"
 
 # not -e because we want to try to iterate all partitions
 set -u

@@ -159,3 +159,10 @@ _color_echo() {
 
 # a-1  -> set "a" value to 1 only if a is unset
 # a:-1 -> set "a" value to 1 if "a" is unset or "a" is equal to ""
+
+_herbe() {
+    if command -v herbe > /dev/null 2>&1
+    then
+        XAUTHORITY="$(_passwd 6)/.local/share/sx/xauthority" DISPLAY=":1" herbe "${@}"
+    fi
+}
