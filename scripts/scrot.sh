@@ -1,5 +1,6 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
+. "/home/igor/arch/scripts/_herbe.sh"
 
 set -eu
 
@@ -31,11 +32,8 @@ then
     mv "${_vfn1}" "${_vfn2}"
     mv "${_hfn1}" "${_hfn2}"
     
-    # if herbe is installed, display notification
-    if command -v herbe > /dev/null 2>&1
-    then
-        herbe "Screenshot ${_ts} saved to ${_dir}"
-    fi
+    # display notification
+    _herbe "Screenshot ${_ts} saved to ${_dir}"
 fi
 
 _echo "done."

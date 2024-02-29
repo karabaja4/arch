@@ -1,5 +1,6 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
+. "/home/igor/arch/scripts/_herbe.sh"
 
 # not -e because we want to try to iterate all partitions
 set -u
@@ -73,19 +74,5 @@ _enum() {
         _mount "${_part}"
     done
 }
-
-_herbe() {
-    if command -v herbe > /dev/null 2>&1
-    then
-        herbe "${@}"
-    fi
-}
-
-if command -v herbe > /dev/null 2>&1
-then
-    _home="$(_passwd 6)"
-    export XAUTHORITY="${_home}/.local/share/sx/xauthority"
-    export DISPLAY=":1"
-fi
 
 ( _enum "${1}" & ) > /dev/null 2>&1
