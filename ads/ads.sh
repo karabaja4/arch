@@ -34,11 +34,11 @@ else
     _fail "${_js}"
 fi
 
-_sig='patched by karabaja4'
-if ! grep -q "${_sig}" "${_css}"
-then
-    printf '\n%s\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }'  "/* ${_sig} */" >> "${_css}"
-    _success "${_css}"
-else
-    _fail "${_css}"
-fi
+# _sig='patched by karabaja4'
+# if ! grep -q "${_sig}" "${_css}"
+# then
+#     printf '\n%s\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }'  "/* ${_sig} */" >> "${_css}"
+#     _success "${_css}"
+# else
+#     _fail "${_css}"
+# fi
