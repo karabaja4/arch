@@ -13,9 +13,11 @@ _fail() {
     printf '%s \033[31m%s\033[0m %s %s\n' '[' 'ERROR' ']' "${1} was not changed."
 }
 
+# set 2nd parameter of saveProfile forceWritePlaintextPassword to true
 _s1='this\._connectionStore\.saveProfile\((.{1,3}),void 0,(.{1,3})\)'
 _s2='this\._connectionStore\.saveProfile\(\1,true,\2\)'
 
+# do not show "installation appears to be corrupt" prompt
 _s3='\(.{1,3}\?\.dontShowPrompt&&.{1,3}\.commit===this\.productService.commit\)'
 _s4='\(true\)'
 
