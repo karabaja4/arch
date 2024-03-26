@@ -81,6 +81,9 @@ onlyoffice)
 thunderbird)
     _run thunderbird
     ;;
+zoom)
+    _run zoom
+    ;;
 work)
     _run /home/igor/arch/scripts/work.sh
     ;;
