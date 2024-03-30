@@ -2,14 +2,22 @@
 
 # bring ethernet interface up so udhcpc can operate
 _ethernet='enp2s0'
-modprobe r8169
 for _i in $(seq 100)
 do
-    ip link | grep -Fq "${_ethernet}" && break
-    printf 'Waiting on %s to come up (%s)\n' "${_ethernet}" "${_i}"
+    printf 'Waiting on interface %s to initialize (%s)\n' "${_ethernet}" "${_i}"
+    ip link | grep -Fq "${_ethernet}"
+    _ethec="${?}"
+    
+    # give some more time to settle
     sleep 1
+    
+    if [ "${_ethec}" -eq 0 ]
+    then
+        printf 'Interface %s is initialized, bringing interface up.\n' "${_ethernet}"
+        ip link set "${_ethernet}" up
+        break
+    fi
 done
-ip link set "${_ethernet}" up
 
 _uid="1000"
 _user="$(getent passwd "${_uid}" | cut -d':' -f1)"
