@@ -1,0 +1,32 @@
+#!/bin/sh
+set -eu
+IFS='
+'
+
+_echo() {
+    printf '\033[91m%s\033[0m\n' "${1}"
+}
+
+_src="${HOME}/yt.txt"
+_wd="${HOME}/ytdl"
+
+rm -rf "${_wd}"
+mkdir -p "${_wd}"
+
+_echo "Running yt-dlp for: ${_src}"
+yt-dlp -a "${_src}" -o "${_wd}/%(title)s.%(ext)s" -v --extract-audio --audio-format mp3
+
+_echo "Renaming files in: ${_wd}"
+(cd "${_wd}" && perl-rename -v 's/[^a-zA-Z0-9]//g; s/mp3$/.mp3/' ./*.mp3)
+
+# increase volume for Huawei Watch GT 2 Pro
+for _mp3 in "${_wd}/"*.mp3
+do
+    if [ -f "${_mp3}" ]
+    then
+        _echo "Running ffmpeg for: ${_mp3}"
+        _fixed="${_mp3}.fixed.mp3"
+        ffmpeg -i "${_mp3}" -af 'volume=3' "${_fixed}"
+        mv -v "${_fixed}" "${_mp3}"
+    fi
+done
