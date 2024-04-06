@@ -25,7 +25,7 @@ do
     if [ -f "${_mp3}" ]
     then
         _echo "Running ffmpeg for: ${_mp3}"
-        ffmpeg -i "${_mp3}" -af 'volume=3' "$(dirname "${_mp3}")/yt-$(basename "${_mp3}")"
+        ffmpeg -i "${_mp3}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "$(dirname "${_mp3}")/yt-$(basename "${_mp3}")"
         rm -v "${_mp3}"
     fi
 done
