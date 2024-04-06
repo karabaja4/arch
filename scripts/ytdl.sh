@@ -25,8 +25,7 @@ do
     if [ -f "${_mp3}" ]
     then
         _echo "Running ffmpeg for: ${_mp3}"
-        _fixed="${_mp3}.fixed.mp3"
-        ffmpeg -i "${_mp3}" -af 'volume=3' "${_fixed}"
-        mv -v "${_fixed}" "${_mp3}"
+        ffmpeg -i "${_mp3}" -af 'volume=3' "$(dirname "${_mp3}")/yt-$(basename "${_mp3}")"
+        rm -v "${_mp3}"
     fi
 done
