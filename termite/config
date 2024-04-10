@@ -49,6 +49,7 @@ cursor_shape = ibeam
 # is no longer possible to send a ^V to the running program when this option is
 # enabled.
 smart_copy = true
+copy_mouse_selection = true
 
 [colors]
 # If both of these are unset, cursor falls back to the foreground color,
