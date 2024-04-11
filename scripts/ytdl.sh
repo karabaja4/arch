@@ -7,11 +7,13 @@ _echo() {
     printf '\033[91m%s\033[0m\n' "${1}"
 }
 
-_src="${HOME}/yt.txt"
-_wd="${HOME}/ytdl"
+_src="${HOME}/ytdl.txt"
+_wd="${HOME}/ytdl-tmp"
+_dest="${HOME}/ytdl"
 
-rm -rf "${_wd}"
-mkdir -p "${_wd}"
+rm -vrf "${_wd}"
+mkdir -vp "${_wd}"
+mkdir -vp "${_dest}"
 
 (
     cd "${_wd}"
@@ -32,3 +34,7 @@ do
         rm -v "${_mp3}"
     fi
 done
+
+# move from temp to dest
+mv -v "${_wd}/"*.mp3 "${_dest}"
+rm -vrf "${_wd}"
