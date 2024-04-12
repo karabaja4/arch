@@ -22,19 +22,20 @@ mkdir -vp "${_dest}"
     
     _echo "Renaming files in: ${_wd}"
     perl-rename -v 's/[^a-zA-Z0-9]//g; s/mp3$/.mp3/' ./*.mp3
+    
+    # increase volume for Huawei Watch GT 2 Pro
+    for _mp3 in *.mp3
+    do
+        if [ -f "${_mp3}" ]
+        then
+            _echo "Running ffmpeg for: ${_mp3}"
+            _prod="yt-$(basename "${_mp3}")"
+            ffmpeg -i "${_mp3}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "${_prod}"
+            mv -v "${_prod}" "${_dest}"
+            rm -v "${_mp3}"
+        fi
+    done
 )
 
-# increase volume for Huawei Watch GT 2 Pro
-for _mp3 in "${_wd}/"*.mp3
-do
-    if [ -f "${_mp3}" ]
-    then
-        _echo "Running ffmpeg for: ${_mp3}"
-        ffmpeg -i "${_mp3}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "$(dirname "${_mp3}")/yt-$(basename "${_mp3}")"
-        rm -v "${_mp3}"
-    fi
-done
-
 # move from temp to dest
-mv -v "${_wd}/"*.mp3 "${_dest}"
 rm -vrf "${_wd}"
