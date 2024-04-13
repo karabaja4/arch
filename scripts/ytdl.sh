@@ -18,22 +18,23 @@ mkdir -vp "${_dest}"
 (
     cd "${_wd}"
     _echo "Running yt-dlp for: ${_src}"
-    yt-dlp -a "${_src}" -o "%(title)s.%(ext)s" -v --extract-audio --audio-format mp3
+    yt-dlp -a "${_src}" -o "%(title)s.%(ext)s" -v --extract-audio --audio-format best
     
     # clean up weird characters in file names
     _echo "Renaming files in: ${_wd}"
-    perl-rename -v 's/[^a-zA-Z0-9]//g; s/mp3$/.mp3/' ./*.mp3
+    perl-rename -v 's/[^a-zA-Z0-9](?![^.]*$)//g' ./*
     
     # increase volume for Huawei Watch GT 2 Pro
-    for _mp3 in *.mp3
+    for _original in ./*
     do
-        if [ -f "${_mp3}" ]
+        if [ -f "${_original}" ]
         then
-            _echo "Running ffmpeg for: ${_mp3}"
-            _prod="yt-$(basename "${_mp3}")"
-            ffmpeg -i "${_mp3}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "${_prod}"
-            mv -v "${_prod}" "${_dest}"
-            rm -v "${_mp3}"
+            _basename="$(basename "${_original}")"
+            _mp3="yt-${_basename%%.*}.mp3"
+            _echo "Converting ${_original} to ${_mp3}"
+            ffmpeg -i "${_original}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "${_mp3}"
+            mv -v "${_mp3}" "${_dest}"
+            rm -v "${_original}"
         fi
     done
 )
