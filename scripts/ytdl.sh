@@ -37,5 +37,5 @@ mkdir -vp "${_dest}"
     done
 )
 
-# move from temp to dest
+# remove working dir
 rm -vrf "${_wd}"
