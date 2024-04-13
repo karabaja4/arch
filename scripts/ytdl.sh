@@ -20,6 +20,7 @@ mkdir -vp "${_dest}"
     _echo "Running yt-dlp for: ${_src}"
     yt-dlp -a "${_src}" -o "%(title)s.%(ext)s" -v --extract-audio --audio-format mp3
     
+    # clean up weird characters in file names
     _echo "Renaming files in: ${_wd}"
     perl-rename -v 's/[^a-zA-Z0-9]//g; s/mp3$/.mp3/' ./*.mp3
     
