@@ -19,14 +19,16 @@ mkdir -vp "${_dest}"
 (
     cd "${_wd}"
     _echo "Running yt-dlp for: ${_src}"
+    
+    # youtube videos are (mostly?) in opus, so download native audio without re-encoding
     yt-dlp -a "${_src}" -o "%(title)s.%(ext)s" -v --extract-audio --audio-format opus
     
     # clean up weird characters in file names
     _echo "Renaming files in: ${_wd}"
-    perl-rename -v 's/[^a-zA-Z0-9](?![^.]*$)//g' ./*
+    perl-rename -v 's/[^a-zA-Z0-9](?![^.]*$)//g' ./*.opus
     
     # increase volume for Huawei Watch GT 2 Pro
-    for _original in ./*
+    for _original in ./*.opus
     do
         if [ -f "${_original}" ]
         then
