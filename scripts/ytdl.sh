@@ -10,6 +10,7 @@ _echo() {
 _src="${HOME}/ytdl.txt"
 _wd="${HOME}/ytdl-tmp"
 _dest="${HOME}/ytdl"
+_end="${HOME}/arch/misc/ding.opus"
 
 rm -vrf "${_wd}"
 mkdir -vp "${_wd}"
@@ -32,7 +33,7 @@ mkdir -vp "${_dest}"
             _basename="$(basename "${_original}")"
             _mp3="yt-${_basename%%.*}.mp3"
             _echo "Converting ${_original} to ${_mp3}"
-            ffmpeg -i "${_original}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "${_mp3}"
+            ffmpeg -i "concat:${_original}|${_end}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "${_mp3}"
             mv -v "${_mp3}" "${_dest}"
             rm -v "${_original}"
         fi
