@@ -19,7 +19,7 @@ mkdir -vp "${_dest}"
 (
     cd "${_wd}"
     _echo "Running yt-dlp for: ${_src}"
-    yt-dlp -a "${_src}" -o "%(title)s.%(ext)s" -v --extract-audio --audio-format best
+    yt-dlp -a "${_src}" -o "%(title)s.%(ext)s" -v --extract-audio --audio-format opus
     
     # clean up weird characters in file names
     _echo "Renaming files in: ${_wd}"
