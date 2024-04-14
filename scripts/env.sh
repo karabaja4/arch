@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # exports
-export QT_QPA_PLATFORMTHEME='qt5ct'
+export QT_QPA_PLATFORMTHEME='qt6ct'
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 export NO_AT_BRIDGE=1
 export EDITOR='nano'
