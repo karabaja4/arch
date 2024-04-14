@@ -19,14 +19,6 @@ do
     fi
 done
 
-_uid="1000"
-_user="$(getent passwd "${_uid}" | cut -d':' -f1)"
-_sysctl="/usr/lib/sysctl.d"
-
-_mkxdg() {
-    install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
-}
-
 # allow non-root to change fan speed
 chmod 666 /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
 
@@ -34,14 +26,14 @@ chmod 666 /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
 
-# increase virtual memory count
-printf '2147483642' > /proc/sys/vm/max_map_count
-
 # load (some) of the arch sysctl settings
-sysctl -p "${_sysctl}/10-arch.conf" "${_sysctl}/50-pid-max.conf" > /dev/null
+_loadsysctl() {
+    sysctl -p "/usr/lib/sysctl.d/${1}" > /dev/null
+}
 
-# enable ping as non root
-printf '0 2147483647' > /proc/sys/net/ipv4/ping_group_range
+_loadsysctl "10-arch.conf"
+_loadsysctl "50-default.conf"
+_loadsysctl "50-pid-max.conf"
 
 # prevent kernel from printing messages into framebuffer
 printf '0' > /proc/sys/kernel/printk
@@ -52,12 +44,18 @@ mkdir -p /run/postgresql
 chown postgres:postgres /run/postgresql
 
 # create XDG directories for current user (read from $HOME/.config/user-dirs.dirs and env.sh)
+_uid="1000"
+_user="$(getent passwd "${_uid}" | cut -d':' -f1)"
+
+_mkxdg() {
+    install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
+}
+
 _mkxdg ""
 _mkxdg "runtime"
 _mkxdg "other"
 
 # set CPU to performance preset
-#printf 'active' > /sys/devices/system/cpu/intel_pstate/status
 printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
 printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq > /dev/null
 
