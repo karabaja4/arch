@@ -157,6 +157,6 @@ _log "All children exited."
 
 # bring interface down
 ip link set "${_interface}" down
-_log "Interface ${_interface} down"
+_log "Interface ${_interface} down."
 
 _log "Goodbye."
