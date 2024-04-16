@@ -138,8 +138,6 @@ _pid2="${!}"
 _trap() {
     _log "killing ${_pid1} ${_pid2}"
     kill -TERM "${_pid1}" "${_pid2}"
-    ip link set "${_interface}" down
-    _log "Interface ${_interface} down"
 }
 
 trap '_trap' INT TERM QUIT HUP
@@ -155,5 +153,10 @@ _log "All components initialized."
 # wait exists with non zero on SIGINT so mask it
 _log "Waiting for child processes to exit..."
 wait || true
+_log "All children exited."
+
+# bring interface down
+ip link set "${_interface}" down
+_log "Interface ${_interface} down"
 
 _log "Goodbye."
