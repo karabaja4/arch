@@ -3,30 +3,19 @@ set -u
 IFS='
 '
 
-# prints current shell path
-_shell_path() {
-    readlink /proc/$$/exe
-}
-
 # prints current script path
-_script_fp() {
+_script_path() {
     readlink -f "${0}"
 }
 
 # prints current dir
 _script_dir() {
-    dirname "$(_script_fp)"
+    dirname "$(_script_path)"
 }
 
 # prints current script file name
-_script_fn() {
-    basename "$(_script_fp)"
-}
-
-# if script is symlinked, prints link name
-# otherwise prints script name
-_script_ln() {
-    basename "${0}"
+_script_filename() {
+    basename "$(_script_path)"
 }
 
 # print text

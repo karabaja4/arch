@@ -5,7 +5,9 @@ set -e
 
 doas modprobe fuse
 
-case "$(_script_ln)" in
+# if script is symlinked, ${0} prints link name
+
+case "$(basename "${0}")" in
 onlyoffice-desktopeditors)
     exec "/opt/appimage/DesktopEditors-x86_64.AppImage" "${@}"
     ;;
@@ -18,8 +20,8 @@ inkscape)
 bruno)
     exec "/opt/appimage/bruno_1.3.0_x86_64_linux.AppImage" "${@}"
     ;;
-"$(_script_fn)")
-    _echo "Symlink the script to the app, e.g. ln -s $(_script_fp) /usr/bin/onlyoffice-desktopeditors"
+"$(_script_filename)")
+    _echo "Symlink the script to the app, e.g. ln -s $(_script_path) /usr/bin/onlyoffice-desktopeditors"
     ;;
 *)
     _echo "Unknown app"
