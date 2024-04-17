@@ -51,6 +51,9 @@ cursor_shape = ibeam
 smart_copy = true
 copy_mouse_selection = true
 
+# DPI aware (experimental)
+#dpi_aware = true
+
 [colors]
 # If both of these are unset, cursor falls back to the foreground color,
 # and cursor_foreground falls back to the background color.
