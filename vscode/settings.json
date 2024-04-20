@@ -107,5 +107,7 @@
     "diffEditor.experimental.showEmptyDecorations": false,
     "window.commandCenter": false,
     "editor.useTabStops": false,
-    "editor.trimAutoWhitespace": false
+    "editor.trimAutoWhitespace": false,
+    "editor.folding": true,
+    "editor.stickyScroll.enabled": false
 }
