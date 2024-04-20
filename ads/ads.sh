@@ -36,12 +36,11 @@ else
     _fail "${_js}"
 fi
 
-# _sig='patched by karabaja4'
-# if ! grep -q "${_sig}" "${_css}"
-# then
-#     printf '\n%s\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }'  "/* ${_sig} */" >> "${_css}"
-#     _success "${_css}"
-# else
-#     _fail "${_css}"
-# fi
-
+_sig='fea513f76ab8d448ea1692178208812e749710307efdae2ea5f70ea5de63a453'
+if ! grep -q "${_sig}" "${_css}"
+then
+    printf '\n%s\n%s\n%s' '.monaco-workbench > .notifications-toasts.visible { display:none; }' '.notifications-toasts { display:none; }'  "/* ${_sig} */" >> "${_css}"
+    _success "${_css}"
+else
+    _fail "${_css}"
+fi
