@@ -15,17 +15,17 @@ _fail() {
 
 # set 2nd parameter of saveProfile forceWritePlaintextPassword to true
 _s1='this\._connectionStore\.saveProfile\((.{1,3}),void 0,(.{1,3})\)'
-_s2='this\._connectionStore\.saveProfile\(\1,true,\2\)'
+_s2='this._connectionStore.saveProfile(\1,true,\2)'
 
 # do not show "installation appears to be corrupt" prompt
-_s3='\(.{1,3}\?\.dontShowPrompt&&.{1,3}\.commit===this\.productService.commit\)'
-_s4='\(true\)'
+_s3='\(.{1,3}\.dontShowPrompt\&\&.{1,3}\.commit===this\.productService.commit\)'
+_s4='(true)'
 
 _tmp="/tmp/$(basename "${_js}")"
 
 cp -v "${_js}" "${_tmp}"
-perl -p -i -e "s/${_s1}/${_s2}/g" "${_js}"
-perl -p -i -e "s/${_s3}/${_s4}/g" "${_js}"
+sed -i -E "s/${_s1}/${_s2}/g" "${_js}"
+sed -i -E "s/${_s3}/${_s4}/g" "${_js}"
 
 _result="$(wdiff -3 "${_tmp}" "${_js}" | grep -vx '=.*' | grep -v '^\s*$')"
 if [ -n "${_result}" ]
@@ -44,3 +44,4 @@ fi
 # else
 #     _fail "${_css}"
 # fi
+
