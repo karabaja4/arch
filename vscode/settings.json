@@ -57,11 +57,9 @@
     "explorer.confirmDelete": false,
     "msbuildProjectTools.logging.level": "Verbose",
     "omnisharp.disableMSBuildDiagnosticWarning": true,
-    "razor.disabled": true,
     "window.titleBarStyle": "custom",
     "window.restoreWindows": "none",
     "workbench.settings.editor": "json",
-    "razor.trace": "Off",
     "debug.console.fontFamily": "Consolas",
     "terminal.external.linuxExec": "termite",
     "terminal.explorerKind": "external",
@@ -109,5 +107,11 @@
     "editor.useTabStops": false,
     "editor.trimAutoWhitespace": false,
     "editor.folding": true,
-    "editor.stickyScroll.enabled": false
+    "editor.stickyScroll.enabled": false,
+    "thunder-client.defaultHeaders": [
+        {
+            "name": "Content-Type",
+            "value": "application/json"
+        }
+    ]
 }
