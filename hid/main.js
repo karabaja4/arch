@@ -21,7 +21,7 @@ const write = async (key) => {
 
 const main = async () => {
   
-  write("ENTER");
+  write("ESCAPE");
   await timers.setTimeout(5000);
   
   for (let i = 0; i < text1.length; i++) {
