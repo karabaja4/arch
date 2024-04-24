@@ -11,3 +11,13 @@ sudo apt install crossbuild-essential-armhf
 
 git clone --depth=1 https://github.com/raspberrypi/linux
 
+# patch
+patch -p1 < wakeup.patch
+
+# configs
+cd linux
+KERNEL=kernel
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcmrpi_defconfig
+
+# build
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs
