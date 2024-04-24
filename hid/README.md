@@ -1,5 +1,4 @@
 apt install linux-headers-amd64
-apt add gcc make perl
 apt install gcc make perl
 
 apt install git
