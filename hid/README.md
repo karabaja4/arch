@@ -8,3 +8,6 @@ apt install gcc make perl
 
 sudo apt install git bc bison flex libssl-dev make libc6-dev libncurses5-dev
 sudo apt install crossbuild-essential-armhf
+
+git clone --depth=1 https://github.com/raspberrypi/linux
+
