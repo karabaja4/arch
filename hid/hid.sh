@@ -17,6 +17,7 @@ echo "Logitech USB Keyboard" > strings/0x409/product
 mkdir -p configs/c.1/strings/0x409
 echo "Config 1: ECM network" > configs/c.1/strings/0x409/configuration
 echo 250 > configs/c.1/MaxPower
+echo 0xa0 > configs/c.1/bmAttributes
 
 mkdir -p functions/hid.usb0
 echo 1 > functions/hid.usb0/protocol
