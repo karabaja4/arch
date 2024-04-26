@@ -52,4 +52,4 @@ sudo echo "libcomposite" | sudo tee -a /etc/modules
 libcamera-vid -t 0 --width 1280 --height 720 --framerate 30 --listen -o tcp://0.0.0.0:8494
 
 # camera client
-ffplay tcp://192.168.0.17:8494 -fflags nobuffer -flags low_delay -framedrop
+ffplay tcp://192.168.0.30:8494 -fflags nobuffer -flags low_delay -framedrop
