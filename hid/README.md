@@ -34,6 +34,7 @@ sudo mount /dev/sdb2 mnt/ext4
 
 sudo env PATH=$PATH make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=mnt/ext4 modules_install
 
+KERNEL=kernel
 sudo cp mnt/fat32/$KERNEL.img mnt/fat32/$KERNEL-backup.img
 sudo cp arch/arm/boot/zImage mnt/fat32/$KERNEL.img
 sudo cp arch/arm/boot/dts/broadcom/*.dtb mnt/fat32/
