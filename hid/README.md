@@ -41,3 +41,9 @@ sudo cp arch/arm/boot/dts/overlays/*.dtb* mnt/fat32/overlays/
 sudo cp arch/arm/boot/dts/overlays/README mnt/fat32/overlays/
 sudo umount mnt/fat32
 sudo umount mnt/ext4
+
+# camera server
+libcamera-vid -t 0 --width 1280 --height 720 --framerate 30 --listen -o tcp://0.0.0.0:8494
+
+# camera client
+ffplay tcp://192.168.0.17:8494 -fflags nobuffer -flags low_delay -framedrop
