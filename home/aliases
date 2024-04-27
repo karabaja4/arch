@@ -54,8 +54,8 @@ alias df3='duf'
 alias dmesg='doas dmesg'
 alias locate='locate --ignore-case'
 
-alias picam='/home/igor/git/hid/client/camera.sh'
-alias pikey='/home/igor/git/hid/client/keyboard.sh'
+alias picam='/home/igor/git/hid/scripts/camera.sh'
+alias pikey='/home/igor/git/hid/scripts/keyboard.sh'
 
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
 
