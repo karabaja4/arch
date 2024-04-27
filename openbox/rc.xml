@@ -73,7 +73,7 @@
   </margins>
 
   <keyboard>
-    <keybind key="A-F4">
+    <keybind key="W-F4">
       <action name="Close"/>
     </keybind>
     <keybind key="W-C">
