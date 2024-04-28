@@ -82,6 +82,10 @@ cmd cp &{{
     printf "${f}" | xclip -i -selection clipboard
 }}
 
+cmd touch &{{
+    touch "${f}"
+}}
+
 cmd term &{{
     termite --directory="${PWD}" > /dev/null 2>&1
 }}
