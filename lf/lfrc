@@ -95,6 +95,13 @@ cmd code &{{
     code "${PWD}"
 }}
 
+cmd thumb &{{
+    set -f
+    case "${f}" in
+        *.bmp|*.png|*.jpg|*.jpeg|*.gif) convert "${f}" -resize 15% "${f%%.*}-thumb.${f#*.}";;
+    esac
+}}
+
 map <backspace2> updir
 
 # bookmarks
