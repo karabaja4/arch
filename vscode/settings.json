@@ -113,5 +113,6 @@
             "name": "Content-Type",
             "value": "application/json"
         }
-    ]
+    ],
+    "diffEditor.wordWrap": "off"
 }
