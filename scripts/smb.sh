@@ -16,15 +16,22 @@ _secret="/etc/secret/secret.json"
 _username="$(jq -crM '.smb.username' "${_secret}")"
 _password="$(jq -crM '.smb.password' "${_secret}")"
 
-_mount() {
+_mount_remote() {
     mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port=44555,nosharesock,actimeo=30 "${@}"
+}
+
+_mount_local() {
+    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,nosharesock,actimeo=30 "${@}"
 }
 
 _public="${_home}/_public"
 _private="${_home}/_private"
+_disk="${_home}/_disk"
 
 mkdir -p "${_public}"
 mkdir -p "${_private}"
+mkdir -p "${_disk}"
 
-_mount "//radiance.hr/public" "${_public}"
-_mount "//radiance.hr/private" "${_private}"
+_mount_remote "//radiance.hr/public" "${_public}"
+_mount_remote "//radiance.hr/private" "${_private}"
+_mount_local "//192.168.0.32/disk" "${_disk}"
