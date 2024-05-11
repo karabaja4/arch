@@ -149,7 +149,7 @@ cmd ex ${{
     set -f
     case "${f}" in
         *.tar.*|*.tar) tar xvf "${f}";;
-        *.7z|*.zip|*.rar|*.xz|*.gz|*.deb|*.apk) 7z x "${f}";;
+        *.7z|*.zip|*.rar|*.xz|*.gz|*.deb|*.apk|*.img) 7z x "${f}";;
     esac
 }}
 
