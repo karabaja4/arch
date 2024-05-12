@@ -41,7 +41,7 @@ _exit() {
 _run() {
     _current_ip="$(_get_current_ip)" || _exit "${?}"
     _do_ip="$(_get_do_ip)" || _exit "${?}"
-
+    
     _echo "Current IP: ${_current_ip}"
     _echo "DigitalOcean IP: ${_do_ip}"
     
