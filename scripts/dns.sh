@@ -41,10 +41,10 @@ _exit() {
 _run() {
     _current_ip="$(_get_current_ip)" || _exit "${?}"
     _do_ip="$(_get_do_ip)" || _exit "${?}"
-    
+
     _echo "Current IP: ${_current_ip}"
     _echo "DigitalOcean IP: ${_do_ip}"
-    
+
     if [ "${_current_ip}" != "${_do_ip}" ]
     then
         _new_ip="$(_update_do_ip "${_current_ip}")" || _exit "${?}"
