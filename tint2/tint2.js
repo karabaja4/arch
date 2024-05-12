@@ -41,7 +41,7 @@ const icons = {
   mem: mkicon('', fonts.flaticon, 7500, 100),
   clock: mkicon('', fonts.awesome, 7500, 100),
   ssd: mkicon('', fonts.awesome, 7500, 100),
-  edd: mkicon('', fonts.awesome, 7500, 100)
+  mmc: mkicon('', fonts.flaticon, 7500, 100)
 };
 
 const mkdisk = (mountpoint, icon, label) => {
@@ -55,7 +55,7 @@ const mkdisk = (mountpoint, icon, label) => {
 // disks
 const disks = [
   mkdisk('/', icons.ssd, 'SSD'),
-  mkdisk('/home/igor/_disk', icons.edd, 'EDD')
+  mkdisk('/home/igor/_mmc', icons.mmc, 'MMC')
 ];
 
 // activity color
