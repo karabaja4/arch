@@ -4,10 +4,21 @@ set -eu
 _fn="$(basename "${0}")"
 _fd="$(dirname "$(readlink -f "${0}")")"
 
+_logfile="${_fd}/dns.log"
+
 _echo() {
     printf '[\033[35m%s\033[0m] %s\n' "${_fn}" "${1}"
-    printf '[%s][%s] %s\n' "${_fn}" "$(date -Is)" "${1}" >> "${_fd}/dns.log"
+    printf '[%s][%s] %s\n' "${_fn}" "$(date -Is)" "${1}" >> "${_logfile}"
 }
+
+# clean up after file gets over 50MB, keep last 6000 lines
+_logsize="$(stat -c %s "${_logfile}" 2>/dev/null || printf '%s\n' 0)"
+if [ "${_logsize}" -gt 52428800 ]
+then
+    tail -n 6000 "${_logfile}" > "${_logfile}.temp"
+    mv "${_logfile}.temp" "${_logfile}"
+    _echo "Cleaned up log file."
+fi
 
 _secret="/etc/secret/secret.json"
 _record=$(jq -r ".dns .record" "${_secret}")
