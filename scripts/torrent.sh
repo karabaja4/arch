@@ -1,4 +1,5 @@
 #!/bin/sh
+. "/home/igor/arch/scripts/_lib.sh"
 
 if [ -f "${1}" ]
 then
@@ -9,6 +10,7 @@ then
         if [ -d "${_drop}" ]
         then
             mv "${1}" "${_drop}"
+            _herbe "Moved ${1} to ${_drop}"
         fi
     fi
 fi
