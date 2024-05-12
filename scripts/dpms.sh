@@ -17,8 +17,8 @@ fi
 
 # if we didn't exit, means computer is used
 # ping disk to prevent spindown
-# _mp="${HOME}/_disk"
-# if mountpoint -q "${_mp}"
-# then
-#     printf '%s\n' "$(date -Is)" > "${_mp}/ping"
-# fi
+_mp="${HOME}/disk"
+if mountpoint -q "${_mp}"
+then
+    printf '%s\n' "$(date -Is)" > "${_mp}/ping"
+fi
