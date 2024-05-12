@@ -1,8 +1,12 @@
 #!/bin/sh
 set -eu
 
+_fn="$(basename "${0}")"
+_fd="$(dirname "$(readlink -f "${0}")")"
+
 _echo() {
-    printf '%s\n' "${@}"
+    printf '[\033[35m%s\033[0m] %s\n' "${_fn}" "${1}"
+    printf '[%s][%s] %s\n' "${_fn}" "$(date -Is)" "${1}" >> "${_fd}/dns.log"
 }
 
 _secret="/etc/secret/secret.json"
@@ -21,12 +25,12 @@ _auth="Authorization: Bearer ${_token}"
 
 _get_do_ip() (
     _result="$(curl -s -f -X GET -H "${_ctype}" -H "${_auth}" "${_record}")" || exit 2
-    _echo "${_result}" | jq -r ".domain_record .data"
+    printf "%s" "${_result}" | jq -r ".domain_record .data"
 )
 
 _update_do_ip() (
     _result="$(curl -s -f -X PUT -H "${_ctype}" -H "${_auth}" -d "{\"data\":\"${1}\"}" "${_record}")" || exit 3
-    _echo "${_result}" | jq -r ".domain_record .data"
+    printf "%s" "${_result}" | jq -r ".domain_record .data"
 )
 
 _exit() {
