@@ -35,7 +35,7 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = bottom
-panel_items = PPPPPPPPPPPPPPPPFE
+panel_items = PPPPPPPPPPPPPPPFE
 strut_policy = follow_size
 
 #-------------------------------------
@@ -71,13 +71,6 @@ button_max_icon_size = 16
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/chromium-browser.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh chromium
-button_padding = 3 0 0
-button_background_id = 1
-button_max_icon_size = 16
-
-button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/qbittorrent.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh qbittorrent
 button_padding = 3 0 0
 button_background_id = 1
 button_max_icon_size = 16
