@@ -1,4 +1,5 @@
 Host *
+    IdentityFile ~/keys/aur
     IdentityFile ~/keys/github
     IdentityFile ~/keys/radiance
     IdentityFile ~/keys/pizero2w1
