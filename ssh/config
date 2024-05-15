@@ -1,4 +1,9 @@
 Host *
+    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/keys/radiance
+    IdentityFile ~/keys/pizero2w1
+    IdentityFile ~/keys/pizero2w2
+    IdentityFile ~/keys/pizero
     StrictHostKeyChecking no
     UserKnownHostsFile=/dev/null
     LogLevel ERROR
