@@ -1,5 +1,5 @@
 Host *
-    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/keys/github
     IdentityFile ~/keys/radiance
     IdentityFile ~/keys/pizero2w1
     IdentityFile ~/keys/pizero2w2
