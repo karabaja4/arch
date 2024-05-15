@@ -13,7 +13,7 @@
     },
     {
         "name": "sshd",
-        "enabled": true,
+        "enabled": false,
         "user": "root",
         "command": "/usr/bin/sshd -D -e"
     },
