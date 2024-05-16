@@ -1,7 +1,10 @@
+Host radiance.hr
+    IdentityFile ~/keys/radiance    
+    IdentityFile ~/keys/nahiri
+
 Host *
     IdentityFile ~/keys/aur
     IdentityFile ~/keys/github
-    IdentityFile ~/keys/radiance
     IdentityFile ~/keys/pizero2w1
     IdentityFile ~/keys/pizero2w2
     IdentityFile ~/keys/pizero
