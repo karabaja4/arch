@@ -221,6 +221,9 @@
         <width>938</width>
       </size>
     </application>
+    <application name="xfreerdp">
+      <layer>above</layer>
+    </application>
   </applications>
 
 </openbox_config>
