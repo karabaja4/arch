@@ -7,8 +7,6 @@ alias sn='screen -S'
 alias racuni='node /home/igor/git/racuni-mailer/src/main.js'
 alias rezije='node /home/igor/git/rezije/src/main.js'
 
-#alias rcc='doas rcc'
-
 export EDITOR='nano'
 
 _bold="\033[1m"
