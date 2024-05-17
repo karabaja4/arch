@@ -1,4 +1,5 @@
 session=openbox
 rfbport=59001
-geometry=1366x768
+geometry=1600x900
+localhost
 rawkeyboard=1
