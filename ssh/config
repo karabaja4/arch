@@ -1,4 +1,4 @@
-Host radiance.hr
+Host *.radiance.hr radiance.hr
     IdentityFile ~/keys/radiance    
     IdentityFile ~/keys/nahiri
 
