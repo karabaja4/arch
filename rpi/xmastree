@@ -4,10 +4,7 @@ pigpio pigpio-dev
 
 https://github.com/karabaja4/nodexmastree.git
 
-g++ python3 make npm
-
-qbittorrent-nox samba
+g++ python3 make npm qbittorrent-nox samba linux-firmware-mediatek wireless-tools wget git
 
 iomem=relaxed
 
-linux-firmware-mediatek wireless-tools wget
