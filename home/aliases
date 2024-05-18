@@ -30,7 +30,7 @@ alias poweroff='doas /home/igor/arch/scripts/reboot.sh poweroff'
 
 alias rsnc='doas pacman -Rsnc'
 alias work='/home/igor/arch/scripts/work.sh'
-alias speedtest='wget http://mirror.carnet.hr/debian-cd/12.5.0/amd64/iso-cd/debian-12.5.0-amd64-netinst.iso -O /dev/null'
+alias speedtest='wget https://avacyn.radiance.hr/stuff/debian-12.5.0-amd64-netinst.iso -O /dev/null'
 alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
