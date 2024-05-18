@@ -8,3 +8,4 @@ g++ python3 make npm qbittorrent-nox samba linux-firmware-mediatek wireless-tool
 
 iomem=relaxed
 
+smbpasswd -a igor
