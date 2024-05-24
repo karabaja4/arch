@@ -18,6 +18,12 @@ _script_filename() {
     basename "$(_script_path)"
 }
 
+# if script is symlinked, prints link name
+# otherwise prints script name
+_script_ln() {
+    basename "${0}"
+}
+
 # print text
 # usage: _echo "<text1>" "<text2>"
 # each parameter will be printed as a new line
