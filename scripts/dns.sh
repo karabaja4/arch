@@ -18,16 +18,16 @@ _echo() {
 }
 
 _get_current_ip() (
-    curl -s -f "https://avacyn.radiance.hr/ip" || exit 1
+    curl -s -f -m 10 "https://avacyn.radiance.hr/ip" || exit 1
 )
 
 _get_do_ip() (
-    _result="$(curl -s -f -X GET -H "${_ctype}" -H "${_auth}" "${_record}")" || exit 2
+    _result="$(curl -s -f -m 10 -X GET -H "${_ctype}" -H "${_auth}" "${_record}")" || exit 2
     printf "%s" "${_result}" | jq -r ".domain_record .data"
 )
 
 _update_do_ip() (
-    _result="$(curl -s -f -X PUT -H "${_ctype}" -H "${_auth}" -d "{\"data\":\"${1}\"}" "${_record}")" || exit 3
+    _result="$(curl -s -f -m 10 -X PUT -H "${_ctype}" -H "${_auth}" -d "{\"data\":\"${1}\"}" "${_record}")" || exit 3
     printf "%s" "${_result}" | jq -r ".domain_record .data"
 )
 
