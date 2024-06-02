@@ -34,7 +34,7 @@ mkdir -vp "${_dest}"
         if [ -f "${_original}" ]
         then
             _basename="$(basename "${_original}")"
-            _mp3="yt-${_date}-${_basename%%.*}.mp3"
+            _mp3="yt${_date}-${_basename%%.*}.mp3"
             _echo "Converting ${_original} to ${_mp3}"
             ffmpeg -i "concat:${_original}|${_end}" -af 'volume=3' -codec:a libmp3lame -qscale:a 4 "${_mp3}"
             mv -v "${_mp3}" "${_dest}"
