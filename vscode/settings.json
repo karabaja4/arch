@@ -114,5 +114,11 @@
             "value": "application/json"
         }
     ],
-    "diffEditor.wordWrap": "off"
+    "diffEditor.wordWrap": "off",
+    "[json]": {
+        "editor.tabSize": 2
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    }
 }
