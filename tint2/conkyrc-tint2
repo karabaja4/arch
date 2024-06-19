@@ -8,13 +8,13 @@ conky.config = {
 conky.text = [[
 {
 	"net": {
-		"down": "${downspeedf enp2s0}",
-		"up": "${upspeedf enp2s0}"
+		"down": "${downspeedf enp56s0u1u2c2}",
+		"up": "${upspeedf enp56s0u1u2c2}"
 	},
 	"cpu": {
 		"perc": "${cpu}",
 		"freq": "${freq}",
-		"temp": "${hwmon 5 temp 1}"
+		"temp": "${hwmon 1 temp 1}"
 	},
 	"mem": {
 		"perc": "${memperc}",

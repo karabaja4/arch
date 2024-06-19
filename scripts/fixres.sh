@@ -1,12 +1,12 @@
 #!/bin/sh
 
-_screen_middle="HDMI-1-1"
-_screen_right="DP-1-1"
+_screen_middle="DP-5.6"
+_screen_right="DP-5.5"
 _screen_left="eDP-1-1"
 
 _res_middle="1920x1200"
 _res_right="1920x1200"
-_res_left="1920x1080"
+_res_left="2560x1600"
 
 # middle
 xrandr --output "${_screen_middle}" --mode "${_res_middle}" --primary

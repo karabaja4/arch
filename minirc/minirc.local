@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # bring ethernet interface up so udhcpc can operate
-_ethernet='enp2s0'
+_ethernet='enp56s0u1u2c2'
 for _i in $(seq 100)
 do
     printf 'Waiting on interface %s to initialize (%s)\n' "${_ethernet}" "${_i}"
@@ -20,7 +20,7 @@ do
 done
 
 # allow non-root to change fan speed
-chmod 666 /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
+#chmod 666 /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
 
 # improve responsivness under heavy IO
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
@@ -39,9 +39,9 @@ _loadsysctl "50-pid-max.conf"
 printf '0' > /proc/sys/kernel/printk
 
 # create tmpfs dirs
-mkdir -p /run/samba
-mkdir -p /run/postgresql
-chown postgres:postgres /run/postgresql
+#mkdir -p /run/samba
+#mkdir -p /run/postgresql
+#chown postgres:postgres /run/postgresql
 
 # create XDG directories for current user (read from $HOME/.config/user-dirs.dirs and env.sh)
 _uid="1000"
@@ -57,7 +57,7 @@ _mkxdg "other"
 
 # set CPU to performance preset
 printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
-printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq > /dev/null
+#printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq > /dev/null
 
 # activate swap
 swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
