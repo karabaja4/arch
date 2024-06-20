@@ -14,7 +14,7 @@ conky.text = [[
   "cpu": {
     "perc": "${cpu}",
     "freq": "${freq}",
-    "temp": "${hwmon 7 temp 1}"
+    "temp": "${hwmon coretemp temp 1}"
   },
   "bat": {
     "perc": "${battery_percent}",
