@@ -43,8 +43,8 @@ printf '80' > /sys/class/power_supply/BAT0/charge_control_end_threshold
 
 # create tmpfs dirs
 #mkdir -p /run/samba
-#mkdir -p /run/postgresql
-#chown postgres:postgres /run/postgresql
+mkdir -p /run/postgresql
+chown postgres:postgres /run/postgresql
 
 # create XDG directories for current user (read from $HOME/.config/user-dirs.dirs and env.sh)
 _uid="1000"
