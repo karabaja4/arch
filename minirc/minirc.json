@@ -12,28 +12,10 @@
         "command": "/usr/bin/udhcpc -nqfv -i enp56s0u1u2c2"
     },
     {
-        "name": "sshd",
-        "enabled": false,
-        "user": "root",
-        "command": "/usr/bin/sshd -D -e"
-    },
-    {
         "name": "ntpd",
         "enabled": true,
         "user": "root",
         "command": "/usr/bin/ntpd -n -p time.cloudflare.com"
-    },
-    {
-        "name": "vnc",
-        "enabled": false,
-        "user": "igor",
-        "command": "/home/igor/arch/scripts/vnc.sh"
-    },
-    {
-        "name": "samba",
-        "enabled": false,
-        "user": "root",
-        "command": "/usr/bin/smbd --foreground"
     },
     {
         "name": "crond",
@@ -42,21 +24,9 @@
         "command": "/usr/bin/crond -f -d8"
     },
     {
-        "name": "tlp",
-        "enabled": true,
-        "user": "root",
-        "command": "/usr/bin/tlp init start"
-    },
-    {
         "name": "pg",
         "enabled": false,
         "user": "postgres",
         "command": "/usr/bin/postgres -D /var/lib/postgres/data"
-    },
-    {
-        "name": "redis",
-        "enabled": false,
-        "user": "redis",
-        "command": "/usr/bin/redis-server /etc/redis/redis.conf"
     }
 ]
