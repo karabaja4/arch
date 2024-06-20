@@ -42,6 +42,12 @@
         "command": "/usr/bin/crond -f -d8"
     },
     {
+        "name": "tlp",
+        "enabled": true,
+        "user": "root",
+        "command": "/usr/bin/tlp init start"
+    },
+    {
         "name": "pg",
         "enabled": false,
         "user": "postgres",
