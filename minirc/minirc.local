@@ -39,7 +39,7 @@ _loadsysctl "50-pid-max.conf"
 printf '0' > /proc/sys/kernel/printk
 
 # limit battery charge
-#printf '80' > /sys/class/power_supply/BAT0/charge_control_end_threshold
+printf '80' > /sys/class/power_supply/BAT0/charge_control_end_threshold
 
 # create tmpfs dirs
 #mkdir -p /run/samba

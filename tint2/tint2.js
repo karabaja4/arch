@@ -73,6 +73,14 @@ const colorize2 = (value) => {
   return colors.green;
 };
 
+// battery color
+const colorize3 = (value) => {
+  if (value !== 0 && !value) return colors.gray;
+  if (value < 20) return colors.red;
+  if (value < 60) return colors.yellow;
+  return colors.green;
+};
+
 const span = (icon, colorize, name, format, values, cidx) => {
   let text = `${name}: N/A`;
   let color = colors.gray;
@@ -136,6 +144,12 @@ const print = () => {
     }
     text += span(disk.icon, colorize2, disk.label, '$0 GB / $1 GB', res, 2);
   }
+  
+  // battery
+  text += span(icons.cpu, colorize3, 'BAT', '$0% ($1)', [
+    data?.conky?.bat?.perc, // 0
+    data?.conky?.bat?.time || 'charged' // 1
+  ], 0);
 
   let clk = dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss');
   if (data?.weather?.temp) {
