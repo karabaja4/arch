@@ -1,7 +1,7 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
 
-set -eu
+set -u
 
 # argument check
 _check_arg "${_arg1}" "reboot|poweroff"
@@ -23,7 +23,7 @@ _umount() {
 _home="$(_passwd 6)"
 if [ -z "${_home}" ]
 then
-    _err 101 "Cannot find user's home"
+    _err 101 "Cannot find user's home."
 fi
 
 for _mp in "${_home}/_"*
@@ -33,6 +33,10 @@ done
 
 # cleanup /mnt
 "$(_script_dir)/usb.sh"
+if [ "${?}" -ne 0 ]
+then
+    _err 101 "Failed to unmount USB drives."
+fi
 
 rm -rf "${_home}/.cache"
 
