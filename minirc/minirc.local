@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # bring ethernet interface up so udhcpc can operate
-_ethernet='enp56s0u1u2c2'
+_ethernet='eth0'
 for _i in $(seq 100)
 do
     printf 'Waiting on interface %s to initialize (%s)\n' "${_ethernet}" "${_i}"

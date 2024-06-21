@@ -9,7 +9,7 @@
         "name": "udhcpc",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/udhcpc -nqfv -i enp56s0u1u2c2"
+        "command": "/usr/bin/udhcpc -nqfv -i eth0"
     },
     {
         "name": "ntpd",
