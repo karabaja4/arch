@@ -1,2 +1,2 @@
-ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", RUN{program}+="/home/igor/arch/scripts/automount.sh $devnode"
+ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ATTR{removable}=="1", RUN{program}+="/home/igor/arch/scripts/automount.sh $devnode"
 ACTION=="add", SUBSYSTEMS=="mmc", SUBSYSTEM=="block", ATTR{removable}=="0", RUN{program}+="/home/igor/arch/scripts/automount.sh $devnode"
