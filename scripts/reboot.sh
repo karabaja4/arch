@@ -1,7 +1,7 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
 
-set -u
+set -eu
 
 # argument check
 _check_arg "${_arg1}" "reboot|poweroff"
