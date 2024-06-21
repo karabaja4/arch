@@ -8,8 +8,8 @@ conky.config = {
 conky.text = [[
 {
   "net": {
-    "down": "${downspeedf enp56s0u1u2c2}",
-    "up": "${upspeedf enp56s0u1u2c2}"
+    "down": "${downspeedf eth0}",
+    "up": "${upspeedf eth0}"
   },
   "cpu": {
     "perc": "${cpu}",
