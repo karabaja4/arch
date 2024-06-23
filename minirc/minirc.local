@@ -1,23 +1,7 @@
 #!/bin/sh
 
 # bring ethernet interface up so udhcpc can operate
-_ethernet='eth0'
-for _i in $(seq 100)
-do
-    printf 'Waiting on interface %s to initialize (%s)\n' "${_ethernet}" "${_i}"
-    ip link | grep -Fq "${_ethernet}"
-    _ethec="${?}"
-    
-    # give some more time to settle
-    sleep 1
-    
-    if [ "${_ethec}" -eq 0 ]
-    then
-        printf 'Interface %s is initialized, bringing interface up.\n' "${_ethernet}"
-        ip link set "${_ethernet}" up
-        break
-    fi
-done
+ip link set eth0 up > /dev/null 2>&1
 
 # allow non-root to change fan speed
 #chmod 666 /sys/devices/platform/asus-nb-wmi/hwmon/hwmon4/pwm1
