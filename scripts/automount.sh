@@ -50,6 +50,9 @@ _mount() (
     ext*|jfs|reiserfs|xfs|f2fs|btrfs|nilfs2|hfsplus)
         mount "${_devpath}" "${_mntpath}" && chown "${_user}:${_user}" "${_mntpath}"
         ;;
+    swap)
+        exit 0
+        ;;
     *)
         mount "${_devpath}" "${_mntpath}"
         ;;
