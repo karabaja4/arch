@@ -51,6 +51,7 @@ _mount() (
         mount "${_devpath}" "${_mntpath}" && chown "${_user}:${_user}" "${_mntpath}"
         ;;
     swap)
+        rmdir "${_mntpath}"
         exit 0
         ;;
     *)
