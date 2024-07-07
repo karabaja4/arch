@@ -18,6 +18,12 @@
         "command": "/usr/bin/ntpd -n -p time.cloudflare.com"
     },
     {
+        "name": "fans",
+        "enabled": true,
+        "user": "igor",
+        "command": "/home/igor/arch/scripts/fans.sh"
+    },
+    {
         "name": "crond",
         "enabled": true,
         "user": "root",
