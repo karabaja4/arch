@@ -4,7 +4,8 @@
 set -u
 enable -f /usr/lib/bash/sleep sleep
 
-_threshold=70
+_threshold_up=70
+_threshold_down=65
 
 _cpu_label="$(grep -l 'Package id 0' /sys/devices/platform/coretemp.0/hwmon/hwmon*/temp*_label 2>/dev/null)"
 _cpu_base="${_cpu_label%/*}"
@@ -41,11 +42,18 @@ do
     
     if [ -n "${_nv_temp}" ] && [ -n "${_cpu_temp}" ]
     then
-        if [ "${_nv_temp}" -gt "${_threshold}" ] || [ "${_cpu_temp}" -gt "${_threshold}" ]
+        if [ "${_nv_temp}" -gt "${_threshold_up}" ] || [ "${_cpu_temp}" -gt "${_threshold_up}" ]
         then
+            # max fans if temp goes over 70
+            _echo "Fans set to max."
             _set_pwm 0
         else
-            _set_pwm 2
+            # restore auto fans if temp drops below 65
+            if [ "${_nv_temp}" -lt "${_threshold_down}" ] && [ "${_cpu_temp}" -lt "${_threshold_down}" ]
+            then
+                _echo "Fans set to auto."
+                _set_pwm 2
+            fi
         fi
     else
         _echo "Error reading temperatures"
