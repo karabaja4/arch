@@ -49,7 +49,7 @@ _mkxdg "other"
 #printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq > /dev/null
 
 # activate swap
-swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
+#swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
 
 # write /etc/issue to display a nice greeting message
 /home/igor/arch/scripts/info.sh > /etc/issue
