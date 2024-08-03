@@ -19,7 +19,7 @@
     },
     {
         "name": "fans",
-        "enabled": false,
+        "enabled": true,
         "user": "igor",
         "command": "/home/igor/arch/scripts/fans.sh"
     },
