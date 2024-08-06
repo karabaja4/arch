@@ -72,8 +72,7 @@ ip link set "${_interface}" up
 
 # scan for networks and present a choice
 _log "Scanning for networks..."
-_essids="$(iwlist "${_interface}" scan | grep -F 'ESSID:' -B 5 | cut -c 11-)"
-
+_essids="$(iwlist "${_interface}" scan | grep -E 'Address: [0-9A-F:]{17}' -A 5 | cut -c 11-)"
 if [ -z "${_essids}" ]
 then
     _err 104 "No networks found."
@@ -93,14 +92,14 @@ done
 _cell="$(_echo "${_essids}" | grep -E "^Cell ${_idx} - " -A 5)"
 
 # bssid
-_bssid="$(_echo "${_cell}" | grep -o 'Address: [0-9A-F:]\{17\}' | cut -d' ' -f2)"
+_bssid="$(_echo "${_cell}" | grep -Eo 'Address: [0-9A-F:]{17}' | cut -d' ' -f2)"
 if [ -z "${_bssid}" ]
 then
     _err 105 'Cannot parse BSSID.'
 fi
 
 # essid
-_essid="$(_echo "${_cell}" | tail -n 1 | grep 'ESSID:' | cut -d'"' -f2)"
+_essid="$(_echo "${_cell}" | tail -n 1 | grep -F 'ESSID:' | cut -d'"' -f2)"
 if [ -z "${_essid}" ]
 then
     _err 106 'Cannot parse ESSID.'
