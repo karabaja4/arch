@@ -108,25 +108,25 @@ vncviewer)
 # gaming)
 #     _keypress "Super_L+0"
 #     ;;
-pd2)
-    #export __GL_FSAA_MODE=11
-    cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
-    _run wine Game.exe -3dfx
-    ;;
-wow)
-    rm -r /home/igor/.wine/drive_c/wow/WDB
-    _run wine /home/igor/.wine/drive_c/wow/WoW.exe
-    ;;
-openmw)
-    _run openmw-launcher
-    ;;
-quake3)
-    _run quake3
-    ;;
-openjk)
-    export __GL_FSAA_MODE=5
-    _run openjk
-    ;;
+# pd2)
+#     #export __GL_FSAA_MODE=11
+#     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
+#     _run wine Game.exe -3dfx
+#     ;;
+# wow)
+#     rm -r /home/igor/.wine/drive_c/wow/WDB
+#     _run wine /home/igor/.wine/drive_c/wow/WoW.exe
+#     ;;
+# openmw)
+#     _run openmw-launcher
+#     ;;
+# quake3)
+#     _run quake3
+#     ;;
+# openjk)
+#     export __GL_FSAA_MODE=5
+#     _run openjk
+#     ;;
 *)
     echo "unknown app"
     ;;
