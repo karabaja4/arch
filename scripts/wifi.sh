@@ -62,101 +62,77 @@ else
     fi
 fi
 
+# setup hook
+_log "Setting up hook..."
+ln -sf /usr/share/dhcpcd/hooks/10-wpa_supplicant /usr/lib/dhcpcd/dhcpcd-hooks/
+
+# scar 18 wifi needs reset after each scan
+ip link set "${_interface}" down
 ip link set "${_interface}" up
 
 # scan for networks and present a choice
 _log "Scanning for networks..."
-_essids="$(iwlist "${_interface}" scan | grep -F 'ESSID' | cut -d'"' -f2)"
-_i=1
+_essids="$(iwlist "${_interface}" scan | grep -F 'ESSID' -B 5 | cut -c 11-)"
 
 if [ -z "${_essids}" ]
 then
     _err 104 "No networks found."
 fi
 
-for _essid in ${_essids}
+_echo "${_essids}"
+
+# loop until user enters a valid choice (non-empty, at least two digits, starting with Cell)
+_idx=''
+while [ -z "${_idx}" ] || ! _echo "${_idx}" | grep -Eq '^[0-9]{2,}$' || ! _echo "${_essids}" | grep -Eq "^Cell ${_idx} - "
 do
-    _echo "${_i}) ${_essid}"
-    _i=$((_i+1))
+    printf '%s' 'Select a network: '
+    read -r _idx
 done
 
-_prompt() {
-    printf '%s' "${1}"
-}
+# extract selected cell
+_cell="$(_echo "${_essids}" | grep -E "^Cell ${_idx} - " -A 5)"
 
-_invalid_input() {
-    _err 105 "Invalid input."
-}
+# bssid
+_bssid="$(_echo "${_cell}" | grep -o 'Address: [0-9A-F:]\{17\}' | cut -d' ' -f2)"
+if [ -z "${_bssid}" ]
+then
+    _err 105 'Cannot parse BSSID.'
+fi
 
-# read a choice
-_prompt "Select network: "
-read -r _idx
+# essid
+_essid="$(_echo "${_cell}" | tail -n 1 | grep 'ESSID:' | cut -d'"' -f2)"
+if [ -z "${_essid}" ]
+then
+    _err 106 'Cannot parse ESSID.'
+fi
 
-# check empty input
-[ -z "${_idx}" ] && _invalid_input
-
-# check if there are non-numbers in input
-_idx_validate="$(_echo "${_idx}" | tr -d '0-9')"
-[ -n "${_idx_validate}" ] && _invalid_input
-
-# check the number is in range
-_ssid="$(_echo "${_essids}" | sed -n "${_idx}p")"
-[ -z "${_ssid}" ] && _invalid_input
-
-_md5="$(_echo "${_ssid}" | md5sum | cut -d' ' -f1)"
-_log "Selected: ${_ssid} (md5: ${_md5})"
+_log "ESSID: ${_essid}, BSSID: ${_bssid}"
 
 # config paths
 _config_dir="/root/.config/wifi"
 mkdir -p "${_config_dir}"
-_config="${_config_dir}/${_md5}.conf"
+_config="${_config_dir}/$(_echo "${_bssid}" | tr -d ':').conf"
 
 # if config does not exist, create it
 if [ ! -f "${_config}" ]
 then
-    _prompt "Enter password: "
+    printf '%s' "Enter a password: "
     read -r _psk
-    _log "Saving config ${_config}"
-    printf '%s\n%s\n%s\n%s\n%s\n' \
+    _log "Saving config to ${_config}"
+    printf '%s\n%s\n%s\n%s\n%s\n%s\n' \
         "ctrl_interface=/run/wpa_supplicant" \
         "network={" \
-        "    ssid=\"${_ssid}\"" \
+        "    bssid=${_bssid}" \
+        "    ssid=\"${_essid}\"" \
         "    psk=\"${_psk}\"" \
         "}" > "${_config}"
 else
     _log "Using config ${_config}"
 fi
 
-# run with setsid to prevent terminal sending sigint to children
-setsid wpa_supplicant -c "${_config}" -i "${_interface}" &
-_pid1="${!}"
+_wpa_supplicant_conf='/etc/wpa_supplicant/wpa_supplicant.conf'
+_log "Copying ${_config} to ${_wpa_supplicant_conf}"
+cp "${_config}" "${_wpa_supplicant_conf}"
 
-setsid dhcpcd -4 -B "${_interface}" &
-_pid2="${!}"
-
-# kill all on exit
-_trap() {
-    _log "killing ${_pid1} ${_pid2}"
-    kill -TERM "${_pid1}" "${_pid2}"
-}
-
-trap '_trap' INT TERM QUIT HUP
-
-_log "All components initialized."
-
-# sleep is the catch for SIGINT
-# better than interrupting wait, which if killed
-# ends the script before the children had the chance
-# to exit and print the closing text to stdout
-/bin/sleep infinity || true
-
-# wait exists with non zero on SIGINT so mask it
-_log "Waiting for child processes to exit..."
-wait || true
-_log "All children exited."
-
-# bring interface down
-ip link set "${_interface}" down
-_log "Interface ${_interface} down."
-
-_log "Goodbye."
+# run dhcpcd which will implicitly run wpa_supplicant using a hook
+dhcpcd -4 "${_interface}"
