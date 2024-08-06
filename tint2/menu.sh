@@ -18,10 +18,10 @@ _load_apulse() {
     export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 }
 
-_keypress() {
-    xdotool key "${@}"
-    xdotool keyup "${@}"
-}
+# _keypress() {
+#     xdotool key "${@}"
+#     xdotool keyup "${@}"
+# }
 
 case "${1}" in
 terminal)
@@ -105,9 +105,9 @@ kvirc)
 vncviewer)
     _run vncviewer
     ;;
-gaming)
-    _keypress "Super_L+0"
-    ;;
+# gaming)
+#     _keypress "Super_L+0"
+#     ;;
 pd2)
     #export __GL_FSAA_MODE=11
     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit

@@ -114,11 +114,6 @@
         <command>/home/igor/arch/tint2/menu.sh flameshot</command>
       </action>
     </keybind>
-    <keybind key="W-0">
-      <action name="ShowMenu">
-        <menu>games-menu</menu>
-      </action>
-    </keybind>
     <keybind key="C-A-T">
       <action name="ToggleAlwaysOnTop" />
     </keybind>
