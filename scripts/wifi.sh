@@ -72,7 +72,7 @@ ip link set "${_interface}" up
 
 # scan for networks and present a choice
 _log "Scanning for networks..."
-_essids="$(iwlist "${_interface}" scan | grep -F 'ESSID' -B 5 | cut -c 11-)"
+_essids="$(iwlist "${_interface}" scan | grep -F 'ESSID:' -B 5 | cut -c 11-)"
 
 if [ -z "${_essids}" ]
 then
