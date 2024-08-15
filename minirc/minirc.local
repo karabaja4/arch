@@ -4,9 +4,9 @@
 ip link set eth0 up > /dev/null 2>&1
 
 # allow non-root to change fan speed
-_asus_label="$(grep -lw '^asus$' /sys/devices/platform/asus-nb-wmi/hwmon/hwmon*/name 2>/dev/null)"
-_asus_base="${_asus_label%/*}"
-chmod 666 "${_asus_base}"/pwm*_enable
+#_asus_label="$(grep -lw '^asus$' /sys/devices/platform/asus-nb-wmi/hwmon/hwmon*/name 2>/dev/null)"
+#_asus_base="${_asus_label%/*}"
+#chmod 666 "${_asus_base}"/pwm*_enable
 
 # improve responsivness under heavy IO
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
@@ -28,7 +28,7 @@ printf '0' > /proc/sys/kernel/printk
 printf '60' > /sys/class/power_supply/BAT0/charge_control_end_threshold
 
 # turbo fans
-#printf '1' > /sys/devices/platform/asus-nb-wmi/throttle_thermal_policy
+printf '1' > /sys/devices/platform/asus-nb-wmi/throttle_thermal_policy
 
 # create tmpfs dirs
 #mkdir -p /run/samba
