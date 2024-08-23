@@ -34,4 +34,4 @@ mkdir -p "${_disk}"
 
 _mount_remote "//radiance.hr/public" "${_public}"
 _mount_remote "//radiance.hr/private" "${_private}"
-_mount_local "//192.168.0.32/disk" "${_disk}"
+_mount_local "//192.168.0.33/disk" "${_disk}"
