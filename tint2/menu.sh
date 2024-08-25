@@ -70,11 +70,11 @@ discord)
 flameshot)
     _run flameshot
     ;;
-paint)
-    #rm -f "/home/igor/.config/chromium/Default/Local Storage/leveldb/"*
-    #_run chromium --start-maximized --disable-smooth-scrolling --disable-audio-output --app=https://jspaint.app
-    _run /home/igor/arch/mspaint/mspaint.sh
-    ;;
+# paint)
+#     #rm -f "/home/igor/.config/chromium/Default/Local Storage/leveldb/"*
+#     #_run chromium --start-maximized --disable-smooth-scrolling --disable-audio-output --app=https://jspaint.app
+#     #_run /home/igor/arch/mspaint/mspaint.sh
+#     ;;
 onlyoffice)
     _run onlyoffice-desktopeditors
     ;;
