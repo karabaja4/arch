@@ -44,8 +44,11 @@ _mount() (
     _mkdir "${_mntpath}"
 
     case "${_fstype}" in
-    vfat|ntfs)
+    vfat)
         mount -o uid="${_uid}",fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
+        ;;
+    ntfs)
+        mount -t ntfs3 -o uid="${_uid}",fmask=133,dmask=022 "${_devpath}" "${_mntpath}"
         ;;
     ext*|jfs|reiserfs|xfs|f2fs|btrfs|nilfs2|hfsplus)
         mount "${_devpath}" "${_mntpath}" && chown "${_user}:${_user}" "${_mntpath}"
