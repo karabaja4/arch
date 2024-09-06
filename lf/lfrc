@@ -161,3 +161,12 @@ cmd zip ${{
     done
     7z a -tzip "${f}.zip" "${@}"
 }}
+
+cmd 7z ${{
+    set -f
+    for _x in ${fx}
+    do
+        set -- "${@}" "$(basename "${_x}")"
+    done
+    7z a -t7z "${f}.7z" "${@}"
+}}
