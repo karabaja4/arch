@@ -46,6 +46,7 @@ code)
     _run code --use-inmemory-secretstorage
     ;;
 azuredatastudio)
+    export GDK_SCALE=2
     _run azuredatastudio --disable-keytar
     ;;
 virtualbox)
@@ -61,6 +62,7 @@ virtualbox)
 discord)
     #_run chromium --disable-gpu --start-maximized --disable-smooth-scrolling --app=https://discord.com/app
     _load_apulse
+    export GDK_SCALE=2
     _run discord --disable-smooth-scrolling
     ;;
 # skype)

@@ -28,7 +28,7 @@ _desktop() {
     #nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
     
     # alsa
-    "${HOME}/arch/scripts/sound.sh" KTUSBAUDIO
+    "${HOME}/arch/scripts/sound.sh" SOUND
 
     # daemons
     xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
@@ -38,8 +38,7 @@ _desktop() {
     "${HOME}/arch/scripts/fixres.sh"
     #xwallpaper --stretch "${HOME}/arch/wall/default5.png"
     xwallpaper --output eDP-1-1 --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png" \
-               --output DP-5.6 --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png" \
-               --output DP-5.5 --stretch "${HOME}/arch/wall/exodus_v02_5120x2880.png"
+               --output DP-5 --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
 
     # conky kernel
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0

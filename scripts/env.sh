@@ -11,6 +11,7 @@ export LESSHISTFILE=/dev/null
 export BROWSER='firefox-socket'
 export HISTFILESIZE=2000
 export GIT_PS1_SHOWCONFLICTSTATE="no"
+export QT_FONT_DPI=150
 
 # vnc does not export $SHELL
 export SHELL='/bin/bash'

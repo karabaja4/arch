@@ -34,7 +34,7 @@
     "extensions.ignoreRecommendations": true,
     "workbench.iconTheme": "vscode-icon-theme",
     "editor.dragAndDrop": false,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 3,
     "workbench.colorCustomizations": {
         "gitDecoration.modifiedResourceForeground": "#FF8C00",
         "gitDecoration.untrackedResourceForeground": "#32CD32"
