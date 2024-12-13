@@ -43,6 +43,7 @@ qtextpad)
     _run qtextpad
     ;;
 code)
+    export GDK_SCALE=2
     _run code --use-inmemory-secretstorage
     ;;
 azuredatastudio)
