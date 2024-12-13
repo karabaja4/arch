@@ -1,6 +1,6 @@
 conky.config = {
 	use_xft = true,
-	font = 'Roboto:size=18',
+	font = 'Roboto:size=12',
 	draw_shades = false,
 	alignment = 'bottom_right',
 	gap_x = 25,
@@ -15,7 +15,7 @@ conky.config = {
 };
 
 conky.text = [[
-${alignr}${color1}${font openlogos:size=48}B${font}
+${alignr}${color1}${font openlogos:size=36}B${font}
 ${alignr}${color0}Kernel: ${kernel}
 ${alignr}Available Updates: ${execi 300 /home/igor/arch/conky/updates.sh}
 ${alignr}Uptime: ${uptime}
