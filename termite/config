@@ -7,7 +7,7 @@ bold_is_bright = false
 #clickable_url = true
 clickable_url_ctrl = true
 #dynamic_title = true
-font = Consolas 13
+font = Consolas 16
 #fullscreen = true
 icon_name = utilities-terminal
 #mouse_autohide = false
@@ -52,7 +52,7 @@ smart_copy = true
 copy_mouse_selection = true
 
 # DPI aware (experimental)
-dpi_aware = true
+#dpi_aware = true
 
 [colors]
 # If both of these are unset, cursor falls back to the foreground color,
