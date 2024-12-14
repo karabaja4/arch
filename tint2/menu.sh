@@ -34,7 +34,7 @@ qtfm)
     _run qtfm
     ;;
 chromium)
-    _run chromium --start-maximized --disable-smooth-scrolling
+    _run chromium
     ;;
 qbittorrent)
     _run qbittorrent
@@ -43,7 +43,7 @@ qtextpad)
     _run qtextpad
     ;;
 code)
-    #export GDK_SCALE=2
+    export GDK_SCALE=2
     _run code
     ;;
 azuredatastudio)
