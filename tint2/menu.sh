@@ -34,6 +34,7 @@ qtfm)
     _run qtfm
     ;;
 chromium)
+    export GDK_SCALE=2
     _run chromium
     ;;
 qbittorrent)
