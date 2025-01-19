@@ -3,8 +3,8 @@
 _res_middle="3840x2160"
 _res_left="2560x1600"
 
-_screen_middle="$(xrandr | grep '3840x2160+2560+0' | cut -d' ' -f1)"
-_screen_left="$(xrandr | grep '2560x1600+0+0' | cut -d' ' -f1)"
+_screen_middle="$(xrandr | grep '699mm x 395mm' | cut -d' ' -f1)"
+_screen_left="$(xrandr | grep '388mm x 242mm' | cut -d' ' -f1)"
 
 _rate_middle="240.02"
 _rate_left="240.00"
