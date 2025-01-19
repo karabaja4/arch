@@ -1,10 +1,10 @@
 #!/bin/sh
 
-_screen_middle="DP-5"
-_screen_left="eDP-1-1"
-
 _res_middle="3840x2160"
 _res_left="2560x1600"
+
+_screen_middle="$(xrandr | grep '3840x2160+2560+0' | cut -d' ' -f1)"
+_screen_left="$(xrandr | grep '2560x1600+0+0' | cut -d' ' -f1)"
 
 _rate_middle="240.02"
 _rate_left="240.00"
