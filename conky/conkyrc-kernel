@@ -16,7 +16,7 @@ conky.config = {
 
 conky.text = [[
 ${alignr}${color1}${font openlogos:size=36}B${font}
-${alignr}${color0}Kernel: ${kernel}
-${alignr}Available Updates: ${execi 300 /home/igor/arch/conky/updates.sh}
-${alignr}Uptime: ${uptime}
+${voffset 3}${alignr}${color0}Kernel: ${kernel}
+${voffset 3}${alignr}Available Updates: ${execi 300 /home/igor/arch/conky/updates.sh}
+${voffset 3}${alignr}Uptime: ${uptime}
 ]];
