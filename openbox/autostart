@@ -32,13 +32,9 @@ _desktop() {
 
     # daemons
     xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
-    #xcompmgr -a &
 
     # resolution and background
     "${HOME}/arch/scripts/fixres.sh"
-    #xwallpaper --stretch "${HOME}/arch/wall/default5.png"
-    xwallpaper --output eDP-1-1 --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png" \
-               --output DP-5 --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
 
     # conky kernel
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0

@@ -3,8 +3,8 @@
 _res_middle="3840x2160"
 _res_left="2560x1600"
 
-_screen_middle="$(xrandr | grep '699mm x 395mm' | cut -d' ' -f1)"
-_screen_left="$(xrandr | grep '388mm x 242mm' | cut -d' ' -f1)"
+_screen_middle="$(xrandr | grep "${_res_middle}+" | cut -d' ' -f1)"
+_screen_left="$(xrandr | grep "${_res_left}+" | cut -d' ' -f1)"
 
 _rate_middle="240.02"
 _rate_left="240.00"
@@ -29,6 +29,9 @@ if _exists "${_screen_middle}"
 then
     _log "${_screen_middle}" "${_res_middle}"
     xrandr --output "${_screen_middle}" --mode "${_res_middle}" --primary --rate "${_rate_middle}"
+    
+    # set middle wallpaper
+    xwallpaper --output "${_screen_middle}" --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
 fi
 
 # left
@@ -41,4 +44,7 @@ then
     else
         xrandr --output "${_screen_left}" --mode "${_res_left}" --rate "${_rate_left}"
     fi
+    
+    # set left wallpaper
+     xwallpaper --output "${_screen_left}" --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png"
 fi
