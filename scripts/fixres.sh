@@ -29,9 +29,6 @@ if _exists "${_screen_middle}"
 then
     _log "${_screen_middle}" "${_res_middle}"
     xrandr --output "${_screen_middle}" --mode "${_res_middle}" --primary --rate "${_rate_middle}"
-    
-    # set middle wallpaper
-    xwallpaper --output "${_screen_middle}" --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
 fi
 
 # left
@@ -44,7 +41,15 @@ then
     else
         xrandr --output "${_screen_left}" --mode "${_res_left}" --rate "${_rate_left}"
     fi
-    
-    # set left wallpaper
-     xwallpaper --output "${_screen_left}" --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png"
+fi
+
+# set wallpapers
+if _exists "${_screen_middle}"
+then
+    xwallpaper --output "${_screen_middle}" --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
+fi
+
+if _exists "${_screen_left}"
+then
+    xwallpaper --output "${_screen_left}" --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png"
 fi
