@@ -80,6 +80,7 @@ flameshot)
 #     #_run /home/igor/arch/mspaint/mspaint.sh
 #     ;;
 onlyoffice)
+    export GDK_SCALE=2
     _run onlyoffice-desktopeditors
     ;;
 thunderbird)
