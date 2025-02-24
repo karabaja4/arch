@@ -27,19 +27,19 @@ case "${1}" in
 terminal)
     _run termite
     ;;
-firefox)
-    _run firefox-socket
-    ;;
-qtfm)
-    _run qtfm
-    ;;
+# firefox)
+#     _run firefox-socket
+#     ;;
+# qtfm)
+#     _run qtfm
+#     ;;
 chromium)
     export GDK_SCALE=2
     _run chromium
     ;;
-qbittorrent)
-    _run qbittorrent
-    ;;
+# qbittorrent)
+#     _run qbittorrent
+#     ;;
 qtextpad)
     _run qtextpad
     ;;
@@ -83,27 +83,27 @@ onlyoffice)
     export GDK_SCALE=2
     _run onlyoffice-desktopeditors
     ;;
-thunderbird)
-    _run thunderbird
-    ;;
-zoom)
-    _run zoom
-    ;;
-work)
-    _run /home/igor/arch/scripts/work.sh
-    ;;
-krita)
-    _run krita
-    ;;
-inkscape)
-    _run inkscape
-    ;;
-vlc)
-    _run vlc
-    ;;
-obs)
-    _run obs
-    ;;
+# thunderbird)
+#     _run thunderbird
+#     ;;
+# zoom)
+#     _run zoom
+#     ;;
+# work)
+#     _run /home/igor/arch/scripts/work.sh
+#     ;;
+# krita)
+#     _run krita
+#     ;;
+# inkscape)
+#     _run inkscape
+#     ;;
+# vlc)
+#     _run vlc
+#     ;;
+# obs)
+#     _run obs
+#     ;;
 kvirc)
     _run kvirc
     ;;
