@@ -25,6 +25,7 @@ _load_apulse() {
 
 case "${1}" in
 terminal)
+    export GDK_SCALE=1
     _run termite
     ;;
 # firefox)
