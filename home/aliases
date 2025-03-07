@@ -52,21 +52,8 @@ alias df2='dysk'
 alias df3='duf'
 alias dmesg='doas dmesg'
 alias locate='locate --ignore-case'
-
 alias picam='/home/igor/git/hid/scripts/client.sh'
-
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
-
-fixvolume() {
-    for _f in *".mp3"
-    do
-        if [ -f "${_f}" ]
-        then
-            printf "=> Converting %s\n" "${_f}"
-            ffmpeg -i "${_f}" -af 'volume=3' "$(basename "${_f}" '.mp3' | sed 's/[^a-zA-Z0-9]//g')-vol3.mp3"
-        fi
-    done
-}
 
 # shellcheck disable=SC1090
 _source() {
