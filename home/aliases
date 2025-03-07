@@ -12,7 +12,8 @@ alias sudo='doas'
 alias sr='screen -r'
 alias sn='screen -S'
 
-alias startx='exec sx'
+alias startx='exec /usr/bin/sx'
+alias sx='exec /usr/bin/sx'
 
 hs() {
     history -w /dev/stdout | cat - "${HOME}/.bash_history" | awk '!x[$0]++' | grep "${1}"
