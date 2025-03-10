@@ -93,7 +93,7 @@ const span = (icon, colorize, name, format, values, cidx) => {
       color = colorize(values[cidx]);
     }
   }
-  return `<span font_family="${icon.font}" size="${icon.size}" rise="${icon.rise}" foreground="${color}">${icon.char}</span>  ${text}          `;
+  return `<span font_family="${icon.font}" size="${icon.size}" rise="${icon.rise}" foreground="${color}">${icon.char}</span>  <span rise="-1000">${text}</span>          `;
 };
 
 const norm = (input) => {
