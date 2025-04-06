@@ -1,72 +1,62 @@
 #!/bin/sh
-. "/home/igor/arch/scripts/_lib.sh"
 
-set -u
+_asoundrc="${HOME}/.asoundrc"
 
-_usage() {
-    _echo "usage: $(basename "${0}") [ <card_name> | l(ist) ]"
-    exit 1
-}
+# remove so if it's invalid don't get in the way of aplay
+rm -f "${_asoundrc}"
 
-[ "${#}" -ne 1 ] && _usage
+_aplay="$(aplay -l | grep '^card ')"
+_choices="$(printf '%s\n' "${_aplay}" | sed 's/.*\[\([^]]*\)\].*\[\([^]]*\)\].*/\1 - \2/' | nl -w1 -s ') ')"
 
-_unmute_max_all() {
-    for _channel in $(amixer | grep -P -B1 "^.*Capabilities:.* pvolume( .*$|$)" | grep -oP "(?<=Simple mixer control ').+(?=')")
+_ln=''
+if [ -z "${1}" ]
+then
+    printf '%s\n' "${_choices}"
+    while [ -z "${_ln}" ] || ! printf '%s\n' "${_choices}" | grep -q "^${_ln}) "
     do
-        _echo "Unmuting ${_channel} to 100%"
-        amixer set "${_channel}" unmute > /dev/null 2>&1
-        amixer set "${_channel}" 100% > /dev/null 2>&1
+      printf 'Choose a device: '
+      read -r _ln
     done
-}
-
-_write_asoundrc() {
-    printf 'defaults.ctl.card %s\ndefaults.pcm.card %s\n' "${1}" "${1}" > "${HOME}/.asoundrc"
-}
-
-_switch_card() {
-    _search="$(grep -iwH "^${1}$" /proc/asound/card*/id)"
-    if [ -n "${_search}" ]
+else
+    _auto_choice="$(printf '%s\n' "${_choices}" | grep -i "${1}")"
+    _match_count="$(printf '%s\n' "${_auto_choice}" | grep -c -v '^\s*$')"
+    if [ "${_match_count}" -ne 1 ]
     then
-        _index="$(_echo "${_search%:*}" | grep -oP '(?<=/proc/asound/card)[0-9]+(?=/id)')"
-        _write_asoundrc "${_index}"
-        _echo "Switched to card ${_search##*:} (${_index})"
+        printf 'Found %s matches for "%s"\n' "${_match_count}" "${1}"
+        exit 1
     else
-        _err 100 "Card ${1} not found, exiting."
+        _ln="$(printf '%s\n' "${_auto_choice}" | cut -d')' -f1)"
     fi
-}
+fi
 
-_list() {
-    _default="$(amixer info | grep -oP "(?<=Card default ').+?(?='/)")"
-    cat /proc/asound/card*/id | while IFS= read -r _name
-    do
-        if [ "${_name}" = "${_default}" ]
-        then
-            _echo "+ ${_name}"
-        else
-            _echo "  ${_name}"
-        fi
-    done
-}
+printf 'Selected: %s\n' "$(printf '%s\n' "${_choices}" | sed -n "${_ln}p" | sed 's/^[0-9]*) //')"
 
-_play_sound() {
-    sed -n '/^# ----- SOUND START -----$/,/^# ----- SOUND END -----$/p' "$(_script_path)" \
-        | sed 's/^..//;1d;$d' \
-        | base64 -d \
-        | gunzip \
-        | mpg123 -q - \
-        > /dev/null 2>&1 &
-}
+_aplay_row="$(printf '%s\n' "${_aplay}" | sed -n "${_ln}p")"
 
-case "${1}" in
-list|l)
-    _list
-    ;;
-*)
-    _switch_card "${1}"
-    _unmute_max_all
-    _play_sound
-    ;;
-esac
+_card="$(printf '%s\n' "${_aplay_row}" | sed -n 's/.*card \([0-9][0-9]*\):.*/\1/p')"
+_device="$(printf '%s\n' "${_aplay_row}" | sed -n 's/.*device \([0-9][0-9]*\):.*/\1/p')"
+
+printf 'defaults.ctl.card %s\ndefaults.pcm.card %s\ndefaults.pcm.device %s\n' "${_card}" "${_card}" "${_device}" > "${_asoundrc}"
+printf 'Device index: card %s, device %s\n' "${_card}" "${_device}"
+
+# unmute and max all channels that support pvolume
+for _channel in $(amixer | grep -P -B1 "^.*Capabilities:.* pvolume( .*$|$)" | grep -oP "(?<=Simple mixer control ').+(?=')")
+do
+    printf 'Unmuting %s to 100%%\n' "${_channel}"
+    amixer set "${_channel}" unmute > /dev/null 2>&1
+    amixer set "${_channel}" 100% > /dev/null 2>&1
+done
+
+# unmute S/PDIF 0 if present
+_iec="IEC958,0"
+if amixer get "${_iec}" > /dev/null 2>&1
+then
+    printf "Unmuting %s\n" "${_iec}"
+    amixer set "${_iec}" unmute > /dev/null
+fi
+
+# play embedded sound
+sed -n '/^# ----- SOUND START -----$/,/^# ----- SOUND END -----$/p' "$(readlink -f "${0}")" | sed 's/^..//;1d;$d' | base64 -d | gunzip | mpg123 -q - > /dev/null 2>&1 &
 
 # ----- SOUND START -----
 # H4sIAAAAAAAAA6WZeTiUbRvwZzFm7GOfUJaEFMZOxdiXsi8hlSVFWkZUJJmhiOzyRKkwZCuh5dEi
