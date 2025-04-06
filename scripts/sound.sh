@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# speaker-test -D hdmi:CARD=NVidia,DEV=0 -c 2 -t wav
+
 _asoundrc="${HOME}/.asoundrc"
 
 # remove so if it's invalid don't get in the way of aplay
