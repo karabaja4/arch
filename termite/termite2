@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export GDK_SCALE=1
+exec termite "${@}"

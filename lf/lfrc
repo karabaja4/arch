@@ -87,8 +87,7 @@ cmd touch &{{
 }}
 
 cmd term &{{
-    export GDK_SCALE=1
-    termite --directory="${PWD}" > /dev/null 2>&1
+    /usr/bin/termite2 --directory="${PWD}" > /dev/null 2>&1
 }}
 map t term
 
