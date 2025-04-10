@@ -53,6 +53,7 @@ _mkxdg "other"
 
 # activate swap
 #swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
+swapon /swapfile
 
 # write /etc/issue to display a nice greeting message
 /home/igor/arch/scripts/info.sh > /etc/issue

@@ -35,7 +35,7 @@ panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = bottom
-panel_items = PPPPPPPPPPPPFE
+panel_items = PPPPPPPPPPPPPFE
 strut_policy = follow_size
 
 #-------------------------------------
@@ -134,6 +134,13 @@ button_max_icon_size = 24
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/postman.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh postman
+button_padding = 5 0 0
+button_background_id = 1
+button_max_icon_size = 24
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/vmware-workstation.svg
+button_lclick_command = /home/igor/arch/tint2/menu.sh vmware
 button_padding = 5 0 0
 button_background_id = 1
 button_max_icon_size = 24

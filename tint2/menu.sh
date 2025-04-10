@@ -55,6 +55,9 @@ azuredatastudio)
 virtualbox)
     _run VirtualBox
     ;;
+vmware)
+    _run vmware
+    ;;
 # slack)
 #     _run slack --start-maximized --disable-smooth-scrolling
 #     ;;
