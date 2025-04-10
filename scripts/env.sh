@@ -23,3 +23,7 @@ export SHELL='/bin/bash'
 
 # xdg
 export XDG_RUNTIME_DIR='/tmp/xdg-igor/runtime'
+
+# path
+export PATH="${PATH}:${HOME}/.dotnet/tools"
+export JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION=1
