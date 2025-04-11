@@ -90,8 +90,22 @@ button_background_id = 1
 button_max_icon_size = 24
 
 button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/postman.svg
+button_lclick_command = /home/igor/arch/tint2/menu.sh postman
+button_padding = 5 0 0
+button_background_id = 1
+button_max_icon_size = 24
+
+button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/virtualbox.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh virtualbox
+button_padding = 5 0 0
+button_background_id = 1
+button_max_icon_size = 24
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/vmware-workstation.svg
+button_lclick_command = /home/igor/arch/tint2/menu.sh vmware
 button_padding = 5 0 0
 button_background_id = 1
 button_max_icon_size = 24
@@ -127,20 +141,6 @@ button_max_icon_size = 24
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/putty.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh vncviewer
-button_padding = 5 0 0
-button_background_id = 1
-button_max_icon_size = 24
-
-button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/postman.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh postman
-button_padding = 5 0 0
-button_background_id = 1
-button_max_icon_size = 24
-
-button = new
-button_icon = /usr/share/icons/Papirus/16x16/apps/vmware-workstation.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh vmware
 button_padding = 5 0 0
 button_background_id = 1
 button_max_icon_size = 24
