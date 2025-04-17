@@ -28,11 +28,5 @@
         "enabled": false,
         "user": "postgres",
         "command": "/usr/bin/postgres -D /var/lib/postgres/data"
-    },
-    {
-        "name": "vmware",
-        "enabled": false,
-        "user": "root",
-        "command": "/home/igor/arch/scripts/vmware.sh"
     }
 ]

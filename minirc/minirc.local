@@ -3,11 +3,6 @@
 # bring ethernet interface up so udhcpc can operate
 ip link set eth0 up > /dev/null 2>&1
 
-# allow non-root to change fan speed
-#_asus_label="$(grep -lw '^asus$' /sys/devices/platform/asus-nb-wmi/hwmon/hwmon*/name 2>/dev/null)"
-#_asus_base="${_asus_label%/*}"
-#chmod 666 "${_asus_base}"/pwm*_enable
-
 # improve responsivness under heavy IO
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
 printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
@@ -46,10 +41,6 @@ _mkxdg() {
 _mkxdg ""
 _mkxdg "runtime"
 _mkxdg "other"
-
-# set CPU to performance preset
-#printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
-#printf '3100000'     | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq > /dev/null
 
 # activate swap
 #swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
