@@ -106,7 +106,7 @@
     </keybind>
     <keybind key="Print">
       <action name="Execute">
-        <command>/home/igor/arch/scripts/scrot.sh</command>
+        <command>/home/igor/arch/scripts/prtsc.sh</command>
       </action>
     </keybind>
     <keybind key="W-Print">
