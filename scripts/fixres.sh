@@ -44,12 +44,11 @@ then
 fi
 
 # set wallpapers
-if _exists "${_screen_middle}"
+if _exists "${_screen_middle}" && _exists "${_screen_left}"
 then
     xwallpaper --output "${_screen_middle}" --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
-fi
-
-if _exists "${_screen_left}"
-then
     xwallpaper --output "${_screen_left}" --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png"
+elif _exists "${_screen_left}"
+then
+    xwallpaper --output "${_screen_left}" --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
 fi
