@@ -76,7 +76,7 @@ discord)
 #     _run /usr/share/skypeforlinux/skypeforlinux --disable-gpu
 #     ;;
 flameshot)
-    flameshot gui -r | xclip -i -selection clipboard -t image/png
+    _run /home/igor/arch/scripts/flameshot.sh
     ;;
 # paint)
 #     #rm -f "/home/igor/.config/chromium/Default/Local Storage/leveldb/"*

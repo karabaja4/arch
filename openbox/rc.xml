@@ -106,7 +106,7 @@
     </keybind>
     <keybind key="Print">
       <action name="Execute">
-        <command>/home/igor/arch/tint2/menu.sh flameshot</command>
+        <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
     </keybind>
     <keybind key="C-A-T">
