@@ -106,11 +106,6 @@
     </keybind>
     <keybind key="Print">
       <action name="Execute">
-        <command>/home/igor/arch/scripts/prtsc.sh</command>
-      </action>
-    </keybind>
-    <keybind key="W-Print">
-      <action name="Execute">
         <command>/home/igor/arch/tint2/menu.sh flameshot</command>
       </action>
     </keybind>
