@@ -12,7 +12,7 @@ onlyoffice-desktopeditors)
     exec "/opt/appimage/DesktopEditors-x86_64.AppImage" "${@}"
     ;;
 krita)
-    exec "/opt/appimage/krita-5.2.1-x86_64.appimage" "${@}"
+    exec "/opt/appimage/krita-5.2.9-x86_64.AppImage" "${@}"
     ;;
 inkscape)
     exec "/opt/appimage/Inkscape-091e20e-x86_64.AppImage" "${@}"
