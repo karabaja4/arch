@@ -66,7 +66,7 @@ _iteration() {
             # virtualbox clipboard only supports bmp images
             if [ "${_match}" = "image/png" ] && \
                command -v wmctrl >/dev/null 2>&1 && \
-               wmctrl -l 2>/dev/null | grep -q '\[Running\] - Oracle VirtualBox' && \
+               wmctrl -l 2>/dev/null | grep -q "\[Running\] - Oracle VirtualBox" && \
                command -v magick >/dev/null 2>&1
             then
                 magick "${_out}" "bmp:${_out}"
