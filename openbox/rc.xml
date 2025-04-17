@@ -109,6 +109,11 @@
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
     </keybind>
+    <keybind key="W-Print">
+      <action name="Execute">
+        <command>/home/igor/arch/scripts/scrot.sh</command>
+      </action>
+    </keybind>
     <keybind key="C-A-T">
       <action name="ToggleAlwaysOnTop" />
     </keybind>

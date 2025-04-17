@@ -23,10 +23,10 @@ then
     _hfn2="${_dir}/${_ts}_horizontal.png"
 
     _echo "Creating vertical tile: ${_vfn2}"
-    convert -background black -append "${_dir}/${_ts}_*.png" "${_vfn1}"
+    magick -background black "${_dir}/${_ts}_*.png" -append "${_vfn1}"
 
     _echo "Creating horizontal tile: ${_hfn2}"
-    convert -background black +append "${_dir}/${_ts}_*.png" "${_hfn1}"
+    magick -background black "${_dir}/${_ts}_*.png" +append "${_hfn1}"
 
     mv "${_vfn1}" "${_vfn2}"
     mv "${_hfn1}" "${_hfn2}"
