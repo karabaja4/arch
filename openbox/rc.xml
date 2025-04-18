@@ -101,13 +101,13 @@
     <keybind key="W-M">
       <action name="Iconify" />
     </keybind>
-    <keybind key="Print">
+    <keybind key="Home">
       <action name="Iconify" />
     </keybind>
     <keybind key="W-S-M">
       <action name="ToggleShowDesktop" />
     </keybind>
-    <keybind key="W-Print">
+    <keybind key="Print">
       <action name="Execute">
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
