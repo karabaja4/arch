@@ -101,17 +101,15 @@
     <keybind key="W-M">
       <action name="Iconify" />
     </keybind>
+    <keybind key="Print">
+      <action name="Iconify" />
+    </keybind>
     <keybind key="W-S-M">
       <action name="ToggleShowDesktop" />
     </keybind>
-    <keybind key="Print">
-      <action name="Execute">
-        <command>/home/igor/arch/scripts/flameshot.sh</command>
-      </action>
-    </keybind>
     <keybind key="W-Print">
       <action name="Execute">
-        <command>/home/igor/arch/scripts/scrot.sh</command>
+        <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
     </keybind>
     <keybind key="C-A-T">

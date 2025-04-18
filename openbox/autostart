@@ -28,7 +28,7 @@ _desktop() {
     #nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
     
     # alsa
-    sleep 3 && "${HOME}/arch/scripts/sound.sh" pg32ucdm > /dev/null 2>&1 &
+    sleep 3 && "${HOME}/arch/scripts/sound.sh" logi > /dev/null 2>&1 &
 
     # daemons
     xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
