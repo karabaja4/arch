@@ -87,7 +87,7 @@ cmd touch &{{
 }}
 
 cmd term &{{
-    /usr/bin/termite2 --directory="${PWD}" > /dev/null 2>&1
+    /usr/bin/termite --directory="${PWD}" > /dev/null 2>&1
 }}
 map t term
 

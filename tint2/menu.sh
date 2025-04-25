@@ -25,7 +25,6 @@ _load_apulse() {
 
 case "${1}" in
 terminal)
-    export GDK_SCALE=1
     _run termite
     ;;
 # firefox)
@@ -35,7 +34,6 @@ terminal)
 #     _run qtfm
 #     ;;
 chromium)
-    export GDK_SCALE=2
     _run chromium
     ;;
 # qbittorrent)
@@ -45,11 +43,9 @@ qtextpad)
     _run qtextpad
     ;;
 code)
-    export GDK_SCALE=2
     _run code
     ;;
 azuredatastudio)
-    export GDK_SCALE=2
     _run azuredatastudio --disable-keytar
     ;;
 virtualbox)
@@ -68,7 +64,6 @@ virtualbox)
 discord)
     #_run chromium --disable-gpu --start-maximized --disable-smooth-scrolling --app=https://discord.com/app
     _load_apulse
-    export GDK_SCALE=2
     _run discord --disable-smooth-scrolling
     ;;
 # skype)
@@ -84,15 +79,15 @@ flameshot)
 #     #_run /home/igor/arch/mspaint/mspaint.sh
 #     ;;
 onlyoffice)
-    export GDK_SCALE=2
     _run onlyoffice-desktopeditors
     ;;
 # thunderbird)
 #     _run thunderbird
 #     ;;
-# zoom)
-#     _run zoom
-#     ;;
+zoom)
+    _load_apulse
+    _run zoom
+    ;;
 # work)
 #     _run /home/igor/arch/scripts/work.sh
 #     ;;
@@ -125,10 +120,9 @@ postman)
 #     cd /home/igor/.wine/drive_c/d2/ProjectD2 || exit
 #     _run wine Game.exe -3dfx
 #     ;;
-# wow)
-#     rm -r /home/igor/.wine/drive_c/wow/WDB
-#     _run wine /home/igor/.wine/drive_c/wow/WoW.exe
-#     ;;
+wow)
+    _run /home/igor/games/turtlewow/TurtleWoW.AppImage
+    ;;
 # openmw)
 #     _run openmw-launcher
 #     ;;
