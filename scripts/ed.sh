@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-# ln -sf /home/igor/arch/scripts/ed.sh /usr/bin/ed
+# ln -sf /home/igor/arch/scripts/ed.sh /usr/local/bin/ed
 
 _run() {
     ( "${@}" & ) > /dev/null 2>&1
