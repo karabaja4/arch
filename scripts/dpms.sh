@@ -10,7 +10,10 @@ xset dpms 0 0 0
 #then
 if [ "$(xprintidle)" -gt 300000 ] # 5 min = 300000 ms
 then
-    xset dpms force off
-    exit 0
+    if ! pgrep -x vlc > /dev/null
+    then
+        xset dpms force off
+        exit 0
+    fi
 fi
 #fi
