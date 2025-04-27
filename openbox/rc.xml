@@ -130,6 +130,10 @@
     <keybind key="W-S-M">
       <action name="ToggleShowDesktop" />
     </keybind>
+    <keybind key="Menu">
+      <!-- Logitech MX Keys S: Menu button -->
+      <action name="ToggleShowDesktop" />
+    </keybind>
     <keybind key="C-A-T">
       <action name="ToggleAlwaysOnTop" />
     </keybind>
