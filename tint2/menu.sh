@@ -109,8 +109,8 @@ kvirc)
 vncviewer)
     _run vncviewer
     ;;
-postman)
-    _run postman
+bruno)
+    _run bruno
     ;;
 # gaming)
 #     _keypress "Super_L+0"

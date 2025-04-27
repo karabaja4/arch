@@ -18,7 +18,7 @@ inkscape)
     exec "/opt/appimage/Inkscape-091e20e-x86_64.AppImage" "${@}"
     ;;
 bruno)
-    exec "/opt/appimage/bruno_1.3.0_x86_64_linux.AppImage" "${@}"
+    exec "/opt/appimage/bruno_2.2.0_x86_64_linux.AppImage" "${@}"
     ;;
 zoom)
     exec "/opt/appimage/Zoom_Workplace-6.4.3.827.glibc2.27-x86_64.AppImage" "${@}"
