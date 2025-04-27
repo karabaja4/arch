@@ -102,20 +102,33 @@
       <action name="Iconify" />
     </keybind>
     <keybind key="Home">
+      <!-- Scar 18: Minimize with top right Home -->
       <action name="Iconify" />
     </keybind>
-    <keybind key="W-S-M">
-      <action name="ToggleShowDesktop" />
+    <keybind key="XF86Calculator">
+      <!-- Logitech MX Keys S: Calculator button -->
+      <action name="Iconify" />
+    </keybind>
+    <keybind key="W-S-S">
+      <!-- Logitech MX Keys S: Screenshot button -->
+      <action name="Execute">
+        <command>/home/igor/arch/scripts/flameshot.sh</command>
+      </action>
     </keybind>
     <keybind key="Print">
+      <!-- Scar 18: Screenshot with top right PrtSc -->
       <action name="Execute">
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
     </keybind>
     <keybind key="End">
+      <!-- Logitech MX Keys S: Screenshot with End -->
       <action name="Execute">
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
+    </keybind>
+    <keybind key="W-S-M">
+      <action name="ToggleShowDesktop" />
     </keybind>
     <keybind key="C-A-T">
       <action name="ToggleAlwaysOnTop" />
