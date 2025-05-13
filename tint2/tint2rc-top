@@ -37,6 +37,7 @@ panel_background_id = 1
 panel_layer = bottom
 panel_items = PPPPPPPPPPPPPPFE
 strut_policy = follow_size
+mouse_effects = 0
 
 #-------------------------------------
 # Executor 1
