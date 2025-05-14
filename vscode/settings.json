@@ -61,7 +61,8 @@
     "window.restoreWindows": "none",
     "workbench.settings.editor": "json",
     "debug.console.fontFamily": "Consolas",
-    "terminal.external.linuxExec": "termite2",
+    "terminal.external.linuxExec": "termite",
+    "terminal.external.windowsExec": "C:\\Program Files\\Git\\bin\\bash.exe",
     "terminal.explorerKind": "external",
     "update.mode": "none",
     "files.watcherExclude": {
@@ -121,5 +122,6 @@
     "[javascript]": {
         "editor.tabSize": 2
     },
-    "git.discardUntrackedChangesToTrash": false
+    "git.discardUntrackedChangesToTrash": false,
+    "workbench.tree.enableStickyScroll": false
 }
