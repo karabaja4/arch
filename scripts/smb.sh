@@ -1,7 +1,7 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
 
-set -eu
+set -u
 
 _home="$(_passwd 6)"
 _uid="$(_passwd 3)"
