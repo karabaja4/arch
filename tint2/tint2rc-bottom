@@ -76,7 +76,7 @@ systray_padding = 5 5 5
 systray_background_id = 0
 systray_sort = left2right
 systray_icon_size = 16
-systray_monitor = 3
+systray_monitor = 2
 
 #---------------------------------------------
 # MOUSE ACTION ON TASK

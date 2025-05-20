@@ -121,7 +121,9 @@ pd2)
     _run wine Game.exe -3dfx
     ;;
 wow)
-    _run /home/igor/games/turtlewow/TurtleWoW.AppImage
+    # _run /home/igor/games/turtlewow/TurtleWoW.AppImage
+    cd /home/igor/games/turtlewow || exit
+    _run wine WoW.exe
     ;;
 # openmw)
 #     _run openmw-launcher

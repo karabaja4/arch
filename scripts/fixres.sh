@@ -1,15 +1,15 @@
 #!/bin/sh
 
-_res_middle="1920x1200"
+_res_middle="1920x1080"
 _res_left="1920x1080"
 
 #_screen_middle="$(xrandr | grep "699mm x 395mm" | cut -d' ' -f1)"
 #_screen_left="$(xrandr | grep "344mm x 194mm" | cut -d' ' -f1)"
 
-_screen_middle="$(xrandr | grep "520mm x 320mm" | cut -d' ' -f1)"
+_screen_middle="$(xrandr | grep "700mm x 400mm" | cut -d' ' -f1)"
 _screen_left="$(xrandr | grep "340mm x 190mm" | cut -d' ' -f1)"
 
-_rate_middle="59.95"
+_rate_middle="60.00"
 _rate_left="60.06"
 
 _exists() {
