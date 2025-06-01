@@ -1,8 +1,8 @@
 #!/bin/sh
 
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
-xrandr --dpi 140
-xrdb -merge /home/igor/.Xresources
+#xrandr --setprovideroutputsource modesetting NVIDIA-0
+#xrandr --auto
+#xrandr --dpi 96
+#xrdb -merge /home/igor/.Xresources
 
 exec /usr/bin/openbox --sm-disable --startup /home/igor/arch/openbox/autostart

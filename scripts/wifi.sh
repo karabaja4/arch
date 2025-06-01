@@ -62,9 +62,19 @@ else
     fi
 fi
 
+_resolv_conf="/etc/resolv.conf"
+_resolv_conf_old="/etc/resolv.conf.old"
+
+# backup resolv.conf so dhcpcd does not overwrite it
+_log "Backing up ${_resolv_conf} to ${_resolv_conf_old}"
+cp "${_resolv_conf}" "${_resolv_conf_old}"
+
 # setup hook
 _log "Setting up hook..."
 ln -sf /usr/share/dhcpcd/hooks/10-wpa_supplicant /usr/lib/dhcpcd/dhcpcd-hooks/
+
+# lenovo ideapad 3 needs this
+rfkill unblock all
 
 # scar 18 wifi needs reset after each scan
 ip link set "${_interface}" down

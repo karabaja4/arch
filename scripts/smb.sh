@@ -1,7 +1,7 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
 
-set -eu
+set -u
 
 _home="$(_passwd 6)"
 _uid="$(_passwd 3)"
@@ -35,3 +35,4 @@ mkdir -p "${_disk}"
 _mount_remote "//radiance.hr/public" "${_public}"
 _mount_remote "//radiance.hr/private" "${_private}"
 _mount_local "//192.168.100.33/disk" "${_disk}"
+_mount_remote "//localhost/disk" "${_disk}"

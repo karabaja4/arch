@@ -29,14 +29,15 @@ border_color = #4A4A4A 0
 #---------------------------------------------
 panel_monitor = all
 panel_position = top center
-panel_size = 0 40
+panel_size = 0 25
 panel_margin = 0 0
 panel_padding = 0 0
 font_shadow = 0
 panel_background_id = 1
 panel_layer = bottom
-panel_items = PPPPPPPPPPPPFE
+panel_items = PPPPPPPPPPPPPFE
 strut_policy = follow_size
+mouse_effects = 0
 
 #-------------------------------------
 # Executor 1
@@ -44,7 +45,7 @@ strut_policy = follow_size
 execp = new
 execp_command = /usr/bin/node /home/igor/arch/tint2/tint2.js
 execp_continuous = 1
-execp_font = Roboto Bold 12
+execp_font = Roboto Bold 8
 execp_font_color = #ffffff 100
 execp_padding = 10 0
 execp_tooltip =
@@ -57,83 +58,90 @@ execp_lclick_command = /home/igor/arch/tint2/cal.sh
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/utilities-terminal.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh terminal
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/chromium-browser.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh chromium
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/accessories-text-editor.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh qtextpad
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/visual-studio-code.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh code
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /opt/azuredatastudio/resources/app/extensions/azurecore/resources/azureArcService.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh azuredatastudio
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/postman.svg
-button_lclick_command = /home/igor/arch/tint2/menu.sh postman
-button_padding = 5 0 0
+button_lclick_command = /home/igor/arch/tint2/menu.sh bruno
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/virtualbox.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh virtualbox
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/discord.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh discord
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/polari.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh kvirc
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/flameshot.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh flameshot
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/onlyoffice-desktopeditors.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh onlyoffice
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
 
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/putty.svg
 button_lclick_command = /home/igor/arch/tint2/menu.sh vncviewer
-button_padding = 5 0 0
+button_padding = 3 0 0
 button_background_id = 1
-button_max_icon_size = 24
+button_max_icon_size = 16
+
+button = new
+button_icon = /usr/share/icons/Papirus/16x16/apps/doom3.svg
+button_lclick_command = /home/igor/arch/tint2/menu.sh pd2
+button_padding = 3 0 0
+button_background_id = 1
+button_max_icon_size = 16

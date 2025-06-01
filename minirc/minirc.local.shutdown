@@ -2,5 +2,6 @@
 
 # add shutdown commands here
 
+swapoff /swapfile
 hwclock --systohc
 
