@@ -40,7 +40,7 @@ _desktop() {
     # conky kernel
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
-    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
+    #conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
 
     # tray
     tint2 -c "${HOME}/arch/tint2/tint2rc-top" > /dev/null 2>&1 &
