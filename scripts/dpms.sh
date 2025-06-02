@@ -6,6 +6,7 @@ export DISPLAY=":1"
 
 xset dpms 0 0 0
 
+# TODO: virtualbox
 #if ! grep -q "RUNNING" /proc/asound/card*/pcm*/sub*/status
 #then
 if [ "$(xprintidle)" -gt 300000 ] # 5 min = 300000 ms

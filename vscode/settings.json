@@ -61,7 +61,7 @@
     "window.restoreWindows": "none",
     "workbench.settings.editor": "json",
     "debug.console.fontFamily": "Consolas",
-    "terminal.external.linuxExec": "termite",
+    "terminal.external.linuxExec": "termite2",
     "terminal.external.windowsExec": "C:\\Program Files\\Git\\bin\\bash.exe",
     "terminal.explorerKind": "external",
     "update.mode": "none",

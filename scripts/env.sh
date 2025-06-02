@@ -14,9 +14,9 @@ export GIT_PS1_SHOWCONFLICTSTATE="no"
 
 # default scaling
 # QT
-#export QT_FONT_DPI=150
+export QT_FONT_DPI=150
 # GTK
-#export GDK_SCALE=1
+export GDK_SCALE=2
 
 # vnc does not export $SHELL
 export SHELL='/bin/bash'

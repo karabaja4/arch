@@ -34,7 +34,7 @@ _desktop() {
     xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
 
     # resolution and background
-    sleep 2
+    #sleep 2
     "${HOME}/arch/scripts/fixres.sh"
 
     # conky kernel

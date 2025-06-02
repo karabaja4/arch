@@ -25,7 +25,7 @@ _load_apulse() {
 
 case "${1}" in
 terminal)
-    _run termite
+    _run termite2
     ;;
 # firefox)
 #     _run firefox-socket

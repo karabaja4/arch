@@ -20,7 +20,7 @@ _loadsysctl "50-pid-max.conf"
 printf '0' > /proc/sys/kernel/printk
 
 # limit battery charge
-#printf '60' > /sys/class/power_supply/BAT0/charge_control_end_threshold
+printf '80' > /sys/class/power_supply/BAT0/charge_control_end_threshold
 
 # turbo fans
 #printf '1' > /sys/devices/platform/asus-nb-wmi/throttle_thermal_policy
@@ -43,11 +43,11 @@ _mkxdg "runtime"
 _mkxdg "other"
 
 # set CPU to performance preset
-printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
+#printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
 
 # activate swap
 #swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
-swapon /swapfile
+#swapon /swapfile
 
 # write /etc/issue to display a nice greeting message
 /home/igor/arch/scripts/info.sh > /etc/issue

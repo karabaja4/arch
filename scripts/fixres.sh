@@ -1,16 +1,13 @@
 #!/bin/sh
 
-_res_middle="1920x1080"
-_res_left="1920x1080"
+_res_middle="3840x2160"
+_res_left="2560x1600"
 
-#_screen_middle="$(xrandr | grep "699mm x 395mm" | cut -d' ' -f1)"
-#_screen_left="$(xrandr | grep "344mm x 194mm" | cut -d' ' -f1)"
+_screen_middle="$(xrandr | grep "${_res_middle}+" | cut -d' ' -f1)"
+_screen_left="$(xrandr | grep "${_res_left}+" | cut -d' ' -f1)"
 
-_screen_middle="$(xrandr | grep "700mm x 400mm" | cut -d' ' -f1)"
-_screen_left="$(xrandr | grep "340mm x 190mm" | cut -d' ' -f1)"
-
-_rate_middle="60.00"
-_rate_left="60.06"
+_rate_middle="240.02"
+_rate_left="240.00"
 
 _exists() {
     _screen="${1}"

@@ -1,19 +1,19 @@
 conky.config = {
-	use_xft = true,
-	font = 'Consolas:size=11',
-	draw_shades = false,
-	alignment = 'top_right',
-	gap_x = 30,
-	gap_y = 55,
-    minimum_width = 200,
-	update_interval = 86400,
-	double_buffer = true,
-	own_window = true,
-	own_window_type = 'normal',
-	own_window_transparent = false,
-	own_window_colour = '#FAFAFA',
-	color1 = '#212121',
-	border_width = 5
+  use_xft = true,
+  font = 'Consolas:size=11',
+  draw_shades = false,
+  alignment = 'top_right',
+  gap_x = 30,
+  gap_y = 55,
+  minimum_width = 200,
+  update_interval = 86400,
+  double_buffer = true,
+  own_window = true,
+  own_window_type = 'normal',
+  own_window_transparent = false,
+  own_window_colour = '#FAFAFA',
+  color1 = '#212121',
+  border_width = 5
 };
 
 conky.text = [[
