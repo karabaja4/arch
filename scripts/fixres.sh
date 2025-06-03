@@ -1,59 +1,74 @@
 #!/bin/sh
 
-_res_middle="3840x2160"
-_res_left="2560x1600"
-
-_screen_middle="DP-5"
-_screen_left="eDP-1-1"
-
-_rate_middle="240.02"
-_rate_left="240.00"
-
-_exists() {
-    _screen="${1}"
-    _test="$(xrandr --output "${_screen}" 2>&1)"
-    if [ -z "${_test}" ]
-    then
-        return 0
-    else
-        return 1
-    fi
-}
-
-_log() {
-    printf 'Setting %s to %s\n' "${1}" "${2}"
-}
-
 pkill -f conkyrc-kernel
 
-# middle
-if _exists "${_screen_middle}"
+_external_resolution='3840x2160'
+_laptop_resolution='2560x1600'
+
+_connected="$(xrandr | awk '/ connected / { print; getline; print }')"
+_xrandr_count=0
+
+_get_screen_info_by_resolution() {
+    printf '%s' "${_connected}" | grep -B1 "^   ${1}"
+}
+
+_get_screen_name() {
+    printf '%s' "${1}" | awk 'NR==1 { print $1 }'
+}
+
+_get_max_refresh_rate() {
+    printf '%s' "${1}" | awk 'NR==2' | tr -d '+*' | awk '{$1=""; sub(/^ /, ""); print}' | tr ' ' '\n' | sort -nr | head -n1
+}
+
+_set_wallpaper() {
+    printf 'Setting %s wallpaper to %s\n' "${1}" "${2}"
+    xwallpaper --output "${1}" --stretch "${2}"
+}
+
+_set_xrandr() {
+    _set_xrandr_output="${1}"
+    _set_xrandr_mode="${2}"
+    _set_xrandr_rate="${3}"
+    shift 3
+    printf 'Setting %s to %s@%s\n' "${_set_xrandr_output}" "${_set_xrandr_mode}" "${_set_xrandr_rate}"
+    xrandr --output "${_set_xrandr_output}" --mode "${_set_xrandr_mode}" --rate "${_set_xrandr_rate}" "${@}"
+    _xrandr_count=$((_xrandr_count + 1))
+}
+
+_laptop_info="$(_get_screen_info_by_resolution "${_laptop_resolution}")"
+
+# laptop display is mandatory
+if [ -z "${_laptop_info}" ]
 then
-    _log "${_screen_middle}" "${_res_middle}"
-    xrandr --output "${_screen_middle}" --mode "${_res_middle}" --primary --rate "${_rate_middle}"
+    printf '%s\n' "Unable to detect internal laptop display."
+    exit 1
 fi
 
-# left
-if _exists "${_screen_left}"
+_laptop_screen_name="$(_get_screen_name "${_laptop_info}")"
+_laptop_max_refresh_rate="$(_get_max_refresh_rate "${_laptop_info}")"
+
+# if external display is optional, if connected it's primary
+_external_info="$(_get_screen_info_by_resolution "${_external_resolution}")"
+if [ -n "${_external_info}" ]
 then
-    _log "${_screen_left}" "${_res_left}"
-    if _exists "${_screen_middle}"
-    then
-        xrandr --output "${_screen_left}" --mode "${_res_left}" --left-of "${_screen_middle}" --rate "${_rate_left}"
-    else
-        xrandr --output "${_screen_left}" --mode "${_res_left}" --rate "${_rate_left}"
-    fi
+    _external_screen_name="$(_get_screen_name "${_external_info}")"
+    _external_max_refresh_rate="$(_get_max_refresh_rate "${_external_info}")"
+    
+    _set_xrandr "${_external_screen_name}" "${_external_resolution}" "${_external_max_refresh_rate}" --primary
+    _set_xrandr "${_laptop_screen_name}" "${_laptop_resolution}" "${_laptop_max_refresh_rate}" --left-of "${_external_screen_name}"
+    
+    _set_wallpaper "${_external_screen_name}" "${HOME}/arch/wall/exodus_v03_5120x2880.png"
+    _set_wallpaper "${_laptop_screen_name}" "${HOME}/arch/wall/exodus_v01_5120x2880.png"
+else
+    _set_xrandr "${_laptop_screen_name}" "${_laptop_resolution}" "${_laptop_max_refresh_rate}" --primary
+    _set_wallpaper "${_laptop_screen_name}" "${HOME}/arch/wall/exodus_v03_5120x2880.png"
 fi
 
-# set wallpapers and conky
-if _exists "${_screen_middle}" && _exists "${_screen_left}"
-then
-    xwallpaper --output "${_screen_middle}" --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
-    xwallpaper --output "${_screen_left}" --stretch "${HOME}/arch/wall/exodus_v01_5120x2880.png"
-    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
-    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
-elif _exists "${_screen_left}"
-then
-    xwallpaper --output "${_screen_left}" --stretch "${HOME}/arch/wall/exodus_v03_5120x2880.png"
-    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
-fi
+# conky
+_i=0
+while [ "${_i}" -lt "${_xrandr_count}" ]
+do
+    printf '%s\n' "Starting conkyrc-kernel for monitor ${_i}"
+    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head "${_i}"
+    _i=$((_i + 1))
+done
