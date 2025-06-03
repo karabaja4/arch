@@ -3,7 +3,7 @@
 _res_middle="3840x2160"
 _res_left="2560x1600"
 
-_screen_middle="DP-1-5"
+_screen_middle="DP-5"
 _screen_left="eDP-1-1"
 
 _rate_middle="240.02"
