@@ -38,8 +38,8 @@ _desktop() {
     "${HOME}/arch/scripts/fixres.sh"
 
     # conky kernel
-    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
-    conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
+    #conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
+    #conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
     #conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
 
     # tray
