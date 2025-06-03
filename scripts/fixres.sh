@@ -47,10 +47,10 @@ fi
 _laptop_screen_name="$(_get_screen_name "${_laptop_info}")"
 _laptop_max_refresh_rate="$(_get_max_refresh_rate "${_laptop_info}")"
 
-# if external display is optional, if connected it's primary
 _external_info="$(_get_screen_info_by_resolution "${_external_resolution}")"
 if [ -n "${_external_info}" ]
 then
+    # external display connected, it's primary, laaptop is left of external display
     _external_screen_name="$(_get_screen_name "${_external_info}")"
     _external_max_refresh_rate="$(_get_max_refresh_rate "${_external_info}")"
     
@@ -60,6 +60,7 @@ then
     _set_wallpaper "${_external_screen_name}" "${HOME}/arch/wall/exodus_v03_5120x2880.png"
     _set_wallpaper "${_laptop_screen_name}" "${HOME}/arch/wall/exodus_v01_5120x2880.png"
 else
+    # only laptop display, it's primary
     _set_xrandr "${_laptop_screen_name}" "${_laptop_resolution}" "${_laptop_max_refresh_rate}" --primary
     _set_wallpaper "${_laptop_screen_name}" "${HOME}/arch/wall/exodus_v03_5120x2880.png"
 fi
