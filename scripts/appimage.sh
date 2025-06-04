@@ -8,9 +8,6 @@ doas modprobe fuse
 # if script is symlinked, ${0} prints link name
 
 case "$(basename "${0}")" in
-onlyoffice-desktopeditors)
-    exec "/opt/appimage/DesktopEditors-x86_64.AppImage" "${@}"
-    ;;
 krita)
     exec "/opt/appimage/krita-5.2.9-x86_64.AppImage" "${@}"
     ;;
@@ -18,10 +15,7 @@ inkscape)
     exec "/opt/appimage/Inkscape-091e20e-x86_64.AppImage" "${@}"
     ;;
 bruno)
-    exec "/opt/appimage/bruno_2.2.0_x86_64_linux.AppImage" "${@}"
-    ;;
-zoom)
-    exec "/opt/appimage/Zoom_Workplace-6.4.3.827.glibc2.27-x86_64.AppImage" "${@}"
+    exec "/opt/appimage/bruno_2.4.0_x86_64_linux.AppImage" --force-device-scale-factor=1.5 "${@}"
     ;;
 "$(_script_filename)")
     _echo "Symlink the script to the app, e.g. ln -s $(_script_path) /usr/bin/onlyoffice-desktopeditors"
