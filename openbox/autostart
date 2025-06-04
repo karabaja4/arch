@@ -1,10 +1,8 @@
 #!/bin/sh
 
-# xorg settings
-#xinput set-prop 14 358 0, 0, 0
+# screen sleep settings
 xset -display :1 s 0 0
 xset -display :1 dpms 0 0 0
-#nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
 
 # alsa
 sleep 3 && "${HOME}/arch/scripts/sound.sh" pg32 > /dev/null 2>&1 &
@@ -15,11 +13,6 @@ xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
 # resolution and background
 #sleep 2
 "${HOME}/arch/scripts/fixres.sh"
-
-# conky kernel
-#conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
-#conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
-#conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
 
 # tray
 tint2 -c "${HOME}/arch/tint2/tint2rc-top" > /dev/null 2>&1 &
