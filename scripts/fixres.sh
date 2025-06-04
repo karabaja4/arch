@@ -1,4 +1,5 @@
 #!/bin/sh
+set -u
 
 pkill -f conkyrc-kernel
 
