@@ -22,6 +22,5 @@
     "[sql]": {
         "editor.defaultFormatter": "Microsoft.azuredatastudio-postgresql"
     },
-    "extensions.autoUpdate": false,
-    "window.zoomLevel": -1
+    "extensions.autoUpdate": false
 }

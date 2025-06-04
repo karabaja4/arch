@@ -46,7 +46,7 @@ code)
     _run code
     ;;
 azuredatastudio)
-    _run azuredatastudio --disable-keytar
+    _run azuredatastudio --disable-keytar --force-device-scale-factor=1.5
     ;;
 virtualbox)
     _run VirtualBox
