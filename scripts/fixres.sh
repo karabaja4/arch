@@ -50,7 +50,7 @@ _laptop_max_refresh_rate="$(_get_max_refresh_rate "${_laptop_info}")"
 _external_info="$(_get_screen_info_by_resolution "${_external_resolution}")"
 if [ -n "${_external_info}" ]
 then
-    # external display connected, it's primary, laaptop is left of external display
+    # external display connected, it's primary, laptop is left of external display
     _external_screen_name="$(_get_screen_name "${_external_info}")"
     _external_max_refresh_rate="$(_get_max_refresh_rate "${_external_info}")"
     
