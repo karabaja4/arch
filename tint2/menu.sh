@@ -64,7 +64,7 @@ virtualbox)
 discord)
     #_run chromium --disable-gpu --start-maximized --disable-smooth-scrolling --app=https://discord.com/app
     _load_apulse
-    _run discord --disable-smooth-scrolling
+    _run discord --disable-smooth-scrolling --force-device-scale-factor=1.5
     ;;
 # skype)
 #     _load_apulse
