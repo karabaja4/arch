@@ -3,6 +3,15 @@
 # speaker-test -D hdmi:CARD=NVidia,DEV=0 -c 2 -t wav
 
 _asoundrc="${HOME}/.asoundrc"
+_asoundrc_content="$(cat "${_asoundrc}")"
+
+_restore() {
+    printf '\n%s\n' 'No choice has been made, goodbye.'
+    printf '%s\n' "${_asoundrc_content}" > "${_asoundrc}"
+    exit 0
+}
+
+trap _restore HUP INT QUIT TERM
 
 # remove so if it's invalid don't get in the way of aplay
 rm -f "${_asoundrc}"
@@ -16,8 +25,8 @@ then
     printf '%s\n' "${_choices}"
     while [ -z "${_ln}" ] || ! printf '%s\n' "${_choices}" | grep -q "^${_ln}) "
     do
-      printf 'Choose a device: '
-      read -r _ln
+        printf 'Choose a device: '
+        read -r _ln
     done
 else
     _auto_choice="$(printf '%s\n' "${_choices}" | grep -i "${1}")"
