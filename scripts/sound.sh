@@ -3,7 +3,7 @@
 # speaker-test -D hdmi:CARD=NVidia,DEV=0 -c 2 -t wav
 
 _asoundrc_path="${HOME}/.asoundrc"
-_asoundrc_content=""
+_asoundrc_content=''
 
 if [ -f "${_asoundrc_path}" ]
 then
@@ -25,7 +25,32 @@ trap _restore HUP INT QUIT TERM
 rm -f "${_asoundrc_path}"
 
 _aplay="$(aplay -l | grep '^card ')"
+
+# read current indexes from asoundrc and try to match them up to aplay
+_current_index=""
+if [ -n "${_asoundrc_content}" ]
+then
+    _current_card="$(printf '%s\n' "${_asoundrc_content}" | grep '^defaults.pcm.card' | awk '{print $NF}')"
+    _current_device="$(printf '%s\n' "${_asoundrc_content}" | grep '^defaults.pcm.device' | awk '{print $NF}')"
+    _current_index="$(printf '%s\n' "${_aplay}" | grep -n "card ${_current_card}:.*device ${_current_device}:" | cut -d: -f1)"
+fi
+
 _choices="$(printf '%s\n' "${_aplay}" | sed 's/.*\[\([^]]*\)\].*\[\([^]]*\)\].*/\1 - \2/' | nl -w1 -s ') ')"
+
+# color the line that matched
+if [ -n "${_current_index}" ]
+then
+    _color_red="$(printf '\033[94m')"
+    _color_reset="$(printf '\033[0m')"
+    _choices="$(printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_red}/;${_current_index}s/\$/${_color_reset}/")"
+fi
+
+# list mode
+if [ "${1}" = "l" ] || [ "${1}" = "-l" ]
+then
+    printf '%s\n' "${_choices}"
+    exit 0
+fi
 
 _ln=''
 if [ -z "${1}" ]
@@ -37,7 +62,7 @@ then
         read -r _ln
     done
 else
-    _auto_choice="$(printf '%s\n' "${_choices}" | grep -i "${1}")"
+    _auto_choice="$(printf '%s\n' "${_choices}" | grep -i -F "${1}")"
     _match_count="$(printf '%s\n' "${_auto_choice}" | grep -c -v '^\s*$')"
     if [ "${_match_count}" -ne 1 ]
     then
