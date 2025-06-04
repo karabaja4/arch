@@ -2,19 +2,27 @@
 
 # speaker-test -D hdmi:CARD=NVidia,DEV=0 -c 2 -t wav
 
-_asoundrc="${HOME}/.asoundrc"
-_asoundrc_content="$(cat "${_asoundrc}")"
+_asoundrc_path="${HOME}/.asoundrc"
+_asoundrc_content=""
+
+if [ -f "${_asoundrc_path}" ]
+then
+    _asoundrc_content="$(cat "${_asoundrc_path}")"
+fi
 
 _restore() {
     printf '\n%s\n' 'No choice has been made, goodbye.'
-    printf '%s\n' "${_asoundrc_content}" > "${_asoundrc}"
+    if [ -n "${_asoundrc_content}" ]
+    then
+        printf '%s\n' "${_asoundrc_content}" > "${_asoundrc_path}"
+    fi
     exit 0
 }
 
 trap _restore HUP INT QUIT TERM
 
 # remove so if it's invalid don't get in the way of aplay
-rm -f "${_asoundrc}"
+rm -f "${_asoundrc_path}"
 
 _aplay="$(aplay -l | grep '^card ')"
 _choices="$(printf '%s\n' "${_aplay}" | sed 's/.*\[\([^]]*\)\].*\[\([^]]*\)\].*/\1 - \2/' | nl -w1 -s ') ')"
@@ -47,7 +55,7 @@ _aplay_row="$(printf '%s\n' "${_aplay}" | sed -n "${_ln}p")"
 _card="$(printf '%s\n' "${_aplay_row}" | sed -n 's/.*card \([0-9][0-9]*\):.*/\1/p')"
 _device="$(printf '%s\n' "${_aplay_row}" | sed -n 's/.*device \([0-9][0-9]*\):.*/\1/p')"
 
-printf 'defaults.ctl.card %s\ndefaults.pcm.card %s\ndefaults.pcm.device %s\n' "${_card}" "${_card}" "${_device}" > "${_asoundrc}"
+printf 'defaults.ctl.card %s\ndefaults.pcm.card %s\ndefaults.pcm.device %s\n' "${_card}" "${_card}" "${_device}" > "${_asoundrc_path}"
 printf 'Device index: card %s, device %s\n' "${_card}" "${_device}"
 
 # unmute and max all channels that support pvolume
