@@ -1,59 +1,30 @@
 #!/bin/sh
 
-_vnc() {
+# xorg settings
+#xinput set-prop 14 358 0, 0, 0
+xset -display :1 s 0 0
+xset -display :1 dpms 0 0 0
+#nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
 
-    # daemons
-    xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
+# alsa
+sleep 3 && "${HOME}/arch/scripts/sound.sh" pg32 > /dev/null 2>&1 &
 
-    # bacgkround
-    xsetroot -solid '#008080'
+# daemons
+xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
 
-    # interface
-    tint2 -c "${HOME}/arch/tint2/tint2rc-vnc" &
+# resolution and background
+#sleep 2
+"${HOME}/arch/scripts/fixres.sh"
 
-    # keyboard (because raw inputs revert to US)
-    # raw inputs are necessary for VirtualBox keyboard layout
-    # requires rawkeyboard=1 in vnc config
-    setxkbmap hr
-    
-    wine /home/igor/work/ticker/MouseTicker.App.exe -qs &
-}
+# conky kernel
+#conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
+#conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
+#conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
 
-_desktop() {
+# tray
+tint2 -c "${HOME}/arch/tint2/tint2rc-top" > /dev/null 2>&1 &
+tint2 -c "${HOME}/arch/tint2/tint2rc-bottom" > /dev/null 2>&1 &
 
-    # xorg settings
-    #xinput set-prop 14 358 0, 0, 0
-    xset -display :1 s 0 0
-    xset -display :1 dpms 0 0 0
-    #nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
-    
-    # alsa
-    sleep 3 && "${HOME}/arch/scripts/sound.sh" pg32 > /dev/null 2>&1 &
-
-    # daemons
-    xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
-
-    # resolution and background
-    #sleep 2
-    "${HOME}/arch/scripts/fixres.sh"
-
-    # conky kernel
-    #conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 0
-    #conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 1
-    #conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head 2
-
-    # tray
-    tint2 -c "${HOME}/arch/tint2/tint2rc-top" > /dev/null 2>&1 &
-    tint2 -c "${HOME}/arch/tint2/tint2rc-bottom" > /dev/null 2>&1 &
-
-    # other
-    sleep 1
-    "${HOME}/arch/scripts/clip.sh" > /dev/null 2>&1 &
-}
-
-if /usr/bin/xdpyinfo | grep VNC > /dev/null
-then
-    _vnc
-else
-    _desktop
-fi
+# other
+sleep 1
+"${HOME}/arch/scripts/clip.sh" > /dev/null 2>&1 &
