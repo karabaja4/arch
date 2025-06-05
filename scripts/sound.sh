@@ -49,7 +49,7 @@ then
     then
         _color_red="$(printf '\033[94m')"
         _color_reset="$(printf '\033[0m')"
-        printf '%s\n' "$(printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_red}/;${_current_index}s/\$/${_color_reset}/")"
+        printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_red}/;${_current_index}s/\$/${_color_reset}/"
     else
         printf '%s\n' "${_choices}"
     fi
