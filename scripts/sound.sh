@@ -10,8 +10,12 @@ then
     _asoundrc_content="$(cat "${_asoundrc_path}")"
 fi
 
-_restore() {
+_handle_signal() {
     printf '\n%s\n' 'No choice has been made, goodbye.'
+    _restore
+}
+
+_restore() {
     if [ -n "${_asoundrc_content}" ]
     then
         printf '%s\n' "${_asoundrc_content}" > "${_asoundrc_path}"
@@ -19,7 +23,7 @@ _restore() {
     exit 0
 }
 
-trap _restore HUP INT QUIT TERM
+trap _handle_signal HUP INT QUIT TERM
 
 # remove so if it's invalid don't get in the way of aplay
 rm -f "${_asoundrc_path}"
@@ -37,25 +41,29 @@ fi
 
 _choices="$(printf '%s\n' "${_aplay}" | sed 's/.*\[\([^]]*\)\].*\[\([^]]*\)\].*/\1 - \2/' | nl -w1 -s ') ')"
 
-# color the line that matched
-if [ -n "${_current_index}" ]
+if [ "${1}" = "l" ] || [ "${1}" = "-l" ] || [ -z "${1}" ]
 then
-    _color_red="$(printf '\033[94m')"
-    _color_reset="$(printf '\033[0m')"
-    _choices="$(printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_red}/;${_current_index}s/\$/${_color_reset}/")"
+    # print the numbered list only in list mode or select mode
+    # color the line that matched
+    if [ -n "${_current_index}" ]
+    then
+        _color_red="$(printf '\033[94m')"
+        _color_reset="$(printf '\033[0m')"
+        printf '%s\n' "$(printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_red}/;${_current_index}s/\$/${_color_reset}/")"
+    else
+        printf '%s\n' "${_choices}"
+    fi
 fi
 
-# list mode
+# list mode, restore and exit
 if [ "${1}" = "l" ] || [ "${1}" = "-l" ]
 then
-    printf '%s\n' "${_choices}"
-    exit 0
+    _restore
 fi
 
 _ln=''
 if [ -z "${1}" ]
 then
-    printf '%s\n' "${_choices}"
     while [ -z "${_ln}" ] || ! printf '%s\n' "${_choices}" | grep -q "^${_ln}) "
     do
         printf 'Choose a device: '
