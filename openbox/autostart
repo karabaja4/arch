@@ -18,9 +18,6 @@ xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
 tint2 -c "${HOME}/arch/tint2/tint2rc-top" > /dev/null 2>&1 &
 tint2 -c "${HOME}/arch/tint2/tint2rc-bottom" > /dev/null 2>&1 &
 
-# prevent ghosting in electron/chromium
-xcompmgr -a &
-
 # other
 sleep 1
 "${HOME}/arch/scripts/clip.sh" > /dev/null 2>&1 &
