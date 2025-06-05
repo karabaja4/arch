@@ -31,12 +31,15 @@ rm -f "${_asoundrc_path}"
 _aplay="$(aplay -l | grep '^card ')"
 
 # read current indexes from asoundrc and try to match them up to aplay
-_current_index=""
+_current_index=''
 if [ -n "${_asoundrc_content}" ]
 then
     _current_card="$(printf '%s\n' "${_asoundrc_content}" | grep '^defaults.pcm.card' | awk '{print $NF}')"
     _current_device="$(printf '%s\n' "${_asoundrc_content}" | grep '^defaults.pcm.device' | awk '{print $NF}')"
-    _current_index="$(printf '%s\n' "${_aplay}" | grep -n "card ${_current_card}:.*device ${_current_device}:" | cut -d: -f1)"
+    if [ -n "${_current_card}" ] && [ -n "${_current_device}" ]
+    then
+        _current_index="$(printf '%s\n' "${_aplay}" | grep -n "card ${_current_card}:.*device ${_current_device}:" | cut -d: -f1)"
+    fi
 fi
 
 _choices="$(printf '%s\n' "${_aplay}" | sed 's/.*\[\([^]]*\)\].*\[\([^]]*\)\].*/\1 - \2/' | nl -w1 -s ') ')"
