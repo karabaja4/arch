@@ -3,8 +3,8 @@ set -u
 
 pkill -f conkyrc-kernel
 
-_external_resolution='3840x2160'
-_laptop_resolution='2560x1600'
+_external_resolution='123'
+_laptop_resolution='123'
 
 _connected="$(xrandr | awk '/ connected / { print; getline; print }')"
 _xrandr_count=0
@@ -36,35 +36,19 @@ _set_xrandr() {
     _xrandr_count=$((_xrandr_count + 1))
 }
 
-_laptop_info="$(_get_screen_info_by_resolution "${_laptop_resolution}")"
+_external_screen_name='HDMI1'
+_external_resolution='1920x1080'
+_external_max_refresh_rate='60.00'
 
-# laptop display is mandatory
-if [ -z "${_laptop_info}" ]
-then
-    printf '%s\n' "Unable to detect internal laptop display."
-    exit 1
-fi
+_laptop_screen_name='eDP1'
+_laptop_resolution='1920x1080'
+_laptop_max_refresh_rate='60.06'
 
-_laptop_screen_name="$(_get_screen_name "${_laptop_info}")"
-_laptop_max_refresh_rate="$(_get_max_refresh_rate "${_laptop_info}")"
+_set_xrandr "${_external_screen_name}" "${_external_resolution}" "${_external_max_refresh_rate}" --primary
+_set_xrandr "${_laptop_screen_name}" "${_laptop_resolution}" "${_laptop_max_refresh_rate}" --left-of "${_external_screen_name}"
 
-_external_info="$(_get_screen_info_by_resolution "${_external_resolution}")"
-if [ -n "${_external_info}" ]
-then
-    # external display connected, it's primary, laptop is left of external display
-    _external_screen_name="$(_get_screen_name "${_external_info}")"
-    _external_max_refresh_rate="$(_get_max_refresh_rate "${_external_info}")"
-    
-    _set_xrandr "${_external_screen_name}" "${_external_resolution}" "${_external_max_refresh_rate}" --primary
-    _set_xrandr "${_laptop_screen_name}" "${_laptop_resolution}" "${_laptop_max_refresh_rate}" --left-of "${_external_screen_name}"
-    
-    _set_wallpaper "${_external_screen_name}" "${HOME}/arch/wall/exodus_v03_5120x2880.png"
-    _set_wallpaper "${_laptop_screen_name}" "${HOME}/arch/wall/exodus_v01_5120x2880.png"
-else
-    # only laptop display, it's primary
-    _set_xrandr "${_laptop_screen_name}" "${_laptop_resolution}" "${_laptop_max_refresh_rate}" --primary
-    _set_wallpaper "${_laptop_screen_name}" "${HOME}/arch/wall/exodus_v03_5120x2880.png"
-fi
+_set_wallpaper "${_external_screen_name}" "${HOME}/arch/wall/exodus_v03_5120x2880.png"
+_set_wallpaper "${_laptop_screen_name}" "${HOME}/arch/wall/exodus_v01_5120x2880.png"
 
 # conky
 _i=0
