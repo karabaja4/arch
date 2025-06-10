@@ -27,9 +27,9 @@ case "${1}" in
 terminal)
     _run termite2
     ;;
-# firefox)
-#     _run firefox-socket
-#     ;;
+firefox)
+    _run firefox-socket
+    ;;
 # qtfm)
 #     _run qtfm
 #     ;;
