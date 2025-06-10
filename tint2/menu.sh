@@ -28,6 +28,7 @@ terminal)
     _run termite2
     ;;
 firefox)
+    _load_apulse
     _run firefox-socket
     ;;
 # qtfm)
