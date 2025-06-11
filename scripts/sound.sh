@@ -78,7 +78,7 @@ else
     if [ "${_match_count}" -ne 1 ]
     then
         printf 'Found %s matches for "%s"\n' "${_match_count}" "${1}"
-        exit 1
+        _restore
     else
         _ln="$(printf '%s\n' "${_auto_choice}" | cut -d')' -f1)"
     fi
