@@ -9,7 +9,7 @@ xset dpms 0 0 0
 # Get idle time in milliseconds
 _idle_time="$(xprintidle)"
 
-# Turn off screen based on conditions
+# Only continue if idle time exceeds 5 minutes (300000 ms)
 if [ "${_idle_time}" -gt 300000 ]
 then
     # Initialize flags
@@ -28,10 +28,8 @@ then
         _vbox_running=1
     fi
 
-    if [ "${_audio_running}" -eq 1 ] && [ "${_vbox_running}" -eq 1 ]
-    then
-        xset dpms force off
-    elif [ "${_audio_running}" -eq 0 ]
+    # Determine whether to turn off the screen
+    if [ "${_audio_running}" -eq 0 ] || [ "${_vbox_running}" -eq 1 ]
     then
         xset dpms force off
     fi
