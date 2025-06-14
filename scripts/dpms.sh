@@ -6,15 +6,32 @@ export DISPLAY=":1"
 
 xset dpms 0 0 0
 
-# TODO: virtualbox
-#if ! grep -q "RUNNING" /proc/asound/card*/pcm*/sub*/status
-#then
-if [ "$(xprintidle)" -gt 300000 ] # 5 min = 300000 ms
+# Initialize flags
+_audio_running=0
+_vbox_running=0
+
+# Check if audio is running
+if grep -q "RUNNING" /proc/asound/card*/pcm*/sub*/status 2>/dev/null
 then
-    if ! pgrep -x vlc > /dev/null
-    then
-        xset dpms force off
-        exit 0
-    fi
+    _audio_running=1
 fi
-#fi
+
+# Check if VirtualBox is running
+if wmctrl -l 2>/dev/null | grep -q "\[Running\] - Oracle VirtualBox"
+then
+    _vbox_running=1
+fi
+
+# Get idle time in milliseconds
+_idle_time="$(xprintidle)"
+
+# Turn off screen based on conditions
+if [ "${_audio_running}" -eq 1 ] && [ "${_vbox_running}" -eq 1 ]
+then
+    xset dpms force off
+elif [ "${_audio_running}" -eq 0 ] && [ "${_idle_time}" -gt 300000 ]
+then
+    xset dpms force off
+else
+    printf 'Audio: %s, Virtualbox: %s, Idle: %s\n' "${_audio_running}" "${_vbox_running}" "${_idle_time}"
+fi
