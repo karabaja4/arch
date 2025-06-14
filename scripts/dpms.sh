@@ -10,7 +10,6 @@ xset dpms 0 0 0
 _idle_time="$(xprintidle)"
 
 # Turn off screen based on conditions
-
 if [ "${_idle_time}" -gt 300000 ]
 then
     # Initialize flags
