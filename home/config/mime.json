@@ -5,7 +5,7 @@
     "jpg,jpeg,svg,png,bmp,gif,tga": "/home/igor/arch/feh/feh.sh $arg",
     "gz,zip,rar,zst,tar,7z,iso,bz2,xz": "xarchiver $arg",
     "torrent": "/home/igor/arch/scripts/torrent.sh $arg",
-    "pdf": "mupdf -r 140 $arg",
+    "pdf": "mupdf -r 96 $arg",
     "htm,html": "chromium $arg",
     "exe": "wine $arg",
     "doc,xls,ppt,docx,xlsx,pptx,odt": "onlyoffice-desktopeditors $arg"
@@ -15,7 +15,7 @@
     "video/*": "vlc $arg",
     "image/*": "/home/igor/arch/feh/feh.sh $arg",
     "media/video": "vlc $arg",
-    "document/pdf": "mupdf -r 140 $arg",
+    "document/pdf": "mupdf -r 96 $arg",
     "inode/directory": "/home/igor/arch/lf/lf.sh $arg",
     "inode/x-empty": "qtextpad $arg",
     "application/octet-stream": "qtextpad $arg"
