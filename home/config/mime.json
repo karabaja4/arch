@@ -6,7 +6,7 @@
     "gz,zip,rar,zst,tar,7z,iso,bz2,xz": "xarchiver $arg",
     "torrent": "/home/igor/arch/scripts/torrent.sh $arg",
     "pdf": "mupdf -r 140 $arg",
-    "htm,html": "firefox-socket $arg",
+    "htm,html": "chromium $arg",
     "exe": "wine $arg",
     "doc,xls,ppt,docx,xlsx,pptx,odt": "onlyoffice-desktopeditors $arg"
   },
@@ -21,8 +21,8 @@
     "application/octet-stream": "qtextpad $arg"
   },
   "protocols": {
-    "http://": "firefox-socket $arg",
-    "https://": "firefox-socket $arg",
+    "http://": "chromium $arg",
+    "https://": "chromium $arg",
     "slack://": "slack $arg",
     "file://": "/home/igor/arch/lf/lf.sh $arg",
     "vscode://": "code $arg",
