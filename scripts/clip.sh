@@ -63,15 +63,19 @@ _iteration() {
                 _log "Added to history ${_history}"
             fi
             
-            # virtualbox clipboard only supports bmp images
+            # windows clipboard only supports bmp images
             if [ "${_match}" = "image/png" ] && \
                command -v magick >/dev/null 2>&1 && \
-               command -v wmctrl >/dev/null 2>&1 && \
-               wmctrl -l 2>/dev/null | grep -q "\[Running\] - Oracle VirtualBox"
+               command -v wmctrl >/dev/null 2>&1
             then
-                magick "${_out}" "bmp:${_out}"
-                _match="image/bmp"
-                _log "Converting ${_out} to bmp for VirtualBox"
+                _wmout="$(wmctrl -l 2>/dev/null)"
+                case "${_wmout}" in
+                *'FreeRDP:'* | *'[Running] - Oracle VirtualBox'* )
+                    magick "${_out}" "bmp:${_out}"
+                    _match="image/bmp"
+                    _log "Converting ${_out} to bmp for Windows"
+                    ;;
+                esac
             fi
 
             # read temp file, take ownership of clipboard and wait for pastes
