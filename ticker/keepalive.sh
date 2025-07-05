@@ -13,6 +13,5 @@ do
     then
     	printf '%s\n' "Sending ${_key} to ${_id}"
     	xdotool key --window "${_id}" "${_key}"
-    	sleep 60
     fi
 done
