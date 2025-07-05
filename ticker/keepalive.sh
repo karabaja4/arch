@@ -4,7 +4,7 @@ set -eu
 export XAUTHORITY="${HOME}/.local/share/sx/xauthority"
 export DISPLAY=":1"
 
-_key="F13"
+_key="Scroll_Lock"
 
 _id="$(xdotool search --name "FreeRDP" | head -n1)"
 if [ -n "${_id}" ]
