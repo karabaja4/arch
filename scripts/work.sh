@@ -10,8 +10,14 @@ _host="$(jq -crM '.work.host' "${_secret}")"
 _user="$(jq -crM '.work.user' "${_secret}")"
 _password="$(jq -crM '.work.password' "${_secret}")"
 
+# alsa is sensitive to timings, underruns occur
+export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+# /monitors:1
+# /multimon
+
 _color_echo 31 "Connecting to: ${_user} @ ${_domain}/${_host}"
-exec xfreerdp3 /monitors:1 /cert:ignore /bpp:32 /network:lan /audio-mode:2 /scale:100 /multimon /floatbar:sticky:off /gfx:RFX -themes -wallpaper -grab-keyboard \
+exec xfreerdp3 /cert:ignore /bpp:32 /network:lan /audio-mode:0 /sound:sys:pulse /scale:100 /monitors:1 /floatbar:sticky:off /gfx:RFX /log-level:FATAL +f -themes -wallpaper -grab-keyboard \
 /d:"${_domain}" \
 /v:"${_host}" \
 /u:"${_user}" \
