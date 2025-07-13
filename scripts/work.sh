@@ -16,6 +16,9 @@ export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 # /monitors:1
 # /multimon
 
+# /gfx:AVC444
+# /gfx:RFX
+
 _color_echo 94 "Connecting to: ${_user} @ ${_domain}/${_host}"
 exec xfreerdp3 /cert:ignore /bpp:32 /network:lan /audio-mode:0 /sound:sys:pulse /scale:100 /monitors:1 /floatbar:sticky:off /gfx:RFX /log-level:FATAL +f -themes -wallpaper -grab-keyboard \
 /d:"${_domain}" \
