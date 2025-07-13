@@ -43,7 +43,7 @@ _mkxdg "runtime"
 _mkxdg "other"
 
 # set CPU to performance preset
-#printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
+printf '%s\n' "performance" | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
 
 # activate swap
 #swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
