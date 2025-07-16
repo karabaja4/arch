@@ -4,8 +4,8 @@
 ip link set eth0 up > /dev/null 2>&1
 
 # improve responsivness under heavy IO
-#printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
-#printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
+printf '%s\n' "$((1*1024*1024))" > /proc/sys/vm/dirty_background_bytes
+printf '%s\n' "$((1*1024*1024))" > /proc/sys/vm/dirty_bytes
 
 # load (some) of the arch sysctl settings
 _loadsysctl() {
