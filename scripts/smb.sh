@@ -17,11 +17,11 @@ _username="$(jq -crM '.smb.username' "${_secret}")"
 _password="$(jq -crM '.smb.password' "${_secret}")"
 
 _mount_remote() {
-    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port=44555,nosharesock,actimeo=30 "${@}"
+    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port=44555 "${@}"
 }
 
 _mount_local() {
-    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,nosharesock,actimeo=30 "${@}"
+    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644 "${@}"
 }
 
 _public="${_home}/_public"
