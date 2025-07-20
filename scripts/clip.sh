@@ -62,21 +62,6 @@ _iteration() {
                 printf '%s\n' "$(cat "${_out}")" >> "${_history}"
                 _log "Added to history ${_history}"
             fi
-            
-            # windows clipboard only supports bmp images
-            if [ "${_match}" = "image/png" ] && \
-               command -v magick >/dev/null 2>&1 && \
-               command -v wmctrl >/dev/null 2>&1
-            then
-                _wmout="$(wmctrl -l 2>/dev/null)"
-                case "${_wmout}" in
-                *'FreeRDP:'* | *'[Running] - Oracle VirtualBox'* )
-                    magick "${_out}" "bmp:${_out}"
-                    _match="image/bmp"
-                    _log "Converting ${_out} to bmp for Windows"
-                    ;;
-                esac
-            fi
 
             # read temp file, take ownership of clipboard and wait for pastes
             # after something else is copied, xclip loses ownership and exits, and another iteration begins
