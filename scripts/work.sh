@@ -29,7 +29,7 @@ export LD_LIBRARY_PATH="/usr/lib/apulse${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 # RDP_SEC: An error was encountered when transitioning from FStateActivated in response to FEventHandshakeFailed (error code 0x8007052E)
 
 _color_echo 94 "Connecting to: ${_user} @ ${_domain}/${_host}"
-exec xfreerdp3 /cert:ignore /bpp:32 /network:lan /audio-mode:0 /sound:sys:pulse /scale:100 /monitors:1 /floatbar:sticky:off /gfx:AVC444 /log-level:FATAL +f -themes -wallpaper -grab-keyboard \
+exec xfreerdp3 /cert:ignore /bpp:32 /network:lan /audio-mode:0 /sound:sys:pulse /scale:100 /monitors:0 /floatbar:sticky:off /gfx:AVC444 /log-level:FATAL +f -themes -wallpaper -grab-keyboard \
 /d:"${_domain}" \
 /v:"${_host}" \
 /u:"${_user}" \
