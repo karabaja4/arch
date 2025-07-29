@@ -20,7 +20,7 @@ const colors = {
 };
 
 const fonts = {
-  awesome: 'Font Awesome 6 Free', // ttf-font-awesome
+  awesome: 'Font Awesome 6 Free', // ln -s /home/igor/arch/conky/fa-solid-900.ttf /usr/share/fonts/awesome.ttf
   flaticon: 'Flaticon'            // ln -s /home/igor/arch/conky/flaticon.ttf /usr/share/fonts/flaticon.ttf
 };
 
