@@ -29,7 +29,7 @@ _is_running() {
 }
 
 _is_running 'wpa_supplicant'
-_is_running 'dhcpcd'
+_is_running 'udhcpc'
 
 # resolve interface
 _interface="$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' | cat)"
@@ -68,10 +68,6 @@ _resolv_conf_old="/etc/resolv.conf.old"
 # backup resolv.conf so dhcpcd does not overwrite it
 _log "Backing up ${_resolv_conf} to ${_resolv_conf_old}"
 cp "${_resolv_conf}" "${_resolv_conf_old}"
-
-# setup hook
-_log "Setting up hook..."
-ln -sf /usr/share/dhcpcd/hooks/10-wpa_supplicant /usr/lib/dhcpcd/dhcpcd-hooks/
 
 # lenovo ideapad 3 needs this
 rfkill unblock all
@@ -139,9 +135,6 @@ else
     _log "Using config ${_config}"
 fi
 
-_wpa_supplicant_conf='/etc/wpa_supplicant/wpa_supplicant.conf'
-_log "Copying ${_config} to ${_wpa_supplicant_conf}"
-cp "${_config}" "${_wpa_supplicant_conf}"
-
-# run dhcpcd which will implicitly run wpa_supplicant using a hook
-dhcpcd -4 "${_interface}"
+wpa_supplicant -B -i "${_interface}" -c "${_config}"
+sleep 3
+udhcpc -nqfv -i "${_interface}"
