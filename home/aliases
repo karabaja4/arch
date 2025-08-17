@@ -22,6 +22,7 @@ hs() {
 gitpullall() {
     for _dir in */.git
     do
+        printf 'Pulling \033[94m%s\033[0m\n' "${_dir%%/*}"
         git -C "$(realpath "${_dir}/..")" pull
     done
 }
