@@ -122,7 +122,7 @@ pd2)
     ;;
 wow)
     # _run /home/igor/games/turtlewow/TurtleWoW.AppImage
-    cd /home/igor/games/turtlewow || exit
+    #cd /home/igor/games/turtlewow || exit
     #_run wine VanillaFixes.exe
     export LD_PRELOAD="/usr/lib/libwayland-client.so.0:/usr/lib/libwayland-egl.so.1:/usr/lib/libwayland-cursor.so.0"
     _run /home/igor/games/turtlewow/TurtleWoW.AppImage
