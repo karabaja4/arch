@@ -28,16 +28,39 @@ _script_ln() {
 # usage: _echo "<text1>" "<text2>"
 # each parameter will be printed as a new line
 _echo() {
-    printf '%s\n' "${@}"
+    for __line in "${@}"
+    do
+        printf '%s\n' "${__line}"
+    done
+}
+
+# prints colored text
+# 3x - dark
+# 9x - light
+# 0 - black
+# 1 - red
+# 2 - green
+# 3 - orange
+# 4 - blue
+# 5 - purple
+# 6 - cyan
+# 7 - white
+_color_echo() {
+    __color_code="${1}"
+    shift
+    for __color_line in "${@}"
+    do
+        printf '\033[%sm%s\033[0m\n' "${__color_code}" "${__color_line}"
+    done
 }
 
 # non-empty line count
 _nelc() {
     if [ "${#}" -eq 0 ]
     then
-        grep -c -v '^\s*$'
+        grep -c -v '^[[:space:]]*$'
     else
-        _echo "${@}" | grep -c -v '^\s*$'
+        _echo "${@}" | grep -c -v '^[[:space:]]*$'
     fi
 }
 
@@ -134,22 +157,6 @@ _check_arg() {
     then
         _err 206 "Invalid parameter."
     fi
-}
-
-# 3x - dark
-# 9x - light
-# 0 - black
-# 1 - red
-# 2 - green
-# 3 - orange
-# 4 - blue
-# 5 - purple
-# 6 - cyan
-# 7 - white
-
-# prints colored text
-_color_echo() {
-    printf '\033[%sm%s\033[0m\n' "${1}" "${2}"
 }
 
 # a-1  -> set "a" value to 1 only if a is unset
