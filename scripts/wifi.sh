@@ -1,7 +1,51 @@
 #!/bin/sh
-. "/home/igor/arch/scripts/_lib.sh"
 
 set -eu
+
+# helper functions start
+_echo() {
+    for _line in "${@}"
+    do
+        printf '%s\n' "${_line}"
+    done
+}
+
+_color_echo() {
+    _color_code="${1}"
+    shift
+    for _color_line in "${@}"
+    do
+        printf '\033[%sm%s\033[0m\n' "${_color_code}" "${_color_line}"
+    done
+}
+
+_err() {
+    _color_echo 91 "${@}" >&2
+    exit 2
+}
+
+_log() {
+    _color_echo 94 "${@}"
+}
+
+_nelc() {
+    _echo "${@}" | grep -c -v '^[[:space:]]*$'
+}
+
+_must_be_root() {
+    if [ "$(id -u)" -ne 0 ]
+    then
+        _err "Root privileges are required to run this command."
+    fi
+}
+
+_must_not_run() {
+    if pgrep -x "${1}" > /dev/null
+    then
+        _err "${1} is running, cannot continue."
+    fi
+}
+# helper functions end
 
 _usage() {
     _echo "Connect to a WiFi network." \
@@ -9,33 +53,23 @@ _usage() {
     exit 1
 }
 
+_arg1="${1-}"
+
 case "${_arg1}" in
 --help|-h)
     _usage
     ;;
 esac
 
-_log() {
-    _color_echo 94 "${1}"
-}
-
 _must_be_root
-
-_is_running() {
-    if pgrep -x "${1}" > /dev/null
-    then
-        _err 100 "${1} is running, cannot continue."
-    fi
-}
-
-_is_running 'wpa_supplicant'
-_is_running 'udhcpc'
+_must_not_run 'wpa_supplicant'
+_must_not_run 'udhcpc'
 
 # resolve interface
-_interface="$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' | cat)"
+_interface="$(_echo /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' || true)"
 if [ -z "${_interface}" ]
 then
-    _err 101 "No wireless interfaces found."
+    _err "No wireless interfaces found."
 fi
 
 if [ -z "${_arg1}" ]
@@ -44,18 +78,18 @@ then
     _count="$(_nelc "${_interface}")"
     if [ "${_count}" -ne 1 ]
     then
-        _err 102 "More than one interface found:" \
-                 "${_interface}" \
-                 "Please specify an interface as an argument." >&2
+        _err "More than one interface found:" \
+             "${_interface}" \
+             "Please specify an interface as an argument."
     else
         _log "Detected interface ${_interface}"
     fi
 else
     # interface provided by user on arg1
-    _match="$(_echo "${_interface}" | grep -F "${_arg1}" | cat)"
+    _match="$(_echo "${_interface}" | grep -F "${_arg1}" || true)"
     if [ -z "${_match}" ]
     then
-        _err 103 "Interface ${_arg1} not found."
+        _err "Interface ${_arg1} not found."
     else
          _interface="${_match}"
         _log "Using interface ${_interface}"
@@ -70,47 +104,52 @@ _log "Backing up ${_resolv_conf} to ${_resolv_conf_old}"
 cp "${_resolv_conf}" "${_resolv_conf_old}"
 
 # lenovo ideapad 3 needs this
-rfkill unblock all
+rfkill unblock wifi
 
 # scar 18 wifi needs reset after each scan
 ip link set "${_interface}" down
 ip link set "${_interface}" up
 
-# scan for networks and present a choice
+# start wpa_supplicant for scanning purposes
+_scan_pid_file="/run/wpa_supplicant/${_interface}-scan.pid"
+wpa_supplicant -B -i "${_interface}" -c /dev/null -C /run/wpa_supplicant -P "${_scan_pid_file}" > /dev/null
+sleep 1
+_scan_pid="$(cat "${_scan_pid_file}")"
+
+# scan networks
+wpa_cli -i "${_interface}" scan > /dev/null
+
+# allow for scan to complete
 _log "Scanning for networks..."
-_essids="$(iwlist "${_interface}" scan | grep -E 'Address: [0-9A-F:]{17}' -A 5 | cut -c 11-)"
-if [ -z "${_essids}" ]
+sleep 5
+
+# save scan results
+_scan_results="$(wpa_cli -i "${_interface}" scan_results | sed '1d')"
+if [ -z "${_scan_results}" ]
 then
-    _err 104 "No networks found."
+    _err "No networks found."
 fi
 
-_echo "${_essids}"
+# kill wpa_supplicant because we are done scanning
+kill "${_scan_pid}"
 
-# loop until user enters a valid choice (non-empty, at least two digits, starting with Cell)
-_idx=''
-while [ -z "${_idx}" ] || ! _echo "${_idx}" | grep -Eq '^[0-9]{2,}$' || ! _echo "${_essids}" | grep -Eq "^Cell ${_idx} - "
+# enumerate choices and show them
+# loop until the user enters a correct choice
+_choices="$(_echo "${_scan_results}" | nl -w1 -s ') ')"
+_echo "${_choices}"
+_ln=''
+while [ -z "${_ln}" ] || ! _echo "${_choices}" | grep -q "^${_ln}) "
 do
-    printf '%s' 'Select a network: '
-    read -r _idx
+    printf 'Choose a network: '
+    read -r _ln
 done
 
-# extract selected cell
-_cell="$(_echo "${_essids}" | grep -E "^Cell ${_idx} - " -A 5)"
+# parse out the choice
+_selected_choice="$(_echo "${_scan_results}" | sed -n "${_ln}p")"
+_bssid="$(_echo "${_selected_choice}" | cut -f1)"
+_essid="$(_echo "${_selected_choice}" | cut -f5-)"
 
-# bssid
-_bssid="$(_echo "${_cell}" | grep -Eo 'Address: [0-9A-F:]{17}' | cut -d' ' -f2)"
-if [ -z "${_bssid}" ]
-then
-    _err 105 'Cannot parse BSSID.'
-fi
-
-# essid
-_essid="$(_echo "${_cell}" | tail -n 1 | grep -F 'ESSID:' | cut -d'"' -f2)"
-if [ -z "${_essid}" ]
-then
-    _err 106 'Cannot parse ESSID.'
-fi
-
+# print the choice
 _log "ESSID: ${_essid}, BSSID: ${_bssid}"
 
 # config paths
