@@ -16,9 +16,9 @@ alias speedtest='wget https://avacyn.radiance.hr/stuff/debian-12.5.0-amd64-netin
 alias myip='curl https://avacyn.radiance.hr/ip'
 
 _reset="\[\033[0m\]"
-_green_b="\[\033[1;32m\]"
+_green_b="\[\033[1;34m\]"
 
-PS1="\w ${_green_b}>>${_reset} "
+PS1="\w ${_green_b}##${_reset} "
 
 # aliases end
 
@@ -27,8 +27,8 @@ _gid="1000"
 _secret="/root/secret.txt"
 _username="$(cat "${_secret}" | sed -n '1p')"
 _password="$(cat "${_secret}" | sed -n '2p')"
-_public="/root/public"
-_private="/root/private"
+_public="/root/_public"
+_private="/root/_private"
 
 _mount_remote() {
     mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port=44555 "${@}"
