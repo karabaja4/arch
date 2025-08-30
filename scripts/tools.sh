@@ -18,7 +18,7 @@ alias myip='curl https://avacyn.radiance.hr/ip'
 _reset="\[\033[0m\]"
 _blue_b="\[\033[1;34m\]"
 
-PS1="\w ${_blue_b}##${_reset} "
+PS1="\w ${_blue_b}#${_reset} "
 
 # aliases end
 
