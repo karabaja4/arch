@@ -86,7 +86,7 @@ then
     fi
 else
     # interface provided by user on arg1
-    _match="$(_echo "${_interface}" | grep -F "${_arg1}" || true)"
+    _match="$(_echo "${_interface}" | grep -Fx "${_arg1}" || true)"
     if [ -z "${_match}" ]
     then
         _err "Interface ${_arg1} not found."
