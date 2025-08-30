@@ -48,8 +48,11 @@ _must_not_run() {
 # helper functions end
 
 _usage() {
+    _script_name="$(basename "${0}")"
     _echo "Connect to a WiFi network." \
-          "Usage: $(basename "${0}") [interface (omit to autodetect)]"
+          "Usage:" \
+          "${_script_name} [interface (omit to autodetect)]" \
+          "${_script_name} [off|stop]"
     exit 1
 }
 
@@ -58,6 +61,10 @@ _arg1="${1-}"
 case "${_arg1}" in
 --help|-h)
     _usage
+    ;;
+off|stop)
+    wpa_cli terminate
+    exit 0
     ;;
 esac
 
@@ -111,10 +118,8 @@ ip link set "${_interface}" down
 ip link set "${_interface}" up
 
 # start wpa_supplicant for scanning purposes
-_scan_pid_file="/run/wpa_supplicant/${_interface}-scan.pid"
-wpa_supplicant -B -i "${_interface}" -c /dev/null -C /run/wpa_supplicant -P "${_scan_pid_file}" > /dev/null
+wpa_supplicant -B -i "${_interface}" -c /dev/null -C /run/wpa_supplicant > /dev/null
 sleep 1
-_scan_pid="$(cat "${_scan_pid_file}")"
 
 # scan networks
 wpa_cli -i "${_interface}" scan > /dev/null
@@ -131,7 +136,7 @@ then
 fi
 
 # kill wpa_supplicant because we are done scanning
-kill "${_scan_pid}"
+wpa_cli -i "${_interface}" terminate
 
 # enumerate choices and show them
 # loop until the user enters a correct choice
@@ -160,16 +165,26 @@ _config="${_config_dir}/$(_echo "${_bssid}" | tr -d ':').conf"
 # if config does not exist, create it
 if [ ! -f "${_config}" ]
 then
-    printf '%s' "Enter a password: "
-    read -r _psk
+    _psk=''
+    while [ -z "${_psk}" ]
+    do
+        printf '%s' "Enter a password ('-' for no password): "
+        read -r _psk
+    done
     _log "Saving config to ${_config}"
-    printf '%s\n%s\n%s\n%s\n%s\n%s\n' \
-        "ctrl_interface=/run/wpa_supplicant" \
-        "network={" \
-        "    bssid=${_bssid}" \
-        "    ssid=\"${_essid}\"" \
-        "    psk=\"${_psk}\"" \
-        "}" > "${_config}"
+    {
+        printf '%s\n' "ctrl_interface=/run/wpa_supplicant"
+        printf '%s\n' "network={"
+        printf '    bssid=%s\n' "${_bssid}"
+        printf '    ssid="%s"\n' "${_essid}"
+        if [ "${_psk}" != "-" ]
+        then
+            printf '    psk="%s"\n' "${_psk}"
+        else
+            printf '    %s\n' "key_mgmt=NONE"
+        fi
+        printf '%s\n' "}"
+    } > "${_config}"
 else
     _log "Using config ${_config}"
 fi
