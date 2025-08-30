@@ -18,7 +18,7 @@ export CHECKUPDATES_DB="${_root}"
 
 _aur() {
 
-    _aur_out="$(/usr/bin/auracle outdated | grep -v virtualbox-ext-oracle 2>&1)"
+    _aur_out="$(/usr/bin/auracle outdated 2>&1)"
     _aur_rv="${?}"
     _aur_wc=""
 
