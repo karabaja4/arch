@@ -23,7 +23,7 @@ mountremote() {
 zero() {
     if [ -z "${1-}" ] || [ ! -b "${1}" ]
     then
-        echo "Usage example: zero /dev/nvme0n1" >&2
+        printf '%s\n' "Usage example: zero /dev/nvme0n1" >&2
         return 1
     fi
     dd if=/dev/zero of="${1}" bs=1M
@@ -32,7 +32,7 @@ zero() {
 backup() {
     if [ -z "${1-}" ] || [ -z "${2-}" ] || [ ! -b "${1}" ]
     then
-        echo "Usage example: backup /dev/nvme0n1 /home/igor/private/backups/win" >&2
+        printf '%s\n' "Usage example: backup /dev/nvme0n1 /home/igor/private/backups/win" >&2
         return 1
     fi
     dd if="${1}" conv=sync,noerror bs=64K | gzip -c > "${2}.img.gz"
@@ -41,7 +41,7 @@ backup() {
 restore() {
     if [ -z "${1-}" ] || [ -z "${2-}" ] || [ ! -b "${2}" ]
     then
-        echo "Usage example: restore /home/igor/private/backups/win.img.gz /dev/nvme0n1" >&2
+        printf '%s\n' "Usage example: restore /home/igor/private/backups/win.img.gz /dev/nvme0n1" >&2
         return 1
     fi
     gunzip -c "${1}" | dd of="${2}"
