@@ -16,9 +16,9 @@ alias speedtest='wget https://avacyn.radiance.hr/stuff/debian-12.5.0-amd64-netin
 alias myip='curl https://avacyn.radiance.hr/ip'
 
 _reset="\[\033[0m\]"
-_green_b="\[\033[1;34m\]"
+_blue_b="\[\033[1;34m\]"
 
-PS1="\w ${_green_b}##${_reset} "
+PS1="\w ${_blue_b}##${_reset} "
 
 # aliases end
 
