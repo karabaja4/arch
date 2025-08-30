@@ -111,10 +111,8 @@ ip link set "${_interface}" down
 ip link set "${_interface}" up
 
 # start wpa_supplicant for scanning purposes
-_scan_pid_file="/run/wpa_supplicant/${_interface}-scan.pid"
-wpa_supplicant -B -i "${_interface}" -c /dev/null -C /run/wpa_supplicant -P "${_scan_pid_file}" > /dev/null
+wpa_supplicant -B -i "${_interface}" -c /dev/null -C /run/wpa_supplicant > /dev/null
 sleep 1
-_scan_pid="$(cat "${_scan_pid_file}")"
 
 # scan networks
 wpa_cli -i "${_interface}" scan > /dev/null
@@ -131,7 +129,7 @@ then
 fi
 
 # kill wpa_supplicant because we are done scanning
-kill "${_scan_pid}"
+wpa_cli terminate
 
 # enumerate choices and show them
 # loop until the user enters a correct choice
