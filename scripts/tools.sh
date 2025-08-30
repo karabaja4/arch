@@ -6,6 +6,7 @@ set -u
 alias ls='ls -A -l -h --group-directories-first --full-time'
 alias chx='chmod +x'
 alias permof='/root/arch/scripts/permof.sh'
+alias wifi='/root/arch/scripts/wifi.sh'
 alias sizeof='du -sh'
 alias grep='grep --color'
 alias c='clear'
