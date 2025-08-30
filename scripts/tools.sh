@@ -1,6 +1,27 @@
 #!/bin/sh
 set -u
 
+# aliases start
+
+alias ls='ls -A -l -h --group-directories-first --full-time'
+alias chx='chmod +x'
+alias permof='/root/arch/scripts/permof.sh'
+alias sizeof='du -sh'
+alias grep='grep --color'
+alias c='clear'
+alias x='exit'
+alias sr='screen -r'
+alias sn='screen -S'
+alias speedtest='wget https://avacyn.radiance.hr/stuff/debian-12.5.0-amd64-netinst.iso -O /dev/null'
+alias myip='curl https://avacyn.radiance.hr/ip'
+
+_reset="\[\033[0m\]"
+_green_b="\[\033[1;32m\]"
+
+PS1="\w ${_green_b}>>${_reset} "
+
+# aliases end
+
 _uid="1000"
 _gid="1000"
 _secret="/root/secret.txt"
