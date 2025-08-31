@@ -136,7 +136,7 @@ then
 fi
 
 # kill wpa_supplicant because we are done scanning
-wpa_cli -i "${_interface}" terminate
+wpa_cli -i "${_interface}" terminate > /dev/null
 
 # enumerate choices and show them
 # loop until the user enters a correct choice
