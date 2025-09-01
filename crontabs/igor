@@ -1,3 +1,2 @@
 */5 * * * *    /home/igor/arch/scripts/dpms.sh
 */5 * * * *    /home/igor/arch/scripts/updates.sh
-* * * * *      /home/igor/arch/ticker/keepalive.sh
