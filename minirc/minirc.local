@@ -3,9 +3,13 @@
 # bring ethernet interface up so udhcpc can operate
 ip link set eth0 up > /dev/null 2>&1
 
+_set() {
+    printf '%s\n' "${1}" > "${2}"
+}
+
 # improve responsivness under heavy IO
-printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_background_bytes
-printf '%s' "$((4*1024*1024))" > /proc/sys/vm/dirty_bytes
+_set "$((4*1024*1024))" "/proc/sys/vm/dirty_background_bytes"
+_set "$((4*1024*1024))" "/proc/sys/vm/dirty_bytes"
 
 # load (some) of the arch sysctl settings
 _loadsysctl() {
@@ -17,13 +21,7 @@ _loadsysctl "50-default.conf"
 _loadsysctl "50-pid-max.conf"
 
 # prevent kernel from printing messages into framebuffer
-printf '0' > /proc/sys/kernel/printk
-
-# limit battery charge
-printf '80' > /sys/class/power_supply/BAT0/charge_control_end_threshold
-
-# turbo fans
-#printf '1' > /sys/devices/platform/asus-nb-wmi/throttle_thermal_policy
+_set "0" "/proc/sys/kernel/printk"
 
 # create tmpfs dirs
 #mkdir -p /run/samba
@@ -42,12 +40,11 @@ _mkxdg ""
 _mkxdg "runtime"
 _mkxdg "other"
 
-# set CPU to performance preset
-#printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
-
 # activate swap
-#swapon -U 471ae89a-9131-4de5-9126-a9129bbdc2b5
-#swapon /swapfile
+modprobe zram
+zramctl /dev/zram0 --algorithm zstd --size 8G
+mkswap -U clear /dev/zram0
+swapon --discard --priority 100 /dev/zram0
 
 # write /etc/issue to display a nice greeting message
 /home/igor/arch/scripts/info.sh > /etc/issue
