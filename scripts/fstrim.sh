@@ -2,13 +2,20 @@
 set -u
 
 _fn="$(basename "${0}")"
-_root_dir="/root/.local/share/fstrim"
-_last_run_file="${_root_dir}/lastruntime"
-_log_file="${_root_dir}/log"
 
 _log() {
     printf '[%s][%s] %s\n' "${_fn}" "$(date -Is)" "${1}"
 }
+
+if [ "$(id -u)" -ne 0 ]
+then
+    _log "Root privileges are required to run this script."
+    exit 1
+fi
+
+_root_dir="/root/.local/share/fstrim"
+_last_run_file="${_root_dir}/lastruntime"
+_log_file="${_root_dir}/log"
 
 # ensure directories exists
 mkdir -p "${_root_dir}"
