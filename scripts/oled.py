@@ -15,8 +15,8 @@ class ToggleFullscreenApp:
         self.root.title("OLED saver")
 
         # Bind click events
-        self.root.bind("<Button-1>", self.toggle_fullscreen)
-        self.root.bind("<Button-3>", self.exit_app)
+        self.root.bind("<Button-3>", self.toggle_fullscreen)
+        self.root.bind("<Button-1>", self.exit_app)
 
         # Force window manager to place window and get actual geometry
         self.root.update_idletasks()

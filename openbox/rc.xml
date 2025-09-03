@@ -103,11 +103,11 @@
       <action name="Iconify" />
     </keybind>
     <keybind key="Home">
-      <!-- Scar 18: Minimize with top right Home -->
+      <!-- Minimize with Home -->
       <action name="Iconify" />
     </keybind>
     <keybind key="Print">
-      <!-- Scar 18: Screenshot with top right PrtSc -->
+      <!-- Legion 7: Screenshot with top right PrtSc -->
       <action name="Execute">
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
@@ -120,6 +120,12 @@
       <!-- Logitech MX Keys S: Screenshot with Menu -->
       <action name="Execute">
         <command>/home/igor/arch/scripts/flameshot.sh</command>
+      </action>
+    </keybind>
+    <keybind key="W-F">
+      <!-- OLED screensaver -->
+      <action name="Execute">
+        <command>/home/igor/arch/scripts/oled.sh</command>
       </action>
     </keybind>
     <keybind key="W-S-M">
