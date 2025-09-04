@@ -234,6 +234,12 @@
         <width>1558</width>
       </size>
     </application>
+    <application name="kvirc">
+      <size>
+        <height>1400</height>
+        <width>2800</width>
+      </size>
+    </application>
     <application name="xfreerdp">
       <layer>above</layer>
     </application>
