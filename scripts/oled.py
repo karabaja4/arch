@@ -43,12 +43,10 @@ class ToggleFullscreenApp:
 
             # Go fullscreen
             self.root.attributes("-fullscreen", True)
-            #self.root.attributes("-topmost", True)
         else:
             # Restore original size and position
             self.root.attributes("-fullscreen", False)
             self.root.geometry(self.saved_geometry)
-            self.root.attributes("-topmost", False)
 
     def exit_app(self, event=None):
         self.root.quit()
