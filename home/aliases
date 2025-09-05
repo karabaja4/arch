@@ -29,6 +29,7 @@ gitpullall() {
 
 alias reboot='doas /home/igor/arch/scripts/reboot.sh reboot'
 alias poweroff='doas /home/igor/arch/scripts/reboot.sh poweroff'
+alias suspend='doas /home/igor/arch/scripts/suspend.sh'
 
 alias rsnc='doas pacman -Rsnc'
 alias work='/home/igor/arch/scripts/work.sh'
