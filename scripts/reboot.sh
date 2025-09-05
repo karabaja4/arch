@@ -35,7 +35,7 @@ then
     _err 101 "Failed to unmount USB drives."
 fi
 
-rm -rf "${_home}/.cache"
+#rm -rf "${_home}/.cache"
 
 if [ "${_arg1}" = "reboot" ]
 then
