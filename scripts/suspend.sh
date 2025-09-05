@@ -3,19 +3,26 @@ set -eu
 
 sync
 
-printf '%s\n' "TXHC" > /proc/acpi/wakeup
+_toggle_wakeup() {
+    printf '%s\n' "${1}" > /proc/acpi/wakeup
+}
 
-if [ -x "/usr/bin/nvidia-sleep.sh" ]
-then
-    /usr/bin/nvidia-sleep.sh suspend
-fi
+_nvidia() {
+    if [ -x "/usr/bin/nvidia-sleep.sh" ]
+    then
+        /usr/bin/nvidia-sleep.sh "${1}"
+    fi
+}
+
+_toggle_wakeup "TXHC"
+_toggle_wakeup "XHCI"
+
+_nvidia "suspend"
 
 printf '%s\n' "deep" > /sys/power/mem_sleep
 printf '%s\n' "mem" > /sys/power/state
 
-if [ -x "/usr/bin/nvidia-sleep.sh" ]
-then
-    /usr/bin/nvidia-sleep.sh resume
-fi
+_nvidia "resume"
 
-printf '%s\n' "TXHC" > /proc/acpi/wakeup
+_toggle_wakeup "TXHC"
+_toggle_wakeup "XHCI"
