@@ -8,8 +8,6 @@ _check_arg "${_arg1}" "reboot|poweroff"
 
 _must_be_root
 
-killall -q -v -w qbittorrent
-
 _umount() {
     if mountpoint -q "${1}"
     then
@@ -32,8 +30,7 @@ do
 done
 
 # cleanup /mnt
-"$(_script_dir)/usb.sh"
-if [ "${?}" -ne 0 ]
+if ! "$(_script_dir)/usb.sh"
 then
     _err 101 "Failed to unmount USB drives."
 fi
