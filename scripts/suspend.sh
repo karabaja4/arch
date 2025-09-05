@@ -24,5 +24,5 @@ printf '%s\n' "mem" > /sys/power/state
 
 _nvidia "resume"
 
-_toggle_wakeup "TXHC"
 _toggle_wakeup "XHCI"
+_toggle_wakeup "TXHC"
