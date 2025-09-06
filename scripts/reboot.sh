@@ -29,13 +29,13 @@ do
     _umount "${_mp}"
 done
 
+_root="$(dirname "$(readlink -f "$0")")"
+
 # cleanup /mnt
-if ! "$(_script_dir)/usb.sh"
+if ! "${_root}/usb.sh"
 then
     _err 101 "Failed to unmount USB drives."
 fi
-
-#rm -rf "${_home}/.cache"
 
 if [ "${_arg1}" = "reboot" ]
 then

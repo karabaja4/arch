@@ -3,27 +3,6 @@ set -u
 IFS='
 '
 
-# prints current script path
-_script_path() {
-    readlink -f "${0}"
-}
-
-# prints current dir
-_script_dir() {
-    dirname "$(_script_path)"
-}
-
-# prints current script file name
-_script_filename() {
-    basename "$(_script_path)"
-}
-
-# if script is symlinked, prints link name
-# otherwise prints script name
-_script_ln() {
-    basename "${0}"
-}
-
 # print text
 # usage: _echo "<text1>" "<text2>"
 # each parameter will be printed as a new line

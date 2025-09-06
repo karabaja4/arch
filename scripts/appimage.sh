@@ -1,7 +1,10 @@
 #!/bin/sh
+set -e
+
 . "/home/igor/arch/scripts/_lib.sh"
 
-set -e
+_script_path="$(readlink -f "${0}")"
+_script_filename="$(basename "${_script_path}")"
 
 doas modprobe fuse
 
@@ -17,8 +20,8 @@ inkscape)
 bruno)
     exec "/opt/appimage/bruno_2.10.0_x86_64_linux.AppImage" --force-device-scale-factor=1.75 "${@}"
     ;;
-"$(_script_filename)")
-    _echo "Symlink the script to the app, e.g. ln -s $(_script_path) /usr/local/bin/krita"
+"${_script_filename}")
+    _echo "Symlink the script to the app, e.g. ln -s ${_script_path} /usr/local/bin/krita"
     ;;
 *)
     _echo "Unknown app"
