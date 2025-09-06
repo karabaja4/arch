@@ -23,11 +23,6 @@ _loadsysctl "50-pid-max.conf"
 # prevent kernel from printing messages into framebuffer
 _set "0" "/proc/sys/kernel/printk"
 
-# create tmpfs dirs
-#mkdir -p /run/samba
-#mkdir -p /run/postgresql
-#chown postgres:postgres /run/postgresql
-
 # create XDG directories for current user (read from $HOME/.config/user-dirs.dirs and env.sh)
 _uid="1000"
 _user="$(getent passwd "${_uid}" | cut -d':' -f1)"
@@ -40,7 +35,7 @@ _mkxdg ""
 _mkxdg "runtime"
 _mkxdg "other"
 
-# activate swap
+# activate zram swap
 modprobe zram
 zramctl /dev/zram0 --algorithm zstd --size 8G
 mkswap -U clear /dev/zram0
