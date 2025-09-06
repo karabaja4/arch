@@ -1,6 +1,5 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
-set -u
 
 _must_be_root
 
