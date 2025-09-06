@@ -54,7 +54,7 @@ zero() {
 backup() {
     if [ -z "${1-}" ] || [ -z "${2-}" ] || [ ! -b "${1}" ]
     then
-        printf '%s\n' "Usage example: backup /dev/nvme0n1 /root/_private/backups/win" >&2
+        printf '%s\n' "Usage example: backup /dev/nvme0n1 /root/_private/_backups/win" >&2
         return 1
     fi
     dd if="${1}" conv=sync,noerror bs=64K | gzip -c > "${2}.img.gz"
@@ -63,7 +63,7 @@ backup() {
 restore() {
     if [ -z "${1-}" ] || [ -z "${2-}" ] || [ ! -b "${2}" ]
     then
-        printf '%s\n' "Usage example: restore /root/_private/backups/win.img.gz /dev/nvme0n1" >&2
+        printf '%s\n' "Usage example: restore /root/_private/_backups/win.img.gz /dev/nvme0n1" >&2
         return 1
     fi
     gunzip -c "${1}" | dd of="${2}"
