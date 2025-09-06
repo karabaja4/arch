@@ -27,8 +27,8 @@ gitpullall() {
     done
 }
 
-alias reboot='doas /home/igor/arch/scripts/reboot.sh reboot'
-alias poweroff='doas /home/igor/arch/scripts/reboot.sh poweroff'
+alias reboot='doas /home/igor/arch/scripts/power.sh reboot'
+alias poweroff='doas /home/igor/arch/scripts/power.sh poweroff'
 alias suspend='doas /home/igor/arch/scripts/suspend.sh'
 
 alias rsnc='doas pacman -Rsnc'
@@ -47,7 +47,6 @@ alias ytdlhq='yt-dlp -f "bestaudio/best" -o "%(title)s.%(ext)s" -v --extract-aud
 alias ytdl='/home/igor/arch/scripts/ytdl.sh'
 #alias firefox='firefox-socket'
 alias ncdu='ncdu --color dark'
-alias usb='doas /home/igor/arch/scripts/usb.sh'
 alias myip='curl https://avacyn.radiance.hr/ip'
 alias srcinfo='makepkg --printsrcinfo > .SRCINFO'
 alias df2='dysk'
@@ -56,6 +55,10 @@ alias dmesg='doas dmesg'
 alias locate='locate --ignore-case'
 alias picam='/home/igor/git/hid/scripts/client.sh'
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
+
+usb() {
+    doas /home/igor/arch/scripts/unmount.sh /mnt/*
+}
 
 # shellcheck disable=SC1090
 _source() {
