@@ -11,8 +11,6 @@ _usage() {
     exit 1
 }
 
-_arg1="${1-}"
-
 case "${_arg1}" in
 --help|-h)
     _usage
