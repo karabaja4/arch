@@ -33,4 +33,6 @@ mkdir -p "${_disk}"
 _mount_remote "//radiance.hr/public" "${_public}"
 _mount_remote "//radiance.hr/private" "${_private}"
 _mount_local "//192.168.100.33/disk" "${_disk}"
+
+# ssh tunnel
 _mount_remote "//localhost/disk" "${_disk}"

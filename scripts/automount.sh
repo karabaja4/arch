@@ -62,13 +62,14 @@ _mount() (
     esac
 
     _ec="${?}"
-    if [ "${_ec}" -ne 0 ]
+    if [ "${_ec}" -eq 0 ]
     then
+        # display notification on successful mount
+        _herbe "Mounted ${_devpath} to ${_mntpath} (${_fstype})"
+    else
+        # remove created dir on failed mount
         rmdir "${_mntpath}"
     fi
-    
-    # display notification
-    _herbe "Mounted ${_devpath} to ${_mntpath} (${_fstype})"
 )
 
 _enum() {
