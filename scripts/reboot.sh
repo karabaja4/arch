@@ -9,7 +9,7 @@ _umount() {
     then
         if ! umount -v "${1}"
         then
-            _err 100 "Not rebooting, umount ${1} failed."
+            _fatal "Not rebooting, umount ${1} failed."
         fi
     fi
 }
@@ -17,9 +17,10 @@ _umount() {
 _home="$(_passwd 6)"
 if [ -z "${_home}" ]
 then
-    _err 101 "Cannot find user's home."
+    _fatal "Cannot find user's home."
 fi
 
+# cleanup /home/igor/_*
 for _mp in "${_home}/_"*
 do
     _umount "${_mp}"
@@ -27,10 +28,10 @@ done
 
 _root="$(dirname "$(readlink -f "$0")")"
 
-# cleanup /mnt
+# cleanup /mnt/*
 if ! "${_root}/usb.sh"
 then
-    _err 101 "Failed to unmount USB drives."
+    _fatal "Failed to unmount USB drives."
 fi
 
 if [ "${_arg1}" = "reboot" ]

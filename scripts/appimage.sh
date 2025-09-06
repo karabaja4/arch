@@ -1,7 +1,6 @@
 #!/bin/sh
-set -e
-
 . "/home/igor/arch/scripts/_lib.sh"
+set -e
 
 _script_path="$(readlink -f "${0}")"
 _script_filename="$(basename "${_script_path}")"

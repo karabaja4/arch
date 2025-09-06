@@ -1,7 +1,6 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
-
-set -eu
+set -e
 
 _must_be_root
 

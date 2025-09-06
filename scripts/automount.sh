@@ -1,8 +1,7 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
 
-# not -e because we want to try to iterate all partitions
-set -u
+# don't use -e because we want to try to iterate all partitions
 
 _must_be_root
 

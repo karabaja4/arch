@@ -1,15 +1,13 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
 
-set -u
-
 _home="$(_passwd 6)"
 _uid="$(_passwd 3)"
 _gid="$(_passwd 4)"
 
 if [ -z "${_home}" ] ||  [ -z "${_uid}" ] ||  [ -z "${_gid}" ]
 then
-    _err 100 "Cannot find user's home or uid or gid."
+    _fatal "Cannot find user's home or uid or gid."
 fi
 
 _secret="/etc/secret/secret.json"

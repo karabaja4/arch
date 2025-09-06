@@ -1,8 +1,6 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
 
-set -u
-
 # multiple checkupdates calls cannot run in parallel
 # that is why a new CHECKUPDATES_DB is created only for this script
 
@@ -29,7 +27,7 @@ _aur() {
     then
         _aur_wc="0"
     else
-        _err 100 "auracle failed with [${_aur_rv}]:" "[${_aur_out}]"
+        _fatal "auracle failed with [${_aur_rv}]:" "[${_aur_out}]"
     fi
 
     if [ -n "${_aur_wc}" ]
@@ -52,7 +50,7 @@ _cu() {
     then
         _cu_wc="0"
     else
-        _err 101 "checkupdates failed with [${_cu_rv}]:" "[${_cu_out}]"
+        _fatal "checkupdates failed with [${_cu_rv}]:" "[${_cu_out}]"
     fi
 
     if [ -n "${_cu_wc}" ]

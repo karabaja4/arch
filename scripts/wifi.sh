@@ -1,51 +1,6 @@
 #!/bin/sh
-
-set -eu
-
-# helper functions start
-_echo() {
-    for _line in "${@}"
-    do
-        printf '%s\n' "${_line}"
-    done
-}
-
-_color_echo() {
-    _color_code="${1}"
-    shift
-    for _color_line in "${@}"
-    do
-        printf '\033[%sm%s\033[0m\n' "${_color_code}" "${_color_line}"
-    done
-}
-
-_err() {
-    _color_echo 91 "${@}" >&2
-    exit 2
-}
-
-_log() {
-    _color_echo 94 "${@}"
-}
-
-_nelc() {
-    _echo "${@}" | grep -c -v '^[[:space:]]*$'
-}
-
-_must_be_root() {
-    if [ "$(id -u)" -ne 0 ]
-    then
-        _err "Root privileges are required to run this command."
-    fi
-}
-
-_must_not_run() {
-    if pgrep -x "${1}" > /dev/null
-    then
-        _err "${1} is running, cannot continue."
-    fi
-}
-# helper functions end
+. "/home/igor/arch/scripts/_lib.sh"
+set -e
 
 _usage() {
     _script_name="$(basename "${0}")"
@@ -76,7 +31,7 @@ _must_not_run 'udhcpc'
 _interface="$(_echo /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' || true)"
 if [ -z "${_interface}" ]
 then
-    _err "No wireless interfaces found."
+    _fatal "No wireless interfaces found."
 fi
 
 if [ -z "${_arg1}" ]
@@ -85,21 +40,21 @@ then
     _count="$(_nelc "${_interface}")"
     if [ "${_count}" -ne 1 ]
     then
-        _err "More than one interface found:" \
-             "${_interface}" \
-             "Please specify an interface as an argument."
+        _fatal "More than one interface found:" \
+               "${_interface}" \
+               "Please specify an interface as an argument."
     else
-        _log "Detected interface ${_interface}"
+        _info "Detected interface ${_interface}"
     fi
 else
     # interface provided by user on arg1
     _match="$(_echo "${_interface}" | grep -Fx "${_arg1}" || true)"
     if [ -z "${_match}" ]
     then
-        _err "Interface ${_arg1} not found."
+        _fatal "Interface ${_arg1} not found."
     else
          _interface="${_match}"
-        _log "Using interface ${_interface}"
+        _info "Using interface ${_interface}"
     fi
 fi
 
@@ -107,7 +62,7 @@ _resolv_conf="/etc/resolv.conf"
 _resolv_conf_old="/etc/resolv.conf.old"
 
 # backup resolv.conf so dhcpcd does not overwrite it
-_log "Backing up ${_resolv_conf} to ${_resolv_conf_old}"
+_info "Backing up ${_resolv_conf} to ${_resolv_conf_old}"
 cp "${_resolv_conf}" "${_resolv_conf_old}"
 
 # lenovo ideapad 3 needs this
@@ -125,14 +80,14 @@ sleep 1
 wpa_cli -i "${_interface}" scan > /dev/null
 
 # allow for scan to complete
-_log "Scanning for networks..."
+_info "Scanning for networks..."
 sleep 5
 
 # save scan results
 _scan_results="$(wpa_cli -i "${_interface}" scan_results | sed '1d')"
 if [ -z "${_scan_results}" ]
 then
-    _err "No networks found."
+    _fatal "No networks found."
 fi
 
 # kill wpa_supplicant because we are done scanning
@@ -155,7 +110,7 @@ _bssid="$(_echo "${_selected_choice}" | cut -f1)"
 _essid="$(_echo "${_selected_choice}" | cut -f5-)"
 
 # print the choice
-_log "ESSID: ${_essid}, BSSID: ${_bssid}"
+_info "ESSID: ${_essid}, BSSID: ${_bssid}"
 
 # config paths
 _config_dir="/root/.config/wifi"
@@ -171,7 +126,7 @@ then
         printf '%s' "Enter a password ('-' for no password): "
         read -r _psk
     done
-    _log "Saving config to ${_config}"
+    _info "Saving config to ${_config}"
     {
         printf '%s\n' "ctrl_interface=/run/wpa_supplicant"
         printf '%s\n' "network={"
@@ -186,7 +141,7 @@ then
         printf '%s\n' "}"
     } > "${_config}"
 else
-    _log "Using config ${_config}"
+    _info "Using config ${_config}"
 fi
 
 wpa_supplicant -B -i "${_interface}" -c "${_config}"

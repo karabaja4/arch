@@ -3,6 +3,8 @@ set -u
 IFS='
 '
 
+# a-1  -> set "a" value to 1 only if a is unset
+# a:-1 -> set "a" value to 1 if "a" is unset or "a" is equal to ""
 _arg1="${1-}"
 _arg2="${2-}"
 _arg3="${3-}"
@@ -49,32 +51,13 @@ _nelc() {
     fi
 }
 
-# exit with an error and print text to stderr
-# usage: _err <exit-code> <exit-text>
-_err() {
-    __ec="${1-}"
-    if [ -z "${__ec}" ]
-    then
-        _err 255 "This function needs an argument."
-    fi
-    case "${__ec}" in
-        ''|*[!0-9]*)
-            _err 255 "Invalid exit code (not integer)."
-            ;;
-        *)
-            if [ "${__ec}" -ge 0 ] && [ "${__ec}" -le 255 ]
-            then
-                if [ "${#}" -gt 1 ]
-                then
-                    shift
-                    _echo "${@}" >&2
-                fi
-                exit "${__ec:-255}"
-            else
-                _err 255 "Invalid exit code (not between 0-255)."
-            fi
-            ;;
-    esac
+_info() {
+    _color_echo 94 "${@}"
+}
+
+_fatal() {
+    _color_echo 91 "${@}" >&2
+    exit 9
 }
 
 # gets the passwd column for the single logged in user
@@ -85,32 +68,35 @@ _passwd() {
     __idx="${1-}"
     if [ -z "${__idx}" ]
     then
-        _err 200 "This function needs an argument."
+        _fatal "This function needs an argument."
     fi
     __u="$(users | tr ' ' '\n' | sort -u)"
     __uc="$(_nelc "${__u}")"
     if [ "${__uc}" -ne 1 ]
     then
-        _err 201 "Cannot find a single logged in user (${__uc})."
+        _fatal "Cannot find a single logged in user (${__uc})."
     fi
     __col="$(getent passwd "${__u}" | cut -d ':' -f "${__idx}")"
     if [ -z "${__col}" ]
     then
-        _err 202 "Invalid passwd column."
+        _fatal "Invalid passwd column."
     fi
     _echo "${__col}"
 }
 
-# exits if the current user is not root
 _must_be_root() {
     if [ "$(id -u)" -ne 0 ]
     then
-        _err 203 "Root privileges are required to run this command."
+        _fatal "Root privileges are required to run this command."
     fi
 }
 
-# a-1  -> set "a" value to 1 only if a is unset
-# a:-1 -> set "a" value to 1 if "a" is unset or "a" is equal to ""
+_must_not_run() {
+    if pgrep -x "${1}" > /dev/null
+    then
+        _fatal "${1} is running, cannot continue."
+    fi
+}
 
 _herbe() {
     if command -v herbe > /dev/null 2>&1
