@@ -5,7 +5,7 @@ set -u
 _must_be_root
 
 _home="$(_passwd 6)"
-if [ -d "${_home}" ]
+if [ ! -d "${_home}" ]
 then
     _fatal "Cannot find user's home."
 fi
