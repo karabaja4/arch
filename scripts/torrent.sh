@@ -18,7 +18,7 @@ then
         _drop="${_disk}/drop"
         if [ -d "${_drop}" ]
         then
-            # temp file
+            # temp file to prevent concurrency issues
             _moving_file="${_arg1}.moving"
             if [ -e "${_moving_file}" ]
             then
