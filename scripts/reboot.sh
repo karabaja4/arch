@@ -1,10 +1,6 @@
 #!/bin/sh
 . "/home/igor/arch/scripts/_lib.sh"
-
 set -u
-
-# argument check
-_check_arg "${_arg1}" "reboot|poweroff"
 
 _must_be_root
 

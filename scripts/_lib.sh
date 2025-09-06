@@ -3,6 +3,12 @@ set -u
 IFS='
 '
 
+_arg1="${1-}"
+_arg2="${2-}"
+_arg3="${3-}"
+_arg4="${4-}"
+_arg5="${5-}"
+
 # print text
 # usage: _echo "<text1>" "<text2>"
 # each parameter will be printed as a new line
@@ -100,41 +106,6 @@ _must_be_root() {
     if [ "$(id -u)" -ne 0 ]
     then
         _err 203 "Root privileges are required to run this command."
-    fi
-}
-
-_arg1="${1-}"
-_arg2="${2-}"
-_arg3="${3-}"
-_arg4="${4-}"
-_arg5="${5-}"
-
-# checks arguments
-# usage: _check_arg "<arg-to-check>" "<valid-arg1>|<valid-arg2>|<valid-arg3>"
-# if the argument is not valid, exit with an error
-_check_arg() {
-    __larg1="${1-}"
-    __larg2="${2-}"
-    if [ -z "${__larg1}" ]
-    then
-        _err 204 "Invalid parameter."
-    fi
-    if [ -z "${__larg2}" ]
-    then
-        _err 205 "This function needs 2 arguments"
-    fi
-    __found=0
-    __param_list=$(_echo "${__larg2}" | tr '|' '\n')
-    for __param in ${__param_list}
-    do
-        if [ "${__larg1}" = "${__param}" ]
-        then
-            __found=1
-        fi
-    done
-    if [ "${__found}" -eq 0 ]
-    then
-        _err 206 "Invalid parameter."
     fi
 }
 
