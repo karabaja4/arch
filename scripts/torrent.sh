@@ -28,11 +28,12 @@ then
 
             # temp file to drop file
             _fn="$(basename "${_arg1}")"
-            if [ -e "${_drop}/${_fn}" ]
+            _dest_file="${_drop}/${_fn}"
+            if [ -e "${_dest_file}" ]
             then
-                _fatal "${_drop}/${_fn} already exists."
+                _fatal "${_dest_file} already exists."
             fi
-            mv "${_moving_file}" "${_drop}/${_fn}"
+            mv "${_moving_file}" "${_dest_file}"
 
             # notification
             _herbe "Moved \"${_fn}\" to \"${_drop}\""
