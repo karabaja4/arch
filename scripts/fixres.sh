@@ -3,18 +3,18 @@ set -eu
 
 ### configuration ###
 
-_rtl_wallpapers="
-${HOME}/arch/wall/exodus_v01_5120x2880.png
+_ltr_wallpapers="
 ${HOME}/arch/wall/exodus_v03_5120x2880.png
+${HOME}/arch/wall/exodus_v01_5120x2880.png
 ${HOME}/arch/wall/exodus_v02_5120x2880.png
 ${HOME}/arch/wall/exodus_v04_5120x2880.png
 ${HOME}/arch/wall/exodus_v05_5120x2880.png
 ${HOME}/arch/wall/exodus_v06_5120x2880.png
 "
 
-_rtl_monitors="
-ATNA60HU01-0
+_ltr_monitors="
 PG32UCDM
+ATNA60HU01-0
 "
 
 _primary_monitor="PG32UCDM"
@@ -22,15 +22,11 @@ _primary_monitor="PG32UCDM"
 #####################
 
 # remove empty lines
-_rtl_wallpapers="$(printf '%s\n' "${_rtl_wallpapers}" | grep '.')"
-_rtl_monitors="$(printf '%s\n' "${_rtl_monitors}" | grep '.')"
+_ltr_wallpapers="$(printf '%s\n' "${_ltr_wallpapers}" | grep '.')"
+_ltr_monitors="$(printf '%s\n' "${_ltr_monitors}" | grep '.')"
 
 # kill all conky instances
 pkill -f conkyrc-kernel || true
-
-_get_wallpaper_for_line() {
-    printf '%s\n' "${_rtl_wallpapers}" | sed -n "${1}p"
-}
 
 # use edid data to read monitor model
 _get_monitor_to_port_map() {
@@ -46,7 +42,7 @@ _get_monitor_to_port_map() {
 
 # map "<monitor name>" "<port name>"
 _monitor_to_port_map="$(_get_monitor_to_port_map)"
-printf '%s\n' "Monitor to Port map:"
+printf '%s\n' "Monitor to port map:"
 printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/-> /'
 _get_port_for_monitor() {
     printf '%s\n' "${_monitor_to_port_map}" | grep "^${1} " | cut -d' ' -f2
@@ -65,9 +61,15 @@ _get_max_refresh_rate_for_screen_info() {
     printf '%s' "${1}" | awk 'NR==2' | tr -d '+*' | awk '{$1=""; sub(/^ /, ""); print}' | tr ' ' '\n' | sort -nr | head -n1
 }
 
-_set_wallpaper() {
-    printf 'Setting %s wallpaper to %s\n' "${1}" "${2}"
-    xwallpaper --output "${1}" --stretch "${2}"
+_set_wallpaper_line_for_port() {
+    _wallpaper_path="$(printf '%s\n' "${_ltr_wallpapers}" | sed -n "${1}p")"
+    if [ -n "${_wallpaper_path}" ]
+    then
+        printf 'Setting %s wallpaper to %s (%s)\n' "${2}" "${_wallpaper_path}" "${1}"
+        xwallpaper --output "${2}" --stretch "${_wallpaper_path}"
+    else
+        printf 'There are not enough wallpapers (%s) for port %s\n' "${1}" "${2}"
+    fi
 }
 
 _start_conky_on_index() {
@@ -75,13 +77,14 @@ _start_conky_on_index() {
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head "${1}"
 }
 
-# iterate monitors right to left
+# iterate monitors left to right
+# if usign rtl mouse cursor is not visible on right monitor under hybrid graphics
 _configure_screens()
 {
     # xrandr
     _previous_port=""
     _i=0
-    for _monitor in ${_rtl_monitors}
+    for _monitor in ${_ltr_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
         if [ -z "${_port}" ]
@@ -102,11 +105,10 @@ _configure_screens()
         
         if [ "${_i}" -gt 0 ]
         then
-            set -- "${@}" --right-of "${_previous_port}"
+            set -- "${@}" --left-of "${_previous_port}"
         fi
         
         printf "xrandr %s\n" "${*}"
-        
         xrandr "${@}"
 
         _previous_port="${_port}"
@@ -116,17 +118,11 @@ _configure_screens()
     _total_count="${_i}"
     
     # wallpapers
-    _i=0
-    for _monitor in ${_rtl_monitors}
+    _i=1
+    for _monitor in ${_ltr_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
-        _wallpaper_path="$(_get_wallpaper_for_line "$((_i + 1))")"
-        if [ -n "${_wallpaper_path}" ]
-        then
-            _set_wallpaper "${_port}" "${_wallpaper_path}"
-        else
-            printf 'There are not enough wallpapers for %s\n' "${_port}"
-        fi
+        _set_wallpaper_line_for_port "${_i}" "${_port}"
         _i=$((_i + 1))
     done
     
