@@ -62,13 +62,15 @@ _get_max_refresh_rate_for_screen_info() {
 }
 
 _set_wallpaper_line_for_port() {
-    _wallpaper_path="$(printf '%s\n' "${_ltr_wallpapers}" | sed -n "${1}p")"
+    _wallpaper_line="${1}"
+    _wallpaper_port="${2}"
+    _wallpaper_path="$(printf '%s\n' "${_ltr_wallpapers}" | sed -n "${_wallpaper_line}p")"
     if [ -n "${_wallpaper_path}" ]
     then
-        printf 'Setting port %s wallpaper to path %s (%s)\n' "${2}" "${_wallpaper_path}" "${1}"
-        xwallpaper --output "${2}" --stretch "${_wallpaper_path}"
+        printf 'Setting %s wallpaper to %s (%s)\n' "${_wallpaper_port}" "${_wallpaper_path}" "${_wallpaper_line}"
+        xwallpaper --output "${_wallpaper_port}" --stretch "${_wallpaper_path}"
     else
-        printf 'There are not enough wallpapers (%s) for port %s\n' "${1}" "${2}"
+        printf 'There are not enough wallpapers (%s) for %s\n' "${_wallpaper_line}" "${_wallpaper_port}"
     fi
 }
 
