@@ -78,11 +78,11 @@ _start_conky_on_index() {
 # iterate monitors right to left
 _configure_screens()
 {
-    _i=0
+    # xrandr
     _previous_port=""
+    _i=0
     for _monitor in ${_rtl_monitors}
     do
-        printf 'Processing Monitor: %s\n' "${_monitor}"
         _port="$(_get_port_for_monitor "${_monitor}")"
         if [ -z "${_port}" ]
         then
@@ -108,8 +108,18 @@ _configure_screens()
         printf "xrandr %s\n" "${*}"
         
         xrandr "${@}"
-        _start_conky_on_index "${_i}"
-        
+
+        _previous_port="${_port}"
+        _i=$((_i + 1))
+    done
+    
+    _total_count="${_i}"
+    
+    # wallpapers
+    _i=0
+    for _monitor in ${_rtl_monitors}
+    do
+        _port="$(_get_port_for_monitor "${_monitor}")"
         _wallpaper_path="$(_get_wallpaper_for_line "$((_i + 1))")"
         if [ -n "${_wallpaper_path}" ]
         then
@@ -117,8 +127,14 @@ _configure_screens()
         else
             printf 'There are not enough wallpapers for %s\n' "${_port}"
         fi
-
-        _previous_port="${_port}"
+        _i=$((_i + 1))
+    done
+    
+    # conky
+    _i=0
+    while [ "${_i}" -lt "${_total_count}" ]
+    do
+        _start_conky_on_index "${_i}"
         _i=$((_i + 1))
     done
 }
