@@ -111,7 +111,7 @@ _configure_screens()
             _previous_port="${_port}"
             _i=$((_i + 1))
         else
-            printf 'Cannot find port for monitor: %s, skipping.\n' "${_monitor}"
+            printf '(xrandr) Monitor %s not found, skipping.\n' "${_monitor}"
         fi
     done
     
@@ -127,7 +127,7 @@ _configure_screens()
             _set_wallpaper_line_for_port "${_i}" "${_port}"
             _i=$((_i + 1))
         else
-            printf 'Cannot find port for monitor: %s, skipping.\n' "${_monitor}"
+            printf '(wallpaper) Monitor %s not found, skipping.\n' "${_monitor}"
         fi
     done
     
