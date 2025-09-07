@@ -81,8 +81,7 @@ _start_conky_on_index() {
 
 # iterate monitors left to right
 # if usign rtl mouse cursor is not visible on right monitor under hybrid graphics
-_configure_screens()
-{
+_configure_screens() {
     # xrandr
     _previous_port=""
     _i=0
