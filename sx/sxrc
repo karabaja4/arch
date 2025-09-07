@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#xrandr --setprovideroutputsource modesetting NVIDIA-0
-#xrandr --auto
 xrandr --dpi 140
 xrdb -merge /home/igor/.Xresources
 
