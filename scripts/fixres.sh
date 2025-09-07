@@ -42,8 +42,8 @@ _get_monitor_to_port_map() {
 
 # map "<monitor name>" "<port name>"
 _monitor_to_port_map="$(_get_monitor_to_port_map)"
-printf '%s\n' "Monitor to port map:"
-printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/-> /'
+printf '%s\n' "Available monitors and ports:"
+printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/* /'
 _get_port_for_monitor() {
     printf '%s\n' "${_monitor_to_port_map}" | grep "^${1} " | cut -d' ' -f2
 }
@@ -105,13 +105,13 @@ _configure_screens()
                 set -- "${@}" --left-of "${_previous_port}"
             fi
             
-            printf "xrandr %s\n" "${*}"
+            printf "(%s) xrandr %s\n" "${_monitor}" "${*}"
             xrandr "${@}"
 
             _previous_port="${_port}"
             _i=$((_i + 1))
         else
-            printf '(xrandr) Monitor %s not found, skipping.\n' "${_monitor}"
+            printf '(%s) Monitor not found, skipping xrandr.\n' "${_monitor}"
         fi
     done
     
@@ -124,10 +124,11 @@ _configure_screens()
         _port="$(_get_port_for_monitor "${_monitor}")"
         if [ -n "${_port}" ]
         then
+            printf '(%s) ' "${_monitor}"
             _set_wallpaper_line_for_port "${_i}" "${_port}"
             _i=$((_i + 1))
         else
-            printf '(wallpaper) Monitor %s not found, skipping.\n' "${_monitor}"
+            printf '(%s) Monitor not found, skipping wallpaper.\n' "${_monitor}"
         fi
     done
     
