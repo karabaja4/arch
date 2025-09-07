@@ -87,32 +87,32 @@ _configure_screens()
     for _monitor in ${_ltr_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
-        if [ -z "${_port}" ]
+        if [ -n "${_port}" ]
         then
-            printf 'Cannot find port for monitor: %s\n' "${_monitor}"
-            exit 1
-        fi
-        _screen_info="$(_get_screen_info_for_port "${_port}")"
-        _max_resolution="$(_get_max_resolution_for_screen_info "${_screen_info}")"
-        _max_refresh_rate="$(_get_max_refresh_rate_for_screen_info "${_screen_info}")"
-        
-        set -- --output "${_port}" --mode "${_max_resolution}" --rate "${_max_refresh_rate}"
+            _screen_info="$(_get_screen_info_for_port "${_port}")"
+            _max_resolution="$(_get_max_resolution_for_screen_info "${_screen_info}")"
+            _max_refresh_rate="$(_get_max_refresh_rate_for_screen_info "${_screen_info}")"
+            
+            set -- --output "${_port}" --mode "${_max_resolution}" --rate "${_max_refresh_rate}"
 
-        if [ "${_monitor}" = "${_primary_monitor}" ]
-        then
-            set -- "${@}" --primary
-        fi
-        
-        if [ "${_i}" -gt 0 ]
-        then
-            set -- "${@}" --left-of "${_previous_port}"
-        fi
-        
-        printf "xrandr %s\n" "${*}"
-        xrandr "${@}"
+            if [ "${_monitor}" = "${_primary_monitor}" ]
+            then
+                set -- "${@}" --primary
+            fi
+            
+            if [ -n "${_previous_port}" ]
+            then
+                set -- "${@}" --left-of "${_previous_port}"
+            fi
+            
+            printf "xrandr %s\n" "${*}"
+            xrandr "${@}"
 
-        _previous_port="${_port}"
-        _i=$((_i + 1))
+            _previous_port="${_port}"
+            _i=$((_i + 1))
+        else
+            printf 'Cannot find port for monitor: %s, skipping.\n' "${_monitor}"
+        fi
     done
     
     _total_count="${_i}"
@@ -122,8 +122,13 @@ _configure_screens()
     for _monitor in ${_ltr_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
-        _set_wallpaper_line_for_port "${_i}" "${_port}"
-        _i=$((_i + 1))
+        if [ -n "${_port}" ]
+        then
+            _set_wallpaper_line_for_port "${_i}" "${_port}"
+            _i=$((_i + 1))
+        else
+            printf 'Cannot find port for monitor: %s, skipping.\n' "${_monitor}"
+        fi
     done
     
     # conky
