@@ -1,4 +1,0 @@
-[Desktop Entry]
-Name=mime2
-Type=Application
-Exec=/usr/bin/xdg-open %U

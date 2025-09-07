@@ -1,11 +1,5 @@
 [
     {
-        "name": "dbus",
-        "enabled": false,
-        "user": "igor",
-        "command": "/usr/bin/dbus-daemon --session --nofork --nopidfile --nosyslog"
-    },
-    {
         "name": "udhcpc",
         "enabled": true,
         "user": "root",

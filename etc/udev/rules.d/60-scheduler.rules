@@ -1,7 +1,0 @@
-# /etc/udev/rules.d/60-scheduler.rules
-#
-# set none scheduler for non-rotating disks
-ACTION=="add|change", KERNEL=="sd[a-z]|mmcblk[0-9]*|nvme[0-9]*|loop[0-9]*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="none"
-
-# set none scheduler for others
-ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="none"

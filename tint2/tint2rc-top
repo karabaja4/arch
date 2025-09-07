@@ -50,7 +50,7 @@ execp_font_color = #ffffff 100
 execp_padding = 10 0
 execp_tooltip =
 execp_markup = 1
-execp_lclick_command = /home/igor/arch/tint2/cal.sh
+execp_lclick_command = gsimplecal
 
 #-------------------------------------
 # Buttons
