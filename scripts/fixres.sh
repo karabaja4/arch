@@ -65,7 +65,7 @@ _set_wallpaper_line_for_port() {
     _wallpaper_path="$(printf '%s\n' "${_ltr_wallpapers}" | sed -n "${1}p")"
     if [ -n "${_wallpaper_path}" ]
     then
-        printf 'Setting %s wallpaper to %s (%s)\n' "${2}" "${_wallpaper_path}" "${1}"
+        printf 'Setting port %s wallpaper to path %s (%s)\n' "${2}" "${_wallpaper_path}" "${1}"
         xwallpaper --output "${2}" --stretch "${_wallpaper_path}"
     else
         printf 'There are not enough wallpapers (%s) for port %s\n' "${1}" "${2}"
