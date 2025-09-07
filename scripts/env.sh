@@ -13,7 +13,8 @@ export HISTFILESIZE=2000
 export GIT_PS1_SHOWCONFLICTSTATE="no"
 
 # default scaling
-# QT
+# QT (2*96)
+# https://doc.qt.io/qt-6/highdpi.html
 export QT_FONT_DPI=192
 # GTK
 export GDK_SCALE=2
