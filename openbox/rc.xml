@@ -194,16 +194,6 @@
 
   </mouse>
 
-  <menu>
-    <file>menu.xml</file>
-    <hideDelay>200</hideDelay>
-    <middle>no</middle>
-    <submenuShowDelay>100</submenuShowDelay>
-    <submenuHideDelay>400</submenuHideDelay>
-    <showIcons>yes</showIcons>
-    <manageDesktops>yes</manageDesktops>
-  </menu>
-
   <applications>
     <application type="normal">
       <position force="yes">
