@@ -30,12 +30,25 @@ pkill -f conkyrc-kernel || true
 
 # use edid data to read monitor model
 _get_monitor_to_port_map() {
-    xrandr --props | awk '/ connected / {d=$1} /EDID:/ {h=""; while (getline) {if ($0 !~ /^[ \t]*[0-9a-f]+$/) break; gsub(/[ \t]/,""); h=h $0} if(h!="") print d, h}' | \
-    while read -r _line
+    xrandr --props | awk '
+    / connected / {
+        display = $1
+    }
+    /EDID:/ {
+        edid = ""
+        while (getline) {
+            if ($0 !~ /^[ \t]*[0-9a-f]+$/)
+                break
+            gsub(/[ \t]/, "")
+            edid = edid $0
+        }
+        if (edid != "")
+            print display, edid
+    }' | while read -r _line
     do
         _product_port="$(printf "%s" "${_line}" | cut -d' ' -f1)"
         _edid_data="$(printf "%s" "${_line}" | cut -d' ' -f2-)"
-        _product_name="$(printf '%s\n' "${_edid_data}" | edid-decode | grep "Display Product Name:" | sed "s/.*'\(.*\)'.*/\1/" | awk '{$1=$1; print}')"
+        _product_name="$(printf '%s\n' "${_edid_data}" | edid-decode | grep 'Display Product Name:' | sed "s/.*'\(.*\)'.*/\1/" | awk '{$1=$1; print}')"
         printf "%s %s\n" "${_product_name}" "${_product_port}" 
     done
 }
