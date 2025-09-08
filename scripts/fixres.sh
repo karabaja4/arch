@@ -3,7 +3,7 @@ set -eu
 
 ### configuration ###
 
-_ltr_wallpapers="
+_rtl_wallpapers="
 ${HOME}/arch/wall/exodus_v03_5120x2880.png
 ${HOME}/arch/wall/exodus_v01_5120x2880.png
 ${HOME}/arch/wall/exodus_v02_5120x2880.png
@@ -12,9 +12,9 @@ ${HOME}/arch/wall/exodus_v05_5120x2880.png
 ${HOME}/arch/wall/exodus_v06_5120x2880.png
 "
 
-_ltr_monitors="
-PG32UCDM
-ATNA60HU01-0
+_rtl_monitors="
+b7640568d841635dae37b2ec33571146
+0c4d02f7fd1bb2fc35e87e3143e85d1c
 "
 
 _primary_monitor="PG32UCDM"
@@ -22,8 +22,8 @@ _primary_monitor="PG32UCDM"
 #####################
 
 # remove empty lines
-_ltr_wallpapers="$(printf '%s\n' "${_ltr_wallpapers}" | grep '.' || true)"
-_ltr_monitors="$(printf '%s\n' "${_ltr_monitors}" | grep '.' || true)"
+_rtl_wallpapers="$(printf '%s\n' "${_rtl_wallpapers}" | grep '.' || true)"
+_rtl_monitors="$(printf '%s\n' "${_rtl_monitors}" | grep '.' || true)"
 
 # kill all conky instances
 pkill -f conkyrc-kernel || true
@@ -48,8 +48,8 @@ _get_monitor_to_port_map() {
     do
         _product_port="$(printf "%s" "${_line}" | cut -d' ' -f1)"
         _edid_data="$(printf "%s" "${_line}" | cut -d' ' -f2-)"
-        _product_name="$(printf '%s\n' "${_edid_data}" | edid-decode | grep 'Display Product Name:' | sed "s/.*'\(.*\)'.*/\1/" | awk '{$1=$1; print}')"
-        printf "%s %s\n" "${_product_name}" "${_product_port}" 
+        _product_hash="$(printf '%s\n' "${_edid_data}" | xxd -r -p | md5sum | cut -d' ' -f1)"
+        printf "%s %s\n" "${_product_hash}" "${_product_port}" 
     done
 }
 
@@ -77,7 +77,7 @@ _get_max_refresh_rate_for_screen_info() {
 _set_wallpaper_line_for_port() {
     _wallpaper_line="${1}"
     _wallpaper_port="${2}"
-    _wallpaper_path="$(printf '%s\n' "${_ltr_wallpapers}" | sed -n "${_wallpaper_line}p")"
+    _wallpaper_path="$(printf '%s\n' "${_rtl_wallpapers}" | sed -n "${_wallpaper_line}p")"
     if [ -n "${_wallpaper_path}" ]
     then
         printf 'Setting %s wallpaper to %s (%s)\n' "${_wallpaper_port}" "${_wallpaper_path}" "${_wallpaper_line}"
@@ -92,13 +92,13 @@ _start_conky_on_index() {
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head "${1}"
 }
 
-# iterate monitors left to right
-# if usign rtl mouse cursor is not visible on right monitor under hybrid graphics
+# iterate monitors right to left
+# when using left to right mouse cursor is not visible on right monitor under hybrid graphics
 _configure_screens() {
     # xrandr
     _previous_port=""
     _i=0
-    for _monitor in ${_ltr_monitors}
+    for _monitor in ${_rtl_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
         if [ -n "${_port}" ]
@@ -133,7 +133,7 @@ _configure_screens() {
     
     # wallpapers
     _i=1
-    for _monitor in ${_ltr_monitors}
+    for _monitor in ${_rtl_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
         if [ -n "${_port}" ]
