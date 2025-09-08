@@ -205,6 +205,13 @@
   </menu>
 
   <applications>
+    <application type="dialog">
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+        <monitor>mouse</monitor>
+      </position>
+    </application>
     <application type="normal">
       <position force="yes">
         <x>center</x>
