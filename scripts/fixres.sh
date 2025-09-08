@@ -17,7 +17,7 @@ b7640568d841635dae37b2ec33571146
 0c4d02f7fd1bb2fc35e87e3143e85d1c
 "
 
-_primary_monitor="PG32UCDM"
+_primary_monitor="b7640568d841635dae37b2ec33571146"
 
 #####################
 
@@ -53,7 +53,7 @@ _get_monitor_to_port_map() {
     done
 }
 
-# map "<monitor name>" "<port name>"
+# map "<monitor hash>" "<port name>"
 _monitor_to_port_map="$(_get_monitor_to_port_map)"
 printf '%s\n' "Available monitors and ports:"
 printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/* /'
