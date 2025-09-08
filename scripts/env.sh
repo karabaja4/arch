@@ -2,7 +2,7 @@
 
 # exports
 export QT_QPA_PLATFORMTHEME='qt6ct'
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export NO_AT_BRIDGE=1
 export EDITOR='nano'
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
@@ -13,9 +13,9 @@ export HISTFILESIZE=2000
 export GIT_PS1_SHOWCONFLICTSTATE="no"
 
 # default scaling
-# QT (2*96)
+# QT (1.75*96)
 # https://doc.qt.io/qt-6/highdpi.html
-export QT_FONT_DPI=192
+#export QT_FONT_DPI=168
 # GTK
 export GDK_SCALE=2
 
