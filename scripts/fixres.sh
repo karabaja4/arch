@@ -22,8 +22,8 @@ _primary_monitor="PG32UCDM"
 #####################
 
 # remove empty lines
-_ltr_wallpapers="$(printf '%s\n' "${_ltr_wallpapers}" | grep '.')"
-_ltr_monitors="$(printf '%s\n' "${_ltr_monitors}" | grep '.')"
+_ltr_wallpapers="$(printf '%s\n' "${_ltr_wallpapers}" | grep '.' || true)"
+_ltr_monitors="$(printf '%s\n' "${_ltr_monitors}" | grep '.' || true)"
 
 # kill all conky instances
 pkill -f conkyrc-kernel || true
