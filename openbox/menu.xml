@@ -21,12 +21,6 @@
       </action>
     </item>
 
-    <item label="OpenJK" icon="/usr/share/pixmaps/openjo.png">
-      <action name="Execute">
-        <execute>/home/igor/arch/tint2/menu.sh openjk</execute>
-      </action>
-    </item>
-
     <item label="World of Warcraft" icon="/usr/share/icons/Papirus/16x16/apps/wargus.svg">
       <action name="Execute">
         <execute>/home/igor/arch/tint2/menu.sh wow</execute>
