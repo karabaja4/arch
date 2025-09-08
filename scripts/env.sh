@@ -15,7 +15,7 @@ export GIT_PS1_SHOWCONFLICTSTATE="no"
 # default scaling
 # QT (1.75*96)
 # https://doc.qt.io/qt-6/highdpi.html
-#export QT_FONT_DPI=168
+export QT_FONT_DPI=168
 # GTK
 export GDK_SCALE=2
 
