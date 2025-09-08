@@ -7,10 +7,6 @@ _set() {
     printf '%s\n' "${1}" > "${2}"
 }
 
-# improve responsivness under heavy IO
-_set "$((4*1024*1024))" "/proc/sys/vm/dirty_background_bytes"
-_set "$((4*1024*1024))" "/proc/sys/vm/dirty_bytes"
-
 # load (some) of the arch sysctl settings
 _loadsysctl() {
     sysctl -p "/usr/lib/sysctl.d/${1}" > /dev/null
