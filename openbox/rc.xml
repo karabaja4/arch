@@ -240,6 +240,13 @@
         <width>2800</width>
       </size>
     </application>
+    <application name="kvirc" type="dialog">
+      <position force="yes">
+        <x>900</x>
+        <y>500</y>
+        <monitor>mouse</monitor>
+      </position>
+    </application>
     <application name="xfreerdp">
       <layer>above</layer>
     </application>
