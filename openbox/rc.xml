@@ -234,7 +234,7 @@
         <width>1558</width>
       </size>
     </application>
-    <application name="kvirc">
+    <application name="kvirc" type="normal">
       <size>
         <height>1400</height>
         <width>2800</width>
