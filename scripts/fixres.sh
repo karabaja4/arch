@@ -21,12 +21,20 @@ _primary_monitor="b7640568d841635dae37b2ec33571146"
 
 #####################
 
+# argument handling
+_list_only=0
+if [ "${#}" -eq 1 ] && [ "${1}" = "-l" ]
+then
+    _list_only=1
+elif [ "${#}" -ne 0 ]
+then
+    printf '%s\n' "Invalid parameter." >&2
+    exit 1
+fi
+
 # remove empty lines
 _rtl_wallpapers="$(printf '%s\n' "${_rtl_wallpapers}" | grep '.' || true)"
 _rtl_monitors="$(printf '%s\n' "${_rtl_monitors}" | grep '.' || true)"
-
-# kill all conky instances
-pkill -f conkyrc-kernel || true
 
 # use edid data to read monitor model
 _get_monitor_to_port_map() {
@@ -55,8 +63,17 @@ _get_monitor_to_port_map() {
 
 # map "<monitor hash>" "<port name>"
 _monitor_to_port_map="$(_get_monitor_to_port_map)"
+
+# always print available monitors
 printf '%s\n' "Available monitors and ports:"
 printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/* /'
+
+# on list mode just exit after print
+[ "${_list_only}" -eq 1 ] && exit 0
+
+# kill all conky instances
+pkill -f conkyrc-kernel || true
+
 _get_port_for_monitor() {
     printf '%s\n' "${_monitor_to_port_map}" | grep "^${1} " | cut -d' ' -f2
 }
