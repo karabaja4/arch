@@ -234,6 +234,7 @@
         <width>1558</width>
       </size>
     </application>
+    <!-- kvirc is just going crazy on scaled screens -->
     <application name="kvirc" type="normal">
       <size>
         <height>1400</height>
