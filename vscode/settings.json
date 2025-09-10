@@ -123,5 +123,6 @@
         "editor.tabSize": 2
     },
     "git.discardUntrackedChangesToTrash": false,
-    "workbench.tree.enableStickyScroll": false
+    "workbench.tree.enableStickyScroll": false,
+    "chat.commandCenter.enabled": false
 }
