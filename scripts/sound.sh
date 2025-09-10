@@ -94,8 +94,19 @@ _device="$(printf '%s\n' "${_aplay_row}" | sed -n 's/.*device \([0-9][0-9]*\):.*
 printf 'defaults.ctl.card %s\ndefaults.pcm.card %s\ndefaults.pcm.device %s\n' "${_card}" "${_card}" "${_device}" > "${_asoundrc_path}"
 printf 'Device index: card %s, device %s\n' "${_card}" "${_device}"
 
+_get_pvolume_controls() {
+    amixer | awk "
+      /^Simple mixer control/ {
+        if (match(\$0, /'([^']+)'/, m)) name=m[1]
+      }
+      /Capabilities:/ {
+        for (i=2; i<=NF; i++) if (\$i==\"pvolume\") print name
+      }
+    "
+}
+
 # unmute and max all channels that support pvolume
-for _channel in $(amixer | grep -P -B1 "^.*Capabilities:.* pvolume( .*$|$)" | grep -oP "(?<=Simple mixer control ').+(?=')")
+for _channel in $(_get_pvolume_controls)
 do
     printf 'Unmuting %s to 100%%\n' "${_channel}"
     amixer set "${_channel}" unmute > /dev/null 2>&1
