@@ -35,11 +35,20 @@ _mount_remote() {
     mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port=44555 "${@}"
 }
 
-mntall() {
+mnt() {
     mkdir -p "${_public}"
     mkdir -p "${_private}"
     _mount_remote "//radiance.hr/public" "${_public}"
     _mount_remote "//radiance.hr/private" "${_private}"
+}
+
+umnt() {
+    umount "${_public}"
+    umount "${_private}"
+}
+
+conn() {
+    ifconfig "${1}" up && udhcpc -nqfv -i "${1}"
 }
 
 _example_zero="zero /dev/nvme0n1"
@@ -79,11 +88,13 @@ Welcome to Alpine Tools by Igor Saric!
 This is a toolkit distro to erase, backup and restore hard disk images.
 Examples:
 
- >> ifconfig eth0 up && udhcpc -nqfv -i eth0
+ >> conn eth0
 
  >> wifi
 
- >> mntall
+ >> mnt
+ 
+ >> umnt
 
  >> ${_example_zero}
 
