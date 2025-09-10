@@ -13,11 +13,11 @@ ${HOME}/arch/wall/exodus_v06_5120x2880.png
 "
 
 _rtl_monitors="
-b7640568d841635dae37b2ec33571146
+7d8bdbfaa45690e734b37972324250d6
 0c4d02f7fd1bb2fc35e87e3143e85d1c
 "
 
-_primary_monitor="b7640568d841635dae37b2ec33571146"
+_primary_monitor="7d8bdbfaa45690e734b37972324250d6"
 
 #####################
 
