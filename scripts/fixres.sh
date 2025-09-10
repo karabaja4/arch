@@ -13,11 +13,11 @@ ${HOME}/arch/wall/exodus_v06_5120x2880.png
 "
 
 _rtl_monitors="
-7d8bdbfaa45690e734b37972324250d6
-0c4d02f7fd1bb2fc35e87e3143e85d1c
+712a4914850c9b6e3a97c14350e23dbe
+5760f56f845302e774c86dd475500d09
 "
 
-_primary_monitor="7d8bdbfaa45690e734b37972324250d6"
+_primary_monitor="712a4914850c9b6e3a97c14350e23dbe"
 
 #####################
 
@@ -56,7 +56,7 @@ _get_monitor_to_port_map() {
     do
         _product_port="$(printf "%s" "${_line}" | cut -d' ' -f1)"
         _edid_data="$(printf "%s" "${_line}" | cut -d' ' -f2-)"
-        _product_hash="$(printf '%s\n' "${_edid_data}" | xxd -r -p | md5sum | cut -d' ' -f1)"
+        _product_hash="$(printf '%s\n' "${_edid_data}" | md5sum | cut -d' ' -f1)"
         printf "%s %s\n" "${_product_hash}" "${_product_port}" 
     done
 }
