@@ -15,7 +15,7 @@ then
 
     # virtualbox only supports bmp
     case "${_wmout}" in
-    *'FreeRDP:'* | *'[Running] - Oracle VirtualBox'* )
+    *'[Running] - Oracle VirtualBox'*)
         magick "${_path}" "bmp:${_path}"
         _type='image/bmp'
         ;;
