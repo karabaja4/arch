@@ -92,14 +92,16 @@ printf 'defaults.ctl.card %s\ndefaults.pcm.card %s\ndefaults.pcm.device %s\n' "$
 printf 'Device index: card %s, device %s\n' "${_card}" "${_device}"
 
 _get_pvolume_controls() {
-    amixer | awk "
-      /^Simple mixer control/ {
-        if (match(\$0, /'([^']+)'/, m)) name=m[1]
-      }
-      /Capabilities:/ {
-        for (i=2; i<=NF; i++) if (\$i==\"pvolume\") print name
-      }
-    "
+    amixer | awk '
+        /^Simple mixer control/ {
+            split($0, a, "'\''")
+            name = a[2]
+        }
+        /Capabilities:/ {
+            for (i = 2; i <= NF; i++)
+                if ($i == "pvolume")
+                    print name
+        }'
 }
 
 # unmute and max all channels that support pvolume
