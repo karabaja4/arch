@@ -1,5 +1,5 @@
 #!/bin/sh
-. "/home/igor/arch/scripts/_lib.sh"
+. "$(dirname "$(readlink -f "${0}")")/_lib.sh"
 
 _home="$(_passwd 6)"
 _uid="$(_passwd 3)"

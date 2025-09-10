@@ -1,5 +1,5 @@
 #!/bin/sh
-. "/home/igor/arch/scripts/_lib.sh"
+. "$(dirname "$(readlink -f "${0}")")/_lib.sh"
 
 # multiple checkupdates calls cannot run in parallel
 # that is why a new CHECKUPDATES_DB is created only for this script

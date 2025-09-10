@@ -1,5 +1,5 @@
 #!/bin/sh
-. "/home/igor/arch/scripts/_lib.sh"
+. "$(dirname "$(readlink -f "${0}")")/_lib.sh"
 set -e
 
 _script_path="$(readlink -f "${0}")"

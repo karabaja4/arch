@@ -1,5 +1,5 @@
 #!/bin/sh
-. "/home/igor/arch/scripts/_lib.sh"
+. "$(dirname "$(readlink -f "${0}")")/_lib.sh"
 
 # don't use -e because we want to try to iterate all partitions
 
