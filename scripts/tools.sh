@@ -15,6 +15,7 @@ alias sr='screen -r'
 alias sn='screen -S'
 alias speedtest='wget https://avacyn.radiance.hr/stuff/debian-12.5.0-amd64-netinst.iso -O /dev/null'
 alias myip='curl https://avacyn.radiance.hr/ip'
+alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'
 
 _reset="\[\033[0m\]"
 _blue_b="\[\033[1;34m\]"
