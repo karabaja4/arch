@@ -39,7 +39,7 @@ then
     fi
 fi
 
-_choices="$(printf '%s\n' "${_aplay}" | sed 's/.*\[\([^]]*\)\].*\[\([^]]*\)\].*/\1 - \2/' | nl -w1 -s ') ')"
+_choices="$(printf '%s\n' "${_aplay}" | awk -F'[][]' '{print $2 " - " $4}' | nl -w1 -s ') ')"
 
 if [ "${1}" = "l" ] || [ "${1}" = "-l" ] || [ -z "${1}" ]
 then
