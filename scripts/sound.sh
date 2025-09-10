@@ -2,6 +2,23 @@
 
 # speaker-test -D hdmi:CARD=NVidia,DEV=0 -c 2 -t wav
 
+_handle_signal() {
+    printf '\n%s\n' 'No choice has been made, goodbye.'
+    exit 1
+}
+
+trap _handle_signal HUP INT QUIT TERM
+
+_aplay_empty_home="/tmp/aplay-empty-home"
+rm -rf "${_aplay_empty_home}"
+mkdir -p "${_aplay_empty_home}"
+
+_aplay_default() {
+    HOME="${_aplay_empty_home}" aplay -l
+}
+
+_aplay="$(_aplay_default | grep '^card ')"
+
 _asoundrc_path="${HOME}/.asoundrc"
 _asoundrc_content=''
 
@@ -9,26 +26,6 @@ if [ -f "${_asoundrc_path}" ]
 then
     _asoundrc_content="$(cat "${_asoundrc_path}")"
 fi
-
-_handle_signal() {
-    printf '\n%s\n' 'No choice has been made, goodbye.'
-    _restore
-}
-
-_restore() {
-    if [ -n "${_asoundrc_content}" ]
-    then
-        printf '%s\n' "${_asoundrc_content}" > "${_asoundrc_path}"
-    fi
-    exit 0
-}
-
-trap _handle_signal HUP INT QUIT TERM
-
-# remove so if it's invalid don't get in the way of aplay
-rm -f "${_asoundrc_path}"
-
-_aplay="$(aplay -l | grep '^card ')"
 
 # read current indexes from asoundrc and try to match them up to aplay
 _current_index=''
@@ -58,10 +55,10 @@ then
     fi
 fi
 
-# list mode, restore and exit
+# list mode, exit
 if [ "${1}" = "l" ] || [ "${1}" = "-l" ]
 then
-    _restore
+    exit 0
 fi
 
 _ln=''
