@@ -65,8 +65,8 @@ if __name__ == "__main__":
             "  -h, --help      Show this help message and exit\n"
             "  -m              Start the application in fullscreen mode\n\n"
             "Controls:\n"
-            "  Left-click      Toggle fullscreen on/off\n"
-            "  Right-click     Exit the application"
+            "  Right-click     Toggle fullscreen on/off\n"
+            "  Left-click      Exit the application"
         )
         sys.exit(0)
     
