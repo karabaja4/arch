@@ -14,12 +14,10 @@ _secret="/etc/secret/secret.json"
 _username="$(jq -crM '.smb.username' "${_secret}")"
 _password="$(jq -crM '.smb.password' "${_secret}")"
 
-_mount_remote() {
-    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port=44555 "${@}"
-}
-
-_mount_local() {
-    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644 "${@}"
+_mount() {
+    _port="${1}"
+    shift
+    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${_port}" "${@}"
 }
 
 _public="${_home}/_public"
@@ -30,9 +28,9 @@ mkdir -p "${_public}"
 mkdir -p "${_private}"
 mkdir -p "${_disk}"
 
-_mount_remote "//radiance.hr/public" "${_public}"
-_mount_remote "//radiance.hr/private" "${_private}"
-_mount_local "//192.168.100.33/disk" "${_disk}"
+_mount 44555 "//radiance.hr/public" "${_public}"
+_mount 44555 "//radiance.hr/private" "${_private}"
+_mount 445 "//192.168.100.33/disk" "${_disk}"
 
 # ssh tunnel
-_mount_remote "//localhost/disk" "${_disk}"
+_mount 44555 "//localhost/disk" "${_disk}"
