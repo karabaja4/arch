@@ -9,7 +9,7 @@ _kill_on_hover() {
     
     # see if OLED saver is the first window under root, means we're hovering over the app
     # if we're not hovering over it (e.g. we're on the second monitor), it will still be in the tree but not on the top
-    _child_window_id="$(xwininfo -tree -id "${_mouse_window_id}" | awk '/^[[:space:]]*0x[0-9a-f]+/ {if (/OLED saver/) print $1; exit}')"
+    _child_window_id="$(xwininfo -children -id "${_mouse_window_id}" | awk '/^[[:space:]]*0x[0-9a-f]+/ {if (/OLED saver/) print $1; exit}')"
 
     # child window is not oled saver
     [ -z "${_child_window_id}" ] && return 1
