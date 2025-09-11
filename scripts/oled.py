@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import os
 import tkinter as tk
 
 class ToggleFullscreenApp:
@@ -12,7 +13,9 @@ class ToggleFullscreenApp:
         self.height = 800
         self.root.geometry(f"{self.width}x{self.height}")  # let WM place it
         self.root.configure(background="black")
-        self.root.title("OLED saver")
+        
+        pid = os.getpid()
+        self.root.title(f"OLED saver [{pid}]")
 
         # Bind click events
         self.root.bind("<Button-3>", self.toggle_fullscreen)
