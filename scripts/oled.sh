@@ -18,7 +18,7 @@ _kill_on_hover() {
     _padded_window_id="$(printf "0x%08x" "$(( _child_window_id ))")"
 
     # find a wmctrl line with the hex id
-    _wmctrl_line="$(wmctrl -l | grep "${_padded_window_id}")"
+    _wmctrl_line="$(wmctrl -l | grep "^${_padded_window_id} " | grep 'OLED saver')"
 
     # wmctrl should know about this window since we hovered over it, but check anyway
     [ -z "${_wmctrl_line}" ] && return 1
