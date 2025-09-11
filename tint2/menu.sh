@@ -42,10 +42,6 @@ flameshot)
 onlyoffice)
     _run onlyoffice-desktopeditors
     ;;
-zoom)
-    _load_apulse
-    _run zoom
-    ;;
 kvirc)
     _run kvirc
     ;;
@@ -64,6 +60,6 @@ wow)
     _run /home/igor/games/turtlewow/TurtleWoW.AppImage
     ;;
 *)
-    echo "unknown app"
+    printf '%s\n' "unknown app"
     ;;
 esac
