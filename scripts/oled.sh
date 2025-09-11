@@ -26,7 +26,7 @@ _kill_on_hover() {
     # pid is in the title of oled.py, e.g. [1234]
     _pid="$(printf '%s\n' "${_wmctrl_line}" | sed 's/.*\[\([0-9][0-9]*\)\].*/\1/')"
     
-    # pid should be in the title of the window, but check anway
+    # pid should be in the title of the window, but check anyway
     [ -z "${_pid}" ] && return 1
 
     kill "${_pid}"
