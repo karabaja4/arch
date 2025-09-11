@@ -9,7 +9,7 @@ then
     _fatal "Cannot find user's home directory."
 fi
 
-_root="$(dirname "$(readlink -f "$0")")"
+_root="$(dirname "$(readlink -f "${0}")")"
 
 if ! "${_root}/unmount.sh" /mnt/* "${_home}"/_*
 then

@@ -32,7 +32,7 @@ _kill_on_hover() {
     kill "${_pid}"
 }
 
-_root="$(dirname "$(readlink -f "$0")")"
+_root="$(dirname "$(readlink -f "${0}")")"
 
 if ! _kill_on_hover
 then
