@@ -38,9 +38,45 @@ alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
-alias mountmmc='doas mount -t ntfs3 -U 78DD72146717D509 -o uid=$(id -u),fmask=133,dmask=022 /home/igor/_mmc'
-alias mountsmb='doas /home/igor/arch/scripts/smb.sh'
-alias mountall='mountmmc; mountsmb'
+
+# mounts
+mntmmc() {
+    if ! mountpoint -q '/home/igor/_mmc'
+    then
+        # uses kernel ntfs3 driver
+        doas mount -v -t ntfs3 -U 78DD72146717D509 -o uid="$(id -u)",fmask=133,dmask=022 '/home/igor/_mmc'
+    else
+        printf '%s is already mounted.\n' '/home/igor/_mmc'
+    fi
+}
+
+mntsmb() {
+    # remote
+    doas '/home/igor/arch/scripts/smb.sh' '\\radiance.hr\private' '44555' '/home/igor/_private'
+    doas '/home/igor/arch/scripts/smb.sh' '\\radiance.hr\public' '44555' '/home/igor/_public'
+    if lsof -Pi :44555 > /dev/null 2>&1
+    then
+        # ssh tunnel (traveling)
+        doas '/home/igor/arch/scripts/smb.sh' '\\localhost\disk' '44555' '/home/igor/_disk'
+    else
+        # local (home)
+        doas '/home/igor/arch/scripts/smb.sh' '\\192.168.100.33\disk' '445' '/home/igor/_disk'
+    fi
+}
+
+mnt() {
+    mntmmc
+    mntsmb
+}
+
+umnt() {
+    doas umount -c -v '/home/igor/_'*
+}
+
+usb() {
+    doas '/home/igor/arch/scripts/unmount.sh' /mnt/*
+}
+
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'
 alias ddiff='code --diff'
 alias wget='wget --no-hsts'
@@ -56,10 +92,6 @@ alias dmesg='doas dmesg'
 alias locate='locate --ignore-case'
 alias picam='/home/igor/git/hid/scripts/client.sh'
 alias vboxload='doas modprobe -a vboxdrv vboxnetadp vboxnetflt'
-
-usb() {
-    doas /home/igor/arch/scripts/unmount.sh /mnt/*
-}
 
 # shellcheck disable=SC1090
 _source() {
