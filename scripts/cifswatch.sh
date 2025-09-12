@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# CIFS is unable to re-establish connection on SMB server restart
+# CIFS is unable to re-establish connection on SMB server restart when using a custom port
 # DebugData shows DISCONNECTED:
 
 # 1) \\radiance.hr\public
