@@ -40,7 +40,7 @@ alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
 
 # mounts
-mntmmc() {
+mountmmc() {
     if ! mountpoint -q '/home/igor/_mmc'
     then
         # uses kernel ntfs3 driver
@@ -50,7 +50,7 @@ mntmmc() {
     fi
 }
 
-mntsmb() {
+mountsmb() {
     # remote
     doas '/home/igor/arch/scripts/smb.sh' '\\radiance.hr\private' '44555' '/home/igor/_private'
     doas '/home/igor/arch/scripts/smb.sh' '\\radiance.hr\public' '44555' '/home/igor/_public'
@@ -64,12 +64,12 @@ mntsmb() {
     fi
 }
 
-mnt() {
-    mntmmc
-    mntsmb
+mountall() {
+    mountmmc
+    mountsmb
 }
 
-umnt() {
+umountall() {
     doas umount -c -v '/home/igor/_'*
 }
 
