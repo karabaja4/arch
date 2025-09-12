@@ -12,15 +12,15 @@ _loadsysctl() {
     sysctl -p "/usr/lib/sysctl.d/${1}" > /dev/null
 }
 
-_loadsysctl "10-arch.conf"
-_loadsysctl "50-default.conf"
-_loadsysctl "50-pid-max.conf"
+_loadsysctl '10-arch.conf'
+_loadsysctl '50-default.conf'
+_loadsysctl '50-pid-max.conf'
 
 # prevent kernel from printing messages into framebuffer
-_set "0" "/proc/sys/kernel/printk"
+_set '0' '/proc/sys/kernel/printk'
 
 # XDG_RUNTIME_DIR
-_uid="1000"
+_uid='1000'
 _xdg_runtime_dir="/run/user/${_uid}"
 if [ ! -d "${_xdg_runtime_dir}" ]
 then
