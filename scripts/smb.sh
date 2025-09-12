@@ -1,8 +1,8 @@
 #!/bin/sh
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
 
-# ${1} = remote path
-# ${2} = port
+# ${1} = port
+# ${2} = remote path
 # ${3} = local path
 
 _uid="$(_passwd 3)"
@@ -24,8 +24,8 @@ fi
 
 if ! mountpoint -q "${3}"
 then
-    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${2}" "${1}" "${3}"
-    printf 'Mounted %s to %s (port %s)\n' "${1}" "${3}" "${2}"
+    mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${1}" "${2}" "${3}"
+    printf 'Mounted %s to %s on port %s\n' "${2}" "${3}" "${1}"
 else
     printf '%s is already mounted.\n' "${3}"
 fi

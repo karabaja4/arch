@@ -52,15 +52,15 @@ mountmmc() {
 
 mountsmb() {
     # remote
-    doas '/home/igor/arch/scripts/smb.sh' '\\radiance.hr\private' '44555' '/home/igor/_private'
-    doas '/home/igor/arch/scripts/smb.sh' '\\radiance.hr\public' '44555' '/home/igor/_public'
+    doas '/home/igor/arch/scripts/smb.sh' '44555' '\\radiance.hr\private' '/home/igor/_private'
+    doas '/home/igor/arch/scripts/smb.sh' '44555' '\\radiance.hr\public' '/home/igor/_public'
     if lsof -Pi :44555 > /dev/null 2>&1
     then
         # ssh tunnel (traveling)
-        doas '/home/igor/arch/scripts/smb.sh' '\\localhost\disk' '44555' '/home/igor/_disk'
+        doas '/home/igor/arch/scripts/smb.sh' '44555' '\\localhost\disk' '/home/igor/_disk'
     else
         # local (home)
-        doas '/home/igor/arch/scripts/smb.sh' '\\192.168.100.33\disk' '445' '/home/igor/_disk'
+        doas '/home/igor/arch/scripts/smb.sh' '445' '\\192.168.100.33\disk' '/home/igor/_disk'
     fi
 }
 
