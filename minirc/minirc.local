@@ -19,17 +19,12 @@ _loadsysctl "50-pid-max.conf"
 # prevent kernel from printing messages into framebuffer
 _set "0" "/proc/sys/kernel/printk"
 
-# create XDG directories for current user (read from $HOME/.config/user-dirs.dirs and env.sh)
+# XDG_RUNTIME_DIR
 _uid="1000"
-_user="$(getent passwd "${_uid}" | cut -d':' -f1)"
-
-_mkxdg() {
-    install -m 700 -g "${_user}" -o "${_user}" -d "/tmp/xdg-${_user}/${1}"
-}
-
-_mkxdg ""
-_mkxdg "runtime"
-_mkxdg "other"
+_xdg_runtime_dir="/run/user/${_uid}"
+mkdir -p "${_xdg_runtime_dir}"
+chown "${_uid}:${_uid}" "${_xdg_runtime_dir}"
+chmod 700 "${_xdg_runtime_dir}"
 
 # activate zram swap
 modprobe zram

@@ -66,6 +66,14 @@ _source() {
     [ -f "${1}" ] && source "${1}"
 }
 
+# user-dirs.dirs target
+_xdg_dirs="/tmp/xdg-dirs/"
+if [ ! -d "${_xdg_dirs}" ]
+then
+    mkdir -p "${_xdg_dirs}"
+    chmod 700 "${_xdg_dirs}"
+fi
+
 _source '/home/igor/arch/scripts/env.sh'
 _source '/usr/share/git/completion/git-prompt.sh'
 _source '/home/igor/arch/lf/icons.sh'

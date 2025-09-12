@@ -23,7 +23,8 @@ export GDK_SCALE=2
 export SHELL='/bin/bash'
 
 # xdg
-export XDG_RUNTIME_DIR='/tmp/xdg-igor/runtime'
+_xdg_runtime_dir="/run/user/$(id -u)"
+export XDG_RUNTIME_DIR="${_xdg_runtime_dir}"
 
 # path
 export PATH="${PATH}:${HOME}/.dotnet/tools"
