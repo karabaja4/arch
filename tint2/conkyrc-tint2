@@ -11,7 +11,7 @@ conky.text = [[
     "down": "${downspeedf eth0}",
     "up": "${upspeedf eth0}"
   },
-  "wlan": {
+  "wifi": {
     "down": "${downspeedf wlan0}",
     "up": "${upspeedf wlan0}"
   },
