@@ -108,10 +108,10 @@ const norm = (input) => {
 const print = () => {
   let text = '';
   text += span(icons.netdown, colorize1, 'DWL', '$0 KB', [ 
-    data?.conky?.net?.down // 0
+    parseFloat(data?.conky?.eth?.down || 0) + parseFloat(data?.conky?.wlan?.down || 0) // 0
   ], 0);
   text += span(icons.netup, colorize1, 'UPL', '$0 KB', [
-    data?.conky?.net?.up // 0
+    parseFloat(data?.conky?.eth?.up || 0) + parseFloat(data?.conky?.wlan?.up || 0) // 0
   ], 0);
   text += span(icons.ping, colorize2, 'PNG', '$0 ms', [
     data?.ws?.ping // 0

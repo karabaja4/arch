@@ -7,9 +7,13 @@ conky.config = {
 
 conky.text = [[
 {
-  "net": {
+  "eth": {
     "down": "${downspeedf eth0}",
     "up": "${upspeedf eth0}"
+  },
+  "wlan": {
+    "down": "${downspeedf wlan0}",
+    "up": "${upspeedf wlan0}"
   },
   "cpu": {
     "perc": "${cpu}",
