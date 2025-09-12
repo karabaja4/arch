@@ -67,11 +67,10 @@ _source() {
 }
 
 # user-dirs.dirs target
-_xdg_dirs="/tmp/xdg-dirs/"
-if [ ! -d "${_xdg_dirs}" ]
+if [ ! -d "/tmp/xdg-dirs/" ]
 then
-    mkdir -p "${_xdg_dirs}"
-    chmod 700 "${_xdg_dirs}"
+    mkdir -p "/tmp/xdg-dirs/"
+    chmod 700 "/tmp/xdg-dirs/"
 fi
 
 _source '/home/igor/arch/scripts/env.sh'

@@ -22,9 +22,12 @@ _set "0" "/proc/sys/kernel/printk"
 # XDG_RUNTIME_DIR
 _uid="1000"
 _xdg_runtime_dir="/run/user/${_uid}"
-mkdir -p "${_xdg_runtime_dir}"
-chown "${_uid}:${_uid}" "${_xdg_runtime_dir}"
-chmod 700 "${_xdg_runtime_dir}"
+if [ ! -d "${_xdg_runtime_dir}" ]
+then
+    mkdir -p "${_xdg_runtime_dir}"
+    chown "${_uid}:${_uid}" "${_xdg_runtime_dir}"
+    chmod 700 "${_xdg_runtime_dir}"
+fi
 
 # activate zram swap
 modprobe zram
