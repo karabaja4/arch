@@ -107,12 +107,16 @@ const norm = (input) => {
 
 const print = () => {
   let text = '';
-  text += span(icons.netdown, colorize1, 'DWL', '$0 KB', [ 
-    parseFloat(data?.conky?.eth?.down || 0) + parseFloat(data?.conky?.wifi?.down || 0) // 0
-  ], 0);
-  text += span(icons.netup, colorize1, 'UPL', '$0 KB', [
-    parseFloat(data?.conky?.eth?.up || 0) + parseFloat(data?.conky?.wifi?.up || 0) // 0
-  ], 0);
+  const down = (
+    parseFloat(data?.conky?.eth?.down || 0) +
+    parseFloat(data?.conky?.wifi?.down || 0)
+  ).toFixed(1);
+  const up = (
+    parseFloat(data?.conky?.eth?.up || 0) +
+    parseFloat(data?.conky?.wifi?.up || 0)
+  ).toFixed(1);
+  text += span(icons.netdown, colorize1, 'DWN', '$0 KB', [ down ], 0);
+  text += span(icons.netup, colorize1, 'UPL', '$0 KB', [ up ], 0);
   text += span(icons.ping, colorize2, 'PNG', '$0 ms', [
     data?.ws?.ping // 0
   ], 0);
