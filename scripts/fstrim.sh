@@ -1,5 +1,6 @@
 #!/bin/sh
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
+set -e
 
 _must_be_root
 
