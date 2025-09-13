@@ -27,7 +27,7 @@ _mount_smb() {
     if ! mountpoint -q "${3}"
     then
         mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${1}" "${2}" "${3}"
-        printf 'Mounted %s:%s to %s\n' "${2}" "${1}" "${3}"
+        printf 'Mounted [%s][%s] to %s\n' "${1}" "${2}" "${3}"
     else
         printf '%s is already mounted.\n' "${3}"
     fi
@@ -74,8 +74,7 @@ _mount_mmc() {
 
 if [ "${#}" -ne 1 ]
 then
-    printf '%s\n' "Invalid parameter."
-    exit 1
+    _fatal "Invalid parameter."
 fi
 
 case "${1}" in
@@ -100,7 +99,6 @@ all)
     _mount_mmc
     ;;
 *)
-    printf '%s\n' "Invalid parameter."
-    exit 1
+    _fatal "Invalid parameter."
     ;;
 esac
