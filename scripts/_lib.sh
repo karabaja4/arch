@@ -66,8 +66,9 @@ _log_line() {
     printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${1}"
 }
 
-__log_dir='/var/log/scripts'
+__log_dir="${HOME}/.local/share/logs"
 _log() {
+    mkdir -p "${__log_dir}"
     [ ! -w "${__log_dir}" ] && _fatal "${__log_dir} is not writable."
     __logfile="${__log_dir}/${__script_name%.*}.log"
     if [ "${#}" -eq 0 ]
