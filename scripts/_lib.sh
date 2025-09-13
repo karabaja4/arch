@@ -66,9 +66,10 @@ _log_line() {
     printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${1}"
 }
 
+__log_dir='/var/log/scripts'
 _log() {
-    __logfile="/var/log/scripts/${__script_name%.*}.log"
-    [ ! -r "${__logfile}" ] && _fatal "Cannot read ${__logfile}"
+    [ ! -w "${__log_dir}" ] && _fatal "${__log_dir} is not writable."
+    __logfile="${__log_dir}/${__script_name%.*}.log"
     if [ "${#}" -eq 0 ]
     then
         while IFS= read -r __line

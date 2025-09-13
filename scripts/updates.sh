@@ -32,7 +32,7 @@ _aur() {
 
     if [ -n "${_aur_wc}" ]
     then
-        _echo "Found ${_aur_wc} AUR updates."
+        _log "Found ${_aur_wc} AUR updates."
         _echo "${_aur_wc}" > "${_root}/aur"
     fi
 }
@@ -55,7 +55,7 @@ _cu() {
 
     if [ -n "${_cu_wc}" ]
     then
-        _echo "Found ${_cu_wc} pacman updates."
+        _log "Found ${_cu_wc} pacman updates."
         _echo "${_cu_wc}" > "${_root}/pacman"
     fi
 }
