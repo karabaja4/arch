@@ -1,4 +1,5 @@
 #!/bin/sh
+. "$(dirname "$(readlink -f "${0}")")/_lib.sh"
 
 # CIFS is unable to re-establish connection on SMB server restart when using a custom port
 # DebugData shows DISCONNECTED:
@@ -7,22 +8,24 @@
 # ...
 # ...	DISCONNECTED
 
+_must_be_root
+
 _root="$(dirname "$(readlink -f "${0}")")"
 _debug_data="$(cat /proc/fs/cifs/DebugData)"
 
-# ${1} = port
-# ${2} = remote path
-# ${3} = local path
 _check_mount() {
-    if printf '%s\n' "${_debug_data}" | grep -F -A3 "${2}" | grep -q 'DISCONNECTED'
+    _remote_path="\\\\radiance.hr\\${1}"
+    _local_path="/home/igor/_${1}"
+    if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
     then
+        printf 'Detected %s as DISCONNECTED, remounting...\n' "${_remote_path}"
         # use -c to not canonicalize paths
         # otherwise umount stalls on a non-responsive path
-        printf 'Detected %s as DISCONNECTED, remounting...\n' "${2}"
-        doas umount -c -v "${3}"
-        doas "${_root}/smb.sh" "${@}"
+        # as does mountpoint -q, so don't use umount.sh
+        umount -c -v "${_local_path}"
+        "${_root}/mount.sh" "${1}"
     fi
 }
 
-_check_mount '44555' '\\radiance.hr\private' '/home/igor/_private'
-_check_mount '44555' '\\radiance.hr\public' '/home/igor/_public'
+_check_mount 'private'
+_check_mount 'public'

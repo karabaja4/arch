@@ -39,42 +39,16 @@ alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
 
-# mounts
-mntmmc() {
-    if ! mountpoint -q '/home/igor/_mmc'
-    then
-        # uses kernel ntfs3 driver
-        doas mount -v -t ntfs3 -U 78DD72146717D509 -o uid="$(id -u)",fmask=133,dmask=022 '/home/igor/_mmc'
-    else
-        printf '%s is already mounted.\n' '/home/igor/_mmc'
-    fi
-}
-
-mntsmb() {
-    # remote
-    doas '/home/igor/arch/scripts/smb.sh' '44555' '\\radiance.hr\private' '/home/igor/_private'
-    doas '/home/igor/arch/scripts/smb.sh' '44555' '\\radiance.hr\public' '/home/igor/_public'
-    if lsof -Pi :44555 > /dev/null 2>&1
-    then
-        # ssh tunnel (traveling)
-        doas '/home/igor/arch/scripts/smb.sh' '44555' '\\localhost\disk' '/home/igor/_disk'
-    else
-        # local (home)
-        doas '/home/igor/arch/scripts/smb.sh' '445' '\\192.168.100.33\disk' '/home/igor/_disk'
-    fi
-}
-
-mnt() {
-    mntmmc
-    mntsmb
-}
-
-umnt() {
-    doas umount -c -v '/home/igor/_'*
-}
+alias mountall='doas /home/igor/arch/scripts/mount.sh all'
+alias mountsmb='doas /home/igor/arch/scripts/mount.sh smb'
+alias mountmmc='doas /home/igor/arch/scripts/mount.sh mmc'
 
 usb() {
-    doas '/home/igor/arch/scripts/unmount.sh' /mnt/*
+    doas '/home/igor/arch/scripts/umount.sh' /mnt/*
+}
+
+umountall() {
+    doas '/home/igor/arch/scripts/umount.sh' /mnt/* /home/igor/_*
 }
 
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'

@@ -15,7 +15,7 @@ do
         /mnt/*)
             # any dir under /mnt must already be mounted, and then unmounted and deleted
             # show notification for those kind of dirs
-            if umount -v "${_f}"
+            if umount -c -v "${_f}"
             then
                 rmdir -v "${_f}"
                 _herbe "Unmounted ${_f}"
@@ -24,10 +24,10 @@ do
             fi
             ;;
         *)
-            # dirs not under /mnt just need to be unmounted if they're mounted
+            # dirs NOT under /mnt just need to be unmounted if they're mounted
             if mountpoint -q "${_f}"
             then
-                if ! umount -v "${_f}"
+                if ! umount -c -v "${_f}"
                 then
                     _has_failures=1
                 fi
@@ -39,8 +39,7 @@ done
 
 if [ "${_has_failures}" -ne 0 ]
 then
-    _echo "Failed to cleanly unmount all devices."
-    exit 1
-else
-    exit 0
+    _echo "Failed to cleanly unmount devices."
 fi
+
+exit "${_has_failures}"
