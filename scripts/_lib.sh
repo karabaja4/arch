@@ -60,6 +60,26 @@ _fatal() {
     exit 9
 }
 
+# logging to stdout and to files simultaneously
+__script_name="$(basename "${0}")"
+_log_line() {
+    printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${1}"
+}
+
+_log() {
+    __logfile="/var/log/scripts/${__script_name%.*}.log"
+    [ ! -r "${__logfile}" ] && _fatal "Cannot read ${__logfile}"
+    if [ "${#}" -eq 0 ]
+    then
+        while IFS= read -r __line
+        do
+            _log_line "${__line}" | tee -a "${__logfile}"
+        done
+    else
+        _log_line "${1}" | tee -a "${__logfile}"
+    fi
+}
+
 # gets the passwd column for the single logged in user
 # usage: _passwd <passwd-index>
 # for example, _passwd 6 will get the 6th column from the user's passwd, that is, a user's home directory

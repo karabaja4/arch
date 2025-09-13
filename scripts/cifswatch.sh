@@ -8,22 +8,40 @@
 # ...
 # ...	DISCONNECTED
 
-_must_be_root
+# use umount -c to not canonicalize paths
+# otherwise umount stalls on a non-responsive path
+# as does mountpoint -q, so don't use umount.sh
 
+_must_be_root
 _root="$(dirname "$(readlink -f "${0}")")"
-_debug_data="$(cat /proc/fs/cifs/DebugData)"
+
+_debug_data_path='/proc/fs/cifs/DebugData'
+
+if [ ! -r "${_debug_data_path}" ]
+then
+    _log "${_debug_data_path} is not readable."
+    exit 1
+fi
+
+_remote='radiance.hr'
+
+_ping() {
+    curl -fs -o /dev/null -w '%{http_code}' "https://avacyn.${_remote}/ip" 2>/dev/null
+}
 
 _check_mount() {
-    _remote_path="\\\\radiance.hr\\${1}"
+    _debug_data="$(cat "${_debug_data_path}")"
+    _remote_path="\\\\${_remote}\\${1}"
     _local_path="/home/igor/_${1}"
     if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
     then
-        printf 'Detected %s as DISCONNECTED, remounting...\n' "${_remote_path}"
-        # use -c to not canonicalize paths
-        # otherwise umount stalls on a non-responsive path
-        # as does mountpoint -q, so don't use umount.sh
-        umount -c -v "${_local_path}"
-        "${_root}/mount.sh" "${1}"
+        _ping_http_code="$(_ping)"
+        _log "${_remote_path} is DISCONNECTED (${_ping_http_code})"
+        if [ "${_ping_http_code}" = "200" ]
+        then
+            umount -c -v "${_local_path}" 2>&1 | _log
+            "${_root}/mount.sh" "${1}" 2>&1 | _log
+        fi
     fi
 }
 
