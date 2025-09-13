@@ -1,2 +1,2 @@
-0 */6 * * *      /home/igor/arch/scripts/fstrim.sh
-* * * * *        /home/igor/arch/scripts/cifswatch.sh
+0 */6 * * *    /home/igor/arch/scripts/fstrim.sh
+* * * * *      /home/igor/arch/scripts/cifswatch.sh
