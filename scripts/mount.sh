@@ -23,7 +23,6 @@ _mount_smb() {
     then
         install -v -m 755 -g "${_gid}" -o "${_uid}" -d "${3}"
     fi
-
     if ! mountpoint -q "${3}"
     then
         mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${1}" "${2}" "${3}"
