@@ -29,7 +29,6 @@ _host="radiance.hr"
 
 _check_mount() {
     _remote_path="\\\\${_host}\\${1}"
-    _local_path="/home/igor/_${1}"
     if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
     then
         nc -z -w2 "${_host}" 44555
@@ -37,6 +36,7 @@ _check_mount() {
         _log "${_remote_path} is DISCONNECTED (${_nc_ec})"
         if [ "${_nc_ec}" -eq 0 ]
         then
+            _local_path="/home/igor/_${1}"
             umount -c -v "${_local_path}" 2>&1 | _log
             "${_root}/mount.sh" "${1}" 2>&1 | _log
         fi
