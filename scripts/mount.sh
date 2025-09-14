@@ -28,9 +28,13 @@ _mount_smb() {
         if mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${1}" "${2}" "${3}"
         then
             printf 'Mounted [%s][%s] to %s\n' "${1}" "${2}" "${3}"
+        else
+            printf 'Failed to mount [%s][%s] to %s\n' "${1}" "${2}" "${3}"
+            return 1
         fi
     else
         printf '%s is already mounted.\n' "${3}"
+        return 2
     fi
 }
 
@@ -47,6 +51,7 @@ _mount_ntfs() {
         mount -v -t ntfs3 -U "${1}" -o uid="${_uid}",fmask=133,dmask=022 "${2}"
     else
         printf '%s is already mounted.\n' "${2}"
+        return 2
     fi
 }
 
