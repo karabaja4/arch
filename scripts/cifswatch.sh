@@ -1,5 +1,6 @@
 #!/bin/sh
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
+set -e
 
 # CIFS is unable to re-establish connection on SMB server restart when using a custom port
 # DebugData shows DISCONNECTED:
@@ -26,7 +27,9 @@ fi
 _remote='radiance.hr'
 
 _ping() {
-    curl -fs -o /dev/null -w '%{http_code}' "https://avacyn.${_remote}/ip" 2>/dev/null
+    curl -fs -o /dev/null -w '%{http_code}' \
+    --connect-timeout 1 --max-time 3 \
+    "https://avacyn.${_remote}/ip" 2>/dev/null
 }
 
 _check_mount() {
