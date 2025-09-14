@@ -78,8 +78,8 @@ _log() {
     then
         while IFS= read -r __stdin_line
         do
-            _log_lines "${__stdin_line}" | tee -a "${__log_file}"
-        done
+            _log_lines "${__stdin_line}"
+        done | tee -a "${__log_file}"
     else
         _log_lines "${@}" | tee -a "${__log_file}"
     fi
