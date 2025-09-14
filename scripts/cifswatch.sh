@@ -32,12 +32,35 @@ _check_mount() {
     then
         if nc -z -w2 "${_host}" 44555 > /dev/null 2>&1
         then
+            # smb working
             _nc_ec="0"
             _local_path="/home/igor/_${1}"
             _log "${_remote_path} is DISCONNECTED (nc = ${_nc_ec}), remounting ${_local_path}"
-            umount -c -v "${_local_path}" 2>&1 | _log
-            "${_root}/mount.sh" "${1}" 2>&1 | _log
+            
+            # umount
+            _umount_out="$(umount -c -v "${_local_path}" 2>&1)"
+            _umount_ec="${?}"
+            _log "${_umount_out}"
+            _log "Mount exited with ${_umount_ec}"
+            
+            # if umount ok
+            if [ "${_umount_ec}" -eq 0 ]
+            then
+            
+                #mount
+                _mount_out="$("${_root}/mount.sh" "${1}" 2>&1)"
+                _mount_ec="${?}"
+                _log "${_mount_out}"
+                _log "Mount exited with ${_mount_ec}"
+                
+                # success
+                if [ "${_mount_ec}" -eq 0 ]
+                then
+                    _log 'All good.'
+                fi
+            fi
         else
+            # smb not working
             _nc_ec="${?}"
             _log "${_remote_path} is DISCONNECTED (nc = ${_nc_ec}), skip."
         fi
