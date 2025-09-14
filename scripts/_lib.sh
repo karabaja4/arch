@@ -62,23 +62,26 @@ _fatal() {
 
 # logging to stdout and to files simultaneously
 __script_name="$(basename "${0}")"
-_log_line() {
-    printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${1}"
+_log_lines() {
+    for __log_line in "${@}"
+    do
+        printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${__log_line}"
+    done
 }
 
 __log_dir="${HOME}/.local/share/logs"
 _log() {
     mkdir -p "${__log_dir}"
     [ ! -w "${__log_dir}" ] && _fatal "${__log_dir} is not writable."
-    __logfile="${__log_dir}/${__script_name%.*}.log"
-    if [ "${#}" -eq 0 ]
+    __log_file="${__log_dir}/${__script_name%.*}.log"
+    if [ -t 0 ]
     then
-        while IFS= read -r __line
-        do
-            _log_line "${__line}" | tee -a "${__logfile}"
-        done
+        _log_lines "${@}" | tee -a "${__log_file}"
     else
-        _log_line "${1}" | tee -a "${__logfile}"
+        while IFS= read -r __stdin_line
+        do
+            _log_lines "${__stdin_line}" | tee -a "${__log_file}"
+        done
     fi
 }
 
