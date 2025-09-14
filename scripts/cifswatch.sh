@@ -19,8 +19,8 @@ _debug_data_path='/proc/fs/cifs/DebugData'
 
 if [ ! -r "${_debug_data_path}" ]
 then
-    _log "${_debug_data_path} is not readable."
-    exit 1
+    # cifs not loaded
+    exit 0
 fi
 
 _debug_data="$(cat "${_debug_data_path}")"
