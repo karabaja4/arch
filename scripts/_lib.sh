@@ -74,14 +74,14 @@ _log() {
     mkdir -p "${__log_dir}"
     [ ! -w "${__log_dir}" ] && _fatal "${__log_dir} is not writable."
     __log_file="${__log_dir}/${__script_name%.*}.log"
-    if [ -t 0 ]
+    if [ "${#}" -eq 0 ]
     then
-        _log_lines "${@}" | tee -a "${__log_file}"
-    else
         while IFS= read -r __stdin_line
         do
             _log_lines "${__stdin_line}" | tee -a "${__log_file}"
         done
+    else
+        _log_lines "${@}" | tee -a "${__log_file}"
     fi
 }
 
