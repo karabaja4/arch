@@ -32,13 +32,14 @@ _ping() {
     "https://avacyn.${_remote}/ip" 2>/dev/null
 }
 
+_debug_data="$(cat "${_debug_data_path}")"
+_ping_http_code="$(_ping)"
+
 _check_mount() {
-    _debug_data="$(cat "${_debug_data_path}")"
     _remote_path="\\\\${_remote}\\${1}"
     _local_path="/home/igor/_${1}"
     if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
     then
-        _ping_http_code="$(_ping)"
         _log "${_remote_path} is DISCONNECTED (${_ping_http_code})"
         if [ "${_ping_http_code}" = "200" ]
         then
