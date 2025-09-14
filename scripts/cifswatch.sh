@@ -33,9 +33,9 @@ _check_mount() {
     if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
     then
         nc -z -w2 "${_host}" 44555
-        _nc_exit_code="${?}"
-        _log "${_remote_path} is DISCONNECTED (${_nc_exit_code})"
-        if [ "${_nc_exit_code}" -eq 0 ]
+        _nc_ec="${?}"
+        _log "${_remote_path} is DISCONNECTED (${_nc_ec})"
+        if [ "${_nc_ec}" -eq 0 ]
         then
             umount -c -v "${_local_path}" 2>&1 | _log
             "${_root}/mount.sh" "${1}" 2>&1 | _log
