@@ -72,7 +72,7 @@ _log_lines() {
     done
 }
 
-__log_dir="${HOME}/.local/share/logs"
+__log_dir="${HOME:-/root}/.local/share/logs"
 _log() {
     mkdir -p "${__log_dir}"
     [ ! -w "${__log_dir}" ] && _fatal "${__log_dir} is not writable."
