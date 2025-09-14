@@ -1,7 +1,6 @@
 #!/bin/sh
 _root="$(dirname "$(readlink -f "${0}")")"
 . "${_root}/_lib.sh"
-set -e
 
 # CIFS is unable to re-establish connection on SMB server restart when using a custom port
 # DebugData shows DISCONNECTED:
