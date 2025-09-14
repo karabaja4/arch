@@ -59,7 +59,7 @@ _mount_public() {
 }
 
 _mount_disk() {
-    if lsof -Pi :44555 > /dev/null 2>&1
+    if nc -z localhost 44555 > /dev/null 2>&1
     then
         # ssh tunnel (traveling)
         _mount_smb '44555' '\\localhost\disk' '/home/igor/_disk'
