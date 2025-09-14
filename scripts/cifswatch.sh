@@ -1,5 +1,6 @@
 #!/bin/sh
-. "$(dirname "$(readlink -f "${0}")")/_lib.sh"
+_root="$(dirname "$(readlink -f "${0}")")"
+. "${_root}/_lib.sh"
 set -e
 
 # CIFS is unable to re-establish connection on SMB server restart when using a custom port
@@ -14,7 +15,6 @@ set -e
 # as does mountpoint -q, so don't use umount.sh
 
 _must_be_root
-_root="$(dirname "$(readlink -f "${0}")")"
 
 _debug_data_path='/proc/fs/cifs/DebugData'
 

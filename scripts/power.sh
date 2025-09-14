@@ -1,5 +1,6 @@
 #!/bin/sh
-. "$(dirname "$(readlink -f "${0}")")/_lib.sh"
+_root="$(dirname "$(readlink -f "${0}")")"
+. "${_root}/_lib.sh"
 
 _must_be_root
 
@@ -8,8 +9,6 @@ if [ ! -d "${_home}" ]
 then
     _fatal "Cannot find user's home directory."
 fi
-
-_root="$(dirname "$(readlink -f "${0}")")"
 
 if ! "${_root}/umount.sh" /mnt/* "${_home}"/_*
 then
