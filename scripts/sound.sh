@@ -118,7 +118,7 @@ _iec="IEC958,0"
 if amixer get "${_iec}" > /dev/null 2>&1
 then
     printf "Unmuting %s\n" "${_iec}"
-    amixer set "${_iec}" unmute > /dev/null
+    amixer set "${_iec}" unmute > /dev/null 2>&1 || true
 fi
 
 # play embedded sound
