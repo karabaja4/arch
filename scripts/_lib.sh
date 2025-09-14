@@ -65,7 +65,10 @@ __script_name="$(basename "${0}")"
 _log_lines() {
     for __log_line in "${@}"
     do
-        printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${__log_line}"
+        if [ -n "${__log_line}" ]
+        then
+            printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${__log_line}"
+        fi
     done
 }
 
