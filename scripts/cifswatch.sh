@@ -24,19 +24,17 @@ then
     exit 1
 fi
 
-_remote='radiance.hr'
-
 _ping() {
     curl -fs -o /dev/null -w '%{http_code}' \
     --connect-timeout 1 --max-time 3 \
-    "https://avacyn.${_remote}/ip" 2>/dev/null
+    "https://avacyn.radiance.hr/ip" 2>/dev/null
 }
 
 _debug_data="$(cat "${_debug_data_path}")"
 _ping_http_code="$(_ping)"
 
 _check_mount() {
-    _remote_path="\\\\${_remote}\\${1}"
+    _remote_path="\\\\radiance.hr\\${1}"
     _local_path="/home/igor/_${1}"
     if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
     then
