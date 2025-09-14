@@ -72,7 +72,14 @@ _log_lines() {
     done
 }
 
-__log_dir="${HOME:-/root}/.local/share/logs"
+# udev does not define $HOME
+if [ -z "${HOME-}" ]
+then
+    __log_dir="/tmp/logs"
+else
+    __log_dir="${HOME}/.local/share/logs"
+fi
+
 _log() {
     mkdir -p "${__log_dir}"
     [ ! -w "${__log_dir}" ] && _fatal "${__log_dir} is not writable."
