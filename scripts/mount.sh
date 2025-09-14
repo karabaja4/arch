@@ -25,8 +25,10 @@ _mount_smb() {
     fi
     if ! mountpoint -q "${3}"
     then
-        mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${1}" "${2}" "${3}"
-        printf 'Mounted [%s][%s] to %s\n' "${1}" "${2}" "${3}"
+        if mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${1}" "${2}" "${3}"
+        then
+            printf 'Mounted [%s][%s] to %s\n' "${1}" "${2}" "${3}"
+        fi
     else
         printf '%s is already mounted.\n' "${3}"
     fi
