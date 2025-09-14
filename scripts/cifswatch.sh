@@ -31,7 +31,7 @@ _check_mount() {
     _remote_path="\\\\${_host}\\${1}"
     if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
     then
-        if nc -z -w2 "${_host}" 44555
+        if nc -z -w2 "${_host}" 44555 > /dev/null 2>&1
         then
             _nc_ec="0"
             _local_path="/home/igor/_${1}"
