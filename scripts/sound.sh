@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 # speaker-test -D hdmi:CARD=NVidia,DEV=0 -c 2 -t wav
 
@@ -109,8 +108,8 @@ _get_pvolume_controls() {
 for _channel in $(_get_pvolume_controls)
 do
     printf 'Unmuting %s to 100%%\n' "${_channel}"
-    amixer set "${_channel}" unmute > /dev/null 2>&1 || true
-    amixer set "${_channel}" 100% > /dev/null 2>&1 || true
+    amixer set "${_channel}" unmute > /dev/null 2>&1
+    amixer set "${_channel}" 100% > /dev/null 2>&1
 done
 
 # unmute S/PDIF 0 if present
@@ -118,7 +117,7 @@ _iec="IEC958,0"
 if amixer get "${_iec}" > /dev/null 2>&1
 then
     printf "Unmuting %s\n" "${_iec}"
-    amixer set "${_iec}" unmute > /dev/null 2>&1 || true
+    amixer set "${_iec}" unmute > /dev/null 2>&1
 fi
 
 # play embedded sound
