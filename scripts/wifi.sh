@@ -82,13 +82,14 @@ sleep 5
 
 # save scan results
 _scan_results="$(wpa_cli -i "${_interface}" scan_results | sed '1d')"
+
+# kill wpa_supplicant because we are done scanning
+wpa_cli -i "${_interface}" terminate > /dev/null
+
 if [ -z "${_scan_results}" ]
 then
     _fatal "No networks found."
 fi
-
-# kill wpa_supplicant because we are done scanning
-wpa_cli -i "${_interface}" terminate > /dev/null
 
 # enumerate choices and show them
 # loop until the user enters a correct choice
