@@ -12,7 +12,8 @@ do
     then
         case "${_f}" in
         /mnt/*)
-            # any dir under /mnt must already be mounted, and then unmounted and deleted
+            # any dir under /mnt must be mounted
+            # and then attempted to be unmounted and deleted
             # show notification for those kind of dirs
             if umount -c -v "${_f}"
             then
