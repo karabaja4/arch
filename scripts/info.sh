@@ -3,11 +3,11 @@ set -eu
 
 clear
 
-_mem_total_kb="$( grep "^MemTotal:" /proc/meminfo | awk '{ print $2 }' )"
-_mem_available_kb="$( grep "^MemAvailable:" /proc/meminfo | awk '{ print $2 }' )"
+_mem_total_kb="$(grep "^MemTotal:" /proc/meminfo | awk '{ print $2 }')"
+_mem_available_kb="$(grep "^MemAvailable:" /proc/meminfo | awk '{ print $2 }')"
 
-_mem_used_gb="$( printf '%s %s' "${_mem_total_kb}" "${_mem_available_kb}" | awk '{ print ($1 - $2) / 1048576 }' )"
-_mem_total_gb="$( printf '%s' "${_mem_total_kb}" | awk '{ print $1 / 1048576 }' )"
+_mem_used_gb="$(printf '%s %s' "${_mem_total_kb}" "${_mem_available_kb}" | awk '{ print ($1 - $2) / 1048576 }')"
+_mem_total_gb="$(printf '%s' "${_mem_total_kb}" | awk '{ print $1 / 1048576 }')"
 
 printf '\n'
 printf '  %s @ %s\n\n' "$(cut -d '"' -f2 /etc/os-release | head -n1)" "$(cut -d' ' -f3 /proc/version)"
