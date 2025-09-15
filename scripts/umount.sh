@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
-set -e
 
 _must_be_root
 
@@ -17,8 +16,12 @@ do
             # show notification for those kind of dirs
             if umount -c -v "${_f}"
             then
-                rmdir -v "${_f}"
-                _herbe "Unmounted ${_f}"
+                if rmdir -v "${_f}"
+                then
+                    _herbe "Unmounted ${_f}"
+                else
+                    _has_failures=1
+                fi
             else
                 _has_failures=1
             fi
