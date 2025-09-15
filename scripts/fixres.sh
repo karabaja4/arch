@@ -33,8 +33,8 @@ then
 fi
 
 # remove empty lines
-_rtl_wallpapers="$(printf '%s\n' "${_rtl_wallpapers}" | grep '.' || true)"
-_rtl_monitors="$(printf '%s\n' "${_rtl_monitors}" | grep '.' || true)"
+_rtl_wallpapers="$(printf '%s\n' "${_rtl_wallpapers}" | grep '.')"
+_rtl_monitors="$(printf '%s\n' "${_rtl_monitors}" | grep '.')"
 
 # use edid data to read monitor model
 _get_monitor_to_port_map() {
@@ -72,7 +72,7 @@ printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/* /'
 [ "${_list_only}" -eq 1 ] && exit 0
 
 # kill all conky instances
-pkill -f conkyrc-kernel || true
+pkill -f conkyrc-kernel
 
 _get_port_for_monitor() {
     printf '%s\n' "${_monitor_to_port_map}" | grep "^${1} " | cut -d' ' -f2

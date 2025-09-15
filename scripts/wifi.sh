@@ -25,7 +25,7 @@ _must_not_run 'wpa_supplicant'
 _must_not_run 'udhcpc'
 
 # resolve interface
-_interface="$(_echo /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' || true)"
+_interface="$(_echo /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*')"
 if [ -z "${_interface}" ]
 then
     _fatal "No wireless interfaces found."
@@ -45,7 +45,7 @@ then
     fi
 else
     # interface provided by user on arg1
-    _match="$(_echo "${_interface}" | grep -Fx "${_arg1}" || true)"
+    _match="$(_echo "${_interface}" | grep -Fx "${_arg1}")"
     if [ -z "${_match}" ]
     then
         _fatal "Interface ${_arg1} not found."
