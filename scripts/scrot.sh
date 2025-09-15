@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
-set -e
 
 _dir="/tmp/screenshots"
 mkdir -p "${_dir}"
