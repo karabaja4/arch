@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
-set -e
 
 _usage() {
     _script_name="$(basename "${0}")"
