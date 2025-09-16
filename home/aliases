@@ -38,7 +38,7 @@ alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
-alias wifi='/home/igor/arch/scripts/wifi.sh'
+alias wifi='doas /home/igor/arch/scripts/wifi.sh'
 
 alias mountall='doas /home/igor/arch/scripts/mount.sh all'
 alias mountsmb='doas /home/igor/arch/scripts/mount.sh smb'
