@@ -237,8 +237,8 @@
     <!-- kvirc is just going crazy on scaled screens -->
     <application name="kvirc" type="normal">
       <size>
-        <height>1400</height>
-        <width>2800</width>
+        <height>1200</height>
+        <width>2400</width>
       </size>
     </application>
     <application name="kvirc" type="dialog">
