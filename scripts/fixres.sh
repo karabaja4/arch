@@ -74,23 +74,30 @@ printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/* /'
 # kill all conky instances
 pkill -f conkyrc-kernel
 
+# get port for monitor hash
 _get_port_for_monitor() {
     printf '%s\n' "${_monitor_to_port_map}" | grep "^${1} " | cut -d' ' -f2
 }
 
+# get all screen info lines with "connected" and include one line below for each (resolutions and refresh rates)
 _all_screen_infos="$(xrandr | awk '/ connected / { print; getline; print }')"
+
+# isolate screen info for a single port from all screen infos
 _get_screen_info_for_port() {
     printf '%s' "${_all_screen_infos}" | grep -A1 "^${1} connected"
 }
 
+# get the first field from the second line of screen info which is the maximum resolution
 _get_max_resolution_for_screen_info() {
     printf '%s' "${1}" | awk 'NR==2 {print $1}'
 }
 
+# extracts a maximum refresh rate from the second line of screen info
 _get_max_refresh_rate_for_screen_info() {
     printf '%s' "${1}" | awk 'NR==2' | tr -d '+*' | awk '{$1=""; sub(/^ /, ""); print}' | tr ' ' '\n' | sort -nr | head -n1
 }
 
+# sets wallpaper N from the predefined list of wallpapers for port
 _set_wallpaper_line_for_port() {
     _wallpaper_line="${1}"
     _wallpaper_port="${2}"
@@ -104,6 +111,7 @@ _set_wallpaper_line_for_port() {
     fi
 }
 
+# start conky on xinerama index (0, 1, 2...)
 _start_conky_on_index() {
     printf 'Starting conky on screen %s\n' "${1}"
     conky -q -d -c "${HOME}/arch/conky/conkyrc-kernel" --xinerama-head "${1}"
