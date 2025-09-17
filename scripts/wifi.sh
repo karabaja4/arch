@@ -1,5 +1,6 @@
 #!/bin/sh
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
+set -e
 
 _usage() {
     _script_name="$(basename "${0}")"
@@ -25,7 +26,7 @@ _must_not_run 'wpa_supplicant'
 _must_not_run 'udhcpc'
 
 # resolve interface
-_interface="$(_echo /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*')"
+_interface="$(_echo /sys/class/net/*/wireless | cut -d/ -f5 | grep -v -F '*' || true)"
 if [ -z "${_interface}" ]
 then
     _fatal "No wireless interfaces found."
@@ -45,12 +46,12 @@ then
     fi
 else
     # interface provided by user on arg1
-    _match="$(_echo "${_interface}" | grep -Fx "${_arg1}")"
+    _match="$(_echo "${_interface}" | grep -Fx "${_arg1}" || true)"
     if [ -z "${_match}" ]
     then
         _fatal "Interface ${_arg1} not found."
     else
-         _interface="${_match}"
+        _interface="${_match}"
         _info "Using interface ${_interface}"
     fi
 fi
