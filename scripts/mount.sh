@@ -78,33 +78,7 @@ _mount_mmc() {
     _mount_ntfs '78DD72146717D509' '/home/igor/_mmc'
 }
 
-if [ "${#}" -ne 1 ]
-then
-    _fatal "Invalid parameter."
-fi
-
-case "${1}" in
-private)
-    _mount_private
-    ;;
-public)
-    _mount_public
-    ;;
-smb)
-    _mount_private
-    _mount_public
-    _mount_disk
-    ;;
-mmc)
-    _mount_mmc
-    ;;
-all)
-    _mount_private
-    _mount_public
-    _mount_disk
-    _mount_mmc
-    ;;
-*)
-    _fatal "Invalid parameter."
-    ;;
-esac
+for _item in "${@}"
+do
+    _mount_"${_item}"
+done

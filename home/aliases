@@ -40,8 +40,8 @@ alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
 alias wifi='doas /home/igor/arch/scripts/wifi.sh'
 
-alias mountall='doas /home/igor/arch/scripts/mount.sh all'
-alias mountsmb='doas /home/igor/arch/scripts/mount.sh smb'
+alias mountall='doas /home/igor/arch/scripts/mount.sh private public disk mmc'
+alias mountsmb='doas /home/igor/arch/scripts/mount.sh private public disk'
 alias mountmmc='doas /home/igor/arch/scripts/mount.sh mmc'
 
 usb() {
