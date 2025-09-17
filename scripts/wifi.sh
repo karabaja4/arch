@@ -56,13 +56,6 @@ else
     fi
 fi
 
-_resolv_conf="/etc/resolv.conf"
-_resolv_conf_old="/etc/resolv.conf.old"
-
-# backup resolv.conf so dhcpcd does not overwrite it
-_info "Backing up ${_resolv_conf} to ${_resolv_conf_old}"
-cp "${_resolv_conf}" "${_resolv_conf_old}"
-
 # lenovo ideapad 3 needs this
 rfkill unblock wifi
 
