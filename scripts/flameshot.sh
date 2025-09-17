@@ -2,7 +2,7 @@
 set -eu
 
 # scaling screws screens up
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_ENABLE_HIGHDPI_SCALING=0
 
 _path='/tmp/flameshot.png'
 
