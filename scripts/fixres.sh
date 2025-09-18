@@ -92,12 +92,27 @@ fi
 
 # always print available monitors
 printf '%s\n' "Available monitors and ports:"
+
+# first print monitors from map in _rtl_monitors order
+for _monitor in ${_rtl_monitors}
+do
+    _port="$(_get_port_for_monitor "${_monitor}")"
+    if [ -n "${_port}" ]
+    then
+        if [ "${_monitor}" = "${_primary_monitor}" ]
+        then
+            printf '* %s %s (P)\n' "${_monitor}" "${_port}"
+        else
+            printf '* %s %s\n' "${_monitor}" "${_port}"
+        fi
+    fi
+done
+
+# then print any remaining monitors in map not in _rtl_monitors
 printf '%s\n' "${_monitor_to_port_map}" | while IFS=' ' read -r _monitor _port
 do
-    if [ "${_monitor}" = "${_primary_monitor}" ]
+    if ! printf '%s\n' "${_rtl_monitors}" | grep -qx "${_monitor}"
     then
-        printf '* %s %s (P)\n' "${_monitor}" "${_port}"
-    else
         printf '* %s %s\n' "${_monitor}" "${_port}"
     fi
 done
