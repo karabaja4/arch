@@ -36,7 +36,9 @@ fi
 _rtl_wallpapers="$(printf '%s\n' "${_rtl_wallpapers}" | grep '.')"
 _rtl_monitors="$(printf '%s\n' "${_rtl_monitors}" | grep '.')"
 
-# use edid data to read monitor model
+# read connected monitors from xrandr
+# use edid data to generate monitor hash
+# output is: "<monitor hash>" "<port>"
 _get_monitor_to_port_map() {
     xrandr --props | awk '
     / connected / {
@@ -61,7 +63,7 @@ _get_monitor_to_port_map() {
     done
 }
 
-# map "<monitor hash>" "<port name>"
+# load map
 _monitor_to_port_map="$(_get_monitor_to_port_map)"
 
 # always print available monitors
@@ -74,7 +76,7 @@ printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/* /'
 # kill all conky instances
 pkill -f conkyrc-kernel
 
-# get port for monitor hash
+# get port for monitor hash from monitor to port map
 _get_port_for_monitor() {
     printf '%s\n' "${_monitor_to_port_map}" | grep "^${1} " | cut -d' ' -f2
 }
