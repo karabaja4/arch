@@ -66,20 +66,45 @@ _get_monitor_to_port_map() {
 # load map
 _monitor_to_port_map="$(_get_monitor_to_port_map)"
 
-# always print available monitors
-printf '%s\n' "Available monitors and ports:"
-printf '%s\n' "${_monitor_to_port_map}" | sed 's/^/* /'
-
-# on list mode just exit after print
-[ "${_list_only}" -eq 1 ] && exit 0
-
-# kill all conky instances
-pkill -f conkyrc-kernel
-
 # get port for monitor hash from monitor to port map
 _get_port_for_monitor() {
     printf '%s\n' "${_monitor_to_port_map}" | grep "^${1} " | cut -d' ' -f2
 }
+
+# if primary monitor is not connected, pick first connected from _rtl_monitors
+if [ -z "$(_get_port_for_monitor "${_primary_monitor}")" ]
+then
+    for _monitor in ${_rtl_monitors}
+    do
+        if [ -n "$(_get_port_for_monitor "${_monitor}")" ]
+        then
+            printf 'Warning: falling back to %s as primary.\n' "${_monitor}"
+            _primary_monitor="${_monitor}"
+            break
+        fi
+    done
+fi
+
+# always print available monitors
+printf '%s\n' "Available monitors and ports:"
+printf '%s\n' "${_monitor_to_port_map}" | while IFS=' ' read -r _monitor _port
+do
+    if [ "${_monitor}" = "${_primary_monitor}" ]
+    then
+        printf '* %s %s (P)\n' "${_monitor}" "${_port}"
+    else
+        printf '* %s %s\n' "${_monitor}" "${_port}"
+    fi
+done
+
+# on list mode just exit after print
+[ "${_list_only}" -eq 1 ] && exit 0
+
+# print separator on non list mode
+printf '%s\n' '-----------------------------------------'
+
+# kill all conky instances
+pkill -f conkyrc-kernel
 
 # get all screen info lines with "connected" and include one line below for each (resolutions and refresh rates)
 _all_screen_infos="$(xrandr | awk '/ connected / { print; getline; print }')"
