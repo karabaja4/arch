@@ -27,14 +27,14 @@ code)
     _run code
     ;;
 azuredatastudio)
-    _run azuredatastudio --disable-keytar --force-device-scale-factor=1.5
+    _run azuredatastudio --disable-keytar --force-device-scale-factor=1.75
     ;;
 virtualbox)
     _run VirtualBox
     ;;
 discord)
     _load_apulse
-    _run discord --disable-smooth-scrolling --force-device-scale-factor=1.5
+    _run discord --disable-smooth-scrolling --force-device-scale-factor=1.75
     ;;
 flameshot)
     _run /home/igor/arch/scripts/flameshot.sh
