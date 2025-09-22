@@ -27,7 +27,7 @@ _time_passed="$((_now - _last_run))"
 
 if [ "${_time_passed}" -ge "${_interval}" ]
 then
-    _log "Starting fstrim"
+    _log "Time passed: ${_time_passed} >= ${_interval}, starting fstrim."
     /usr/bin/fstrim --listed-in /etc/fstab:/proc/self/mountinfo --verbose --quiet-unsupported | _log
     _exit_code="${?}"
     _log "fstrim exited with ${_exit_code}"
@@ -37,5 +37,5 @@ then
         printf '%s\n' "${_now}" > "${_last_run_file}"
     fi
 else
-    _log "Time passed: ${_time_passed}/${_interval}, skipping."
+    _log "Time passed: ${_time_passed} < ${_interval}, skipping."
 fi
