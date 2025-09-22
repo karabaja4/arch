@@ -27,9 +27,9 @@ _mount_smb() {
     then
         if mount -t cifs -o username="${_username}",password="${_password}",uid="${_uid}",gid="${_gid}",dir_mode=0755,file_mode=0644,port="${1}" "${2}" "${3}"
         then
-            printf 'Mounted [%s][%s] to %s\n' "${1}" "${2}" "${3}"
+            printf 'Mounted [%s][%s] to %s\n' "${2}" "${1}" "${3}"
         else
-            printf 'Failed to mount [%s][%s] to %s\n' "${1}" "${2}" "${3}"
+            printf 'Failed to mount [%s][%s] to %s\n' "${2}" "${1}" "${3}"
             return 1
         fi
     else
