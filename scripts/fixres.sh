@@ -61,10 +61,10 @@ _get_monitor_to_port_map() {
             print display, edid
     }' | while read -r _line
     do
-        _product_port="$(printf "%s" "${_line}" | cut -d' ' -f1)"
+        _device_port="$(printf "%s" "${_line}" | cut -d' ' -f1)"
         _edid_data="$(printf "%s" "${_line}" | cut -d' ' -f2-)"
-        _product_hash="$(printf '%s\n' "${_edid_data}" | md5sum | cut -d' ' -f1)"
-        printf "%s %s\n" "${_product_hash}" "${_product_port}" 
+        _device_hash="$(printf '%s\n' "${_edid_data}" | md5sum | cut -d' ' -f1)"
+        printf "%s %s\n" "${_device_hash}" "${_device_port}" 
     done
 }
 
