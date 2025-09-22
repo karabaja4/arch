@@ -41,7 +41,8 @@ const icons = {
   mem: mkicon('', fonts.flaticon, 10000, 100),
   clock: mkicon('', fonts.awesome, 10000, 100),
   ssd: mkicon('', fonts.awesome, 10000, 100),
-  mmc: mkicon('', fonts.flaticon, 10000, 100)
+  mmc: mkicon('', fonts.flaticon, 10000, 100),
+  battery: mkicon('', fonts.awesome, 12000, -1000)
 };
 
 const mkdisk = (mountpoint, icon, label) => {
@@ -150,7 +151,7 @@ const print = () => {
   }
   
   // battery
-  text += span(icons.cpu, colorize3, 'BAT', '$0% ($1)', [
+  text += span(icons.battery, colorize3, 'BAT', '$0% ($1)', [
     data?.conky?.bat?.perc, // 0
     data?.conky?.bat?.time || 'charged' // 1
   ], 0);
