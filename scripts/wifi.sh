@@ -63,6 +63,9 @@ rfkill unblock wifi
 ip link set "${_interface}" down
 ip link set "${_interface}" up
 
+# start scanning
+_info "Scanning for networks..."
+
 # start wpa_supplicant for scanning purposes
 wpa_supplicant -B -i "${_interface}" -c /dev/null -C /run/wpa_supplicant > /dev/null
 sleep 1
@@ -71,7 +74,6 @@ sleep 1
 wpa_cli -i "${_interface}" scan > /dev/null
 
 # allow for scan to complete
-_info "Scanning for networks..."
 sleep 5
 
 # save scan results
