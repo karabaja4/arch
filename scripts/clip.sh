@@ -74,7 +74,6 @@ _iteration() {
     fi
 }
 
-_log "${_script} @ $(readlink /proc/$$/exe)"
 while true
 do
     _log "Start"
