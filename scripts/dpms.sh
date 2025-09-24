@@ -4,6 +4,7 @@ set -eu
 export XAUTHORITY="${HOME}/.local/share/sx/xauthority"
 export DISPLAY=":1"
 
+xset s 0 0
 xset dpms 0 0 0
 
 # Get idle time in milliseconds

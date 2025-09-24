@@ -5,7 +5,7 @@ xset -display :1 s 0 0
 xset -display :1 dpms 0 0 0
 
 # alsa
-sleep 5 && "${HOME}/arch/scripts/sound.sh" pg32 > /dev/null 2>&1 &
+sleep 5 && "${HOME}/arch/scripts/sound.sh" logi > /dev/null 2>&1 &
 
 # daemons
 xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
