@@ -14,7 +14,10 @@ printf '  %s @ %s\n\n' "$(cut -d '"' -f2 /etc/os-release | head -n1)" "$(cut -d'
 printf '  * CPU:      %s\n' "$(grep 'model name' /proc/cpuinfo | head -n1 | sed 's/model name\t: //')"
 if command -v nvidia-smi > /dev/null 2>&1
 then
-    printf '  * GPU:      %s\n' "$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader)"
+    if _smi="$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null)"
+    then
+        printf '  * GPU:      %s\n' "${_smi}"
+    fi
 fi
 printf '  * Memory:   %.2f GB / %.2f GB\n' "${_mem_used_gb}" "${_mem_total_gb}"
 printf '  * Shell:    %s\n' "$(readlink /proc/${PPID}/exe | sed 's/\/usr\/bin\///')"
