@@ -12,7 +12,10 @@ _mem_total_gb="$(printf '%s' "${_mem_total_kb}" | awk '{ print $1 / 1048576 }')"
 printf '\n'
 printf '  %s @ %s\n\n' "$(cut -d '"' -f2 /etc/os-release | head -n1)" "$(cut -d' ' -f3 /proc/version)"
 printf '  * CPU:      %s\n' "$(grep 'model name' /proc/cpuinfo | head -n1 | sed 's/model name\t: //')"
-printf '  * GPU:      %s\n' "$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader)"
+if command -v nvidia-smi > /dev/null 2>&1
+then
+    printf '  * GPU:      %s\n' "$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader)"
+fi
 printf '  * Memory:   %.2f GB / %.2f GB\n' "${_mem_used_gb}" "${_mem_total_gb}"
 printf '  * Shell:    %s\n' "$(readlink /proc/${PPID}/exe | sed 's/\/usr\/bin\///')"
 printf '  * Uptime:   %s\n' "$(uptime -p | cut -c 4-)"
