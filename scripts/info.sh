@@ -27,7 +27,10 @@ _get_nvidia_gpu() {
     fi
 }
 
+_system_model="$(cat /sys/class/dmi/id/product_version)"
+
 printf '\n'
+printf '  %s\n' "${_system_model}"
 printf '  %s @ %s\n\n' "$(cut -d '"' -f2 /etc/os-release | head -n1)" "$(cut -d' ' -f3 /proc/version)"
 printf '  * CPU:      %s\n' "$(grep 'model name' /proc/cpuinfo | head -n1 | sed 's/model name\t: //')"
 printf '  * GPU:      %s\n' "$(_get_nvidia_gpu || _get_first_gpu)"
