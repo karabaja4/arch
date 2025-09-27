@@ -9,16 +9,23 @@ _mem_available_kb="$(grep "^MemAvailable:" /proc/meminfo | awk '{ print $2 }')"
 _mem_used_gb="$(printf '%s %s' "${_mem_total_kb}" "${_mem_available_kb}" | awk '{ print ($1 - $2) / 1048576 }')"
 _mem_total_gb="$(printf '%s' "${_mem_total_kb}" | awk '{ print $1 / 1048576 }')"
 
+_get_first_gpu() {
+    lspci | grep 'VGA' | head -n1 | awk -F'[][]' '{print $2}'
+}
+
+_get_nvidia_gpu() {
+    if command -v nvidia-smi > /dev/null 2>&1
+    then
+        nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null
+    else
+        return 1
+    fi
+}
+
 printf '\n'
 printf '  %s @ %s\n\n' "$(cut -d '"' -f2 /etc/os-release | head -n1)" "$(cut -d' ' -f3 /proc/version)"
 printf '  * CPU:      %s\n' "$(grep 'model name' /proc/cpuinfo | head -n1 | sed 's/model name\t: //')"
-if command -v nvidia-smi > /dev/null 2>&1
-then
-    if _smi="$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null)"
-    then
-        printf '  * GPU:      %s\n' "${_smi}"
-    fi
-fi
+printf '  * GPU:      %s\n' "$(_get_nvidia_gpu || _get_first_gpu)"
 printf '  * Memory:   %.2f GB / %.2f GB\n' "${_mem_used_gb}" "${_mem_total_gb}"
 printf '  * Shell:    %s\n' "$(readlink /proc/${PPID}/exe | sed 's/\/usr\/bin\///')"
 printf '  * Uptime:   %s\n' "$(uptime -p | cut -c 4-)"
