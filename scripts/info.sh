@@ -16,7 +16,12 @@ _get_first_gpu() {
 _get_nvidia_gpu() {
     if command -v nvidia-smi > /dev/null 2>&1
     then
-        nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null
+        if _nvidia_out="$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null)"
+        then
+            printf '%s\n' "${_nvidia_out}"
+        else
+            return 1
+        fi
     else
         return 1
     fi
