@@ -4,7 +4,22 @@ set -eu
 clear
 
 _get_lspci_gpu() {
-    lspci | grep 'VGA' | head -n1 | awk -F'[][]' '{printf "\033[96m%s\033[0m\n", $2}'
+    _gpu_name='unknown'
+    if command -v lspci > /dev/null 2>&1
+    then
+        _gpu_line="$(lspci | grep 'VGA' | head -n1)"
+        case "${_gpu_line}" in
+            '')
+                ;;
+            *'['*']'*)
+                _gpu_name="$(printf '%s\n' "${_gpu_line}" | awk -F'[][]' '{print $2}')"
+                ;;
+            *)
+                _gpu_name="$(printf '%s\n' "${_gpu_line}" | awk -F':' '{ sub(/^ */, "", $NF); print $NF }')"
+                ;;
+        esac
+    fi
+    printf '\033[96m%s\033[0m\n' "${_gpu_name}"
 }
 
 _get_nvidia_gpu() {
@@ -55,14 +70,13 @@ _mem_available_kb="$(grep "^MemAvailable:" /proc/meminfo | awk '{ print $2 }')"
 _mem_used_gb="$(printf '%s %s' "${_mem_total_kb}" "${_mem_available_kb}" | awk '{ print ($1 - $2) / 1048576 }')"
 _mem_total_gb="$(printf '%s' "${_mem_total_kb}" | awk '{ print $1 / 1048576 }')"
 
+_system_model=''
 if [ -r '/sys/class/dmi/id/product_version' ] && grep -q ' ' '/sys/class/dmi/id/product_version' 2>/dev/null
 then
     _system_model="$(cat '/sys/class/dmi/id/product_version')"
 elif [ -r '/sys/class/dmi/id/product_name' ]
 then
     _system_model="$(cat '/sys/class/dmi/id/product_name')"
-else
-    _system_model=''
 fi
 
 printf '\n'
