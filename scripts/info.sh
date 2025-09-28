@@ -3,6 +3,8 @@ set -eu
 
 clear
 
+_uid="$(id -u)"
+
 _get_lspci_gpu() {
     _gpu_name='unknown'
     if command -v lspci > /dev/null 2>&1
@@ -19,7 +21,13 @@ _get_lspci_gpu() {
                 ;;
         esac
     fi
-    printf '\033[36m%s\033[0m\n' "${_gpu_name}"
+    if [ "${_uid}" -eq 0 ]
+    then
+        # print gpu in color on welcome screen
+        printf '\033[36m%s\033[0m\n' "${_gpu_name}"
+    else
+        printf '%s\n' "${_gpu_name}"
+    fi
 }
 
 _get_nvidia_gpu() {
@@ -27,7 +35,13 @@ _get_nvidia_gpu() {
     then
         if _nvidia_out="$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null)"
         then
-            printf '\033[31m%s\033[0m\n' "${_nvidia_out}"
+            if [ "${_uid}" -eq 0 ]
+            then
+                # print gpu in color on welcome screen
+                printf '\033[31m%s\033[0m\n' "${_nvidia_out}"
+            else
+                printf '%s\n' "${_nvidia_out}"
+            fi
         else
             return 1
         fi
