@@ -85,12 +85,9 @@ _mem_used_gb="$(printf '%s %s' "${_mem_total_kb}" "${_mem_available_kb}" | awk '
 _mem_total_gb="$(printf '%s' "${_mem_total_kb}" | awk '{ print $1 / 1048576 }')"
 
 _system_model=''
-if [ -r '/sys/class/dmi/id/product_version' ] && grep -q ' ' '/sys/class/dmi/id/product_version' 2>/dev/null
+if [ -r '/sys/class/dmi/id/product_version' ]
 then
     _system_model="$(cat '/sys/class/dmi/id/product_version')"
-elif [ -r '/sys/class/dmi/id/product_name' ]
-then
-    _system_model="$(cat '/sys/class/dmi/id/product_name')"
 fi
 
 printf '\n'
