@@ -19,7 +19,7 @@ _get_lspci_gpu() {
                 ;;
         esac
     fi
-    printf '\033[96m%s\033[0m\n' "${_gpu_name}"
+    printf '\033[36m%s\033[0m\n' "${_gpu_name}"
 }
 
 _get_nvidia_gpu() {
@@ -27,7 +27,7 @@ _get_nvidia_gpu() {
     then
         if _nvidia_out="$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null)"
         then
-            printf '\033[91m%s\033[0m\n' "${_nvidia_out}"
+            printf '\033[31m%s\033[0m\n' "${_nvidia_out}"
         else
             return 1
         fi
