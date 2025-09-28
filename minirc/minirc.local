@@ -30,7 +30,6 @@ then
 fi
 
 # activate zram swap
-modprobe zram
 zramctl /dev/zram0 --algorithm zstd --size 8G
 mkswap -U clear /dev/zram0
 swapon --discard --priority 100 /dev/zram0
