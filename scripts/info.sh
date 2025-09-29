@@ -24,7 +24,7 @@ _get_lspci_gpu() {
     if [ "${_uid}" -eq 0 ]
     then
         # print gpu in color on welcome screen
-        printf '\033[36m%s\033[0m\n' "${_gpu_name}"
+        printf '\033[96m%s\033[0m\n' "${_gpu_name}"
     else
         printf '%s\n' "${_gpu_name}"
     fi
@@ -38,7 +38,7 @@ _get_nvidia_gpu() {
             if [ "${_uid}" -eq 0 ]
             then
                 # print gpu in color on welcome screen
-                printf '\033[31m%s\033[0m\n' "${_nvidia_out}"
+                printf '\033[91m%s\033[0m\n' "${_nvidia_out}"
             else
                 printf '%s\n' "${_nvidia_out}"
             fi
