@@ -33,7 +33,7 @@ alias suspend='doas /home/igor/arch/scripts/suspend.sh'
 
 alias rsnc='doas pacman -Rsnc'
 alias work='/home/igor/arch/scripts/work.sh'
-alias speedtest='wget https://debian.anexia.at/debian-cd/13.1.0/amd64/iso-dvd/debian-13.1.0-amd64-DVD-1.iso -O /dev/null'
+alias speedtest='wget https://debian.connesi.it/13.1.0/amd64/iso-dvd/debian-13.1.0-amd64-DVD-1.iso -O /dev/null'
 alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
