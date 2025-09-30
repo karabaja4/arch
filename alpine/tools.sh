@@ -13,7 +13,7 @@ alias c='clear'
 alias x='exit'
 alias sr='screen -r'
 alias sn='screen -S'
-alias speedtest='wget https://ftp.gwdg.de/debian-cd/13.1.0/amd64/iso-dvd/debian-13.1.0-amd64-DVD-1.iso -O /dev/null'
+alias speedtest='wget https://debian.anexia.at/debian-cd/13.1.0/amd64/iso-dvd/debian-13.1.0-amd64-DVD-1.iso -O /dev/null'
 alias myip='curl https://avacyn.radiance.hr/ip'
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'
 
