@@ -14,9 +14,9 @@ const data = {};
 
 const colors = {
   gray: '#757575',
-  red: '#FF6E40',
-  yellow: '#EEFF41',
-  green: '#69F0AE'
+  red: '#FF4141',
+  yellow: '#FFFF41',
+  green: '#41FFAD'
 };
 
 const fonts = {
