@@ -47,9 +47,9 @@ then
     # color the line that matched
     if [ -n "${_current_index}" ]
     then
-        _color_red="$(printf '\033[94m')"
+        _color_blue="$(printf '\033[94m')"
         _color_reset="$(printf '\033[0m')"
-        printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_red}/;${_current_index}s/\$/${_color_reset}/"
+        printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_blue}/;${_current_index}s/\$/${_color_reset}/"
     else
         printf '%s\n' "${_choices}"
     fi
@@ -71,7 +71,7 @@ then
     done
 else
     _auto_choice="$(printf '%s\n' "${_choices}" | grep -i -F "${1}")"
-    _match_count="$(printf '%s\n' "${_auto_choice}" | grep -c -v '^\s*$')"
+    _match_count="$(printf '%s\n' "${_auto_choice}" | grep -c -v '^[[:space:]]*$')"
     if [ "${_match_count}" -ne 1 ]
     then
         printf 'Found %s matches for "%s"\n' "${_match_count}" "${1}"

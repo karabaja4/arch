@@ -122,6 +122,12 @@
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
     </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <!-- Logitech MX Keys S: Loop sound devices -->
+      <action name="Execute">
+        <command>/home/igor/arch/scripts/sloop.sh</command>
+      </action>
+    </keybind>
     <keybind key="W-F">
       <!-- OLED screensaver -->
       <action name="Execute">

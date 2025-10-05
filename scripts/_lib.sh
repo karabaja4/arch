@@ -51,6 +51,10 @@ _nelc() {
     fi
 }
 
+_nel() {
+    grep -v '^[[:space:]]*$'
+}
+
 _info() {
     _color_echo 94 "${@}"
 }
