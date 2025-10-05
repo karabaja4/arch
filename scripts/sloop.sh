@@ -34,7 +34,7 @@ _color_blue="$(printf '\033\[94m')"
 _color_reset="$(printf '\033\[0m')"
 
 _selected_and_next="$(_echo "${_selections}" | grep -A1 "^${_color_blue}.*${_color_reset}$")"
-_lc="$(_echo "${_selected_and_next}" | _nelc)"
+_lc="$(_nelc "${_selected_and_next}")"
 
 if [ "${_lc}" -eq 2 ]
 then
