@@ -112,10 +112,6 @@
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
     </keybind>
-    <keybind key="XF86Calculator">
-      <!-- Logitech MX Keys S: Calculator button minimize all -->
-      <action name="ToggleShowDesktop" />
-    </keybind>
     <keybind key="Menu">
       <!-- Logitech MX Keys S: Screenshot with Menu -->
       <action name="Execute">
@@ -133,6 +129,10 @@
       <action name="Execute">
         <command>/home/igor/arch/scripts/oled.sh</command>
       </action>
+    </keybind>
+    <keybind key="XF86Calculator">
+      <!-- Logitech MX Keys S: Calculator button minimize all -->
+      <action name="ToggleShowDesktop" />
     </keybind>
     <keybind key="W-S-M">
       <!-- Minimize all with Win+Shift+M -->
