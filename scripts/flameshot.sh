@@ -15,7 +15,7 @@ then
     _type='image/png'
 
     # virtualbox only supports bmp
-    if printf '%s\n' "${_wmout}" | grep -q '\[Running\] - Oracle VirtualBox'
+    if printf '%s\n' "${_wmout}" | grep -q 'ws2008r2-v2 \[Running\] - Oracle VirtualBox'
     then
         printf 'Converting %s to bmp\n' "${_path}"
         magick "${_path}" "bmp:${_path}"
