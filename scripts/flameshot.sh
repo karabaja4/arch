@@ -15,12 +15,12 @@ then
     _type='image/png'
 
     # virtualbox only supports bmp
-    case "${_wmout}" in
-    *'[Running] - Oracle VirtualBox'*)
+    if printf '%s\n' "${_wmout}" | grep -q '\[Running\] - Oracle VirtualBox'
+    then
+        printf 'Converting %s to bmp\n' "${_path}"
         magick "${_path}" "bmp:${_path}"
         _type='image/bmp'
-        ;;
-    esac
+    fi
 
     xclip -in -selection clipboard -t "${_type}" "${_path}"
 fi
