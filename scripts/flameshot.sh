@@ -15,12 +15,14 @@ then
     _type='image/png'
 
     # virtualbox only supports bmp
-    if printf '%s\n' "${_wmout}" | grep -q 'ws2008r2-v2 \[Running\] - Oracle VirtualBox'
-    then
-        printf 'Converting %s to bmp\n' "${_path}"
-        magick "${_path}" "bmp:${_path}"
-        _type='image/bmp'
-    fi
+    case "${_wmout}" in
+        *'FreeRDP:'* | \
+        *'ws2008r2-v2 [Running] - Oracle VirtualBox'*)
+            printf 'Converting %s to bmp\n' "${_path}"
+            magick "${_path}" "bmp:${_path}"
+            _type='image/bmp'
+            ;;
+    esac
 
     xclip -in -selection clipboard -t "${_type}" "${_path}"
 fi
