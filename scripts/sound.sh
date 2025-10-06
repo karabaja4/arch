@@ -44,12 +44,10 @@ _choices="$(printf '%s\n' "${_aplay}" | awk -F'[][]' '{print $2 " - " $4}' | nl 
 if [ "${1}" = "l" ] || [ "${1}" = "-l" ] || [ -z "${1}" ]
 then
     # print the numbered list only in list mode or select mode
-    # color the line that matched
+    # mark the line that matched
     if [ -n "${_current_index}" ]
     then
-        _color_blue="$(printf '\033[94m')"
-        _color_reset="$(printf '\033[0m')"
-        printf '%s\n' "${_choices}" | sed "${_current_index}s/^/${_color_blue}/;${_current_index}s/\$/${_color_reset}/"
+        printf '%s\n' "${_choices}" | sed "${_current_index}s/^/*/"
     else
         printf '%s\n' "${_choices}"
     fi

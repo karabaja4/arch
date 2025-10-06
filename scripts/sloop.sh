@@ -30,22 +30,18 @@ then
     exit 1
 fi
 
-_color_blue="$(printf '\033\[94m')"
-_color_reset="$(printf '\033\[0m')"
-
-_selected_and_next="$(_echo "${_selections}" | grep -A1 "^${_color_blue}.*${_color_reset}$")"
+_selected_and_next="$(_echo "${_selections}" | grep -A1 '^\*')"
 _lc="$(_nelc "${_selected_and_next}")"
 
 if [ "${_lc}" -eq 2 ]
 then
-    # selected is non-last line, select the one after the blue line
-    # is not blue, so no need to remove color
+    # selected is non-last line, select the one after the line with the asterisk
     _to_select="$(_echo "${_selected_and_next}" | tail -n1)"
 else
     # selected is last (or only), _lc = 1
-    # nothing is selected, _lc = 0
-    # take the first line, remove color
-    _to_select="$(_echo "${_selections}" | head -n1 | sed "s/${_color_blue}//g; s/${_color_reset}//g")"
+    # or nothing is selected, _lc = 0
+    # take the first line, remove asterisk (in case of only one option that's selected)
+    _to_select="$(_echo "${_selections}" | head -n1 | sed 's/^\*//')"
 fi
 
 _color_echo 35 "Selecting: ${_to_select}"
