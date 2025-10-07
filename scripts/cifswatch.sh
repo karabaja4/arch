@@ -3,11 +3,9 @@ _root="$(dirname "$(readlink -f "${0}")")"
 . "${_root}/_lib.sh"
 
 # CIFS is unable to re-establish connection on SMB server restart when using a custom port
-# DebugData shows DISCONNECTED:
+# Stats shows DISCONNECTED:
 
-# 1) \\radiance.hr\public
-# ...
-# ...	DISCONNECTED
+# 1) \\radiance.hr\public DISCONNECTED
 
 # use umount -c to not canonicalize paths
 # otherwise umount stalls on a non-responsive path
@@ -15,20 +13,20 @@ _root="$(dirname "$(readlink -f "${0}")")"
 
 _must_be_root
 
-_debug_data_path='/proc/fs/cifs/DebugData'
+_stats_path='/proc/fs/cifs/Stats'
 
-if [ ! -r "${_debug_data_path}" ]
+if [ ! -r "${_stats_path}" ]
 then
     # cifs not loaded
     exit 0
 fi
 
-_debug_data="$(cat "${_debug_data_path}")"
+_stats_data="$(cat "${_stats_path}")"
 _host="radiance.hr"
 
 _check_mount() {
     _remote_path="\\\\${_host}\\${1}"
-    if printf '%s\n' "${_debug_data}" | grep -F -A3 "${_remote_path}" | grep -q 'DISCONNECTED'
+    if printf '%s\n' "${_stats_data}" | grep -F "${_remote_path}" | grep -F -q 'DISCONNECTED'
     then
         _log "${_remote_path} is DISCONNECTED"
     
