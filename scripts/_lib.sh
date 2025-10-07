@@ -86,7 +86,10 @@ fi
 
 _log() {
     mkdir -p "${__log_dir}"
-    [ ! -w "${__log_dir}" ] && _fatal "${__log_dir} is not writable."
+    if [ ! -w "${__log_dir}" ]
+    then
+        _fatal "${__log_dir} is not writable."
+    fi
     __log_file="${__log_dir}/${__script_name%.*}.log"
     if [ "${#}" -eq 0 ]
     then
