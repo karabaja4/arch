@@ -16,7 +16,7 @@ _out="$("${_root}"/sound.sh l)"
 # loop through preconfigured _loop items and make a list of lines from snd that matched each item
 for _item in ${_loop}
 do
-    _result="$(_echo "${_out}" | grep -i "${_item}")"
+    _result="$(_echo "${_out}" | grep -i -F "${_item}")"
     if [ -n "${_result}" ]
     then
         _selections="$(printf '%s\n%s' "${_selections}" "${_result}")"
