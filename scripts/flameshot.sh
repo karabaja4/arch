@@ -11,18 +11,21 @@ flameshot gui -r > "${_path}"
 
 if [ -s "${_path}" ]
 then
-    _wmout="$(wmctrl -l 2>/dev/null)"
     _type='image/png'
+    if [ "${1-}" != '--no-convert' ]
+    then
+        _wmout="$(wmctrl -l 2>/dev/null)"
 
-    # virtualbox only supports bmp
-    case "${_wmout}" in
-        *'FreeRDP:'* | \
-        *'ws2008r2-v2 [Running] - Oracle VirtualBox'*)
-            printf 'Converting %s to bmp\n' "${_path}"
-            magick "${_path}" "bmp:${_path}"
-            _type='image/bmp'
-            ;;
-    esac
+        # virtualbox only supports bmp
+        case "${_wmout}" in
+            *'FreeRDP:'* | \
+            *'ws2008r2-v2 [Running] - Oracle VirtualBox'*)
+                printf 'Converting %s to bmp\n' "${_path}"
+                magick "${_path}" "bmp:${_path}"
+                _type='image/bmp'
+                ;;
+        esac
+    fi
 
     xclip -in -selection clipboard -t "${_type}" "${_path}"
 fi

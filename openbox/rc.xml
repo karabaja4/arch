@@ -118,6 +118,18 @@
         <command>/home/igor/arch/scripts/flameshot.sh</command>
       </action>
     </keybind>
+    <keybind key="A-Print">
+      <!-- Legion 7: Screenshot with top right PrtSc (no convert) -->
+      <action name="Execute">
+        <command>/home/igor/arch/scripts/flameshot.sh --no-convert</command>
+      </action>
+    </keybind>
+    <keybind key="A-Menu">
+      <!-- Logitech MX Keys S: Screenshot with Menu (no convert) -->
+      <action name="Execute">
+        <command>/home/igor/arch/scripts/flameshot.sh --no-convert</command>
+      </action>
+    </keybind>
     <keybind key="W-S-XF86Assistant">
       <!-- Legion 7: Loop sound devices -->
       <action name="Execute">
@@ -130,7 +142,7 @@
         <command>/home/igor/arch/scripts/sloop.sh</command>
       </action>
     </keybind>
-    <keybind key="W-F">
+    <keybind key="W-Q">
       <!-- OLED screensaver -->
       <action name="Execute">
         <command>/home/igor/arch/scripts/oled.sh</command>
