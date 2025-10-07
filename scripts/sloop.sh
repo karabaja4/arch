@@ -48,4 +48,4 @@ _color_echo 35 "Selecting: ${_to_select}"
 "${_root}"/sound.sh "${_to_select}"
 
 # send notification
-_herbe "Audio device: ${_to_select#*) }"
+_herbe "Selected audio device: ${_to_select#*) }"
