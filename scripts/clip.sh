@@ -32,6 +32,10 @@ _add_to_history() {
     _log "Added to history ${_history}"
 }
 
+_random_digits() {
+    cat /dev/urandom | LC_ALL=C tr -dc '0-9' | fold -w "${1}" | head -n 1
+}
+
 _iteration() {
 
     # target test of current selection
@@ -72,7 +76,7 @@ _iteration() {
             case "${_match}" in
                 image/*)
                     mkdir -p "${_image_dir}"
-                    _image_path="${_image_dir}/$(date +%s).${_match#*/}"
+                    _image_path="${_image_dir}/$(date +%s)$(_random_digits 4).${_match#*/}"
                     cp "${_out}" "${_image_path}"
                     _log "Saved image to ${_image_path}"
                     _add_to_history "${_match}: ${_image_path}"
