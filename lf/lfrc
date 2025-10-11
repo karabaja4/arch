@@ -98,7 +98,7 @@ cmd code &{{
 cmd thumb &{{
     set -f
     case "${f}" in
-        *.bmp|*.png|*.jpg|*.jpeg|*.gif) convert "${f}" -resize 15% "${f%%.*}-thumb.${f#*.}";;
+        *.bmp|*.png|*.jpg|*.jpeg|*.gif) convert "${f}" -resize 10% "${f%%.*}-thumb.${f#*.}";;
     esac
 }}
 

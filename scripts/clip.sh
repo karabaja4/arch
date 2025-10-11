@@ -13,6 +13,7 @@ _utf8="UTF8_STRING"
 
 _out="/tmp/xclip.out"
 _history="/tmp/xclip.history"
+_image_dir="/tmp/xclip.images"
 _script="$(basename "${0}")"
 
 _log() {
@@ -25,6 +26,11 @@ _usage() {
 }
 
 [ "${#}" -gt 0 ] && _usage
+
+_add_to_history() {
+    printf '%s\n%s\n' '-----' "${1}" >> "${_history}"
+    _log "Added to history ${_history}"
+}
 
 _iteration() {
 
@@ -47,7 +53,7 @@ _iteration() {
         _log "Default targets: ${_utf8}"
 
         # join both lists together, and print first item of targets occuring in _pref
-        _match="$(printf '%s\n%s\n%s\n' "${_tc}" "${_pref}" "${_utf8}" | grep -v '^\s*$' | awk 'a[$0]++' | head -n1)"
+        _match="$(printf '%s\n%s\n%s\n' "${_tc}" "${_pref}" "${_utf8}" | grep -v '^[[:space:]]*$' | awk 'a[$0]++' | head -n1)"
 
         if [ -n "${_match}" ]
         then
@@ -59,9 +65,19 @@ _iteration() {
 
             if [ "${_match}" = "${_utf8}" ]
             then
-                printf '%s\n' "$(cat "${_out}")" >> "${_history}"
-                _log "Added to history ${_history}"
+                _add_to_history "$(cat "${_out}")"
             fi
+            
+            # save images to folder
+            case "${_match}" in
+                image/*)
+                    mkdir -p "${_image_dir}"
+                    _image_path="${_image_dir}/$(date +%s).${_match#*/}"
+                    cp "${_out}" "${_image_path}"
+                    _log "Saved image to ${_image_path}"
+                    _add_to_history "${_match}: ${_image_path}"
+                    ;;
+            esac
 
             # read temp file, take ownership of clipboard and wait for pastes
             # after something else is copied, xclip loses ownership and exits, and another iteration begins
