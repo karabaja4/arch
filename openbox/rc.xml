@@ -88,6 +88,9 @@
         </finalactions>
       </action>
     </keybind>
+    <keybind key="A-space">
+      <action name="ShowMenu"><menu>client-menu</menu></action>
+    </keybind>
     <keybind key="W-T">
       <action name="Execute">
         <command>/home/igor/arch/tint2/menu.sh terminal</command>
