@@ -11,9 +11,16 @@ code/file-list
 "
 _utf8="UTF8_STRING"
 
-_out="/tmp/xclip.out"
-_history="/tmp/xclip.history"
-_image_dir="/tmp/xclip.images"
+_root_dir="/tmp/clipsh"
+_image_dir="${_root_dir}/images"
+
+# create root and image dirs
+mkdir -p "${_image_dir}"
+
+# files
+_out="${_root_dir}/out"
+_history="${_root_dir}/history"
+
 _script="$(basename "${0}")"
 
 _log() {
@@ -75,7 +82,6 @@ _iteration() {
             # save images to folder
             case "${_match}" in
                 image/*)
-                    mkdir -p "${_image_dir}"
                     _image_path="${_image_dir}/$(date +%s)$(_random_digits 4).${_match#*/}"
                     cp "${_out}" "${_image_path}"
                     _log "Saved image to ${_image_path}"
