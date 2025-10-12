@@ -1,4 +1,7 @@
 # unbind reload_image and bind r to rotate clockwise
 
 reload_image
+toggle_caption
+
 orient_1 r
+action_1 c
