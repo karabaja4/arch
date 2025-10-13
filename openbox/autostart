@@ -4,6 +4,9 @@
 xset -display :1 s 0 0
 xset -display :1 dpms 0 0 0
 
+# load nvidia settings
+nvidia-settings --load-config-only
+
 # alsa
 sleep 5 && "${HOME}/arch/scripts/sound.sh" pg > /dev/null 2>&1 &
 
