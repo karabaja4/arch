@@ -20,6 +20,9 @@ terminal)
 chromium)
     _run chromium
     ;;
+firefox)
+    _run firefox-socket
+    ;;
 qtextpad)
     _run qtextpad
     ;;
