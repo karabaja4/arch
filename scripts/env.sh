@@ -10,7 +10,7 @@ export DOTNET_GENERATE_ASPNET_CERTIFICATE=false
 export LESSHISTFILE=/dev/null
 export BROWSER='chromium'
 export HISTFILESIZE=2000
-export GIT_PS1_SHOWCONFLICTSTATE="no"
+export GIT_PS1_SHOWCONFLICTSTATE='no'
 
 # default scaling
 # QT (1.75*96)
@@ -29,3 +29,12 @@ export XDG_RUNTIME_DIR="${_xdg_runtime_dir}"
 # path
 export PATH="${PATH}:${HOME}/.dotnet/tools"
 export JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION=1
+
+# $HOME/.config/glib-2.0/settings/keyfile
+# filepicker settings
+export GSETTINGS_BACKEND='keyfile'
+export ALSOFT_DRIVERS='alsa'
+
+# firefox vaapi
+export MOZ_DISABLE_RDD_SANDBOX=1
+export LIBVA_DRIVER_NAME='nvidia'
