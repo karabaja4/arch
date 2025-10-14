@@ -21,7 +21,6 @@ chromium)
     _run chromium
     ;;
 firefox)
-    _load_apulse
     _run firefox-socket
     ;;
 qtextpad)
