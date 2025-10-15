@@ -35,6 +35,7 @@ export JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION=1
 export GSETTINGS_BACKEND='keyfile'
 export ALSOFT_DRIVERS='alsa'
 
-# firefox vaapi
+# firefox
 export MOZ_DISABLE_RDD_SANDBOX=1
 export LIBVA_DRIVER_NAME='nvidia'
+export MOZ_CRASHREPORTER_DISABLE=1
