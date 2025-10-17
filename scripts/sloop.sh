@@ -5,7 +5,8 @@ _root="$(dirname "$(readlink -f "${0}")")"
 _loop="
 pg
 logi
-w3
+ugreen
+bt-w3
 "
 
 _selections=''
