@@ -3,10 +3,10 @@ _root="$(dirname "$(readlink -f "${0}")")"
 . "${_root}/_lib.sh"
 
 _loop="
-pg
-logi
-ugreen
-bt-w3
+PG32UCDM
+Logitech
+UGREEN-BT501
+BT-W3
 "
 
 _selections=''
