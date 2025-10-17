@@ -5,7 +5,7 @@ _root="$(dirname "$(readlink -f "${0}")")"
 _loop="
 PG32UCDM
 Logitech
-UGREEN-BT501
+BT501
 BT-W3
 "
 
