@@ -52,7 +52,12 @@ _nelc() {
 }
 
 _nel() {
-    grep -v '^[[:space:]]*$'
+    if [ "${#}" -eq 0 ]
+    then
+        grep -v '^[[:space:]]*$'
+    else
+        _echo "${@}" | grep -v '^[[:space:]]*$'
+    fi
 }
 
 _info() {

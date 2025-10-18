@@ -11,7 +11,7 @@ BT-W3
 
 _selections=''
 
-_loop="$(_echo "${_loop}" | _nel)"
+_loop="$(_nel "${_loop}")"
 _out="$("${_root}"/sound.sh l)"
 
 # loop through preconfigured _loop items and make a list of lines from snd that matched each item
@@ -23,7 +23,7 @@ do
         _selections="$(printf '%s\n%s' "${_selections}" "${_result}")"
     fi
 done
-_selections="$(_echo "${_selections}" | _nel)"
+_selections="$(_nel "${_selections}")"
 
 if [ -z "${_selections}" ]
 then
