@@ -257,6 +257,9 @@ user_pref("browser.newtabpage.activity-stream.showSearch", false);
 // no sync and save data button
 user_pref("identity.fxaccounts.enabled", false);
 
+// no tabs hover
+user_pref("browser.tabs.hoverPreview.enabled", false);
+
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
 ****************************************************************************/
