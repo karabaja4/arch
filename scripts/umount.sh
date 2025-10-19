@@ -20,7 +20,7 @@ _umount_cifs() {
 }
 
 _umount_home() {
-    _home_devices="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/sd" && $2 ~ "^/home" { print $1 }')"
+    _home_devices="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/" && $2 ~ "^/home/" { print $1 }')"
     for _device in ${_home_devices}
     do
         umount -c -v "${_device}" || _failed
@@ -28,7 +28,7 @@ _umount_home() {
 }
 
 _umount_mnt() {
-    _mnt_lines="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/sd" && $2 ~ "^/mnt" { print $1 "|" $2 }')"
+    _mnt_lines="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/" && $2 ~ "^/mnt/" { print $1 "|" $2 }')"
     for _line in ${_mnt_lines}
     do
         _mnt_device="${_line%%|*}"
