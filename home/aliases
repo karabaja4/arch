@@ -45,11 +45,11 @@ alias mountsmb='doas /home/igor/arch/scripts/mount.sh private public disk'
 alias mountmmc='doas /home/igor/arch/scripts/mount.sh mmc'
 
 usb() {
-    doas '/home/igor/arch/scripts/umount.sh' /mnt/*
+    doas /home/igor/arch/scripts/umount.sh mnt
 }
 
 umountall() {
-    doas '/home/igor/arch/scripts/umount.sh' /mnt/* /home/igor/_*
+    doas /home/igor/arch/scripts/umount.sh
 }
 
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'

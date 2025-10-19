@@ -10,7 +10,7 @@ then
     _fatal "Cannot find user's home directory."
 fi
 
-if ! "${_root}/umount.sh" /mnt/* "${_home}"/_*
+if ! "${_root}/umount.sh"
 then
     _fatal "Failed to ${_arg1}"
 fi

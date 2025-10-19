@@ -1,53 +1,66 @@
 #!/bin/sh
+# shellcheck disable=SC2329
 . "$(dirname "$(readlink -f "${0}")")/_lib.sh"
 
 _must_be_root
 
-_has_failures=0
-
+_failures=0
 _failed() {
-    _has_failures=1
+   _failures=$((_failures + 1))
 }
 
-for _f in "${@}"
-do
-    # process only dirs
-    if [ -d "${_f}" ]
-    then
-        case "${_f}" in
-        /mnt/*)
-            # any dir under /mnt must be mounted
-            # and then attempted to be unmounted and deleted
-            # show notification for those kind of dirs
-            if umount -c -v "${_f}"
+_mounts="$(cat /proc/mounts)"
+
+_umount_cifs() {
+    _cifs="$(_echo "${_mounts}" | awk '$3 == "cifs" { print $1 }')"
+    for _share in ${_cifs}
+    do
+        umount -c -v "${_share}" || _failed
+    done
+}
+
+_umount_home() {
+    _home_devices="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/sd" && $2 ~ "^/home" { print $1 }')"
+    for _device in ${_home_devices}
+    do
+        umount -c -v "${_device}" || _failed
+    done
+}
+
+_umount_mnt() {
+    _mnt_lines="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/sd" && $2 ~ "^/mnt" { print $1 "|" $2 }')"
+    for _line in ${_mnt_lines}
+    do
+        _mnt_device="${_line%%|*}"
+        _mnt_mountpoint="${_line#*|}"
+        if umount -c -v "${_mnt_device}"
+        then
+            if rmdir -v "${_mnt_mountpoint}"
             then
-                if rmdir -v "${_f}"
-                then
-                    _herbe "Unmounted ${_f}"
-                else
-                    _failed
-                fi
+                _herbe "Unmounted ${_mnt_mountpoint} (${_mnt_device})"
             else
                 _failed
             fi
-            ;;
-        *)
-            # dirs NOT under /mnt just need to be unmounted if they're mounted
-            if mountpoint -q "${_f}"
-            then
-                if ! umount -c -v "${_f}"
-                then
-                    _failed
-                fi
-            fi
-            ;;
-        esac
-    fi
-done
+        else
+            _failed
+        fi
+    done
+}
 
-if [ "${_has_failures}" -ne 0 ]
+if [ "${#}" -eq 0 ]
 then
-    _echo "Failed to cleanly unmount devices."
+    set -- cifs home mnt
 fi
 
-exit "${_has_failures}"
+for _param in "${@}"
+do
+    _umount_"${_param}"
+done
+
+if [ "${_failures}" -gt 0 ]
+then
+    _echo "Failed to cleanly unmount ${_failures} devices."
+    exit 1
+fi
+
+exit 0
