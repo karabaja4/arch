@@ -5,6 +5,10 @@ _must_be_root
 
 _has_failures=0
 
+_failed() {
+    _has_failures=1
+}
+
 for _f in "${@}"
 do
     # process only dirs
@@ -21,10 +25,10 @@ do
                 then
                     _herbe "Unmounted ${_f}"
                 else
-                    _has_failures=1
+                    _failed
                 fi
             else
-                _has_failures=1
+                _failed
             fi
             ;;
         *)
@@ -33,7 +37,7 @@ do
             then
                 if ! umount -c -v "${_f}"
                 then
-                    _has_failures=1
+                    _failed
                 fi
             fi
             ;;
