@@ -28,11 +28,11 @@ _umount_home() {
 }
 
 _umount_mnt() {
-    _mnt_lines="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/" && $2 ~ "^/mnt/" { print $1 "|" $2 }')"
+    _mnt_lines="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/" && $2 ~ "^/mnt/"')"
     for _line in ${_mnt_lines}
     do
-        _mnt_device="${_line%%|*}"
-        _mnt_mountpoint="${_line#*|}"
+        _mnt_device="$(_echo "${_line}" | awk '{print $1}')"
+        _mnt_mountpoint="$(_echo "${_line}" | awk '{print $2}')"
         if umount -c -v "${_mnt_device}"
         then
             if rmdir -v "${_mnt_mountpoint}"
