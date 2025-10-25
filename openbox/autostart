@@ -8,13 +8,12 @@ xset -display :1 dpms 0 0 0
 nvidia-settings --load-config-only
 
 # alsa
-sleep 5 && "${HOME}/arch/scripts/sound.sh" pg > /dev/null 2>&1 &
+sleep 5 && "${HOME}/arch/scripts/sound.sh" PG32UCDM > /dev/null 2>&1 &
 
 # daemons
 xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
 
 # resolution and background
-#sleep 2
 "${HOME}/arch/scripts/fixres.sh"
 
 # tray
