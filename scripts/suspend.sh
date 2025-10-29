@@ -1,6 +1,14 @@
 #!/bin/sh
 set -eu
 
+_lock="/tmp/suspend.lock"
+
+if [ -f "${_lock}" ]
+then
+    printf '%s\n' "Lock file exists."
+    exit 1
+fi
+
 sync
 
 _toggle_wakeup() {
@@ -26,3 +34,5 @@ _nvidia "resume"
 
 _toggle_wakeup "XHCI"
 _toggle_wakeup "TXHC"
+
+rm "${_lock}"
