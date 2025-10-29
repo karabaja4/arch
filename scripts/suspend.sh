@@ -7,6 +7,8 @@ if [ -f "${_lock}" ]
 then
     printf '%s\n' "Lock file exists."
     exit 1
+else
+    touch "${_lock}"
 fi
 
 sync
