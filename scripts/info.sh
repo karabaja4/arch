@@ -78,6 +78,10 @@ _get_uptime() {
     uptime -p | cut -c 4-
 }
 
+_get_kernel_params() {
+    sed 's/^[^ ]* //' /proc/cmdline
+}
+
 _mem_total_kb="$(grep "^MemTotal:" /proc/meminfo | awk '{ print $2 }')"
 _mem_available_kb="$(grep "^MemAvailable:" /proc/meminfo | awk '{ print $2 }')"
 
@@ -95,7 +99,8 @@ if [ -n "${_system_model}" ]
 then
     printf '  %s\n' "${_system_model}"
 fi
-printf '  %s @ %s\n\n' "$(_get_distro)" "$(_get_kernel)"
+printf '  %s @ %s\n' "$(_get_distro)" "$(_get_kernel)"
+printf '  %s\n\n' "$(_get_kernel_params)"
 printf '  * CPU:      %s\n' "$(_get_cpu)"
 printf '  * GPU:      %s\n' "$(_get_nvidia_gpu || _get_lspci_gpu)"
 printf '  * Memory:   %.2f GB / %.2f GB\n' "${_mem_used_gb}" "${_mem_total_gb}"
