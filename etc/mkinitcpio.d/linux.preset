@@ -1,0 +1,9 @@
+ALL_kver="/boot/vmlinuz-linux"
+
+PRESETS=('nvidia' 'intel')
+
+nvidia_uki="/boot/EFI/Linux/10-arch-linux-nvidia.efi"
+nvidia_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp --cmdline /etc/kernel/nvidia"
+
+intel_uki="/boot/EFI/Linux/20-arch-linux-intel.efi"
+intel_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp --cmdline /etc/kernel/intel"

@@ -1,0 +1,1 @@
+root=PARTUUID=68faa264-8fa3-4410-a714-f460a9f91a2a zswap.enabled=0 rw rootfstype=ext4 modprobe.blacklist=i915
