@@ -37,10 +37,12 @@ export ALSOFT_DRIVERS='alsa'
 
 # firefox
 export MOZ_DISABLE_RDD_SANDBOX=1
+export MOZ_CRASHREPORTER_DISABLE=1
+
+# VDPAU
 if nvidia-smi --query-gpu=gpu_name --format=csv,noheader > /dev/null 2>&1
 then
     export LIBVA_DRIVER_NAME='nvidia'
 else
     export LIBVA_DRIVER_NAME='iHD'
 fi
-export MOZ_CRASHREPORTER_DISABLE=1
