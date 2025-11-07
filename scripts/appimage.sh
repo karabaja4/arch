@@ -12,7 +12,7 @@ doas modprobe fuse
 case "$(basename "${0}")" in
 krita)
     export QT_ENABLE_HIGHDPI_SCALING=0
-    exec "/opt/appimage/krita-5.2.11-x86_64.AppImage" "${@}"
+    exec "/opt/appimage/krita-5.2.13-x86_64.AppImage" "${@}"
     ;;
 inkscape)
     exec "/opt/appimage/Inkscape-091e20e-x86_64.AppImage" "${@}"
