@@ -120,5 +120,4 @@ fi
 
 # play embedded sound
 _root="$(dirname "$(readlink -f "${0}")")"
-sleep 0.2
-aplay "${_root}/../misc/notify.wav" &
+sleep 0.5 && aplay "${_root}/../misc/notify.wav" > /dev/null 2>&1 &
