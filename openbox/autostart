@@ -8,25 +8,7 @@ xset -display :1 dpms 0 0 0
 nvidia-settings --load-config-only
 
 # alsa
-# aplay sometimes doesn't exit when run from openbox autostart
-# goes into a loop state and uses 100% of a CPU core
-# I have no idea why
-(
-    sleep 5
-    "${HOME}/arch/scripts/sound.sh" PG32UCDM > /dev/null 2>&1
-    sleep 5
-    _pids="$(pgrep -x aplay)"
-    if [ -n "${_pids}" ]
-    then
-        _logdir="${HOME}/.local/share/logs"
-        mkdir -p "${_logdir}"
-        for _pid in ${_pids}
-        do
-            kill -9 "${_pid}"
-            printf '[%s] Killed aplay PID: %s\n' "$(date -Is)" "${_pid}" >> "${_logdir}/aplay.log"
-        done
-    fi
-) &
+sleep 6 && "${HOME}/arch/scripts/sound.sh" PG32UCDM > /dev/null 2>&1 &
 
 # daemons
 xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
