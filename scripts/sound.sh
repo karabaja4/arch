@@ -120,4 +120,7 @@ fi
 
 # play embedded sound
 _root="$(dirname "$(readlink -f "${0}")")"
-aplay "${_root}/../misc/notify.wav" > /dev/null 2>&1 &
+
+# sometimes aplay goes into loop on a single cpu core
+# guard it with timeout
+( timeout -s SIGKILL 1.5s aplay "${_root}/../misc/notify.wav" & ) > /dev/null 2>&1
