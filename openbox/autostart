@@ -8,7 +8,17 @@ xset -display :1 dpms 0 0 0
 nvidia-settings --load-config-only
 
 # alsa
-sleep 5 && "${HOME}/arch/scripts/sound.sh" PG32UCDM > /dev/null 2>&1 &
+(
+    sleep 5
+    "${HOME}/arch/scripts/sound.sh" PG32UCDM > /dev/null 2>&1
+    sleep 5
+    
+    # aplay sometimes doesn't exit when run from openbox autostart, I have no idea why
+    if pgrep -x aplay >/dev/null 2>&1
+    then
+        pkill -9 -x aplay
+    fi
+) &
 
 # daemons
 xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
