@@ -45,7 +45,7 @@ else
 fi
 
 _color_echo 35 "Selecting: ${_to_select}"
-"${_root}"/sound.sh "${_to_select}"
+"${_root}"/sound.sh "${_to_select}" 70
 
 # send notification
 _herbe "Selected audio device: ${_to_select#*) }"
