@@ -102,12 +102,14 @@ _get_pvolume_controls() {
         }'
 }
 
+_volume_level="${2:-100}"
+
 # unmute and max all channels that support pvolume
 for _channel in $(_get_pvolume_controls)
 do
-    printf 'Unmuting %s to 100%%\n' "${_channel}"
+    printf 'Unmuting %s to %s%%\n' "${_channel}" "${_volume_level}"
     amixer set "${_channel}" unmute > /dev/null 2>&1
-    amixer set "${_channel}" 100% > /dev/null 2>&1
+    amixer set "${_channel}" "${_volume_level}%" > /dev/null 2>&1
 done
 
 # unmute S/PDIF 0 if present
