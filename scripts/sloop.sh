@@ -3,10 +3,18 @@ _root="$(dirname "$(readlink -f "${0}")")"
 . "${_root}/_lib.sh"
 
 _loop="
-PG32UCDM
-EarPods
-BT-W3
+PG32UCDM 100
+EarPods 80
+BT-W3 100
 "
+
+_before_space() {
+    printf '%s\n' "${1}" | sed 's/ [^ ]*$//'
+}
+
+_after_space() {
+   printf '%s\n' "${1}" | sed 's/.* //'
+}
 
 _selections=''
 
@@ -16,10 +24,12 @@ _out="$("${_root}"/sound.sh l)"
 # loop through preconfigured _loop items and make a list of lines from snd that matched each item
 for _item in ${_loop}
 do
-    _result="$(_echo "${_out}" | grep -i -F "${_item}")"
+    _name=$(_before_space "${_item}")
+    _result="$(_echo "${_out}" | grep -i -F "${_name}")"
     if [ -n "${_result}" ]
     then
-        _selections="$(printf '%s\n%s' "${_selections}" "${_result}")"
+        _volume=$(_after_space "${_item}")
+        _selections="$(printf '%s\n%s %s' "${_selections}" "${_result}" "${_volume}")"
     fi
 done
 _selections="$(_nel "${_selections}")"
@@ -44,8 +54,11 @@ else
     _to_select="$(_echo "${_selections}" | head -n1 | sed 's/^\*//')"
 fi
 
-_color_echo 35 "Selecting: ${_to_select}"
-"${_root}"/sound.sh "${_to_select}" 80
+_to_select_name="$(_before_space "${_to_select}")"
+_to_select_volume="$(_after_space "${_to_select}")"
+
+_color_echo 35 "Selecting: ${_to_select_name} (volume: ${_to_select_volume}%)"
+"${_root}"/sound.sh "${_to_select_name}" "${_to_select_volume}"
 
 # send notification
-_herbe "Selected audio device: ${_to_select#*) }"
+_herbe "Selected audio device: ${_to_select_name#*) } (volume: ${_to_select_volume}%)"
