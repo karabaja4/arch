@@ -4,7 +4,7 @@ _root="$(dirname "$(readlink -f "${0}")")"
 
 _loop="
 PG32UCDM 100
-EarPods 80
+EarPods 85
 BT-W3 100
 "
 
