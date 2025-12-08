@@ -9,11 +9,11 @@ BT-W3 100
 "
 
 _before_space() {
-    printf '%s\n' "${1}" | sed 's/ [^ ]*$//'
+    _echo "${1}" | sed 's/ [^ ]*$//'
 }
 
 _after_space() {
-   printf '%s\n' "${1}" | sed 's/.* //'
+    _echo "${1}" | sed 's/.* //'
 }
 
 _selections=''
