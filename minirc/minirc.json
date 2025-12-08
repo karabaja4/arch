@@ -15,6 +15,6 @@
         "name": "crond",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/crond -f -d8"
+        "command": "/usr/sbin/crond -f"
     }
 ]
