@@ -40,7 +40,7 @@ strut_policy = follow_size
 #---------------------------------------------
 taskbar_mode = single_desktop
 taskbar_padding = 0 0 0
-taskbar_background_id = 0
+taskbar_background_id = 1
 
 #---------------------------------------------
 # TASK
@@ -73,7 +73,7 @@ task_active_background_id = 3
 #---------------------------------------------
 systray = 1
 systray_padding = 5 0 10
-systray_background_id = 0
+systray_background_id = 1
 systray_sort = left2right
 systray_icon_size = 24
 systray_monitor = 2
