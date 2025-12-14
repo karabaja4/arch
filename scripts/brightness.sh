@@ -30,6 +30,11 @@ else
     _exit "No supported backlight found."
 fi
 
+if [ ! -w "${_path}/brightness" ] || [ ! -r "${_path}/max_brightness" ]
+then
+    _exit "No supported backlight controls found."
+fi
+
 _current="$(cat "${_path}/brightness")"
 _max="$(cat "${_path}/max_brightness")"
 
