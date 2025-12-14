@@ -53,7 +53,10 @@ _step="$(( _max / _num_steps ))"
 _next="$(( _current + (_step * _direction) ))"
 
 # don't allow next to go 0 (black screen) or below
-[ "${_next}" -le 0 ] && exit 0
+if [ "${_next}" -le 0 ]
+then
+    _exit "Brightness too low."
+fi
 
 # don't allow to go over max
 [ "${_next}" -gt "${_max}" ] && _next="${_max}"
