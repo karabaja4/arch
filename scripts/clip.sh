@@ -11,7 +11,7 @@ code/file-list
 "
 _utf8="UTF8_STRING"
 
-_root_dir="/tmp/clipsh"
+_root_dir="/tmp/clip"
 _image_dir="${_root_dir}/images"
 
 # create root and image dirs
