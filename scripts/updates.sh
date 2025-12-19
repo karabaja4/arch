@@ -18,7 +18,7 @@ _aur() {
 
     _aur_out="$(/usr/bin/auracle outdated 2>&1)"
     _aur_rv="${?}"
-    _aur_wc=""
+    _aur_wc="E"
 
     if [ "${_aur_rv}" -eq 0 ] && [ -n "${_aur_out}" ]
     then
@@ -27,22 +27,18 @@ _aur() {
     then
         _aur_wc="0"
     else
-        _echo "auracle failed with [${_aur_rv}]:" "[${_aur_out}]"
-        return 1
+        _echo "auracle failed with [${_aur_rv}]:" "${_aur_out}"
     fi
 
-    if [ -n "${_aur_wc}" ]
-    then
-        _echo "Found ${_aur_wc} AUR updates."
-        _echo "${_aur_wc}" > "${_root}/aur"
-    fi
+    _echo "AUR updates: ${_aur_wc}"
+    _echo "${_aur_wc}" > "${_root}/aur"
 }
 
 _cu() {
 
     _cu_out="$(/usr/bin/checkupdates 2>&1)"
     _cu_rv="${?}"
-    _cu_wc=""
+    _cu_wc="E"
 
     if [ "${_cu_rv}" -eq 0 ] && [ -n "${_cu_out}" ]
     then
@@ -51,15 +47,11 @@ _cu() {
     then
         _cu_wc="0"
     else
-        _echo "checkupdates failed with [${_cu_rv}]:" "[${_cu_out}]"
-        return 1
+        _echo "checkupdates failed with [${_cu_rv}]:" "${_cu_out}"
     fi
 
-    if [ -n "${_cu_wc}" ]
-    then
-        _echo "Found ${_cu_wc} pacman updates."
-        _echo "${_cu_wc}" > "${_root}/pacman"
-    fi
+    _echo "pacman updates: ${_cu_wc}"
+    _echo "${_cu_wc}" > "${_root}/pacman"
 }
 
 _aur
