@@ -98,6 +98,11 @@
     </keybind>
     <keybind key="W-L">
       <action name="Execute">
+        <command>slock</command>
+      </action>
+    </keybind>
+    <keybind key="W-U">
+      <action name="Execute">
         <command>doas /home/igor/arch/scripts/suspend.sh</command>
       </action>
     </keybind>
