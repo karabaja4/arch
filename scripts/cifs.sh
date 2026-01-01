@@ -51,6 +51,7 @@ _check_mount() {
             then
             
                 #mount
+                sleep 3
                 _mount_out="$("${_root}/mount.sh" "${1}" 2>&1)"
                 _mount_ec="${?}"
                 _log "${_mount_out}"
