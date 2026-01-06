@@ -12,9 +12,9 @@
         "command": "/usr/bin/ntpd -n -p time.cloudflare.com"
     },
     {
-        "name": "crond",
+        "name": "nodecron",
         "enabled": true,
         "user": "root",
-        "command": "/usr/bin/crond -f -d8"
+        "command": "node /home/igor/arch/nodecron/cron.js"
     }
 ]
