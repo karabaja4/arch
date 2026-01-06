@@ -29,14 +29,14 @@ const run = async (command, interval, user) => {
     } catch (err) {
       await log('ERROR', err.stack || err.message || err)
     }
-    await timers.setTimeout(interval * 1000);
+    await timers.setTimeout(interval);
   }
 };
 
 const every = {
-  seconds: n => n,
-  minutes: n => n * 60,
-  hours:   n => n * 60 * 60,
+  seconds: n => n * 1000,
+  minutes: n => n * 60 * 1000,
+  hours:   n => n * 60 * 60 * 1000
 };
 
 const users = {
