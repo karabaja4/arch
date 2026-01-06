@@ -27,7 +27,7 @@ const run = async (command, interval, user) => {
       }
       log('END', infoline);
     } catch (err) {
-      log('ERROR', err.stack || err.message || err)
+      log('ERROR', err.stack || err.message || err);
     }
     await timers.setTimeout(interval);
   }
