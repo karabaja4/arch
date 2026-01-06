@@ -12,7 +12,7 @@ const run = async (command, interval, user) => {
     try {
       const infoline = `${user.uid}:${user.gid} ${command}`;
       log('START', infoline);
-      const content = await exec(command, { 
+      const content = await exec(command, {
         uid: user.uid,
         gid: user.gid,
         env: { 
@@ -34,9 +34,9 @@ const run = async (command, interval, user) => {
 };
 
 const every = {
-  seconds: n => n * 1000,
-  minutes: n => n * 60 * 1000,
-  hours:   n => n * 60 * 60 * 1000
+  seconds: (n) => (n * 1000),
+  minutes: (n) => (n * 60 * 1000),
+  hours:   (n) => (n * 60 * 60 * 1000)
 };
 
 const users = {
