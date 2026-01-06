@@ -10,13 +10,16 @@ const log = (type, message) => {
 const run = async (command, interval, user) => {
   while (true) {
     try {
-      const infoline = `${user.uid}:${user.gid} ${command}`;
+      const infoline = `(UID: ${user.uid}) ${command}`;
       log('START', infoline);
       const content = await exec(command, {
         uid: user.uid,
-        gid: user.gid,
+        gid: user.uid,
         env: { 
-          HOME: user.home
+          HOME: user.home,
+          USER: user.name,
+          SHELL: '/bin/sh',
+          PATH: process.env['PATH']
         }
       });
       if (content.stdout) {
@@ -40,8 +43,8 @@ const every = {
 };
 
 const users = {
-  igor: { uid: 1000, gid: 1000, home: '/home/igor' },
-  root: { uid: 0,    gid: 0,    home: '/root'      }
+  igor: { name: 'igor', uid: 1000, home: '/home/igor' },
+  root: { name: 'root', uid: 0,    home: '/root'      }
 };
 
 // root
