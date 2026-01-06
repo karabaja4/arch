@@ -9,6 +9,14 @@
 # auracle also returns 1 when check failed, with non-empty stdout+stderr
 # so if return code is non-zero, stdour+stderr should be empty, otherwise it should be handled as a failure
 
+# check for internet
+_status="$(curl -s -o /dev/null -I -m 2 -w "%{http_code}" "https://avacyn.radiance.hr/ip")"
+if [ "${_status}" != "200" ]
+then
+    # ignore offline
+    exit 0
+fi
+
 _root="${HOME}/.local/share/updatecount"
 mkdir -p "${_root}"
 
