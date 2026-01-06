@@ -41,7 +41,7 @@ const every = {
 
 const users = {
   igor: { uid: 1000, gid: 1000, home: '/home/igor' },
-  root: { uid: 0,    gid: 0,    home: '/root' }
+  root: { uid: 0,    gid: 0,    home: '/root'      }
 };
 
 // root
