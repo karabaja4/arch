@@ -28,7 +28,7 @@ const processQueue = async () => {
   } finally {
     processing = false;
     // catch any logs added during finishing before processing was set to false
-    if (queue.length > 0) processQueue();
+    if (queue.length > 0) setImmediate(processQueue);
   }
 };
 
