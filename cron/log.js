@@ -8,7 +8,12 @@ const queue = [];
 let processing = false;
 
 const unpack = (err) => {
-  return (err.stack || err.message || err)?.trim();
+  try {
+    if (!err) return '';
+    return (err.stack || err.message || String(err)).toString().trim();
+  } catch {
+    return '(unpack error)';
+  }
 };
 
 const process = async () => {
@@ -23,7 +28,7 @@ const process = async () => {
     console.log(`Error writing to log: ${unpack(err)}`);
   } finally {
     processing = false;
-    if (queue.length > 0) process();
+    if (queue.length > 0) setImmediate(process);
   }
 };
 bus.on('log-added', process);
