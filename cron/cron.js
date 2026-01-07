@@ -12,8 +12,8 @@ const run = async (command, interval, user) => {
         uid: user.uid,
         gid: user.uid,
         env: { 
-          HOME: user.home,
           USER: user.name,
+          HOME: user.home,
           SHELL: '/bin/sh',
           PATH: process.env['PATH']
         },
