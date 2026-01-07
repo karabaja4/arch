@@ -49,7 +49,6 @@ const users = {
 
 // root
 run('/home/igor/arch/scripts/fstrim.sh', every.hours(6), users.root);
-run('/home/igor/arch/scripts/cifs.sh', every.seconds(20), users.root);
 
 // igor
 run('/home/igor/arch/scripts/dpms.sh', every.minutes(5), users.igor);

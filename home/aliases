@@ -44,6 +44,11 @@ alias mountall='doas /home/igor/arch/scripts/mount.sh private public disk mmc'
 alias mountsmb='doas /home/igor/arch/scripts/mount.sh private public disk'
 alias mountmmc='doas /home/igor/arch/scripts/mount.sh mmc'
 
+fixcifs() {
+    doas /home/igor/arch/scripts/umount.sh cifs
+    doas /home/igor/arch/scripts/mount.sh private public
+}
+
 usb() {
     doas /home/igor/arch/scripts/umount.sh mnt
 }
