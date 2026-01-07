@@ -1,17 +1,13 @@
 const util = require('node:util');
 const exec = util.promisify(require('node:child_process').exec);
 const timers = require('node:timers/promises');
-
-const log = (type, message) => {
-  const utc = (new Date()).toISOString();
-  console.log(`[${utc}][${type}] ${message?.trim()}`);
-};
+const log = require('./log');
 
 const run = async (command, interval, user) => {
   while (true) {
     try {
       const infoline = `(UID: ${user.uid}) ${command}`;
-      log('START', infoline);
+      log.push('START', infoline);
       const content = await exec(command, {
         uid: user.uid,
         gid: user.uid,
@@ -20,17 +16,18 @@ const run = async (command, interval, user) => {
           USER: user.name,
           SHELL: '/bin/sh',
           PATH: process.env['PATH']
-        }
+        },
+        maxBuffer: 1024 * 1024 * 5
       });
       if (content.stdout) {
-        log('STDOUT', content.stdout);
+        log.push('STDOUT', content.stdout);
       }
       if (content.stderr) {
-        log('STDERR', content.stderr);
+        log.push('STDERR', content.stderr);
       }
-      log('END', infoline);
+      log.push('END', infoline);
     } catch (err) {
-      log('ERROR', err.stack || err.message || err);
+      log.push('ERROR', err.stack || err.message || err);
     }
     await timers.setTimeout(interval);
   }
