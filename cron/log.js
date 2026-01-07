@@ -7,6 +7,10 @@ const logpath = '/tmp/cron.log';
 const queue = [];
 let processing = false;
 
+const unpack = (err) => {
+  return (err.stack || err.message || err)?.trim();
+};
+
 const process = async () => {
   if (processing) return;
   processing = true;
@@ -16,7 +20,7 @@ const process = async () => {
       await fs.promises.appendFile(logpath, item);
     };
   } catch (err) {
-    console.log(`Error writing to log: ${err.stack || err.message || err}`);
+    console.log(`Error writing to log: ${unpack(err)}`);
   } finally {
     processing = false;
     if (queue.length > 0) process();
@@ -26,7 +30,7 @@ bus.on('log-added', process);
 
 const push = (type, message) => {
   const utc = (new Date()).toISOString();
-  const formatted = `[${utc}][${type}] ${message?.trim()}`;
+  const formatted = `[${utc}][${type}] ${unpack(message)}`;
   console.log(formatted);
   queue.push(`${formatted}\n`);
   bus.emit('log-added');

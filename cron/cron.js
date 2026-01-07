@@ -6,8 +6,8 @@ const log = require('./log');
 const run = async (command, interval, user) => {
   while (true) {
     try {
-      const infoline = `(UID: ${user.uid}) ${command}`;
-      log.push('START', infoline);
+      const line = `(UID: ${user.uid}) ${command}`;
+      log.push('START', line);
       const content = await exec(command, {
         uid: user.uid,
         gid: user.uid,
@@ -25,9 +25,9 @@ const run = async (command, interval, user) => {
       if (content.stderr) {
         log.push('STDERR', content.stderr);
       }
-      log.push('END', infoline);
+      log.push('END', line);
     } catch (err) {
-      log.push('ERROR', err.stack || err.message || err);
+      log.push('ERROR', err);
     }
     await timers.setTimeout(interval);
   }
