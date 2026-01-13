@@ -19,6 +19,14 @@ _umount_cifs() {
     done
 }
 
+_umount_private() {
+    umount -c -v /home/igor/_private || _failed
+}
+
+_umount_public() {
+    umount -c -v /home/igor/_public || _failed
+}
+
 _umount_home() {
     _home_devices="$(_echo "${_mounts}" | awk '$1 ~ "^/dev/" && $2 ~ "^/home/" { print $1 }')"
     for _device in ${_home_devices}
