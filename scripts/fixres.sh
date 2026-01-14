@@ -63,12 +63,18 @@ _get_monitor_to_port_map() {
         _device_port="$(printf "%s" "${_line}" | cut -d' ' -f1)"
         _edid_data="$(printf "%s" "${_line}" | cut -d' ' -f2-)"
         _device_hash="$(printf '%s\n' "${_edid_data}" | md5sum | cut -d' ' -f1)"
-        printf "%s %s\n" "${_device_hash}" "${_device_port}" 
+        printf "%s %s\n" "${_device_hash}" "${_device_port}"
     done
 }
 
 # load map
 _monitor_to_port_map="$(_get_monitor_to_port_map)"
+
+if [ -z "${_monitor_to_port_map}" ]
+then
+    printf '%s\n' "Unable to generate monitor to port map, EDID data may be missing."
+    exit 1
+fi
 
 # get port for monitor hash from monitor to port map
 _get_port_for_monitor() {
