@@ -45,18 +45,19 @@ const icons = {
   battery: mkicon('', fonts.awesome, 12000, -1000)
 };
 
-const mkdisk = (mountpoint, icon, label) => {
+const mkdisk = (mountpoint, icon, label, uuid) => {
   return {
     mountpoint: mountpoint,
     icon: icon,
-    label: label
+    label: label,
+    uuid: uuid
   }
 };
 
 // disks
 const disks = [
-  mkdisk('/', icons.ssd, 'SSD')
-  //mkdisk('/home/igor/_mmc', icons.mmc, 'MMC')
+  mkdisk('/', icons.ssd, 'SSD', '0b74f75e-8cc6-4a79-8da5-e1e6695b2acb')
+  //mkdisk('/home/igor/_mmc', icons.mmc, 'MMC', '78DD72146717D509')
 ];
 
 // activity color
@@ -134,13 +135,13 @@ const print = () => {
 
   for (let i = 0; i < disks.length; i++) {
     const disk = disks[i];
-    const avail = data?.mounts?.[disk.mountpoint] &&
-                  data?.du?.[disk.mountpoint]?.total &&
-                  data?.du?.[disk.mountpoint]?.used &&
-                  data?.du?.[disk.mountpoint]?.available || null;
+    const avail = (data?.mounts?.[disk.mountpoint] &&
+                   data?.du?.[disk.uuid]?.total &&
+                   data?.du?.[disk.uuid]?.used &&
+                   data?.du?.[disk.uuid]?.available) || null;
     const res = [];
     if (avail) {
-      const dfi = data.du[disk.mountpoint];
+      const dfi = data.du[disk.uuid];
       const used  = dfi.used;
       const total = used + dfi.available;
       res[0] = Math.floor((used / 1024) / 1024);
@@ -239,6 +240,17 @@ const ping = () => {
   });
 };
 
+const isValidDevice = (device) => {
+  return (
+    (device?.uuid != null) &&
+    (typeof device.uuid === 'string') &&
+    (device.type === 'part') &&
+    Number.isFinite(device.fsavail) &&
+    Number.isFinite(device.fssize) &&
+    Number.isFinite(device.fsused)
+  );
+};
+
 const diskusage = async () => {
   const dudir = path.join(os.homedir(), '.local/share/diskusage');
   await fs.promises.mkdir(dudir, { recursive: true });
@@ -256,8 +268,8 @@ const diskusage = async () => {
       if (parsed.blockdevices) {
         for (let i = 0; i < parsed.blockdevices.length; i++) {
           const device = parsed.blockdevices[i];
-          if (device.mountpoint && device.fssize && typeof device.fssize === 'number' && device.type !== 'loop') {
-            result[device.mountpoint] = {
+          if (isValidDevice(device)) {
+            result[device.uuid] = {
               total: Math.floor(device.fssize / 1024),
               used: Math.floor(device.fsused / 1024),
               available: Math.floor(device.fsavail / 1024)
