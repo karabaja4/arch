@@ -13,7 +13,7 @@ alias c='clear'
 alias x='exit'
 alias sr='screen -r'
 alias sn='screen -S'
-alias speedtest='wget https://debian.connesi.it/13.1.0/amd64/iso-dvd/debian-13.1.0-amd64-DVD-1.iso -O /dev/null'
+alias speedtest='wget https://download.manjaro.org/i3/25.0.3/manjaro-i3-25.0.3-250609-linux612.iso -O /dev/null'
 alias myip='curl https://avacyn.radiance.hr/ip'
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'
 
