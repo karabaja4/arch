@@ -1,7 +1,7 @@
 {
   "extensions": {
     "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv,cfg": "qtextpad $arg",
-    "avi,mkv,flac,mp3,wav,mp4,mov,ogg,aac,opus": "vlc $arg",
+    "avi,mkv,flac,mp3,wav,mp4,mov,ogg,aac,opus": "mpv --vo=gpu --hwdec=nvdec $arg",
     "jpg,jpeg,svg,png,bmp,gif,tga": "/home/igor/arch/feh/feh.sh $arg",
     "gz,zip,rar,zst,tar,7z,iso,bz2,xz": "xarchiver $arg",
     "torrent": "/home/igor/arch/scripts/torrent.sh $arg",
@@ -12,9 +12,9 @@
   },
   "mimetypes": {
     "text/*": "qtextpad $arg",
-    "video/*": "vlc $arg",
+    "video/*": "mpv --vo=gpu --hwdec=nvdec $arg",
     "image/*": "/home/igor/arch/feh/feh.sh $arg",
-    "media/video": "vlc $arg",
+    "media/video": "mpv --vo=gpu --hwdec=nvdec $arg",
     "document/pdf": "mupdf -r 140 $arg",
     "inode/directory": "/home/igor/arch/lf/lf.sh $arg",
     "inode/x-empty": "qtextpad $arg",
