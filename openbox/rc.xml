@@ -310,6 +310,9 @@
     <application name="xfreerdp">
       <layer>above</layer>
     </application>
+    <application title="OLED saver*">
+      <layer>above</layer>
+    </application>
     <application class="VirtualBox*">
       <position force="yes">
         <x>center</x>
