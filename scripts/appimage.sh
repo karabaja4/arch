@@ -12,7 +12,7 @@ doas modprobe fuse
 case "$(basename "${0}")" in
 krita)
     export QT_ENABLE_HIGHDPI_SCALING=0
-    exec "/opt/appimage/krita-5.2.14-x86_64.AppImage" "${@}"
+    exec "/opt/appimage/krita-5.2.15-x86_64.AppImage" "${@}"
     ;;
 bruno)
     exec "/opt/appimage/bruno_3.1.3_x86_64_linux.AppImage" --force-device-scale-factor=1.75 "${@}"
