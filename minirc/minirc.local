@@ -2,7 +2,7 @@
 
 # fix ASPM for i226-v
 # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=279245
-/home/igor/arch/scripts/fixaspm.sh
+/home/igor/arch/scripts/fixnet.sh
 
 # bring ethernet interface up so udhcpc can operate
 ip link set eth0 up > /dev/null 2>&1
