@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# fix ASP for i226-v
+# fix ASPM for i226-v
 # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=279245
 /home/igor/arch/scripts/fixnet.sh
 
