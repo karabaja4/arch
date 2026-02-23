@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+#
+
+# PROVIDE: eth_aspm_disable
+# REQUIRE: NETWORKING
+# BEFORE: SERVERS
+# KEYWORD: nojail
+
+. /etc/rc.subr
+
+PATH=${PATH}:/usr/local/sbin:/usr/local/bin
+
+name="eth_aspm_disable"
+desc="Disable ASPM on problematic Ethernet devices"
+start_cmd="eth_aspm_start"
+stop_cmd=":"
+
+eth_aspm_start()
+{
+	echo "Disabling ASPM on buggy PCIe devices..."
+	if ! command -v -- lspci > /dev/null 2>&1; then
+		echo " pciutils package not installed."
+		exit 0
+	fi
+	if ! command -v -- aspm_disable > /dev/null 2>&1; then
+		echo " aspm_disable script not found."
+		exit 0
+	fi
+
+	for dev in `lspci -d 8086:125c | awk '{ print $1 }'`; do
+		echo " Checking Ethernet device at PCIe ${dev}"
+		aspm_disable ${dev}
+	done
+}
+
+load_rc_config $name
+run_rc_command "$1"

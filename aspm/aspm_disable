@@ -1,0 +1,115 @@
+#!/usr/bin/bash
+#
+# Disable ASPM (L0s + L1) by walking the PCI capability list.
+# The command uses setpci. On FreeBSD, the pciutils package
+# is required.
+#
+# Usage:   aspm_disable <pci-device-id>
+# Example: aspm_disable 03:00.0
+#
+
+DEV="$1"
+set -eu
+
+if [ -z "$DEV" ]; then
+    echo "Usage: $0 <pci-device-id>  (e.g. 0000:03:00.0)"
+    exit 1
+fi
+
+# read the first capability pointer (offset 0x34) as a byte
+CAP_PTR=$(setpci -s "$DEV" 34.b 2>/dev/null || true)
+
+if [ -z "$CAP_PTR" ]; then
+    echo "  Failed to read capability pointer (offset 0x34) for $DEV"
+    exit 1
+fi
+
+if [ "$CAP_PTR" = "00" ]; then
+    echo "  No capabilities (cap_ptr == 0x00) for $DEV"
+    exit 1
+fi
+
+# Walk capability list to find capability ID 0x10 (PCI Express)
+MAX_ITER=64
+iter=0
+found=""
+# cap_ptr is hex string like "50"
+cap_hex="$CAP_PTR"
+
+while [ "$cap_hex" != "00" ] && [ $iter -lt $MAX_ITER ]; do
+    # capability ID is at offset cap_hex (byte)
+    cap_id=$(setpci -s "$DEV" "${cap_hex}".b 2>/dev/null || true)
+    if [ -z "$cap_id" ]; then
+        echo "  Failed to read capability ID at offset 0x$cap_hex"
+        exit 1
+    fi
+
+    # normalize to lower-case
+    cap_id_lc=$(echo "$cap_id" | tr '[:upper:]' '[:lower:]')
+
+    if [ "$cap_id_lc" = "10" ]; then
+        found="$cap_hex"
+        break
+    fi
+
+    # next pointer is at offset cap_hex + 1
+    # convert hex to decimal, add 1, format back to hex
+    cap_dec=$((0x$cap_hex))
+    next_dec=$((cap_dec + 1))
+    next_off_hex=$(printf "%x" "$next_dec")
+    next_ptr=$(setpci -s "$DEV" "${next_off_hex}".b 2>/dev/null || true)
+    if [ -z "$next_ptr" ]; then
+        echo "  Failed to read next capability pointer at offset 0x$next_off_hex"
+        exit 1
+    fi
+
+    # the "next" value is the pointer (byte) at cap+1
+    cap_hex=$(echo "$next_ptr" | tr '[:upper:]' '[:lower:]')
+    iter=$((iter + 1))
+done
+
+if [ -z "$found" ]; then
+    echo "  PCI Express capability (ID 0x10) not found after $iter iterations."
+    exit 1
+fi
+
+printf "  PCIe capability found at offset 0x%s\n" "$found"
+
+# Link Control register = capability_offset + 0x10
+cap_dec=$((0x$found))
+linkctl_dec=$((cap_dec + 0x10))
+linkctl_hex=$(printf "%x" "$linkctl_dec")
+
+printf "  Link Control offset: 0x%s\n" "$linkctl_hex"
+
+# Read 16-bit Link Control (.w)
+CURRENT=$(setpci -s "$DEV" "${linkctl_hex}".w 2>/dev/null || true)
+if [ -z "$CURRENT" ]; then
+    echo "  Failed to read Link Control at 0x$linkctl_hex"
+    exit 1
+fi
+
+printf "  Current Link Control: 0x%s\n" "$CURRENT"
+
+# Disable ASPM by clearing bits 0 and 1 (mask ~0x3)
+CURRENT_VAL=$((0x$CURRENT))
+NEW_VAL=$((CURRENT_VAL & ~0x3))
+NEW=$(printf "%04x" "$NEW_VAL")
+
+if [ ${CURRENT} == ${NEW} ]; then
+    echo "  ASPM already disabled"
+    exit 0
+fi
+
+printf "  New Link Control (ASPM disabled): 0x%s\n" "$NEW"
+
+# Write back 16-bit value
+echo "  setpci -s $DEV ${linkctl_hex}.w=$NEW"
+setpci -s $DEV ${linkctl_hex}.w=$NEW
+
+if [ $? -eq 0 ]; then
+    echo "  ASPM disabled for $DEV."
+else
+    echo "  Failed to write new Link Control value for $DEV."
+    exit 1
+fi
