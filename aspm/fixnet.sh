@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 
+# https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=279245
+
 if [ "$(id -u)" -ne 0 ]
 then
     printf '%s\n' "Must be root."
