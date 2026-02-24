@@ -3,7 +3,7 @@ set -eu
 
 if [ "$(id -u)" -ne 0 ]
 then
-    printf "%s\n" "Must be root."
+    printf '%s\n' "Must be root."
     exit 1
 fi
 
