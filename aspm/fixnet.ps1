@@ -16,7 +16,7 @@ function InvokeRwe ($command) {
     Log "Command: $command"
     $output = & $rweExe /Min /Nologo /Stdout /Command="$command" | Select-Object -First 1
     $result = '0xFFFF'
-    if ($output -match ".+ = (0x[0-9A-Fa-f]+)") {
+    if ($output -match "^.+ = (0x[0-9A-Fa-f]+)$") {
         $result = $Matches[1]
     }
     Log "Result: $result"
