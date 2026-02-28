@@ -16,7 +16,7 @@ then
     _current="$(setpci -s "${_address}" b0.b)"
     if [ "${_current}" = "42" ]
     then
-        setpci -s "${_address}" b0.w=0040
+        setpci -s "${_address}" b0.b=40
         printf '[%s] ASPM disabled.\n' "${_address}"
     else
         printf '[%s] Current value %s not valid, exiting.\n' "${_address}" "${_current}"
