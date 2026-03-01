@@ -1,4 +1,5 @@
 #!/bin/sh
 
-_mime="$(file -L -E --brief --mime-type "${1}")"
-xclip -in -selection clipboard -t "${_mime}" "${1}"
+_dest="/tmp/feh.png"
+magick "${1}" "png:${_dest}"
+xclip -in -selection clipboard -t "image/png" "${_dest}"
