@@ -39,6 +39,32 @@ const definitions = [
   }
 ];
 
+const crondir = path.join(os.homedir(), '.local/share/cron');
+
+const getLastRunTime = async (id) => {
+  try {
+    const filepath = path.join(crondir, `${id}.lrt`);
+    const content = await fs.promises.readFile(filepath, 'utf8');
+    const result = parseInt(content.trim());
+    if (Number.isInteger(result)) {
+      return result;
+    }
+    log.push('INFO', `Last run time for ${id} is invalid.`);
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      log.push('INFO', `Last run time for ${id} was not found.`);
+    } else {
+      throw err;
+    }
+  }
+  return 0;
+};
+
+const setLastRunTime = async (id, ts) => {
+  const filepath = path.join(crondir, `${id}.lrt`);
+  await fs.promises.writeFile(filepath, ts.toString());
+};
+
 const run = async (id, command, interval, user, wait) => {
   if (wait > 0) {
     log.push('INFO', `${id} waiting for ${wait}ms`);
@@ -72,32 +98,6 @@ const run = async (id, command, interval, user, wait) => {
   }
   await setLastRunTime(id, Date.now());
   setImmediate(() => run(id, command, interval, user, interval));
-};
-
-const crondir = path.join(os.homedir(), '.local/share/cron');
-
-const getLastRunTime = async (id) => {
-  try {
-    const filepath = path.join(crondir, `${id}.lrt`);
-    const content = await fs.promises.readFile(filepath, 'utf8');
-    const result = parseInt(content.trim());
-    if (Number.isInteger(result)) {
-      return result;
-    }
-    log.push('INFO', `Last run time for ${id} is invalid.`);
-  } catch (err) {
-    if (err.code === 'ENOENT') {
-      log.push('INFO', `Last run time for ${id} not found.`);
-    } else {
-      throw err;
-    }
-  }
-  return 0;
-};
-
-const setLastRunTime = async (id, ts) => {
-  const filepath = path.join(crondir, `${id}.lrt`);
-  await fs.promises.writeFile(filepath, ts.toString());
 };
 
 const main = async () => {
