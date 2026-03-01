@@ -4,6 +4,12 @@ set -eu
 export XAUTHORITY="${HOME}/.local/share/sx/xauthority"
 export DISPLAY=":1"
 
+# Exit if X server is not available
+if ! xset q >/dev/null 2>&1
+then
+    exit 0
+fi
+
 xset s 0 0
 xset dpms 0 0 0
 
