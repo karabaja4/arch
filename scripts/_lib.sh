@@ -69,44 +69,6 @@ _fatal() {
     exit 9
 }
 
-# logging to stdout and to files simultaneously
-__script_name="$(basename "${0}")"
-_log_lines() {
-    for __log_line in "${@}"
-    do
-        if [ -n "${__log_line}" ]
-        then
-            printf '[%s][%s] %s\n' "${__script_name}" "$(date -Is)" "${__log_line}"
-        fi
-    done
-}
-
-# udev does not define $HOME
-if [ -z "${HOME-}" ]
-then
-    __log_dir="/tmp/logs"
-else
-    __log_dir="${HOME}/.local/share/logs"
-fi
-
-_log() {
-    mkdir -p "${__log_dir}"
-    if [ ! -w "${__log_dir}" ]
-    then
-        _fatal "${__log_dir} is not writable."
-    fi
-    __log_file="${__log_dir}/${__script_name%.*}.log"
-    if [ "${#}" -eq 0 ]
-    then
-        while IFS= read -r __stdin_line
-        do
-            _log_lines "${__stdin_line}" | tee -a "${__log_file}"
-        done
-    else
-        _log_lines "${@}" | tee -a "${__log_file}"
-    fi
-}
-
 # gets the passwd column for the single logged in user
 # usage: _passwd <passwd-index>
 # for example, _passwd 6 will get the 6th column from the user's passwd, that is, a user's home directory
