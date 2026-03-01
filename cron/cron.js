@@ -49,10 +49,10 @@ const getLastRunTime = async (id) => {
     if (Number.isInteger(result)) {
       return result;
     }
-    log.push('INFO', `Last run time for ${id} is invalid.`);
+    log.push(`${id}:LRT`, `Last run time for ${id} is invalid.`);
   } catch (err) {
     if (err.code === 'ENOENT') {
-      log.push('INFO', `Last run time for ${id} was not found.`);
+      log.push(`${id}:LRT`, `Last run time for ${id} was not found.`);
     } else {
       throw err;
     }
@@ -67,14 +67,14 @@ const setLastRunTime = async (id, ts) => {
 
 const run = async (id, command, interval, user, wait) => {
   if (wait > 0) {
-    log.push('INFO', `${id} waiting for ${wait}ms`);
+    log.push(`${id}:RUN`, `Job waiting for ${wait}ms`);
     await timers.setTimeout(wait);
   } else {
-    log.push('INFO', `${id} is overdue or has never run, starting immediately.`);
+    log.push(`${id}:RUN`, `Job is overdue or has never run, starting immediately.`);
   }
   try {
     const line = `(UID: ${user.uid}) ${command}`;
-    log.push('START', line);
+    log.push(`${id}:START`, line);
     const content = await exec(command, {
       uid: user.uid,
       gid: user.uid,
@@ -87,14 +87,14 @@ const run = async (id, command, interval, user, wait) => {
       maxBuffer: 1024 * 1024 * 5
     });
     if (content.stdout) {
-      log.push('STDOUT', content.stdout);
+      log.push(`${id}:STDOUT`, content.stdout);
     }
     if (content.stderr) {
-      log.push('STDERR', content.stderr);
+      log.push(`${id}:STDERR`, content.stderr);
     }
-    log.push('END', line);
+    log.push(`${id}:END`, line);
   } catch (err) {
-    log.push('ERROR', err);
+    log.push(`${id}:ERROR`, err);
   }
   await setLastRunTime(id, Date.now());
   setImmediate(() => run(id, command, interval, user, interval));
