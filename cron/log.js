@@ -32,9 +32,9 @@ const processQueue = async () => {
   }
 };
 
-const push = (type, message) => {
+const push = (source, type, message) => {
   const utc = (new Date()).toISOString();
-  const formatted = `[${utc}][${type}] ${unpack(message)}`;
+  const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
   console.log(formatted);
   queue.push(`${formatted}\n`);
   processQueue();
