@@ -12,10 +12,10 @@ doas modprobe fuse
 case "$(basename "${0}")" in
 krita)
     export QT_ENABLE_HIGHDPI_SCALING=0
-    exec "/opt/appimage/krita-5.2.15-x86_64.AppImage" "${@}"
+    exec "/opt/appimage/krita-5.2.16-x86_64.AppImage" "${@}"
     ;;
 bruno)
-    exec "/opt/appimage/bruno_3.1.3_x86_64_linux.AppImage" --force-device-scale-factor=1.75 "${@}"
+    exec "/opt/appimage/bruno_3.1.4_x86_64_linux.AppImage" --force-device-scale-factor=1.75 "${@}"
     ;;
 "${_script_filename}")
     _echo "Symlink the script to the app, e.g. ln -s ${_script_path} /usr/local/bin/krita"
