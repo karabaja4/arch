@@ -100,13 +100,19 @@ const run = async (id, command, interval, user, wait) => {
 };
 
 const main = async () => {
-  await fs.promises.mkdir(crondir, { recursive: true });
-  for (let i = 0; i < definitions.length; i++) {
-    const def = definitions[i];
-    const lastRunTime = await getLastRunTime(def.id);
-    const elapsed = (lastRunTime === 0) ? Infinity : (Date.now() - lastRunTime);
-    const wait = (elapsed >= def.interval) ? 0 : (def.interval - elapsed);
-    run(def.id, def.path, def.interval, def.user, wait);
+  try {
+    await fs.promises.mkdir(crondir, { recursive: true });
+    for (let i = 0; i < definitions.length; i++) {
+      const def = definitions[i];
+      const lastRunTime = await getLastRunTime(def.id);
+      const elapsed = (lastRunTime === 0) ? Infinity : (Date.now() - lastRunTime);
+      const wait = (elapsed >= def.interval) ? 0 : (def.interval - elapsed);
+      run(def.id, def.path, def.interval, def.user, wait);
+    }
+  } catch (err) {
+    await log.push('main', 'ERROR', err);
+    await log.close();
+    process.exit(1);
   }
 };
 

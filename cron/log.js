@@ -1,8 +1,7 @@
 const fs = require('node:fs');
 const logpath = '/tmp/cron.log';
 
-const queue = [];
-let processing = false;
+const stream = fs.createWriteStream(logpath, { flags: 'a' });
 
 const unpack = (err) => {
   try {
@@ -13,33 +12,28 @@ const unpack = (err) => {
   }
 };
 
-const processQueue = async () => {
-  if (processing) return;
-  processing = true;
-  try {
-    while (queue.length > 0) {
-      const item = queue.shift();
-      try {
-        await fs.promises.appendFile(logpath, item);
-      } catch (err) {
-        console.log(`Error writing to log: ${unpack(err)}`);
-      }
-    }
-  } finally {
-    processing = false;
-    // catch any logs added after loop finished but before processing was set to false
-    if (queue.length > 0) setImmediate(processQueue);
-  }
+const format = (source, type, message) => {
+  const utc = (new Date()).toISOString();
+  return `[${utc}][${source}][${type}] ${unpack(message)}`;
 };
 
 const push = (source, type, message) => {
-  const utc = (new Date()).toISOString();
-  const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
-  console.log(formatted);
-  queue.push(`${formatted}\n`);
-  processQueue();
+  return new Promise((resolve, reject) => {
+    const formatted = format(source, type, message);
+    console.log(formatted);
+    stream.write(`${formatted}\n`, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
 };
 
+const close = () => new Promise((resolve) => stream.end(resolve));
+
 module.exports = {
-  push
+  push,
+  close
 };
