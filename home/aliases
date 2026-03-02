@@ -40,9 +40,7 @@ alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
 alias wifi='doas /home/igor/arch/scripts/wifi.sh'
 
-alias mountall='doas /home/igor/arch/scripts/mount.sh private public disk mmc'
-alias mountsmb='doas /home/igor/arch/scripts/mount.sh private public disk'
-alias mountmmc='doas /home/igor/arch/scripts/mount.sh mmc'
+alias mountall='doas /home/igor/arch/scripts/mount.sh private public disk'
 
 fixcifs() {
     doas /home/igor/arch/scripts/umount.sh private public || return 1
