@@ -2,6 +2,6 @@
 
 exec mpv \
 --vo=gpu \
---hwdec=nvdec \
+--hwdec=vaapi \
 --script-opts=osc-fadeduration=0,osc-scalefullscreen=0.5 \
 "${@}"

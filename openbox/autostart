@@ -5,10 +5,10 @@ xset -display :1 s 0 0
 xset -display :1 dpms 0 0 0
 
 # load nvidia settings
-nvidia-settings --load-config-only
+#nvidia-settings --load-config-only
 
 # alsa
-sleep 6 && "${HOME}/arch/scripts/sound.sh" EarPods 85 > /dev/null 2>&1 &
+sleep 3 && "${HOME}/arch/scripts/sound.sh" ALC298 100 > /dev/null 2>&1 &
 
 # daemons
 xsettingsd -c "${HOME}/arch/termite/xsettingsd" &

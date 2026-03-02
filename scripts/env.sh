@@ -15,9 +15,9 @@ export GIT_PS1_SHOWCONFLICTSTATE='no'
 # default scaling
 # QT (1.75*96)
 # https://doc.qt.io/qt-6/highdpi.html
-export QT_FONT_DPI=168
+#export QT_FONT_DPI=168
 # GTK
-export GDK_SCALE=2
+#export GDK_SCALE=2
 
 # vnc does not export $SHELL
 export SHELL='/bin/bash'
@@ -39,10 +39,5 @@ export ALSOFT_DRIVERS='alsa'
 export MOZ_DISABLE_RDD_SANDBOX=1
 export MOZ_CRASHREPORTER_DISABLE=1
 
-# VDPAU
-if nvidia-smi --query-gpu=gpu_name --format=csv,noheader > /dev/null 2>&1
-then
-    export LIBVA_DRIVER_NAME='nvidia'
-else
-    export LIBVA_DRIVER_NAME='iHD'
-fi
+# libva
+export LIBVA_DRIVER_NAME='iHD'

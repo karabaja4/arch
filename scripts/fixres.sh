@@ -13,8 +13,7 @@ ${HOME}/arch/wall/exodus_v06_5120x2880.png
 "
 
 _rtl_monitors="
-712a4914850c9b6e3a97c14350e23dbe
-5760f56f845302e774c86dd475500d09
+6677d5f74e2f795bc14c9720f6dca12d
 "
 
 # 712a4914850c9b6e3a97c14350e23dbe = ASUS PG32UCDM

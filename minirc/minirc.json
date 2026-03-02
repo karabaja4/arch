@@ -1,7 +1,7 @@
 [
     {
         "name": "udhcpc",
-        "enabled": true,
+        "enabled": false,
         "user": "root",
         "command": "/usr/bin/udhcpc -nqfv -i eth0"
     },

@@ -19,6 +19,7 @@
 ****************************************************************************/
 user_pref("gfx.canvas.accelerated.cache-size", 256); // reset pref
 user_pref("gfx.webrender.layer-compositor", true);
+user_pref("gfx.webrender.all", true);
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
@@ -199,7 +200,7 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 // Enter your personal overrides below this line:
 
 // scaling
-user_pref("layout.css.devPixelsPerPx", "1.75");
+//user_pref("layout.css.devPixelsPerPx", "1.75");
 
 // scrollbar
 user_pref("widget.gtk.overlay-scrollbars.enabled", false);

@@ -34,15 +34,15 @@ const mkicon = (char, font, size, rise) => {
 };
 
 const icons = {
-  netdown: mkicon('', fonts.flaticon, 10000, 100),
-  netup: mkicon('', fonts.flaticon, 10000, 100),
-  ping: mkicon('', fonts.awesome, 10000, 100),
-  cpu: mkicon('', fonts.flaticon, 7500, 1000),
-  mem: mkicon('', fonts.flaticon, 10000, 100),
-  clock: mkicon('', fonts.awesome, 10000, 100),
-  ssd: mkicon('', fonts.awesome, 10000, 100),
-  //mmc: mkicon('', fonts.flaticon, 10000, 100),
-  battery: mkicon('', fonts.awesome, 12000, -1000)
+  netdown: mkicon('', fonts.flaticon, 7500, 100),
+  netup: mkicon('', fonts.flaticon, 7500, 100),
+  ping: mkicon('', fonts.awesome, 7500, 100),
+  cpu: mkicon('', fonts.flaticon, 5000, 1000),
+  mem: mkicon('', fonts.flaticon, 7500, 100),
+  clock: mkicon('', fonts.awesome, 7500, 100),
+  ssd: mkicon('', fonts.awesome, 7500, 100),
+  //mmc: mkicon('', fonts.flaticon, 7500, 100),
+  battery: mkicon('', fonts.awesome, 8500, -1000)
 };
 
 const mkdisk = (mountpoint, icon, label, uuid) => {
@@ -56,7 +56,7 @@ const mkdisk = (mountpoint, icon, label, uuid) => {
 
 // disks
 const disks = [
-  mkdisk('/', icons.ssd, 'SSD', '0b74f75e-8cc6-4a79-8da5-e1e6695b2acb')
+  mkdisk('/', icons.ssd, 'SSD', '9214470b-a3d4-463e-a272-c2a8bf329fc5')
   //mkdisk('/home/igor/_mmc', icons.mmc, 'MMC', '78DD72146717D509')
 ];
 
