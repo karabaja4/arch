@@ -1,0 +1,6 @@
+ALL_kver="/boot/vmlinuz-linux-lts"
+
+PRESETS=('lts')
+
+lts_uki="/boot/EFI/Linux/20-arch-linux-lts.efi"
+lts_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp --cmdline /etc/kernel/linux"

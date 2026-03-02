@@ -1,0 +1,1 @@
+root=PARTUUID=6e54841c-a0ba-419c-b3f2-99b3ebca7b25 zswap.enabled=0 rw rootfstype=ext4 mitigations=off

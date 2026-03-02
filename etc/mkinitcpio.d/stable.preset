@@ -1,0 +1,6 @@
+ALL_kver="/boot/vmlinuz-linux"
+
+PRESETS=('stable')
+
+stable_uki="/boot/EFI/Linux/10-arch-linux.efi"
+stable_options="--splash /usr/share/systemd/bootctl/splash-arch.bmp --cmdline /etc/kernel/linux"
