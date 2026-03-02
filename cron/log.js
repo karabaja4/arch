@@ -12,14 +12,10 @@ const unpack = (err) => {
   }
 };
 
-const format = (source, type, message) => {
-  const utc = (new Date()).toISOString();
-  return `[${utc}][${source}][${type}] ${unpack(message)}`;
-};
-
 const push = (source, type, message) => {
   return new Promise((resolve, reject) => {
-    const formatted = format(source, type, message);
+    const utc = (new Date()).toISOString();
+    const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
     console.log(formatted);
     stream.write(`${formatted}\n`, (err) => {
       if (err) {
