@@ -3,7 +3,7 @@ _root="$(dirname "$(readlink -f "${0}")")"
 . "${_root}/_lib.sh"
 
 _loop="
-PG32UCDM 100
+ALC298 100
 EarPods 85
 BT-W3 100
 "
