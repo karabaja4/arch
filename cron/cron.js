@@ -2,8 +2,8 @@ const util = require('node:util');
 const os = require('node:os');
 const fs = require('node:fs');
 const path = require('node:path');
-const exec = util.promisify(require('node:child_process').exec);
 const timers = require('node:timers/promises');
+const exec = util.promisify(require('node:child_process').exec);
 const log = require('./log');
 
 const every = {
@@ -40,10 +40,11 @@ const definitions = [
 ];
 
 const crondir = path.join(os.homedir(), '.local/share/cron');
+const getLastRunTimePath = (id) => path.join(crondir, `${id}.lrt`);
 
 const getLastRunTime = async (id) => {
   try {
-    const filepath = path.join(crondir, `${id}.lrt`);
+    const filepath = getLastRunTimePath(id);
     const content = await fs.promises.readFile(filepath, 'utf8');
     const result = parseInt(content.trim());
     if (Number.isInteger(result)) {
@@ -61,7 +62,7 @@ const getLastRunTime = async (id) => {
 };
 
 const setLastRunTime = async (id, ts) => {
-  const filepath = path.join(crondir, `${id}.lrt`);
+  const filepath = getLastRunTimePath(id);
   await fs.promises.writeFile(filepath, ts.toString());
 };
 
