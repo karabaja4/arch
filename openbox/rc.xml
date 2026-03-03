@@ -215,6 +215,11 @@
     <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
 
     <context name="Frame">
+      <mousebind button="Middle" action="Drag">
+        <action name="Move"/>
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
       <mousebind button="W-Left" action="Drag">
         <action name="Move"/>
         <action name="Focus"/>
