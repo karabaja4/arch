@@ -120,6 +120,14 @@ then
     amixer set "${_iec}" unmute > /dev/null 2>&1
 fi
 
+# unmute capture if muted
+_capture="Capture,0"
+if amixer get "${_capture}" | grep '\[off\]' > /dev/null 2>&1
+then
+    printf "Unmuting %s\n" "${_capture}"
+    amixer set "${_capture}" 100% cap > /dev/null 2>&1
+fi
+
 # play embedded sound
 _root="$(dirname "$(readlink -f "${0}")")"
 
