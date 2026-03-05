@@ -39,7 +39,7 @@ ip addr add "${_ip}/${_prefix}" dev "${_iface}"
 ip route add default dev "${_iface}"
 printf 'nameserver %s\nnameserver %s\n' "${_dns1}" "${_dns2}" > /etc/resolv.conf
 
-printf 'Connected.\nIP: %s\nGateway: %s\nDNS 1: %s\nDNS 2: %s\n' "${_ip}" "${_gateway}" "${_dns1}" "${_dns2}"
+printf 'Connected.\nIP: %s\nGateway: %s\nDNS1: %s\nDNS2: %s\n' "${_ip}" "${_gateway}" "${_dns1}" "${_dns2}"
 
 # $ qmicli --device-open-proxy --device=/dev/cdc-wdm0 --wds-get-profile-list="3gpp"
 # Profile list retrieved:
