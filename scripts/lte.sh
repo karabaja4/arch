@@ -10,7 +10,9 @@ _qmicli() {
     qmicli --device-open-proxy --device="${_dev}" "${@}"
 }
 
-_qmicli --dms-set-fcc-authentication
+# unblock FCC, persists across reboots but not shutdowns
+_qmicli --dms-set-fcc-authentication || true
+
 _qmicli --dms-set-operating-mode='online'
 _qmicli --wds-start-network='3gpp-profile=1' --client-no-release-cid
 
@@ -37,4 +39,16 @@ ip addr add "${_ip}/${_prefix}" dev "${_iface}"
 ip route add default dev "${_iface}"
 printf 'nameserver %s\nnameserver %s\n' "${_dns1}" "${_dns2}" > /etc/resolv.conf
 
-printf '%s\n' "Done."
+printf 'Connected.\nIP: %s\nGateway: %s\nDNS 1: %s\nDNS 2: %s\n' "${_ip}" "${_gateway}" "${_dns1}" "${_dns2}"
+
+# $ qmicli --device-open-proxy --device=/dev/cdc-wdm0 --wds-get-profile-list="3gpp"
+# Profile list retrieved:
+# 	[1] 3gpp - 
+# 		APN: 'internet.ht.hr'
+# 		PDP type: 'ipv4'
+# 		PDP context number: '1'
+# 		Username: ''
+# 		Password: ''
+# 		Auth: 'none'
+# 		No roaming: 'no'
+# 		APN disabled: 'no'
