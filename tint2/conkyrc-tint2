@@ -21,7 +21,7 @@ conky.text = [[
     "temp": "${hwmon coretemp temp 1}"
   },
   "bat": {
-    "perc": "${battery_percent}",
+    "perc": "${battery_percent all}",
     "time": "${battery_time}"
   },
   "mem": {
