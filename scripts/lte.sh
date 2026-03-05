@@ -32,7 +32,7 @@ _gateway="$(_parse 'IPv4 gateway address')"
 _dns1="$(_parse 'IPv4 primary DNS')"
 _dns2="$(_parse 'IPv4 secondary DNS')"
 
-_prefix=$(_get_prefix "${_ip}" "${_mask}")
+_prefix="$(_get_prefix "${_ip}" "${_mask}")"
 
 ip link set "${_iface}" up
 ip addr add "${_ip}/${_prefix}" dev "${_iface}"
