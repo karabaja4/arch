@@ -136,7 +136,6 @@ const createBatteryTracker = () => {
     if (nowCharging !== charging) {
       charging = nowCharging;
       rates.length = 0;
-      estimatedSeconds = null;
     }
 
     rates.push(rate);
