@@ -220,7 +220,7 @@ const conky = async () => {
   instance.stdout.pipe(JSONStream.parse()).on('data', (result) => {
     data.conky = result;
     print();
-    battery.recordCharge(result?.bat?.perc);
+    battery.recordCharge(parseFloat(result?.bat?.perc));
   }); 
 };
 
