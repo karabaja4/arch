@@ -113,7 +113,6 @@ const createBatteryTracker = () => {
   let lastPercentage = null;
   let lastTimestamp = null;
   let estimatedSeconds = null;
-  let avgRate = 0;
   let charging = null;
   const rates = [];
 
@@ -142,7 +141,7 @@ const createBatteryTracker = () => {
 
     rates.push(rate);
     if (rates.length > 3) rates.shift();
-    avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+    const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
 
     estimatedSeconds = charging
       ? (100 - percentage) / avgRate
@@ -153,7 +152,7 @@ const createBatteryTracker = () => {
   };
 
   const getRemaining = () => {
-    if (estimatedSeconds === null || !isFinite(estimatedSeconds)) return null;
+    if (estimatedSeconds === null) return null;
     const h = Math.floor(estimatedSeconds / 3600);
     const m = Math.floor((estimatedSeconds % 3600) / 60);
     const time = h > 0 ? `${h}h ${m}m` : `${m}m`;
