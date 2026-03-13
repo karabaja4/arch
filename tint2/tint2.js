@@ -107,6 +107,48 @@ const norm = (input) => {
   return `${num} ${unit}B`;
 };
 
+// thinkpad has two batteries so conky remaining time is not correct
+// calculate remaining time manually
+const createBatteryTracker = () => {
+  let lastPercentage = null;
+  let lastTimestamp = null;
+  let remainingSeconds = null;
+  const drainRates = [];
+
+  const recordCharge = (percentage) => {
+    if (percentage == null || isNaN(percentage)) return;
+    const now = Date.now();
+    if (lastPercentage === null || percentage >= lastPercentage) {
+      lastPercentage = percentage;
+      lastTimestamp = now;
+      return;
+    }
+    const elapsedSeconds = (now - lastTimestamp) / 1000;
+    if (elapsedSeconds <= 0) return;
+    const drainRate = (lastPercentage - percentage) / elapsedSeconds;
+    if (drainRate <= 0) return;
+
+    drainRates.push(drainRate);
+    if (drainRates.length > 3) drainRates.shift();
+    const avgDrainRate = drainRates.reduce((a, b) => a + b, 0) / drainRates.length;
+
+    remainingSeconds = percentage / avgDrainRate;
+    lastPercentage = percentage;
+    lastTimestamp = now;
+  };
+
+  const getRemaining = () => {
+    if (remainingSeconds === null) return null;
+    const h = Math.floor(remainingSeconds / 3600);
+    const m = Math.floor((remainingSeconds % 3600) / 60);
+    return h > 0 ? `${h}h ${m}m` : `${m}m`;
+  };
+
+  return { recordCharge, getRemaining };
+};
+
+const battery = createBatteryTracker();
+
 const print = () => {
   let text = '';
   const down = (
@@ -154,7 +196,7 @@ const print = () => {
   // battery
   text += span(icons.battery, colorize3, 'BAT', '$0% ($1)', [
     data?.conky?.bat?.perc, // 0
-    data?.conky?.bat?.time || 'charged' // 1
+    battery.getRemaining() || 'charged' // 1
   ], 0);
 
   let clk = dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss');
@@ -177,6 +219,7 @@ const conky = async () => {
   instance.stdout.pipe(JSONStream.parse()).on('data', (result) => {
     data.conky = result;
     print();
+    battery.recordCharge(result?.bat?.perc);
   }); 
 };
 
