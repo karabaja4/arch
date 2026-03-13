@@ -112,36 +112,41 @@ const norm = (input) => {
 const createBatteryTracker = () => {
   let lastPercentage = null;
   let lastTimestamp = null;
-  let remainingSeconds = null;
-  const drainRates = [];
+  let estimatedSeconds = null;
+  const rates = [];
 
   const recordCharge = (percentage) => {
-    if (percentage == null || isNaN(percentage)) return;
+    if (typeof percentage !== 'number' || !Number.isInteger(percentage) || percentage < 1 || percentage > 100) return;
     const now = Date.now();
     if (lastPercentage === null) {
       lastPercentage = percentage;
       lastTimestamp = now;
       return;
     }
-    if (percentage >= lastPercentage) return;
+    if (percentage === lastPercentage) return;
+
     const elapsedSeconds = (now - lastTimestamp) / 1000;
     if (elapsedSeconds <= 0) return;
-    const drainRate = (lastPercentage - percentage) / elapsedSeconds;
-    if (drainRate <= 0) return;
 
-    drainRates.push(drainRate);
-    if (drainRates.length > 3) drainRates.shift();
-    const avgDrainRate = drainRates.reduce((a, b) => a + b, 0) / drainRates.length;
+    const delta = percentage - lastPercentage;
+    const rate = delta / elapsedSeconds;
 
-    remainingSeconds = percentage / avgDrainRate;
+    rates.push(rate);
+    if (rates.length > 3) rates.shift();
+    const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+
+    estimatedSeconds = avgRate > 0
+      ? (100 - percentage) / avgRate
+      : percentage / -avgRate;
+
     lastPercentage = percentage;
     lastTimestamp = now;
   };
 
   const getRemaining = () => {
-    if (remainingSeconds === null) return null;
-    const h = Math.floor(remainingSeconds / 3600);
-    const m = Math.floor((remainingSeconds % 3600) / 60);
+    if (estimatedSeconds === null) return null;
+    const h = Math.floor(estimatedSeconds / 3600);
+    const m = Math.floor((estimatedSeconds % 3600) / 60);
     return h > 0 ? `${h}h ${m}m` : `${m}m`;
   };
 
