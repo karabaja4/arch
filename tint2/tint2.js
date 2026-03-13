@@ -137,6 +137,7 @@ const createBatteryTracker = () => {
     if (nowCharging !== charging) {
       charging = nowCharging;
       rates.length = 0;
+      estimatedSeconds = null;
     }
 
     rates.push(rate);
@@ -152,7 +153,7 @@ const createBatteryTracker = () => {
   };
 
   const getRemaining = () => {
-    if (estimatedSeconds === null) return null;
+    if (estimatedSeconds === null || !isFinite(estimatedSeconds)) return null;
     const h = Math.floor(estimatedSeconds / 3600);
     const m = Math.floor((estimatedSeconds % 3600) / 60);
     const time = h > 0 ? `${h}h ${m}m` : `${m}m`;
