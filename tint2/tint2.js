@@ -208,9 +208,10 @@ const print = () => {
   }
   
   // battery
+  const batteryRemaining = data?.conky?.bat?.time && battery.getRemaining();
   text += span(icons.battery, colorize3, 'BAT', '$0%$1', [
     data?.conky?.bat?.perc, // 0
-    data?.conky?.bat?.time ? battery.getRemaining() : 'charged' // 1
+    batteryRemaining ? ` (${batteryRemaining})` : '' // 1
   ], 0);
 
   let clk = dayjs().format('dddd, MMMM, DD.MM.YYYY. HH:mm:ss');
