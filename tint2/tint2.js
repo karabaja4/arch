@@ -118,11 +118,12 @@ const createBatteryTracker = () => {
   const recordCharge = (percentage) => {
     if (percentage == null || isNaN(percentage)) return;
     const now = Date.now();
-    if (lastPercentage === null || percentage >= lastPercentage) {
+    if (lastPercentage === null) {
       lastPercentage = percentage;
       lastTimestamp = now;
       return;
     }
+    if (percentage >= lastPercentage) return;
     const elapsedSeconds = (now - lastTimestamp) / 1000;
     if (elapsedSeconds <= 0) return;
     const drainRate = (lastPercentage - percentage) / elapsedSeconds;
