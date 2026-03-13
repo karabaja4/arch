@@ -20,7 +20,7 @@ _rtl_monitors="
 # 4cea8aee318363210372cd034c591ce8 = DELL U2412M
 # 5760f56f845302e774c86dd475500d09 = Legion 7 OLED
 
-_primary_monitor="712a4914850c9b6e3a97c14350e23dbe"
+_primary_monitor="6677d5f74e2f795bc14c9720f6dca12d"
 
 #####################
 
