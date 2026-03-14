@@ -1,7 +1,8 @@
+let lastCharging = null;
 let lastPercentage = null;
 let lastTimestamp = null;
+
 let estimatedSeconds = null;
-let charging = null;
 const rates = [];
 
 const recordCharge = (percentage) => {
@@ -14,23 +15,30 @@ const recordCharge = (percentage) => {
   }
   if (percentage === lastPercentage) return;
 
+  const nowCharging = percentage > lastPercentage;
+  
+  if (lastCharging !== null && nowCharging !== lastCharging) {
+    lastCharging = nowCharging;
+    lastPercentage = percentage;
+    lastTimestamp = now;
+    rates.length = 0;
+    estimatedSeconds = null;
+    return;
+  }
+  
+  lastCharging = nowCharging;
+  
   const elapsedSeconds = (now - lastTimestamp) / 1000;
   if (elapsedSeconds <= 0) return;
 
   const delta = percentage - lastPercentage;
   const rate = delta / elapsedSeconds;
 
-  const nowCharging = delta > 0;
-  if (nowCharging !== charging) {
-    charging = nowCharging;
-    rates.length = 0;
-  }
-
   rates.push(rate);
   if (rates.length > 3) rates.shift();
   const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
 
-  estimatedSeconds = charging
+  estimatedSeconds = lastCharging
     ? (100 - percentage) / avgRate
     : percentage / -avgRate;
 
@@ -43,7 +51,7 @@ const getRemaining = () => {
   const h = Math.floor(estimatedSeconds / 3600);
   const m = Math.floor((estimatedSeconds % 3600) / 60);
   const time = h > 0 ? `${h}h ${m}m` : `${m}m`;
-  return charging ? `${time}, charging` : `${time}, discharging`;
+  return lastCharging ? `${time}, charging` : `${time}, discharging`;
 };
 
 module.exports = {
