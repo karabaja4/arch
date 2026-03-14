@@ -48,7 +48,7 @@ wchar_t *worddelimiters = L" `'\"()[]{}";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
-static unsigned int tripleclicktimeout = 600;
+static unsigned int tripleclicktimeout = 0;
 
 /* alt screens */
 int allowaltscreen = 1;
