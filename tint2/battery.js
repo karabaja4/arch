@@ -17,7 +17,7 @@ const recordCharge = (percentage) => {
 
   const nowCharging = percentage > lastPercentage;
   
-  if (lastCharging !== null && nowCharging !== lastCharging) {
+  if (nowCharging !== lastCharging) {
     // reset everything on direction flip and start over
     lastCharging = nowCharging;
     lastPercentage = percentage;
@@ -26,8 +26,6 @@ const recordCharge = (percentage) => {
     estimatedMs = null;
     return;
   }
-  
-  lastCharging = nowCharging;
   
   const elapsed = now - lastTimestamp;
   if (elapsed <= 0) return;
