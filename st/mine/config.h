@@ -44,7 +44,7 @@ static float chscale = 1.0;
  *
  * More advanced example: L" `'\"()[]{}"
  */
-wchar_t *worddelimiters = L" ";
+wchar_t *worddelimiters = L" `'\"()[]{}";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
@@ -129,8 +129,8 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+	"#808080", /* cursor */
+	"#FAFAFA", /* cursor inverted */
 	"#212121", /* default foreground colour */
 	"#FAFAFA", /* default background colour */
 };
