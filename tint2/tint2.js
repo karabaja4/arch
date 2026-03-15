@@ -154,7 +154,7 @@ const print = () => {
   }
   
   // battery
-  const batteryRemaining = data?.conky?.bat?.time ? battery.getRemaining() : 'charged';
+  const batteryRemaining = battery.getRemaining();
   text += span(icons.battery, colorize3, 'BAT', '$0%$1', [
     data?.conky?.bat?.perc, // 0
     batteryRemaining ? ` (${batteryRemaining})` : '' // 1
