@@ -47,6 +47,8 @@ const recordCharge = (percentage) => {
 
 const getRemaining = () => {
   if (estimatedMs === null) return null;
+  if (lastPercentage === 100) return "charged";
+  if (lastPercentage === 0) return "empty";
   const totalSeconds = estimatedMs / 1000;
   const h = Math.floor(totalSeconds / 3600);
   const m = Math.floor((totalSeconds % 3600) / 60);
