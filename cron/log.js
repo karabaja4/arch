@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const logpath = '/tmp/cron.log';
+const logpath = '/var/log/cron.log';
 
 const stream = fs.createWriteStream(logpath, { flags: 'a' });
 
