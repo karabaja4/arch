@@ -50,7 +50,7 @@ bruno)
     _run bruno
     ;;
 pd2)
-    cd /home/igor/games/pd2/ProjectD2 || exit
+    cd '/home/igor/.wine/drive_c/Games/Diablo II/ProjectD2/' || exit
     _run wine Game.exe -3dfx
     ;;
 wow)
