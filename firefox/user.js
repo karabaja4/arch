@@ -241,6 +241,9 @@ user_pref("browser.tabs.hoverPreview.enabled", false);
 // no restore crashes
 user_pref("browser.sessionstore.resume_from_crash", false);
 
+// no weather widget
+user_pref("browser.newtabpage.activity-stream.showWeather", false);
+
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
 ****************************************************************************/
