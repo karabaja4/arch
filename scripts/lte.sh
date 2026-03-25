@@ -52,3 +52,6 @@ printf 'Connected.\nIP: %s\nGateway: %s\nDNS1: %s\nDNS2: %s\n' "${_ip}" "${_gate
 # 		Auth: 'none'
 # 		No roaming: 'no'
 # 		APN disabled: 'no'
+#
+# qmicli --device-open-proxy --device=/dev/cdc-wdm0 \
+#   --wds-create-profile="3gpp,apn=internet.ht.hr,pdp-type=IP,auth=none"
