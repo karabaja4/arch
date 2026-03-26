@@ -18,7 +18,6 @@
  * SECTION: FASTFOX                                                         *
 ****************************************************************************/
 user_pref("gfx.canvas.accelerated.cache-size", 256); // reset pref
-user_pref("gfx.webrender.layer-compositor", true);
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
@@ -242,14 +241,6 @@ user_pref("browser.sessionstore.resume_from_crash", false);
 
 // no weather widget
 user_pref("browser.newtabpage.activity-stream.showWeather", false);
-
-/****************************************************************************
- * SECTION: SMOOTHFOX                                                       *
-****************************************************************************/
-// visit https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
-// Enter your scrolling overrides below this line:
-
-
 
 /****************************************************************************
  * END: BETTERFOX                                                           *
