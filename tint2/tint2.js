@@ -58,7 +58,7 @@ const mkdisk = (mountpoint, icon, label, partuuid) => {
 
 // disks
 const disks = [
-  mkdisk('/', icons.ssd, 'SSD', '68faa264-8fa3-4410-a714-f460a9f91a2a')
+  mkdisk('/', icons.ssd, 'SSD', '6e54841c-a0ba-419c-b3f2-99b3ebca7b25')
   //mkdisk('/home/igor/_mmc', icons.mmc, 'MMC', '78DD72146717D509')
 ];
 
