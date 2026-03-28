@@ -1,0 +1,4 @@
+Server = https://de-nue.soulharsh007.dev/archlinux/$repo/os/$arch
+#Server = https://arch.jensgutermuth.de/$repo/os/$arch
+#Server = https://mirror.moson.org/arch/$repo/os/$arch
+#Server = https://at.arch.niranjan.co/$repo/os/$arch

@@ -10,7 +10,7 @@
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 148                                                             *
+ * version: 149                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
 ****************************************************************************/
 
@@ -18,7 +18,6 @@
  * SECTION: FASTFOX                                                         *
 ****************************************************************************/
 user_pref("gfx.canvas.accelerated.cache-size", 256); // reset pref
-user_pref("gfx.webrender.layer-compositor", true);
 user_pref("gfx.webrender.all", true);
 
 /****************************************************************************
@@ -244,13 +243,8 @@ user_pref("browser.sessionstore.resume_from_crash", false);
 // no weather widget
 user_pref("browser.newtabpage.activity-stream.showWeather", false);
 
-/****************************************************************************
- * SECTION: SMOOTHFOX                                                       *
-****************************************************************************/
-// visit https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
-// Enter your scrolling overrides below this line:
-
-
+// layer compositor
+user_pref("gfx.webrender.layer-compositor", true);
 
 /****************************************************************************
  * END: BETTERFOX                                                           *

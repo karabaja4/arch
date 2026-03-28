@@ -13,7 +13,7 @@ alias c='clear'
 alias x='exit'
 alias sr='screen -r'
 alias sn='screen -S'
-alias speedtest='wget https://download.manjaro.org/i3/25.0.3/manjaro-i3-25.0.3-250609-linux612.iso -O /dev/null'
+alias speedtest='wget https://de-nue.soulharsh007.dev/archlinux/iso/2026.03.01/archlinux-x86_64.iso -O /dev/null'
 alias myip='curl https://avacyn.radiance.hr/ip'
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'
 

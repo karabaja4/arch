@@ -33,7 +33,7 @@ alias suspend='doas /home/igor/arch/scripts/suspend.sh'
 
 alias rsnc='doas pacman -Rsnc'
 alias work='/home/igor/arch/scripts/work.sh'
-alias speedtest='wget https://download.manjaro.org/i3/25.0.3/manjaro-i3-25.0.3-250609-linux612.iso -O /dev/null'
+alias speedtest='wget https://de-nue.soulharsh007.dev/archlinux/iso/2026.03.01/archlinux-x86_64.iso -O /dev/null'
 alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
 alias fixres='/home/igor/arch/scripts/fixres.sh'
@@ -57,7 +57,7 @@ umountall() {
 }
 
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'
-alias ddiff='code --diff'
+alias ddiff='code --new-window --diff'
 alias wget='wget --no-hsts'
 alias ytdlhq='yt-dlp -f "bestaudio/best" -o "%(title)s.%(ext)s" -v --extract-audio --audio-quality 0 --audio-format mp3 '
 alias ytdl='/home/igor/arch/scripts/ytdl.sh'
