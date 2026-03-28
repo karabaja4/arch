@@ -31,8 +31,7 @@ virtualbox)
     _run VirtualBox
     ;;
 discord)
-    _load_apulse
-    _run discord --disable-smooth-scrolling
+    _run chromium --app="https://discord.com/app" --user-data-dir=/home/igor/.config/chromium-discord
     ;;
 flameshot)
     _run /home/igor/arch/scripts/flameshot.sh
@@ -48,14 +47,6 @@ vncviewer)
     ;;
 bruno)
     _run bruno
-    ;;
-pd2)
-    cd '/home/igor/.wine/drive_c/Games/Diablo II/ProjectD2/' || exit
-    _run wine Game.exe -3dfx
-    ;;
-wow)
-    export LD_PRELOAD="/usr/lib/libwayland-client.so.0:/usr/lib/libwayland-egl.so.1:/usr/lib/libwayland-cursor.so.0"
-    _run /home/igor/games/turtlewow/TurtleWoW.AppImage
     ;;
 *)
     printf '%s\n' "unknown app"

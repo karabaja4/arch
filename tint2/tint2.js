@@ -47,18 +47,18 @@ const icons = {
   battery: mkicon('', fonts.awesome, 8500, -1000)
 };
 
-const mkdisk = (mountpoint, icon, label, uuid) => {
+const mkdisk = (mountpoint, icon, label, partuuid) => {
   return {
     mountpoint: mountpoint,
     icon: icon,
     label: label,
-    uuid: uuid
+    partuuid: partuuid
   }
 };
 
 // disks
 const disks = [
-  mkdisk('/', icons.ssd, 'SSD', '9214470b-a3d4-463e-a272-c2a8bf329fc5')
+  mkdisk('/', icons.ssd, 'SSD', '68faa264-8fa3-4410-a714-f460a9f91a2a')
   //mkdisk('/home/igor/_mmc', icons.mmc, 'MMC', '78DD72146717D509')
 ];
 
@@ -138,12 +138,12 @@ const print = () => {
   for (let i = 0; i < disks.length; i++) {
     const disk = disks[i];
     const avail = (data?.mounts?.[disk.mountpoint] &&
-                   data?.du?.[disk.uuid]?.total &&
-                   data?.du?.[disk.uuid]?.used &&
-                   data?.du?.[disk.uuid]?.available) || null;
+                   data?.du?.[disk.partuuid]?.total &&
+                   data?.du?.[disk.partuuid]?.used &&
+                   data?.du?.[disk.partuuid]?.available) || null;
     const res = [];
     if (avail) {
-      const dfi = data.du[disk.uuid];
+      const dfi = data.du[disk.partuuid];
       const used  = dfi.used;
       const total = used + dfi.available;
       res[0] = Math.floor((used / 1024) / 1024);
@@ -246,8 +246,8 @@ const ping = () => {
 
 const isValidDevice = (device) => {
   return (
-    (device?.uuid != null) &&
-    (typeof device.uuid === 'string') &&
+    (device?.partuuid != null) &&
+    (typeof device.partuuid === 'string') &&
     (device.type === 'part') &&
     Number.isFinite(device.fsavail) &&
     Number.isFinite(device.fssize) &&
@@ -267,13 +267,13 @@ const diskusage = async () => {
         const content = await fs.promises.readFile(dufile, 'utf8');
         result = JSON.parse(content);
       } catch {}
-      const proc = await execFile('lsblk', ['--output', 'UUID,PATH,MOUNTPOINT,FSAVAIL,FSSIZE,FSUSED,TYPE', '--json', '--bytes']);
+      const proc = await execFile('lsblk', ['--output', 'PARTUUID,FSAVAIL,FSSIZE,FSUSED,TYPE', '--json', '--bytes']);
       const parsed = JSON.parse(proc.stdout);
       if (parsed.blockdevices) {
         for (let i = 0; i < parsed.blockdevices.length; i++) {
           const device = parsed.blockdevices[i];
           if (isValidDevice(device)) {
-            result[device.uuid] = {
+            result[device.partuuid] = {
               total: Math.floor(device.fssize / 1024),
               used: Math.floor(device.fsused / 1024),
               available: Math.floor(device.fsavail / 1024)
