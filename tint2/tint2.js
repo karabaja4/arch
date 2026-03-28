@@ -263,7 +263,7 @@ const diskusage = async () => {
         const content = await fs.promises.readFile(dufile, 'utf8');
         result = JSON.parse(content);
       } catch {}
-      const proc = await execFile('lsblk', ['--output', 'PARTUUID,PATH,MOUNTPOINT,FSAVAIL,FSSIZE,FSUSED,TYPE', '--json', '--bytes']);
+      const proc = await execFile('lsblk', ['--output', 'PARTUUID,FSAVAIL,FSSIZE,FSUSED,TYPE', '--json', '--bytes']);
       const parsed = JSON.parse(proc.stdout);
       if (parsed.blockdevices) {
         for (let i = 0; i < parsed.blockdevices.length; i++) {
