@@ -171,3 +171,7 @@ cmd 7z ${{
     done
     7z a -t7z "${f}.7z" "${@}"
 }}
+
+cmd diff ${{
+    code --new-window --diff ${fx}
+}}

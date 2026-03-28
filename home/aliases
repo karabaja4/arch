@@ -58,7 +58,7 @@ umountall() {
 }
 
 alias lsblk='lsblk -o NAME,UUID,FSTYPE,SCHED,RM,SIZE,TYPE,MOUNTPOINTS'
-alias ddiff='code --diff'
+alias ddiff='code --new-window --diff'
 alias wget='wget --no-hsts'
 alias ytdlhq='yt-dlp -f "bestaudio/best" -o "%(title)s.%(ext)s" -v --extract-audio --audio-quality 0 --audio-format mp3 '
 alias ytdl='/home/igor/arch/scripts/ytdl.sh'
