@@ -48,6 +48,10 @@ vncviewer)
 bruno)
     _run bruno
     ;;
+pd2)
+    cd '/home/igor/.wine/drive_c/Games/D2/ProjectD2/' || exit
+    _run wine Game.exe -3dfx
+    ;;
 *)
     printf '%s\n' "unknown app"
     ;;
