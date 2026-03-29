@@ -113,11 +113,13 @@ const print = () => {
   let text = '';
   const down = (
     parseFloat(data?.conky?.eth?.down || 0) +
-    parseFloat(data?.conky?.wifi?.down || 0)
+    parseFloat(data?.conky?.wifi?.down || 0) +
+    parseFloat(data?.conky?.mobile?.down || 0)
   ).toFixed(1);
   const up = (
     parseFloat(data?.conky?.eth?.up || 0) +
-    parseFloat(data?.conky?.wifi?.up || 0)
+    parseFloat(data?.conky?.wifi?.up || 0) +
+    parseFloat(data?.conky?.mobile?.up || 0)
   ).toFixed(1);
   text += span(icons.netdown, colorize1, 'DWN', '$0 KB', [ down ], 0);
   text += span(icons.netup, colorize1, 'UPL', '$0 KB', [ up ], 0);

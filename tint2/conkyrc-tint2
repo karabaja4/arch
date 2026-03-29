@@ -15,6 +15,10 @@ conky.text = [[
     "down": "${downspeedf wlp58s0}",
     "up": "${upspeedf wlp58s0}"
   },
+  "mobile": {
+    "down": "${downspeedf wwp0s20f0u6i12}",
+    "up": "${upspeedf wwp0s20f0u6i12}"
+  },
   "cpu": {
     "perc": "${cpu}",
     "freq": "${freq}",
