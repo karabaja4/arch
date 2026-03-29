@@ -18,26 +18,41 @@ const users = {
   root: { name: 'root', uid: 0,    home: '/root'      }
 };
 
-const definitions = [
+const jobs = [
   {
     id: 'fstrim',
-    path: '/home/igor/arch/scripts/fstrim.sh',
+    command: '/home/igor/arch/scripts/fstrim.sh',
     interval: every.days(7),
-    user: users.root
+    user: users.root,
+    online: false
   },
   {
     id: 'dpms',
-    path: '/home/igor/arch/scripts/dpms.sh',
+    command: '/home/igor/arch/scripts/dpms.sh',
     interval: every.minutes(5),
-    user: users.igor
+    user: users.igor,
+    online: false
   },
   {
     id: 'updates',
-    path: '/home/igor/arch/scripts/updates.sh',
+    command: '/home/igor/arch/scripts/updates.sh',
     interval: every.minutes(5),
-    user: users.igor
+    user: users.igor,
+    online: true
   }
 ];
+
+const isOnline = async () => {
+  try {
+    const res = await fetch('https://avacyn.radiance.hr/ip', {
+      method: 'HEAD',
+      signal: AbortSignal.timeout(2000),
+    });
+    return res.status === 200;
+  } catch {
+    return false;
+  }
+};
 
 const crondir = path.join(os.homedir(), '.local/share/cron');
 const getLastRunTimePath = (id) => path.join(crondir, `${id}.lrt`);
@@ -66,49 +81,55 @@ const setLastRunTime = async (id, ts) => {
   await fs.promises.writeFile(filepath, ts.toString());
 };
 
-const run = async (id, command, interval, user, wait) => {
+const run = async (job, wait) => {
   if (wait > 0) {
-    log.push(id, 'RUN', `Job waiting for ${wait}ms`);
+    log.push(job.id, 'RUN', `Job waiting for ${wait}ms`);
     await timers.setTimeout(wait);
   } else {
-    log.push(id, 'RUN', 'Job is overdue or has never run, starting immediately.');
+    log.push(job.id, 'RUN', 'Job is overdue or has never run, starting immediately.');
   }
   try {
-    log.push(id, 'START', `(UID: ${user.uid}) ${command}`);
-    const content = await exec(command, {
-      uid: user.uid,
-      gid: user.uid,
-      env: { 
-        USER: user.name,
-        HOME: user.home,
-        SHELL: '/bin/sh',
-        PATH: process.env['PATH']
-      },
-      maxBuffer: 1024 * 1024 * 5
-    });
-    if (content.stdout) {
-      log.push(id, 'STDOUT', content.stdout);
+    log.push(job.id, 'START', `(UID: ${job.user.uid}) ${job.command}`);
+    const shouldRun = !job.online || await isOnline();
+    if (!shouldRun) {
+      log.push(job.id, 'ERROR', 'The job requires an internet connection, but none was available.');
     }
-    if (content.stderr) {
-      log.push(id, 'STDERR', content.stderr);
+    if (shouldRun) {
+      const content = await exec(job.command, {
+        uid: job.user.uid,
+        gid: job.user.uid,
+        env: { 
+          USER: job.user.name,
+          HOME: job.user.home,
+          SHELL: '/bin/sh',
+          PATH: process.env['PATH']
+        },
+        maxBuffer: 1024 * 1024 * 5
+      });
+      if (content.stdout) {
+        log.push(job.id, 'STDOUT', content.stdout);
+      }
+      if (content.stderr) {
+        log.push(job.id, 'STDERR', content.stderr);
+      }
     }
-    log.push(id, 'END', 'Job ended.');
+    log.push(job.id, 'END', 'Job ended.');
   } catch (err) {
-    log.push(id, 'ERROR', err);
+    log.push(job.id, 'ERROR', err);
   }
-  await setLastRunTime(id, Date.now());
-  setImmediate(() => run(id, command, interval, user, interval));
+  await setLastRunTime(job.id, Date.now());
+  setImmediate(() => run(job, job.interval));
 };
 
 const main = async () => {
   try {
     await fs.promises.mkdir(crondir, { recursive: true });
-    for (let i = 0; i < definitions.length; i++) {
-      const def = definitions[i];
-      const lastRunTime = await getLastRunTime(def.id);
+    for (let i = 0; i < jobs.length; i++) {
+      const job = jobs[i];
+      const lastRunTime = await getLastRunTime(job.id);
       const elapsed = (lastRunTime === 0) ? Infinity : (Date.now() - lastRunTime);
-      const wait = (elapsed >= def.interval) ? 0 : (def.interval - elapsed);
-      run(def.id, def.path, def.interval, def.user, wait);
+      const wait = (elapsed >= job.interval) ? 0 : (job.interval - elapsed);
+      run(job, wait);
     }
   } catch (err) {
     await log.push('main', 'ERROR', err);
