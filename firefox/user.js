@@ -244,7 +244,7 @@ user_pref("browser.sessionstore.resume_from_crash", false);
 user_pref("browser.newtabpage.activity-stream.showWeather", false);
 
 // layer compositor
-user_pref("gfx.webrender.layer-compositor", true);
+//user_pref("gfx.webrender.layer-compositor", true);
 
 /****************************************************************************
  * END: BETTERFOX                                                           *
