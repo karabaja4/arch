@@ -8,12 +8,12 @@ conky.config = {
 conky.text = [[
 {
   "eth": {
-    "down": "${downspeedf eth0}",
-    "up": "${upspeedf eth0}"
+    "down": "${downspeedf enp0s31f6}",
+    "up": "${upspeedf enp0s31f6}"
   },
   "wifi": {
-    "down": "${downspeedf wlan0}",
-    "up": "${upspeedf wlan0}"
+    "down": "${downspeedf wlp58s0}",
+    "up": "${upspeedf wlp58s0}"
   },
   "cpu": {
     "perc": "${cpu}",
