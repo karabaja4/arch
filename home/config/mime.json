@@ -8,7 +8,8 @@
     "pdf,epub": "mupdf -r 140 $arg",
     "htm,html": "chromium $arg",
     "exe": "wine $arg",
-    "doc,xls,ppt,docx,xlsx,pptx,odt": "onlyoffice-desktopeditors $arg"
+    "doc,xls,ppt,docx,xlsx,pptx,odt": "onlyoffice-desktopeditors $arg",
+    "AppImage": "$arg"
   },
   "mimetypes": {
     "text/*": "qtextpad $arg",
