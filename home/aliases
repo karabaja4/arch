@@ -33,6 +33,7 @@ alias suspend='doas /home/igor/arch/scripts/suspend.sh'
 
 alias rsnc='doas pacman -Rsnc'
 alias work='/home/igor/arch/scripts/work.sh'
+alias menu='/home/igor/arch/tint2/menu.sh'
 alias speedtest='wget https://de-nue.soulharsh007.dev/archlinux/iso/2026.03.01/archlinux-x86_64.iso -O /dev/null'
 alias syu='doas pacman -Syu'
 alias aur='auracle outdated'
