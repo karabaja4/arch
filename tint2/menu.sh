@@ -52,6 +52,10 @@ pd2)
     cd '/home/igor/.wine/drive_c/Games/D2/ProjectD2/' || exit
     _run wine Game.exe -3dfx
     ;;
+nfs4)
+    cd '/home/igor/.wine/drive_c/Games/NFS4' || exit
+    _run wine nfs4.exe
+    ;;
 wow)
     export LD_PRELOAD="/usr/lib/libwayland-client.so.0:/usr/lib/libwayland-egl.so.1:/usr/lib/libwayland-cursor.so.0"
     _run /home/igor/games/turtlewow/TurtleWoW.AppImage
