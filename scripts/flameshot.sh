@@ -1,10 +1,6 @@
 #!/bin/sh
 set -eu
 
-_path='/tmp/flameshot'
-_png="${_path}.png"
-_bmp="${_path}.bmp"
-
 _copy() {
     _ext="${1##*.}"
     printf "Copying %s to clipboard as %s\n" "${1}" "${_ext}"
@@ -25,6 +21,10 @@ _vbox() {
 _main() {
     # scaling screws screens up
     export QT_ENABLE_HIGHDPI_SCALING=0
+    
+    _path='/tmp/flameshot'
+    _png="${_path}.png"
+    _bmp="${_path}.bmp"
     
     rm -f "${_png}" "${_bmp}"
     flameshot gui -r > "${_png}"
