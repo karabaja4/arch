@@ -4,28 +4,38 @@ set -eu
 # scaling screws screens up
 export QT_ENABLE_HIGHDPI_SCALING=0
 
-_path='/tmp/flameshot.png'
+_path='/tmp/flameshot'
+_png="${_path}.png"
+_bmp="${_path}.bmp"
 
-rm -rf "${_path}"
-flameshot gui -r > "${_path}"
+_copy() {
+    _ext="${1##*.}"
+    printf "Copying %s to clipboard as %s\n" "${1}" "${_ext}"
+    xclip -in -selection clipboard -t "image/${_ext}" "${1}"
+}
 
-if [ -s "${_path}" ]
+_vbox() {
+    _wmout="$(wmctrl -l 2>/dev/null)"
+    case "${_wmout}" in
+        *'FreeRDP:'* | \
+        *'ws2008r2-v2 [Running] - Oracle VirtualBox'*)
+            return 0
+            ;;
+    esac
+    return 1
+}
+
+rm -f "${_png}" "${_bmp}"
+flameshot gui -r > "${_png}"
+
+if [ -s "${_png}" ]
 then
-    _type='image/png'
-    if [ "${1-}" != '--no-convert' ]
+    if [ "${1-}" = '--no-convert' ] || ! _vbox
     then
-        _wmout="$(wmctrl -l 2>/dev/null)"
-
-        # virtualbox only supports bmp
-        case "${_wmout}" in
-            *'FreeRDP:'* | \
-            *'ws2008r2-v2 [Running] - Oracle VirtualBox'*)
-                printf 'Converting %s to bmp\n' "${_path}"
-                magick "${_path}" "bmp:${_path}"
-                _type='image/bmp'
-                ;;
-        esac
+        _copy "${_png}"
+    else
+        printf 'Converting %s to %s\n' "${_png}" "${_bmp}"
+        magick "${_png}" "bmp:${_bmp}"
+        _copy "${_bmp}"
     fi
-
-    xclip -in -selection clipboard -t "${_type}" "${_path}"
 fi
