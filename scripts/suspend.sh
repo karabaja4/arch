@@ -18,7 +18,7 @@ _toggle_wakeup() {
 }
 
 _nvidia() {
-    if [ -x "/usr/bin/nvidia-sleep.sh" ]
+    if [ -x "/usr/bin/nvidia-sleep.sh" ] && [ -f "/proc/driver/nvidia/suspend" ]
     then
         /usr/bin/nvidia-sleep.sh "${1}"
     fi
