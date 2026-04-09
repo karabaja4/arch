@@ -19,4 +19,3 @@ iptables -A INPUT -i lo -j ACCEPT
 
 # Allow all traffic on wifi
 iptables -A INPUT -i wlp58s0 -j ACCEPT
-
