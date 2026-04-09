@@ -17,3 +17,6 @@ iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 # Allow all traffic on the loopback interface
 iptables -A INPUT -i lo -j ACCEPT
 
+# Allow all traffic on wifi
+iptables -A INPUT -i wlp58s0 -j ACCEPT
+
