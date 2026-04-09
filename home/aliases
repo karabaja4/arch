@@ -41,6 +41,7 @@ alias fixres='/home/igor/arch/scripts/fixres.sh'
 alias snd='/home/igor/arch/scripts/sound.sh'
 alias wifi='doas /home/igor/arch/scripts/wifi.sh'
 alias lte='doas /home/igor/arch/scripts/lte.sh'
+alias ap='doas /home/igor/arch/scripts/ap.sh'
 
 alias mountall='doas /home/igor/arch/scripts/mount.sh private public disk'
 
