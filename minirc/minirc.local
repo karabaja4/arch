@@ -23,6 +23,9 @@ _loadsysctl '50-pid-max.conf'
 # prevent kernel from printing messages into framebuffer
 _set '0' '/proc/sys/kernel/printk'
 
+# set performance profile
+printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
+
 # enable firewall because of lte and no nat
 iptables-restore < /home/igor/arch/iptables/rules
 
