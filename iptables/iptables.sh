@@ -17,5 +17,9 @@ iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 # Allow all traffic on the loopback interface
 iptables -A INPUT -i lo -j ACCEPT
 
-# Allow all traffic on wifi
-iptables -A INPUT -i wlp58s0 -j ACCEPT
+# Allow DHCP on wifi (dnsmasq)
+iptables -A INPUT -i wlp58s0 -p udp --dport 67 -j ACCEPT
+
+# Allow DNS on wifi (dnsmasq)
+iptables -A INPUT -i wlp58s0 -p udp --dport 53 -j ACCEPT
+iptables -A INPUT -i wlp58s0 -p tcp --dport 53 -j ACCEPT
