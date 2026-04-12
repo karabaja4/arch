@@ -42,7 +42,7 @@ export MOZ_CRASHREPORTER_DISABLE=1
 # VDPAU
 if nvidia-smi --query-gpu=gpu_name --format=csv,noheader > /dev/null 2>&1
 then
-    export __GL_SYNC_TO_VBLANK=1
+    export __GL_SYNC_TO_VBLANK=0
     export CUDA_DISABLE_PERF_BOOST=1
     export LIBVA_DRIVER_NAME='nvidia'
 else
