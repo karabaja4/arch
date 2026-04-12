@@ -44,14 +44,5 @@ zramctl /dev/zram0 --algorithm zstd --size 8G
 mkswap -U clear /dev/zram0
 swapon --discard --priority 100 /dev/zram0
 
-# use tearfree config on intel gpu
-_intel_conf='/etc/X11/xorg.conf.d/20-intel.conf'
-if nvidia-smi --query-gpu=gpu_name --format=csv,noheader > /dev/null 2>&1
-then
-    rm -f "${_intel_conf}"
-else
-    cp "/home/igor/arch${_intel_conf}" "${_intel_conf}"
-fi
-
 # write /etc/issue to display a nice greeting message
 /home/igor/arch/scripts/info.sh > /etc/issue
