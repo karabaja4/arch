@@ -47,6 +47,8 @@ sha512sums=('8c1fafb41d678a6e7d9cd5df3b2bdb5c30e22b3e7a53f5e4bc38e00a23af687364e
 
 prepare() {
   cd ${pkgbase}
+  
+  # https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/1006
   patch -p1 -i ../1006.patch
 }
 
