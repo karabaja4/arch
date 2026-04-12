@@ -42,9 +42,9 @@ swapon --discard --priority 100 /dev/zram0
 _intel_conf='/etc/X11/xorg.conf.d/20-intel.conf'
 if nvidia-smi --query-gpu=gpu_name --format=csv,noheader > /dev/null 2>&1
 then
-    cp "/home/igor/arch${_intel_conf}" "${_intel_conf}"
+    rm -f "${_intel_conf}"
 else
-    rm "${_intel_conf}"
+    cp "/home/igor/arch${_intel_conf}" "${_intel_conf}"
 fi
 
 # write /etc/issue to display a nice greeting message
