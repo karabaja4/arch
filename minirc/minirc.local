@@ -31,13 +31,19 @@ iptables-restore < /home/igor/arch/iptables/rules
 
 # XDG_RUNTIME_DIR
 _uid='1000'
-_xdg_runtime_dir="/run/user/${_uid}"
-if [ ! -d "${_xdg_runtime_dir}" ]
-then
-    mkdir -p "${_xdg_runtime_dir}"
-    chown "${_uid}:${_uid}" "${_xdg_runtime_dir}"
-    chmod 700 "${_xdg_runtime_dir}"
-fi
+_user_mkdir() {
+    if [ ! -d "${1}" ]
+    then
+        mkdir -p "${1}"
+        chown "${_uid}:${_uid}" "${1}"
+        chmod 700 "${1}"
+    fi
+}
+
+# XDG_RUNTIME_DIR
+_user_mkdir "/run/user/${_uid}"
+_user_mkdir "/tmp/virtualbox"
+_user_mkdir "/tmp/xdg-dirs"
 
 # activate zram swap
 zramctl /dev/zram0 --algorithm zstd --size 8G
