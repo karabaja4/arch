@@ -15,11 +15,6 @@
 ****************************************************************************/
 
 /****************************************************************************
- * SECTION: FASTFOX                                                         *
-****************************************************************************/
-user_pref("gfx.webrender.all", true);
-
-/****************************************************************************
  * SECTION: SECUREFOX                                                       *
 ****************************************************************************/
 /** TRACKING PROTECTION ***/
@@ -244,6 +239,9 @@ user_pref("browser.newtabpage.activity-stream.showWeather", false);
 
 // layer compositor
 user_pref("gfx.webrender.layer-compositor", true);
+
+// force webrender on thinkpad
+user_pref("gfx.webrender.all", true);
 
 /****************************************************************************
  * END: BETTERFOX                                                           *
