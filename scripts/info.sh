@@ -5,6 +5,20 @@ clear
 
 _uid="$(id -u)"
 
+_wrong_gpu=' (!) WRONG GPU BOOTED (!)'
+_nvidia_poison='i915.enable_psr=0'
+_intel_poison='modprobe.blacklist=i915'
+_cmdline='/proc/cmdline'
+
+_print_wrong_gpu_warning() {
+    if [ "${_uid}" -eq 0 ]
+    then
+        printf ' \033[93m%s\033[0m' "${_wrong_gpu}"
+    else
+        printf ' %s' "${_wrong_gpu}"
+    fi
+}
+
 _get_lspci_gpu() {
     _gpu_name='unknown'
     if command -v lspci > /dev/null 2>&1
@@ -24,10 +38,15 @@ _get_lspci_gpu() {
     if [ "${_uid}" -eq 0 ]
     then
         # print gpu in color on welcome screen
-        printf '\033[96m%s\033[0m\n' "${_gpu_name}"
+        printf '\033[96m%s\033[0m' "${_gpu_name}"
     else
-        printf '%s\n' "${_gpu_name}"
+        printf '%s' "${_gpu_name}"
     fi
+    if grep -q "${_intel_poison}" "${_cmdline}"
+    then
+        _print_wrong_gpu_warning
+    fi
+    printf '\n'
 }
 
 _get_nvidia_gpu() {
@@ -38,10 +57,15 @@ _get_nvidia_gpu() {
             if [ "${_uid}" -eq 0 ]
             then
                 # print gpu in color on welcome screen
-                printf '\033[91m%s\033[0m\n' "${_nvidia_out}"
+                printf '\033[91m%s\033[0m' "${_nvidia_out}"
             else
-                printf '%s\n' "${_nvidia_out}"
+                printf '%s' "${_nvidia_out}"
             fi
+            if grep -q "${_nvidia_poison}" "${_cmdline}"
+            then
+                _print_wrong_gpu_warning
+            fi
+            printf '\n'
         else
             return 1
         fi
