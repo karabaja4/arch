@@ -42,7 +42,6 @@ _user_mkdir() {
 
 # XDG_RUNTIME_DIR
 _user_mkdir "/run/user/${_uid}"
-_user_mkdir "/tmp/virtualbox"
 _user_mkdir "/tmp/xdg-dirs"
 
 # activate zram swap

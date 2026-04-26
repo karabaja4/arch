@@ -40,7 +40,7 @@ export MOZ_DISABLE_RDD_SANDBOX=1
 export MOZ_CRASHREPORTER_DISABLE=1
 
 # virtualbox
-export VBOX_LOG_DEST="dir=/tmp/virtualbox"
+export VBOX_LOG_DEST="nofile"
 
 # libva
 export LIBVA_DRIVER_NAME='iHD'
