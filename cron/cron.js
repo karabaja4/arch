@@ -138,4 +138,18 @@ const main = async () => {
   }
 };
 
+const shutdown = async () => {
+  try {
+    await log.push('main', 'SHUTDOWN', 'Shutting down, goodbye.');
+    await log.close();
+    console.log('Exiting.');
+  } finally {
+    process.exit(0);
+  }
+};
+
+process.on('SIGHUP', shutdown);
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
+
 main();
