@@ -12,19 +12,21 @@ const unpack = (err) => {
   }
 };
 
+let canWrite = true;
+
 const push = (source, type, message) => {
-  return new Promise((resolve, reject) => {
-    const utc = (new Date()).toISOString();
-    const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
-    console.log(formatted);
-    stream.write(`${formatted}\n`, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
+  const utc = (new Date()).toISOString();
+  const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
+  console.log(formatted);
+
+  if (!canWrite) return;
+  
+  canWrite = stream.write(`${formatted}\n`);
+  if (!canWrite) {
+    stream.once('drain', () => {
+      canWrite = true;
     });
-  });
+  }
 };
 
 const close = () => new Promise((resolve) => stream.end(resolve));
