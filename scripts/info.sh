@@ -113,7 +113,7 @@ then
     printf '\n'
 fi
 _colorize_root "97" "  $(_get_distro) @ $(_get_kernel)"
-printf '\n'
+printf '\n\n'
 printf '  %s\n\n' "$(_get_kernel_params)"
 printf '  * CPU:      %s\n' "$(_get_cpu)"
 printf '  * GPU:      %s\n' "$(_get_nvidia_gpu || _get_lspci_gpu)"
