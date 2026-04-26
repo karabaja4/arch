@@ -5,17 +5,17 @@ clear
 
 _uid="$(id -u)"
 
-_wrong_gpu=' (!) WRONG GPU BOOTED (!)'
+_wrong_gpu='  (!) WRONG GPU BOOTED (!)'
 _nvidia_poison='i915.enable_psr=0'
 _intel_poison='modprobe.blacklist=i915'
 _cmdline='/proc/cmdline'
 
-_print_wrong_gpu_warning() {
+_colorize_root() {
     if [ "${_uid}" -eq 0 ]
     then
-        printf ' \033[93m%s\033[0m' "${_wrong_gpu}"
+        printf '\033[%sm%s\033[0m' "${1}" "${2}"
     else
-        printf ' %s' "${_wrong_gpu}"
+        printf '%s' "${2}"
     fi
 }
 
@@ -35,16 +35,10 @@ _get_lspci_gpu() {
                 ;;
         esac
     fi
-    if [ "${_uid}" -eq 0 ]
-    then
-        # print gpu in color on welcome screen
-        printf '\033[96m%s\033[0m' "${_gpu_name}"
-    else
-        printf '%s' "${_gpu_name}"
-    fi
+    _colorize_root "96" "${_gpu_name}"
     if grep -q "${_intel_poison}" "${_cmdline}"
     then
-        _print_wrong_gpu_warning
+        _colorize_root "93" "${_wrong_gpu}"
     fi
     printf '\n'
 }
@@ -54,16 +48,10 @@ _get_nvidia_gpu() {
     then
         if _nvidia_out="$(nvidia-smi --query-gpu=gpu_name --format=csv,noheader 2>/dev/null)"
         then
-            if [ "${_uid}" -eq 0 ]
-            then
-                # print gpu in color on welcome screen
-                printf '\033[91m%s\033[0m' "${_nvidia_out}"
-            else
-                printf '%s' "${_nvidia_out}"
-            fi
+            _colorize_root "91" "${_nvidia_out}"
             if grep -q "${_nvidia_poison}" "${_cmdline}"
             then
-                _print_wrong_gpu_warning
+                _colorize_root "93" "${_wrong_gpu}"
             fi
             printf '\n'
         else
@@ -121,7 +109,8 @@ fi
 printf '\n'
 if [ -n "${_system_model}" ]
 then
-    printf '  %s\n' "${_system_model}"
+    _colorize_root "97" "  ${_system_model}"
+    printf '\n'
 fi
 printf '  %s @ %s\n' "$(_get_distro)" "$(_get_kernel)"
 printf '  %s\n\n' "$(_get_kernel_params)"
@@ -146,10 +135,8 @@ _print_color_row() {
     done
 }
 
-_print_color_row 30
+_print_color_row "30"
 printf '\n  '
-_print_color_row 90
+_print_color_row "90"
 
 printf '\n\n'
-
-#/home/igor/arch/scripts/scrot.sh > /dev/null
