@@ -142,6 +142,7 @@ const shutdown = async () => {
   try {
     await log.push('main', 'SHUTDOWN', 'Shutting down, goodbye.');
     await log.close();
+    console.log('Exiting.');
   } finally {
     process.exit(0);
   }
