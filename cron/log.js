@@ -12,6 +12,10 @@ const unpack = (err) => {
   }
 };
 
+stream.on('error', (err) => {
+  console.log(unpack(err));
+});
+
 let canWrite = true;
 
 const push = (source, type, message) => {
@@ -29,7 +33,9 @@ const push = (source, type, message) => {
   }
 };
 
-const close = () => new Promise((resolve) => stream.end(resolve));
+const close = () => {
+  return new Promise((resolve) => stream.end(resolve));
+};
 
 module.exports = {
   push,
