@@ -45,9 +45,10 @@ export VBOX_LOG_DEST="nofile"
 # VDPAU
 if [ -f '/etc/X11/xorg.conf.d/20-intel.conf' ]
 then
+    export LIBVA_DRIVER_NAME='iHD'
+
+else
     export __GL_SYNC_TO_VBLANK=1
     export CUDA_DISABLE_PERF_BOOST=1
     export LIBVA_DRIVER_NAME='nvidia'
-else
-    export LIBVA_DRIVER_NAME='iHD'
 fi
