@@ -43,7 +43,7 @@ export MOZ_CRASHREPORTER_DISABLE=1
 export VBOX_LOG_DEST="nofile"
 
 # VDPAU
-if nvidia-smi --query-gpu=gpu_name --format=csv,noheader > /dev/null 2>&1
+if [ -f '/etc/X11/xorg.conf.d/20-intel.conf' ]
 then
     export __GL_SYNC_TO_VBLANK=1
     export CUDA_DISABLE_PERF_BOOST=1
