@@ -47,7 +47,7 @@ sha512sums=('81644a6a95b387fdd8e5582100d63cf4efbe6353e6a6b9bdd6435555018f6bae931
 
 prepare() {
   cd ${pkgbase}
-  sed -i '110s/SET_ABI_VERSION(25, 2)/SET_ABI_VERSION(25, 3)/' ../1006.patch
+  sed -i '110s/SET_ABI_VERSION(25, 3)/SET_ABI_VERSION(25, 2)/' ../1006.patch
   # https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/1006
   patch -p1 -i ../1006.patch
 }
