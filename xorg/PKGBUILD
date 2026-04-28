@@ -34,7 +34,7 @@ makedepends=('xorgproto' 'pixman' 'libx11' 'mesa' 'mesa-libgl' 'xtrans'
 source=(${pkgbase}::git+https://gitlab.freedesktop.org/xorg/xserver.git?signed#tag=${pkgbase}-${pkgver}
         xvfb-run # with updates from FC master
         xvfb-run.1
-        1006.patch
+        https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/1006.patch
 )
 validpgpkeys=('3C2C43D9447D5938EF4551EBE23B7E70B467F0BF'  # Peter Hutterer (Who-T) <office@who-t.net>
               '67DC86F2623FC5FD4BB5225D14706DBE1E4B4540'  # Olivier Fourdan <fourdan@xfce.org>
@@ -43,11 +43,11 @@ validpgpkeys=('3C2C43D9447D5938EF4551EBE23B7E70B467F0BF'  # Peter Hutterer (Who-
 sha512sums=('81644a6a95b387fdd8e5582100d63cf4efbe6353e6a6b9bdd6435555018f6bae9318fb3f67c5a2f574b9b4b997917c077027162f37fc26f94b0745d6f531fba6'
             '672375cb5028ba9cda286e317d17bd8c9a9039483e7f79c21f223fd08ba07655729e9f59a082f4b8f5d8de45a77a9e9affce1002fb8c6657e26ef1a490654e49'
             'de5e2cb3c6825e6cf1f07ca0d52423e17f34d70ec7935e9dd24be5fb9883bf1e03b50ff584931bd3b41095c510ab2aa44d2573fd5feaebdcb59363b65607ff22'
-            'c8819d145b2d596fdc22a913d52421962605ab3de602cd8de58176d85145dc164693bc07d7b782ed103775be2b0e77accab78772b9ea55c65253365c542aa6dc')
+            'c6a20cf7027641390cb4acb04247e9adc41d2a51eab71ca775f2920545119844405ef1d2e4a5f2f5d41ce753cb56051153c1dc24fdd3b2bb8322ebdd275fc3f2')
 
 prepare() {
   cd ${pkgbase}
-  
+  sed -i '110s/SET_ABI_VERSION(25, 2)/SET_ABI_VERSION(25, 3)/' ../1006.patch
   # https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/1006
   patch -p1 -i ../1006.patch
 }
