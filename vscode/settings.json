@@ -32,7 +32,7 @@
     "workbench.colorTheme": "Light+",
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": true,
-    "workbench.iconTheme": "vscode-icon-theme",
+    "workbench.iconTheme": "material-icon-theme",
     "editor.dragAndDrop": false,
     "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
@@ -126,5 +126,6 @@
     "chat.commandCenter.enabled": false,
     "workbench.browser.showInTitleBar": false,
     "workbench.layoutControl.enabled": false,
-    "workbench.editor.useModal": "off"
+    "workbench.editor.useModal": "off",
+    "chat.disableAIFeatures": true
 }
