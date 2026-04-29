@@ -32,7 +32,7 @@
     "workbench.colorTheme": "Light+",
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": true,
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.iconTheme": "simple-icons",
     "editor.dragAndDrop": false,
     "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
@@ -127,5 +127,6 @@
     "workbench.browser.showInTitleBar": false,
     "workbench.layoutControl.enabled": false,
     "workbench.editor.useModal": "off",
-    "chat.disableAIFeatures": true
+    "chat.disableAIFeatures": true,
+    "simpleIcons.hideArrows": false
 }
