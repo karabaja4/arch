@@ -29,10 +29,10 @@
     "editor.minimap.enabled": false,
     "git.enableSmartCommit": true,
     "telemetry.telemetryLevel": "off",
-    "workbench.colorTheme": "Default Light+",
+    "workbench.colorTheme": "Light+",
     "extensions.autoUpdate": false,
     "extensions.ignoreRecommendations": true,
-    "workbench.iconTheme": "vscode-icon-theme",
+    "workbench.iconTheme": "simple-icons",
     "editor.dragAndDrop": false,
     "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
@@ -90,7 +90,6 @@
     "git.autofetch": false,
     "gitlens.showWelcomeOnInstall": false,
     "omnisharp.loggingLevel": "critical",
-    "workbench.startupEditor": "welcomePage",
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.tabs.enabled": false,
     "diffEditor.ignoreTrimWhitespace": false,
@@ -124,5 +123,10 @@
     },
     "git.discardUntrackedChangesToTrash": false,
     "workbench.tree.enableStickyScroll": false,
-    "chat.commandCenter.enabled": false
+    "chat.commandCenter.enabled": false,
+    "workbench.browser.showInTitleBar": false,
+    "workbench.layoutControl.enabled": false,
+    "workbench.editor.useModal": "off",
+    "chat.disableAIFeatures": true,
+    "simpleIcons.hideArrows": false
 }
