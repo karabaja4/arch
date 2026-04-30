@@ -12,11 +12,11 @@ case "${1}" in
 terminal)
     _run termite2
     ;;
-chromium)
-    _run chromium
-    ;;
 firefox)
     _run firefox-socket
+    ;;
+chromium)
+    _run chromium
     ;;
 qtextpad)
     _run qtextpad
@@ -24,8 +24,8 @@ qtextpad)
 code)
     _run code
     ;;
-azuredatastudio)
-    _run azuredatastudio --disable-keytar --force-device-scale-factor=1.75
+bruno)
+    _run bruno
     ;;
 virtualbox)
     _run VirtualBox
@@ -33,20 +33,17 @@ virtualbox)
 discord)
     _run chromium --app="https://discord.com/app" --user-data-dir=/home/igor/.config/chromium-discord
     ;;
+kvirc)
+    _run kvirc
+    ;;
 flameshot)
     _run /home/igor/arch/scripts/flameshot.sh
     ;;
 onlyoffice)
     _run onlyoffice-desktopeditors
     ;;
-kvirc)
-    _run kvirc
-    ;;
 vncviewer)
     _run vncviewer
-    ;;
-bruno)
-    _run bruno
     ;;
 *)
     printf '%s\n' "unknown app"
