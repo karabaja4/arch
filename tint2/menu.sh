@@ -12,11 +12,11 @@ case "${1}" in
 terminal)
     _run termite2
     ;;
-chromium)
-    _run chromium
-    ;;
 firefox)
     _run firefox-socket
+    ;;
+chromium)
+    _run chromium
     ;;
 qtextpad)
     _run qtextpad
@@ -24,8 +24,8 @@ qtextpad)
 code)
     _run code
     ;;
-azuredatastudio)
-    _run azuredatastudio --disable-keytar
+bruno)
+    _run bruno
     ;;
 virtualbox)
     _run VirtualBox
@@ -33,20 +33,17 @@ virtualbox)
 discord)
     _run chromium --app="https://discord.com/app" --user-data-dir=/home/igor/.config/chromium-discord
     ;;
+kvirc)
+    _run kvirc
+    ;;
 flameshot)
     _run /home/igor/arch/scripts/flameshot.sh
     ;;
 onlyoffice)
     _run onlyoffice-desktopeditors
     ;;
-kvirc)
-    _run kvirc
-    ;;
 vncviewer)
     _run vncviewer
-    ;;
-bruno)
-    _run bruno
     ;;
 pd2)
     cd '/home/igor/.wine/drive_c/Games/D2/ProjectD2/' || exit
@@ -55,10 +52,6 @@ pd2)
 nfs4)
     cd '/home/igor/.wine/drive_c/Games/NFS4' || exit
     _run wine nfs4.exe
-    ;;
-wow)
-    export LD_PRELOAD="/usr/lib/libwayland-client.so.0:/usr/lib/libwayland-egl.so.1:/usr/lib/libwayland-cursor.so.0"
-    _run /home/igor/games/turtlewow/TurtleWoW.AppImage
     ;;
 *)
     printf '%s\n' "unknown app"
