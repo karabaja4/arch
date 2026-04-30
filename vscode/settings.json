@@ -16,9 +16,7 @@
     "workbench.editor.enablePreview": true,
     "editor.wordWrap": "off",
     "explorer.autoReveal": true,
-    "csharp.suppressDotnetRestoreNotification": true,
-    "typescript.referencesCodeLens.enabled": true,
-    "omnisharp.projectLoadTimeout": 120,
+    "js/ts.referencesCodeLens.enabled": true,
     "files.exclude":
     {
         "**/node_modules": true,
@@ -42,21 +40,9 @@
     "workbench.editor.decorations.colors": false,
     "workbench.editor.decorations.badges": false,
     "explorer.decorations.badges": false,
-    "gitlens.advanced.messages": {
-        "suppressCommitHasNoPreviousCommitWarning": false,
-        "suppressCommitNotFoundWarning": false,
-        "suppressFileNotUnderSourceControlWarning": false,
-        "suppressGitVersionWarning": false,
-        "suppressLineUncommittedWarning": false,
-        "suppressNoRepositoryWarning": false
-    },
-    "gitlens.currentLine.enabled": true,
     "problems.decorations.enabled": false,
     "breadcrumbs.enabled": false,
-    "msbuildProjectTools.nuget.newestVersionsFirst": true,
     "explorer.confirmDelete": false,
-    "msbuildProjectTools.logging.level": "Verbose",
-    "omnisharp.disableMSBuildDiagnosticWarning": true,
     "window.titleBarStyle": "custom",
     "window.restoreWindows": "none",
     "workbench.settings.editor": "json",
@@ -71,7 +57,7 @@
         "**/node_modules/*/**": true,
         "**/lib_bower/*/**": true
     },
-    "javascript.updateImportsOnFileMove.enabled": "never",
+    "js/ts.updateImportsOnFileMove.enabled": "never",
     "explorer.compactFolders": false,
     "files.associations": {
         "autostart": "shellscript",
@@ -88,14 +74,11 @@
     "github.gitAuthentication": false,
     "editor.semanticHighlighting.enabled": true,
     "git.autofetch": false,
-    "gitlens.showWelcomeOnInstall": false,
-    "omnisharp.loggingLevel": "critical",
     "terminal.integrated.persistentSessionReviveProcess": "never",
     "terminal.integrated.tabs.enabled": false,
     "diffEditor.ignoreTrimWhitespace": false,
     "shellcheck.customArgs": ["-x"],
     "editor.scrollbar.verticalScrollbarSize": 25,
-    "settingsSync.keybindingsPerPlatform": false,
     "git.showActionButton": {
         "commit": false,
         "publish": false,
@@ -108,12 +91,6 @@
     "editor.trimAutoWhitespace": false,
     "editor.folding": true,
     "editor.stickyScroll.enabled": false,
-    "thunder-client.defaultHeaders": [
-        {
-            "name": "Content-Type",
-            "value": "application/json"
-        }
-    ],
     "diffEditor.wordWrap": "off",
     "[json]": {
         "editor.tabSize": 2
@@ -123,7 +100,6 @@
     },
     "git.discardUntrackedChangesToTrash": false,
     "workbench.tree.enableStickyScroll": false,
-    "chat.commandCenter.enabled": false,
     "workbench.browser.showInTitleBar": false,
     "workbench.layoutControl.enabled": false,
     "workbench.editor.useModal": "off",
