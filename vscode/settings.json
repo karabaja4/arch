@@ -16,7 +16,6 @@
     "workbench.editor.enablePreview": true,
     "editor.wordWrap": "off",
     "explorer.autoReveal": true,
-    "js/ts.referencesCodeLens.enabled": true,
     "files.exclude":
     {
         "**/node_modules": true,
@@ -104,5 +103,10 @@
     "workbench.layoutControl.enabled": false,
     "workbench.editor.useModal": "off",
     "chat.disableAIFeatures": true,
-    "simpleIcons.hideArrows": false
+    "simpleIcons.hideArrows": false,
+    "js/ts.referencesCodeLens.enabled": true,
+    "js/ts.referencesCodeLens.showOnAllFunctions": true,
+    "js/ts.implementationsCodeLens.enabled": true,
+    "js/ts.implementationsCodeLens.showOnAllClassMethods": true,
+    "js/ts.implementationsCodeLens.showOnInterfaceMethods": true
 }
