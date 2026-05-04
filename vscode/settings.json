@@ -108,5 +108,6 @@
     "js/ts.referencesCodeLens.showOnAllFunctions": true,
     "js/ts.implementationsCodeLens.enabled": true,
     "js/ts.implementationsCodeLens.showOnAllClassMethods": true,
-    "js/ts.implementationsCodeLens.showOnInterfaceMethods": true
+    "js/ts.implementationsCodeLens.showOnInterfaceMethods": true,
+    "keyboard.dispatch": "keyCode"
 }
