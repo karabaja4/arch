@@ -13,7 +13,6 @@ mkdir -p "${_root}"
 # MAC
 rfkill unblock wifi
 macchanger --mac=00:0B:AD:C0:FF:EE "${_ap}"
-ip link set "${_ap}" up
 
 # ROUTING
 iptables -t nat -I POSTROUTING -o "${_source}" -j MASQUERADE
