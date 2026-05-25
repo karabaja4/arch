@@ -1,7 +1,8 @@
 {
   "extensions": {
     "txt,c,cpp,js,conf,md,sh,json,map,yml,xml,py,log,cs,ini,csv,cfg": "qtextpad $arg",
-    "avi,mkv,flac,mp3,wav,mp4,mov,ogg,aac,opus": "/home/igor/arch/scripts/mpv.sh $arg",
+    "avi,mkv,mp4,mov": "/home/igor/arch/scripts/mpv.sh $arg",
+    "flac,mp3,wav,ogg,aac,opus": "vlc $arg",
     "jpg,jpeg,svg,png,bmp,gif,tga": "/home/igor/arch/feh/feh.sh $arg",
     "gz,zip,rar,zst,tar,7z,iso,bz2,xz": "xarchiver $arg",
     "torrent": "/home/igor/arch/scripts/torrent.sh $arg",
@@ -14,6 +15,7 @@
   "mimetypes": {
     "text/*": "qtextpad $arg",
     "video/*": "/home/igor/arch/scripts/mpv.sh $arg",
+    "audio/*": "vlc $arg",
     "image/*": "/home/igor/arch/feh/feh.sh $arg",
     "media/video": "/home/igor/arch/scripts/mpv.sh $arg",
     "document/pdf": "mupdf -r 140 $arg",
@@ -27,7 +29,6 @@
     "slack://": "slack $arg",
     "file://": "/home/igor/arch/lf/lf.sh $arg",
     "vscode://": "code $arg",
-    "msteams:/l/": "/home/igor/arch/teams/teams.sh $arg",
     "zoommtg://": "zoom $arg"
   }
 }
