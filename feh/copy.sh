@@ -1,13 +1,7 @@
 #!/bin/sh
-. '/home/igor/arch/scripts/flameshot.sh'
 
-_dest='/tmp/feh'
-_format='png'
+_format="${2}"
+_dest="/tmp/feh.${_format}"
 
-if _vbox
-then
-    _format='bmp'
-fi
-
-magick "${1}" "${_format}:${_dest}.${_format}"
-_copy "${_dest}.${_format}"
+magick "${1}" "${_format}:${_dest}"
+xclip -in -selection clipboard -t "image/${_format}" "${_dest}"
