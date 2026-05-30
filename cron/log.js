@@ -1,5 +1,4 @@
 import * as std from 'std';
-import * as os from 'os';
 
 const logpath = '/var/log/cron.log';
 const logfile = std.open(logpath, 'a');
