@@ -190,7 +190,7 @@ const shutdown = () => {
   std.exit(0);
 };
 
-os.signal(os.SIGINT,  shutdown);
+os.signal(os.SIGINT, shutdown);
 os.signal(os.SIGTERM, shutdown);
 
 const SIGHUP = 1;
