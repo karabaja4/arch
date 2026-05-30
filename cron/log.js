@@ -7,7 +7,7 @@ const unpack = (err) => {
   try {
     if (err === null || err === undefined) return '';
     if (err instanceof Error) {
-      return [err.message || String(err), err.stack].filter(Boolean).join('\n').trimEnd();
+      return [err.message || String(err), err.stack].filter(Boolean).join('\n').trim();
     }
     return String(err).trim();
   } catch {
