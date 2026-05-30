@@ -132,7 +132,7 @@ const run = async (job, wait) => {
       USER:  job.user.name,
       HOME:  job.user.home,
       SHELL: '/bin/sh',
-      PATH:  std.getenv('PATH')
+      PATH:  std.getenv('PATH') || '/usr/local/sbin:/usr/local/bin:/usr/bin'
     };
 
     const content = await execCommand(job.command, job.user.uid, env);
