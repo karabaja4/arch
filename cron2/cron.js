@@ -19,22 +19,19 @@ const jobs = [
     id: 'fstrim',
     command: '/home/igor/arch/scripts/fstrim.sh',
     interval: every.days(7),
-    user: users.root,
-    online: false
+    user: users.root
   },
   {
     id: 'dpms',
     command: '/home/igor/arch/scripts/dpms.sh',
     interval: every.minutes(5),
-    user: users.igor,
-    online: false
+    user: users.igor
   },
   {
     id: 'updates',
     command: '/home/igor/arch/scripts/updates.sh',
     interval: every.minutes(5),
-    user: users.igor,
-    online: true
+    user: users.igor
   }
 ];
 
