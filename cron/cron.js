@@ -1,10 +1,6 @@
-const util = require('node:util');
-const os = require('node:os');
-const fs = require('node:fs');
-const path = require('node:path');
-const timers = require('node:timers/promises');
-const exec = util.promisify(require('node:child_process').exec);
-const log = require('./log');
+import * as std from 'std';
+import * as os from 'os';
+import * as log from './log.js';
 
 const every = {
   seconds: (n) => (n * 1000),
@@ -23,133 +19,180 @@ const jobs = [
     id: 'fstrim',
     command: '/home/igor/arch/scripts/fstrim.sh',
     interval: every.days(7),
-    user: users.root,
-    online: false
+    user: users.root
   },
   {
     id: 'dpms',
     command: '/home/igor/arch/scripts/dpms.sh',
     interval: every.minutes(5),
-    user: users.igor,
-    online: false
+    user: users.igor
   },
   {
     id: 'updates',
     command: '/home/igor/arch/scripts/updates.sh',
     interval: every.minutes(5),
-    user: users.igor,
-    online: true
+    user: users.igor
   }
 ];
 
-const isOnline = async () => {
-  try {
-    const res = await fetch('https://avacyn.radiance.hr/ip', {
-      method: 'HEAD',
-      signal: AbortSignal.timeout(2000),
-    });
-    return res.status === 200;
-  } catch {
-    return false;
-  }
-};
+const home = std.getenv('HOME') || '/root';
+const crondir = `${home}/.local/share/cron`;
 
-const crondir = path.join(os.homedir(), '.local/share/cron');
-const getLastRunTimePath = (id) => path.join(crondir, `${id}.lrt`);
+const getLastRunTimePath = (id) => `${crondir}/${id}.lrt`;
 
-const getLastRunTime = async (id) => {
-  try {
-    const filepath = getLastRunTimePath(id);
-    const content = await fs.promises.readFile(filepath, 'utf8');
-    const result = parseInt(content.trim());
-    if (Number.isInteger(result)) {
-      return result;
-    }
-    log.push(id, 'LRT', `Last run time for ${id} is invalid.`);
-  } catch (err) {
-    if (err.code === 'ENOENT') {
-      log.push(id, 'LRT', `Last run time for ${id} was not found.`);
-    } else {
-      throw err;
-    }
+const getLastRunTime = (id) => {
+  const filepath = getLastRunTimePath(id);
+  const content = std.loadFile(filepath);   // returns null if missing
+  if (content === null) {
+    log.push(id, 'LRT', `Last run time for ${id} was not found.`);
+    return 0;
   }
+  const result = parseInt(content.trim(), 10);
+  if (Number.isInteger(result)) {
+    return result;
+  }
+  log.push(id, 'LRT', `Last run time for ${id} is invalid.`);
   return 0;
 };
 
-const setLastRunTime = async (id, ts) => {
+const setLastRunTime = (id, ts) => {
   const filepath = getLastRunTimePath(id);
-  await fs.promises.writeFile(filepath, ts.toString());
+  const f = std.open(filepath, 'w');
+  if (f) {
+    f.puts(ts.toString());
+    f.close();
+  }
+};
+
+const readFdAsync = (fd) => new Promise((resolve) => {
+  const chunks = [];
+  const buf = new ArrayBuffer(4096);
+  os.setReadHandler(fd, () => {
+    const n = os.read(fd, buf, 0, buf.byteLength);
+    if (n > 0) {
+      chunks.push(String.fromCharCode(...new Uint8Array(buf, 0, n)));
+    } else {
+      os.setReadHandler(fd, null);
+      os.close(fd);
+      resolve(chunks.join(''));
+    }
+  });
+});
+
+const execCommand = (command, uid, env) => {
+  
+  const stdoutPipe = os.pipe();
+  const stderrPipe = os.pipe();
+
+  if (!stdoutPipe || !stderrPipe) {
+    throw new Error('Failed to create pipes');
+  }
+
+  const [stdoutRead, stdoutWrite] = stdoutPipe;
+  const [stderrRead, stderrWrite] = stderrPipe;
+
+  const pid = os.exec(
+    [command],
+    {
+      block: false,
+      usePath: false,
+      uid: uid,
+      gid: uid,
+      env: env,
+      stdout: stdoutWrite,
+      stderr: stderrWrite,
+    }
+  );
+
+  os.close(stdoutWrite);
+  os.close(stderrWrite);
+
+  return Promise.all([
+    readFdAsync(stdoutRead),
+    readFdAsync(stderrRead),
+  ]).then(([stdout, stderr]) => {
+    const [, status] = os.waitpid(pid, 0);
+    const exitCode = (status >> 8) & 0xff;
+    return { stdout, stderr, exitCode };
+  });
 };
 
 const run = async (job, wait) => {
   if (wait > 0) {
     log.push(job.id, 'RUN', `Job waiting for ${wait}ms`);
-    await timers.setTimeout(wait);
+    await os.sleepAsync(wait);
   } else {
     log.push(job.id, 'RUN', 'Job is overdue or has never run, starting immediately.');
   }
+
   try {
     log.push(job.id, 'START', `(UID: ${job.user.uid}) ${job.command}`);
-    const shouldRun = !job.online || await isOnline();
-    if (!shouldRun) {
-      log.push(job.id, 'ERROR', 'The job requires an internet connection, but none was available.');
+
+    const env = {
+      USER:  job.user.name,
+      HOME:  job.user.home,
+      SHELL: '/bin/sh',
+      PATH:  std.getenv('PATH')
+    };
+
+    const content = await execCommand(job.command, job.user.uid, env);
+
+    if (content.stdout) {
+      log.push(job.id, 'STDOUT', content.stdout);
     }
-    if (shouldRun) {
-      const content = await exec(job.command, {
-        uid: job.user.uid,
-        gid: job.user.uid,
-        env: { 
-          USER: job.user.name,
-          HOME: job.user.home,
-          SHELL: '/bin/sh',
-          PATH: process.env['PATH']
-        },
-        maxBuffer: 1024 * 1024 * 5
-      });
-      if (content.stdout) {
-        log.push(job.id, 'STDOUT', content.stdout);
-      }
-      if (content.stderr) {
-        log.push(job.id, 'STDERR', content.stderr);
-      }
+    if (content.stderr) {
+      log.push(job.id, 'STDERR', content.stderr);
     }
-    log.push(job.id, 'END', 'Job ended.');
+
+    log.push(job.id, 'END', `Job ended with exit code ${content.exitCode}.`);
   } catch (err) {
     log.push(job.id, 'ERROR', err);
   }
-  await setLastRunTime(job.id, Date.now());
-  setImmediate(() => run(job, job.interval));
+
+  setLastRunTime(job.id, Date.now());
+  os.setTimeout(() => run(job, job.interval), 0);
+};
+
+const mkdirp = (dirpath) => {
+  const parts = dirpath.split('/').filter(Boolean);
+  let current = '';
+  for (const part of parts) {
+    current += '/' + part;
+    const ret = os.mkdir(current, 0o755);
+    // -17 is -EEXIST; anything else is a real error
+    if (ret !== 0 && ret !== -17) {
+      throw new Error(`mkdir failed for ${current}: error ${ret}`);
+    }
+  }
 };
 
 const main = async () => {
   try {
-    await fs.promises.mkdir(crondir, { recursive: true });
-    for (let i = 0; i < jobs.length; i++) {
-      const job = jobs[i];
-      const lastRunTime = await getLastRunTime(job.id);
+    mkdirp(crondir);
+    for (const job of jobs) {
+      const lastRunTime = getLastRunTime(job.id);
       const elapsed = (lastRunTime === 0) ? Infinity : (Date.now() - lastRunTime);
       const wait = (elapsed >= job.interval) ? 0 : (job.interval - elapsed);
       run(job, wait);
     }
   } catch (err) {
-    await log.push('main', 'ERROR', err);
-    await log.close();
-    process.exit(1);
+    log.push('main', 'ERROR', err);
+    log.close();
+    std.exit(1);
   }
 };
 
-const shutdown = async () => {
-  try {
-    await log.push('main', 'SHUTDOWN', 'Shutting down, goodbye.');
-    await log.close();
-    console.log('Exiting.');
-  } finally {
-    process.exit(0);
-  }
+const shutdown = () => {
+  log.push('main', 'SHUTDOWN', 'Shutting down, goodbye.');
+  log.close();
+  console.log('Exiting.');
+  std.exit(0);
 };
 
-process.on('SIGHUP', shutdown);
-process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown);
+os.signal(os.SIGINT,  shutdown);
+os.signal(os.SIGTERM, shutdown);
+
+const SIGHUP = 1;
+os.signal(SIGHUP, shutdown);
 
 main();
