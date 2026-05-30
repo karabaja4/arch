@@ -118,6 +118,7 @@ const execCommand = (command, uid, env) => {
 };
 
 const run = async (job, wait) => {
+  
   if (wait > 0) {
     log.push(job.id, 'RUN', `Job waiting for ${wait}ms`);
     await os.sleepAsync(wait);
