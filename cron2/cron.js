@@ -67,6 +67,21 @@ const setLastRunTime = (id, ts) => {
   }
 };
 
+const readFdAsync = (fd) => new Promise((resolve) => {
+  const chunks = [];
+  const buf = new ArrayBuffer(4096);
+  os.setReadHandler(fd, () => {
+    const n = os.read(fd, buf, 0, buf.byteLength);
+    if (n > 0) {
+      chunks.push(String.fromCharCode(...new Uint8Array(buf, 0, n)));
+    } else {
+      os.setReadHandler(fd, null);
+      os.close(fd);
+      resolve(chunks.join(''));
+    }
+  });
+});
+
 const execCommand = (command, uid, env) => {
   
   const stdoutPipe = os.pipe();
@@ -95,25 +110,14 @@ const execCommand = (command, uid, env) => {
   os.close(stdoutWrite);
   os.close(stderrWrite);
 
-  const readAll = (fd) => {
-    const chunks = [];
-    const buf = new ArrayBuffer(4096);
-    while (true) {
-      const n = os.read(fd, buf, 0, buf.byteLength);
-      if (n <= 0) break;
-      chunks.push(String.fromCharCode(...new Uint8Array(buf, 0, n)));
-    }
-    os.close(fd);
-    return chunks.join('');
-  };
-
-  const stdout = readAll(stdoutRead);
-  const stderr = readAll(stderrRead);
-
-  const [, status] = os.waitpid(pid, 0);
-  const exitCode = (status >> 8) & 0xff;
-
-  return { stdout, stderr, exitCode };
+  return Promise.all([
+    readFdAsync(stdoutRead),
+    readFdAsync(stderrRead),
+  ]).then(([stdout, stderr]) => {
+    const [, status] = os.waitpid(pid, 0);
+    const exitCode = (status >> 8) & 0xff;
+    return { stdout, stderr, exitCode };
+  });
 };
 
 const run = async (job, wait) => {
@@ -134,7 +138,7 @@ const run = async (job, wait) => {
       PATH:  std.getenv('PATH')
     };
 
-    const content = execCommand(job.command, job.user.uid, env);
+    const content = await execCommand(job.command, job.user.uid, env);
 
     if (content.stdout) {
       log.push(job.id, 'STDOUT', content.stdout);
