@@ -1,43 +1,39 @@
-const fs = require('node:fs');
-const logpath = '/var/log/cron.log';
+import * as std from 'std';
 
-const stream = fs.createWriteStream(logpath, { flags: 'a' });
+const logpath = '/var/log/cron.log';
+const logfile = std.open(logpath, 'a');
 
 const unpack = (err) => {
   try {
-    if (!err) return '';
-    return (err.stack || err.message || String(err)).toString().trim();
+    if (err === null || err === undefined) return '';
+    if (err instanceof Error) {
+      return [err.message || String(err), err.stack].filter(Boolean).join('\n').trim();
+    }
+    return String(err).trim();
   } catch {
     return '(unpack error)';
   }
 };
 
-stream.on('error', (err) => {
-  console.log(unpack(err));
-});
-
-let canWrite = true;
-
 const push = (source, type, message) => {
   const utc = (new Date()).toISOString();
   const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
   console.log(formatted);
-
-  if (!canWrite) return;
-  
-  canWrite = stream.write(`${formatted}\n`);
-  if (!canWrite) {
-    stream.once('drain', () => {
-      canWrite = true;
-    });
+  if (logfile) {
+    logfile.puts(`${formatted}\n`);
+    logfile.flush();
   }
 };
 
 const close = () => {
-  return new Promise((resolve) => stream.end(resolve));
+  if (logfile) {
+    logfile.flush();
+    logfile.close();
+  }
 };
 
-module.exports = {
-  push,
-  close
-};
+if (!logfile) {
+  push('log', 'ERROR', `Cannot open ${logpath} for writing.`);
+}
+
+export { push, close };

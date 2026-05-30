@@ -15,6 +15,6 @@
         "name": "cron",
         "enabled": true,
         "user": "root",
-        "command": "node /home/igor/arch/cron/cron.js"
+        "command": "qjs /home/igor/arch/cron/cron.js"
     }
 ]
