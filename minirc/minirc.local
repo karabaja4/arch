@@ -24,7 +24,7 @@ _loadsysctl '50-pid-max.conf'
 _set '0' '/proc/sys/kernel/printk'
 
 # set performance profile
-#printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
+printf 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
 
 _uid='1000'
 _user_mkdir() {
