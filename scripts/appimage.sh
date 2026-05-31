@@ -15,7 +15,7 @@ krita)
     exec "/opt/appimage/krita-5.3.1-x86_64.AppImage" "${@}"
     ;;
 bruno)
-    exec "/opt/appimage/bruno_3.2.2_x86_64_linux.AppImage" --force-device-scale-factor=1.75 "${@}"
+    exec "/opt/appimage/bruno_3.4.2_x86_64_linux.AppImage" --force-device-scale-factor=1.75 "${@}"
     ;;
 "${_script_filename}")
     _echo "Symlink the script to the app, e.g. ln -s ${_script_path} /usr/local/bin/krita"
