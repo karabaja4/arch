@@ -118,7 +118,7 @@ printf '%s\n' "${_monitor_to_port_map}" | while IFS=' ' read -r _monitor _port
 do
     if ! printf '%s\n' "${_rtl_monitors}" | grep -qx "${_monitor}"
     then
-        printf '* %s %s\n' "${_monitor}" "${_port}"
+        printf '* %s %s (new)\n' "${_monitor}" "${_port}"
     fi
 done
 
