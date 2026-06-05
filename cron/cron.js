@@ -97,7 +97,7 @@ const execCommand = (command, uid, env) => {
       block: false,
       usePath: false,
       uid: uid,
-      //gid: uid,
+      gid: uid,
       env: env,
       stdout: stdoutWrite,
       stderr: stderrWrite,
