@@ -100,6 +100,7 @@ int main(void)
                 XCloseDisplay(dpy);
                 return 0;
             }
+            break;
         }
     }
 }
