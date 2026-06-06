@@ -7,7 +7,6 @@ _kill_on_hover() {
     # get window id under mouse
     _mouse_window_id="$(xdotool getmouselocation --shell | awk -F= '/WINDOW/{print $2}')"
     
-    # see if OLED saver is the first window under root, means we're hovering over the app
     if xwininfo -children -id "${_mouse_window_id}" | grep -q 'Window id: 0x.* "blackscreen"'
     then
         xkill -id "${_mouse_window_id}"
