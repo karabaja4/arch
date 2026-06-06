@@ -94,22 +94,12 @@ int main(void)
             break;
 
         case ButtonPress:
-            if (ev.xbutton.button == Button1)   /* left click */
-                goto done;
-            break;
-
-        case KeyPress: {
-            KeySym ks = XLookupKeysym(&ev.xkey, 0);
-            if (ks == XK_Escape)
-                goto done;
-            break;
-        }
+            if (ev.xbutton.button == Button1) {
+                XFreeGC(dpy, gc);
+                XDestroyWindow(dpy, win);
+                XCloseDisplay(dpy);
+                return 0;
+            }
         }
     }
-
-done:
-    XFreeGC(dpy, gc);
-    XDestroyWindow(dpy, win);
-    XCloseDisplay(dpy);
-    return 0;
 }
