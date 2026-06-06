@@ -1,7 +1,7 @@
 #!/bin/sh
 set -u
 
-# kill the script if we are hovering over it
+# kill the program if we are hovering over it
 _kill_on_hover() {
     
     # get window id under mouse
