@@ -2,7 +2,7 @@
  * blackscreen.c
  *
  * Covers the current monitor (whichever the cursor is on) with a solid
- * black, override-redirect window. Left-click or Escape to quit.
+ * black window. Left-click to quit.
  *
  * Build:
  *   gcc -O2 -Wall -o blackscreen blackscreen.c -lX11 -lXrandr
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include <X11/Xlib.h>
-#include <X11/keysym.h>
+#include <X11/Xatom.h>
 #include <X11/extensions/Xrandr.h>
 
 typedef struct { int x, y, w, h; } Rect;
@@ -64,26 +64,44 @@ int main(void)
     int scr  = DefaultScreen(dpy);
     Rect mon = current_monitor(dpy, scr);
 
+    Atom _NET_WM_STATE            = XInternAtom(dpy, "_NET_WM_STATE",            False);
+    Atom _NET_WM_STATE_FULLSCREEN = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
+
     XSetWindowAttributes attrs = {0};
-    attrs.override_redirect = True;
     attrs.background_pixel  = BlackPixel(dpy, scr);
-    attrs.event_mask        = ButtonPressMask | ExposureMask | KeyPressMask;
+    attrs.event_mask        = ButtonPressMask | ExposureMask;
 
     Window win = XCreateWindow(
         dpy, RootWindow(dpy, scr),
         mon.x, mon.y, (unsigned)mon.w, (unsigned)mon.h, 0,
         DefaultDepth(dpy, scr), InputOutput, DefaultVisual(dpy, scr),
-        CWOverrideRedirect | CWBackPixel | CWEventMask, &attrs);
+        CWBackPixel | CWEventMask, &attrs);
+
+    Atom states[1] = { _NET_WM_STATE_FULLSCREEN };
+    XChangeProperty(dpy, win, _NET_WM_STATE, XA_ATOM, 32,
+                    PropModeReplace, (unsigned char *)states, 1);
 
     GC gc = XCreateGC(dpy, win, 0, NULL);
     XSetForeground(dpy, gc, BlackPixel(dpy, scr));
 
     XStoreName(dpy, win, "blackscreen");
     XMapRaised(dpy, win);
+
+    XEvent ev;
+    ev.type                 = ClientMessage;
+    ev.xclient.window       = win;
+    ev.xclient.message_type = _NET_WM_STATE;
+    ev.xclient.format       = 32;
+    ev.xclient.data.l[0]    = 1; /* _NET_WM_STATE_ADD */
+    ev.xclient.data.l[1]    = (long)_NET_WM_STATE_FULLSCREEN;
+    ev.xclient.data.l[2]    = 0;
+    ev.xclient.data.l[3]    = 1;
+    XSendEvent(dpy, RootWindow(dpy, scr), False,
+               SubstructureNotifyMask | SubstructureRedirectMask, &ev);
     XFlush(dpy);
 
     for (;;) {
-        XEvent ev;
+
         XNextEvent(dpy, &ev);
 
         switch (ev.type) {
