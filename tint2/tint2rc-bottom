@@ -92,7 +92,7 @@ mouse_hover_icon_asb = 100 0 0
 #-------------------------------------
 button = new
 button_icon = /usr/share/icons/Papirus/16x16/apps/system-shutdown.svg
-button_lclick_command = /home/igor/arch/scripts/oled.py -m
+button_lclick_command = /home/igor/arch/oled/blackscreen
 button_padding = 5 0 0
 button_background_id = 1
 button_max_icon_size = 24
