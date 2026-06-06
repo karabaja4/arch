@@ -37,5 +37,5 @@ _root="$(dirname "$(readlink -f "${0}")")"
 if ! _kill_on_hover
 then
     # start oled saver detached under pid 1
-    ( python3 "${_root}/oled.py" -m & ) > /dev/null 2>&1
+    ( /home/igor/arch/oled/blackscreen & ) > /dev/null 2>&1
 fi
