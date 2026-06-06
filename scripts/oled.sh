@@ -7,7 +7,7 @@ _kill_on_hover() {
     # get window id under mouse
     _mouse_window_id="$(xdotool getmouselocation --shell | awk -F= '/WINDOW/{print $2}')"
     
-    if xwininfo -children -id "${_mouse_window_id}" | grep -q 'Window id: 0x.* "blackscreen"'
+    if xwininfo -id "${_mouse_window_id}" | grep -q 'Window id: 0x.* "blackscreen"'
     then
         xkill -id "${_mouse_window_id}"
         return 0
