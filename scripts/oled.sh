@@ -19,10 +19,8 @@ _kill_on_hover() {
     
 }
 
-_root="$(dirname "$(readlink -f "${0}")")"
-
 if ! _kill_on_hover
 then
     # start oled saver detached under pid 1
-    ( /home/igor/arch/oled/blackscreen & ) > /dev/null 2>&1
+    ( /home/igor/arch/oled/blackscreen & printf '%s' "${!}" > /tmp/blackscreen.pid ) > /dev/null 2>&1
 fi

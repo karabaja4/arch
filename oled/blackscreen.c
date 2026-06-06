@@ -13,7 +13,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
@@ -79,13 +78,6 @@ int main(void)
     GC gc = XCreateGC(dpy, win, 0, NULL);
     XSetForeground(dpy, gc, BlackPixel(dpy, scr));
 
-    /* Write PID file so other scripts can find/kill this process. */
-    FILE *pf = fopen("/tmp/blackscreen.pid", "w");
-    if (pf) {
-        fprintf(pf, "%d\n", (int)getpid());
-        fclose(pf);
-    }
-
     XStoreName(dpy, win, "blackscreen");
     XMapRaised(dpy, win);
     XFlush(dpy);
@@ -119,6 +111,5 @@ done:
     XFreeGC(dpy, gc);
     XDestroyWindow(dpy, win);
     XCloseDisplay(dpy);
-    remove("/tmp/blackscreen.pid");
     return 0;
 }
