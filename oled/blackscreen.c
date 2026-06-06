@@ -86,6 +86,7 @@ int main(void)
         fclose(pf);
     }
 
+    XStoreName(dpy, win, "blackscreen");
     XMapRaised(dpy, win);
     XFlush(dpy);
 
