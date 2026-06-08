@@ -117,7 +117,7 @@ printf '%s\n' "${_monitor_to_port_map}" | while IFS=' ' read -r _monitor _port
 do
     if ! printf '%s\n' "${_rtl_monitors}" | grep -qx "${_monitor}"
     then
-        printf '* %s %s\n' "${_monitor}" "${_port}"
+        printf '* %s %s (new)\n' "${_monitor}" "${_port}"
     fi
 done
 
@@ -148,20 +148,6 @@ _get_max_refresh_rate_for_screen_info() {
     printf '%s' "${1}" | awk 'NR==2' | tr -d '+*' | awk '{$1=""; sub(/^ /, ""); print}' | tr ' ' '\n' | sort -nr | head -n1
 }
 
-# sets wallpaper N from the predefined list of wallpapers for port
-_set_wallpaper_line_for_port() {
-    _wallpaper_line="${1}"
-    _wallpaper_port="${2}"
-    _wallpaper_path="$(printf '%s\n' "${_rtl_wallpapers}" | sed -n "${_wallpaper_line}p")"
-    if [ -n "${_wallpaper_path}" ]
-    then
-        printf 'Setting %s wallpaper to %s (%s)\n' "${_wallpaper_port}" "${_wallpaper_path}" "${_wallpaper_line}"
-        xwallpaper --output "${_wallpaper_port}" --stretch "${_wallpaper_path}"
-    else
-        printf 'There are not enough wallpapers (%s) for %s\n' "${_wallpaper_line}" "${_wallpaper_port}"
-    fi
-}
-
 # start conky on xinerama index (0, 1, 2...)
 _start_conky_on_index() {
     printf 'Starting conky on screen %s\n' "${1}"
@@ -174,6 +160,7 @@ _configure_screens() {
     # xrandr
     _previous_port=""
     _i=0
+    set --
     for _monitor in ${_rtl_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
@@ -183,7 +170,7 @@ _configure_screens() {
             _max_resolution="$(_get_max_resolution_for_screen_info "${_screen_info}")"
             _max_refresh_rate="$(_get_max_refresh_rate_for_screen_info "${_screen_info}")"
             
-            set -- --output "${_port}" --mode "${_max_resolution}" --rate "${_max_refresh_rate}"
+            set -- "${@}" --output "${_port}" --mode "${_max_resolution}" --rate "${_max_refresh_rate}"
 
             if [ "${_monitor}" = "${_primary_monitor}" ]
             then
@@ -194,9 +181,6 @@ _configure_screens() {
             then
                 set -- "${@}" --left-of "${_previous_port}"
             fi
-            
-            printf "(%s) xrandr %s\n" "${_monitor}" "${*}"
-            xrandr "${@}"
 
             _previous_port="${_port}"
             _i=$((_i + 1))
@@ -205,22 +189,32 @@ _configure_screens() {
         fi
     done
     
+    printf "xrandr %s\n" "${*}"
+    xrandr "${@}"
+    
     _total_count="${_i}"
     
     # wallpapers
+    set --
     _i=1
     for _monitor in ${_rtl_monitors}
     do
         _port="$(_get_port_for_monitor "${_monitor}")"
         if [ -n "${_port}" ]
         then
-            printf '(%s) ' "${_monitor}"
-            _set_wallpaper_line_for_port "${_i}" "${_port}"
+            _wallpaper_path="$(printf '%s\n' "${_rtl_wallpapers}" | sed -n "${_i}p")"
+            if [ -n "${_wallpaper_path}" ]
+            then
+                set -- "${@}" --output "${_port}" --stretch "${_wallpaper_path}"
+            else
+                printf 'Not enough wallpapers for %s\n' "${_port}"
+            fi
             _i=$((_i + 1))
-        else
-            printf '(%s) Monitor not found, skipping wallpaper.\n' "${_monitor}"
         fi
     done
+    
+    printf "xwallpaper %s\n" "${*}"
+    xwallpaper "${@}"
     
     # conky
     _i=0

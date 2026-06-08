@@ -97,7 +97,7 @@ const execCommand = (command, uid, env) => {
       block: false,
       usePath: false,
       uid: uid,
-      //gid: uid,
+      gid: uid,
       env: env,
       stdout: stdoutWrite,
       stderr: stderrWrite,
@@ -117,10 +117,23 @@ const execCommand = (command, uid, env) => {
   });
 };
 
+const formatDuration = (ms) => {
+  const s = 1000;
+  const m = s * 60;
+  const h = m * 60;
+  const d = h * 24;
+  const dv = Math.floor(ms / d);
+  const hv = Math.floor((ms % d) / h);
+  const mv = Math.floor((ms % h) / m);
+  const sv = Math.floor((ms % m) / s);
+  return [dv && `${dv}d`, hv && `${hv}h`, mv && `${mv}m`, sv && `${sv}s`]
+    .filter(Boolean).join('') || '0s';
+};
+
 const run = async (job, wait) => {
   
   if (wait > 0) {
-    log.push(job.id, 'RUN', `Job waiting for ${wait}ms`);
+    log.push(job.id, 'RUN', `Job waiting for ${formatDuration(wait)}`);
     await os.sleepAsync(wait);
   } else {
     log.push(job.id, 'RUN', 'Job is overdue or has never run, starting immediately.');
