@@ -160,7 +160,7 @@ static unsigned int cursorshape = 6;
  */
 
 static unsigned int cols = 120;
-static unsigned int rows = 32;
+static unsigned int rows = 30;
 
 /*
  * Default colour and shape of the mouse cursor
