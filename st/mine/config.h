@@ -7,7 +7,7 @@
  */
 static char *font = "Consolas:pixelsize=24:antialias=true:autohint=true";
 static char *font2[] = { "Segoe UI Emoji:pixelsize=22:antialias=true:autohint=true" };
-static int borderpx = 5;
+static int borderpx = 4;
 
 /* "OS/2" OpenType tables give more accurate typographic metrics for some fonts,
  * which may or may not improve rendering of box-drawing elements.
