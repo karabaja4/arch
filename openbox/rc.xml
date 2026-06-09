@@ -296,8 +296,8 @@
       <size>
         <height>789</height>
         <width>1558</width>
-      </size> -->
-    </application>
+      </size>
+    </application> -->
     <!-- kvirc is just going crazy on scaled screens -->
     <application name="kvirc" type="normal">
       <size>
