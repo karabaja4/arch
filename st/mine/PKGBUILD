@@ -29,7 +29,7 @@ sha256sums=('9ed9feabcded713d4ded38c8cebf36a3b08f0042ef7934a0e2b2409da56e649b'
             '961198be12e01e20ea93cd822ed73a9106a5386383954613a96aae122bc143e4'
             '329169acac7ceaf901995d6e0897913089b799d8cd150c7f04c902f4a5b8eab2'
             '2ea18a883a7f2ee925b8b04b8bef97e3c1be62d6d31367574467570768a7a4f1'
-            'e1077bb43a071ea3e266ee68cfef92cb30de73eace05ead9e78aa1f2e15a7d65')
+            '61228c99d636ef12bf19ee978cda42490cc9ae6a4d4f27c0fe9b4b515efd19f4')
 _sourcedir=$pkgname-$pkgver
 
 prepare() {
