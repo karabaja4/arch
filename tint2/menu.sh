@@ -10,7 +10,8 @@ _load_apulse() {
 
 case "${1}" in
 terminal)
-    _run termite2
+    # _run termite2
+    _run st
     ;;
 firefox)
     _run firefox-socket
