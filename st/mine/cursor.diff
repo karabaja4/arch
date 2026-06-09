@@ -1,0 +1,13 @@
+diff --git a/x.c b/x.c
+index d73152b..cd066a1 100644
+--- a/x.c
++++ b/x.c
+@@ -1746,6 +1746,8 @@ xsetmode(int set, unsigned int flags)
+ int
+ xsetcursor(int cursor)
+ {
++	if (cursor == 0)
++		cursor = cursorshape;
+ 	if (!BETWEEN(cursor, 0, 7)) /* 7: st extension */
+ 		return 1;
+ 	win.cursor = cursor;
