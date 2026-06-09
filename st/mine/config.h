@@ -17,7 +17,7 @@ static int ignoreOS2metrics = 0;
 /* Multiplier applied to the distance between baselines.
  * Increasing this value can misalign block or line-drawing characters.
  */
-static float linespacing = 1.0;
+static float linespacing = 1.4;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -160,7 +160,7 @@ static unsigned int cursorshape = 6;
  */
 
 static unsigned int cols = 120;
-static unsigned int rows = 30;
+static unsigned int rows = 27;
 
 /*
  * Default colour and shape of the mouse cursor
