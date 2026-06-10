@@ -88,7 +88,7 @@ cmd touch &{{
 }}
 
 cmd term &{{
-    st -e bash -c "cd '${PWD}' && exec bash" > /dev/null 2>&1
+    /usr/local/bin/termite2 --directory="${PWD}" > /dev/null 2>&1
 }}
 map t term
 
