@@ -1,5 +1,5 @@
 diff --git a/x.c b/x.c
-index d73152b..dc073bd 100644
+index d73152b..e533b87 100644
 --- a/x.c
 +++ b/x.c
 @@ -221,6 +221,11 @@ static XWindow xw;
@@ -57,11 +57,11 @@ index d73152b..dc073bd 100644
 +		if (abs(e->xbutton.x - sel_pending_x) <= 5 &&
 +		    abs(e->xbutton.y - sel_pending_y) <= 5)
 +			return;
-+		int sx = sel_pending_x - borderpx;
-+		int sy = sel_pending_y - borderpx;
-+		LIMIT(sx, 0, win.tw-1);
-+		LIMIT(sy, 0, win.th-1);
-+		selstart(sx / win.cw, sy / win.ch, sel_pending_snap);
++		selstart(
++			(LIMIT(sel_pending_x - borderpx, 0, win.tw-1)) / win.cw,
++			(LIMIT(sel_pending_y - borderpx, 0, win.th-1)) / win.ch,
++			sel_pending_snap
++		);
 +		sel_pending = 0;
 +	}
 +
