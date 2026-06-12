@@ -11,7 +11,7 @@ nvidia-settings --load-config-only
 sleep 6 && "${HOME}/arch/scripts/sound.sh" EarPods 85 > /dev/null 2>&1 &
 
 # daemons
-xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
+#xsettingsd -c "${HOME}/arch/termite/xsettingsd" &
 
 # resolution and background
 "${HOME}/arch/scripts/fixres.sh"
