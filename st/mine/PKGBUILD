@@ -22,7 +22,7 @@ source=(https://dl.suckless.org/$pkgname/$pkgname-$pkgver.tar.gz
         https://st.suckless.org/patches/font2/st-font2-0.8.5.diff
         https://raw.githubusercontent.com/karabaja4/arch/refs/heads/master/st/mine/cursor.diff
         https://raw.githubusercontent.com/karabaja4/arch/refs/heads/master/st/mine/redraw3.diff
-        https://raw.githubusercontent.com/karabaja4/arch/refs/heads/master/st/mine/selection2.diff)
+        https://raw.githubusercontent.com/karabaja4/arch/refs/heads/master/st/mine/selection.diff)
 sha256sums=('9ed9feabcded713d4ded38c8cebf36a3b08f0042ef7934a0e2b2409da56e649b'
             'f9deea445a5c6203a0e8e699f3c3b55e27275f17fb408562c4dd5d649edeea23'
             '95be3197f7de77a0fe2e4f527202e17e910ee24e1ed6bc39beb320a1304bb7e1'
@@ -33,7 +33,7 @@ sha256sums=('9ed9feabcded713d4ded38c8cebf36a3b08f0042ef7934a0e2b2409da56e649b'
             '2ea18a883a7f2ee925b8b04b8bef97e3c1be62d6d31367574467570768a7a4f1'
             '61228c99d636ef12bf19ee978cda42490cc9ae6a4d4f27c0fe9b4b515efd19f4'
             'c425806252428c61ef9d8fbd567ab71480eee3785eb8f87ce69665db0dc35a22'
-            'd1d80e0642060da6de797caebc05920640f8de132c17aa70f76ff164563f15d5')
+            'e8461b97ab9efe6ae6f4b78bf00182ec359223e9da12456f41cf63a098b198c0')
 _sourcedir=$pkgname-$pkgver
 
 prepare() {
@@ -45,7 +45,7 @@ prepare() {
   patch -d "$_sourcedir" -p 1 < st-font2-0.8.5.diff
   patch -d "$_sourcedir" -p 1 < cursor.diff
   patch -d "$_sourcedir" -p 1 < redraw3.diff
-  patch -d "$_sourcedir" -p 1 < selection2.diff
+  patch -d "$_sourcedir" -p 1 < selection.diff
 
   # This package provides a mechanism to provide a custom config.h. Multiple
   # configuration states are determined by the presence of two files in
