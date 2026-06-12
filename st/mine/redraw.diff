@@ -1,21 +1,13 @@
 diff --git a/x.c b/x.c
-index d73152b..4605c4f 100644
+index d73152b..382d969 100644
 --- a/x.c
 +++ b/x.c
-@@ -1164,7 +1164,7 @@ xinit(int cols, int rows)
- 	xw.attrs.border_pixel = dc.col[defaultbg].pixel;
- 	xw.attrs.bit_gravity = NorthWestGravity;
- 	xw.attrs.event_mask = FocusChangeMask | KeyPressMask | KeyReleaseMask
--		| ExposureMask | VisibilityChangeMask | StructureNotifyMask
-+		| VisibilityChangeMask | StructureNotifyMask
- 		| ButtonMotionMask | ButtonPressMask | ButtonReleaseMask;
- 	xw.attrs.colormap = xw.cmap;
- 
-@@ -1710,7 +1710,6 @@ xximspot(int x, int y)
+@@ -1710,7 +1710,7 @@ xximspot(int x, int y)
  void
  expose(XEvent *ev)
  {
 -	redraw();
++	XCopyArea(xw.dpy, xw.buf, xw.win, dc.gc, 0, 0, win.w, win.h, 0, 0);
  }
  
  void
