@@ -1,13 +1,17 @@
 diff --git a/x.c b/x.c
-index d73152b..382d969 100644
+index d73152b..a0f924f 100644
 --- a/x.c
 +++ b/x.c
-@@ -1710,7 +1710,7 @@ xximspot(int x, int y)
+@@ -1710,7 +1710,11 @@ xximspot(int x, int y)
  void
  expose(XEvent *ev)
  {
 -	redraw();
-+	XCopyArea(xw.dpy, xw.buf, xw.win, dc.gc, 0, 0, win.w, win.h, 0, 0);
++    XEvent dummy;
++    /* drain all pending expose events, only blit once */
++    while (XCheckTypedWindowEvent(xw.dpy, xw.win, Expose, &dummy))
++        ;
++    XCopyArea(xw.dpy, xw.buf, xw.win, dc.gc, 0, 0, win.w, win.h, 0, 0);
  }
  
  void
