@@ -21,7 +21,7 @@ source=(https://dl.suckless.org/$pkgname/$pkgname-$pkgver.tar.gz
         https://st.suckless.org/patches/bold-is-not-bright/st-bold-is-not-bright-20190127-3be4cf1.diff
         https://st.suckless.org/patches/font2/st-font2-0.8.5.diff
         https://raw.githubusercontent.com/karabaja4/arch/refs/heads/master/st/mine/cursor.diff
-        https://raw.githubusercontent.com/karabaja4/arch/refs/heads/master/st/mine/redraw2.diff)
+        https://raw.githubusercontent.com/karabaja4/arch/refs/heads/master/st/mine/redraw3.diff)
 sha256sums=('9ed9feabcded713d4ded38c8cebf36a3b08f0042ef7934a0e2b2409da56e649b'
             'f9deea445a5c6203a0e8e699f3c3b55e27275f17fb408562c4dd5d649edeea23'
             '95be3197f7de77a0fe2e4f527202e17e910ee24e1ed6bc39beb320a1304bb7e1'
@@ -42,7 +42,7 @@ prepare() {
   patch -d "$_sourcedir" -p 1 < st-bold-is-not-bright-20190127-3be4cf1.diff
   patch -d "$_sourcedir" -p 1 < st-font2-0.8.5.diff
   patch -d "$_sourcedir" -p 1 < cursor.diff
-  patch -d "$_sourcedir" -p 1 < redraw2.diff
+  patch -d "$_sourcedir" -p 1 < redraw3.diff
 
   # This package provides a mechanism to provide a custom config.h. Multiple
   # configuration states are determined by the presence of two files in
