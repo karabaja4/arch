@@ -1,0 +1,13 @@
+diff --git a/x.c b/x.c
+index d73152b..382d969 100644
+--- a/x.c
++++ b/x.c
+@@ -1710,7 +1710,7 @@ xximspot(int x, int y)
+ void
+ expose(XEvent *ev)
+ {
+-	redraw();
++	XCopyArea(xw.dpy, xw.buf, xw.win, dc.gc, 0, 0, win.w, win.h, 0, 0);
+ }
+ 
+ void

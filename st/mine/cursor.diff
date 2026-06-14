@@ -1,0 +1,82 @@
+diff --git a/x.c b/x.c
+index d73152b..d0ee208 100644
+--- a/x.c
++++ b/x.c
+@@ -1559,49 +1559,30 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
+ 	}
+ 
+ 	/* draw the new one */
+-	if (IS_SET(MODE_FOCUSED)) {
+-		switch (win.cursor) {
+-		case 7: /* st extension */
+-			g.u = 0x2603; /* snowman (U+2603) */
+-			/* FALLTHROUGH */
+-		case 0: /* Blinking Block */
+-		case 1: /* Blinking Block (Default) */
+-		case 2: /* Steady Block */
+-			xdrawglyph(g, cx, cy);
+-			break;
+-		case 3: /* Blinking Underline */
+-		case 4: /* Steady Underline */
+-			XftDrawRect(xw.draw, &drawcol,
+-					borderpx + cx * win.cw,
+-					borderpx + (cy + 1) * win.ch - \
+-						cursorthickness,
+-					win.cw, cursorthickness);
+-			break;
+-		case 5: /* Blinking bar */
+-		case 6: /* Steady bar */
+-			XftDrawRect(xw.draw, &drawcol,
+-					borderpx + cx * win.cw,
+-					borderpx + cy * win.ch,
+-					cursorthickness, win.ch);
+-			break;
+-		}
+-	} else {
++	switch (win.cursor) {
++	case 7: /* st extension */
++		g.u = 0x2603; /* snowman (U+2603) */
++		/* FALLTHROUGH */
++	case 0: /* Blinking Block */
++	case 1: /* Blinking Block (Default) */
++	case 2: /* Steady Block */
++		xdrawglyph(g, cx, cy);
++		break;
++	case 3: /* Blinking Underline */
++	case 4: /* Steady Underline */
+ 		XftDrawRect(xw.draw, &drawcol,
+ 				borderpx + cx * win.cw,
+-				borderpx + cy * win.ch,
+-				win.cw - 1, 1);
++				borderpx + (cy + 1) * win.ch - \
++					cursorthickness,
++				win.cw, cursorthickness);
++		break;
++	case 5: /* Blinking bar */
++	case 6: /* Steady bar */
+ 		XftDrawRect(xw.draw, &drawcol,
+ 				borderpx + cx * win.cw,
+ 				borderpx + cy * win.ch,
+-				1, win.ch - 1);
+-		XftDrawRect(xw.draw, &drawcol,
+-				borderpx + (cx + 1) * win.cw - 1,
+-				borderpx + cy * win.ch,
+-				1, win.ch - 1);
+-		XftDrawRect(xw.draw, &drawcol,
+-				borderpx + cx * win.cw,
+-				borderpx + (cy + 1) * win.ch - 1,
+-				win.cw, 1);
++				cursorthickness, win.ch);
++		break;
+ 	}
+ }
+ 
+@@ -1746,6 +1727,8 @@ xsetmode(int set, unsigned int flags)
+ int
+ xsetcursor(int cursor)
+ {
++	if (cursor == 0)
++		cursor = cursorshape;
+ 	if (!BETWEEN(cursor, 0, 7)) /* 7: st extension */
+ 		return 1;
+ 	win.cursor = cursor;

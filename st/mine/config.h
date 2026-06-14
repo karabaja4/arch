@@ -6,7 +6,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Consolas:pixelsize=24:antialias=true:autohint=true";
-static int borderpx = 2;
+static char *font2[] = { "Segoe UI Emoji:pixelsize=22:antialias=true:autohint=true" };
+static int borderpx = 4;
 
 /* "OS/2" OpenType tables give more accurate typographic metrics for some fonts,
  * which may or may not improve rendering of box-drawing elements.
@@ -16,7 +17,7 @@ static int ignoreOS2metrics = 0;
 /* Multiplier applied to the distance between baselines.
  * Increasing this value can misalign block or line-drawing characters.
  */
-static float linespacing = 1.0;
+static float linespacing = 1.4;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -159,7 +160,7 @@ static unsigned int cursorshape = 6;
  */
 
 static unsigned int cols = 120;
-static unsigned int rows = 32;
+static unsigned int rows = 27;
 
 /*
  * Default colour and shape of the mouse cursor
