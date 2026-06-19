@@ -1,7 +1,7 @@
 import * as std from 'std';
 
 const logpath = '/var/log/cron.log';
-const logfile = std.open(logpath, 'a');
+let writable = true;
 
 const unpack = (err) => {
   try {
@@ -19,21 +19,16 @@ const push = (source, type, message) => {
   const utc = (new Date()).toISOString();
   const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
   console.log(formatted);
-  if (logfile) {
-    logfile.puts(`${formatted}\n`);
-    logfile.flush();
+  if (writable) {
+    const logfile = std.open(logpath, 'a');
+    if (logfile) {
+      logfile.puts(`${formatted}\n`);
+      logfile.close();
+    } else {
+      writable = false;
+      push('log', 'ERROR', `Cannot open ${logpath} for writing.`);
+    }
   }
 };
 
-const close = () => {
-  if (logfile) {
-    logfile.flush();
-    logfile.close();
-  }
-};
-
-if (!logfile) {
-  push('log', 'ERROR', `Cannot open ${logpath} for writing.`);
-}
-
-export { push, close };
+export { push };
