@@ -191,15 +191,13 @@ const main = async () => {
     }
   } catch (err) {
     log.push('main', 'ERROR', err);
-    log.close();
     std.exit(1);
   }
 };
 
 const shutdown = () => {
-  log.push('main', 'SHUTDOWN', 'Shutting down, goodbye.');
-  log.close();
   console.log('Exiting.');
+  log.push('main', 'SHUTDOWN', 'Shutting down, goodbye.');
   std.exit(0);
 };
 
