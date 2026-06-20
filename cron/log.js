@@ -17,7 +17,9 @@ const unpack = (err) => {
 
 const push = (source, type, message) => {
   const utc = (new Date()).toISOString();
-  const formatted = `[${utc}][${source}][${type}] ${unpack(message)}`;
+  const formatted = unpack(message).split('\n')
+    .map(line => `[${utc}][${source}][${type}] ${line}`)
+    .join('\n');
   console.log(formatted);
   if (writable) {
     const logfile = std.open(logpath, 'a');
