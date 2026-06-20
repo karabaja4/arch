@@ -18,7 +18,7 @@ const unpack = (err) => {
 const push = (source, type, message) => {
   const utc = (new Date()).toISOString();
   const formatted = unpack(message).split('\n')
-    .map(line => `[${utc}][${source}][${type}] ${line}`)
+    .map(line => `[${utc}][${source}][${type}] ${line?.trim()}`)
     .join('\n');
   console.log(formatted);
   if (writable) {
