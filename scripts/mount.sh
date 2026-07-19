@@ -70,7 +70,7 @@ _mount_disk() {
         _mount_smb '44555' '\\localhost\disk' '/home/igor/_disk'
     else
         # local (home)
-        _mount_smb '445' '\\192.168.100.33\disk' '/home/igor/_disk'
+        _mount_smb '445' '\\192.168.1.33\disk' '/home/igor/_disk'
     fi
 }
 
