@@ -285,7 +285,7 @@ const diskusage = async () => {
 };
 
 const weather = async () => {
-  const station = 'Zagreb-Maksimir';
+  const station = 'Zadar';
   const url = 'https://vrijeme.hr/hrvatska_n.xml';
   while (true) {
     let temp = null;
