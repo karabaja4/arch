@@ -2,6 +2,7 @@
 set -eu
 
 # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=279245
+# https://wireless.docs.kernel.org/en/latest/en/users/documentation/aspm.html
 
 if [ "$(id -u)" -ne 0 ]
 then
