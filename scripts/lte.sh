@@ -56,6 +56,10 @@ printf 'Connected.\nIP: %s\nGateway: %s\nDNS1: %s\nDNS2: %s\n' "${_ip}" "${_gate
 # qmicli --device-open-proxy --device=/dev/cdc-wdm0 \
 #   --wds-create-profile="3gpp,apn=internet.ht.hr,pdp-type=IP,auth=none"
 #
-#qmicli --device-open-proxy \
-#  --device=/dev/cdc-wdm0 \
-#  --wds-modify-profile="3gpp,1,apn=internet"
+# qmicli --device-open-proxy \
+#   --device=/dev/cdc-wdm0 \
+#   --wds-modify-profile="3gpp,1,apn=internet"
+#
+# screen /dev/ttyUSB2 115200
+# AT+CMGL="ALL"
+#
