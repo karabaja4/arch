@@ -5,13 +5,13 @@ PORT=/dev/ttyUSB2
 exec 3<"$PORT"
 exec 4>"$PORT"
 
-cmd()
+_cmd()
 {
     printf '%s\r' "$1" >&4
     timeout 1 cat <&3
 }
 
-cmd 'AT'
-cmd 'AT+CMGF=1'
-cmd 'AT+CMGL="ALL"'
-cmd 'AT+CMGD=0'
+_cmd 'AT'
+_cmd 'AT+CMGF=1'
+_cmd 'AT+CMGL="ALL"'
+_cmd 'AT+CMGD=0'
