@@ -61,5 +61,6 @@ printf 'Connected.\nIP: %s\nGateway: %s\nDNS1: %s\nDNS2: %s\n' "${_ip}" "${_gate
 #   --wds-modify-profile="3gpp,1,apn=internet"
 #
 # screen /dev/ttyUSB2 115200
+# AT+CMGF=1
 # AT+CMGL="ALL"
-#
+# AT+CMGD=0
