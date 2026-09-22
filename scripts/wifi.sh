@@ -141,3 +141,4 @@ fi
 wpa_supplicant -B -i "${_interface}" -c "${_config}"
 sleep 3
 udhcpc -nqfv -i "${_interface}"
+#dhcpcd --oneshot --ipv4only "${_interface}"

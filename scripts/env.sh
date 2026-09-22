@@ -40,7 +40,10 @@ export MOZ_DISABLE_RDD_SANDBOX=1
 export MOZ_CRASHREPORTER_DISABLE=1
 
 # virtualbox
-export VBOX_LOG_DEST="nofile"
+export VBOX_LOG_DEST='nofile'
+
+# chromium wants this instead of Xresources
+export XCURSOR_SIZE='42'
 
 # libva
 export LIBVA_DRIVER_NAME='iHD'
