@@ -16,8 +16,15 @@ case "${_arg1}" in
     _usage
     ;;
 off|stop)
-    wpa_cli terminate
-    exit 0
+    _term_interface="$(wpa_cli terminate | cut -s -d"'" -f2)"
+    if [ -n "${_term_interface}" ]
+    then
+        ip link set "${_term_interface}" down
+        _info "${_term_interface} stopped."
+        exit 0
+    else
+        exit 1
+    fi
     ;;
 esac
 
