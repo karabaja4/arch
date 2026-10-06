@@ -6,7 +6,7 @@
 
 # bring ethernet interface up so udhcpc can operate
 #ip link set eth0 up > /dev/null 2>&1
-iw dev wlan0 set power_save off
+#iw dev wlan0 set power_save off
 
 _set() {
     printf '%s\n' "${1}" > "${2}"
