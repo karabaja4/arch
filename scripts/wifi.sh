@@ -70,6 +70,9 @@ rfkill unblock wifi
 ip link set "${_interface}" down
 ip link set "${_interface}" up
 
+# turn off power saving
+iw dev "${_interface}" set power_save off
+
 # start scanning
 _info "Scanning for networks..."
 
