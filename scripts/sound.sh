@@ -125,7 +125,7 @@ _capture="Capture,0"
 if amixer get "${_capture}" 2>/dev/null | grep '\[off\]' > /dev/null 2>&1
 then
     printf "Unmuting %s\n" "${_capture}"
-    amixer set "${_capture}" 100% cap > /dev/null 2>&1
+    amixer set "${_capture}" 70% cap > /dev/null 2>&1
 fi
 
 # play embedded sound
